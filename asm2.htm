@@ -1,0 +1,185 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en Ensamblador para PC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+
+
+<BR><BR>
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:magic_ring@xoommail.com">Ricardo Amil "Artemis"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Capítulo 2.<br>
+Tipos de datos y operaciones binarias.
+</H3>
+
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+
+<FONT FACE="Arial,Helvetica" SIZE=2><P ALIGN="JUSTIFY">
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">En el n&uacute;mero anterior se explic&oacute; el sistema de numeraci&oacute;n de un PC. Ahora se podr&aacute;n ver los diferentes tipos de datos que en &eacute;ste se usan como unidad de medici&oacute;n:</P>
+<B><P ALIGN="JUSTIFY">1 BIT: </B>Es la m&iacute;nima parte de informaci&oacute;n existente. Es una cifra binaria (puede ser 1 &oacute; 0). R<I>ango decimal = de 0 a 1.</P>
+</I><B><P ALIGN="JUSTIFY">1 NIBBLE = 4 BITS: </B>Es la base del sistema hexadecimal, ya que: 1111 bin = 15 dec. = F hex. Puede ser representado con 1 d&iacute;gito hexadecimal. Ej: 0Fh. <I>Rango decimal = de 0 a 15.</I> </P>
+<B><P ALIGN="JUSTIFY">1 BYTE = 2 NIBBLES = 8 BITS: </B>Es la base est&aacute;ndar para la representaci&oacute;n de datos. Puede ser representado con 2 d&iacute;gitos hexadecimales. Ej: 0FFh. <I>Rango decimal = de 0 a 255.</P>
+</I><B><P ALIGN="JUSTIFY">1 WORD = 2 BYTES = 4 NIBBLES = 16 BITS: </B>Puede ser representado con 4 d&iacute;gitos hexadecimales. Ej: 0FFFFh. <I>Rango decimal = de 0 a 65.535.</P>
+</I><B><P ALIGN="JUSTIFY">1 DWORD = 2 WORDS = 4 BYTES = 8 NIBBLES = 32 BITS: </B>Es una palabra doble (DOUBLE-WORD). Puede ser representado por 8 d&iacute;gitos hexadecimales. Ej: 0FFFFFFFFh. <I>Rango decimal = de 0 a 4.294.967.295.</P>
+</I><B><P ALIGN="JUSTIFY">1 KILOBYTE = 256 DWORDS = 512 WORDS = 1.024 BYTES = 2048 NIBBLES = 8192 BITS: </B>Aunque su nombre despiste, el kb. es un conjunto de 1.024 y no de 1.000 bytes. Puede ser representado por 2.048 d&iacute;gitos hexadecimales. Ej: JA, JA!!! <I>Rango decimal = de 0 a 2<SUP>8192</SUP>.</P>
+</I><B><P ALIGN="JUSTIFY">1 MEGABYTE = 1.024 KILOBYTES = 262.144 DWORDS = 524.288 WORDS = 1.048.576 BYTES = 2.097.152 NIBBLES = 8.388.608 BITS: </B>Puede ser representado por 2.097.152 d&iacute;gitos hexadecimales (esto lo hago para que quede bien claro que cada nibble representa un d&iacute;gito hexadecimal). <I>Rango decimal = de 0 a 2<SUP>8.388.608</SUP> </I>(esto lo hago para que quede bien claro que el n&uacute;mero de bits representa al exponente de la base 2)(la base es 2 porque cada bit puede albergar solo dos valores decimales, 1 &oacute; 0).</P>
+<B><P ALIGN="JUSTIFY">1 GIGABYTE = 1.024 MEGABYTES = 1.048.576 KILOBYTES = 268.435.456 DWORDS = 536.870.912 WORDS = 1.073.741.824 BYTES = 2.147.483.648 NIBBLES = 8.589.934.592 BITS: </B>¿Por cu&aacute;ntos d&iacute;gitos hexadecimales puede ser representado?... Muy bien!!! (2.147.483.648). <I>Rango decimal = de 0 a 2<SUP>8.589.934.592</SUP>.</P>
+</I><B><P ALIGN="JUSTIFY">1 TERABYTE = 1024 GIGABYTES = 1.048.576 MEGABYTES = 1.073.741.824 KILOBYTES = 274.877.906.944 DWORDS = 549.755.813.888 WORDS = 1.099.511.627.776 BYTES = 2.199.023.255.552 NIBBLES = 8.796.093.022.208 BITS: </B>Puede ser representado por 2.199.023.255.552 d&iacute;gitos hexadecimales. <I>Rango decimal = de 0 a 2<SUP>8.796.093.022.208</SUP>.</P>
+</I><B><U><P ALIGN="JUSTIFY">OPERACIONES BINARIAS:</B></U> A continuaci&oacute;n se explicar&aacute;n las cuatro operaciones fundamentales de los d&iacute;gitos binarios. Recordar que 0 = "falso" y 1 = "verdadero".</P><IMG SRC="gif/casma01.gif" ALIGN="LEFT" HSPACE=2 WIDTH=200 HEIGHT=200>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Operaci&oacute;n AND ("Y" l&oacute;gico): Se toman dos d&iacute;gitos binarios, y si los dos son verdaderos el resultado tambi&eacute;n lo es.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P><IMG SRC="gif/casma02.gif" ALIGN="LEFT" HSPACE=2 WIDTH=200 HEIGHT=200>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"> Operaci&oacute;n OR ("O" l&oacute;gico): Se toman dos d&iacute;gitos binarios, y si los al menos uno es verdadero el resultado tambi&eacute;n lo es:</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P><IMG SRC="gif/casma03.gif" ALIGN="LEFT" HSPACE=2 WIDTH=200 HEIGHT=200>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"> Operaci&oacute;n XOR (OR exclusivo): Se toman dos d&iacute;gitos binarios, y si s&oacute;lo uno de los dos es verdadero el resultado tambi&eacute;n lo es:</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P>&nbsp;</P><IMG SRC="gif/casma04.gif" ALIGN="RIGHT" HSPACE=2 WIDTH=200 HEIGHT=100>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"> Operaci&oacute;n NOT (negaci&oacute;n): Se toman s&oacute;lo un d&iacute;gito binario y el resultado ser&aacute; el valor opuesto:</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<B><U><P>SEGMENTOS Y DESPLAZOS (segments &amp; offsets):</P>
+</B></U><P ALIGN="JUSTIFY">Cuando se dise&ntilde;&oacute; el 8088, los ingenieros pensaron que nunca se usar&iacute;a m&aacute;s memoria que 1 megabyte. Entonces lo construyeron de manera que no se pod&iacute;a acceder a memorias mayores que 1 MB. Para acceder al MB se necesitan 20 bits, pero el problema es que un registro ten&iacute;a solo 16 bits y si se usaban dos registros eran 32 bits, demasiado. Entonces decidieron que usar&iacute;an 2 registros, pero que no conformar&iacute;an 32 bits, que dar&iacute;an direcciones de 20 bits. Como ya veremos m&aacute;s adelante, cada registro de 16 bits posee dos registros de 8 bits: 1 alto y 1 bajo. Si tenemos 32 bits, tenemos 4 bytes, 2 bytes de cada registro de 16 bits. Pensando que los dos bytes inferiores pueden tener un valor m&aacute;ximo de 0FFFFh (el cero delante se usa para que el ensamblador entienda que no es una cadena sino un n&uacute;mero y la h es el s&iacute;mbolo de hexadecimal), 4 nibbles; esto nos da acceso a (0FFFh = 65535d) 65535 bytes de memoria, a esto se le llama bloque. Estos 2 bytes son el "offset" o desplazo. </P>
+<P ALIGN="JUSTIFY">Ahora tenemos 2 bytes del registro superior o de segmento, que se sit&uacute;an en los 16 bits superiores de la direcci&oacute;n de 20 bits, quedando los 4 bits inferiores a 0, o sea que el valor se multiplic&oacute; por 16 ya que 10000b = 16d. Ahora se le suma a este valor el offset, y el resultado es la direcci&oacute;n real de 20 bits, de &eacute;sta manera se pudieron aprovechar 32 bits de los 2 registros para formar una direcci&oacute;n de 20 bits. Ejemplo:</P>
+<P ALIGN="CENTER"><IMG SRC="gif/casma05.gif" WIDTH=500 HEIGHT=400></P>
+<P ALIGN="JUSTIFY">Recordar que para expresar una direcci&oacute;n de memoria se usa segment:offset. Hay direcciones f&iacute;sicas o reales que pueden ser accedidas con diferentes valores de segment:offset, por ejemplo 0FFF:0001 = 0000:FFF1.</P>
+<P ALIGN="JUSTIFY">El valor m&aacute;ximo de la direcci&oacute;n real (20 bits) es de 1048575 (1 MB) y  aunque los dos registros con su m&aacute;ximo valor dieran por resultado: 65535*16 + 65535 = 1114095 (65520 bytes m&aacute;s que 1MB), solo hay 20 bits y no 21 para acarrear el bit m&aacute;s significante. Para tener este 21er bit se necesita activar algo llamado la l&iacute;nea A20, m&aacute;s conocida como memoria alta (la administra en DOS el  "himem.sys"), pero esto no es de importancia. </P>
+<P ALIGN="JUSTIFY">En el pr&oacute;ximo n&uacute;mero veremos los registros y su utilidad.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<BR><BR>
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>JULIO</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+<A HREF="index03.htm">
+<FONT FACE="ARIAL"><B>[Aula Macedonia]</B></FONT>
+</A>
+<HR>
+<A HREF="aulas.htm">
+<FONT FACE="ARIAL"><B>[Curso de Ensamblador]</B></FONT>
+</A> 
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>AULA MACEDO<FONT COLOR="#CC0000">N</FONT>IA</B></FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>
+
+
+

@@ -1,0 +1,425 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>G</B></font><FONT color="#000000" size=2 face="arial"><B>eneral</B></FONT></a>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Diseñando nuestro primer juego
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Que un buen dise&ntilde;o es indispensable para acometer cualquier proyecto inform&aacute;tico, lo sabe cualquier persona que haya creado o codificado algo. El mundo del desarrollo de software de entretenimiento se encuentra completamente dominado por dise&ntilde;os muy elaborados. De poco vale tener una idea revolucionaria si no hay un dise&ntilde;o que se encargue de darle forma. Antes de ponerse a trabajar en la creaci&oacute;n de un videojuego, por peque&ntilde;o que &eacute;ste sea, hay que armarse de papel y bol&iacute;grafo y precisar todas y cada una de las etapas por las que tenemos que pasar de una forma clara y concisa. Si nuestro dise&ntilde;o es robusto, est&aacute; bien realizado y se encuentra perfectamente delimitado (sabemos qu&eacute; es lo que va y no va a tener), la codificaci&oacute;n puede ser algo "trivial". Es preferible pasarse cuatro semanas (o las que hagan falta) dise&ntilde;ando todos y cada uno de los aspectos del juego antes que volverse loco a los siete d&iacute;as de comenzar la codificaci&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">Es obvio que trabajar en una aventura gr&aacute;fica no es lo mismo que trabajar en un arcade o en un juego de estrategia sin embargo, todos nuestros dise&ntilde;os o guiones siempre tendr&aacute;n las mismas etapas o campos "a rellenar". Una aventura gr&aacute;fica tendr&aacute; un buen "taco" de hojas destinadas al gui&oacute;n pero, seguramente, el &aacute;rea destinada a la programaci&oacute;n en s&iacute; no sea, en principio, tan compleja como el de un juego de acci&oacute;n o un simulador. Del mismo modo, un arcade no tendr&aacute; mucho espacio destinado al argumento del juego (y si me apur&aacute;is, el gui&oacute;n ser&aacute; nulo), sin embargo, eso no quiere decir que no pueda tener uno complejo. </P>
+
+<P ALIGN="JUSTIFY">Un juego, por tanto, debe de ser perfectamente delimitado y estructurado en la etapa del dise&ntilde;o. De lo contrario, nos veremos con que no sabemos bien qu&eacute; juego queremos hacer (nos surgen nuevas ideas que machacan a las anteriores, no tenemos claro c&oacute;mo definir las estructuras, nos quedamos atascados en la codificaci&oacute;n... no controlamos el proyecto y este nos desborda). El informe que hay que desarrollar no ha de ser tampoco realizado por una &uacute;nica persona a no ser, claro, que sea esta la que se encargue de realizar todas las tareas (en juegos sencillos, y sin demasiadas pretensiones comerciales, es decir, en el aprendizaje, esto es lo que ocurre). Hay que establecer unas partes globales que involucran a todos los miembros del proyecto (programadores, grafistas, guionistas, directores, etc) y otras destinadas a aquellos equipos o personas que se encargan de determinadas &aacute;reas espec&iacute;ficas.</P>
+
+<P ALIGN="JUSTIFY">Como este art&iacute;culo no pretende ser m&aacute;s que una sencilla referencia o consejo para todos aquellos que tengan en mente comenzar a trabajar en su primer juego, vamos a ver c&oacute;mo podr&iacute;a ser un breve, pero eficaz, gui&oacute;n de trabajo.</P>
+
+</FONT><font face=arial><h4>Ideas generales.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Antes de comenzar a trabajar, si quiera en el gui&oacute;n del juego, hace falta tener una idea m&aacute;s o menos clara de lo que queremos hacer (no de c&oacute;mo vamos a implementarlo). Para ello, debemos de partir de una idea inicial. ¿Qu&eacute; juego queremos hacer?, ¿una aventura?, ¿un juego de rol?, ¿un shot'em up?, ¿un juego de estrategia?, ¿tal vez uno de habilidad?... Una vez que nos hemos decidido por el g&eacute;nero del que va a "beber" nuestro juego, viene la etapa de "brain storms" (tormentas de ideas). Las "brain storms" consisten, b&aacute;sicamente, en que los miembros que van a desarrollar el juego se re&uacute;nan en un determinado lugar (una habitaci&oacute;n acogedora, una cafeter&iacute;a, un parque... en donde os sint&aacute;is a gusto). Es imprescindible que ese lugar ayude a inspiraros. Acto seguido, se comienzan a dar sugerencias sobre lo que deber&iacute;a de existir en el juego como, por ejemplo, opciones a incluir, tipo de perspectiva a utilizar, estilo de los gr&aacute;ficos, ideas generales sobre el argumento, tipo de dificultad, etc. Como es l&oacute;gico, alguien deber&aacute; de ir anotando todas esas ideas generales que van surgiendo y que van pasando por el "filtro" que es el grupo de trabajo. Si da el caso de que no tienes a nadie con quien realizar el proyecto, no pasa nada, basta con que t&uacute; mismo te encargues de hacer las anotaciones generales que se te vayan ocurriendo (mientras te encuentras escuchando t&uacute; disco de m&uacute;sica preferido).</P>
+
+<P ALIGN="JUSTIFY">Lo m&aacute;s normal es que durante este periodo de "brain storms" nuestro juego adquiera unas caracter&iacute;sticas descomunales, en otras palabras, que para concluirlo haga falta un equipo de 20 personas altamente especializadas. Por este motivo, y para prevenirnos de las emociones, es indispensable que una vez que hayamos "volcado" todas nuestras ideas en una sencilla hoja de notas, vayamos desechando las que se escapen de nuestras propias posibilidades (me temo que incluir esa pantalla de presentaci&oacute;n va a necesitar un "Silicon", que para realizar ese juego de acci&oacute;n 3D va a ser necesario contratar a Javier Arévalo, o que para saber incluir todo esos aspectos estrat&eacute;gicos, vamos a tener que llamar a Gonzalo Su&aacute;rez) y las que no resulten coherentes con lo que queremos realizar. Esta fase es, probablemente, una de las m&aacute;s importantes de todas pues los programadores y grafistas deben de ser honestos consigo mismos y decir si pueden o si no pueden realizar todo lo que pone en esa "inocente" hoja de notas. Si nuestro juego es excesivamente (y si me apur&aacute;is, un poco) ambicioso, habr&aacute; un 99.9% de posibilidades de que nunca se acabe. M&aacute;s vale hacer juegos poco complicados pero bien pulidos y trabajados, que intentar ser los mejores desarrolladores del mundo con el primer t&iacute;tulo. No lo olvid&eacute;is nunca, sed realistas y no intent&eacute;is conquistar el mundo a la primera.</P>
+
+</FONT><font face=arial><h4>Informe general sobre el juego.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Una vez que nos hemos quedado con unas cuantas ideas factibles, llega el turno de hacer un gui&oacute;n o informe m&aacute;s o menos estable sobre lo que ser&aacute; nuestro juego. Aqu&iacute;, ser&iacute;a bueno que la persona que haya estado tomando las notas se ponga delante de su procesador de textos favorito y vaya escribiendo lo que va a ser nuestro juego, las opciones que va a tener y las posibilidades del mismo. No se trata de construir el gui&oacute;n. Se trata, simplemente, de escribir de forma seria todas las ideas que han sobrevivido a la "brain storm". No hay que utilizar frases del tipo "<I>el juego podr&iacute;a incluir</I>..." sino frases del tipo "<I>el juego incluir&aacute;...</I>", es decir, se trata de establecer qu&eacute; es lo que va a existir en nuestro juego. Hay que hablar del g&eacute;nero del mismo, por ejemplo, "<I>El proyecto X</I> (ser&iacute;a bueno ir asignando un nombre al proyecto<I>), va a ser un juego de estrategia por turnos ambientado en la &eacute;poca medieval fant&aacute;stica...</I>", de las opciones generales que va a tener explicando, a su vez, qu&eacute; es lo que podremos encontrarnos dentro de ellas (lo que podremos hacer). Un ejemplo de esto &uacute;ltimo podr&iacute;a ser el decir "<I>Las opciones generales van a ser [Partida Nueva] [Cargar Partida] [Ver Cr&eacute;ditos] y [Abandonar Juego</I>". A continuaci&oacute;n, se explicar&iacute;a cada una de las mismas. Por ejemplo, basta con decir que si se pulsa en "<I>[Partida Nueva]</I>" el jugador comenzar&aacute; un nuevo juego y le aparecer&aacute; una sencilla pantalla de presentaci&oacute;n para ponerle en situaci&oacute;n. A continuaci&oacute;n, vendr&iacute;a otra en la que podr&iacute;a elegir el h&eacute;roe a encarnar, el bando, y la dificultad. Todas estas explicaciones, se encuadrar&iacute;an en un primer nivel sobre el que poder situarse. </P>
+
+<P ALIGN="JUSTIFY">Lo importante, como ver&eacute;is cuando trabaj&eacute;is en equipo, es que todos se&aacute;is capaces de ver el mismo juego en vuestra imaginaci&oacute;n porque, de lo contrario, surgir&aacute;n infinidad de problemas despu&eacute;s. </P>
+
+<P ALIGN="JUSTIFY">Una vez que se definen las opciones generales, y lo que aparecer&iacute;a nada m&aacute;s acceder a ellas, pasamos a la segunda parte del "Informe general sobre el juego". Ahora deber&iacute;a de estudiarse lo que nos ofrecer&aacute; el juego en s&iacute;, es decir, c&oacute;mo se representar&iacute;a el juego en pantalla, qu&eacute; opciones tendr&iacute;a disponible el usuario o con qu&eacute; estilo se plasmar&iacute;a todo. Se trata de realizar vistazo exhaustivo a todas (no hay que dejarse nada en el tintero) las caracter&iacute;sticas que van a existir en el juego de cara al usuario. Para completar con &eacute;xito esta parte, buscaremos las ideas que hab&iacute;amos seleccionado en la "brain storm" y comenzamos a ponerlas de forma ordenada y coherente en el informe. As&iacute;, si nuestro juego es de estrategia, deber&iacute;a de figurar el modo de representaci&oacute;n (2D vista desde arriba, isom&eacute;trico, ¡¿3D?!...), las opciones de acci&oacute;n que tendr&iacute;amos sobre nuestras unidades (si podremos moverlas animadamente, si podremos atacar, si tendr&aacute;n energ&iacute;a, si podr&aacute;n mejorar a lo largo de los combates, si podr&aacute;n llevar armas, si conversar&aacute;n, qu&eacute; tipos de unidades existir&aacute;n, etc), sobre las ciudades que haya, si es que hay (qu&eacute; opciones podremos realizar en una ciudad, si podremos reclutar unidades, construir edificios, recoger impuestos, utilizar minas, etc), sobre el interfaz (estilo de los men&uacute;s, bot&oacute;n del rat&oacute;n, etc), y cualquier otra caracter&iacute;stica (si podremos obtener informaci&oacute;n de la parte del mapa que pulsemos, si habr&aacute; diferentes tipos de terreno y si &eacute;stos tendr&aacute;n influencia en el movimiento de nuestro personaje, si habr&aacute; cambios meteorol&oacute;gicos, posibilidad de consultar un mini mapa, de grabar partida y de recuperarla, de consultar estad&iacute;sticas, etc). </P>
+
+<P ALIGN="JUSTIFY">Como veis, se trata de hacer un informe bastante serio de lo que existir&aacute; en el juego. Todo lo que aqu&iacute; se plasme se deber&aacute; de seguir tajantemente y, sobre todo, hacerlo. </P>
+
+<P ALIGN="JUSTIFY">Lo que vendr&aacute; ahora ser&aacute;n las formas de abordar los problemas de codificaci&oacute;n o representaci&oacute;n de lo que se pretende ofrecer en el juego. Se debe de partir del hecho de que, con un "poco" de esfuerzo, se lograr&aacute; hacer todo lo que hemos puesto que va a existir. Que no hay nada que se escapa completamente de nuestras posibilidades como programadores o grafistas. </P>
+
+<P ALIGN="JUSTIFY">En &eacute;sta segunda parte del Informe debe de estar todo pulido al m&aacute;ximo y aceptado por todos y cada uno de los miembros del equipo. Todos han de tener clar&iacute;simo lo que se va a realizar. Cualquier nueva idea que pueda amenazar m&iacute;nimamente a las bases que aqu&iacute; se escriban no deber&aacute; tenerse en cuenta. De lo contrario, nos veremos ahogados en mil y un cambios. Lo que aqu&iacute; se escriba ser&aacute; lo que se haga. No haremos m&aacute;s pero tampoco menos.</P>
+
+</FONT><font face=arial><h4>Argumento y gui&oacute;n del juego.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Puede que nuestro juego carezca por completo de estos dos factores, puede que tenga un argumento simple y nada de gui&oacute;n o, puede que haga uso m&aacute;s o menos exhaustivo de estos dos recursos. El<I> argumento</I> del juego se encarga de crear una historia en la que empezar a situar al jugador. Es la historia o universo sobre el que construimos nuestro juego. Un<I> gui&oacute;n</I>, por el contrario, es la parte que se encarga de llevar los di&aacute;logos que puedan existir entre el (o los) protagonistas del juego y el resto de personajes que pueblen nuestra creaci&oacute;n (a los cuales se les conoce como <I>NPC</I> &lt;No Player Caracter&gt; o, en castellano, <I>PNJ</I> &lt;Personajes No Jugador&gt;). </P>
+
+<P ALIGN="JUSTIFY">En una aventura, ya sea conversacional o gr&aacute;fica, &eacute;sta debe ser la parte m&aacute;s completa de todo el informe pues es aqu&iacute; donde residir&aacute; el "alma" del juego. En un arcade, el gui&oacute;n suele carecer de sentido, sin embargo, no es bueno desaprovechar la oportunidad de crear un argumento con el que dar profundidad a lo que ofrecemos al jugador (independientemente de lo simple que lo hagamos). Queda mucho mejor ofrecer una pantalla que nos comente cu&aacute;l es nuestra misi&oacute;n que hacer que en el momento que se pulse "<I>Nueva Partida</I>" nos encontremos masacrando todo "bicho" viviente. Otro cantar ser&iacute;a si nuestro juego no se aferra a un g&eacute;nero determinado, es decir, si bebe de muchas fuentes como aventura, arcade o rol. En ese caso, ser&aacute; esencial hacer un buen argumento y gui&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">En conclusi&oacute;n, los juegos son "pel&iacute;culas" en las que el usuario es el protagonista por eso, conviene hacer que nuestra "pel&iacute;cula" cree una situaci&oacute;n concreta con unos hechos concretos y en un universo tambi&eacute;n concreto, en otras palabras, es aconsejable crear siempre un argumento. Si adem&aacute;s vamos a tener la oportunidad de relacionarnos con el entorno, de hablar con otros personajes, etc, deberemos de construir un gui&oacute;n s&oacute;lido. Los &uacute;nicos juegos que pueden prescindir (aunque no tiene por qu&eacute; ocurrir siempre) de estos dos factores ser&iacute;an los de habilidad o inteligencia ("Tetris" por ejemplo).</P>
+
+</FONT><font face=arial><h4>Estudio de las principales estructuras de datos.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Una vez que hemos escrito todas las opciones del juego, todo lo que el jugador podr&aacute; encontrarse en &eacute;l, y tenemos una idea m&aacute;s o menos general de c&oacute;mo implementarlas, llega la hora de definir las principales estructuras de datos, las especificaciones generales de nuestros archivos y, en l&iacute;neas generales, la estructura interna de cara a la codificaci&oacute;n. </P>
+
+<P ALIGN="JUSTIFY">Este es el momento de definir qu&eacute; vamos a utilizar para poder, por ejemplo, almacenar los escenarios, las animaciones, los gr&aacute;ficos est&aacute;ticos, las conversaciones o los datos auxiliares. Esta parte, adem&aacute;s de ser la m&aacute;s importante de cara a que la codificaci&oacute;n sea, ya no infinitamente m&aacute;s r&aacute;pida y efectiva, sino correcta, es (o deber&iacute;a de ser), una de las m&aacute;s lentas de desarrollar. Hay que discutir los mejores caminos para implementar nuestro juego. Si utiliz&aacute;is programaci&oacute;n orientada a objetos (que deber&iacute;ais a estas alturas), ser&iacute;a el momento de definir las clases generales, las posibles herencias, etc.</P>
+
+<P ALIGN="JUSTIFY">Por poner un ejemplo y siguiendo con el del juego de estrategia por turnos, aqu&iacute; deber&iacute;amos de decidir c&oacute;mo implementar los "Tiles"; si en un array est&aacute;tico o bien con listas din&aacute;micas. Qu&eacute; informaci&oacute;n se almacenar&aacute; por cada casilla de mapa. De si se debe de mantener en todo momento los datos del mapa en memoria o s&oacute;lo las partes sobre las que estamos actuando. De las dimensiones que tendr&aacute; nuestro juego (memoria que vamos a destinar al mapa). Sobre el formato que llevar&aacute;n los gr&aacute;ficos est&aacute;ticos (uno propio, un PCX, GIF, etc) o cu&aacute;ntos frames tendr&aacute;n las unidades en el juego, etc.</P>
+
+<P ALIGN="JUSTIFY">Se trata de que los problemas principales de codificaci&oacute;n encuentren la idea general de dise&ntilde;o para poder trabajar con una referencia clar&iacute;sima e inamovible. Se debe definir todo de tal manera que resulte robusto, eficiente y no se venga abajo transcurridos 5 d&iacute;as de codificaci&oacute;n. No hay que implementar los algoritmos, "s&oacute;lo" dise&ntilde;ar las estructuras de datos a utilizar para poder realizar y construir nuestro juego, las funciones (si trabajamos en la arcaica programaci&oacute;n estructurada) o las clases (si nos aprovechamos de las posibilidades de la programaci&oacute;n orientada a objetos).</P>
+
+<P ALIGN="JUSTIFY">Aunque a primera vista pudiera parecer que esto es s&oacute;lo tarea de los programadores, no lo es en absoluto pues los grafistas, por ejemplo, deben de saber con qu&eacute; formato van a tener que trabajar, de qu&eacute; tama&ntilde;o tendr&aacute;n que crear las unidades y figuras, qu&eacute; tipos de "tiles" deber&aacute;n de construir, qu&eacute; paleta tendr&aacute;n que implementar o de cu&aacute;ntos colores dispondr&aacute;n para dibujar y cu&aacute;les ser&aacute;n reservados para las rutinas de codificaci&oacute;n (es un buen momento de definir, por ejemplo, el color transparente que va a utilizar nuestro juego, o de las posiciones de la paleta, en donde almacenaremos los colores que van a ser rotados, etc).</P>
+
+<P ALIGN="JUSTIFY">Esta es la etapa, por as&iacute; decirlo, cr&iacute;tica pues si no hacemos todo de forma eficiente y coherente, nos encontraremos con un programa redundante, lento y que aprovecha mal la memoria con lo que, transcurrida un par de semanas de codificaci&oacute;n os volver&eacute;is locos al a&ntilde;adir m&aacute;s y m&aacute;s l&iacute;neas de c&oacute;digo.</P>
+
+</FONT><font face=arial><h4>An&aacute;lisis del flujo principal.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Todo juego se compone de un flujo o, m&aacute;s bien, bucle principal en el que se deben de ir ejecutando todas las comprobaciones tales como pulsaciones de teclas, colisiones, actualizaci&oacute;n de los movimientos de los enemigos, etc. Resulta muy &uacute;til, por no decir esencial, crear un flujo de programa general. El objetivo vendr&iacute;a a ser que, mediante un pseudoc&oacute;digo muy elemental, plasm&aacute;ramos el funcionamiento interno del programa. </P>
+
+<P ALIGN="JUSTIFY">Un ejemplo podr&iacute;a ser el siguiente. Imaginar que el juego es un comecocos:</P>
+
+</FONT><FONT FACE="Courier,Courier New" SIZE=1><P ALIGN="JUSTIFY">Carga_Mapa.</P>
+
+<P ALIGN="JUSTIFY">Inicializar_Estructuras.</P>
+
+<P ALIGN="JUSTIFY">Situar_Fantasmas.</P>
+
+<P ALIGN="JUSTIFY">Situar_Jugador.</P>
+
+<P ALIGN="JUSTIFY">Mostrar_Mapa.</P>
+
+<P ALIGN="JUSTIFY">MIENTRAS (No Salir_Juego)</P>
+
+<P ALIGN="JUSTIFY">HACER</P>
+
+<P ALIGN="JUSTIFY">Actualizar_Pos_Fantasmas.</P>
+
+<P ALIGN="JUSTIFY">SI Alg&uacute;n_Fantasma_Come ENTONCES Salir_Juego = S&iacute;.</P>
+
+<P ALIGN="JUSTIFY">SI Pulsa_Tecla ENTONCES</P>
+
+<P ALIGN="JUSTIFY">&#9;SI Tecla=Movimiento ENTONCES Mover_Direcci&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">&#9;SI Tecla=Pausa ENTONCES Detiene_Juego.</P>
+
+<P ALIGN="JUSTIFY">SI Tecla=Salir ENTONCES Salir_Juego = S&iacute;.</P>
+
+<P ALIGN="JUSTIFY">FIN MIENTRAS</P>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Como veis se trata de un flujo que describe el funcionamiento de un "Comecocos" realmente simple no obstante, nos sirve perfectamente para tener una idea de los algoritmos que debemos de implementar para hacer funcionar a nuestro programa y de c&oacute;mo disponer el bucle que eval&uacute;e las iteraciones del jugador con el juego (movimientos, pulsaci&oacute;n de teclas, etc) as&iacute; como las actualizaciones constantes que han de realizarse.</P>
+
+<P ALIGN="JUSTIFY">Una vez que tenemos las estructuras de datos generales en donde guardar o representar los datos del juego y el flujo que nos indica el camino a seguir para implementar el c&oacute;digo, pasaremos a estudiar los algoritmos m&aacute;s importantes a realizar.</P>
+
+</FONT><font face=arial><h4>An&aacute;lisis de los principales algoritmos a implementar.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Este es el paso de m&aacute;s "bajo nivel" que debe de plasmarse en el informe. Realmente, corresponde por entero a los programadores aunque, en muchas ocasiones, dichos algoritmos podr&aacute;n funcionar m&aacute;s eficientemente si los grafistas, por ejemplo, trabajan de una determinada forma sus gr&aacute;ficos. Es decir, siempre habr&aacute; que tener al tanto de lo que aqu&iacute; definamos al encargado en dirigir la creaci&oacute;n gr&aacute;fica (si tiene algo que ver, claro est&aacute;, lo que estamos haciendo con los gr&aacute;ficos).</P>
+
+<P ALIGN="JUSTIFY">El objetivo de este paso es el de escribir aquellos algoritmos m&aacute;s complicados en c&oacute;digo directamente o bien, especificar m&aacute;s claramente ciertos pasos. Si nos ce&ntilde;imos a nuestro ejemplo del "Comecocos", ser&iacute;a bueno especificar m&aacute;s claramente lo que hay que realizar cuando el usuario pulsa una tecla. As&iacute;, una de las cosas que podr&iacute;amos hacer ser&iacute;a:</P>
+
+</FONT><FONT FACE="Courier,Courier New" SIZE=1><P ALIGN="JUSTIFY">Estudio sobre Mover_Direcci&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">Cuando se pulse aqu&iacute;, llamaremos a una rutina que, recibiendo el valor de la tecla pulsada, deber&aacute; de actuar en consecuencia. He aqu&iacute; un flujo muy poco optimizado pero muy ilustrativo.</P>
+
+<P ALIGN="JUSTIFY">Rutina_Movimiento (tecla_pulsada)</P>
+
+<P ALIGN="JUSTIFY">EMPIEZA</P>
+
+<P ALIGN="JUSTIFY">SI tecla_Pulsada = ARRIBA ENTONCES</P>
+
+<P ALIGN="JUSTIFY">EMPIEZA</P>
+
+<P ALIGN="JUSTIFY">&#9;// Comprueba colisi&oacute;n (L&iacute;mites_Mapa).</P>
+
+<P ALIGN="JUSTIFY">&#9;SI Colisi&oacute;n(x,y) ENTONCES SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">&#9;// Comprueba colisi&oacute;n (Fantasmas).</P>
+
+<P ALIGN="JUSTIFY">&#9;SI Colisi&oacute;n (x,y) </P><DIR>
+
+<DIR>
+
+
+
+<P ALIGN="JUSTIFY">ENTONCES </P>
+
+<P ALIGN="JUSTIFY">Salir_Juego = S&iacute;</P>
+
+<P ALIGN="JUSTIFY">SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">FIN SI</P></DIR>
+
+</DIR>
+
+
+
+<P ALIGN="JUSTIFY">&#9;</P>
+
+<P ALIGN="JUSTIFY">&#9;// No hay colisi&oacute;n por lo que movemos</P>
+
+<P ALIGN="JUSTIFY">Mueve_PacMan_Posicion(x,y)</P>
+
+<P ALIGN="JUSTIFY">&#9;</P>
+
+<P ALIGN="JUSTIFY">// Comprobamos si hemos comido bola</P>
+
+<P ALIGN="JUSTIFY">Comprueba colisi&oacute;n (Bola).</P>
+
+<P ALIGN="JUSTIFY">&#9;SI Come_Bola ENTONCES</P>
+
+<P ALIGN="JUSTIFY">&#9;&#9;Elimina_Posicion(x,y)Bola</P>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+
+<P ALIGN="JUSTIFY">SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">FIN SI MOVIMIENTO ARRIBA</P>
+
+<P ALIGN="JUSTIFY">SI tecla_Pulsada = DERECHA ENTONCES</P>
+
+<P ALIGN="JUSTIFY">.</P>
+
+<P ALIGN="JUSTIFY">.// Resto de instrucciones</P>
+
+<P ALIGN="JUSTIFY">SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">FIN SI MOVIMIENTO ARRIBA</P>
+
+<P ALIGN="JUSTIFY">SI tecla_Pulsada = ABAJO ENTONCES</P>
+
+<P ALIGN="JUSTIFY">.</P>
+
+<P ALIGN="JUSTIFY">.// Resto de instrucciones</P>
+
+<P ALIGN="JUSTIFY">SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">FIN SI MOVIMIENTO ARRIBA</P>
+
+<P ALIGN="JUSTIFY">SI tecla_Pulsada = IZQUIERDA ENTONCES</P>
+
+<P ALIGN="JUSTIFY">.</P>
+
+<P ALIGN="JUSTIFY">.// Resto de instrucciones</P>
+
+<P ALIGN="JUSTIFY">SALIR Rutina_Movimiento</P>
+
+<P ALIGN="JUSTIFY">FIN SI MOVIMIENTO ARRIBA</P>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+
+<P ALIGN="JUSTIFY">FIN Rutina_Movimiento</P>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;&#9;</P>
+
+<P ALIGN="JUSTIFY">Con este ejemplo vemos que hay que implementar determinados algoritmos m&aacute;s claramente. Por ejemplo, habr&iacute;a que hacer uno sobre colisiones, otro para saber si nos comemos una bola, etc. Estos algoritmos deber&iacute;an de escribirse en alg&uacute;n sitio antes de proceder a codificar. Esto es as&iacute;, para evitar caer en el error de programar mediante la improvisaci&oacute;n (ni se os ocurra poneros a programar sin algo de pseudoc&oacute;digo o c&oacute;digo escrito en papel). Como es l&oacute;gico, no hace falta, ni mucho menos, codificar todos y cada uno de los algoritmos que existen en el juego. Basta que a aquellos m&aacute;s complejos les dediquemos una atenci&oacute;n principal. El resto, podr&aacute;n "montarse" f&aacute;cilmente mediante una consulta al pseudoc&oacute;digo.</P>
+
+</FONT><font face=arial><h4>Librer&iacute;as, "tools" y "engines" necesarios.</H4>
+
+</FONT><FONT FACE="Arial" SIZE=2>
+
+<P ALIGN="JUSTIFY">Una vez que tenemos muy bien definidas todas las estructuras que utilizar&aacute; el juego, llega el momento de ver qu&eacute; es lo que necesitamos para poder acelerar lo m&aacute;ximo nuestro trabajo, as&iacute; como de qu&eacute; "<I>engines</I>" o sistemas de representaci&oacute;n necesitaremos. Las "<I>tools</I>" son las herramientas que se crean los programadores para que, bien ellos o bien los grafistas, animadores o m&uacute;sicos, puedan trabajar de manera m&aacute;s espec&iacute;fica y r&aacute;pida. As&iacute;, si estamos haciendo un juego de estrategia por turnos basado en "tiles", ser&iacute;a bueno que nos cre&aacute;ramos un editor de escenarios para que los dise&ntilde;adores fueran creando los mapas Este editor, luego se grabar&iacute;a en un formato que el "<I>engine</I>" interno del juego ser&iacute;a capaz de utilizar correctamente. Por ponernos un ejemplo, si no nos cre&aacute;ramos un editor de escenarios, nos ver&iacute;amos obligados bien a crearnos "a pelo" un archivo con todos los datos de un mapa (algo realmente horrible) o bien, a hacer a&uacute;n m&aacute;s el bestia, a meter en el propio c&oacute;digo todo lo referente al escenario. Puede que si tu juego no utiliza mapas excesivamente grandes (y tiene expansibilidad nula), estas dos &uacute;ltimas f&oacute;rmulas no resulten muy descabelladas, pero en el momento en que quieras hacer algo m&iacute;nimamente complejo, te ser&aacute; imposible trabajar de este modo.</P>
+
+<P ALIGN="JUSTIFY">Otras de las herramientas que pueden ser interesantes son las de dibujo y creaci&oacute;n de animaci&oacute;n. Naturalmente, si ten&eacute;is licenciado alg&uacute;n programa que se encargue de realizar todo este trabajo, no merece la pena perder tiempo en ello. De todas formas, siempre que hag&aacute;is algo medianamente complejo, necesitar&eacute;is de alguna herramienta que os acelere alguna parte de la creaci&oacute;n del juego muy concreta.</P>
+
+<P ALIGN="JUSTIFY">Esta parte del informe se encargar&aacute; pues, de especificar las "<I>tools</I>" y los "<I>engines</I>" necesarios o recomendables. Puede ocurrir que no necesit&eacute;is ni lo uno ni lo otro. Un juego del tipo del "Tetris" (un "Tetris" en 2D de lo m&aacute;s simple) realmente no necesita nada por el estilo, ni un editor de animaciones, ni un editor de escenarios, ni un engine complejo. Todo es perfectamente representable sin necesidad de recurrir a un sistema espec&iacute;fico.</P>
+
+</FONT><FONT FACE="Arial">
+
+<P ALIGN="JUSTIFY"><h4>Anotaciones "work in progres".</h4>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Por mucho que nos hayamos trabajado el informe, siempre quedar&aacute; alg&uacute;n resquicio que no hemos tenido en cuenta lo suficiente. Ser&aacute; muy importante ir anotando todas esas peque&ntilde;as correcciones que nos hemos visto obligados a realizar (a la hora de programar, siempre se nos puede haber pasado por alto alg&uacute;n detalle al ver que hab&iacute;a alg&uacute;n otro camino para hacer lo mismo pero m&aacute;s r&aacute;pidamente). Si hemos conseguido realizar un informe bien definido y robusto, estad seguro que &eacute;stas variaciones ser&aacute;n triviales, m&iacute;nimas. Si, por el contrario, hab&eacute;is pasado por alto el realizar un buen informe, os encontrar&eacute;is improvisando continuamente y, al final, os quedar&aacute; (si es que logr&aacute;is acabarlo) un juego desastroso internamente (al menos, habr&eacute;is aprendido para la pr&oacute;xima vez lo que nunca deber&eacute;is de hacer).</P>
+
+</FONT><FONT FACE="Arial">
+
+<font face=arial><h4>¿Esto es todo?.</h4>
+
+</FONT><FONT FACE="Arial" SIZE=2>
+
+<P ALIGN="JUSTIFY">Pues naturalmente que no. Pero s&iacute; que va a servir para ser mucho m&aacute;s ordenado de cara a realizar el juego. Faltan bastantes apartados que deben de figurar en cualquier proyecto grande que se precie como la definici&oacute;n de normas a la hora de especificar las variables, la clarificaci&oacute;n de todas y cada una de las funciones que van a existir, etc.</P>
+
+<P ALIGN="JUSTIFY">Coger un h&aacute;bito de trabajo basado en la creaci&oacute;n de informes medianamente largos y detallados es algo que cuesta bastante m&aacute;s de lo deseado. Sin embargo, es como todo. Una vez que te acostumbras a trabajar de esta forma, te resulta inaudito el abordar la creaci&oacute;n de un juego o programa, en general, sin unas hojas de referencia. En cierto modo, es una maduraci&oacute;n en t&uacute; camino como dise&ntilde;ador, programador o grafista.</P>
+
+<P ALIGN="JUSTIFY">Y hasta aqu&iacute;, este breve art&iacute;culo introductorio al papel de la planificaci&oacute;n de proyectos. Mientras tanto, recordad que merece m&aacute;s la pena estar dos meses dise&ntilde;ando y planificando sin hacer una sola l&iacute;nea de c&oacute;digo que ponerse a las primeras de cambio a los mandos de nuestro compilador preferido o programa de dise&ntilde;o gr&aacute;fico.</P></FONT><BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="apj.htm"><font FACE="ARIAL"><B>[General]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

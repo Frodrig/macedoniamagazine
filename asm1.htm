@@ -1,0 +1,151 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en Ensamblador para PC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+
+
+<BR><BR>
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:magic_ring@xoommail.com">Ricardo Amil "Artemis"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Introducción
+</H3>
+
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+
+<FONT FACE="Arial,Helvetica" SIZE=2><P ALIGN="JUSTIFY">El lenguaje "Assembler" (ASM) o Ensamblador es el lenguaje m&aacute;s r&aacute;pido para la programaci&oacute;n del PC, &eacute;sto se debe a que utiliza instrucciones que acceden a los registros del procesador directamente. Mantiene una comunicaci&oacute;n muy estrecha con el "hardware", permitiendo controlar al m&aacute;ximo cada componente del ordenador. Por lo mencionado anteriormente, el Ensamblador, es un lenguaje de bajo nivel. Los lenguajes de bajo nivel son los que necesitan una descripci&oacute;n y cantidad de pasos mayores, para efectuar una tarea, que en un lenguaje de alto nivel, como el C, C++, Pascal y muchos m&aacute;s, pero permiten una mejor conecci&oacute;n con los dipositivos y brindan una velocidad mayor que los de alto nivel.</P>
+<P ALIGN="JUSTIFY">Un PC opera d&iacute;gitos binarios, o sea 0 y 1, bas&aacute;ndose en el &aacute;lgebra de Boole (matem&aacute;tico ingl&eacute;s, 1815-1864) para llegar a los circuitos electr&oacute;nicos con el simple sistema de la conducci&oacute;n de electricidad (1), o la no conducci&oacute;n de electricidad (0). En la codificaci&oacute;n binaria cada d&iacute;gito puede albergar un valor de 1 &oacute; 0. &Eacute;stos d&iacute;gitos son los bits, los cu&aacute;les se agrupan para formar n&uacute;meros hexadecimales que en su combinaci&oacute;n representan instrucciones de procesamiento. Para entenderlo mejor se pueden representar n&uacute;meros a trav&eacute;s de un conjunto de d&iacute;gitos binarios o bits. Supongamos que tenemos un conjunto de 8 bits (BYTE), como en el sistema decimal cada d&iacute;gito tiene su ubicaci&oacute;n y representa un valor seg&uacute;n su posici&oacute;n, los bits funcionan igual: </P></FONT>
+<P ALIGN="CENTER"><CENTER><TABLE CELLSPACING=0 BORDER=0 WIDTH=400>
+<TR><TD VALIGN="MIDDLE">
+<P ALIGN="CENTER"><IMG SRC="gif/casmin01.gif" WIDTH=287 HEIGHT=96></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial,Helvetica" SIZE=2><P ALIGN="CENTER">Los 0 en violeta representan el estado de cada uno de los 8 bits, en este caso todos son 0(apagado). Cada n&uacute;mero negro representa el valor de bit 1(encendido) en esa posici&oacute;n. </P>
+<P ALIGN="JUSTIFY">Como puede verse, el bit m&aacute;s significativo (MSB - Most Significant bit), situado a la izquierda, posee un valor de 128 decimal cuando est&aacute; encendido, y el bit menos significativo (LSB - Least Significant Bit), situado a la derecha, posee un valor de 1 decimal al estar encendido. De esta manera puede apreciarse que el valor de cada bit en su posici&oacute;n, es de 2 a la potencia cuyo n&uacute;mero corresponda al lugar en orden regresivo, o sea el LSB tiene un valor de 2 a la 0 potencia (1), el siguiente de 2 a la 1 potencia (2), el que le sigue de 2 a la 2 potencia (4), etc. Las posiciones encendidas se suman dando como resultado un n&uacute;mero decimal al que su representaci&oacute;n binaria equivale: 00000000(0), 00000001(1), 00000010(2), 00000011(3), 00000100(4), 00000101(5), 00000111(6), ... , 11111111(255). Pueden realizarse operaciones aritm&eacute;ticas con los d&iacute;gitos binarios, podr&iacute;amos explicarlas, pero &eacute;sa no es la finalidad de &eacute;sta introducci&oacute;n. </P>
+<P ALIGN="JUSTIFY">Con los d&iacute;gitos hexadecimales sucede lo mismo, pero cada posici&oacute;n alberga 16 valores decimales (de all&iacute; HEXA - DECIMAL) los s&iacute;mbolos utilizados son los 10 d&iacute;gitos decimales (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) m&aacute;s los primeros 6 caracteres del alfabeto (A, B, C, D, E, F). En hexadecimal la serie de n&uacute;meros ser&iacute;a: 0-1-2-3-4-5-6-7-8-9-A-B-C-D-E-F-10-11-12-13-14-15-16-17-18-19-1A-1B-1C-1D-1E-1F-20, etc; siendo el equivalente de 10h o 0x10 (10 hexadecimal), 16 decimal.</P>
+<P ALIGN="JUSTIFY">Anteriormente se explic&oacute; el sistema de numeraci&oacute;n que un PC utiliza. Una vez sabido esto, se puede aprender la organizaci&oacute;n de los datos formados por conjuntos de bits.</P></FONT>
+
+<BR><BR>
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>ABRIL</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+<A HREF="index03.htm">
+<FONT FACE="ARIAL"><B>[Aula Macedonia]</B></FONT>
+</A>
+<HR>
+<A HREF="aulas.htm">
+<FONT FACE="ARIAL"><B>[Curso de Ensamblador]</B></FONT>
+</A> 
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>AULA MACEDO<FONT COLOR="#CC0000">N</FONT>IA</B></FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>
+
+
+
