@@ -1,2 +1,9 @@
-# macedoniamagazine
-Fanzine independiente de finales de los 90 sobre programación de videojuegos, internet, hardware y software de entretenimiento.
+# Bienvenido a Macedonia Magazine.
+
+La página que estás visitando recoge el archivo relativo a un fanzine altruista llamado Macedonia el cual, comenzó su andadura a finales del año 1997. Este fanzine abarcó innumerables temas relacionados con la informática, pero principalmente se centró en aquellos que tenían que ver con el desarrollo de videojuegos, la programación gráfica y visual, Internet, hardware y todo lo que tenía que ver con el software de entretenimiento (análisis, artículos nostálgicos, soluciones, entrevistas, etc).
+
+Para poder recopilar toda la inmensa cantidad de trabajos editados cuando Macedonia estuvo activa, se ha dividido la historia del fanzine en dos periodos o épocas. Así, por un lado tenemos la época que comprende los años 1997 / 2000 y, por otro, la que se centra en el periodo 2000 / 2002. La primera época fue la más importante de todas y en la que más artículos se editaron. A partir del número 10 las cosas se pusieron muy complicadas, desde el punto de vista de la coordinación y disponibilidad del equipo de trabajo, propiciando un cese del funcionamiento normal de la revista. En la segunda época se intentó "reanimar" a la misma pero resultó del todo imposible. Es por ello que todos los integrantes de Macedonia hemos decidido darla un final oficial o, al menos, dejarla que quede en coma de manera digna, pues han sido muchas las ilusiones y horas que hemos dedicado a Macedonia realizando artículos, aportando ideas, pensando en nuevos contenidos o rompiéndonos la cabeza con los numerosos diseños que ha tenido a lo largo de su historia.
+
+Os dejamos ya que consultéis cada una de las dos épocas vividas en la revista. Esperamos que los veteranos de Macedonia agradezcan esta recopilación y, sobre todo, que la gente que jamás tuvo contacto con la revista cuando ésta se encontraba pletórica de energías, encuentre artículos, tutoriales, opiniones, entrevistas o cualquier elemento que pueda serle útil. Si de algo nos podemos sentir orgullosos es de la enorme cantidad de "tesoros" que se pueden encontrar navegando por la historia de nuestra entrañable publicación.
+
+Que disfrutéis y sepáis apreciar Macedonia.
