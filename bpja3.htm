@@ -1,0 +1,755 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</td></table></TD>
+
+</td></table>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:spellcaster@bigfoot.com"><b><font color="0000ff">Spellcaster.</font></b></a><br>
+
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 3.<br>Mirar una localidad.
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Veamos, una de las primeras cosas que tu conversacional
+
+debe hacer es el 'mirar' la localidad inicial&#133; Por 'mirar
+
+una localidad' quiero decir 'describir la habitaci&oacute;n actual'.
+
+Al describir una localidad, lo que se hace es sacar por pantalla
+
+tanto la descripci&oacute;n de la misma, como los objetos, monstruos
+
+y PSI's que puedan haber. Como de momento no trataremos ni monstruos,
+
+ni objetos, ni tampoco PSI's, nos limitaremos a escribir la descripci&oacute;n
+
+de la habitaci&oacute;n, la cual la tenemos almacenada en el array
+
+Localizaciones[].Desc&#133; Construyamos el procedimiento 'mirar'
+
+(look).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Mirar(NumeroLoc:Word);
+
+        <B>Var</B> A:Byte;
+
+        <B>Begin</B>
+
+                Writeln;
+
+                A:=1;
+
+                <B>While</B> (A&lt;11) And (Localizaciones[NumeroLoc].Desc[A]&lt;&gt;'*') Do
+
+                <B>Begin</B>
+
+                        Writeln(Localizaciones[NumeroLoc].Desc[A]);
+
+                        Inc(A);
+
+                <B>End</B>;
+
+                Writeln;</CODE>
+
+        <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Quiz&aacute; te preguntes porque no hacemos simplemente
+
+un bucle<I> for</I> para escribir la descripci&oacute;n de 10
+
+l&iacute;neas. La raz&oacute;n es que la descripci&oacute;n podr&iacute;a
+
+tener menos de 10 l&iacute;neas, y que de ser as&iacute;, la &uacute;ltima
+
+l&iacute;nea tendr&aacute; un &uacute;nico car&aacute;cter (un '*').
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ooopsss&#133; Casi me olvido de describir las salidas&#133;
+
+Para hacerlo, a&ntilde;ade las siguientes l&iacute;neas:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        Writeln('Salidas visibles:');</CODE>
+
+        <B>If</B> Rooms[NumeroLoc].Norte&lt;&gt;0 <B>Then</B> Write('Norte');
+
+        <B>If</B> Rooms[NumeroLoc].Sur&lt;&gt;0 <B>Then</B> Write('Sur');
+
+        <B>If</B> Rooms[NumeroLoc].Este&lt;&gt;0 <B>Then</B> Write('Este');
+
+        <B>If</B> Rooms[NumeroLoc].Oeste&lt;&gt;0 <B>Then</B> Write('Oeste');
+
+        Writeln;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Si quieres a&ntilde;adirle un poco de colorido, usa otro color diferente.
+
+Prueba a a&ntilde;adir lo siguiente antes de describir la localidad:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        TextColor(White);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Y antes de dar las salidas:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        TextColor(Yellow);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Y quedar&aacute; mucho mejor&#133; :)
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Si queremos usarlo, tendr&aacute;s que implementar
+
+la procedure 'Jugar', que constituir&aacute; el cuerpo principal
+
+del juego&#133; De momento, 'Jugar' se limitar&aacute; a describir
+
+la localidad&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Jugar;
+
+        <B>Var</B> Fin:Boolean;
+
+        <B>Begin</B>
+
+                Fin:=False;
+
+                Mirar(LocalidadActual);
+
+                <B>Repeat</B>
+
+                <B>Until</B> Fin;
+
+        <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+El booleano <I>Fin</I> controla el final del juego&#133;
+
+cuando se ponga a cierto (true), la partida se dar&aacute; por terminada.
+
+&Eacute;sto deber&aacute; ocurrir cuando por ejemplo el jugador desee
+
+abandonar o finalice con &eacute;xito la aventura&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+As&iacute; pues, tendr&aacute;s que a&ntilde;adir
+
+al programa principal una llamada a esta rutina, y tambi&eacute;n
+
+definir e inicializar la variable <I>LocalidadActual</I>&#133;
+
+En <I>LocalidadActual </I>guardaremos la posici&oacute;n actual
+
+del jugador en el juego, yo la declaro de tipo Word&#133; Y la
+
+inicializo al valor 22, porque esta es precisamente la localidad
+
+de comienzo en Fanglore&#133; H&aacute;zlo en la rutina Init.
+
+<BR>
+
+
+
+
+
+<h4>La Entrada de comandos y el parser</h4>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ha llegado la hora de recibir las ordenes del usuario&#133;
+
+Es aqu&iacute; donde muchos juegos fallan&#133; Y por qu&eacute;?
+
+Pues porque su parser la caga.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+&#191;Qu&eacute; se entiende por parser? Pues no
+
+es m&aacute;s que una rutina (m&aacute;s bien un mont&oacute;n
+
+de ellas) que cogen la entrada del usuario, la procesan (separando
+
+comandos y nombres) y ejecuta las instrucciones que correspondan&#133;
+
+Bien, creo que esto es algo complicado para el principiante, as&iacute; que
+
+intentar&eacute; explicarlo bien.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Antes de nada tienes que recoger la entrada (o input)
+
+del usuario&#133; Lo haremos llamando a Readln (la mayor&iacute;a
+
+de las aventuras tienes sus propias rutinas para leer la entrada
+
+del jugador, pero es algo un tanto complejo como para explicarlo
+
+aqu&iacute;).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        ReadLn(Comando);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+P&oacute;nlo en el la rutina <I>Play</I>, a continuaci&oacute;n
+
+de la llamada a Mirar. Define adem&aacute;s la variable <I>Comando</I>
+
+como un string&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+En el programa Fanglore.Pas le a&ntilde;ado color:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        TextColor(LightRed);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Y tambi&eacute;n le he puesto un mensaje (el prompt),
+
+para que el que juegue sepa que el juego est&aacute; a la espera
+
+de comandos:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        TextColor(White);
+
+        Writeln('&#191;Cu&aacute;l es la oferta, maestro?');
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+El siguiente paso es el dividir el string en sus
+
+componentes. Dado un string como 'Coger la m&aacute;scara', obtendr&iacute;amos
+
+solamente las palabras 'coger' y 'm&aacute;scara'&#133; El art&iacute;culo
+
+'la', al igual que todos los art&iacute;culos que pudieran haber, desaparecer&iacute;a.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+H&aacute;gamos una rutina que dado un string, nos
+
+devuelva un array con las palabras separadas:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Parse(S:String;<B>Var</B> Parsed:Array[1..10] Of String);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Usamos una rutina con un par&aacute;metro Var en
+
+vez de una funci&oacute;n, porque una funci&oacute;n no puede
+
+devolver un array&#133; Y de hecho tampoco ser&iacute;a posible hacer lo
+
+de m&aacute;s arriba, sino que deber&aacute;s definir un tipo:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Type</B> ParsedTipo:Array[1..10] <B>Of</B> String;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+De esta manera podr&aacute;s definir la rutina as&iacute;:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Parse(S:String;<B>Var</B> Parsed:ParsedType);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ahora, lo primero que tenemos que hacer es dividir
+
+la entrada en sus componentes&#133; Lo haremos buscando el primer
+
+espacio, y cogiendo todo lo que estuviera desde el comienzo hasta
+
+el espacio, y guard&aacute;ndolo en el array, y as&iacute; sucesivamente&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+La rutina ser&iacute;a algo como:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Parse(S:String;<B>Var</B> Parsed:TipoParsed);
+
+        <B>Var</B> IndiceArray:Byte;
+
+            IndiceString:Byte;
+
+            SiguienteEspacio:Byte;
+
+        <B>Begin</B>
+
+                IndiceArray:=1;
+
+                IndiceString:=0;
+
+                SiguienteEspacio:=EncuentraEspacio(S,IndiceString);
+
+                <B>While</B> (IndiceString<=Length(S)) <B>And</B> (IndiceArray&lt;11) <B>Do</B>
+
+                <B>Begin</B>
+
+                        NextSpace:=EncuentraEspacio(S,IndiceString);
+
+                        Parsed[IndiceArray]:=ObtieneString(S,IndiceString,SiguienteEspacio);
+
+                        IndiceString:=SiguienteEspacio;
+
+                        Inc(IndiceArray);
+
+                <B>End</B>;
+
+        <B>End</B>;
+
+</FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Esto parsear&aacute; el string&#133; Usa dos funciones,
+
+EncuentraEspacio y ObtieneString, cuyo c&oacute;digo viene a continuaci&oacute;n&#133;
+
+La primera funci&oacute;n se encarga de buscar el siguiente espacio dada una
+
+posici&oacute;n de comienzo, mientras que la segunda copia una
+
+parte del string.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Function</B> EncuentraEspacio(S:String;Inicio:Byte):Byte;
+
+        <B>Begin</B>
+
+                <B>While</B> (S[Inicio+1]&lt;&gt;' ') <B>And</B> (Inicio&lt;Length(S)) <B>Do</B> Inc(Inicio);
+
+                EncuentraEspacio:=Inicio;</CODE>
+
+        <B>End</B>;
+
+        <P ALIGN=JUSTIFY><font size=2 face=arial>
+
+        <B>Function</B> ObtieneString(S:String;Inicio,Final:Byte):String;
+
+        <B>Var</B> A:Byte;
+
+            Tmp:String;
+
+        <B>Begin</B>
+
+                Tmp:='';
+
+                <B>For</B> A:=Inicio+1 <B>To</B> Final <B>Do</B> Tmp:=Tmp+S[A];
+
+                ObtieneString:=Tmp;
+
+        <B>End</B>;
+
+        </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+No te olvides de llamar a la rutina Parse despu&eacute;s de leer el comando:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        Parse(Comando,Parsed);
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Y acu&eacute;rdate de declarar tambi&eacute;n el array Parsed:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Var</B> Parsed:TipoParsed;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ahora lo que tenemos es un array con la entrada parseada&#133;
+
+Lo que hay que hacer es pasarlo todo a may&uacute;sculas&#133;
+
+&#191;Por qu&eacute;? Pues bien, porque lo que no querr&aacute;s es
+
+que el programa te mande a paseo si alguien escribe 'coger' o 'Coger'
+
+en lugar de 'COGER'. Ten en cuenta que para el ordenador
+
+resultan muy diferentes las may&uacute;sculas de las min&uacute;sculas&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Usaremos la rutina <I>PasarAMayusculas</I> para tal fin:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Function</B> PasarAMayusculas(S:String):String;
+
+        <B>Var</B> Tmp:String;
+
+            A:Byte;
+
+        <B>Begin</B>
+
+                Tmp:='';
+
+                <B>For</B> A:=1 To Length(S) <B>Do</B> Tmp:=Tmp+UpCase(S[A]);
+
+                Upper:=Tmp;
+
+        <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+La funci&oacute;n Upcase es una funci&oacute;n
+
+est&aacute;ndar de Pascal que convierte una min&uacute;scula
+
+en may&uacute;scula, sin afectar a los simbolos especiales, ni
+
+tampoco a las may&uacute;sculas&#133; Llama a la rutina PasarAMayusculas
+
+por cada elemento del array Parsed, despu&eacute;s de parsear
+
+la entrada.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<HR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<B><FONT SIZE=4>Pr&oacute;xima Entrega:</B></FONT>
+
+En nuestro pr&oacute;ximo cap&iacute;tulo continuaremos con el desarrollo
+
+del parser, y abordaremos el movimiento del jugador.
+
+<HR><P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<font color=#cc0000>Nota del traductor:</font> En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

@@ -1,0 +1,626 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>V</B></font><FONT color="#000000" size=2 face="arial"><B>arios</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:e3529592@est.fib.upc.es"><b><font color="0000ff">Daniel Miralles.</font></b></a>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Cómo hacer un PSI
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Si lo hicieramos bien del todo los psis se basar&iacute;an en inteligencia artificial
+
+y programar&iacute;amos su consciente, preconsciente y subconsciente. Pero el
+
+resultado aseguro que distar&iacute;a mucho de lo deseado. As&iacute; que no podemos hacer
+
+personajes casi inteligentes, sino PSI (personajes semi inteligentes). Los
+
+primeros PSIs no hac&iacute;an casi nada, estaban ah&iacute; y eran los t&iacute;picos
+
+elfo-que-cambia-tortilla-por-llave. Llegabas, dabas la tortilla y &eacute;l te daba la
+
+llave. No a&ntilde;ad&iacute;an mucho al juego. Luego empezaron a hacer m&aacute;s cosas, a lo
+
+mejor lo que ten&iacute;as que hacer era pagarle una cerveza (como en Cozumel) y te
+
+soltaba no s&eacute; que rollo sobre no me acuerdo. Pero podemos mejorarlo a&uacute;n m&aacute;s:
+
+un PSI act&uacute;a no seg&uacute;n lo que le des, sino seg&uacute;n lo que digas, o como act&uacute;es
+
+t&uacute; con &eacute;l. Esto, que es f&aacute;cil de decir (imagina, psi enano que si lo tratas
+
+bien esta contento y te sigue aunque si ve agua no quiera pasar y que tarar&iacute;
+
+tarar&aacute;) es muy dif&iacute;cil de implementar. Al menos as&iacute;, porque se puede hacer,
+
+pero tenemos que hacerlo bien. Propongo un &quot;est&aacute;ndar&quot;, para que as&iacute; los que
+
+implementen lo tengan m&aacute;s f&aacute;cil. Est&aacute;ndar abierto a modificaciones y mejoras.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<UL>
+
+<LI><P ALIGN=JUSTIFY><font size=2 face=arial><B>Estados</B>. He pensado que la mejor manera de declarar un PSI es mediante
+
+  &quot;estados&quot;. Imaginad el dichoso elfo con la llave. Tiene hambre, y quiere
+
+  su tortilla. Los PSI t&iacute;picos son &quot;mono-estado&quot;, como el loco de Nritis en
+
+  Eudoxio. Sigue con el esquema pregunta-respuesta (t&uacute; le dices algo y &eacute;l te
+
+  dice otra cosa) e incluso da un objeto, pero siempre es el mismo t&iacute;o. T&uacute; le
+
+  preguntas por Sarah y te dice cosas. Si vuelves a&ntilde;os despu&eacute;s, te dir&aacute; lo
+
+  mismo. Podemos hacer que nuestro elfo tenga 5 estados:
+
+  <P ALIGN=JUSTIFY><font size=2 face=arial>
+
+  <OL>
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Desconoce al jugador.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Estado normal.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Cabreado.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Te sigue.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Te ha dado ya la llave, pasa de ti.
+
+  </OL>
+
+  <P ALIGN=JUSTIFY><font size=2 face=arial>
+
+  A ver, s&oacute;lo son 5 estados. El jugador se encuentra primero con un elfo que
+
+  desconf&iacute;a, lo apunta con su arma y si se muestra (el jugador) poco diplom&aacute;tico 
+
+  es muy agresivo y va a por &eacute;l. Si el jugador habla un poco con &eacute;l y le
+
+  demuestra que es pac&iacute;fico, pasa a 2 (normal). Ah&iacute; te confiesa que tiene hambre 
+
+  y te pedir&aacute; una tortilla. Si el jugador le da la tortilla mientras est&aacute;
+
+  en el estado 1, el elfo (como lo desconoce) no la aceptar&aacute;. Y del
+
+  2 vamos a 3 (si lo cabreas, por ejemplo insult&aacute;ndolo; cuando se le pase la
+
+  rabieta vuelve a 2), a 4 (te sigue) y 5 (le das la tortilla, &eacute;l te da la
+
+  llave y de ah&iacute; pasa de ti y empieza a hacer &quot;su vida&quot;). Por cierto, es muy
+
+  probable que para cada estado tenga una descripcion distinta (descripci&oacute;n
+
+  es lo que sale al poner &quot;mirar elfo&quot; o &quot;examinar elfo&quot;.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+  &#191;Qu&eacute;, mejor que el elfo-cambia-tortilla-por-llave, no? En el fondo hacen lo
+
+  mismo, pero uno a&ntilde;ade mucho m&aacute;s jugo.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<LI><P ALIGN=JUSTIFY><font size=2 face=arial><B>Hacer su vida</B>. Esto que pocas aventuras lo consiguen (por ejemplo Gandalf
+
+  en <I>El Hobbit</I>) es complicado, pero tenemos que definirlo al programador.
+
+  Nuestro elfo puede tener un contador, y cada N jugadas le da la vena y dice
+
+  que tiene hambre, a lo que coge, y del estado que sea pasa a (6), buscando
+
+  comida desesperadamente. A todo lo que diga el jugador responder&aacute; &quot;tengo
+
+  hambre&quot;, e ir&aacute; deambulando por localidades (al azar) hasta encontrar alg&uacute;n
+
+  objeto comestible (y con esto le pedimos al programador que defina en TODOS
+
+  los objetos de la aventura una bandera adicional, indicando si es comestible
+
+  o no). No debemos abusar de banderas de &eacute;stas, o sea, nada de llenar la zona
+
+  de psis que busquen objetos de tal color o localidades con sol. Propongo que
+
+  las banderas (lista ampliable) tengan:<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+  <UL>
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Para objetos: tama&ntilde;o, valor y comestible o no.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Para localidades: cubierta o descubierta (&#191;y si llueve?).
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Para otros psis: lado (buenos, malos o neutrales), seguidores o no del
+
+    jugador.
+
+  <LI><P ALIGN=JUSTIFY><font size=2 face=arial>Otras: tiempo (lluvia, sol, noche, d&iacute;a...)
+
+  </UL>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<LI><P ALIGN=JUSTIFY><font size=2 face=arial><B>Pregunta/respuesta</B>. Por desgracia es el punto donde fallan los PSIs, pero no
+
+  se puede hacer mucha cosa. Todos (absolutamente TODOS) los PSIs que dialogan
+
+  con el personaje se basan en el esquema de pregunta/respuesta. Es decir, hay
+
+  una lista de cosas que piensas que el jugador va a decirle a nuestro elfo,
+
+  y una lista de respuestas de nuestro elfo para cada una de las preguntas. En
+
+  <I>Eudoxio</I>, por ejemplo, el esquema era bien claro: hab&iacute;a unas palabras clave
+
+  para cada psi, y si se la dec&iacute;as te soltaba su rollo (por ejemplo, al 
+
+  posadero le dices &quot;ajo&quot; y te habla de licor de ajo; si t&uacute; ped&iacute;as tostadas con ajo
+
+  el no sal&iacute;a de su licor). Repito, es imposible prever todas las &quot;preguntas&quot;
+
+  del jugador (y, en consecuencia, es imposible hacer un PSI que cubra todo).
+
+  As&iacute; que lo que mejor podemos hacer es que la lista de &quot;preguntas&quot; (palabras
+
+  clave o secuencias de ellas que pueda decir el jugador; as&iacute;, es muy t&iacute;pico
+
+  que &quot;amor&quot; no tenga la misma respuesta que &quot;hacer amor&quot;, una PSI puede
+
+  ponerse roja o atizarle una bofetada estilo Gilda) sea lo m&aacute;s amplia posible.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Por cada estado, en la secuencia de preguntas/respuestas, una respuesta 
+
+obligada es a &quot;hola&quot;. Suele ser lo primero que se dice a un PSI. Aunque no estar&iacute;a
+
+de m&aacute;s que el propio PSI hablara y se presentara antes que t&uacute; le digas hola.
+
+Por cierto, lo ideal es incluir en la respuesta al &quot;hola&quot; el m&aacute;ximo de informaci&oacute;n
+
+o palabras clave posible. As&iacute;, el elfo tortillero<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<FONT COLOR="#CC0000"
+
+<SAMP>
+
+<I>&gt; hola</I><BR>
+
+El elfo te responde:
+
+&quot;Hola, t&iacute;o, eres la primera persona que saludo en tiempo. Desde que mi abuela
+
+ me dejo con los trasgos no hab&iacute;a hablado con nadie&quot;. 
+
+</SAMP>
+
+</FONT>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Aqu&iacute; tendr&iacute;amos que saltar a un nuevo estado, puesto que si se le ha dicho hola
+
+al elfo no tendr&iacute;a que repetir lo mismo, a no ser que te hayas ido y vuelto.
+
+Porque un elfo de verdad, o t&uacute; mismo, si te dicen hola y respondes eso no es
+
+l&oacute;gico que si te dicen de nuevo hola sueltes la misma parrafada. M&aacute;s bien diria
+
+&quot;Ya te he visto, tranqui&quot;.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+El quid de la cuesti&oacute;n es que con la &quot;respuesta&quot; del elfo el jugador se sentir&aacute;
+
+atraido por &quot;abuela&quot; y &quot;trasgo&quot;. Adem&aacute;s es posible que pida &quot;ayuda&quot; (o ayudar,
+
+que no es lo mismo; pero son dos palabras tambien muy usadas por pj). Las 
+
+posibles preguntas del jugador tambi&eacute;n pueden venir por su descripcion:<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<FONT COLOR="#CC0000"
+
+<SAMP>
+
+<I>&gt; ex elfo</I><BR>
+
+El elfo va vestido a la &uacute;ltima moda &eacute;lfica, con una capa marr&oacute;n y un medall&oacute;n
+
+colgando del cuello.
+
+</SAMP>
+
+</FONT>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Es muy probable que tras esto nuestro querido jugador le pregunte por el 
+
+medall&oacute;n y/o la capa. Otra posible reacci&oacute;n del elfo es una &quot;respuesta&quot; a la
+
+acci&oacute;n de mirar el medall&oacute;n. Vosotros que har&iacute;ais si estuvi&eacute;rais en medio
+
+del bosque, aparece un t&iacute;o y despu&eacute;s de miraros y deciros hola se fija en el
+
+precioso medall&oacute;n que llev&aacute;is en el cuello? O decide regal&aacute;rselo (si tiene
+
+confianza) o le hablar&aacute; que es un recuerdo de su t&iacute;o el Trasgo, o bien se
+
+cabrear&aacute; e ir&aacute; a por el jugador. Debemos especificar qu&eacute; hace el elfo (puede
+
+ser aleatorio, o dependiendo del estado) ante tal mirada. O ante otras
+
+acciones, como eructar, o ponerse a bailar... en fin.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<LI><P ALIGN=JUSTIFY><font size=2 face=arial><B>Otras consideraciones</B>: Se puede poner el salto de un estado al otro por
+
+  factores aleatorios, por preguntas del jugador, por acciones de &eacute;ste, por
+
+  acciones de otros PSIs, etc&eacute;tera. Por ejemplo, es probable que un PSI act&uacute;e
+
+  frente a palabrotas... &#191;os imagin&aacute;is dos PSIS juntos, uno que le da por decir
+
+  palabrotas y el otro que se cabrea? Eso si ser&iacute;an dos PSIs buenos, y, como
+
+  v&eacute;is, no muy dificil. Hacer que dos PSIs interaccionen entre ellos es mucho
+
+  m&aacute;s dif&iacute;cil (much&iacute;simo) que entre el jugador y un PSI. Pero probablemente 
+
+  ser&aacute; lo que haga de una aventura que sea la mejor del mundo. Y la nuestra
+
+  lo va a ser, &#191;verdad?
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<LI><P ALIGN=JUSTIFY><font size=2 face=arial><B>PSIs garrulos</B>. Se pueden hacer bishos, que son m&aacute;s un objeto que un psi.
+
+  Ejemplo: el pulpo de <I>Eudoxio</I>. Por mucho que le hables seguir&aacute; opinando que
+
+  ser&aacute;s una buena cena, e intentar&aacute; convencerte de ello a golpe de tent&aacute;culo.
+
+  &#191;Podemos incluir? La respuesta es que s&iacute;, pero no muchos. Muchos bichos
+
+  acabar&iacute;an transformando la aventura en Medina, que no dicen nada (casi) pero
+
+  arrean hostias s&oacute;lo por pasar por delante. Y si alguien opina que es mejor,
+
+  que se haga skin, que esos pegan pero no hablan (a lo mejor ni saben hablar).
+
+</UL>
+
+
+
+<U><H4>PMI: Personajes M&aacute;s Inteligentes.</H4></U>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Hasta ahora todo lo relacionado con PSIs se basa en esquema pregunta/respuesta.
+
+Lo ideal ser&iacute;a que, como los seres humanos, adem&aacute;s de &quot;saltar de estado&quot; por
+
+posibles &quot;preguntas&quot; o acciones del jugador, lo hiciera solo. Bien, no es tan
+
+dif&iacute;cil de describir (pero un poquito de implementar). Se trata que el PSI vaya
+
+cambiando &quot;solo&quot; de estado; en realidad no lo har&aacute; solo sino influenciado por
+
+acontecimientos externos (presencia o no de otro PSI, tipo de la localidad, 
+
+etc), o bien por sus flags (banderas cardinales, variables enteras...). Cuando
+
+cierta condici&oacute;n se cumpla (y no necesariamente el que el jugador diga algo o
+
+no) el PSI saltar&aacute; de estado.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Algo que debemos definir es la &quot;jerarqu&iacute;a de estados&quot;. Los estados suelen ser
+
+lineales (de estado A al B, C y D; del B al C y al A; del C al A y del D al C,
+
+por poner un ejemplo), y si bien es verdad que un psi solo con saltos del tipo
+
+indicado antes ya es m&aacute;s avanzado que muchos de los que pululan por las 
+
+conversacionales, a&uacute;n se puede rizar m&aacute;s el rizo. MAAAS?? S&iacute;. Vamos a ver un 
+
+ejemplo pr&aacute;ctico: Tama, el Tamagotchi (c).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Nuestro amigo Tama tendr&aacute; 4 estados: normal, con hambre, con sue&ntilde;o y con miedo.
+
+En un principio podr&iacute;amos hacer que de Normal vaya a los otros y de los otros
+
+al Normal. Simple, efectivo. Pero.... si nuestro Tama tiene hambre y se 
+
+encuentra en peligro, &#191;no ser&iacute;a logico que aunque tuviera hambre saltara a miedo? Vemos
+
+que el estado &quot;miedo&quot; es m&aacute;s importante que Hambre. Hambre y Sue&ntilde;o son 
+
+equivalentes... As&iacute;, tenemos 3 &quot;niveles&quot; para Tama:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CENTER>
+
+<TABLE CELLPADDING=5 BORDER=1>
+
+<TR ALIGN=CENTER><TD>+</TD><TH>M&aacute;xima prioridad</TH><TD>Miedo</TD></TR>
+
+<TR ALIGN=CENTER><TD>=</TD><TH>Media  prioridad</TH><TD>Hambre - Sue&ntilde;o</TD></TR>
+
+<TR ALIGN=CENTER><TD>-</TD><TH>M&iacute;nima prioridad</TH><TD>Normal</TD></TR>
+
+</TABLE>
+
+</CENTER>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Describamos el psi: Necesitamos dos &quot;cardinales&quot;, el nivel de Hambre y el nivel
+
+de Sue&ntilde;o. Los inicializamos a, por ejemplo, 125 y 200 jugadas. Cada jugada del
+
+jugador (valga la redundancia, es cada &quot;orden&quot;) se decrementar&aacute; (le restaremos
+
+1) a los dos. As&iacute;, si el jugador pone &quot;mirar cabeza&quot; (es una orden) aumenta el
+
+hambre y el sue&ntilde;o (en realidad se hace m&aacute;s peque&ntilde;o). Cuando, del estado A,
+
+el sue&ntilde;o valga 0 o el hambre valga 0, saltaremos a los estados de Sue&ntilde;o y
+
+Hambre, respectivamente. Con sue&ntilde;o se pone a sobar (=dormir) durante, 
+
+pongamos, 35 turnos. No hace nada, no responde a nada, su descripci&oacute;n cambia a 
+
+&quot;est&aacute; durmiendo&quot;... El hambre, pues podr&iacute;amos hacer que a cada tirada nos diga
+
+&quot;tengo hambre&quot; y si a las 40 tiradas no le damos comida el t&iacute;o se larga.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+&#191;Qu&eacute; pasa si aparece el bichomonstruo supermalo (si, el que siempre rapta las
+
+chicas en todos los juegos de ordenador)? Pues que si tiene hambre la ignorar&aacute;,
+
+si tiene sue&ntilde;o se despertar&aacute;, si est&aacute; normal, dejar&aacute; de estarlo. Est&eacute; donde
+
+est&eacute;, saltar&aacute; al estado de Miedo, ya que es m&aacute;s prioritario que los dem&aacute;s.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para cada estado podemos hacer lo de siempre (las reacciones y saltos de estado
+
+a pregunta/respuesta, los dame/toma objetos, cambios de descripciones...).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+En resumen: que si Tama se aburre saltar&aacute; al estado Aburrido (media prioridad)
+
+y se ir&aacute;... &#161;&#161;&#161;Podemos hacer lo que nos plazca!!! Ah, eso de 3 prioridades es
+
+inventado, pod&eacute;is hacer todas las prioridades que quer&aacute;is, distintos niveles,
+
+distintos estados dentro de una misma prioridad...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Por supuesto, tambi&eacute;n puede reaccionar a acciones de otros PSI, que a su vez
+
+reaccionar&aacute;n a sus reacciones... &#161;&#161;&#161;el mundo es vuestro!!!
+
+<P ALIGN=RIGHT>
+
+<BR>
+
+(Extra&iacute;do del <I>Bolet&iacute;n del Concilio</I> n&uacute;mero 7)
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

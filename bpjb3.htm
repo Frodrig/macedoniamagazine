@@ -1,0 +1,362 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>R</B></font><FONT color="#000000" size=2 face="arial"><B>utinas avanzadas en NMP</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<a href="mailto:nmsoft@usa.net"><b><font color="0000ff">Carlos Sánchez.</font></b></a>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Rutinas avanzadas en NMP (3)
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Todos hab&eacute;is jugado alguna vez a alguna aventura gr&aacute;fica en la
+
+que continuamente se estaba escuchando una m&uacute;sica, generalmente en volumen
+
+bajo y no demasiado machacona para no cansar. Pues bien, en esta ocasi&oacute;n
+
+vamos a ver como podr&iacute;amos hacer esto con NMP, con el que resulta
+
+bastante f&aacute;cil:
+
+<P>
+
+Supongamos primero que tenemos varias m&uacute;sicas de fondo, a saber: 1000.SBM,
+
+1001.SBM y as&iacute; hasta 1009.SBM (cuantas m&aacute;s mejor para evitar monoton&iacute;a). Tambi&eacute;n
+
+sabemos que existe un proceso en NMP llamado proceso del Input que nos permite
+
+controlar cosas mientras esperamos a la orden del jugador o bien en las pausas del
+
+juego. Este proceso ser&aacute; el ideal para llevar el control del sistema de m&uacute;sica
+
+continuo:
+
+<P>
+
+
+
+<UL>
+
+<LI>A&ntilde;adimos a la tabla de constantes:
+
+<FONT COLOR="#000080">
+
+<PRE>
+
+        <CODE>fAux=250
+
+</CODE></PRE>
+
+</FONT>
+
+siendo el 250 un flag libre, en otro caso elegimos otro cualquiera.
+
+<P>
+
+<LI>A&ntilde;adimos al proceso del input:
+
+<FONT COLOR="#000080">
+
+<PRE>
+
+        <CODE>-* *
+
+        BTST 0 12      ; comprobamos que no hay nada sonando
+
+        RANDOM fAUX 10 ; mete en en fAUX un numero ente 0 y 9
+
+        PLUS fAUX 1000 ; suma 1000 a fAUX
+
+        BCLR 0 13      ; nos aseguramos de que no toque c&iacute;clicamente
+
+        PLAY @fAUX     ; y comenzamos a tocar
+
+        NOTDONE
+
+</CODE></PRE>
+
+</FONT>
+
+</UL>
+
+
+
+Si queremos que no suenen todo el rato sino s&oacute;lamente de vez en
+
+cuando deberemos lograr que no se ejecute esta rutina cada vez que no
+
+hay m&uacute;sica, sino s&oacute;lo de vez en cuando. Para ello nada m&aacute;s f&aacute;cil que
+
+a&ntilde;adir la orden:
+
+<P>
+
+<FONT COLOR="#000080">
+
+<PRE>
+
+        <CODE>CHANCE x
+
+</CODE></PRE>
+
+</FONT>
+
+que es una condici&oacute;n que se cumple un x% de las veces (calcula un n&uacute;mero
+
+aleatoriamente y si este es menor que x se cumple).
+
+<P>
+
+Sin embargo teniendo en cuenta que la rutina tiene lugar en el proceso del
+
+input, que se ejecuta varias veces por segundo, poner un solo <SAMP>CHANCE</SAMP> no
+
+es muy eficaz, debido a que lo intentar&aacute; tantas veces que alguna saldr&aacute;.
+
+Es por eso que es conveniente poner varios <SAMP>CHANCE 1</SAMP> (m&iacute;nima posibilidad)
+
+uno tras otro, hasta conseguir el efecto deseado (que tarde un rato en
+
+iniciar otra melod&iacute;a).
+
+<P>
+
+Por otra parte nuestra aventura puede tener usuarios que usen
+
+el speaker y creedme, se hace molest&iacute;simo oir todo el rato m&uacute;sicas por
+
+el speaker por lo cual recomiendo que para estos .SBM no se creen los
+
+correspondientes .SBP.
+
+<P>
+
+Bueno, este es el fin de un nuevo cap&iacute;tulo, y os recuerdo que
+
+sigo esperando vuestras colaboraciones, sea para el parser que sea,
+
+porque esta es una secci&oacute;n que necesita de vuestra colaboraci&oacute;n.
+
+
+
+<P ALIGN=RIGHT>
+
+ <B>Carlos S&aacute;nchez</B><BR>
+
+ e-mail Internet: <A HREF="mailto:nmsoft@usa.net">nmsoft@usa.net</A><BR>
+
+ Netmail FidoNet: 2:341/136.39
+
+</P>
+
+
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

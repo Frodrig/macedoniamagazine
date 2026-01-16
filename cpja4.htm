@@ -1,0 +1,818 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>M</B></font><FONT color="#000000" size=2 face="arial"><B>atemáticas Básicas</B></FONT></a><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>Á</B></font><FONT color="#000000" size=2 face="arial"><B>lbegra Matricial. Modelado alámbrico de figuras 3D</B></FONT></a>
+
+
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "Cid"</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 4. <br>La aplicación.
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Llega la parte que os gusta m&aacute;s a todos; la practica de todo lo que hemos explicado anteriormente :D. </P>
+
+<P ALIGN=JUSTIFY>Para esto comentar&eacute; el proyecto en Visual C++ de un forma que sea entendibles por todos. Los que pod&aacute;is trabajar en Visual C++, cread un proyecto <B>SDI</B> (Documento Simple), y llamadlo, por ejemplo, Alambre3D, los que no trabajen con &eacute;sta herramienta pueden crear un proyecto, o programa simple, como lo hacen habitualmente. </P>
+
+<P ALIGN=JUSTIFY>Bien, definiremos las siguientes estructuras de datos en nuestra aplicaci&oacute;n:</P>
+
+</FONT><PRE>
+
+
+
+// Vertices
+
+struct Vertice
+
+{
+
+   double nX;
+
+   double nY;
+
+   double nZ;
+
+   double nXPantalla;
+
+   double nYPantalla;
+
+   double nZPantalla;
+
+};
+
+
+
+// Lineas
+
+struct Linea
+
+{
+
+   Vertice Inicio, Final;
+
+};</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Si est&aacute;is utilizando Visual C++, el lugar para definir esta estructura es al principio del fichero cabecera de la vista, este es <I>Alambre3DView.h</I>. Los que no utilic&eacute;is C, definid los valores de coordenadas (nX,nY,nZ,nXPantalla,nYPantalla,nZPantalla) con un tipo de valor que soporte coma flotante, o varios decimales. </P>
+
+<P ALIGN=JUSTIFY>A continuaci&oacute;n definiremos las siguiente variables globales</P>
+
+</FONT><PRE>
+
+
+
+   CArray&lt;Linea,Linea     oLineas;      // Lineas del dibujo
+
+   double GradosX = 0, GradosY = 0, GradosZ = 0;</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>El lugar en el que debemos incluir estas variables es el principio del fichero de la vista, es decir, <I>Alambre3DView</I>.<I>cpp</I>. Adem&aacute;s debemos incluir el archivo de cabecera <I>math.h</I>, que contiene las definiciones de las funciones <B>sin</B> (funci&oacute;n seno) y <B>cos</B> (funci&oacute;n coseno) que utilizaremos mas adelante. Para incluirlo tambi&eacute;n insertaremos en el fichero <I>Alambre3DView</I>.<I>cpp</I> y junto a las dem&aacute;s sentencias #<I>include</I> la siguiente l&iacute;nea: </P>
+
+</FONT><PRE>
+
+
+
+#include "math.h"</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Los que no trabaj&eacute;is en C, definid un array de l&iacute;neas y 3 variables globales. Si no cont&aacute;is que el tipo de datos CArray, os tendr&eacute;is que construir una clase vosotros mismo o encontrar otra soluci&oacute;n. Sea lo que fuere, yo explicar&eacute; c&oacute;mo utilizo esta lista de l&iacute;neas para que comprend&aacute;is mejor su funcionamiento y pod&aacute;is exportarla a vuestro entorno de trabajo.</P>
+
+<P ALIGN=JUSTIFY>Teniendo esto, lo primero que vamos a hacer es insertar las funciones que anteriormente hab&iacute;amos mencionados. Estas son la <B>multiplicar matriz por vector</B>, y la de <B>multiplicar matriz por matriz</B>. Para ello tendr&eacute;is que sumar, los que trabaj&eacute;is con Visual C++, dos nuevas funciones miembros llamadas <B>MultiplicarMatriz</B> y <B>MultiplicarVector</B>. Para ello a&ntilde;adiremos en la clase de nuestra vista las definiciones de las funciones que aportamos anteriormente. La clase nos quedar&aacute; as&iacute;: </P>
+
+</FONT><PRE>
+
+
+
+class CAlambre3DView : public CView
+
+{
+
+
+
+   ....         // Codigo restante
+
+
+
+// Operations
+
+public:
+
+
+
+   ....         // Codigo restante
+
+
+
+void MultiplicarMatriz( double Resultado[4][4],
+
+                        double Matriz1[4][4],
+
+                        double Matriz2[4][4] );
+
+void MultiplicarVector( double Resultado[4],
+
+                        double Matriz1[4],
+
+                        double Matriz2[4][4] );</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Adem&aacute;s de definir las funciones miembros en el fichero <I>Alambre3DView</I>.<I>h</I>, implementaremos el c&oacute;digo en el archivo <I>Alambre3DView</I>.<I>cpp</I> de la forma siguiente: </P>
+
+</FONT><PRE>
+
+
+
+void CAlambre3DView::MultiplicarMatriz( double Resultado[4][4],
+
+                                        double Matriz1[4][4],
+
+                                        double Matriz2[4][4] )
+
+{
+
+   for( int i=0; i &lt;4 ; i++ )
+
+   {
+
+      for( int j=0; j &lt;4 ; j++)
+
+      {
+
+         Resultado[i][j] = 0;
+
+         for( int k=0; k&lt;4 ; k++ )
+
+         Resultado[i][j] += Matriz1[i][k] * Matriz2[k][j];
+
+      } 
+
+   }
+
+}
+
+
+
+void CAlambre3DView::MultiplicarVector( double Resultado[4],
+
+                                        double Matriz1[4],
+
+                                        double Matriz2[4][4] )
+
+{
+
+   Resultado[0] = Matriz1[0]*Matriz2[0][0] +
+
+                  Matriz1[1]*Matriz2[0][1] +
+
+                  Matriz1[2]*Matriz2[0][2] +
+
+                  Matriz1[3]*Matriz2[0][3];
+
+   Resultado[1] = Matriz1[0]*Matriz2[1][0] +
+
+                  Matriz1[1]*Matriz2[1][1] +
+
+                  Matriz1[2]*Matriz2[1][2] +
+
+                  Matriz1[3]*Matriz2[1][3];
+
+   Resultado[2] = Matriz1[0]*Matriz2[2][0] +
+
+                  Matriz1[1]*Matriz2[2][1] +
+
+                  Matriz1[2]*Matriz2[2][2] +
+
+                  Matriz1[3]*Matriz2[2][3];
+
+   Resultado[3] = Matriz1[0]*Matriz2[3][0] +
+
+                  Matriz1[1]*Matriz2[3][1] +
+
+                  Matriz1[2]*Matriz2[3][2] +
+
+                  Matriz1[3]*Matriz2[3][3];
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Esta operaci&oacute;n la tendremos que repetir con las dem&aacute;s funciones que insertemos a continuaci&oacute;n. Si no trabajas en C, define estas funciones de forma global y que toda la aplicaci&oacute;n pueda utilizarla. Bien, ya tenemos el sistema implantado y podemos empezar a manejarlo. Vamos a introducir todas las l&iacute;neas que conformaran la figura. Figura que es, por cierto, una M de Macedonia :D. Para ello los que trabajen en Visual C++ insertar&aacute;n el siguiente c&oacute;digo en el evento <I>OnInitialUpdate()</I> y los que no lo hagan, que lo inserten en el comienzo de la aplicaci&oacute;n.</P>
+
+</FONT><PRE>
+
+
+
+&#9;Linea oLin;
+
+
+
+&#9;GradosX = 0;
+
+&#9;GradosY = 0;
+
+&#9;GradosZ = 0;
+
+
+
+&#9;// Delante
+
+&#9;// Linea 1
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = -50; oLin.Final.nY  = 50; oLin.Final.nZ  = 0;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 2
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 0; oLin.Final.nY  = 0; oLin.Final.nZ  = 0;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 3
+
+&#9;oLin.Inicio.nX = 0; oLin.Inicio.nY = 0; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = -50; oLin.Final.nZ  = 0;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 4
+
+&#9;oLin.Inicio.nX = 50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = 50; oLin.Final.nZ  = 0;
+
+&#9;oLineas.Add( oLin );
+
+
+
+&#9;// Atras
+
+&#9;// Linea 1
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 20;
+
+&#9;oLin.Final.nX  = -50; oLin.Final.nY  = 50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 2
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 20;
+
+&#9;oLin.Final.nX  = 0; oLin.Final.nY  = 0; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 3
+
+&#9;oLin.Inicio.nX = 0; oLin.Inicio.nY = 0; oLin.Inicio.nZ = 20;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = -50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Linea 4
+
+&#9;oLin.Inicio.nX = 50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 20;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = 50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+
+
+&#9;// Vertices
+
+&#9;// Vertice 1
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = -50; oLin.Final.nY  = -50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Vertice 2
+
+&#9;oLin.Inicio.nX = -50; oLin.Inicio.nY = 50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = -50; oLin.Final.nY  = 50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Vertice 3
+
+&#9;oLin.Inicio.nX = 0; oLin.Inicio.nY = 0; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 0; oLin.Final.nY  = 0; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Vertice 4
+
+&#9;oLin.Inicio.nX = 50; oLin.Inicio.nY = -50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = -50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );
+
+&#9;// Vertice 5
+
+&#9;oLin.Inicio.nX = 50; oLin.Inicio.nY = 50; oLin.Inicio.nZ = 0;
+
+&#9;oLin.Final.nX  = 50; oLin.Final.nY  = 50; oLin.Final.nZ  = 20;
+
+&#9;oLineas.Add( oLin );</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Lo que aqu&iacute; estamos haciendo es sumar todas las l&iacute;neas que formaran nuestra figura a la lista <I>oLineas</I> que definimos anteriormente de forma global.</P>
+
+<P ALIGN=JUSTIFY>Lo siguiente que debemos hacer es poder dibujar todas estas l&iacute;neas en pantalla. Si estamos utilizando Visual C++ debemos utilizar el evento <I>OnPaint</I>() que se ejecuta cada vez que la ventana debe ser dibujada. Si no trabajas en Visual C tendr&aacute;s que colocar este c&oacute;digo en alguna funci&oacute;n que ejecutes cuando quieras mostrar el dibujo.</P>
+
+</FONT><PRE>
+
+
+
+void CAlambre3DView::OnPaint() 
+
+{
+
+&#9;CPaintDC dc(this); // device context for painting
+
+&#9;
+
+&#9;Linea oLin;
+
+&#9;int i;
+
+
+
+&#9;i = 0;
+
+
+
+&#9;for( i = 0; i &lt;= oLineas.GetUpperBound() ; i++ )
+
+&#9;{
+
+&#9;&#9;oLin = oLineas.GetAt( i );
+
+&#9;&#9;dc.MoveTo( 100+(int) oLin.Inicio.nXPantalla, 100+(int) oLin.Inicio.nYPantalla );
+
+&#9;&#9;dc.LineTo( 100+(int) oLin.Final.nXPantalla,  100+(int) oLin.Final.nYPantalla );
+
+&#9;}
+
+
+
+&#9;// Do not call CView::OnPaint() for painting messages
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Aqu&iacute; recorremos todos elementos de la lista <I>oLineas</I>, y dibujamos en pantalla cada uno de ellas.</P>
+
+<P ALIGN=JUSTIFY>Llegados a este punto os explicar&eacute; como ser&aacute; la din&aacute;mica de la aplicaci&oacute;n. Tendremos varios botones en una <I>toolbar</I> que modificaran los valores <B>GradosX</B>, <B>GradosY</B> y <B>GradosZ</B> aument&aacute;ndolos o disminuy&eacute;ndolos, y cada vez que hagamos esto calcularemos las nuevas posiciones de todas las l&iacute;neas de la lista. Para ello, y como comente en cap&iacute;tulos anteriores, tendremos que multiplicar cada punto por las <B>matrices de</B> <B>rotacion</B> <B>X, Y</B> y <B>Z</B>. Dado que siempre multiplicaremos el vector del punto tridimensional por las tres matrices de rotaci&oacute;n, crearemos una funci&oacute;n que multiplique estas 3 matrices entre ellas mismas y que devuelva una 'maestra' que usaremos despu&eacute;s para multiplicarla por todos los vectores de los puntos de la figura. Para que lo comprend&aacute;is mejor pensad que ten&eacute;is que multiplicar los n&uacute;meros del 1 al 100 por 3, por 4 y por 8, seria mas f&aacute;cil multiplicar los n&uacute;meros del 1 al 100 por 96 (3 * 4 * 8 = 96). Por eso las matem&aacute;ticas son tan importantes en los videojuegos. El saber que estas 3 matrices se pueden multiplicar entre ellas nos va ahorra muchas operaciones reiterativas. El c&oacute;digo de la funci&oacute;n es el siguiente:</P>
+
+</FONT><PRE>
+
+
+
+void CAlambre3DView::Calculo( double MatrizMaestra[4][4] ) 
+
+{
+
+&#9;double MatrizIden[4][4] = { 1,0,0,0,
+
+&#9;&#9;&#9;&#9;0,1,0,0,
+
+&#9;&#9;&#9;&#9;0,0,1,0,
+
+&#9;&#9;&#9;&#9;0,0,0,1 };
+
+&#9;double MatrizZ[4][4] = { cos(GradosZ), sin(GradosZ), 0, 0,
+
+&#9;&#9;&#9;&#9;-sin(GradosZ), cos(GradosZ), 0, 0,
+
+&#9;&#9;&#9;&#9;0, 0, 1, 0,
+
+&#9;&#9;&#9;&#9;0, 0, 0, 1&#9;};
+
+&#9;double MatrizX[4][4] = { 1, 0, 0, 0,
+
+&#9;&#9;&#9;&#9;0, cos(GradosX), sin(GradosX), 0,
+
+&#9;&#9;&#9;&#9;0, -sin(GradosX), cos(GradosX), 0,
+
+&#9;&#9;&#9;&#9;0, 0, 0, 1&#9;};
+
+&#9;double MatrizY[4][4] = { cos(GradosY), 0, -sin(GradosY), 0, 
+
+&#9;&#9;&#9;&#9;0, 1, 0, 0,
+
+&#9;&#9;&#9;&#9;sin(GradosY), 0, cos(GradosY), 0, 
+
+&#9;&#9;&#9;&#9;0, 0, 0, 1&#9;};
+
+
+
+&#9;double MatrizAux[4][4];
+
+&#9;double MatrizAux2[4][4];
+
+
+
+&#9;MultiplicarMatriz( MatrizAux, MatrizIden, MatrizX );
+
+&#9;MultiplicarMatriz( MatrizAux2, MatrizAux, MatrizY );
+
+&#9;MultiplicarMatriz( MatrizMaestra, MatrizAux2, MatrizZ );
+
+
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Y para terminar la aplicaci&oacute;n expongo la aplicaci&oacute;n que calculara las nuevas posiciones de todas las l&iacute;neas: </P>
+
+</FONT><PRE>
+
+
+
+void CAlambre3DView::OnRepintar() 
+
+{
+
+&#9;Linea oLin;
+
+&#9;int i;
+
+&#9;double MatrizMaestra[4][4];
+
+&#9;double Vector[4];
+
+&#9;double Resultado[4];
+
+
+
+&#9;Calculo( MatrizMaestra );
+
+&#9;for( i = 0; i &lt;= oLineas.GetUpperBound() ; i++ )
+
+&#9;{
+
+&#9;&#9;oLin = oLineas.GetAt( i );
+
+
+
+&#9;&#9;Vector[0] = oLin.Inicio.nX;
+
+&#9;&#9;Vector[1] = oLin.Inicio.nY;
+
+&#9;&#9;Vector[2] = oLin.Inicio.nZ;
+
+&#9;&#9;Vector[3] = 1;
+
+&#9;&#9;MultiplicarVector( Resultado, Vector, MatrizMaestra );
+
+&#9;&#9;oLin.Inicio.nXPantalla = Resultado[0];
+
+&#9;&#9;oLin.Inicio.nYPantalla = Resultado[1];
+
+&#9;&#9;oLin.Inicio.nZPantalla = Resultado[2];
+
+
+
+&#9;&#9;Vector[0] = oLin.Final.nX;
+
+&#9;&#9;Vector[1] = oLin.Final.nY;
+
+&#9;&#9;Vector[2] = oLin.Final.nZ;
+
+&#9;&#9;Vector[3] = 1;
+
+&#9;&#9;MultiplicarVector( Resultado, Vector, MatrizMaestra );
+
+&#9;&#9;oLin.Final.nXPantalla = Resultado[0];
+
+&#9;&#9;oLin.Final.nYPantalla = Resultado[1];
+
+&#9;&#9;oLin.Final.nZPantalla = Resultado[2];
+
+
+
+&#9;&#9;oLineas.SetAt(i,oLin);
+
+&#9;}
+
+
+
+&#9;Invalidate( TRUE );&#9;
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Como v&eacute;is, calculo primero la matriz Maestra con la sentencia <I>Calculo</I>(<I>MatrizMaestra</I>) y a continuaci&oacute;n recorro toda la lista obteniendo el punto origen y final de cada l&iacute;nea. Multiplico estos vectores por la matriz maestra y despu&eacute;s de obtener el resultado, modifico la l&iacute;nea en la lista. Al final con <I>invalidate</I>(<I>TRUE</I>) fuerzo a que se llame a la <I>funci&oacute;n</I> <I>OnPaint</I>() que volver&aacute; a recorrer la lista y dibujar&aacute; las l&iacute;neas en las nuevas posiciones. </P>
+
+<P ALIGN=JUSTIFY>Todas estas operaciones deben ser miembros de la vista <I>CAlambre3Dview</I>. Los que no trabajen en Visual C++, deben ser globales en toda la aplicaci&oacute;n y deb&eacute;is cambiar <I>Invalidate</I>( <I>TRUE</I> ) por la llamada a la funci&oacute;n <I>OnPaint</I>() para que fuerce el dibujar de la figura. </P>
+
+<P ALIGN=JUSTIFY>Por ultimo nos quedar&iacute;a crear los controles que modificar&aacute;n las variables globales <B>GradosX</B>, <B>GradosY</B> y <B>GradosZ</B>. Para ello insertamos en la <I>toolbar</I> de la aplicaci&oacute;n botones que resten y sumen radianes a estas variables, y que despu&eacute;s llamen a la funci&oacute;n <I>OnRepintar</I> para que calcule las nuevas posiciones forzando redibujar el objeto. Esta ultima operaci&oacute;n se puede llevar acabo de muchas formas y depende de que herramientas est&eacute;s utilizando. Yo ahora os doy el c&oacute;digo que implementa el Visual C++ cuando creamos los botones y manejamos el evento O<I>nCommand</I> de cada uno de ellos. </P>
+
+</FONT><PRE>
+
+
+
+void CAlambre3DView::OnMasx() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosX += 0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}
+
+
+
+void CAlambre3DView::OnMasy() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosY += 0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}
+
+
+
+void CAlambre3DView::OnMasz() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosZ += 0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}
+
+
+
+void CAlambre3DView::OnMenosx() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosX -= 0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}
+
+
+
+void CAlambre3DView::OnMenosy() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosY -= 0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}
+
+
+
+void CAlambre3DView::OnMenosz() 
+
+{
+
+&#9;// TODO: Add your command handler code here
+
+&#9;GradosZ -=0.1;
+
+&#9;OnRepintar();
+
+&#9;
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>¡¡¡Y se acabo!!!, ¡¡¡por fin verdad!!. Aqu&iacute; ten&eacute;is unas im&aacute;genes de c&oacute;mo queda el proyecto, pero... se me ha olvidado algo....qu&eacute; es, qu&eacute; es.... ¿alguien lo sabe?. <B>No hemos implementado</B> las matrices de <B>TRASLADAR</B> y <B>ESCALAR</B> he escuchado por ah&iacute;, y la explicaci&oacute;n es que es tan f&aacute;cil que os lo dejo para vosotros. Venga animaos, que el proceso es el mismo que todos los dem&aacute;s, adelante y que la fuerza os acompa&ntilde;e. :) </P>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="gif/figura4.gif" WIDTH=222 HEIGHT=324><IMG SRC="gif/figura5.gif" WIDTH=222 HEIGHT=324><IMG SRC="gif/figura6.gif" WIDTH=222 HEIGHT=324></P>
+<BR><BR>
+<center><font size=2 face=Arial>Puedes conseguir el código fuente del artículo pulsando <b><a href="zip/alam3d.zip">aquí</a></b></font></center>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="cpj.htm"><font FACE="ARIAL"><B>[Matemáticas Básicas]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

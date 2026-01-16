@@ -1,0 +1,233 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Creación de Scripts CGI</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A></b></FONT><br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Capítulo 1. <br>Introducción</H3><br>
+<h4>¿Qu&eacute; es un script CGI?</h4>
+<p align=justify>
+<FONT SIZE=2 FACE=ARIAL>
+El CGI (<I>Common Gateway Interface</I>) es un est&aacute;ndar para comunicar
+aplicaciones externas con los servidores de informaci&oacute;n, tales como
+servidores HTTP o Web. Cuando un navegador lee un documento HTML la informaci&oacute;n
+es est&aacute;tica, como un libro, no puede modificarse, solo leerse. Pero
+un programa CGI al ser ejecutado por el navegador puede generar informaci&oacute;n
+din&aacute;mica y crear HTML en tiempo real, o muchas m&aacute;s opciones,
+casi ilimitadas.
+
+<P align="justify">Los CGI son usados por todos los servidores Web. Un ejemplo son los
+buscadores, como Ole o Yahoo, programas que buscan lo que t&uacute; pides,
+mediante un CGI. La gesti&oacute;n de passwords para acceder a sitios espec&iacute;ficos
+la hacen los programas CGI. Los libros de visitas, los contadores de visitas,
+programas que muestran la hora, formularios para enviar datos por la red,
+etc... Todo eso y mucho m&aacute;s, lo gestionan programas CGI.
+
+<P align="justify">Otro ejemplo de lo que pueden hacer podr&iacute;a ser &eacute;ste: supongamos
+que quieres enganchar tu base de datos sobre libros de Unix al WWW, para
+permitir a gente de todo el mundo consultarla. B&aacute;sicamente se necesitar&aacute;
+un programa CGI que el navegador (o m&aacute;s espec&iacute;ficamente el
+<I>daemon</I> del Web) ejecutar&aacute; para transmitir la informaci&oacute;n
+al gestor de base de datos, y recibir los resultados para present&aacute;rselos
+al cliente como HTML. Este es un ejemplo de pasarela (gateway).
+
+<P align="justify">El ejemplo de la base de datos es una idea sencilla, pero la mayor&iacute;a
+de las veces dif&iacute;cil de implementar. Realmente no hay l&iacute;mite
+con lo que tu quieras enganchar al Web. La &uacute;nica cosa que debes
+recordar es que haga lo que haga tu programa CGI, no deber&aacute; tardar
+mucho tiempo en procesarlo porque puede ser que sea tan complejo, y lento,
+que parezca que nunca termine de ejecutarse el archivo CGI.
+<BR>&nbsp;
+<h4>
+Explicaciones</h4><P align="justify">
+Como un programa CGI es un ejecutable, es equivalente a dejar al mundo
+ejecutar un programa en tu sistema, que no es lo mas seguro a hacer. Por
+ello existen una serie de precauciones de seguridad que son necesarias
+de implementar cuando se usan programas CGI. Probablemente la que afectar&aacute;
+al usuario t&iacute;pico del Web, es el hecho de que los programas CGI
+necesitan residir en un directorio especial, as&iacute; el servidor sabe
+que tiene que ejecutarlo, en vez de simplemente mostrarlo por pantalla.
+Este directorio est&aacute; generalmente bajo el control del webmaster,
+prohibiendo al usuario medio crear programas CGI. Hay otros m&eacute;todos
+para permitir el accesos a scripts CGI, pero depende del webmaster que
+se te de esta posibilidad. As&iacute; que deber&aacute;s contactar con
+tu webmaster para consultar la factibilidad de permitirte un acceso a los
+CGI. Si dispones de una versi&oacute;n del servidor HTTPd NCSA, ver&aacute;s
+un directorio denominado /cgi-bin. Este es el directorio especial antes
+mencionado, donde todos los programas CGI residen.
+
+<P align="justify">Un programa CGI&nbsp; se puede escribir en cualquier lenguaje que permita
+ser ejecutado en el sistema, como:
+
+<P align="justify">&nbsp;&nbsp;&nbsp;&nbsp; C/C++
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Fortran
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; PERL
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; TCL
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Alg&uacute;n Shell de Unix
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Visual Basic
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; AppleScript
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Delphi
+
+<P align="justify">Simplemente depende de lo que tengas en tu sistema. Si usas un lenguaje
+de programaci&oacute;n como C o Fortran, como ya sabr&aacute;s, debes compilar
+el programa antes de poder ejecutarlo. Si miras en el directorio /cgi-src,
+encontrar&aacute;s el c&oacute;digo fuente de algunos programas CGI del
+directorio /cgi-bin. Pero, si usas alguno de los lenguajes interpretados,
+como PERL, TCL, o un shell de Unix, el script simplemente necesita residir
+en el directorio /cgi-bin, ya que no tiene un c&oacute;digo fuente asociado.
+Mucha gente prefiere escribir scripts CGI en vez de programas, ya que son
+m&aacute;s f&aacute;ciles de depurar, modificar y mantener que un programa
+t&iacute;pico compilado.&nbsp; En &eacute;ste curso vamos a hablar de lo
+que, a mi parecer, es la forma m&aacute;s sencilla de crear scripts CGI,
+el PERL en su versi&oacute;n 5. Podr&aacute;s conseguirlo en <A HREF="http://www.ActiveWare.com">http://www.ActiveWare.com</A>
+aunque, como ver&aacute;s, puede que no lo necesites obligatoriamente,
+a no ser que quieras probar tus scripts en casa. El PERL es necesario solo
+para ejecutar los scripts, pero no para crearlos. Puedes ver si lo tienes
+ya instalado si escribes en la linea de comandos <B>perl -v.</B> Puede
+que tu empresa, universidad, o simplemente tu sistema, ya lo tengan funcionando.
+
+<P align="justify">De todas formas, no te preocupes al o&iacute;r eso de lenguajes de programaci&oacute;n
+y PERL y cosas de &eacute;stas. En &eacute;ste cursillo voy a explicar
+c&oacute;mo crear scripts CGI sin grandes complicaciones.
+<BR>&nbsp;
+<h4>
+&iquest;D&oacute;nde debe ir un script CGI?</h4>
+Se supone que debe ir en un directorio llamado <B>cgi-bin</B>. &Eacute;ste
+es un directorio especial, que contiene los scripts, configurado dentro
+del servidor HTTP. El servidor conoce que este directorio contiene ejecutables
+que deber&aacute;n ser ejecutados y su salida deber&aacute; ser enviada
+al navegador del cliente. No se puede simplemente crear un directorio cgi-bin,
+el administrador del servidor deber&aacute; configurarlo para su uso. Si
+no est&aacute; configurado, los scrips ser&aacute;n cargados como simples
+ficheros de texto.
+
+<P align="justify">Algunos servidores est&aacute;n configurados de tal manera que los ficheros
+con una determinada extensi&oacute;n (generalmente .cgi) son reconocidos
+como scripts y ser&aacute;n ejecutados como si estuvieran en un directorio
+cgi-bin sin importar el directorio donde se encuantran. De hecho, la mayor&iacute;a
+de servidores de p&aacute;ginas personales lo tienen configurado as&iacute;.
+Te recomiendo que hables con el responsable de tu servidor para informarte
+de ello.
+<BR>&nbsp;
+<h4>
+&iquest;Solo se usa el Perl o hay tambi&eacute;n HTML?</h4><P align="justify">
+Cuando tenemos un script CGI no basta con cargarlo. Debe recibir una serie
+de datos, como una palabra a buscar o unos comentarios para enviar por
+e-mail. Es necesario que un c&oacute;digo HTML de la web le proporcione
+dichos datos. Por esto, un script CGI constar&aacute; de dos partes: el
+script y un formulario HTML para recogida de datos.
+
+<P align="justify">El script CGI puede crear documentos HTML de forma autom&aacute;tica
+y present&aacute;rselos al navegador, as&iacute; que tambi&eacute;n posee
+HTML un script escrito en PERL.
+
+<P align="justify">Como ves, hay un poco de todo.
+<BR>&nbsp;
+<h4>
+&iquest;Qu&eacute; necesito para seguir &eacute;ste cursillo?</h4><P align="justify">
+Pues solo necesitas tres cosas. Una de ellas es el PERL, aunque ya he explicado
+que es opcional. De todas formas puedes ir a <A HREF="http://www.ActiveWare.com">http://www.ActiveWare.com</A>
+y baj&aacute;rtelo, creo que ocupa 1.3 Megas y hay dos versiones, una para
+Unix y otra para MS-DOS/Windows. Para no tener que hacer otro curso de
+programaci&oacute;n en PERL vamos a usar una librer&iacute;a CGI. Te preguntar&aacute;s,
+&iquest;qu&eacute; es eso? Pues una amable persona decidi&oacute; crear
+un archivo en PERL con las opciones m&aacute;s &uacute;tiles para usar
+en el Web. De esta forma solo tendremos que crear una peque&ntilde;&iacute;sima
+parte del script y aprovechar lo que ya hay hecho. Vamos a usar la librer&iacute;a
+de Steve Brenner, que podr&aacute;s obtener pulsando <A HREF="zip/cgi-lib.pl">aqu&iacute;</A>.
+El fichero se llama cgi-bin.pl y ya explicar&eacute; c&oacute;mo usarlo
+a su tiempo. Lo &uacute;ltimo que necesitas es un poco de pr&aacute;ctica
+con &eacute;sto de crear script CGI. Te aseguro que es muy sencillo y te
+permitir&aacute; tener infinitas posibilidades con tu Web.
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaj.htm"><font FACE="ARIAL"><B>[Curso de Creación de Scripts CGI]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

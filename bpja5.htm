@@ -1,0 +1,785 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</td></table></TD>
+
+</td></table>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:spellcaster@bigfoot.com"><b><font color="0000ff">Spellcaster.</font></b></a><br>
+
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 5.<br>Creando objetos
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+&#161;&#161;En este cap&iacute;tulo nos meteremos de lleno en el alucinante
+
+y esencial mundo de los objetos!! Ninguna aventura conversacional ser&iacute;a
+
+realista al 100% sin 100000 objetos, pero para Fanglore seremos m&aacute;s
+
+modestos, y tan solo tendremos cuatro... Estos ser&aacute;n:
+
+
+
+<UL>
+
+<LI><I>Pala</I>: Necesaria para echar abajo la puerta
+
+<LI><I>M&aacute;scara</I>: Necesaria para superar la habitaci&oacute;n con gas
+
+<LI><I>Espada</I>: Necesaria para matar a los monstruos
+
+<LI><I>Tesoro</I>: &#191;Lo adivinas?
+
+</UL>
+
+Puedes incluir otros objetos redundantes, sin prop&oacute;sito alguno,
+
+excepto el de confundir, o incluso divertir, al jugador... Pondremos en
+
+escena dos de estos objetos:
+
+<UL>
+
+<LI><I>Pistola l&aacute;ser</I>: Accesorio de un juego anterior
+
+<LI><I>Una extra&ntilde;a llave</I>: &#161;No sirve absolutamente para nada!
+
+</UL>
+
+
+
+Lo primero ser&aacute;, claro est&aacute;, crear los objetos...
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<h4>Creando objetos</h4>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para crearlos, podemos utilizar el programa <SAMP>OBJGEN.PAS</SAMP>. Es muy parecido
+
+al <SAMP>ROOMGEN.PAS</SAMP> que ven&iacute;a con el <I>SQ 1</I>, excepto que en vez
+
+de crear localidades, crea objetos.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, veamos qu&eacute; es lo que necesitamos guardar para cada objeto:
+
+su nombre, su posici&oacute;n (podemos mover objetos de una localidad a
+
+otra o llevarlo en el inventario) y su descripci&oacute;n. Explicar&eacute;
+
+la parte de la descripci&oacute;n m&aacute;s adelante. Definiremos un record
+
+como este:
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Type</B> TipoObj=<B>Record</B>
+
+                         Nombre:String[80];
+
+                         Pos:Byte;
+
+                         Desc:<B>Array</B>[1..5] <B>Of</B> String[80];
+
+                     <B>End</B>;
+
+</FONT></PRE></CODE>
+
+Definamos el n&uacute;mero de objetos que habr&aacute;n en el juego:
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Const</B> NumeroObjs=6;
+
+</FONT></PRE></CODE>
+
+Y, finalmente, definamos el vector (array) que guardar&aacute; los
+
+objetos:
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Var</B> Objetos:<B>Array</B>[1..NumeroObjs] <B>of</B> TipoObj;
+
+</FONT></PRE></CODE>
+
+Esto, despu&eacute;s de haber definido estas estructuras y haber obtenido
+
+el fichero <SAMP>OBJ.DAT</SAMP> (con el <SAMP>OBJGEN</SAMP>), tendremos
+
+todos los datos en el mismo, con lo cual s&oacute;lo habr&aacute; que
+
+leer estos, con una rutina muy similar a <I>LeerDatosLocalizaciones</I>
+
+que ya vimos en nuestra segunda entrega:
+
+<CODE><PRE><font size=2  face=arial>        <B>Procedure</B> LeerDatosObjetos;
+
+        { Leemos del disco los datos de los objetos }
+
+        <B>Var</B> F:Text;
+
+            A,B:Byte;
+
+            Flag:Boolean;
+
+        <B>Begin</B>
+
+             <I>{ Preparamos el fichero de texto para el acceso }</I>
+
+             Assign(F,'Obj.Dat');
+
+             Reset(F);
+
+             <I>{ Para cada objeto del juego }</I>
+
+             <B>For</B> A:=1 <B>To</B> NumeroObjs <B>Do</B>
+
+             <B>Begin</B>
+
+                  <I>{ Leemos el nombre del objeto }</I>
+
+                  ReadLn(F,Objetos[A].Nombre);
+
+                  <I>{ Leemos la posici&oacute;n inicial }</I>
+
+                  ReadLn(F,Objetos[A].Pos);
+
+                  <I>{ Limpiamos la descripci&oacute;n del objeto }</I>
+
+                  <B>For</B> B:=1 <B>To</B> 5 <B>Do</B> Objetos[A].Desc[B]:='';
+
+                  <I>{ Leemos la descrici&oacute;n }</I>
+
+                  Flag:=True;
+
+                  B:=1;
+
+                  <B>While</B> Flag <B>Do</B>
+
+                  <B>Begin</B>
+
+                       ReadLn(F,Objetos[A].Desc[B]);
+
+                       <B>If</B> (B=5) <B>Or</B> (Objetos[A].Desc[B]='*') <B>Then</B> Flag:=False;
+
+                       Inc(B);
+
+                  <B>End</B>;
+
+             <B>End</B>;
+
+             Close(F);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Un apunte m&aacute;s... Si el campo <SAMP>POS</SAMP> de un objeto es 0, significar&aacute;
+
+que estamos llevando el objeto, y si es 255, que el objeto est&aacute;
+
+escondido (en el caso de la m&aacute;scara de gas, &eacute;sta s&oacute;lo
+
+aparece si el horno est&aacute; abierto).<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<h4>Contemplando los objetos</h4>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Un objeto es in&uacute;til, a menos que se pueda usar... Y s&oacute;lo lo puedes
+
+usar si se ve, o si sabes que est&aacute; all&iacute;... As&iacute; que hay
+
+dos clases de objetos que uno puede ver: objetos que llevas y objetos
+
+que ruedan por el escenario... Un buen juego tiene diferentes descripciones
+
+para cada una de estas dos <I>clases</I>, pero Fanglore se limita a tratarlos
+
+de la misma forma, soltando la descripci&oacute;n.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, has de saber que hay un comando b&aacute;sico que es igual en
+
+<U><SAMP>TODAS</SAMP></U> las aventuras: &#161;<SAMP>EXAMINAR</SAMP>!
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Al comando examinar le sigue un par&aacute;metro, esto es, acepta (y requiere)
+
+que teclees otra cosa... Esta cosa es precisamente lo que deseas examinar...
+
+Por ejemplo, si quieres examinar la espada, uno teclear&iacute;a:
+
+
+
+<SAMP><FONT COLOR="#FF0000"><CENTER>EXAMINAR ESPADA</CENTER></font><P ALIGN=JUSTIFY><font size=2 face=arial></FONT></SAMP>
+
+<I>Examinar</I> ser&iacute;a el comando, y la <I>espada</I> el par&aacute;metro.
+
+Pero date cuenta que uno no s&oacute;lo puede examinar objetos, sino que
+
+puede examinar cualquier cosa del juego... Por ejemplo, el horno en la
+
+nevera... Hablaremos de esto en otro momento, en un pr&oacute;ximo art&iacute;culo
+
+de esta serie...
+
+Es importante decir que s&oacute;lo puedes examinar objetos que o bien
+
+lleves o que est&eacute;n en la misma localidad... Veamos como quedar&iacute;a
+
+la rutina de <SAMP>EXAMINAR</SAMP>:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CODE><PRE><font size=2  face=arial>         <B>Procedure</B> Examinar(Param:String);
+
+         <B>Var</B> Flag:Boolean;
+
+             A,B:Byte;
+
+         <B>Begin</B>
+
+              Flag:=True;
+
+              <I>{ ***************************************************** }</I>
+
+              <I>{ Aqu&iacute; vendr&iacute;a el c&oacute;digo para cosas como el horno, etc. }</I>
+
+              <I>{ ***************************************************** }</I>
+
+              <I>{ Buscamos el objeto en la lista de objetos }</I>
+
+              A:=0;
+
+              <B>Repeat</B>
+
+                   Inc(A);
+
+                   <B>If</B> Objetos[A].Nombre=Param <B>Then</B> Flag:=True;
+
+              <B>Until</B> Flag <B>Or</B> (A>NumeroObjs);
+
+              <B>If</B> Flag <B>Then</B>
+
+              <B>Begin</B>
+
+                   <I>{ El objeto existe }</I>
+
+                   <I>{ Comprobamos que est&eacute; en localidad o bajo tu poder }</I>
+
+                   <B>If</B> (Objetos[A].Pos=0) <B>Or</B> (Objetos[A].Pos=LocalidadActual) <B>Then</B>
+
+                   <B>Begin</B>
+
+                        <I>{ El objeto es 'visible'... Sacamos descripci&oacute;n }</I>
+
+                        Writeln;
+
+                        B:=1;
+
+                        TextColor(Yellow);
+
+                        <B>While</B> (B<6) <B>And</B> (Objetos[A].Desc[B]<>'*') <B>Do</B>
+
+                        <B>Begin</B>
+
+                             Writeln(Objetos[A].Desc[B]);
+
+                             Inc(B);
+
+                        <B>End</B>;
+
+                        Writeln;
+
+                   <B>End</B>
+
+                   <B>Else</B>
+
+                   <B>Begin</B>
+
+                        <I>{ El objeto existe, pero no est&aacute; visible }</I>
+
+                        Writeln;
+
+                        TextColor(Yellow);
+
+                        WriteLn('No veo el ',Param,' por aqu&iacute;...');
+
+                        WriteLn;
+
+                   <B>End</B>;
+
+              <B>End</B>
+
+              <B>Else</B>
+
+              <B>Begin</B>
+
+                   <I>{ El par&aacute;metro especificado no representa ning&uacute;n objeto  }</I>
+
+                   <I>{ existente...                                           }</I>
+
+                   WriteLn;
+
+                   TextColor(Yellow);
+
+                   WriteLn('Lo siento, pero no s&eacute; qu&eacute; es un ',Param);
+
+                   WriteLn;
+
+              <B>End</B>;
+
+         <B>End</B>;
+
+</CODE></FONT></PRE>
+
+Por supuesto tienes que completar la rutina que llama a esta <I>procedure</I>...
+
+Debes ponerlo todo (al igual que el resto de comandos) en <B>Play</B>. La
+
+rutina quedar&iacute;a as&iacute;:
+
+
+
+<PRE><font size=2  face=arial><CODE>        <B>If</B> Parsed[1]='EXAMINAR' <B>Then</B>
+
+        <B>Begin</B>
+
+                Valid:=True;
+
+                Examinar(Parsed[2]);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+&#191;Verdad que es f&aacute;cil...? Pero a&uacute;n no hemos acabado... Si
+
+te acuerdas de lo que dije a prop&oacute;sito del parseo, sabr&aacute;s que
+
+las entradas se dividen en palabras... Pero resulta que la m&aacute;scara
+
+de gas tiene 2 palabras como nombre (Gas Mask)... Tal como lo tenemos ahora
+
+el programa es incapaz de detectar los objetos con varias palabras.
+
+&#191;C&oacute;mo podr&iacute;amos arreglarlo? Bien, hay que volver a unir las
+
+palabras otra vez... Observa:
+
+<CODE><PRE><font size=2  face=arial>        <B>If</B> Parsed[1]='EXAMINAR' <B>Then</B>
+
+        <B>Begin</B>
+
+                Valid:=True;
+
+                <I>{ Juntamos las palabras otra vez }</I>
+
+                D:=3;
+
+                E:=Parsed[2];
+
+                <B>While</B> Parsed[D]<>'' <B>Do</B>
+
+                <B>Begin</B>
+
+                        E:=E+' '+Parsed[D];
+
+                        Inc(D);
+
+                <B>End</B>;
+
+                Examinar(E);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+
+
+En cuanto a la definici&oacute;n de tipos, define E como string y D como
+
+un Byte. A pesar de que esto funciona con comandos de s&oacute;lo un
+
+parametro, la cosa falla cuando hay comandos que requieren m&uacute;ltiples
+
+parametros... La regla es no utilizar objetos con nombres que llevan
+
+espacios...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+A&uacute;n no hemos acabado la secci&oacute;n... Todav&iacute;a nos queda
+
+ver que objetos hay en la localidad, y que objetos llevas... Pero esto lo
+
+dejar&eacute; para ma&ntilde;ana, ya que ayer s&oacute;lo dorm&iacute; 2 horas...
+
+Y estoy <SAMP>MUY</SAMP> cansado...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Buenas noches... Zzzzzzzzzzzzzzzzzzzzzzzz..........
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ok... &#161;He vuelto! :) Preparado para continuar... Ya... Nuestro
+
+problema es saber los objetos con los que podemos interactuar. Es
+
+f&aacute;cil. Cuando entremos en una localidad, haremos que el programa
+
+saque una lista de los objetos visibles. Para conseguirlo, a&ntilde;adimos
+
+el siguiente c&oacute;digo a la rutina de Mirar:
+
+<CODE><PRE><font size=2  face=arial>        TextColor(LightCyan);
+
+        Writeln('Objetos visibles:');
+
+        Flag:=False;
+
+        <B>For</B> A:=1 <B>To</B> NumeroObjs <B>Do</B> <B>If</B> Objetos[A].Pos=NumeroLoc <B>Then</B>
+
+        <B>Begin</B>
+
+                Writeln('         ',Objects[A].Nombre);
+
+                Flag:=True;
+
+        <B>End</B>;
+
+        <B>If</B> Flag=False <B>Then</B> Writeln('          Nada');
+
+</CODE></FONT></PRE>
+
+
+
+No olvides definir la variable <I>Flag</I> como un Boolean. Se usa para
+
+saber si hay alg&uacute;n objeto en la habitaci&oacute;n... Si al salir
+
+del bucle For fuera falso, significar&aacute; que no hay objetos en la
+
+localidad, y el programa notificar&aacute; que no hay ning&uacute;n objeto...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para saber qu&eacute; objetos est&aacute;s llevando, usamos el segundo
+
+comando m&aacute;s conocido en las aventuras solo-texto... &#161;El comando de
+
+<SAMP>INVENTARIO</SAMP>! Para implementarlo, s&oacute;lo hace falta chequear
+
+todos los objetos del juego. Si su localizaci&oacute;n (campo <SAMP>POS</SAMP>)
+
+es cero, entonces es que lo est&aacute;s llevando... Codificando:
+
+<CODE><PRE><font size=2  face=arial>        <B>Procedure</B> Inventario;
+
+        <B>Var</B> A:Byte;
+
+            Flag:Boolean;
+
+        <B>Begin</B>
+
+                Flag:=False;
+
+                TextColor(LightBlue);
+
+                WriteLn;
+
+                WriteLn('Inventario:');
+
+                <B>For</B> A:=1 <B>To</B> NumeroObjs <B>Do If</B> Objetos[A].Pos=0 <B>Then</B>
+
+                <B>Begin</B>
+
+                        WriteLn('                ',Objetos[A].Nombre);
+
+                        Flag:=True;
+
+                <B>End</B>;
+
+                <B>If</B> Flag=False <B>Then</B> Writeln('                 Nada');
+
+                WriteLn;
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+Como ya es habitual, debes a&ntilde;adir unas l&iacute;neas a la rutina
+
+<B>Play</B>, para que llame a esta &uacute;ltima:
+
+<CODE><PRE><font size=2  face=arial>>        <B>If</B> Parsed[1]='INVENTARIO' <B>Then</B>
+
+        <B>Begin</B>
+
+                Valid:=True;
+
+                Inventario;
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+Ahora ya podemos mirar los objetos... Pero nos queda la interacci&oacute;n,
+
+que dejaremos para el siguiente cap&iacute;tulo...
+
+<HR><P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<font color="#cc0000">Nota del traductor:</font> En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

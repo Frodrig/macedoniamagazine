@@ -1,0 +1,502 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>		  
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+<FONT COLOR="#009933" size=3 face="arial"><B>P</B></font><FONT color="#000000" size=2 face="arial"><B>rogramación y diseño de aventuras multijugador</B>
+</FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+</FONT>
+<br><br>
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+Capítulo 1.<br>Un maravilloso mundo
+</H3>
+<p align="justify">
+Sobre programaci&oacute;n de aventuras conversacionales (ACs) se ha dicho mucho,
+much&iacute;simo dir&iacute;a yo. La mayor&iacute;a de los fanzines 
+de aventuras han dedicado, en alg&uacute;n
+momento de su historia, parte de su contenido a cursos de creaci&oacute;n de
+aventuras: art&iacute;culos sobre programaci&oacute;n de PSIs, laberintos, dise&ntilde;o
+de guiones, problemas y un largo etc&eacute;tera. [ Por cierto, que de todos
+ellos, EL CURSO con may&uacute;sculas es y seguir&aacute; siendo el vertido
+por Andr&eacute;s Samudio en la revista Microhobby hace ya algunos a&ntilde;os.
+Recientemente ha sido transcrito a formato a HTML y los puedes
+conseguir en la p&aacute;gina del <A HREF="http://www.arrakis.es/~caad.">CAAD</A>.
+Te aconsejo que si quieres hacer una aventura leas sus jugosos
+art&iacute;culos, pues son toda una maravilla avalada por el director
+de Aventuras AD, creadores de admirables trabajos como 'Jabato',
+'Cozumel'... ]
+<P ALIGN="JUSTIFY">
+
+Sin embargo, poco se ha dicho acerca de programaci&oacute;n de aventuras
+conversacionales multijugador (ACMs), que son una mezcla de MUD
+y conversacional. A ellas nos vamos a dedicar en esta serie de
+art&iacute;culos, donde vamos a intentar aprender a
+programarlas. En esta primera entrega, trataremos de
+dar una definici&oacute;n m&aacute;s precisa de lo que son, comentaremos
+algo sus tipos y enumenaremos los problemas que surgen tanto en su dise&ntilde;o
+como en su programaci&oacute;n.
+<P ALIGN="JUSTIFY">
+Y antes de meternos ya en materia, a&ntilde;adir que aunque el contenido 
+de este curso est&aacute; especialmente orientado al desarrollo de 
+aventuras conversacionales, contiene pistas igualmente valiosas para 
+realizar gr&aacute;ficas y juegos de rol por ordenador.
+<P ALIGN="JUSTIFY">
+
+<H3>&#191;Qu&eacute; es una Aventura Conversacional Multijugador?</H3>
+<P ALIGN="JUSTIFY">
+
+Como he comentado m&aacute;s arriba son mezcla de MUD (Multiple User
+Dungeon) y de las aventuras conversacionales de siempre.
+Las ACMs tienen de aquellos que varios jugadores est&aacute;n
+compartiendo un mismo mundo virtual y de aquella que hay un gui&oacute;n
+de fondo y unos problemas a resolver. No todo se limita, pues,
+al despanzurramiento existente en la mayor&iacute;a de MUDs. Tan solo
+es una AC en la que pueden cooperar (y tambi&eacute;n competir) varios
+jugadores.
+<P ALIGN="JUSTIFY">
+
+Al igual que en las ACs podr&aacute;n ser con gr&aacute;ficos o sin
+gr&aacute;ficos, pero el texto explicativo no lo quita nadie, porque
+si se lo quitas deja de ser una ACM y se convierte en v&eacute;te
+a saber qu&eacute;, &#191;ok? A mi entender una ACM es la evoluci&oacute;n
+l&oacute;gica de la conversacional, y no lo que se nos ha presentado
+como su evoluci&oacute;n, la aventura gr&aacute;fico animada (AGA). &Eacute;stas no
+son m&aacute;s que hijos deformes con las capacidades m&aacute;s interesantes
+de una AC recortadas o suprimidas del todo.
+<P ALIGN="JUSTIFY">
+
+Veamos, antes de nada, lo que hereda una ACM de una AC:
+<P ALIGN="JUSTIFY">
+
+<UL>
+<LI>se puede programar <I>f&aacute;cilmente</I> y apenas sin coste (a parte
+del esfuerzo, claro). No hay que pagar dibujantes, ni artistas
+3D ni nada. La base es el texto, la palabra, como en los
+libros. Las acciones aleatorias son baratas (la bruja que se
+puede rascar la cabeza, se le cae un moquillo o se pone a barrer)
+porque est&aacute;n basadas en el texto. Hacer acciones aleatorias en una
+aventura gr&aacute;fica implica tener una animaci&oacute;n por cada una de ellas,
+lo cual es extremadamente costoso y por eso no suele hacerse (con
+la p&eacute;rdida de ambientaci&oacute;n que ello conlleva).
+<P ALIGN="JUSTIFY">
+<LI>un buen texto puede crear una magn&iacute;fica ambientaci&oacute;n. Un texto
+puede sugerir cosas y, lo que es m&aacute;s importante, puede sugerir
+cosas diferentes a diferentes personas. As&iacute; -el ejemplo que
+siempre acabo poniendo- si ves el gr&aacute;fico de un drag&oacute;n, los
+jugadores ven al drag&oacute;n que dibuj&oacute; el h&aacute;bil dibujante y todos
+ven el mismo drag&oacute;n. Si se escribe una descripci&oacute;n exponiendo
+a parte de su aspecto, el apestoso olor de su aliento, y 
+el apretuj&oacute;n que te mete tu asustado hombre de armas, totalmente
+cagado de miedo, no todos ver&aacute;n ni el mismo drag&oacute;n, ni vivir&aacute;n
+la misma escena.
+<P ALIGN="JUSTIFY">
+<LI>no hay l&iacute;mite en la complejidad que quieras dotar a tu
+aventura, tanto en gui&oacute;n (una aventura con varias posibilidades
+de ser resuelta) como en lo que respecta a la simulaci&oacute;n del mundo.
+<P ALIGN="JUSTIFY">
+<LI>no se necesita un equipo potente para ser disfrutada. Unicamente
+el que hace de host debe tenerlo si es que la aventura es extremadamente
+compleja (con rutinas de IA, por ejemplo). Al jugador remoto le sobra
+con un 386.
+</UL>
+<P ALIGN="JUSTIFY">
+
+Si una AC la veo como una excursi&oacute;n al mundo ideado por el autor, una
+ACM la veo como una excursi&oacute;n en compa&ntilde;&iacute;a. All&iacute;, podr&aacute;n cooperar
+para conseguir realizar una misi&oacute;n, o dividirse en grupos y
+competir entre ellos. De hecho, el abanico de posibilidades que abre
+una ACM es realmente impresionante, sobre todo si cada jugador
+encarna a un personaje con caracter&iacute;sticas diferentes. As&iacute;, puede
+ser que el personaje con mayor percepci&oacute;n descubra, entre los
+escombros, un anillo que los
+dem&aacute;s no ven. Puede que ese alguien decida cogerlo disimuladamente
+para &eacute;l, o puede que informe a los dem&aacute;s acerca de su descubrimiento.
+Puede que un problema tenga que resolverse con colaboraci&oacute;n, el t&iacute;pico
+bloque de piedra que bloquea la entrada a las cavernas pueda ser
+alzado (no sin dificultad) por el jugador b&aacute;rbaro de dos metros.
+<P ALIGN="JUSTIFY">
+
+Desde luego, los juegos tipo rol se prestan muy bien a una
+adaptaci&oacute;n a ACM, y estoy seguro que en un futuro no muy lejano
+vamos a tener varios de ellos en circulaci&oacute;n. Los juegos ambientados
+en Dungeons & Dragons ser&aacute;n muy interesantes, pero tambi&eacute;n lo ser&aacute;n
+desde los ambientados en los mitos de Cthulhu, pasando por la guerra
+de las galaxias (&#161;me pido el ewok!) y hasta por fanhunter. Aunque todo
+no va a ser estilo rol, con caracter&iacute;sticas y tal, vamos digo
+yo. Tambi&eacute;n ser&iacute;a muy interesante una versi&oacute;n de la aventura original
+en multijugador, por ejemplo. Y la mayor&iacute;a de las aventuras conversacionales
+que incluyan un PSI que acompa&ntilde;a al jugador en la mayor parte de la
+aventura, tambi&eacute;n ser&iacute;an candidatas perfectas para ser convertidas
+en ACM.
+<P ALIGN="JUSTIFY">
+
+<H3>&#191;En qu&eacute; lenguaje se pueden programar las ACMs?</H3>
+<P ALIGN="JUSTIFY">
+
+Primero y fundamental es que el lenguaje que vayamos a utilizar
+tenga soporte TCP/IP, para que el ordenador que hace de host
+(el que tiene todos los datos de la aventura y ejecuta los
+comandos de los jugadores) y los ordenadores cliente (los
+de los jugadores) se puedan conectar y as&iacute; intercambiar
+informaci&oacute;n. Si no hay conexi&oacute;n, poco multijuego va a poder
+haber, &#191;no es cierto?
+<P ALIGN="JUSTIFY">
+
+As&iacute; pues, no tenemos un abanico demasiado amplio de lenguajes
+donde elegir. Se puede usar C/C++ o cualquier lenguaje de alto
+nivel siempre y cuando dispongas de la librer&iacute;a de comunicaci&oacute;n
+adecuada. Otra posibilidad es usar DIV, [risas estridentes del
+que esto escribe], que seg&uacute;n comentan en su p&aacute;gina apa&ntilde;ar&aacute; TCP/IP
+en una pr&oacute;xima versi&oacute;n. Es una posibilidad, de acuerdo, pero no
+la m&aacute;s adecuada. Para una aventura es much&iacute;simo m&aacute;s adecuado
+emplear un lenguaje especialmente dise&ntilde;ado para crear &eacute;stas, y
+te adelanto que el m&aacute;s adecuado es GLD. A
+parte de soporte multijuego TCP/IP, permite orientaci&oacute;n a objetos y
+herencia (ideal para crear ACs y ACMs), orientaci&oacute;n a eventos,
+multitarea, tiempo real y todo tipo de virguer&iacute;as. Ser&aacute; 
+software gratuito, y estar&aacute; disponible a partir de abril-mayo
+de 1999.
+<P ALIGN="JUSTIFY">
+
+Los ejemplos, que a buen seguro inundar&aacute;n este cursillo,
+estar&aacute;n escritos en GLD, pero no hay mayor problema porque lo
+que es realmente la base puede ser transportado a otros sistemas.
+<P ALIGN="JUSTIFY">
+
+
+<H3>Los problemas que surgen</H3>
+<P ALIGN="JUSTIFY">
+
+No esperes que hacer una multijugador sea tarea f&aacute;cil,
+porque si se quiere hacer bien hay cosas que habr&aacute; que cuidar. De hecho,
+lo &uacute;nico que podr&aacute;s permitirte ahorrar ser&aacute;n PSIs (porque ahora
+algunos de ellos se convierten en personajes jugadores), pero se
+plantean una serie de problemas. Ve&aacute;moslos:
+<P ALIGN="JUSTIFY">
+
+<OL>
+<LI><B>Problemas de librer&iacute;a</B>
+<P ALIGN="JUSTIFY">
+La librer&iacute;a debe estar adaptada a un juego multijugador.
+En el momento de escribir esto, ning&uacute;n parser de ACs tiene una librer&iacute;a
+(o una base de datos inicial) que lo permita. Para GLD s&iacute; que se
+est&aacute; haciendo una librer&iacute;a base con soporte multijugador incluido.
+<P ALIGN="JUSTIFY">
+Lo que hace in&uacute;til para las ACMs una librer&iacute;a que funciona
+para ACs, es que &eacute;sta presupone que hay un &uacute;nico jugador. Las
+acciones consultan los atributos de este jugador directamente y,
+por otra parte, informaci&oacute;n del estilo de si un objeto es conocido o no
+por el jugador est&aacute; asociada al objeto en s&iacute;. En una multijugador
+debe haber existir informaci&oacute;n no para un solo jugador, sino para
+todos ellos. Volviendo al ejemplo del jugador que ve el anillo,
+&eacute;ste si lo ha visto, pero el resto no. Te&oacute;ricamente esta info debe
+estar entre los atributos del jugador y no en el objeto en cuesti&oacute;n.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de resoluci&oacute;n de puzzles</B>
+<P ALIGN="JUSTIFY">
+Problemas que quiz&aacute; no eran resolubles por un s&oacute;lo personaje, ahora
+s&iacute; que lo son entre varios. A parte de lo de poder sumar fuerzas
+para levantar objetos pesados, citar coordinaci&oacute;n para maniobras
+de distracci&oacute;n.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de mensajes</B>
+<P ALIGN="JUSTIFY">
+Muy importante, para hacer cre&iacute;ble el mundo y la historia a los
+jugadores. Dependiendo qui&eacute;n sea el personaje, el texto que se le
+ha de presentar (de una descripci&oacute;n de localidad o de una acci&oacute;n
+de otro jugador), puede variar de uno a otro. Por ejemplo, en una
+aventura, la espada corta puede ser &quot;Una espada de juguete&quot; para
+el b&aacute;rbaro de dos metros de altura (y tambi&eacute;n metro y medio de
+espalda), mientras que para el ladronzuelo del grupo puede ser
+&quot;Una espada corta, muy ligera y bella&quot;.
+<P ALIGN="JUSTIFY">
+
+Adem&aacute;s hay que cuidar la descripci&oacute;n que los personajes reciban
+unos de otros. Cuidado con relaciones de parentesco, para X
+&quot;Y es mi padre&quot;, mientras que para Y &quot;X es mi hijo&quot;. A m&aacute;s de esto,
+para el orco la dulce cl&eacute;riga del grupo puede ser &quot;uno de esos humanos
+sin barba&quot;, mientras que para el elfo ella puede ser &quot;una bella
+humana&quot;, y el orco puede ser &quot;un apestoso y feo orco&quot; para nuestra
+cl&eacute;riga. Para el humano (cuyo personaje est&aacute; enamorado secretamente
+de ella), el hecho de que el elfo la mire puede ser reflejado
+con un mensaje como &quot;Genthen clava los ojos en tu chica&quot;, mientras
+que los dem&aacute;s reciben un mensaje por defecto &quot;Genthen mira a
+Pepah&quot;.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de juego</B>
+<P ALIGN="JUSTIFY">
+Cinco jugadores quedan a una hora para adentrarse en el peligroso
+castillo de Celkart. Tras una hora de juego, uno de ellos tiene
+que dejar el juego, por la causa X. &#191;Siguen los otros cuatro
+jugadores sin &eacute;l o posponen la partida para otra ocasi&oacute;n?
+<P ALIGN="JUSTIFY">
+&#191;Y si la palma un personaje? &#191;La partida contin&uacute;a o no? Quiz&aacute;
+algunos puzzles del juego queden irresolubles si ese personaje
+no est&aacute; presente. En el caso de que los personajes puedan morir
+durante el transcurso de la aventura, el autor debe prever
+estas situaciones.
+<P ALIGN="JUSTIFY">
+Otra pregunta que uno se puede realizar es: &#191;podr&aacute;n entrar nuevos
+jugadores en mitad de una partida? &#191;D&oacute;nde aparecer&aacute;n si es as&iacute;?
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de objetos</B>
+<P ALIGN="JUSTIFY">
+En una AC el aventurero pod&iacute;a hallar unas bonitas botas que
+le permit&iacute;an cruzar un r&iacute;o de lava (y casualmente las botas
+eran de su n&uacute;mero). Ahora son cinco jugadores los que se
+van a aventurar por esas mismas cavernas. &#191;Pondr&aacute;s cinco
+pares de botas? (y demasiada ser&iacute;a la casualidad si encima hay
+tallas para todos) Si tus aventureros parten sin apenas equipo,
+vas a tener que equipar no solo a uno, sino a todo el grupo.
+<P ALIGN="JUSTIFY">
+Referente tambi&eacute;n a los objetos, un problema que sufren
+los MUDs. Si vas a hacer una aventura-MUD, el problema va a
+ser que pronto los objetos se agotan, los jugadores se los
+agencian y no los van a soltar (y el jugador que lleva la
+corona de los dioses no piensa volver a pasarse por el MUD, por
+lo que la corona se estanca en su inventario). Los MUDs suelen
+resolverlo a medias reseteando (inicializando) cada cierto
+tiempo el estado de los objetos. Problema: en tu mundo pueden
+acabar coexistiendo veinte anillos &uacute;nicos...
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de PSIs</B>
+<P ALIGN="JUSTIFY">
+Probablemente el PSI que antes se refer&iacute;a a un s&oacute;lo jugador, ahora
+se deber&aacute; referir a todo un grupo de ellos. &#191;C&oacute;mo lo har&aacute;? &#191;Hablar&aacute;
+en plural? &#191;Preguntar&aacute; si todos van juntitos? Por ejemplo, cuando
+entren tres a la vez en la tienda, &#191;qu&eacute; dira el tendero?
+&#191;Saludar&aacute; a todos ellos por separado o dir&aacute; un hola en general a
+todos?
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de declaraci&oacute;n de acciones</B>
+<P ALIGN="JUSTIFY">
+En la estupenda Jabato (de AD, of course), estando en la pir&aacute;mide
+de Keops, y al encontrarnos con un sarc&oacute;fago uno tecleaba algo as&iacute; como:
+&quot;decir a Taurus 'levanta la losa'&quot;, y &eacute;ste la alzaba. En las
+multijugador el problema radicar&iacute;a en si dos jugadores quieren
+ponerse de acuerdo y cooperar para hacer un trabajo juntos, 
+ya que ellos por separado no pueden.
+No basta con pedir al otro jugador que levante la losa. Hay que
+hacerlo simult&aacute;neamente y este hecho hay que indic&aacute;rselo de alguna
+forma al parser.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de tratamiento del tiempo</B>
+<P ALIGN="JUSTIFY">
+Problema grave, como tratar el tiempo si uno de los personajes pilla
+un avi&oacute;n, se va a dormir o se va de viaje a Plut&oacute;n. Si todos los
+personajes van juntos no hay problema, s&iacute; van en grupitos (o cada
+uno por libre) entonces s&iacute; que pueden aparecer dificultades. Habr&aacute; que
+tener cuidado con este tipo de situaciones.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de adaptaci&oacute;n seg&uacute;n n&uacute;mero de jugadores</B>
+<P ALIGN="JUSTIFY">
+Si la aventura puede ser jugada con un n&uacute;mero variable de jugadores,
+entonces en teor&iacute;a la dificultad de la misma deber&iacute;a ser ajustable.
+Si la ACM es de espada y brujer&iacute;a con combates y tal, entonces
+deber&iacute;an presentarse m&aacute;s o menos enemigos seg&uacute;n el n&uacute;mero de personajes
+controlados por humanos. Es m&aacute;s, si alg&uacute;n personaje fundamental
+no tiene controlador, habr&iacute;a que hacerlo PSI, es decir, habr&iacute;a que
+tener programado el PSI por si acaso. Si no hay jugador que lo lleve
+se le mete en la aventura como PSI.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de rejugabilidad</B>
+<P ALIGN="JUSTIFY">
+Si la aventura es posible jugarla tanto en solitario como con otras
+personas se presenta un problema adicional. Puede que una persona
+la haya jugado en solitario y ahora le apetezca rejugarla en
+compa&ntilde;&iacute;a. Esa persona deber&iacute;a tratar de no adelantar acontecimientos
+al resto y evitar fastidiar as&iacute; al personal. Se supone que la juega para
+probar diferentes cosas de las que en su d&iacute;a prob&oacute; en solitario. Sin
+embargo, el autor ha de tratar dar muchas posibilidades en este sentido,
+que su aventura en solitario sea diferente que en compa&ntilde;&iacute;a: incluir
+gran cantidad de detalles aleatorios, que los puzzles se resuelvan
+de diferente forma en uno u otro caso, etc. La soluci&oacute;n radical es
+hacer tu ACM eso, una ACM pura, no jugable en solitario.
+<P ALIGN="JUSTIFY">
+
+<LI><B>Problemas de testeo</B>
+<P ALIGN="JUSTIFY">
+Si testear una compleja aventura ya puede ser complicado, imagina
+una ACM con media docena de jugadores, cada uno con sus
+caracter&iacute;sticas, que leer&aacute;n mensajes espec&iacute;ficos, responder&aacute;n a
+los eventos de diferente forma, recibir&aacute;n diferente tratamiento
+de los PSIs que pululan por ah&iacute;...
+<P ALIGN="JUSTIFY">
+</OL>
+
+<H3>Fin de primera entrega</H3>
+<P ALIGN="JUSTIFY">
+
+Ya nos vamos, pero que quede bien claro que
+las soluciones a todos los problemas aqu&iacute; citados las iremos viendo
+a partir de la pr&oacute;xima entrega. Esta primera ha sido una mera
+introducci&oacute;n, para abrir boca y poco m&aacute;s. En pr&oacute;ximos art&iacute;culos
+analizaremos tambi&eacute;n muchas otras posibilidades que nos ofrece
+el fascinante mundo del multijuego. &#161;Espero que no faltes a nuestra
+cita!<BR>
+<P ALIGN="JUSTIFY">
+
+<BR><BR>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>ABRIL</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

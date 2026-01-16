@@ -1,0 +1,471 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>R</B></font><FONT color="#000000" size=2 face="arial"><B>utinas avanzadas en NMP</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<a href="mailto:nmsoft@usa.net"><b><font color="0000ff">Carlos Sánchez.</font></b></a>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Rutinas avanzadas en NMP (1)
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Comienzo aqu&iacute; una serie de art&iacute;culos en los que
+
+se incluir&aacute;n rutinas avanzadas para el parser NMP, para
+
+aquellos que ya ten&eacute;is un cierto dominio sobre &eacute;l.
+
+La seccion est&aacute; completamente abierta a vuestras colaboraciones,
+
+por lo que si ten&eacute;is rutinas especialmente &uacute;tiles
+
+creadas para este parser, o para cualquier otro de los parsers
+
+espanoles, pod&eacute;is enviarlas a mi direcci&oacute;n para
+
+futuros art&iacute;culos. Esperamos vuestra colaboraci&oacute;n,
+
+y la necesitamos, porque sin ella esta secci&oacute;n no puede
+
+subsistir. Pues bien, vamos all&aacute; con el primero de estos
+
+art&iacute;culos:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Una de las cosas que suelen quedar mal en una aventura es que,
+
+por las limitaciones del parser, muchas veces nos encontramos
+
+con frases del tipo &quot;Puedes ver la espada de oro macizo&quot;,
+
+como si fuera algo que ya hemos visto muchas veces, o bien el
+
+problema contrario, &quot;Coges una llave&quot;, cuando lo correcto
+
+ser&iacute;a &quot;Coges la llave&quot; para el segundo ejemplo
+
+y &quot;Puedes ver una espada de oro macizo&quot; para el primero.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Veamos que la soluci&oacute;n es facil con el parser NMP, gracias
+
+a las secuencias de escape que podemos incluir en sus mensajes.
+
+<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+El proceso es el siguiente:
+
+<UL>
+
+<LI>Creamos la tabla de objetos de la manera habitual utilizando
+
+los articulos &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;,
+
+etc.<BR>
+
+<LI>Utilizamos una tabla de mensajes para crear las descripciones
+
+de los objetos, pero con los art&iacute;culos &quot;el&quot;,
+
+&quot;la&quot;, &quot;los&quot;, etc.. Para ello usamos como n&uacute;mero
+
+de mensaje el correspondiente al n&uacute;mero de objeto. Por
+
+ejemplo: usamos la tabla de mensajes 3 y el mensaje 0 de esa tabla
+
+para el objeto 0, el mensaje 1 para el objeto 1 y as&iacute; sucesivamente.
+
+<BR>
+
+</UL>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Por ejemplo:<BR>
+
+<PRE><font size=2  face=arial>
+
+<CODE><font size=2  face=arial>        TABLA DE OBJETOS
+
+
+
+             {0} {una llave} {llave} {1} {1} {0000000000000000}
+
+             {1} {un libro}  {libro} {1} {1} {0000000000000000}
+
+
+
+        TABLA DE MENSAJES
+
+
+
+             {3,0} {la llave}
+
+             {3,1} {el libro}
+
+</FONT></CODE>
+
+</FONT></PRE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, ahora viene la parte de programaci&oacute;n, que es extremadamente
+
+simple en realidad, aunque para ello hemos de tener los conceptos
+
+claros.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Veamos primero lo que hace la secuencia de escape '@', al ser
+
+insertada en los mensajes:<BR>
+
+<PRE><font size=2  face=arial>
+
+<CODE><font size=2  face=arial>     @f1f2
+
+
+
+     f1 = n&#186; de un flag, en hexadecimal
+
+     f2 = idem.
+
+
+
+</FONT></CODE>
+
+</FONT></PRE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Pues bien, el contenido del flag f1 nos indicar&aacute; el n&uacute;mero
+
+de mensaje que se insertar&aacute; en el otro, y el flag f2 el
+
+n&#186; de tabla de mensajes que le corresponde. As&iacute; que
+
+al mensaje 57, que pongamos que es &quot;Hola @0908&quot;, suponiendo
+
+que el flag 9 contenga un 127 y el flag 8 un 4, se le a&ntilde;adir&iacute;a
+
+el mensaje 127 de la tabla 4, que si suponemos que es &quot;Pepe&quot;
+
+har&iacute;a que la orden MESSAGE 57 mostrara el texto &quot;Hola
+
+Pepe&quot;. Lo que a nosotros nos interesa es cambiar los mensajes
+
+del sistema del tipo &quot;Coges _.&quot; (como el 7 por ejemplo)
+
+por otros del tipo &quot;Coges @f1f2.&quot; de tal manera que
+
+muestren esos mensajes que hemos creado en la tabla 3.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para ello es fundamental que nuestros flags sean los correctos
+
+y que contengan los valores apropiados. Si nos fijamos para que
+
+esto funcione bien, y puesto que hemos elegido la tabla 3, el
+
+flag f2 deber&aacute; contener siempre un 3. La &uacute;nica forma
+
+de hacer esto es utilizar un flag de los libres y ponerlo a 3
+
+al inicializar el juego, para ello como sabr&eacute;is basta con
+
+lo siguiente (utilizaremos el flag 255):<BR>
+
+<PRE><font size=2  face=arial>
+
+<CODE><font size=2  face=arial>        PROCESO 1
+
+
+
+        -* *
+
+        AT 0
+
+        LET 255 3
+
+        NOTDONE
+
+
+
+</FONT></CODE>
+
+</FONT></PRE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, ya tenemos uno de nuestros flags, el que corresponde al
+
+n&uacute;mero de tabla, preparado; nos falta conseguir que otro
+
+flag nos marque el n&uacute;mero de mensaje, y ha de contener
+
+el n&uacute;mero del objeto referenciado por la ultima frase.
+
+Mirad por donde ese flag ya existe, y es uno de los flags del
+
+sistema (en concreto el 9), por lo que no tenemos que hacer nada.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Por tanto, una vez establecidos los mensajes en la tabla 3, y
+
+una vez incluida la entrada en el proceso 1 anteriormente comentada,
+
+nos basta con cambiar los mensajes del sistema del tipo &quot;Coges
+
+_.&quot; por &quot;Coges @09FF.&quot;. Primero ponemos f1, que
+
+es 9, y luego f2 que es FF (255 en hexadecimal, para otros flags
+
+utilizar la opci&oacute;n Hex del menu Utilidad de NMP).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, eso es todo por hoy, si quer&eacute;is saber m&aacute;s
+
+o quer&eacute;is colaborar con rutinas, comentarios, mejoras de
+
+las mismas rutinas o simplemente quer&eacute;is preguntar alguna
+
+duda pod&eacute;is contactar conmigo.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CENTER><a href="mailto:nmsoft@usa.net">Carlos S&aacute;nchez</A></CENTER>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<CENTER><A NAME="OLE_LINK1">csanchez@temple.subred.org</A><BR>
+
+</CENTER>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Nota: la direccion e-mail especificada es un tanto especial, y
+
+no admite attach de ficheros, por tanto no los mand&eacute;is,
+
+porque no llegaran correctamente, limitaos a texto. Tambi&eacute;n
+
+pod&eacute;is localizarme a traves de la red Fidonet, en la direcci&oacute;n
+
+<B>2:341/136.39</B>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

@@ -1,0 +1,263 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>M</B></font><FONT color="#000000" size=2 face="arial"><B>atemáticas Básicas</B></FONT></a><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>Á</B></font><FONT color="#000000" size=2 face="arial"><B>lbegra Matricial. Modelado alámbrico de figuras 3D</B></FONT></a>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "Cid"</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 1. <br>Introducción.
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Bienvenido a este peque&ntilde;o cursillo. En breves momentos pasar&eacute; a explicar algunas de las posibilidades que nos brinda el &aacute;lgebra matricial. No es mi objetivo dar aqu&iacute; un curso sobre matem&aacute;ticas o trigonometr&iacute;a, tan solo explicar, por encima, el uso de estos m&eacute;todos para su aplicaci&oacute;n en el campo de las dos y tres dimensiones. Espero que despu&eacute;s de que le&aacute;is este texto, pod&aacute;is pasar f&aacute;cilmente a alg&uacute;n libro o documento mucho m&aacute;s denso.</P>
+
+<P ALIGN=JUSTIFY>Estos art&iacute;culos no van orientados hacia un tipo de lector concreto. No necesitas saber programar videojuegos para entender esta sencilla introducci&oacute;n. Adem&aacute;s, lo aqu&iacute; expuesto, puede ser desarrollado en cualquier lenguaje de programaci&oacute;n si bien, conocer algo del lenguaje C te ayudar&aacute; a entender todo mejor pues los ejemplos est&aacute;n construidos en dicho lenguaje. Como el DOS ya est&aacute; obsoleto, el proyecto general de este curso se ha construido como un programa Windows es por esto que, si conoces el sistema de mensajes en Windows (mensaje WM_PAINT), entender&aacute;s algunas cosas mejor. Pero repito, no es necesario saber un lenguaje concreto para entender esta breve introducci&oacute;n al &aacute;lgebra matricial.</P>
+
+<P ALIGN=JUSTIFY>Para terminar con esta introducci&oacute;n os comento que, mientras avancemos en los art&iacute;culos, realizaremos un proyecto en Visual C++. Esta herramienta fue escogida por una sencilla raz&oacute;n, tengo la licencia :). Ya se que ha muchos os resultara 'grotesco', pero para mi y para el objetivo de estos art&iacute;culos, Visual C++ 6.0 da la talla para explic&aacute;roslo. </P>
+
+<P ALIGN=JUSTIFY>Bueno, al l&iacute;o que para eso estamos aqu&iacute;. </P>
+
+</FONT><B><FONT FACE="Arial"><P ALIGN=JUSTIFY>Matem&aacute;ticas con matrices </P>
+
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Todos conocemos el plano cartesiano, en este podemos identificar una coordenada por dos valores, con el valor del eje <B>x</B> y con el valor del eje <B>y</B>. Resulta tambi&eacute;n sencillo a&ntilde;adir una tercera dimensi&oacute;n a estas dos anteriores (eje <B>z</B>) para obtener un <B>punto</B> en un plano tridimensional. </P>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="gif/figura1.gif" WIDTH=250 HEIGHT=200><IMG SRC="gif/figura2.gif" WIDTH=250 HEIGHT=200></P>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Existen tres operaciones b&aacute;sicas que podremos realizar con estos puntos, &eacute;stas son <B>trasladar</B>, <B>escalar</B> y <B>rotar</B>. Para <B>trasladar un punto</B>, tan solo debemos sumar a sus coordenadas un valor de traslaci&oacute;n y el punto se mover&aacute; de lugar. Veamos un ejemplo de ello: </P><DIR>
+
+
+
+<P ALIGN=JUSTIFY>Si tenemos el eje tridimensional (3,3,5) y deseamos trasladarlo 2 puntos en el eje de la X y suponiendo que (3,3,5) es una matriz en C, sumaremos 2 a la posici&oacute;n 0, 0 a la posici&oacute;n 1 y de nuevo 0 a la posici&oacute;n 2. </P>
+
+</FONT><PRE>
+
+      // Inincializaci&oacute;n del vector double eje[3]
+
+      eje[0] = 3;
+
+      eje[1] = 3;
+
+      eje[2] = 5;
+
+
+
+      // Traslacci&oacute;n en el eje de las X
+
+      eje[0] += 2;
+
+      eje[1] += 0;
+
+      eje[2] += 0;
+
+      </PRE></DIR>
+
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Igual de sencillo nos resultar&iacute;a <B>escalar un punto</B>, para ello en vez de sumar multiplicar&iacute;amos cada coordenada por un valor de "escalaci&oacute;n", por ejemplo 2 o 1.2 o 0.5. Esta operaci&oacute;n aplicada a todos los puntos de una figura producir&iacute;a el escalamiento de la misma </P>
+
+</FONT><P ALIGN="CENTER"><IMG SRC="gif/figura3.gif" WIDTH=417 HEIGHT=210></P>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Pues bien, esta sencilla operaci&oacute;n, junto a la de rotaci&oacute;n, son posibles utilizando la <B>matem&aacute;tica matricial</B>. Todo se basa en multiplicar ciertas matrices por el vector eje, consiguiendo los resultados que deseamos: trasladar, escalar y rotar en las tres dimensiones. </P>
+
+<P ALIGN=JUSTIFY>¿Y por qu&eacute; utilizar &aacute;lgebra matricial? </P>
+
+<P ALIGN=JUSTIFY>Pues por algunas razones, la primera sin duda es la claridad del c&oacute;digo. Resulta muy l&oacute;gico y comprensible para el programador mantener y manejar arrays de tres elementos. Otra raz&oacute;n es la facilidad de operaci&oacute;n (realmente sencilla ya ver&eacute;is). En fin, existen varias respuestas a esta pregunta (aunque por supuesto yo no las conozco todas). </P>
+
+<P ALIGN=JUSTIFY>¿Y cuales son estas matrices? me preguntareis, pues est&aacute;n todas en el siguiente capitulo, que paso a explicar ahora mismo. </P></FONT>
+<BR><BR>
+<center><font size=2 face=Arial>Puedes conseguir el código fuente del artículo pulsando <b><a href="zip/alam3d.zip">aquí</a></b></font></center>
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="cpj.htm"><font FACE="ARIAL"><B>[Matemáticas Básicas]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

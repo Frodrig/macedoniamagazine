@@ -1,0 +1,479 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>R</B></font><FONT color="#000000" size=2 face="arial"><B>utinas avanzadas en NMP</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<a href="mailto:nmsoft@usa.net"><b><font color="0000ff">Carlos Sánchez.</font></b></a>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Rutinas avanzadas en NMP (2)
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Es habitual en una aventura encontrarnos con la respuesta <I>&quot;No
+
+puedes ir en esa direcci&oacute;n&quot;</I> o similar. Sin embargo, las aventuras
+
+m&aacute;s profesionales amplian esa informaci&oacute;n, obteniendo respuestas
+
+del tipo <I>&quot;No puedes ir al este. Las salidas posibles son norte
+
+y sur.&quot;</I>. Veamos como podemos hacer eso con el parser NMP.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Comenzaremos creando la rutina de salidas, trabajo que es
+
+muy f&aacute;cil con NMP:
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Primeramente debemos crearnos una serie de mensajes en la tabla
+
+de mensajes n&uacute;mero 1, por este orden:<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<OL>
+
+
+
+<LI> un mensaje del tipo <I>&quot;Puedes ir &quot;</I>, que es el principio
+
+de la frase que nos listar&aacute; las respuestas.<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<LI> un mensaje del tipo <I>&quot;No hay ninguna salida.&quot;</I>, que la
+
+rutina mostrar&aacute; en caso de que no encuentre ninguna salida en la
+
+localidad indicada.<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<LI> una serie de mensajes, cada uno correspondiente a un
+
+verbo de direcci&oacute;n. Recordemos que los verbos de direcci&oacute;n son
+
+aquellos cuyo n&uacute;mero de verbo es menor que 20, es decir, del 0
+
+al 19. Si miramos la tabla de vocabulario veremos que el primer
+
+verbo que hay puesto es {1,v,norte}, con lo cual no hay verbo con
+
+n&uacute;mero 0 (aunque no hay inconveniente en que lo haya). Esto
+
+quiere decir que esa lista de mensajes debe empezar por un
+
+mensaje vac&iacute;o, que es el que corresponde al verbo 0, seguir por
+
+un mensaje <I>&quot;al norte&quot;</I>, luego uno <I>&quot;al sur&quot;</I>, y as&iacute; para todos los
+
+restantes verbos de direcci&oacute;n. Si nuestra aventura usa otro tipo
+
+de direcciones como <I>&quot;derecha&quot;</I> pues pondr&iacute;amos los mensajes
+
+correspondientes. Tampoco necesitamos poner los mensajes hasta
+
+el verbo 19, los verbos que no se usen pueden dejar sus mensajes
+
+correspondientes sin definir (en lugar de vac&iacute;os), o pueden
+
+aprovecharse para otra funci&oacute;n.
+
+</OL>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Bien, supongamos que el primer mensaje (el de <I>&quot;Puedes ir&quot;</I>)
+
+es el 100, luego el de <I>&quot;No hay salidas&quot;</I> es el 101 y el del primer
+
+verbo (el 0) es el 102. Pues bien, la entrada:<BR>
+
+<PRE>
+
+        <CODE><font size=2  face=arial>-SALIDAS *
+
+        EXITS @1 100
+
+        DONE
+
+</FONT></CODE></PRE> mostrar&iacute;a las salidas.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Vamos ahora a aprovechar esos mensajes y otras ordenes para
+
+lograr nuestro objetivo:
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Introduzcamos esto en la tabla de respuestas, al final:
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial><PRE>
+
+        <CODE><font size=2  face=arial>-* *
+
+        clear fAUX1
+
+        lt 18 20
+
+        let fAUX1 @18
+
+        move 1 fAUX1
+
+        btst0 fAUX1 7
+
+        let fAUX1 @18
+
+        plus fAUX1 102
+
+        write {No pod&iacute;a ir }
+
+        mes @fAUX1
+
+        write {. }
+
+        done
+
+
+
+        -* *
+
+        lt 18 20
+
+        btst fAUX1 7
+
+        desc
+
+</FONT></CODE></PRE>
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Bien, veamos que hace esto:<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+Comenzamos poniendo a cero el flag fAUX1, un flag auxiliar
+
+(de uso temporal, &uacute;til para varias cosas) que nosotros elijamos,
+
+y comprobamos que el verbo tecleado por el jugador es de
+
+direcci&oacute;n, es decir, menor que 20. Como el n&uacute;mero de verbo de la
+
+frase actual est&aacute; contenido en el flag 18 el LT 18 20 hace esa
+
+labor. En caso afirmativo copiamos en nuestro flag auxiliar ese
+
+verbo y haremos las operaciones con &eacute;l (para no modificar en
+
+ning&uacute;n momento el flag 18).
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Ahora usamos la orden MOVE, que actualiza el valor de un flag (el 1
+
+en este caso, el que guarda la localidad actual) conforme a un verbo de
+
+direcci&oacute;n (el contenido en el flag 18, que ahora est&aacute; en fAUX1,
+
+por tanto MOVE 1 @fAUX1). En caso de que la orden MOVE sea capaz de
+
+&quot;mover&quot; al jugador en la direcci&oacute;n indicada modifica el
+
+flag 1, y pone a 1 el bit 7 del flag auxiliar, por lo que seguidamente
+
+compruebo si no ha cambiado, en cuyo caso he de poner el mensaje <I>&quot;No
+
+puedes ir al xxxxx&quot;</I>. Para ello restauro el valor del flag auxiliar
+
+(esto es en realidad innecesario, puesto que el bit 7 ha quedado a 0,
+
+por lo que el flag auxiliar no habr&aacute; cambiado, pero por claridad
+
+del c&oacute;digo y para que lo entend&aacute;is lo pongo), a&ntilde;ado 102 al flag
+
+auxiliar, de modo que su valor me corresponda con el n&uacute;mero de
+
+mensaje correspondiente al verbo de direcci&oacute;n tecleado. Escribo
+
+el texto <I>&quot;No puedes ir &quot;</I>, seguido del mensaje correspondiente,
+
+y luego un punto. Finalmente acabo la orden con DONE.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>&#191;Qu&eacute; ocurre en caso de que el MOVE tenga &eacute;xito? Pues que se
+
+sale de la primera entrada en el BTST0 y pasa a la segunda, donde
+
+tras comprobar de nuevo que el verbo es de direcci&oacute;n, y que la
+
+orden MOVE tuvo &eacute;xito (BTST, esta orden es tambi&eacute;n redundante si
+
+os fij&aacute;is un poco en el c&oacute;digo) hago un DESC.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>La orden write est&aacute; indocumentada en el manual de NMP,
+
+debido a que se a&ntilde;adi&oacute; poco antes de distribuir la &uacute;ltima
+
+versi&oacute;n. Su sintaxis es WRITE {texto}, y funciona a partir de NMP
+
+5.01. Puede producir y producir&aacute; alg&uacute;n problema con el resaltado
+
+de sintaxis del editor, debido a que el mismo no estaba preparado
+
+para ella (as&iacute; que no os extra&ntilde;e). Todo el texto ha de estar en
+
+una sola l&iacute;nea del c&oacute;digo, aunque nada impide poner:
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<PRE>
+
+        <CODE><font size=2  face=arial>write {hola }
+
+        write {&#191;que tal?}
+
+</FONT></CODE></PRE>
+
+
+
+As&iacute; mismo admite secuencias de escape como los mensajes.
+
+Estoy seguro de que a aquellos que a&uacute;n no la conoc&eacute;is os
+
+resultar&aacute; muy c&oacute;moda.
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>Esto es todo, si quer&eacute;is saber m&aacute;s o quer&eacute;is colaborar con
+
+rutinas, comentarios, mejoras de las mismas rutinas o simplemente
+
+quer&eacute;is preguntar alguna duda pod&eacute;is contactar conmigo.
+
+Necesitamos vuestra colaboraci&oacute;n, aunque sea con peque&ntilde;as rutinas
+
+o truquillos :)
+
+
+
+<P ALIGN=RIGHT>
+
+ <B>Carlos S&aacute;nchez</B><BR>
+
+ e-mail Internet: <A HREF="mailto:csanchez@usa.net">csanchez@temple.subred.org</A><BR>
+
+ Netmail FidoNet: 2:341/136.39
+
+</P><BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

@@ -1,0 +1,632 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Juegos</B></FONT>
+<HR>
+<p align="right"><FONT COLOR="#CC0000" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=3 face="arial"><B>ula Macedo<font color="#cc0000">n</font>ia</B></FONT></p>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>		  
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+</FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+<u><b><font color="0000ff">Spellcaster.</font></b></u><br>
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+</FONT>
+<br><br>
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+Capítulo 7.<br>Monstruos
+</H3>
+
+<P>
+&quot;Qu&eacute; es un monstruo?&quot;. Esto quiz&aacute; pueda parecer
+una pregunta est&uacute;pida, pero de ninguna manera lo es. En una 
+conversacional un <I>monstruo</I> es algo que te puede hacer da&ntilde;o... 
+Puede ser un robot o cualquier otra cosa...
+En FangLore pondremos tres monstruos:
+<P>
+<OL>
+<LI>Un jardinero psic&oacute;pata
+<LI>Un gusano
+<LI>Un vampiro
+</OL>
+El jardinero tiene algo de especial: tiene asignado una ruta predefinida,
+mientras que el gusano y el vampiro permanecer&aacute;n est&aacute;ticos
+en cocina y biblioteca, respectivamente.
+<P>
+Definamos un record para los monstruos:
+
+
+<PRE><CODE><font size=2  face=arial>        <B>Type</B> TipoMonstruo=<B>Record</B>
+                Nombre:String;
+                Pos:Byte;
+                Indice:Byte;
+                Salud:Byte;
+                Fuerza:Byte;
+                Posiciones:Array[1..MaxPos] <B>Of</B> Byte;
+        <B><B>End</B></B>;
+</font>
+</CODE></PRE>
+<P>
+<UL>
+<LI>Nombre es el nombre o tipo del bicho.
+<LI>Pos es la localidad actual del monstruo.
+<LI>Indice y Posiciones son variables que controlan el movimiento. 
+Las veremos a continuaci&oacute;n.
+<LI>Salud son los puntos de vida del monstruo. Digamos que la espada
+(la &uacute;nica forma de acabar con los enemigos en FangLore) quita 20 puntos
+de energ&iacute;a por toque (m&aacute;s un valor aleatorio, la suerte...
+Lo veremos despu&eacute;s).
+<LI>Fuerza es el indicador de cu&aacute;n fuerte golpea el monstruo. Tendremos 
+que definir:
+
+<PRE><CODE><font size=2  face=arial>        <B>Var</B> Salud:Integer;
+</font></CODE></PRE>
+La cual mantiene el estado de salud del jugador. Se empieza con 70 puntos, 
+definidos en:
+<PRE><CODE><font size=2  face=arial>        <B>Const</B> SaludDePartida=70;
+</FONT></CODE></PRE>
+
+No te olvides de inicializar Salud con el valor de SaludDePartida, en la
+rutina <B>Init</B>.
+</UL>
+Como el &uacute;nico monstruo que se mueve en el juego es el jardinero,
+restringiremos su movimiento al jard&iacute;n. As&iacute; que, como
+hay 14 localidades en el jard&iacute;n, definiremos MaxPos:
+<PRE><CODE><font size=2  face=arial>        <B>Const</B> MaxPos=14;
+</font></CODE></PRE>
+Veamos como implementaremos el movimiento. Inicializamos el array <B>Posiciones</B>
+con los valores de las localidades a las que queremos que se mueva el 
+monstruo. Asignaremos a <B>Indice</B> el valor 1. Despu&eacute;s, para cada
+unidad de tiempo que pase, incrementaremos <B>Indice</B> en 1 y cargaremos
+la variable <B>Pos</B> con el valor de la localidad indexado por <B>Indice</B>. Si esta
+localidad indexada es 0, entonces <B>Indice</B> es reseteado de nuevo a 1. Si
+el <B>Indice</B> es mayor que el tama&ntilde;o del array, Indice tambi&eacute;n
+es reseteado a 1.
+<P>
+Definiremos una unidad de tiempo como el tiempo de entrada de cada
+comando. Esto se podr&iacute;a definir como 1 segundo, 1 minuto, cada cinco
+comandos, etc. Pero la elecci&oacute;n ya ha sido tomada. Un poco de
+reprogramaci&oacute;n ser&iacute;a necesaria para cada clase de 
+'temporizador'. La m&aacute;s compleja seria programar un temporizador
+real, que usar&iacute;a una interrupci&oacute;n o algo as&iacute;.
+<P>
+Es el momento de definir las variables para los monstruos:
+<PRE><CODE><font size=2  face=arial>        <B>Var</B> Monstruos:Array[1..MaxMons] <B>Of</B> TipoMonstruo;
+</fonT></CODE></PRE>
+donde <B>MaxMons</B> es el n&uacute;mero de monstruos en la aventura:
+<PRE><CODE><font size=2  face=arial>        <B>Const</B> MaxMons=3;
+</font></CODE></PRE>
+Similar a lo que hice con los Objetos y Localidades, he realizado un
+programa que lee los valores de los records de los monstruos. Con &eacute;l
+he creado un fichero llamado <I>Monster.Dat</I>, el cual leo mediante la rutina
+<B>LeerDatosMonstruos</B>, que es muy parecida a las rutinas 
+<B>LeerDatosLocalidades</B> y <B>LeerDatosObjetos</B>:
+
+<PRE><CODE><font size=2  face=arial><B>Procedure</B> LeerDatosMonstruos;     { Lee de disco los datos de los monstruos }
+<B>Var</B> F:Text;
+    A,B:Byte;
+    Flag:Boolean;
+<B>Begin</B>
+     { Prepara el fichero de texto para el acceso }
+     Assign(F,'Monster.Dat');
+     Reset(F);
+     { Para cada monstruo en la aventura }
+     <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+     <B>Begin</B>
+          { Lee el nombre del monstruo }
+          ReadLn(F,Monstruos[A].Nombre);
+          { Lee la posici&oacute;n inicial del monstruo }
+          ReadLn(F,Monstruos[A].Pos);
+          { Lee la salud del monstruo }
+          ReadLn(F,Monstruos[A].Salud);
+          { Lee la fuerza }
+          ReadLn(F,Monstruos[A].Fuerza);
+          { Limpia ruta }
+          <B>For</B> B:=1 <B>To</B> 5 <B>Do</B> Monstruos[A].Posiciones[B]:=0;
+          { Lee ruta }
+          Flag:=True;
+          B:=1;
+          <B>While</B> Flag Do
+          <B>Begin</B>
+               ReadLn(F,Monstruos[A].Posiciones[B]);
+               <B>If</B> (B=MaxPos) <B>Or</B> (Monstruos[A].Posiciones[B]=0) <B>Then</B> Flag:=False;
+               Inc(B);
+          <B>End</B>;
+          Monstruos[A].Indice:=1;
+     <B>End</B>;
+     Close(F);
+<B>End</B>;
+</font></CODE></PRE>
+
+No olvides llamar a esta rutina en <B>Init</B>.
+<P>
+Y ahora, tenemos que programar un nuevo procedimiento para ver
+el monstruo. &#191;Por qu&eacute; no basta con modificar <B>Mirar</B>?
+Porque el monstruo ser&aacute; examinado un mont&oacute;n de veces
+durante la batalla. &#161;&#161;&#161;&#161;Y tambi&eacute;n haremos 
+servir esta rutina para patear al jugador!!!! :)))
+<P>
+Cada vez que el ordenador 'mire' el monstruo, golpear&aacute;. Aqu&iacute;
+a&ntilde;adiremos el factor suerte. El monstruo solo golpear&aacute;
+con &eacute;xito un porcentaje determinado de veces. Y solo cuando
+golpee con &eacute;xito infrinjir&aacute; da&ntilde;o.
+<P>
+Programemos la rutina:
+<P>
+<PRE><CODE><font size=2  face=arial><B>Procedure</B> VerMonstruo;                   { Ver monstruo }
+<B>Var</B> A,B:Byte;
+    Danyo:Byte;
+<B>Begin</B>
+     <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+     <B>Begin</B>
+          { Comprueba si el monstruo est&aacute; en la localidad }
+          <B>If</B> Monstruos[A].Pos=NumeroLoc <B>Then</B>
+          <B>Begin</B>
+               { Describe el monstruo }
+               TextColor(LightRed);
+               WriteLn;
+               WriteLn('&#161;&#161;&#161;&#161; Veo un ',Monstruos[A].Nombre,' aqu&iacute; !!!!');
+               WriteLn('Le quedan ',Monstruos[A].Salud,' puntos de vida...');
+               { Hagamos que golpee }
+               WriteLn('&#161; Te ha visto !');
+               Write('Trata de golpearte...');
+               { Comprueba si nos acierta. Dificultad es un margen predefinido.
+                 Cuanto m&aacute;s alta, mayor ser&aacute; nuestra 'suerte' }
+               B:=Random(100);
+               <B>If</B> B>Dificultad <B>Then</B>
+               <B>Begin</B>
+                    { &#161;&#161;&#161; Acierta !!! }
+                    WriteLn('&#161;&#161;&#161;&#161; y te acierta !!!!');
+                    { Asigna da&ntilde;os, teniendo en cuenta la buena
+                      o la mala suerte }
+                    Danyo:=Monstruos[A].Fuerza+(Random(8)-5);
+                    Salud:=Salud-Danyo;
+                    WriteLn('&#161; S&oacute;lo te quedan ',Salud,' puntos de vida !');
+                    { Comprueba si todav&iacute;a est&aacute; vivo }
+                    <B>If</B> Salud<=0 <B>Then</B>
+                    <B>Begin</B>
+                         { Hemos muerto... :( }
+                         WriteLn('Has muerto...');
+                         Write('Las Valquirias llegan para reclamar tu cuerpo... Pero ');
+                         WriteLn('no eres un guerrero, así que te dejan');
+                         Writeln('para que te pudras... ');
+                         Writeln;
+                         TextColor(Magenta);
+                         Writeln('Pulsa cualquier tecla para abandonar FangLore...');
+                         <B>Repeat</B> <B>Until</B> Keypressed;
+                         Halt(0);
+                    <B>End</B>;
+               <B>End</B>
+               <B>Else</B>
+               <B>Begin</B>
+                    { &#161;&#161;&#161; Falla !!! }
+                    Writeln('&#161;&#161;&#161; y falla !!!');
+                    WriteLn('&#161; S&oacute;lo te quedan ',Salud,' puntos de vida !');
+               <B>End</B>;
+          <B>End</B>;
+     <B>End</B>;
+<B>End</B>;
+</font></CODE></PRE>
+Hemos tenido en cuenta la suerte, porque el juego ser&aacute; as&iacute;
+m&aacute;s excitante. Nos queda definir el factor Dificultad:
+<PRE><CODE><font size=2  face=arial>        <B>Const</B> Dificultad=40;
+</font></CODE></PRE>
+
+Tan solo añade una llamada a <B>VerMonstruo</B> al comienzo de la rutina 
+<B>Play</B>, y así conseguimos la unidad de tiempo de la que 
+habl&aacute;bamos m&aacute;s arriba.
+<P>
+Tambi&eacute;n cambi&eacute; la rutina <B>Inventario</B> ligeramente.
+Ahora, el comando de inventario tambi&eacute;n te informa de la salud.
+Esto se consigue a&ntilde;adiendo las l&iacute;neas...
+
+<PRE><CODE><font size=2  face=arial>     WriteLn;
+     TextColor(LightGreen);
+     WriteLn('Te quedan ',Salud,' puntos de vida.');
+</font></CODE></PRE>
+
+.... a la rutina de <B>Inventario</B>.
+<P>
+Ahora hagamos que los monstruos se muevan... Como ya he explicado,
+el movimiento se consigue cambiando la posici&oacute;n del monstruo
+cada vez que es introducido un comando. Para lograrlo, a&ntilde;ad&iacute;
+una llamada a la rutina <B>MoverMonstruo</B> al final del bucle
+de la rutina principal de juego <B>Play</B>.
+
+La rutina <B>MoverMonstruo</B> es bastante simple:
+
+<PRE><CODE><font size=2  face=arial>          <B>Procedure</B> MoverMonstruo;
+          <B>Var</B> A:Byte;
+          <B>Begin</B>
+               { Mover cada monstruo }
+               <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+               <B>Begin</B>
+                    { Resetea el &iacute;ndice de posici&oacute;n,
+                      si la posici&oacute;n apuntada es 0 }
+                    <B>If</B> Monstruos[A].Posiciones[Monstruos[A].Indice]=0 <B>Then</B>
+                      Monstruos[A].Indice:=1;
+                    Monstruos[A].Pos:=Monstruos[A].Posiciones[Monstruos[A].Indice];
+                    Inc(Monstruos[A].Indice);
+               <B>End</B>;
+          <B>End</B>;
+</font></CODE></PRE>
+
+Esto es lo b&aacute;sico para conseguir el movimiento. Pero se puede
+mejorar bastante. Una posible mejora es la siguiente: no queremos que el
+monstruo se mueva si se encuentra en la misma localidad que el jugador.
+Podemos lograrlo con solo a&ntilde;adir tres l&iacute;neas:
+
+<PRE><CODE><font size=2  face=arial>          <B>Procedure</B> MoverMonstruo;
+          <B>Var</B> A:Byte;
+          <B>Begin</B>
+               { Mover cada monstruo }
+               <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+               <B>Begin</B>
+                    { Comprueba si el monstruo se encuentra en la misma
+                      localidad que el jugador }
+                    <B>If</B> Monstruos[A].Pos<>LocalidadActual <B>Then</B>
+                    <B>Begin</B>
+                         { Resetea el &iacute;ndice de posici&oacute;n,
+                           si la posici&oacute;n apuntada es 0 }
+                         <B>If</B> Monstruos[A].Posiciones[Monstruos[A].Indice]=0 <B>Then</B>
+                           Monstruos[A].Indice:=1;
+                         Monstruos[A].Pos:=Monstruos[A].Posiciones[Monstruos[A].Indice];
+                         Inc(Monstruos[A].Indice);
+                    <B>End</B>;
+               <B>End</B>;
+          <B>End</B>;
+</font></CODE></PRE>
+Para a&ntilde;adir un poco de realismo al texto, podr&iacute;mos dar 
+un mensaje cuando un monstruo entra en la localidad del jugador.
+Escribamos unas cuantas l&iacute;neas m&aacute;s.
+
+<PRE><CODE><font size=2  face=arial>          <B>Procedure</B> MoverMonstruo;
+          <B>Var</B> A:Byte;
+          <B>Begin</B>
+               { Mover cada monstruo }
+               <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+               <B>Begin</B>
+                    { Comprueba si el monstruo se encuentra en la misma
+                      localidad que el jugador }
+                    <B>If</B> Monstruos[A].Pos<>LocalidadActual <B>Then</B>
+                    <B>Begin</B>
+                         { Resetea el &iacute;ndice de posici&oacute;n,
+                           si la posici&oacute;n apuntada es 0 }
+                         <B>If</B> Monstruos[A].Posiciones[Monstruos[A].Indice]=0 <B>Then</B>
+                           Monstruos[A].Indice:=1;
+                         Monstruos[A].Pos:=Monstruos[A].Posiciones[Monstruos[A].Indice];
+                         Inc(Monstruos[A].Indice);
+                         { Comprueba si el monstruo ha entrado en la 
+                           localidad donde se encuentra el jugador }
+                         <B>If</B> Monstruos[A].Pos=LocalidadActual <B>Then</B>
+                         <B>Begin</B>
+                              TextColor(LightCyan);
+                              Write('&#161;El ',Monstruos[A].Nombre,' ha entrado ');
+                              Writeln('en la habitaci&oacute;n !');
+                         <B>End</B>;
+                    <B>End</B>;
+               <B>End</B>;
+          <B>End</B>;
+</font></CODE></PRE>
+La rutina ha quedado algo larga (comparada con la de la primera
+versi&oacute;n), pero a&ntilde;ade bastante realismo.
+
+Ahora bien, tambi&eacute;n hay que dar la oportunidad de contraataque 
+contra los monstruos. Lo lograremos mediante el uso de la espada que hay
+en el sal&oacute;n principal de FangLore. Entramos el comando
+'USAR ESPADA' y nuestro personaje intenta golpear al monstruo con
+la espada (si realmente est&aacute; en nuestro inventario). Y as&iacute;,
+dependiendo de la suerte, acertar&aacute; o fallar&aacute;. El factor
+suerte se basa en el factor <B>Dificultad</B> que tambi&eacute;n
+emple&aacute;bamos al determinar si el jugador esquivaba los ataques
+de los monstruos. Aha, necesitamos a&ntilde;adir las l&iacute;neas
+siguientes a la rutina <B>Usar</B>, en la secc&iacute;n que controla
+el uso de la espada:
+
+<PRE><CODE><font size=2  face=arial>               Flag:=True;
+               Flag2:=False;
+               { Comprueba si hay bichos en la localidad del jugador }
+               <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B> <B>If</B> Monstruos[A].Pos=LocalidadActual <B>Then</B>
+                                         Flag2:=True;
+               WriteLn;
+               <B>If</B> Flag2=False <B>Then</B>
+               <B>Begin</B>
+                    TextColor(Green);
+                    WriteLn('&#191;&#191;&#191; Usarla con qui&eacute;n ???');
+                    WriteLn;
+               <B>End</B>;
+               <B>For</B> A:=1 <B>To</B> MaxMons <B>Do</B>
+               <B>Begin</B>
+                    { Comprueba si el monstruo est&aacute; en la misma
+                      localidad que el jugador }
+                    <B>If</B> Monstruos[A].Pos=LocalidadActual <B>Then</B>
+                    <B>Begin</B>
+                         { Intenta acertar a monstruo }
+                         Write('Intentas golpear con la espada a ',
+                                Monstruos[A].Nombre,'...');
+                         { Comprueba si acertamos. Dificultad es un margen 
+                           predefinido. Cuanto m&aacute;s alta, mayor 
+                           ser&aacute; nuestra 'suerte' }
+                         B:=Random(100);
+                         <B>If</B> B>(Dificultad Div 2) <B>Then</B>
+                         <B>Begin</B>
+                              { &#161;&#161;&#161; Aciertas !!! }
+                              WriteLn('&#161;&#161;&#161;&#161; y aciertas !!!!');
+                              { Asigna da&ntilde;os, teniendo en cuenta
+                                la posible buena o mala suerte }
+                              Danyo:=12+(Random(8)-5);
+                              Dec(Monstruos[A].Salud,Danyo);
+                              WriteLn('&#161; Al monstruo &uacute;nicamente le restan ',
+                                       Monstruos[A].Salud,
+                                       ' puntos de vida !');
+                              { Comprueba si todav&iacute;a est&aacute; vivo }
+                              <B>If</B> Monstruos[A].Salud<=0 <B>Then</B>
+                              <B>Begin</B>
+                                   { El monstruo muere... :) }
+                                   WriteLn('Has matado a ',
+                                            Monstruos[A].Nombre,'!');
+                                   Writeln;
+                              <B>End</B>;
+                         <B>End</B>
+                         <B>Else</B>
+                         <B>Begin</B>
+                              { Fallas... :( }
+                              Writeln('&#161;&#161;&#161;&#161; y fallas !!!!');
+                              WriteLn('&#161; Al monstruo le quedan ',
+                                       Monstruos[A].Salud,
+                                       ' puntos de vida !');
+                         <B>End</B>;
+                    <B>End</B>;
+               <B>End</B>;
+          <B>End</B>;
+</font></CODE></PRE>
+
+Me he dado cuenta de algo que olvid&eacute; hacer en los cap&iacute;tulos
+anteriores de este cursillo. Se trata de que en la definici&oacute;n
+de TipoMonstruo hemos de declarar <B>Salud</B> como ShortInt en vez
+de Byte. El problema est&aacute; en algo que ocurre a los bytes cuando
+se resta... Echa un vistazo a la secci&oacute;n <I>Tricks and Tips</I> de
+este n&uacute;mero y sabr&aacute;s a qu&eacute; me estoy refiriendo.
+<P>
+Otra cosa que tambi&eacute;n se me olvid&oacute; es chequear la <B>Salud</B>
+de los monstruos en <B>VerMonstruo</B>. &#161;&#161;&#161;&#161;&#161;&#161;El 
+problema es que tal como
+est&aacute; ahora el enemigo golpear&iacute;a incluso muerto!!!!!!
+Lo que hay que hacer es a&ntilde;adir otras tres l&iacute;neas a
+<B>VerMonstruo</B> y comprobar que el monstruo est&aacute; vivo antes
+de que nos mande al otro barrio. Y, finalmente, podemos a&ntilde;adir
+algo en la rutina <B>Mirar</B> que nos diga si hay el cad&aacute;ver
+de alg&uacute;n bicho en la localidad. Estudia el listado completo
+de FangLore para ver los cambios. Son muy simples.                                                                 
+
+<P>
+<B><FONT SIZE=4>Localidades Especiales</FONT></B>
+<P>
+Una localidad especial, como su propio nombre indica, es una
+localidad que tiene algo especial, algo diferente de las otras localidades.
+En FangLore, la &uacute;nica localidad especial es la Sala de
+Gas. Esta localidad mata al jugador en cuanto pone los pies en ella,
+salvo si lleva puesta la m&aacute;scara.
+<P>
+Para implementar la localidad especial, tan solo a&ntilde;adimos unas
+cuantas lineas a la rutina <B>Mirar</B>:
+
+<PRE><CODE><font size=2  face=arial>     { Comprueba si el jugador est&aacute; en una localidad especial, la Sala de Gas }
+     <B>If</B> NumeroLoc=9 <B>Then</B>
+     <B>Begin</B>
+          TextColor(Yellow);
+          Write('Has entrado en la sala de gas, ');
+          { Comprueba si el jugador lleva la m&aacute;scara de gas }
+          <B>If</B> Mascara=True <B>Then</B> WriteLn('pero resultas ileso gracias a la m&aacute;scara de gas.')
+          <B>Else</B>
+          <B>Begin</B>
+               WriteLn('y has muerto, a causa del gas envenenado...');
+               Write('Las Valquirias llegan para reclamar tu cuerpo... Pero ');
+               WriteLn('no eres un guerrero, así que te dejan');
+               Writeln('para que te pudras... ');
+               Writeln;
+               TextColor(Magenta);
+               Writeln('Pulsa una tecla para finalizar FangLore...');
+               <B>Repeat</B> <B>Until</B> Keypressed;
+               Halt(0);
+          <B>End</B>;
+          WriteLn;
+     <B>End</B>;
+</font></CODE></PRE>
+Esto es todo por este n&uacute;mero. En el siguiente tendremos un art&iacute;culo
+sobre examinar y manipular el escenario, y casi terminaremos la aventura...
+&#161;NO! :)))
+   
+<P>
+<HR>
+<P>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<font color="#cc0000">Nota del traductor:</font> En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686" target="_new">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+
+
+<BR><BR>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>ABRIL</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

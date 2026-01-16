@@ -1,0 +1,840 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</td></table></TD>
+
+</td></table>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:spellcaster@bigfoot.com"><b><font color="0000ff">Spellcaster.</font></b></a><br>
+
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 6.<br>Iteraccionando con los objetos
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Un objeto resulta del todo in&uacute;til a menos que se pueda interactuar
+
+con &eacute;l... Existen tres formas habituales de interactuar con los
+
+objetos: Coger, Dejar y Usar. Empecemos con las m&aacute;s f&aacute;ciles:
+
+Coger y Dejar.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para coger un objeto, todo lo que tiene que hacer el programa es asignar
+
+al campo <SAMP>POS</SAMP> del objeto un cero (tras verificar que el objeto exista,
+
+que est&eacute; en la localidad actual, y que a&uacute;n no est&eacute; en el inventario).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Para dejar un objeto, &uacute;nicamente es necesario comprobar que se tiene
+
+el objeto y poner en el campo <SAMP>POS</SAMP> el n&uacute;mero de la localidad donde el
+
+jugador est&aacute;... Programando queda:
+
+<CODE><PRE><font size=2  face=arial>        <B>Procedure</B> Coger(O:String);
+
+        <B>Var</B> A:Byte;
+
+            Flag:Boolean;
+
+        <B>Begin</B>
+
+            Flag:=False;
+
+            A:=0;
+
+            <B>Repeat</B>
+
+                Inc(A);
+
+                <B>If</B> O=Objetos[A].Nombre <B> Then</B> Flag:=True;
+
+            <B>Until</B> (A>NumeroObjs) <B>Or</B> (Flag=True);
+
+            <B>If</B> Flag=True <B>Then</B>
+
+                <B>Begin</B>
+
+                    <I>{ El objeto existe }</I>
+
+                    <B>If</B> Objetos[A].Pos=LocalidadActual <B>Then</B>
+
+                    <B>Begin</B>
+
+                        <I>{ El objeto est&aacute; en la localidad actual }</I>
+
+                        <I>{ Cogemos el objeto }</I>
+
+                        Objetos[A].Pos:=0;
+
+                        TextColor(LightCyan);
+
+                        WriteLn;
+
+                        WriteLn('Coges el ',O);
+
+                        WriteLn;
+
+                    <B>End</B>
+
+                    <B>Else</B>
+
+                    <B>Begin</B>
+
+                        <B>If</B> Objetos[A].Pos=0 <B>Then</B>
+
+                        <B>Begin</B>
+
+                            <I>{ El objeto ya est&aacute; en posesi&oacute;n }</I>
+
+                            <I>{ del jugador...                }</I>
+
+                            TextColor(LightCyan);
+
+                            WriteLn;
+
+                            WriteLn('Ya tienes el ',O);
+
+                            WriteLn;
+
+                         <B>End</B>
+
+                         <B>Else</B>
+
+                         <B>Begin</B>
+
+                             WriteLn('No ves el',O);
+
+                             WriteLn;
+
+                         <B>End</B>;
+
+                     <B>End</B>;   
+
+                 <B>End</B>
+
+                 <B>Else</B>
+
+                 <B>Begin</B>
+
+                     <I>{ el objeto no existe }</I>
+
+                     WriteLn;
+
+                     TextColor(LightRed);
+
+                     Writeln('&#191; De qu&eacute; est&aacute;s hablando ?');
+
+                     Writeln;
+
+                <B>End</B>;
+
+            <B>End</B>;
+
+</FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Como siempre debes poner una llamada a esta rutina en <B>Play</B>...
+
+Este comando tiene el mismo problema que examinar, así que debemos
+
+hacer lo mismo que hicimos en ese caso: juntar el array parsed en un
+
+string que tenga el nombre del objeto:
+
+<CODE><PRE><font size=2  face=arial>        <B>If</B> Parsed[1]='COGER' <B>Then</B>
+
+        <B>Begin</B>
+
+            Valid:=True;
+
+            <I>{ Juntamos palabras }</I>
+
+            D:=3;
+
+            E:=Parsed[2];
+
+            <B>While</B> Parsed[D]<>'' <B>Do</B>
+
+            <B>Begin</B>
+
+                E:=E+' '+Parsed[D];
+
+                Inc(D);
+
+            <B>End</B>;
+
+            Coger(E);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+La rutina de dejar es parecida, aunque un poco m&aacute;s sencilla:
+
+<CODE><PRE><font size=2  face=arial>        <B>Procedure</B> Dejar(O:String);
+
+        <B>Var</B> A:Byte;
+
+            Flag:Boolean;
+
+        <B>Begin</B>
+
+            Flag:=False;
+
+            A:=0;
+
+            <B>Repeat</B>
+
+                Inc(A);
+
+                <B>If</B> (O=Upper(Objetos[A].Nombre)) <B>And</B>
+
+                   (Objetos[A].Pos=0) <B>Then</B> Flag:=True;
+
+            <B>Until</B> (A>NumeroObjs) <B>Or</B> (Flag=True);
+
+            <B>If</B> Flag=True <B>Then</B>
+
+            <B>Begin</B>
+
+                <I>{ El jugador tiene el objeto }</I>
+
+                Objetos[A].Pos:=LocalidadActual;
+
+                TextColor(LightCyan);
+
+                WriteLn;
+
+                WriteLn('Dejas el ',O);
+
+                WriteLn;
+
+                <B>End</B>
+
+                <B>Else</B>
+
+                <B>Begin</B>
+
+                    <I>{ El objeto no existe o no lo tiene el jugador... }</I>
+
+                    TextColor(LightRed);
+
+                    WriteLn;
+
+                    WriteLn('No tienes el ',O);
+
+                    WriteLn;
+
+                <B>End</B>;
+
+            <B>End</B>;
+
+</CODE></FONT></PRE><P ALIGN="JUSTIFY">
+
+De nuevo a&ntilde;ade el c&oacute;digo siguiente a <B>Play</B>... Ya sabes
+
+para que sirve:
+
+<CODE><PRE><font size=2  face=arial>        <B>If</B> Parsed[1]='DEJAR' <B>Then</B>
+
+        <B>Begin</B>
+
+            Valid:=True;
+
+            <I>{ De nuevo juntamos la palabra }</I>
+
+            D:=3;
+
+            E:=Parsed[2];
+
+            <B>While</B> Parsed[D]<>'' <B>Do</B>
+
+            <B>Begin</B>
+
+                E:=E+' '+Parsed[D];
+
+                Inc(D);
+
+            <B>End</B>;
+
+            Dejar(E);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE><P ALIGN="JUSTIFY">
+
+Ya tenemos Coger y Dejar listos... Ahora, vayamos a la tercera <I>clase</I>
+
+de comandos de manipulaci&oacute;n de objetos: los comandos de usar. Hay
+
+muchos, y tienen en com&uacute;n algo: Manipulan el objeto. Por ejemplo...
+
+Puedes usar la M&aacute;scara de Gas tecleando USAR M&Aacute;SCARA...
+
+Pero hag&aacute;moslo m&aacute;s complicado, ya que con USAR M&Aacute;SCARA
+
+tambi&eacute;n nos podr&iacute;mos referir a romperla... :))) Es m&aacute;s
+
+dif&iacute;cil de esta manera puesto que el jugador conoce lo que ha de hacer...
+
+Los comandos de usar no son m&aacute;s que l&iacute;neas y m&aacute;s
+
+l&iacute;neas de IFs, porque cada objeto tiene efectos diferentes. Algunas
+
+&oacute;rdenes requieren m&aacute;s de un par&aacute;rametro. Por ejemplo,
+
+para usar de la espada  debes teclear <SAMP>USAR ESPADA EN MONSTRUO</SAMP>...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+En FangLore tendremos dos comandos de este tipo... La orden USAR y la
+
+de VESTIR. Vestir ser&aacute; usada para la m&aacute;scara de gas... El
+
+comando usar ser&aacute; para los otros. La teor&iacute;a es simple...
+
+Seg&uacute;n el objeto que se elija, debes hacer un bloque de instrucciones
+
+que defina lo que ocurra. Por ejemplo, cuando usas la pala en la
+
+localidad 20, la puerta a FangLore se abre... C&oacute;digo para la
+
+orden VESTIR... Es tan breve y simple que la incluiremos en la rutina
+
+<B>Play</B>.
+
+<CODE><PRE><font size=2  face=arial>        <B>If</B> Parsed[1]='VESTIR' <B>Then</B>
+
+           <B>Begin</B>
+
+               <I>{ Juntamos palabras }</I>
+
+               D:=3;
+
+               E:=Parsed[2];
+
+               <B>While</B> Parsed[D]<>'' <B>Do</B>
+
+               <B>Begin</B>
+
+                   E:=E+' '+Parsed[D];
+
+                   Inc(D);
+
+               <B>End</B>;
+
+               <B>If</B> E='MASCARA GAS' <B>Then</B>
+
+               <B>Begin</B>
+
+                   Valid:=True;
+
+                   <I>{ Comprueba que tenga la m&aacute;scara de gas        }</I>
+
+                   <I>{ Sabemos que la m&aacute;scara es el objeto n&uacute;mero 2 }</I>
+
+                   <B>If</B> Objetos[2].Pos=0 <B>Then</B>
+
+                   <B>Begin</B>
+
+                       Mascara:=True;
+
+                       TextColor(LightCyan);
+
+                       WriteLn;
+
+                       WriteLn('Te pones la m&aacute;scara de gas...');
+
+                       WriteLn;
+
+                   <B>End</B>
+
+                   <B>Else</B>
+
+                   <B>Begin</B>
+
+                       TextColor(LightRed);
+
+                       WriteLn;
+
+                       WriteLn('No tienes la m&aacute;scara de gas.');
+
+                       WriteLn;
+
+                   <B>End</B>;
+
+               <B>End</B>;
+
+           <B>End</B>;
+
+</CODE></FONT></PRE><P ALIGN="JUSTIFY">
+
+La variable <I>Mascara</I> es una variable global de tipo Boolean. Deber&iacute;a
+
+ser inicializada a False en la rutina <B>Init</B>. Cuando sea verdadera,
+
+vendr&aacute; a significar que se est&aacute; usando. Veremos despu&eacute;s
+
+como puede ser usada...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ahora veamos la orden <SAMP>USAR</SAMP>... Existen dos posibilidades:
+
+<UL>
+
+<LI>USAR PALA EN PUERTA
+
+<LI>USAR ESPADA EN MONSTRUO
+
+</UL>
+
+El parser deber&iacute;a eliminar la preposici&oacute;n EN... H&aacute;zlo
+
+en la rutina <B>EliminarArt&iacute;culos</B> (ver detalles en los primeros
+
+art&iacute;culos del curso).
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Implementemos la rutina de <SAMP>USAR</SAMP>:
+
+<CODE><PRE><font size=2  face=arial>           <B>Procedure</B> Usar(Arg:TipoParsed);
+
+           <B>Var</B> A:Byte;
+
+               Flag:Boolean;
+
+           <B>Begin</B>
+
+               Flag:=False;
+
+               A:=0;
+
+               <B>Repeat</B>
+
+                   Inc(A);
+
+                   <B>If</B> (Arg[2]=Upper(Objetos[A].Nombre)) <B>And</B>
+
+                      (Objetos[A].Pos=0) <B>Then</B> Flag:=True;
+
+               <B>Until</B> (A>NumeroObjs) <B>Or</B> (Flag=True);
+
+               <B>If</B> Flag=True <B>Then</B>
+
+               <B>Begin</B>
+
+                   <I>{ El objeto es 'usable' }</I>
+
+                   Flag:=False;
+
+                   <I>{ Miramos si el jugador quiere usar la pala }</I>
+
+                   <B>If</B> Arg[2]='PALA' <B>Then</B>
+
+                   <B>Begin</B>
+
+                       Flag:=True;
+
+                       <I>{ Comprobamos si es usada con la puerta }</I>
+
+                       <B>If</B> Arg[3]='PUERTA' <B>Then</B>
+
+                       <B>Begin</B>
+
+                           <I>{ Miramos si el jugador est&aacute; en             }
+
+                           { la localidad apropiada...                 }</I>
+
+                           <B>If</B> LocalidadActual=20 <B>Then</B>
+
+                           <B>Begin</B>
+
+                               <I>{ El jugador est&aacute; en el sition correcto }
+
+                               { Abrimos pasaje entre el jard&iacute;n        }
+
+                               { y la mansi&oacute;n...                       }</I>
+
+                               Rooms[20].Norte:=15;
+
+                               TextColor(LightCyan);
+
+                               WriteLn;
+
+                               WriteLn('Echas la puerta abajo...');
+
+                               WriteLn;
+
+                           <B>End</B>
+
+                           <B>Else</B>
+
+                               <B>Begin</B>
+
+                                   <I>{ El jugador est&aacute; en alg&uacute;n otro lugar }</I>
+
+                                   TextColor(LightRed);
+
+                                   WriteLn;
+
+                                   WriteLn('No veo ninguna puerta...');
+
+                                   WriteLn;
+
+                              <B>End</B>;
+
+                          <B>End</B>
+
+                          <B>Else</B>
+
+                          <B>Begin</B>
+
+                              <I>{ El jugador no us&oacute; la pala con la puerta... }</I>
+
+                              TextColor(LightRed);
+
+                              WriteLn;
+
+                              WriteLn('&#191; Uso eso con qu&eacute; ?!');
+
+                              WriteLn;
+
+                          <B>End</B>;
+
+                      <B>End</B>;
+
+                      <B>If</B> Arg[2]='ESPADA' <B>Then</B>
+
+                      <B>Begin</B>
+
+                          Flag:=True;
+
+                          { En un futuro art&iacute;culo incluir&eacute;          }
+
+                          { c&oacute;digo, cuando hablemos de monstruos... }
+
+                      <B>End</B>;
+
+                  <B>End</B>;
+
+                  <B>If</B> Flag=False <B>Then</B>
+
+                  <B>Begin</B>
+
+                      <I>{ No fueron usados objetos 'legales' }</I>
+
+                      TextColor(LightRed);
+
+                      WriteLn;
+
+                      WriteLn('No puedo usar eso...');
+
+                      WriteLn;
+
+                 <B>End</B>;
+
+           <B>End</B>;
+
+</CODE></FONT></PRE><P ALIGN="JUSTIFY">
+
+Debemos pasar el array <I>parsed</I> entero como un par&aacute;metro a
+
+la rutina, porque objetos como la pala y la espada necesitan otros 
+
+objetos para funcionar... Recuerda que no est&aacute;s limitado a 
+
+<SAMP>USAR</SAMP> objetos... Puedes usar, por ejemplo, una palanca...
+
+&Eacute;ste no es un objeto porque no lo puedes llevar contigo, pero
+
+lo puedes usar... El c&oacute;digo cambiar&iacute;a ligeramente... En el
+
+caso de FangLore &uacute;nicamente tendremos objetos... :)
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+F&iacute;jate tambi&eacute;n que en el caso de USAR, no podemos usar
+
+el truco que empleamos con Examinar, Coger, Dejar y Vestir, aquello
+
+de juntar el array <I>parsed</I> para formar el nombre de objetos con m&aacute;s
+
+de una palabra (M&Aacute;SCARA DE GAS)... As&iacute; que es bueno usar
+
+una &uacute;nica palabra como nombre de objetos, sino un mont&oacute;n
+
+de manipulaciones se hacen necesarias... En el caso de FangLore no
+
+hay problemas de este tipo, pero en otros podr&iacute;an haberlos...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Una vez m&aacute;s a&ntilde;ade el c&oacute;digo siguiente a <B>Play</B>:
+
+
+
+<CODE><PRE><font size=2  face=arial>        <B>If</B> Parsed[1]='USAR' <B>Then</B>
+
+        <B>Begin</B>
+
+            Valid:=True;
+
+            Usar(Parsed);
+
+        <B>End</B>;
+
+</CODE></FONT></PRE>
+
+Con esto acabamos el art&iacute;culo... En el siguiente hablaremos
+
+de monstruos y habitaciones especiales... &#161;&#161; No te lo pierdas !! :))
+
+
+
+<HR><P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<font color="#cc0000">Nota del traductor:</font> En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

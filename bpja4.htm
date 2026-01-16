@@ -1,0 +1,610 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</td></table></TD>
+
+</td></table>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:spellcaster@bigfoot.com"><b><font color="0000ff">Spellcaster.</font></b></a><br>
+
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 4.<br>La entrada de comandos y el parser
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+En este cap&iacute;tulo seguiremos con el parser. Despu&eacute;s de convertir la
+
+entrada a may&uacute;sculas ahora nos ocuparemos de eliminar los
+
+art&iacute;culos del array 'Parsed'.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> EliminarArticulos(<B>Var</B> Parsed:TipoParsed);
+
+        <B>Var</B> A:Byte;
+
+        <B>Begin</B>
+
+            <B>For</B> A:=1 <B>To</B> 10 <B>Do</B>
+
+            <B>Begin</B>
+
+                <B>If</B> Parsed[A]='THE' <B>Then</B> Elimin(Parsed,A);
+
+                <B>If</B> Parsed[A]='A' <B>Then</B> Elimin(Parsed,A);
+
+            <B>End</B>;
+
+        <B>End</B>1;
+
+     </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+Hay que poner un 'if' para cada art&iacute;culo o palabra a eliminar (en castellano
+
+ser&iacute;an un, una, el, la, unos...). De momento no insistir&eacute; m&aacute;s en el tema... La
+
+rutina Elimin es una rutina que dada una variable de TipoParsed y un
+
+&iacute;ndice, elimina la palabra correspondiente a este &iacute;ndice... Lo hace
+
+copiando la posicion del array con la siguiente posici&oacute;n del mismo, la
+
+cual es copiada a su vez con la siguiente, y as&iacute; sucesivamente...
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>Procedure</B> Elimin(<B>Var</B> Parsed:ParsedType;<B>Var</B> Indice:Byte);
+
+        <B>Var</B> A:Byte;
+
+        <B>Begin</B>
+
+            <B>For</B> A:=Indice <B>To</B> 9 <B>Do</B> Parsed[A]:=Parsed[A+1];
+
+            Parsed[10]:='';
+
+            Dec(Indice);
+
+        <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+  Fijaos, que los dos par&aacute;metros se pasan por referencia (lo indicamos
+
+  mediante la palabra reservada 'Var'), ya que necesitamos decrementar el
+
+  Indice despues de cada llamada a esta rutina y tambi&eacute;n porque la rutina
+
+  modifica el array... Pondr&eacute; un ejemplo, imaginaros que Parsed tiene
+
+  cuatro elementos...<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+  Imaginad que la entrada fuera <I>'Spellcaster The The Best'</I>. En ese
+
+  caso, lo que tendr&iacute;amos en el array ser&iacute;a:<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<OL>
+
+         <LI>Spellcaster
+
+         <LI>The
+
+         <LI>The
+
+         <LI>Best
+
+</OL>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+  EliminarArticulos recorrer&iacute;a el array parsed, comenzando en el &iacute;ndice 1.
+
+  Al ver 'Spellcaster', incrementar&iacute;a el indice. Ahora Indice=2. Despu&eacute;s,
+
+  ver&iacute;a 'The'... llamar&iacute;a a la rutina Elimin, y el array quedar&iacute;a:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<OL>
+
+         <LI>Spellcaster
+
+         <LI>The
+
+         <LI>Best
+
+         <LI>-
+
+</OL>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  Si no se pasara el Indice por referencia y se decrementara al final de
+
+  la rutina Elimin, el &iacute;ndice se incrementar&iacute;a y ser&iacute;a igual a 3, saltando
+
+  el segundo 'The'... La cuesti&oacute;n es que si decrementas Indice, estar&aacute;s
+
+  de nuevo en Indice=2, y el segundo 'The' tambi&eacute;n ser&aacute; eliminado...
+
+  Espectacular, &#191;a que s&iacute;?<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  No te olvides de llamar EliminarArticulos despu&eacute;s de las otras rutinas de
+
+  parseo.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  Probablemente ahora tengais en la primera posici&oacute;n del array el comando
+
+  principal (verbo), y en las otras posiciones el nombre del objeto con
+
+  el cual se realizar&aacute; la acci&oacute;n.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  Sigamos. Deber&iacute;amos tener una bandera (flag) que se active cuando el
+
+  comando se ejecute con &eacute;xito, y as&iacute; podr&iacute;amos dar un mensaje de error
+
+  diciendo que no se entendi&oacute; el comando... Decl&aacute;rala como de tipo
+
+  booleano, e inicializala a False justo despu&eacute;s del Repeat.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  Despu&eacute;s, cada vez que ejecutes un comando, ponla a True, y al final (justo
+
+  antes de Until), comprueba si est&aacute; a cierto... Si no lo est&aacute;, notifica
+
+  el mensaje error... &#161;Tambi&eacute;n podr&iacute;as tener varios de estos mensajes, de
+
+  manera que el jugador no se canse de ver una y otra vez el mismo
+
+  mensaje! En el programa de ejemplo, el programa selecciona
+
+  aleatoriamente uno entre los dos irritantes 'Comando desconocido'... :)
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+  Implementemos ahora dos verbos m&aacute;s simples... Los verbos Mirar y Fin
+
+  (quit)... Esto deber&iacute;a ser f&aacute;cil de comprender... S&oacute;lo tienes que
+
+  a&ntilde;adir las siguientes l&iacute;neas al programa, despu&eacute;s de parsear la entrada:
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>If</B> Parsed[1]='MIRAR' <B>Then</B>
+
+        <B>Begin</B>
+
+            Valid:=True;
+
+            Look(CurrentRoom);
+
+        <B>End</B>;
+
+        <B>If</B> Parsed[1]='FIN' <B>Then</B>
+
+        <B>Begin</B>
+
+            Valid:=True;
+
+            TextColor(BrightRed);
+
+            Writeln;
+
+            Writeln('&#191; De verdad quieres abandonar FangLore (S/N) ?');
+
+            C:=ReadKey;
+
+            <B>If</B> UpCase(C)='S' <B>Then</B> ExitFlag:=True;
+
+        <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+    Define la variable C como una variable de tipo Char... Y voila'...
+
+    Dos verbos implementados !! Fanglore empieza a tomar forma... :)))
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<H4>Verbos de Movimiento</H4>
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+    Bien, esto es realmente obvio y sencillo de hacer... S&oacute;lo ten&eacute;is que
+
+    comprobar si el verbo correspondiente ha sido introducido (ej. 'Norte',
+
+    'N', 'Sur', etc...), y si hay una salida en esa direcci&oacute;n, aseg&uacute;rate
+
+    de que vaya por ah&iacute;... Si puede ir, te queda mirar la habitaci&oacute;n...
+
+    Codificando sabiamente:<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+<CODE><PRE><font size=2  face=arial>
+
+        <B>If</B> (Parsed[1]='N') <B>Or</B> (Parsed[1]='NORTE') <B>Then</B>
+
+        <B>Begin</B>
+
+            <B>If</B> Rooms[LocalidadActual].Norte=0 <B>Then</B>
+
+            <B>Begin</B>
+
+                TextColor(LightRed);
+
+                Writeln;
+
+                Writeln('Lo siento, oh Gran Se&ntilde;or, &#161; pero no puedes ir en esa direcci&oacute;n !');
+
+                Writeln;
+
+            <B>End</B>
+
+            <B>Else</B>
+
+            <B>Begin</B>
+
+                TextColor(LightRed);
+
+                Writeln;
+
+                Writeln('Vas al norte...');
+
+                CurrentRoom:=Rooms[LocalidadActual].Norte;
+
+                Writeln;
+
+                Mirar(LocalidadActual);
+
+             <B>End</B>;
+
+             Correcto:=True;
+
+         <B>End</B>;
+
+      </FONT></PRE></CODE>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+    Haz otro tanto con las otras tres direcciones... Guay, &#191;verdad?
+
+    Bien, ahora ya puedes mirar, abandonar y deambular por Fanglore... En
+
+    nuestra pr&oacute;xima entrega de la serie, nos introduciremos en los
+
+    objetos y su interacci&oacute;n...<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+
+
+
+
+    Todos los trozos de c&oacute;digo que aparecen en este n&uacute;mero han sido
+
+    a&ntilde;adidos al fuente de <A HREF="zip/c4fang.pas">FangLore</A>.<BR>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<HR><P ALIGN=JUSTIFY><font size=2 face=arial>
+
+<font color="#cc0000">Nota del traductor:</font> En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

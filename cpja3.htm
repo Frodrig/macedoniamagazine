@@ -1,0 +1,373 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>M</B></font><FONT color="#000000" size=2 face="arial"><B>atemáticas Básicas</B></FONT></a><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>Á</B></font><FONT color="#000000" size=2 face="arial"><B>lbegra Matricial. Modelado alámbrico de figuras 3D</B></FONT></a>
+
+
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "Cid"</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 3. <br>Sistema alámbrico.
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Como ya muchos deducir&eacute;is del t&iacute;tulo, este capitulo se encarga del dise&ntilde;o de un peque&ntilde;o sistema para dibujar l&iacute;neas que formen un modelado al&aacute;mbrico. En realidad esta basado en funciones que actuaran con matrices y una lista que contendr&aacute; las l&iacute;neas a dibujar. Definiremos qu&eacute; l&iacute;neas queremos en nuestra figura, y mas tarde usaremos funciones que tambi&eacute;n dise&ntilde;aremos aqu&iacute; para modificar los puntos origen y fin de cada l&iacute;nea usando el &aacute;lgebra matricial, para que lo ve&aacute;is mejor pasemos de lleno a ello.</P>
+
+</FONT><B><FONT FACE="Arial"><P ALIGN=JUSTIFY>La lista de l&iacute;neas </P>
+
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Lo primero que tenemos que tener para construir el modelo son sus l&iacute;neas, ¿no? y si queremos que el sistema sea algo manejable, podr&iacute;amos utilizar alguna clase en la que nos sea f&aacute;cil sumar, modificar o quitar l&iacute;neas a nuestro antojo. Yo pens&eacute; en la clase de las <I>MFC</I> Carray. Esta clase nos permite todo lo anteriormente citado, es decir, permite que la lista pueda crecer indefinidamente y adem&aacute;s, guarda cualquier tipo de dato.</P>
+
+<P ALIGN=JUSTIFY>Para nosotros nos basta con que guarde un dato al que llamaremos Linea. Este dato contendr&aacute; los valores <B>X,Y,Z</B> originales (los que se dieron cuando se sumaron a la lista) y los valores <B>XPantalla, YPantalla, ZPantalla</B> de trabajo que usaremos para calcular las nuevas posiciones. Esto &uacute;ltimo evitar&aacute; que perdamos la referencia de d&oacute;nde estaban las l&iacute;neas originalmente. Con todo lo dicho anteriormente, podr&iacute;amos definir una estructura como sigue: </P>
+
+</FONT><PRE>
+
+
+
+
+
+   // Vertices
+
+   struct Vertice
+
+   {
+
+&#9;double nX;
+
+&#9;double nY;
+
+&#9;double nZ;
+
+&#9;double nXPantalla;
+
+&#9;double nYPantalla;
+
+&#9;double nZPantalla;
+
+   };
+
+
+
+   // Lineas
+
+   struct Linea
+
+   {
+
+&#9;Vertice Inicio, Final;
+
+   };
+
+</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Si queremos guardar estructuras del tipo Lineas en la clase CArray, definiremos una instancia de esta de la forma siguiente: </P>
+
+</FONT><PRE>
+
+
+
+
+
+   CArray&lt;Linea,Linea     oLineas;      // Lineas del dibujo</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Esta l&iacute;nea de c&oacute;digo, define una lista llamada <I>oLineas</I>, que contendr&aacute; datos del tipo Linea (pudiera haber sido un tipo b&aacute;sico como un int, un double, una estructura o un objeto, en definitiva, cualquier cosa). Con ella tenemos tres operaciones fundamentales que nos van ha ser de mucha ayuda, estas operaciones son Add, GetAt y SetAt, es decir: </P>
+
+</FONT><PRE>
+
+   oLineas.Add( Linea );
+
+   oLineas.GetAt( N );
+
+   oLineas.SetAt( N, Linea );</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>la primera funci&oacute;n, esto es, <B>Add</B>, suma la l&iacute;nea <I>Linea</I> a la lista. <B>GetAt</B> devuelve la l&iacute;nea colocada en la posici&oacute;n N y la tercera operaci&oacute;n, <B>SetAt</B>, modifica la l&iacute;nea N y la iguala a <I>Linea</I>. Como dec&iacute;amos anteriormente, tenemos ya las operaciones de sumar y modificar, y nos faltar&iacute;a las de eliminar que, aunque no la utilizaremos para este ejemplo os, la comento: </P>
+
+</FONT><PRE>
+
+   oLineas.RemoveAt( N );</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>RemoveAt lo que har&aacute; ser&aacute; eliminar la l&iacute;nea colocada en N. </P>
+
+</FONT><B><FONT FACE="Arial"><P ALIGN=JUSTIFY>Las funciones que multiplican vectores y matrices </P>
+
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Usaremos dos funciones para realizar los c&aacute;lculos. Una multiplicar&aacute; <B>matrices</B> de 4x4 dimensiones y la otra multiplicar&aacute; <B>vectores</B> de cuatro elementos por matrices de 4x4 dimensiones. Al principio de estos art&iacute;culos dej&eacute; claro que no iba a dar una "t&eacute;sis doctoral" sobre &aacute;lgebra matricial, por eso el c&oacute;digo no est&aacute; documentado. Lo que os quiero es ahorrar el tiempo que os supondr&iacute;a aprender ahora &aacute;lgebra matricial (aunque si alguien se anima es lo mejor que hace, las matematicas en videojuegos son muy importantes, y esta especialmente en el campo de las 3D), pensad en estas funciones como funciones de librer&iacute;a, que port&aacute;is a vuestras aplicaciones.</P>
+
+</FONT><PRE>
+
+
+
+void MultiplicarMatriz( double Resultado[4][4],
+
+                        double Matriz1[4][4],
+
+                        double Matriz2[4][4] )
+
+{
+
+   for( int i=0; i &lt;4 ; i++ )
+
+   {
+
+      for( int j=0; j &lt;4 ; j++)
+
+      {
+
+         Resultado[i][j] = 0;
+
+         for( int k=0; k&lt;4 ; k++ )
+
+         Resultado[i][j] += Matriz1[i][k] * Matriz2[k][j];
+
+      } 
+
+   }
+
+}
+
+
+
+void MultiplicarVector( double Resultado[4],
+
+                        double Matriz1[4],
+
+                        double Matriz2[4][4] )
+
+{
+
+   Resultado[0] = Matriz1[0]*Matriz2[0][0] +
+
+                  Matriz1[1]*Matriz2[0][1] +
+
+                  Matriz1[2]*Matriz2[0][2] +
+
+                  Matriz1[3]*Matriz2[0][3];
+
+   Resultado[1] = Matriz1[0]*Matriz2[1][0] +
+
+                  Matriz1[1]*Matriz2[1][1] +
+
+                  Matriz1[2]*Matriz2[1][2] +
+
+                  Matriz1[3]*Matriz2[1][3];
+
+   Resultado[2] = Matriz1[0]*Matriz2[2][0] +
+
+                  Matriz1[1]*Matriz2[2][1] +
+
+                  Matriz1[2]*Matriz2[2][2] +
+
+                  Matriz1[3]*Matriz2[2][3];
+
+   Resultado[3] = Matriz1[0]*Matriz2[3][0] +
+
+                  Matriz1[1]*Matriz2[3][1] +
+
+                  Matriz1[2]*Matriz2[3][2] +
+
+                  Matriz1[3]*Matriz2[3][3];
+
+}</PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>¡¡¡Y ya esta!!! </P>
+
+<P ALIGN=JUSTIFY>Estamos preparados para hacer un programa que maneje gr&aacute;ficos en 3D teniendo la lista de l&iacute;neas y las operaciones para trabajar con ellas. S&oacute;lo nos falta montar una aplicaci&oacute;n que re&uacute;na todas estas operaciones. Eso lo haremos en el siguiente cap&iacute;tulo, utilizando Visual C++. </P></FONT>
+<BR><BR>
+<center><font size=2 face=Arial>Puedes conseguir el código fuente del artículo pulsando <b><a href="zip/alam3d.zip">aquí</a></b></font></center>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="cpj.htm"><font FACE="ARIAL"><B>[Matemáticas Básicas]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

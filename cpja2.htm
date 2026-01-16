@@ -1,0 +1,441 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>M</B></font><FONT color="#000000" size=2 face="arial"><B>atemáticas Básicas</B></FONT></a><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>Á</B></font><FONT color="#000000" size=2 face="arial"><B>lbegra Matricial. Modelado alámbrico de figuras 3D</B></FONT></a>
+
+
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "Cid"</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 2. <br>Las matrices para trasladar, escalar y rotar.
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>El anterior cap&iacute;tulo explic&aacute;bamos como ciertas matrices pod&iacute;an ser utilizadas para trasladar, escalar y rotar puntos tridimensionales. Pues bien, aqu&iacute; ten&eacute;is las cinco matrices que hacen eso posible: </P><DIR>
+
+
+
+<B><P ALIGN=JUSTIFY>Matriz de Traslaci&oacute;n </P>
+
+</B></FONT><PRE>
+
+&#9;&#9;1&#9;0&#9;0&#9;0
+
+
+
+&#9;&#9;0&#9;1&#9;0&#9;0
+
+&#9;
+
+&#9;&#9;0&#9;0&#9;1&#9;0
+
+&#9;&#9;
+
+&#9;&#9;ValorX&#9;ValorY&#9;ValorZ&#9;1
+
+
+
+      </PRE>
+
+<B><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Matriz Escalar </P>
+
+</B></FONT><PRE>
+
+&#9;&#9;ValorX&#9;0&#9;0&#9;0
+
+
+
+&#9;&#9;0&#9;ValorY&#9;0&#9;0
+
+&#9;
+
+&#9;&#9;0&#9;0&#9;ValorZ&#9;0
+
+&#9;&#9;
+
+&#9;&#9;0&#9;0&#9;0&#9;1
+
+
+
+      </PRE>
+
+<B><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Matriz de Rotaci&oacute;n en el eje de la Z, siendo 'a' los radianes a rotar </P>
+
+</B></FONT><PRE>
+
+&#9;&#9;cos(a)&#9;sin(a)&#9;0&#9;0
+
+
+
+&#9;&#9;-sin(a)&#9;cos(a)&#9;0&#9;0
+
+&#9;
+
+&#9;&#9;0&#9;0&#9;1&#9;0
+
+&#9;&#9;
+
+&#9;&#9;0&#9;0&#9;0&#9;1
+
+
+
+      </PRE>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Matriz de <B>Rotaci&oacute;n en el eje de la X, siendo 'a' los radianes a rotar</B> </P>
+
+</FONT><PRE>
+
+&#9;&#9;1&#9;0&#9;0&#9;0
+
+
+
+&#9;&#9;0&#9;cos(a)&#9;sin(a)&#9;0
+
+&#9;
+
+&#9;&#9;0&#9;-sin(a)&#9;cos(a)&#9;0
+
+&#9;&#9;
+
+&#9;&#9;0&#9;0&#9;0&#9;1
+
+
+
+      </PRE>
+
+<B><FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Matriz de Rotaci&oacute;n en el eje de la Y, siendo 'a' los radianes a rotar </P>
+
+</B></FONT><PRE>
+
+&#9;&#9;cos(a)&#9;0&#9;-sin(a)&#9;0
+
+
+
+&#9;&#9;0&#9;1&#9;0&#9;0
+
+&#9;
+
+&#9;&#9;sin(a)&#9;0&#9;cos(a)&#9;0
+
+&#9;&#9;
+
+&#9;&#9;0&#9;0&#9;0&#9;1
+
+
+
+      </PRE></DIR>
+
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>Imaginemos que tenemos un punto tridimensional, por ejemplo (3,4,10). &Eacute;ste punto, que se halla colocado en alg&uacute;n sitio del plano, lo queremos rotar en el eje de las X. Pues bien, para ello haremos lo siguiente:</P><DIR>
+
+
+
+<P ALIGN=JUSTIFY>Se construye un vector del tipo <B>{x,y,z,1}</B>, el la constante 1 al final de este vector es muy importante, la utilizamos para que 'las cuentas cuadren' al multiplicar este vector de coordenadas tridimensionales por la matriz que deseemos (que en este caso, recordemos, es la de rotar en el eje de las X). Si lo codificamos haremos lo siguiente:</P>
+
+</FONT><PRE>
+
+
+
+         void MultiplicarVector( double Resultado[4],
+
+                                 double Matriz1[4],
+
+                                 double Matriz2[4][4] )
+
+         {
+
+            Resultado[0] = Matriz1[0]*Matriz2[0][0] +
+
+                           Matriz1[1]*Matriz2[0][1] +
+
+                           Matriz1[2]*Matriz2[0][2] +
+
+                           Matriz1[3]*Matriz2[0][3];
+
+            Resultado[1] = Matriz1[0]*Matriz2[1][0] +
+
+                           Matriz1[1]*Matriz2[1][1] +
+
+                           Matriz1[2]*Matriz2[1][2] +
+
+                           Matriz1[3]*Matriz2[1][3];
+
+            Resultado[2] = Matriz1[0]*Matriz2[2][0] +
+
+                           Matriz1[1]*Matriz2[2][1] +
+
+                           Matriz1[2]*Matriz2[2][2] +
+
+                           Matriz1[3]*Matriz2[2][3];
+
+            Resultado[3] = Matriz1[0]*Matriz2[3][0] +
+
+                           Matriz1[1]*Matriz2[3][1] +
+
+                           Matriz1[2]*Matriz2[3][2] +
+
+                           Matriz1[3]*Matriz2[3][3];
+
+         }
+
+
+
+         main()
+
+         {
+
+&#9;
+
+            .....
+
+
+
+            double nX = 3, nY = 4, nZ= 10, GradosX = 0.5;  // Coordenadas y grados (radianes)
+
+            double Vector[4], Resultado[4];    // Vectores
+
+            double MatrizX[4][4] = { 1,             0,            0,   0,
+
+                                     0,  cos(GradosX), sin(GradosX),   0,
+
+                                     0, -sin(GradosX), cos(GradosX),   0,
+
+                                     0,             0,            0,   1  };
+
+
+
+            Vector[0] = nX;
+
+            Vector[1] = nY;
+
+            Vector[2] = nZ;
+
+            Vector[3] = 1;
+
+            MultiplicarVector( Resultado, Vector, MatrizX );
+
+            nX = Resultado[0];
+
+            nY = Resultado[1];
+
+            nZ = Resultado[2];
+
+
+
+         }
+
+
+
+
+
+      </PRE></DIR>
+
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN=JUSTIFY>La primera funci&oacute;n multiplica el vector de 4 posiciones Matriz1 por una matriz de 4x4 Matriz2 dejando el resultado de la operaci&oacute;n en Resultado. &Eacute;ste, es otro vector de 4 posiciones que contendr&aacute; las nuevas posiciones X, Y, Z. Despu&eacute;s de la operaci&oacute;n, si observamos el c&oacute;digo restante, en ella se definen un vector de 4 posiciones llamado Vector, otro vector de cuatro posiciones llamado Resultado (donde guardaremos la nueva posici&oacute;n del punto al finalizar la funci&oacute;n MultiplicarVector) y la MatrizX, que contiene la anterior matriz de rotaci&oacute;n del eje de las X. </P>
+
+<P ALIGN=JUSTIFY>Pues con este c&oacute;digo, rotar&iacute;amos el punto (3,4,10) en el eje de las X. Claro que con un punto, no apreciaremos si ha existido o no, una rotaci&oacute;n. En vez de esto podr&iacute;amos construir l&iacute;neas, con puntos de comienzo y de final para observar mejor el efecto de rotaci&oacute;n en los tres ejes. Y esto mismo es lo que vamos hacer en el siguiente capitulo. </P></FONT>
+<BR><BR>
+<center><font size=2 face=Arial>Puedes conseguir el código fuente del artículo pulsando <b><a href="zip/alam3d.zip">aquí</a></b></font></center>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="cpj.htm"><font FACE="ARIAL"><B>[Matemáticas Básicas]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

@@ -1,0 +1,521 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>J</B></font><FONT color="#000000" size=2 face="arial"><B>uegos de Aventuras</B><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>D</B></font><FONT color="#000000" size=2 face="arial"><B>iseñando una aventura conversacional</B>
+
+</FONT>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</td></table></TD>
+
+</td></table>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por</b><br>
+
+<A HREF="mailto:spellcaster@bigfoot.com"><b><font color="0000ff">Spellcaster.</font></b></a><br>
+
+<b>T</b></font><FONT color="#000000" size=2 face="arial"><b>raducción y adaptación de</b><br>
+
+<A HREF="mailto:kilivor@geocities.com"><b>Daniel Cárdenas.</b></A>
+
+</FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Capítulo 2.<br>Manos a la obra.
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Una vez asimilado m&aacute;s o menos lo que os coment&aacute;bamos
+
+en el n&uacute;mero anterior, ya podemos empezar a codificar algo&#133;
+
+Primero deber&iacute;amos ocuparnos de las habitaciones. Cada
+
+localizaci&oacute;n ser&aacute; una tupla (record) que contendr&aacute;
+
+la informaci&oacute;n de las salidas, y la propia descripci&oacute;n
+
+de la habitaci&oacute;n: 
+
+
+
+<br><br>
+
+<font size=2 face=courier><p align="left">
+
+<B>
+
+Type</B> TipoLocalizacion=<B>Record<br>
+
+</B>Desc: <B>Array</B>[1..10] <B>of String</B>[79];<br>
+
+Norte, Sur, Este, Oeste: <B>Byte</B>;<br>
+
+<B>End</B>;</font>
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+La descripci&oacute;n es un array de strings, con
+
+s&oacute;lo 79 car&aacute;cteres por string ya que en la pantalla
+
+s&oacute;lo nos cabr&aacute;n 80 l&iacute;neas, y adem&aacute;s
+
+deber&aacute;s tener en cuenta el retorno de carro. De hecho,
+
+es posible que no necesites las 79 columnas, ni tampoco las 10
+
+l&iacute;neas de texto. Si es as&iacute;, deja una l&iacute;nea
+
+como '*' a continuaci&oacute;n de la &uacute;ltima l&iacute;nea
+
+de texto. Y si usas las 10 l&iacute;neas, no hace falta que pongas
+
+'*'.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Como tendr&aacute;s varias localizaciones, deber&aacute;s
+
+tener un array con todas ellas: 
+
+<br><br>
+
+<font size=2 face=courier><p align="left">
+
+        <B>Const</B> NumeroLocalizaciones=22;<br>
+
+        <B>Var</B> Localizaciones:<B>Array</B>[1..NumeroLocalizaciones] <B>of</B> TipoLocalizacion;<br>
+
+</font>
+
+
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+El contenido de los campos Norte, Sur, Este y Oeste
+
+nos indicar&aacute;n a que localizaci&oacute;n se va siguiendo
+
+esa direcci&oacute;n. Un cero indicar&aacute; que no habr&aacute;
+
+salida en esa direcci&oacute;n. Por ejemplo, si Localizaciones[1].Norte=2
+
+querr&aacute; decir que si desde la habitaci&oacute;n 1 se va
+
+al norte, se ir&aacute; a la habitaci&oacute;n 2.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Fanglore usar&aacute; un fichero, que llamaremos
+
+Room.Dat, y que contendr&aacute; todos los datos de las habitaciones.
+
+La rutina que usaremos para leer ese fichero ser&aacute; la siguiente:
+
+<br><br>
+
+<font size=2 face=courier><p align="left">
+
+<b>Procedure</B> LeerDatosLocalizaciones;<br>
+
+        <B>Var</B> F:Text;<br>
+
+            A,B:Byte;<br>
+
+            Flag:Boolean;<br>
+
+        <B>Begin<br>
+
+</B>                <I>{ Preparamos el fichero de texto }<br>
+
+</I>                Assign(F,'Room.Dat');<br>
+
+                Reset(F);<br>
+
+                <I>{ Para todas y cada una de las localizaciones del juego }<br>
+
+</I>                <B>For</B> A:=1 <B>To</B> NumeroLocalizaciones <B>Do<br>
+
+</B>                <B>Begin<br>
+
+</B>                        <I>{ Limpiamos la descripci&oacute;n de la localizaci&oacute;n }<br>
+
+</I>                        <B>For</B> B:=1 <B>To</B> 10 <B>Do</B> Localizaciones[A].Desc[B]:='';<br>
+
+                        { Leemos la descripci&oacute;n de la habitaci&oacute;n }<br>
+
+                        Flag:=True;<br>
+
+                        B:=1;<br>
+
+                        <B>While</B> Flag <B>Do<br>
+
+</B>                        <B>Begin<br>
+
+</B>                                Readln(F,Localizaciones[A].Desc[B]);<br>
+
+                                <B>If</B> (B=10) <B>Or</B> (Localizaciones[A].Desc[B]='*') <B>Then</B> Flag:=False;<br>
+
+                                Inc(B);<br>
+
+                        <B>End</B>;<br>
+
+                        <I>{ Leemos las salidas }<br>
+
+</I>                        Readln(F,Localizaciones[A].Norte);<br>
+
+                        Readln(F, Localizaciones[A].Sur);<br>
+
+                        Readln(F, Localizaciones[A].Este);<br>
+
+                        Readln(F, Localizaciones[A].Oeste);<br>
+
+                <B>End</B>;<br>
+
+                Close(F);<br>
+
+        <B>End</B>;<br>
+
+</FONT>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+La rutina es bastante clara, a&uacute;n as&iacute;
+
+hay algun que otro punto que es mejor que repasemos. Quiz&aacute;
+
+te est&eacute;s preguntando porqu&eacute; limpiamos la descripci&oacute;n
+
+de las habitaciones antes de que las carguemos, si cuando lo hacemos
+
+no hay nada. La raz&oacute;n es que al crear una variable, Pascal
+
+la coloca en cualquier lugar de la memoria donde pueda caber y
+
+el caso es que all&iacute; puede haber cualquier cosa, y Pascal
+
+no hace limpieza&#133; En programaci&oacute;n, resulta una pr&aacute;ctica
+
+muy aconsejable el limpiar el contenido de una variable antes
+
+de usarla (jeje, me parezco a uno de mis profesores). Segundo,
+
+no s&eacute; si ya os he comentado lo que hace la instrucci&oacute;n
+
+<B>Inc</B>. Lo que hace es incrementar el valor de una variable
+
+en una unidad (si no se especifica ning&uacute;n parametro. As&iacute;
+
+que Inc(B) equivale a B:=B+1, y Inc(B,2) es igual a B:=B+2&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Bien, la llamada a esta rutina deber&iacute;a producirse
+
+desde otra rutina (Init, o algo as&iacute;), la cual se encargar&aacute;
+
+de inicializar todas las variables y de preparar el juego. En
+
+esta rutina habr&aacute;n m&aacute;s cosas, pero de momento lo
+
+que tenemos es: <FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Bien, la llamada a esta rutina deber&iacute;a producirse desde otra rutina (Init, o algo as&iacute;), la cual se encargar&aacute; de inicializar todas las variables y de preparar el juego. En esta rutina habr&aacute;n m&aacute;s cosas, pero de momento lo que tenemos es:
+
+<br><br>
+
+<font size=2 face=courier><p align="left">
+
+<b>Procedure </B>Init;<br>
+
+<B>Begin</b><br>
+
+LeerDatosLocalizaciones;<br>
+
+<B>End</B>;</P><br>
+
+</FONT>
+
+<P ALIGN="JUSTIFY">Y la rutina Init deber&iacute;a ser llamada, a su vez, por el programa principal. Lo que tendremos aqu&iacute; (de </P>
+
+<P ALIGN="JUSTIFY">momento) ser&aacute;: 
+
+</FONT>
+
+<br><br>
+
+<font size=2 face=courier><p align="left">
+
+<B>Begin</B><br>
+
+Init;<br>
+
+<B>End</B>.</FONT>
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Todo esto lo encontrar&aacute;s ya tecleado en el
+
+fichero FangLore.Pas&#133;
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+NOTA: Cualquier fichero generado con el programa
+
+RoomGen puede se alterado a mano, es decir via editor ASCII. Podr&aacute;s
+
+arreglar los errores que vayan saliendo y editar tanto como quieras
+
+el fichero aunque, &#161;no te olvides de guardarlo como un fichero
+
+ASCII!
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+En el pr&oacute;ximo n&uacute;mero, te mostrar&eacute;
+
+como el analizador de entradas, con alguno que otro de los verbos
+
+m&aacute;s b&aacute;sicos&#133; Hasta entonces, tr&aacute;talo
+
+de hacer t&uacute; mismo&#133; :)
+
+<HR><P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Nota del traductor: En los primeros n&uacute;meros
+
+de 'The Mag' se realiz&oacute; un cursillo de Pascal la mar de
+
+majo. Como comprender&eacute;is no es cuesti&oacute;n de que lo
+
+reproduzcamos aqu&iacute;, despu&eacute;s de todo esto es una
+
+revista sobre aventuras, y no de programaci&oacute;n. A los que
+
+no conozc&aacute;is Pascal y sep&aacute;is ingl&eacute;s os remito
+
+directamente a <A HREF="http://alfa.ist.utl.pt/~l42686">'The Mag'</A>.
+
+A los dem&aacute;s buscaos un buen tutorial en castellano, que
+
+seguro que los habr&aacute; perdidos en alg&uacute;n rinc&oacute;n
+
+de la red o miraros alguno de esos CD-ROMS que regalan las revistas,
+
+que puede que venga algun tutorial o cursillo interactivo de Pascal.
+
+Si el Pascal no os va, o simplemente conoc&eacute;is alg&uacute;n
+
+otro lenguaje (BASIC, no gracias) no os ser&aacute; nada complicado
+
+el pasarlo.
+
+<P ALIGN=JUSTIFY><font size=2 face=arial>
+
+Ficheros (cortes&iacute;a de <A HREF="mailto:spellcaster@bigfoot.com">Spellcaster)</A>:
+
+<UL>
+
+<LI><A HREF="zip/fanglore.pas">FanGlore.Pas</A>
+
+<LI><A HREF="zip/roomgen.exe">RoomGen.Exe</A>
+
+<LI><A HREF="zip/Roomgen.pas">RoomGen.Pas</A>
+
+<LI><A HREF="zip/Room.dat">Room.Dat</A>
+
+</ul>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+<A HREF="bpj.htm"><font FACE="ARIAL"><B>[Juegos de Aventuras]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+
