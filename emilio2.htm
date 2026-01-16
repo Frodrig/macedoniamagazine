@@ -1,0 +1,139 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de SQL bajo WindowsNT</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:morzart@activanet.es">Emilio Rubio.</A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial">
+<H3>
+Cap&iacute;tulo 2.<br> Algo de historia y conceptos básicos.
+</H3>
+<P ALIGN=justify>
+
+
+En 1.988, las relaciones entre Microsoft e IBM, eran todav&iacute;a fruct&iacute;feras, y prueba de ello, fue el dise&ntilde;o y posterior implementaci&oacute;n de un gestor de bases de datos relacional, para el sistema operativo del gigante azul, el OS/2. En la construcci&oacute;n de esta primera versi&oacute;n de SQL SERVER, tambi&eacute;n particip&oacute; Sybase, compa&ntilde;&iacute;a que actualmente posee entre sus productos, otro sistema de gesti&oacute;n de bases de datos relacional muy apetecible.</P>
+<P ALIGN="JUSTIFY">&#9;A primeros de los 90, Microsoft cont&oacute; con el trabajo de David N. Cutler, para desarrollar un sistema operativo totalmente innovador para entornos multiusuario. Dicho sistema, se llamar&iacute;a Windows NT v.3.1 y como era de esperar, la compa&ntilde;&iacute;a de Bill Gates le decidi&oacute; incorporar este gestor de bases de datos, separ&aacute;ndose de la colaboraci&oacute;n que hasta ahora hab&iacute;a mantenido con Sybase. Naci&oacute; la primera versi&oacute;n de SQL SERVER para NT, bautizada como SQL SERVER v.4.2.</P>
+<P ALIGN="JUSTIFY">  En esta primera versi&oacute;n, la administraci&oacute;n del sistema era dr&aacute;sticamente diferente a la que nos podemos encontrar hoy en d&iacute;a, pues se basaba en comandos y comandos que hab&iacute;a que escribir con mucha atenci&oacute;n para evitar equivocarnos. Hoy d&iacute;a, todav&iacute;a quedan resquicios de aquella administraci&oacute;n en l&iacute;nea, pero casi en su totalidad, se pude administrar visualmente a golpe de rat&oacute;n, lo cual sin duda, es de agradecer<U>.</P>
+</U><P ALIGN="JUSTIFY">&#9;A&ntilde;os despu&eacute;s, en 1.995, Microsoft saca a la luz una nueva versi&oacute;n del producto, la <B>v.6.0</B>, que mejorar&iacute;a justamente la administraci&oacute;n del gestor y acrecentaba el rendimiento del mismo, a&ntilde;adiendo <I>multitithreading</I>, <I>sincronizaci&oacute;n</I>, <I>ficheros mapeados en memoria</I>, etc.</P>
+<P ALIGN="JUSTIFY">&#9;Debido al &eacute;xito cosechado, (lleg&oacute; a colocarse como segundo gestor relacional m&aacute;s vendido en el mercado), Microsoft volvi&oacute; a sacar, al a&ntilde;o siguiente, la versi&oacute;n 6.5, que se supone que es la versi&oacute;n que se encuentra a medio camino, entre la 6.0 y la definitiva (a tenor de los acontecimientos, la versi&oacute;n 7.0). &#9;</P>
+<P ALIGN="JUSTIFY">&#9;Normalmente, cualquier empresa en v&iacute;as de desarrollo, solicita sistemas multiusuario con facilidad para las comunicaciones y gestores de datos que se adapten a estos sistemas. Windows NT y SQL SERVER cumplen a la perfecci&oacute;n estos requisitos. Nuevamente, Microsoft, alarga sus tent&aacute;culos hacia un tema de siempre candente actualidad, como son la administraci&oacute;n y obtenci&oacute;n de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><h4>¿Qué es una base de datos?</h4></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;SQL SERVER, en cualquiera de sus versiones, se basa en el modelo <B>relacional</B> para la representaci&oacute;n de datos. Los elementos esenciales de dicho modelo, se denominan <B>celdas</B>, <B>columnas</B>, <B>filas</B>, <B>tablas</B> y <B>claves</B>. De nuevo, vuelvo a remitir al sufrido lector, a mi buz&oacute;n personal, para una explicaci&oacute;n de este enfoque mundialmente extendido, por su simplicidad e inusitado parecido con la forma de abstracci&oacute;n que tiene la mente humana.</P>
+<P ALIGN="JUSTIFY">   Llegados a este punto, se preguntar&aacute;, <I>de acuerdo, pero ¿qu&eacute; es realmente una base de datos?, ¿se puede considerar como un fichero en donde se almacenan y almacenan datos ?, </I>a lo que se le podr&iacute;a contestar que, SI. No anda equivocado al decir, que es un fichero que contiene informaci&oacute;n, pero con la salvedad de que dicha informaci&oacute;n no se almacena como estamos acostumbrados, es decir, no se almacena secuencialmente en el fichero, sino que existe cierto modelo, establecido con anterioridad, que dicta las normas de dicho almacenamiento. Es por tanto, informaci&oacute;n almacenada en un fichero bajo unas <I>directrices</I> que la hace <I>coherente</I> y m&aacute;s a&uacute;n, si dichas reglas pueden definirse por nosotros mismos.</P>
+<P ALIGN="JUSTIFY">   Le suenan los t&eacute;rminos, <B>¿modelo de datos, relaciones entre datos, niveles de abstracci&oacute;n e independencia de datos?, </B>si la respuesta es afirmativa, relacione estos conceptos con lo explicado m&aacute;s arriba, y notar&aacute; como realmente se intentan encapsular datos, siguiendo una estructura l&oacute;gica para relacionarlos. Podr&iacute;amos afirmar, que estamos <B><U>enlatando</B></U> informaci&oacute;n, pero enlatando siguiendo unas <B><U>reglas</B></U>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><h4>Bases de datos cliente/servidor frente a gestores de datos de sobremesa</h4></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;La filosof&iacute;a cliente/servidor (C/S) est&aacute; actualmente, muy difundida. Hace unos a&ntilde;os, recuerdo, que era muy com&uacute;n la pregunta <B><I>¿que significa cliente servidor?,</B></I> pero no deja de ser curioso, que con lo ampliamente que est&aacute; desarrollada e implementada esta tecnolog&iacute;a, todav&iacute;a no se tengan claras estas formas de trabajar. Lo intentar&eacute; explicar, pues, de la manera m&aacute;s sencilla que pueda.</P>
+<P ALIGN="JUSTIFY">  ¿Alguien se acuerda de DBASE?, seguro que s&iacute;, pues este paquete es un cl&aacute;sico en lo que se refiere a la gesti&oacute;n de datos en entornos monousuario. Para utilizar DBASE, recuerdo que se ten&iacute;a que acceder a su entorno, y desde all&iacute; desarroll&aacute;bamos todo, pues dise&ntilde;&aacute;bamos las tablas y el c&oacute;digo para explotarlas. Todo estaba pues, unido, tanto los m&oacute;dulos que gestionaban los datos, como nuestros programas que acced&iacute;an a ellos. DBASE, es un <I>sistema de gesti&oacute;n de ficheros</I> de escritorio, y por tanto orientado a entornos monousuario con una cierta cantidad de datos a gestionar. Tanto &eacute;xito tuvo, que todav&iacute;a hoy, existen sistemas trabajando bajo este entorno, sistemas que no pasan del 80386 y no llegan a los 4 MBytes de memoria RAM. Como el caso de DBASE, est&aacute;n los de ARCHIVE y m&aacute;s cercano, ACCESS, entorno que actualmente se acerca m&aacute;s al concepto de bases de datos, como modelo de datos explicado con anterioridad.</P>
+<P ALIGN="JUSTIFY">&#9;Hasta aqu&iacute;, los entornos de sobremesa. Una base de datos cliente/servidor se caracteriza en que tiene claramente diferenciada la parte que gestiona los datos y la parte que se encarga de visualizarlos/mostrarlos. Es decir, hay una aplicaci&oacute;n que se encarga de servir datos (servidor) y otra totalmente deferente a la anterior que se encarga de solicitarlos (cliente). Aqu&iacute;, como vemos, no hay ninguna relaci&oacute;n entre ambas aplicaciones. Yabra</P>
+<P ALIGN="JUSTIFY">   SQL SERVER es pues, una base de datos que funciona bajo la metodolog&iacute;a cliente/servidor y a la cual se accede a trav&eacute;s de aplicaciones clientes, que est&aacute;n desarrolladas bajo la tutela de, por ejemplo, Borland Delphi, Microsoft Visual C++ o Microsoft Visual Basic.</P>
+<P ALIGN="JUSTIFY">  A <I>grosso</I> modo, esta es la diferencia entre ambas concepciones, aunque, como el lector se puede imaginar, hay muchas m&aacute;s, sobre todo en aspectos particulares de acceso, almacenamiento y definici&oacute;n de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><h4>SQL como lenguaje de consulta</h4></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;SQL, siglas de <I>Structured Query Language</I> (lenguaje de consulta estructurado) fue llamado en su d&iacute;a SEQUEL (Structured English Query Language), proviene de los proyectos que IBM, en los a&ntilde;os 70, desarroll&oacute; en el San Jos&eacute; Research Laboratory, en Californaria (USA), sobre una sistema relacional denominado SYSTEM R, que en aquella &eacute;poca, impon&iacute;a las bases de los gestores de datos relacionales que tenemos hoy d&iacute;a. SQL, como en la actualidad se le conoce, fue implementado posteriormente, en la bases de datos para entornos <I>mainframe</I>, que IBM bautiz&oacute; como DB2. Cualquier sistema de bases de datos que se precie hoy d&iacute;a, deber&aacute; tener una referencia a este lenguaje, y de hecho, casi todos la tienen.</P>
+<P ALIGN="JUSTIFY">  Actualmente, SQL ha sido objeto de estandarizaci&oacute;n por parte de ANSI (<I>American Commitee of Standards Institute</I>), denomin&aacute;ndose ANSI SQL-92, aunque, como el lector se puede imaginar, todas las compa&ntilde;&iacute;as aportan su granito de arena particular a este lenguaje, as&iacute; por ejemplo, y como es el caso de Microsoft, su lenguaje de consulta se denomina TRANSACT-SQL, que est&aacute; basado en SQL, pero, con algo m&aacute;s....   </P>
+<P ALIGN="JUSTIFY">&#9;Consideraremos pues, a SQL, como nuestra &uacute;nica v&iacute;a para consultar los datos que almacenemos en nuestro sistema, siendo su conocimiento, por tanto, de obligado inter&eacute;s para poder sacar el m&aacute;ximo provecho de nuestros dise&ntilde;os.</P>
+<P ALIGN="JUSTIFY">&#9;SQL est&aacute; constituido por sentencias de <B>manipulaci&oacute;n</B> y <B>definici&oacute;n</B> de datos de alto nivel, que se pueden ejecutar de tres formas diferentes:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI>A trav&eacute;s de un terminal de pantalla utilizando el SQL interactivo (ISQL/w), que procesar&aacute; transacciones en l&iacute;nea.</LI>
+<LI>Por lotes, mediante la utilizaci&oacute;n de un fichero batch, que contendr&aacute; muchas sentencias SQL sobre una o varias tablas, bases de datos etc.</LI>
+<LI>Mediante programas de aplicaciones escritos en Visual C++, Delphi, Visual Basic, Cobol y hasta incluso, en ensamblador.</LI></UL>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulan.htm"><font FACE="ARIAL"><B>[Curso de SQL bajo WindowsNT]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

@@ -1,0 +1,306 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+<br><br>
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Cap&iacute;tulo 2. Celdas, rangos, libros y hojas.</H3>
+<P ALIGN="justify">En este cap&iacute;tulo vamos a aprender un poco m&aacute;s sobre c&oacute;mo hacer referencia a celdas, rangos, hojas y libros.  Supongo que todos estos conceptos est&aacute;n claros, que todo el mundo sabe lo que es una celda o un rango, o la diferencia entre un libro y una hoja.<BR>
+<BR></P><BR>
+<TABLE>
+	<TR>
+		<TD><FONT SIZE="-1">Todos los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel2.xls">Excel2.xls</A><BR>
+(39kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel2.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD>
+	</TR>
+</TABLE>
+<P ALIGN="justify">Bueno, para entrar en calor vamos a hacer una peque&ntilde;a rutina que pida al usuario un valor y luego sume ese valor a la celda activa.<IMG SRC="gif/macro1.gif" WIDTH="250" HEIGHT="77" ALIGN="Right" BORDER="0" ></P><BR>
+
+
+<PRE><FONT SIZE="-1">
+<FONT COLOR="#0000FF">Sub</FONT> Sumar_A_Celda()
+   <FONT COLOR="#0000FF">Dim</FONT> i As Double<BR>
+   <FONT COLOR="#0000FF">If</FONT> MsgBox(&quot;Esta macro pide al usuario 
+   un valor y lo suma a la celda activa.&quot;, _
+      vbOK, &quot;Sumar a celda&quot;) = vbCancel <FONT COLOR="#0000FF">Then</FONT> Exit Sub
+   i = Val(InputBox(&quot;Importe a sumar: &quot;, &quot;Sumar a celda activa&quot;))
+   ActiveCell.Value = ActiveCell.Value + i
+<FONT COLOR="#0000FF">End Sub</FONT></PRE></FONT>
+
+
+
+<P ALIGN="justify">La primera l&iacute;nea es la declaraci&oacute;n de la variable <B>&quot;i&quot;</B>. Ya hemos comentado anteriormente lo que es la declaraci&oacute;n de variables, lo &uacute;nico nuevo es el tipo de variable (double). Cuando declaramos una variable hay que indicar qu&eacute; tipo de variable queremos que sea. Los tipos de variables m&aacute;s importantes son:</P>
+
+<TABLE BORDER="0" ALIGN="center">
+<TR>
+	<TD WIDTH="20%"><FONT SIZE="-1"><B>Integer</B></FONT></TD>	
+	<TD><FONT SIZE="-1">Un valor entero, entre -32.768 y 32.767</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Long</B></FONT></TD>
+	<TD><FONT SIZE="-1">Un valor entero, entre -2.147.483.648 y 2.147.483.647</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Boolean</B></FONT></TD>
+	<TD><FONT SIZE="-1">Verdadero y Falso</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Single</B></FONT></TD>
+	<TD><FONT SIZE="-1">Un valor con decimales, con precisi&oacute;n simple</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Double</B></FONT></TD>
+	<TD><FONT SIZE="-1">Un valor con decimales, con precisi&oacute;n doble</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>String</B></FONT></TD>
+	<TD><FONT SIZE="-1">Un cadena de caracteres</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Date</B></FONT></TD>
+	<TD><FONT SIZE="-1">Una fecha</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Object</B></FONT></TD>
+	<TD><FONT SIZE="-1">Referencia a cualquier tipo de objeto de Excel</FONT></TD>
+</TR>
+<TR>
+	<TD><FONT SIZE="-1"><B>Variant</B></FONT></TD>
+	<TD><FONT SIZE="-1">Un variable que puede cambiar de tipo</FONT></TD>
+</TR>
+</TABLE>
+<BR>
+<P ALIGN="justify">En este caso declaramos la variable como <B>Double</B>, por si acaso al usuario se le ocurre meter un valor con decimales.</P>
+<P ALIGN="justify">Siguiendo con nuestra rutina, primero presentamos al usuario un peque&ntilde;o mensaje diciendo lo que vamos a hacer. Esto est&aacute; explicado en la entrega anterior, no creo que necesite nada m&aacute;s. Si el usuario pulsa &quot;Cancelar&quot;, salimos de la rutina y no hacemos nada.</P>
+<P ALIGN="justify">En la siguiente l&iacute;nea obtenemos del usuario el valor que quiere sumar a la celda activa. La funci&oacute;n <B>InputBox</B> ya la hemos visto antes, obtiene del usuario una entrada, pero en formato de cadena de caracteres. Como nosotros lo que queremos es un valor num&eacute;rico, utilizamos la funci&oacute;n <B>Val()</B> para convertir la cadena de caracteres proveniente de InputBox en un n&uacute;mero. Lo ponemos todo en la misma l&iacute;nea, pero tambi&eacute;n se pod&iacute;a haber escrito en dos l&iacute;neas:</P>
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">   Dim</FONT> s as String
+   s = InputBox(&quot;Importe a sumar: &quot;, &quot;Sumar a celda activa&quot;)
+   i = Val(s)</FONT>
+</PRE>
+<P ALIGN="justify">Bueno, seguramente queda m&aacute;s claro que de la otra forma, pero normalmente se escribe de la primera forma. Cada uno que lo escriba como quiera, tampoco tiene demasiada trascendencia.</P>
+<IMG SRC="gif/asistent.gif" WIDTH="96" HEIGHT="88" ALIGN="Right" BORDER="0" VSPACE="10" HSPACE="15">
+<P ALIGN="justify">La &uacute;ltima l&iacute;nea es la que hace realmente la suma, dando valor a la propiedad <B>Value</B> de <B>ActiveCell</B>. Ya hemos visto en la entrega anterior lo que es ActiveCell. Una aclaraci&oacute;n sobre ActiveCell y ActiveSheet (que tambi&eacute;n vimos en la entrega anterior): en realidad, ActiveCell no es un objeto, sino que es una &quot;propiedad&quot; de un objeto especial llamado <B>Application</B>, pero cuando escribimos &quot;ActiveCell&quot; Excel entiende que estamos escribiendo &quot;Application.ActiveCell&quot;. Application es un objeto que representa la aplicaci&oacute;n Excel completa. A trav&eacute;s de <B>Application</B> se puede acceder a todas las opciones de la aplicaci&oacute;n (las que podemos cambiar a trav&eacute;s de Herramientas, Opciones), acceder a las funciones de hoja de c&aacute;lculo (SUMA, PROMEDIO, etc) y tambi&eacute;n podemos obtener objetos que referencian a la celda activa (ActiveCell), la hoja activa (ActiveSheet), el libro activo (ActiveWorkbook), etc.</P>
+<P ALIGN="justify">Un peque&ntilde;o ejemplo del uso del objeto Application: para mostrar y ocultar la barra de estado (la que aparece en la parte de abajo, debajo de las etiquetas de las hojas), podemos usar el siguiente c&oacute;digo:</P>
+Para ocultar la barra de estado:
+<PRE><FONT SIZE="+0">   Application.<B>DisplayStatusBar</B> = False</FONT></PRE>
+Para volver a mostrar la barra de estado:
+<PRE><FONT SIZE="+0">   Application.<B>DisplayStatusBar</B> = True</FONT></PRE>
+<P ALIGN="justify">El objeto <B>Application</B> tiene un mont&oacute;n de propiedades y m&eacute;todos, que est&aacute;n muy bien explicados en la ayuda de Excel, y su uso es bastante sencillo.</P>
+
+<P ALIGN="justify">Siguiendo con la &uacute;ltima l&iacute;nea de la rutina, podr&aacute;s comprobar que utilizamos la propiedad <I>Value</I> de ActiveCell. Si hubi&eacute;semos utilizado la propiedad <I>Formula</I> en lugar de <I>Value</I>, la rutina tendr&iacute;a que ser un poco distinta. Utilizando <I>Value</I>, estamos dando a la celda activa un valor directamente, es decir, si miras el contenido de la celda ver&aacute;s que no hay ninguna f&oacute;rmula; la suma la ha hecho nuestra rutina, y ha puesto en la celda el resultado de dicha suma.</P>
+<P ALIGN="justify">Sin embargo, si queremos que la f&oacute;rmula de la suma quede en la celda debemos usar la propiedad <I>Formula</I>. La propiedad <I>Formula</I> es una &quot;cadena de car&aacute;cteres&quot;, que incluye todo lo que se escribir&iacute;a normalmente en una celda de una hoja de c&aacute;lculo para introducir una f&oacute;rmula (incluyendo el signo &quot;=&quot; al principio). Por ejemplo, si queremos que poner en la celda A2 una f&oacute;rmula que nos de el doble del valor de la celda A1, haremos:</P>
+Range(&quot;A2&quot;).Formula = &quot;=A1*2&quot;
+
+<P ALIGN="justify">Como es una cadena de caracteres, hay que rodearla con comillas dobles, y entre &eacute;stas ponemos la f&oacute;rmula tal como lo har&iacute;amos en la hoja de c&aacute;lculo. Tras esta explicaci&oacute;n, si queremos cambiar nuestra rutina para introducir la f&oacute;mula de suma en la celda, nuestro primer intento ser&iacute;a escribir:</P>
+ActiveCell.Formula = ActiveCell.Formula + i<BR>
+<BR>
+<P ALIGN="justify">Si ejecutamos este c&oacute;digo veremos que el resultado puede variar dependiendo de lo que contenga la celda activa:</P>
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="justify">Si la celda activa contiene un <B>n&uacute;mero</B> (no una f&oacute;rmula), el resultado es el mismo que antes. La raz&oacute;n es que como no hay ninguna f&oacute;rmula ActiveCell.Formula devuelve un n&uacute;mero, igual que ActiveCell.Value. Luego le sumamos nuestro valor y asignamos el valor resultante como f&oacute;rmula de la celda.</P></LI>
+<LI><P ALIGN="justify">Si la celda activa contiene una <B>f&oacute;rmula</B>, el resultado es que la macro se para con un error. Esto es debido a que ActiveCell.F&oacute;rmula nos devuelve una cadena de caracteres (por ejemplo, la cadena &quot;=A1*2&quot;), y luego estamos intentando sumar un n&uacute;mero (i) a una cadena de caracteres, cosa que evidentemente no se puede hacer y Excel nos da un error de tipos de datos incompatibles.</P></LI>
+</UL>
+<P ALIGN="justify">Para conseguir lo que realmente queremos (introducir una f&oacute;rmula en la celda), debemos asignar a ActiveCell.Formula una cadena de caracteres con una f&oacute;rmula escrita correctamente. Vamos a intentarlo:</P>
+ActiveCell.Formula = ActiveCell.Formula &amp; &quot;+&quot; &amp; i<BR>
+<BR>
+<P ALIGN="justify">El operador &amp; ya lo vimos en la primera entrega, se utiliza para concatenar cadenas de caracteres. Partimos de la f&oacute;rmula que actualmente tiene la celda activa (por ejemplo, &quot;=A1*2&quot;) y luego le a&ntilde;adimos un signo &quot;+&quot; y luego nuestro valor (i), con lo que la f&oacute;rmula pasar&aacute; a ser &quot;=A1*2+3&quot; (si i tiene el valor 3).</P>
+<P ALIGN="justify">El problema que se nos presenta ahora es que si en la celda activa no hay una celda, sino un valor (por ejemplo, 2), nosotros asignaremos a ActiveCell.Formula la cadena &quot;2+3&quot; (si i tiene el valor 3). ¿Veis el error? Evidentemente el error es que falta el signo &quot;=&quot; al principio de la f&oacute;rmula para decirle a Excel que es una f&oacute;rmula. O sea que deber&iacute;amos a&ntilde;adir delante de la f&oacute;rmula un &quot;=&quot;, lo que podemos hacer de la siguiente forma:</P>
+ActiveCell.Formula = &quot;=&quot; &amp; ActiveCell.Formula &amp; &quot;+&quot; &amp; i<BR><BR>
+<P ALIGN="justify">¿Cu&aacute;l es el problema ahora? Pues que si la celda activa tiene una f&oacute;rmula nos encontramos con que nuestra f&oacute;rmula definitiva tiene dos signos &quot;=&quot; al principio, uno el que ya ten&iacute;a y otro el que le hemos puesto nosotros. El resultado es que introducimos una f&oacute;rmula incorrecta y Excel nos vuelve a dar un error.</P>
+<P ALIGN="justify">Bueno, creo que he montado un peque&ntilde;o l&iacute;o, pero en realidad no tiene ninguna dificultad. Lo que hay que hacer es comprobar si en la celda activa hay una f&oacute;rmula (esto se puede hacer mirando si el primer car&aacute;cter es el signo &quot;=&quot;, utilizando por ejemplo la funci&oacute;n <I>Left</I>). Si hay una f&oacute;rmula, s&oacute;lo a&ntilde;adimos la parte del final, y si no hay una f&oacute;rmula a&ntilde;adimos primero un signo &quot;=&quot; y luego la parte del final. Esto queda como ejercicio, y si no te sale me escribes y lo comentamos.</P>
+<P ALIGN="justify">Pues aparte de todo este l&iacute;o ya lo hemos visto todo. Si ejecutas la rutina <B>Sumar_A_Celda()</B> comprobar&aacute;s que primero te pide un valor y luego suma ese valor a la celda activa. Por cierto, que nadie piense que esta macro es ninguna maravilla, porque lo mismo que hace se puede hacer m&aacute;s r&aacute;pido utilizando &quot;Pegado especial..&quot;, que adem&aacute;s es capaz de restar, multiplicar y dividir. Ya llegaremos a eso tambi&eacute;n, pero para ir aprendiendo un poco no nos viene mal.</P>
+<P ALIGN="justify">Ahora vamos a avanzar otro paso: la rutina anterior sumaba un valor a la celda activa, y ahora vamos a sumar ese valor a todo el rango que seleccione el usuario. Como siempre, aqu&iacute; va la rutina completa, luego la explicamos:</P>
+<PRE><FONT COLOR="#0000FF">Sub</FONT> Sumar_A_Rango()
+    <FONT COLOR="#0000FF">Dim</FONT> i As Double
+    <FONT COLOR="#0000FF">Dim</FONT> h As Object
+    
+    <FONT COLOR="#0000FF">If</FONT> MsgBox(&quot;Esta macro pide al usuario un valor y lo 
+	suma a todas las celdas &quot; &amp; _
+            Chr(13) &amp; &quot;del rango seleccionado.&quot;, vbOK, &quot;Copiar 
+			celda izquierda&quot;) _
+            = vbCancel <FONT COLOR="#0000FF">Then</FONT> <FONT COLOR="#0000FF">Exit Sub</FONT>
+    i = Val(InputBox(&quot;Importe a sumar: &quot;, &quot;Sumar a rango seleccionado&quot;))
+    <FONT COLOR="#0000FF">For Each</FONT> h <FONT COLOR="#0000FF">In</FONT> Selection.Cells
+        h.Value = h.Value + i
+    <FONT COLOR="#0000FF">Next</FONT> h
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN="justify">Lo primero que hacemos es declarar las variables. La primera variable (i), es de tipo <I>Double</I>, al igual que en la rutina anterior. La segunda variable (h) la declaramos como una variable de tipo <I>Object</I>, para que apunte a cualquier tipo de objeto de Excel (una hoja, un rango, una celda, etc.)</P>
+<P ALIGN="justify">Las dos siguientes l&iacute;neas son iguales que antes: primero presentamos un peque&ntilde;o mensaje al usuario, y luego obtenemos el valor y convertimos la cadena a un valor num&eacute;rico.</P>
+<P ALIGN="justify">En las tres siguientes l&iacute;neas est&aacute; todo lo nuevo. Vamos por pasos: <B>Selection</B> es una propiedad del objeto <B>Application</B>, o sea que al escribir <B>Selection</B> Excel supone que estamos escribiendo <B>Application.Selection</B>. Pues bien, la propiedad <B>Selection</B> nos devuelve el rango que est&aacute; seleccionado en la hoja activa, es decir, un objeto de tipo Range.</P>
+<P ALIGN="justify">Con <B>Selection</B> obtenemos un objeto de tipo Range que apunta al rango seleccionado de la hoja activa. Si accedemos a la propiedad <B>Cells</B> de ese objeto Range, obtendremos un &quot;conjunto&quot; de todas las celdas de ese rango.</P>
+<P ALIGN="justify">¿Que es un <U><B>conjunto</B></U>? Un conjunto es un objeto que contiene otros objetos, generalmente del mismo tipo (la definici&oacute;n la he copiado de la ayuda de Windows). La propiedad Cells de un objeto Range nos devuelve un conjunto que contiene todas las celdas de ese rango.</P>
+<P ALIGN="justify">Luego viene una instrucci&oacute;n &quot;<B>For</B>&quot;. En la entrega anterior vimos una instrucci&oacute;n For, pero un poco distinta a esta. En ese caso lo que hac&iacute;amos era dar a una variable distintos valores, desde el 1 hasta el 10, y para cada valor de la variable ejecut&aacute;bamos unas instrucciones. An&aacute;logamente, en esta ocasi&oacute;n vamos a dar a la variable &quot;h&quot; (de tipo Object) unos valores, y para cada valor de &quot;h&quot; vamos a ejecutar una instrucci&oacute;n.</P>
+<P ALIGN="justify">Para dar los distintos valores a &quot;h&quot; vamos a utilizar la instrucci&oacute;n &quot;<B>For Each</B>&quot;, que &quot;<I>repite un grupo de enunciados para cada elemento de una matriz o de un conjunto</I>&quot;. El conjunto que vamos a utilizar es <B>Selection.Cells</B>, que como sabemos son todas las celdas del rango seleccionado. Es decir, que con </P>
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">For Each</FONT> h <FONT COLOR="#0000FF">In</FONT> Selection.Cells
+   h.Value = h.Value + 1
+<FONT COLOR="#0000FF">Next</FONT> h</FONT>
+</PRE>
+<P ALIGN="justify">lo que hacemos es ejecutar una instrucci&oacute;n para cada una de las celdas del conjunto <B>Selection.Cells</B>. La primera vez que se ejecute la instrucci&oacute;n de dentro del buble, h representar&aacute; la primera celda del conjunto de celdas, la segunda vez representar&aacute; la segunda celda del conjunto, etc. En este caso lo que hemos hecho ha sido sumar el valor uno a todas las celdas del rango seleccionado.</P>
+<P ALIGN="justify">La instrucci&oacute;n que va dentro del bucle es la misma que en el ejemplo anterior; tan s&oacute;lo f&iacute;jate que utilizamos &quot;h&quot; en lugar de ActiveCell.</P>
+<P ALIGN="justify">Vamos a hacer otro peque&ntilde;o ejemplo del uso de &quot;<B>For Each</B>&quot; y de conjuntos. En esta ocasi&oacute;n vamos a cambiar el nombre de todas las hojas del libro activo. Para obtener una referencia al libro activo utilizaremos la propiedad <B>ActiveWorkbook</B> del objeto <B>Application</B>. Para acceder a todas las hojas de c&aacute;lculo del libro activo, utilizaremos la propiedad <B>Worksheets</B> de dicho objeto, ActiveWorkbook. He utilizado la propiedad Worksheets porque esta nos devuelve s&oacute;lo las hojas de c&aacute;lculo (no las hojas de gr&aacute;ficos, m&oacute;dulos, etc.). Si queremos acceder a todas las hojas (de cualquier tipo) del libro, utilizaremos la propiedad <B>Sheets</B>, que funciona igual que Worksheets.</P>
+Aqu&iacute; va la rutina de ejemplo:<BR>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> NombresHojas()
+   <FONT COLOR="#0000FF">Dim</FONT> h As Object
+   <FONT COLOR="#0000FF">Dim</FONT> i As Integer
+<IMG SRC="gif/exani.gif" WIDTH="100" HEIGHT="40" ALIGN="RIGHT" BORDER="0" HSPACE="25">
+   i = 15
+   <FONT COLOR="#0000FF">For Each</FONT> h <FONT COLOR="#0000FF">In</FONT> ActiveWorkbook.Worksheets
+      h.Name = &quot;Hoja &quot; &amp; i
+      i = i + 1
+   <FONT COLOR="#0000FF">Next</FONT> h
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+
+<P ALIGN="justify">Lo que hace esta rutina es cambiar los nombres de las hojas de c&aacute;lculo del libro activo, poni&eacute;ndoles los nombres &quot;Hoja15&quot;, &quot;Hoja16&quot;, etc. No es que sea una rutina demasiado &uacute;til, pero como siempre sirve para aprender un poco.</P>
+<P ALIGN="justify">Como siempre, empezamos con la declaraci&oacute;n de variables. Luego le damos a la variable &quot;i&quot; el valor 15, porque nos da la gana, pod&iacute;amos haberle dado cualquier otro. Luego viene lo que nos interesa, el <B>&quot;For Each&quot;</B>. Para cada hoja de c&aacute;lculo (Worksheets) del libro activo (ActiveWorkbook) vamos a ejecutar las dos instrucciones que est&aacute;n dentro del bucle.</P>
+<P ALIGN="justify">Para cambiar el nombre de una hoja utilizamos la propiedad <B>Name</B>. Luego incrementamos el valor de &quot;i&quot; para dar el nombre a la hoja siguiente. (Si intentamos dar a dos hojas el mismo nombre Excel nos dar&aacute; un mensaje de error)</P>
+<P ALIGN="justify">Bueno, otra rutina para jugar un poco con hojas y celdas:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> ListaHojas()
+    <FONT COLOR="#0000FF">Dim</FONT> h As Object
+    <FONT COLOR="#0000FF">Dim</FONT> r As Range
+    
+    <FONT COLOR="#0000FF">If</FONT> MsgBox(&quot;Esta macro crea en la celda 
+	activa una lista con los nombres de todas&quot; &amp; _
+            Chr(13) &amp; &quot;las hojas del libro activo.&quot;, vbOK, 
+			&quot;Lista Hojas&quot;) = vbCancel _
+        <FONT COLOR="#0000FF">Then</FONT> Exit Sub
+    Set r = ActiveCell<IMG SRC="gif/macro2.gif" WIDTH="250" HEIGHT="79" ALIGN="Right" BORDER="0">
+    <FONT COLOR="#0000FF">For</FONT> <FONT COLOR="#0000FF">Each</FONT> h <FONT COLOR="#0000FF">In</FONT> ActiveWorkbook.Sheets
+        r.Value = h.Name
+        r.Offset(0, 1).Value = TypeName(h)
+        Set r = r.Offset(1, 0)
+    <FONT COLOR="#0000FF">Next</FONT> h
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN="justify">Lo que hace esta rutina es crear en la hoja de c&aacute;lculo activa una tabla con los nombres de todas las hojas del libro. Primero, con &quot;Set r = ActiveCell&quot;, hacemos que la variable &quot;r&quot; apunte a la celda activa.</P>
+
+<P ALIGN="justify">Luego viene el bucle <B>&quot;For Each / Next&quot;</B>, que al igual que en el ejemplo anterior hace que el c&oacute;digo entre estas dos l&iacute;neas se ejecute una vez para cada hoja del libro. La &uacute;nica diferencia es que en el ejemplo anterior utiliz&aacute;bamos <B>&quot;ActiveWorkbook.Worksheets&quot; </B>(que pasa por todas las hojas de &quot;c&aacute;lculo&quot; del libro) y aqu&iacute; <B>&quot;ActiveWorkbook.Sheets&quot;</B> (que pasa por todas las hojas del libro, de todo tipo).</P>
+
+<P ALIGN="justify">Primero damos a la celda &quot;r&quot; el nombre de la primera hoja del libro. En la siguiente l&iacute;nea, ponemos en a celda de la derecha de &quot;r&quot; (con el Offset(0,1)) el tipo de hoja de que se trata, utilizando la funci&oacute;n <B>&quot;TypeName(h)&quot;</B>: esta funci&oacute;n devuelve una cadena de car&aacute;cteres que proporciona informaci&oacute;n sobre la variable &quot;h&quot;.</P>
+
+<P ALIGN="justify">En la siguiente l&iacute;nea, utilizando otra vez <B>Offset</B>, &quot;movemos&quot; la variable &quot;r&quot; para que apunte a la celda inferior. Y as&iacute;, vuelta a empezar.</P>
+
+<P ALIGN="justify">Y para terminar, vamos a aprender a utilizar el m&eacute;todo <B>Copy</B>, que se aplica a objetos de Excel que puedan ser copiados, como por ejemplo un objeto de tipo Range, aunque tambi&eacute;n a otros objetos como hojas enteras o gr&aacute;ficos.</P>
+
+<P ALIGN="justify">Lo que vamos a hacer es copiar en la celda activa el contenido de la celda de su izquierda:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> Copiar_CeldaIzquierda()
+    <FONT COLOR="#0000FF">If</FONT> MsgBox(&quot;Esta macro copia en la celda 
+	activa el contenido de la celda situada&quot; &amp; _
+       Chr(13) &amp; &quot;a su izquierda.&quot;, vbOK, &quot;Copiar celda 
+	   izquierda&quot;) = vbCancel <FONT COLOR="#0000FF">Then</FONT> Exit Sub
+    ActiveCell.Offset(0, -1).Copy ActiveCell
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+<P ALIGN="justify">La sintaxis de <B>Copy</B> es muy sencilla: se ejecuta el m&eacute;todo Copy sobre el rango de &quot;origen&quot;, es decir, el que queremos copiar. En el ejemplo, hacemos &quot;ActiveCell.Offset(0,-1).Copy&quot;, ya que queremos copiar la celda que est&aacute; a la izquierda de la celda activa.</P>
+
+<P ALIGN="justify">El par&aacute;metro del m&eacute;todo Copy indica el rango de &quot;destino&quot; para la copia. En nuestro ejemplo ponemos &quot;ActiveCell&quot;, ya que queremos que lo que hemos copiado se copie en la celda activa. Si omitimos el par&aacute;metro del m&eacute;todo Copy la copia se har&aacute; en el &quot;Portapapeles&quot;, y luego deberemos utilizar otros m&eacute;todos como &quot;Paste&quot; o &quot;PasteSpecial&quot; para pegar el contenido del portapapeles en otra celda.</P>
+
+<P ALIGN="justify">Hasta aqu&iacute; llega esta segunda entrega del curso. En este cap&iacute;tulo hemos aprendido a trabajar con celdas, rangos, libros y hojas, que es una de las partes m&aacute;s &uacute;tiles de la programaci&oacute;n en Excel, permiti&eacute;ndonos hacer cualquier operaci&oacute;n (mover, copiar, borrar, hacer operaciones aritm&eacute;ticas, etc) con los datos de una hoja de c&aacute;lculo.</P>
+<BR>
+<TABLE>
+	<TR>	
+		<TD><FONT SIZE="-1">Recuerda que los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel2.xls">Excel2.xls</A><BR>
+(39kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel2.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD>
+	</TR>
+</TABLE>
+<BR>
+</p>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulae.htm"><font FACE="ARIAL"><B>[Curso de VBA para Excel]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

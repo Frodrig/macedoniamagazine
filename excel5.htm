@@ -1,0 +1,441 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
+</H3>
+
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+
+<FONT FACE="Arial" SIZE=2>
+<P ALIGN=JUSTIFY>En esta entrega vamos a tratar sobre la creaci&oacute;n de men&uacute;s y barras de herramientas personalizadas para nuestras hojas. En Visual Basic for Applications, las barras de men&uacute; y las barras de herramientas est&aacute;n representadas por el mismo objeto (<B>CommandBar</B>), y su funcionamiento es exactamente igual. </P>
+
+<HR WIDTH="75%" SIZE="3">
+<TABLE ALIGN="CENTER">
+	<TR>	
+		<TD><FONT SIZE="-1">Todos los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel5.xls">Excel5.xls</A><BR>
+(90kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel5.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD></TR>
+</TABLE>
+<HR WIDTH="75%" SIZE="3">
+<BR>
+
+
+<P ALIGN=JUSTIFY>Antes de nada, vamos a intentar aclarar la nomenclatura que se utiliza en VBA para hacer referencia a cada una de las partes de un menu.
+</P>
+<IMG SRC="gif/xlmenu.gif" HEIGHT="355" WIDTH="412" ALT="Menús y submenús" BORDER="1" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>El nombre del menu en s&iacute; mismo es <B>CommandBar</B>. Un <B>CommandBar</B> (barra de men&uacute;) representa a todo el men&uacute;, como por ejemplo el que aparece cuando est&aacute;s en una hoja de c&aacute;lculo. Si cambias a una hoja de gr&aacute;fico ver&aacute;s que el men&uacute; cambia: se ha cambiado de barra de men&uacute; (<B>CommandBar</B>).</P>
+
+<P ALIGN=JUSTIFY>Cada una de las opciones de la barra de men&uacute; se llama <B>CommandBarPopUp</B> (men&uacute; desplegable seg&uacute;n la traducci&oacute;n de Microsoft). Por ejemplo, en el men&uacute; de una hoja de c&aacute;lculo la opci&oacute;n &quot;Archivo&quot; es un men&uacute; desplegable o <B>CommandBarPopUp</B>. </P>
+
+<P ALIGN=JUSTIFY>Dentro del men&uacute; desplegable, cada una de las opciones se llama <B>ControlButton</B> (opci&oacute;n de men&uacute;). Por ejemplo, &quot;nuevo&quot; y &quot;Guardar&quot; son opciones del men&uacute; desplegable &quot;archivo&quot; de la barra de men&uacute; de &quot;Hoja de c&aacute;lculo&quot; de Excel.</P>
+ 
+<P ALIGN=JUSTIFY>Para tener acceso a las barras de comandos (que pueden ser men&uacute;s o barras de herramientas) utilizaremos la propiedad <B>CommandBars</B>, que devuelve el conjunto de barras de comandos de la aplicaci&oacute;n. Cada una de las barras de comando ser&aacute; por tanto un objeto CommandBar.</P>
+
+<P ALIGN=JUSTIFY>Por ejemplo, para ver los nombres de todas las barras de comando que existen escribiremos la siguiente rutina:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> ListaBarrasComando()
+    <FONT COLOR="#0000FF">Dim</FONT> h <FONT COLOR="#0000FF">as</FONT> Object
+    <FONT COLOR="#0000FF">Dim</FONT> dst <FONT COLOR="#0000FF">as</FONT> Range
+
+    <FONT COLOR="#0000FF">Set</FONT> dst = Sheets(&quot;Hoja1&quot;).Range(&quot;A1&quot;)
+    <FONT COLOR="#0000FF">For Each</FONT> h <FONT COLOR="#0000FF">in</FONT> CommandBars
+	dst.Value = h.Name       
+	<FONT COLOR="#0000FF">Set</FONT> dst = dst.Offset(1, 0)
+    <FONT COLOR="#0000FF">Next</FONT> h
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+
+<P ALIGN=JUSTIFY>De esta forma obtendremos el nombre de todas las barras de comando. Recuerda que puede haber barras de comando que existan pero no est&eacute;n activas, que no aparezcan en la pantalla.</P>
+
+<P ALIGN=JUSTIFY>Como habr&aacute;s podido deducir, la propiedad <B>Name</B> de un objeto <B>CommandBar</B> nos devuelve el nombre de la barra de comando.</P>
+
+<H4>1. Crear una opci&oacute;n de men&uacute;.
+</H4>
+<P ALIGN=JUSTIFY>Lo primero que vamos a hacer es crear una opcion dentro de un men&uacute; desplegable. Por ejemplo, vamos a crear una opci&oacute;n llamada &quot;<I>Macedonia</I>&quot; dentro del men&uacute; &quot;<I>Edici&oacute;n</I>&quot;.</P>
+
+<P ALIGN=JUSTIFY>Antes que nada, declaramos las variables que vamos a utilizar:</P>
+
+<PRE>
+    <FONT COLOR="#0000FF">Dim</FONT> cBar <FONT COLOR="#0000FF">As</FONT> Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp <FONT COLOR="#0000FF">As</FONT> Object
+    <FONT COLOR="#0000FF">Dim</FONT> cButton <FONT COLOR="#0000FF">As</FONT> Object
+</PRE>
+
+<P ALIGN=JUSTIFY>La primera variable (<I>cBar</I>) la utilizaremos para almacenar el men&uacute; de hoja de c&aacute;lculo entero, la segunda (<I>cBarPopUp</I>) para obtener el men&uacute; de &quot;Edici&oacute;n&quot; dentro de <I>cBar</I>, y la tercera para crear nuestra opci&oacute;n (Macedonia) dentro del men&uacute; de Edici&oacute;n.</P>
+
+<P ALIGN=JUSTIFY>Vamos a obtener el men&uacute; de hoja de c&aacute;lculo. Si te fijas en el resultado de la rutina <I>ListaBarrasComando</I> que hemos creado antes, ver&aacute;s que una de las barras de comando se llama &quot;<I>Worksheet Menu Bar</I>&quot;. Esta es la barra de comandos que est&aacute; presente cuando est&aacute;s en una hoja de c&aacute;lculo. Hay otras barras, como por ejemplo &quot;Chart Menu Bar&quot;, que es la que aparece cuando est&aacute;s en una hoja de gr&aacute;ficos.</P>
+
+<P ALIGN=JUSTIFY>Para utilizar la barra de comandos &quot;Worksheet Menu Bar&quot; haremos lo siguiente:</P>
+
+<PRE>    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars(&quot;Worksheet Menu Bar&quot;)
+</PRE>
+<P ALIGN=JUSTIFY>Con esto hemos conseguido que nuestra variable, cBar, contenga la barra de comandos que nos interesa. Ahora queremos seleccionar una parte de ese barra de comandos: queremos el men&uacute; de Edici&oacute;n. Para ello utilizamos el siguiente c&oacute;digo:</P>
+
+<PRE>    Set cBarPopUp = cBar.Controls(&quot;Edici&oacute;n&quot;)
+</PRE>
+<P ALIGN=JUSTIFY>Hemos utilizado la propiedad &quot;Controls&quot; del objeto CommandBar. Esta propiedad nos permite acceder a todos los submen&uacute;s de una barra de comandos. El objeto devuelto es del tipo &quot;CommandBarPopup&quot;. Reconozco que la terminolog&iacute;a es un poco confusa, pero as&iacute; lo ha hecho Microsoft.</P>
+
+<IMG SRC="gif/xlearl.gif" HEIGHT="116" WIDTH="131" ALT="Menús y submenús" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>Ahora ya tenemos el men&uacute; de &quot;<I>Edici&oacute;n</I>&quot; en nuestra variable. Y lo que queremos hacer es a&ntilde;adir una opci&oacute;n dentro de ese men&uacute;. Para hacerlo utilizaremos deberemos acceder a la propiedad &quot;<B>Controls</B>&quot; de nuestro men&uacute; de <I>Edici&oacute;n</I>. F&iacute;jate que antes hemos accedido a la propiedad Controls del objeto cBar, y ahora vamos a acceder a la propiedad <B>Controls</B> del objeto <I>cBarPopUp</I>. Pues bien, una vez que accedemos a la propiedad &quot;Controls&quot; del men&uacute; <I>Edici&oacute;n</I> (<I>cBarPopUp</I>), utilizamos el m&eacute;todo <B>Add</B> para a&ntilde;adir una nueva opci&oacute;n del men&uacute;:</P>
+
+<PRE>    <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
+</PRE>
+
+<P ALIGN=JUSTIFY>Almacenamos en nuestra variable cButton el resultado, porque luego queremos hacerle unos cambios.</P>
+
+<P ALIGN=JUSTIFY>El tipo de control que queremos a&ntilde;adir puede variar ( msoControlButton, msoControlEdit, msoControlDropdown, msoControlComboBox o msoControlPopup ), pero en nuestro caso queremos una opci&oacute;n de men&uacute;, y utilizamos msoControlButton.</P>
+
+<P ALIGN=JUSTIFY>Nos queda hacer que nuestra opci&oacute;n de men&uacute; (o ControlButton), tenga el texto que nosotros queremos y haga lo que nosotros queremos. Para ello utilizaremos las propiedades del ControlButton:</P>
+
+<UL TYPE="CIRCLE">
+<LI><B>Caption:</B> es el texto que queremos que aparezca en la opci&oacute;n de men&uacute;. En nuestro caso, &quot;&amp;Macedonia&quot;. El car&aacute;cter &quot;&amp;&quot; se utiliza para indicar que la letra que le sigue (la &quot;M&quot; en este caso) queremos que apareza subrayada y funcione como tecla r&aacute;pida una vez que est&eacute; abierto el men&uacute;.
+<LI><B>OnAction:</B> es el nombre de la rutina que queremos que se ejecute cuando el usuario seleccione esa opci&oacute;n. En este caso vamos a darle el valor &quot;MiMacro&quot;, que ser&aacute; una peque&ntilde;a rutina que simplemente avisar&aacute; de que hemos seleccionado esa opci&oacute;n.
+<LI><B>ShortcutText</B>: el texto que aparece en la opci&oacute;n del men&uacute;, a la derecha. Normalmente se suele poner la tecla r&aacute;pida para esa opci&oacute;n de men&uacute;. Cuidado, porque esta opci&oacute;n s&oacute;lo sirve para escribir el texto, pero no hace que la tecla r&aacute;pida funcione, eso tendr&aacute;s que hacerlo t&uacute; por otro lado.
+<LI><B>FaceID:</B> es el n&uacute;mero de la imagen que queremos que se asigne a nuestra opci&oacute;n de men&uacute;. La imagen aparece en la parte izquierda de la opci&oacute;n. Excel tiene un mont&oacute;n de im&aacute;genes para nuestras opciones, y se pueden seleccionar cambiando el ID. Para ver todas las im&aacute;genes disponibles y saber qu&eacute; ID corresponde a cada imagen, lo mejor es hacer una peque&ntilde;a rutina que muestre todas las im&aacute;genes. (eso te queda como ejercicio; si tienes alguna duda escr&iacute;beme).
+<LI><B>BeginGroup:</B> true o false, indica si queremos que antes de nuestra opci&oacute;n se ponga un &quot;separador&quot;, una l&iacute;nea que separe un poco nuestra opci&oacute;n de la anterior.
+</UL>
+
+<P ALIGN=JUSTIFY>Como siempre, hay muchas m&aacute;s propiedades, pero creo que hemos visto las m&aacute;s importantes. Vamos a ver nuestra rutina completa:
+</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> CrearOpcionMenu()
+    <FONT COLOR="#0000FF">Dim</FONT> cBar As <FONT COLOR="#0000FF">Object</FONT>
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As <FONT COLOR="#0000FF">Object</FONT>
+    <FONT COLOR="#0000FF">Dim</FONT> cButton As <FONT COLOR="#0000FF">Object</FONT>
+   
+    BorrarOpcionMenu
+    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars(&quot;Worksheet Menu Bar&quot;)
+    <FONT COLOR="#0000FF">Set</FONT> cBarPopUp = cBar.Controls(&quot;Edici&oacute;n&quot;)
+    <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
+    <FONT COLOR="#0000FF">With</FONT> cButton
+       .Caption = &quot;&amp;Macedonia&quot;
+       .OnAction = &quot;MiMacro&quot;
+       .FaceId = 7
+       .ShortcutText = &quot;Ctrl+Shift+M&quot;
+       .BeginGroup = True
+    <FONT COLOR="#0000FF">End With</FONT>
+    Call MsgBox(&quot;Se ha creado la opci&oacute;n 'Macedonia' en el men&uacute; 'Edici&oacute;n'&quot;, vbOKOnly, &quot;Macedonia&quot;)
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+
+<P ALIGN=JUSTIFY>Para verla en acci&oacute;n abre el fichero de <A HREF="excel5.xls">ejemplo</A>, y utiliza el bot&oacute;n &quot;Crear opci&oacute;n de men&uacute;&quot;.</P> 
+
+<P ALIGN=JUSTIFY>Si te fijas en la rutina <I>CrearOpcionMenu</I>, hemos incluido una llamada a la rutina <I>BorrarOpcionMenu</I>. Esta &uacute;ltima se encarga de borrar la opci&oacute;n &quot;Macedonia&quot; del men&uacute; Edici&oacute;n en caso de que ya exista, y llam&aacute;ndola evitamos que aparezcan dos opciones &quot;Macedonia&quot;. La rutina <I>BorrarOpcionMenu</I> es la siguiente:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> BorrarOpcionMenu()
+    <FONT COLOR="#0000FF">Dim</FONT> cBar As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cc As Object
+    
+    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars(&quot;Worksheet Menu Bar&quot;)
+    <FONT COLOR="#0000FF">Set</FONT> cBarPopUp = cBar.Controls(&quot;Edici&oacute;n&quot;)
+    <FONT COLOR="#0000FF">For Each</FONT> cc <FONT COLOR="#0000FF">In</FONT> cBarPopUp.Controls
+       If cc.Caption = &quot;&amp;Macedonia&quot; Then cc.Delete
+    <FONT COLOR="#0000FF">Next</FONT> cc
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN=JUSTIFY>Al igual que en la rutina CrearOpcionMenu, primero obtenemos la barra de comandos &quot;Worksheet Menu Bar&quot;, despues la barra &quot;Edici&oacute;n&quot;, y luego, utilizando la instrucci&oacute;n &quot;For Each&quot;, pasamos por todos las opciones de men&uacute;, y borramos aquellas cuyo &quot;Caption&quot; sea &quot;&amp;Macedonia&quot; (incluyendo el &amp;). Para borrar la opci&oacute;n de men&uacute; utilizamos el m&eacute;todo Delete.</P>
+
+<H4>2. Crear un men&uacute; desplegable.
+</H4>
+<P ALIGN=JUSTIFY>Ahora vamos a crear un men&uacute; desplegable (como el men&uacute; Archivo, o Edici&oacute;n, de la hoja de c&aacute;lculo de Excel). Como siempre, primero declaramos las variables que vamos a utilizar.</P>
+
+<PRE>    <FONT COLOR="#0000FF">Dim</FONT> cBar As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cButton As Object
+</PRE>
+
+<P ALIGN=JUSTIFY>Luego vamos a obtener la barra de comandos de la hoja de c&aacute;lculo:
+</P>
+<PRE>    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars(&quot;Worksheet Menu Bar&quot;)
+</PRE>
+<P ALIGN=JUSTIFY>Para a&ntilde;adir un men&uacute; desplegable a dicha barra de comandos vamos a utilizar el m&eacute;todo &quot;Add&quot; de la colecci&oacute;n &quot;Controls&quot; de la barra de comandos:
+</P>
+<PRE>    <FONT COLOR="#0000FF">Set</FONT> cBarPopUp = cBar.Controls.Add(Type:=msoControlPopup, Before:=10)
+</PRE>
+<P ALIGN=JUSTIFY>El tipo de control que queremos a&ntilde;adir es un &quot;msoControlPopup&quot;, para indicar que queremos un men&uacute; desplegable.
+</P>
+<PRE>    cBarPopUp.Caption = &quot;&amp;Macedonia&quot;
+</PRE>
+<P ALIGN=JUSTIFY>Ahora tenemos en cBarPopUp un men&uacute; desplegable, igual que en el punto anterior ten&iacute;amos el men&uacute; desplegable &quot;Edici&oacute;n&quot;. Ahora tenemos que a&ntilde;adir opciones en dicho men&uacute; desplagable, igual que hemos hecho antes:</P>
+<PRE>
+    <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
+    <FONT COLOR="#0000FF">With</FONT> cButton
+        .Caption = &quot;&amp;Macedonia 1&quot;
+        .OnAction = &quot;MiMacro&quot;
+    <FONT COLOR="#0000FF">End With</FONT>
+</PRE>
+<P ALIGN=JUSTIFY>Tambi&eacute;n podemos a&ntilde;adir un submen&uacute; dentro de alguna opci&oacute;n de nuestro men&uacute;, de una forma muy parecida. La rutina completa para crear un men&uacute; desplegable es la siguiente:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> CrearMenuDesplegable()
+    <FONT COLOR="#0000FF">Dim</FONT> cBar As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cButton As Object
+    <FONT COLOR="#0000FF">Dim</FONT> i, j As Integer
+    
+    BorrarMenuDesplegable
+    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars(&quot;Worksheet Menu Bar&quot;)
+    <FONT COLOR="#0000FF">Set</FONT> cBarPopUp = cBar.Controls.Add(Type:=msoControlPopup, _
+                    Before:=10)
+    cBarPopUp.Caption = &quot;&amp;Macedonia&quot;
+    
+    <FONT COLOR="#0000FF">For</FONT> i = 1 To 10
+        <FONT COLOR="#0000FF">If</FONT> i &lt;&gt; 5 <FONT COLOR="#0000FF">Then</FONT>
+            <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
+            <FONT COLOR="#0000FF">With</FONT> cButton
+                .Caption = &quot;&amp;Macedonia &quot; &amp; i
+                .OnAction = &quot;MiMacro&quot;
+                <FONT COLOR="#0000FF">If</FONT> i Mod 3 = 0 <FONT COLOR="#0000FF">Then</FONT> .BeginGroup = <FONT COLOR="#0000FF">True</FONT>
+            <FONT COLOR="#0000FF">End With</FONT>
+        <FONT COLOR="#0000FF">Else</FONT>
+            <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlPopup)
+            cButton.Caption = &quot;&amp;Macedonia &quot; &amp; i
+            <FONT COLOR="#0000FF">For</FONT> j = 1 <FONT COLOR="#0000FF">To</FONT> 5
+                With cButton.Controls.Add(msoControlButton)
+                    .Caption = &quot;Submen&uacute; Macedonia &quot; &amp; j
+                    .OnAction = &quot;MiMacro&quot;
+                    <FONT COLOR="#0000FF">If</FONT> j Mod 3 = 0 <FONT COLOR="#0000FF">Then</FONT> .BeginGroup = True
+                <FONT COLOR="#0000FF">End With</FONT>
+            <FONT COLOR="#0000FF">Next</FONT> j
+        <FONT COLOR="#0000FF">End If</FONT>
+    <FONT COLOR="#0000FF">Next</FONT> i
+    Call MsgBox(&quot;Se ha a&ntilde;adido la opci&oacute;n 'Macedonia' en el men&uacute; principal&quot;, _
+                 vbOKOnly, &quot;Macedonia&quot;)
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN=JUSTIFY>Para ver esta rutina en acci&oacute;n utiliza el bot&oacute;n &quot;<I>Crear men&uacute; desplegable</I>&quot; del <A HREF="excel5.xls">fichero de ejemplo</A>.</P>
+
+<H4>3. Crear una barra de men&uacute;.
+</H4>
+<P ALIGN=JUSTIFY>Ahora vamos a crear una barra de men&uacute; completa, como la barra de men&uacute; &quot;Worksheet Menu Bar&quot;. Lo primero, como siempre, es declarar las variables:</P>
+
+<PRE>    <FONT COLOR="#0000FF">Dim</FONT> cBar As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cButton As Object
+</PRE>
+<P ALIGN=JUSTIFY>En lugar de obtener la barra de men&uacute; &quot;Worksheet Menu Bar&quot; y luego trabajar con ella, ahora lo que vamos a hacer es crear nosotros mismos una barra de men&uacute;, utilizando el m&eacute;todo &quot;Add&quot; de la colecci&oacute;n &quot;CommandBars&quot;.</P>
+
+<PRE>    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars.Add(&quot;Barra Macedonia&quot;, msoBarTop, True)
+</PRE>
+<IMG SRC="gif/xlbaud.gif" HEIGHT="116" WIDTH="131" ALT="Menús y submenús" ALIGN="Left" HSPACE="4"><P ALIGN=JUSTIFY>El primer argumento es el nombre de la barra de comandos que vamos a crear. El segundo argumento es la posici&oacute;n de la nueva barra de comandos, y puede ser uno de los siguientes valores:</P>
+<UL TYPE="CIRCLE">
+<LI><B>msoBarLeft, msoBarRight, msoBarTop, msoBarBottom</B>: izquierda, derecha, arriba o abajo.
+<LI><B>msoBarFloating</B>: queremos que la nueva barra de men&uacute; sea flotante.
+<LI><B>msoBarPopUp</B>: la nueva barra de men&uacute;s ser&aacute; contextual, como las que salen cuando pulsamos el bot&oacute;n derecho.
+</UL>
+
+<P ALIGN=JUSTIFY>El tercer argumento (verdadero o falso) indica si queremos que la nueva barra de men&uacute; reemplace a la barra de men&uacute;s activa o no.
+</P>
+<P ALIGN=JUSTIFY>Una vez que tenemos nuestra barra de men&uacute; utilizamos el c&oacute;digo que hemos aprendido antes para crear los men&uacute;s desplegables y sus opciones. La siguiente rutina crea una barra de men&uacute; y varios men&uacute;s desplegables y opciones:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Const</FONT> NOMBREMENU = &quot;Men&uacute; Macedonia&quot;
+
+<FONT COLOR="#0000FF">Sub</FONT> CrearBarraMenu()
+    <FONT COLOR="#0000FF">Dim</FONT> cBar As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cBarPopUp As Object
+    <FONT COLOR="#0000FF">Dim</FONT> cButton As Object
+    <FONT COLOR="#0000FF">Dim</FONT> i, j As Integer
+    
+    BorrarBarraMenu
+    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars.Add(NOMBREMENU, msoBarTop, True)
+    
+    <FONT COLOR="#0000FF">For</FONT> j = 1 <FONT COLOR="#0000FF">To</FONT> 5
+        <FONT COLOR="#0000FF">Set</FONT> cBarPopUp = cBar.Controls.Add(Type:=msoControlPopup)
+        cBarPopUp.Caption = &quot;&amp;Macedonia &quot; &amp; j
+        <FONT COLOR="#0000FF">For</FONT> i = 1 <FONT COLOR="#0000FF">To</FONT> j + 2
+            <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
+            <FONT COLOR="#0000FF">With</FONT> cButton
+                .Caption = &quot;&amp;Macedonia &quot; &amp; i
+                .OnAction = &quot;MiMacro&quot;
+                <FONT COLOR="#0000FF">If</FONT> i Mod 3 = 0 <FONT COLOR="#0000FF">Then</FONT> .BeginGroup = True
+            <FONT COLOR="#0000FF">End With</FONT>
+        <FONT COLOR="#0000FF">Next</FONT> i
+    <FONT COLOR="#0000FF">Next</FONT> j
+    Call MsgBox(&quot;Se ha creado la barra de men&uacute; 'Macedonia'.&quot;, vbOKOnly, &quot;Macedonia&quot;)
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN=JUSTIFY>Hemos utilizado la variable &quot;NOMBREMENU&quot; para dar el nombre a la barra de men&uacute;. Cuando se usa una cadena en m&aacute;s de un sitio del c&oacute;digo es aconsejable sustituir la cadena por una variable, para evitar errores al escribir la cadena en varios sitios.</P>
+
+<P ALIGN=JUSTIFY>Con la rutina anterior hemos creado la barra de men&uacute;, pero todav&iacute;a no la podemos ver, porque hay que activarla, usando:
+</P>
+<PRE>    CommandBars(NOMBREMENU).Visible = <FONT COLOR="#0000FF">True</FONT>
+</PRE>
+<P ALIGN=JUSTIFY>Como al crear la barra hemos indicado (con el tercer argumento) que esta barra tiene que sustituir a la que esta activa, la barra activa desaparece y la nuestra aparece. Para volver a desactivar nuestra barra, utilizaremos:
+</P>
+<PRE>    CommandBars(NOMBREMENU).Visible = <FONT COLOR="#0000FF">False</FONT>
+</PRE>
+<P ALIGN=JUSTIFY>Si queremos borrar la barra de menu que hemos creado utilizaremos el metodo Delete:
+</P>
+<PRE>    CommandBars(NOMBREMENU).Delete
+</PRE>
+
+<P ALIGN=JUSTIFY>En el fichero <A HREF="excel5.xls">excel5.xls</A> tienes unos botones que sirven para crear, activar, desactivar y borrar una barra de men&uacute;.</P>
+
+<H4>4. Crear una barra de herramientas:
+</H4>
+
+<P ALIGN=JUSTIFY>Como hemos visto al principio, en VBA las barras de men&uacute; y las barras de herramientas est&aacute;n representadas por el mismo objeto (CommandBar), y su funcionamiento es pr&aacute;cticamente igual.</P>
+
+<P ALIGN=JUSTIFY>Crear una barra de herramientas es exactamente igual que crear una barra de men&uacute;:
+</P>
+ <PRE>   <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars.Add(NOMBREBARRA, msoBarFloating, False)
+</PRE>
+<P ALIGN=JUSTIFY>En este caso hemos creado una barra &quot;flotante&quot;, pero pod&iacute;amos haber utilizado cualquiera de los otros par&aacute;metros que hemos visto antes.
+</P>
+<P ALIGN=JUSTIFY>Ahora vamos a crear un bot&oacute;n de la barra de herramientas. La &uacute;nica diferencia entre crear un bot&oacute;n y crear un men&uacute; desplegable es el tipo de control, el par&aacute;metro del m&eacute;todo Add. En este caso utilizaremos &quot;msoControlButton&quot;:
+</P>
+
+<PRE>
+    <FONT COLOR="#0000FF">Set</FONT> cButton = cBar.Controls.Add(msoControlButton)
+    <FONT COLOR="#0000FF">With</FONT> cButton
+        .Caption = &quot;&amp;Macedonia &quot; &amp; i
+        .OnAction = &quot;MiMacro&quot;
+        .FaceId = Int(Rnd * 1000)
+<FONT COLOR="#0000FF">    End With
+</FONT></PRE>
+
+<P ALIGN=JUSTIFY>El c&oacute;digo utilizado para crear, activar, desactivar y borrar una barra de herramientas es el mismo que para una barra de men&uacute;s. De hecho no hay ninguna diferencia entre ellas, en Excel las dos son una barra de comandos (CommandBar). Adem&aacute;s, tambi&eacute;n podemos mezclar botones y men&uacute;s dentro de una barra de comandos: s&oacute;lo hay que crear la barra y luego a&ntilde;adir controles tipo &quot;msoControlPopup&quot; para los men&uacute;s y controles &quot;msoControlButton&quot; para los botones.
+</P>
+<P ALIGN=JUSTIFY>Bueno, aqu&iacute; termina la quinta entrega del curso de VBA para Excel. Si tienes cualquier duda o comentario no dudes en <A HREF="mailto:ecenaitu@arrakis.es">escribirme.</A>
+</P>
+
+<BR><BR>
+
+<HR WIDTH="75%" SIZE="3">
+<TABLE ALIGN="CENTER">
+	<TR>	
+		<TD><FONT SIZE="-1">Recuerda que los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel5.xls">Excel5.xls</A><BR>
+(90kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel5.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD></TR>
+</TABLE>
+<HR WIDTH="75%" SIZE="3">
+<BR>
+<BR><BR>
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>&Uacute;</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISI&Oacute;N EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>ABRIL</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+<A HREF="index03.htm">
+<FONT FACE="ARIAL"><B>Aula Macedonia</B></FONT>
+</A>
+<HR>
+<A HREF="aulae.htm">
+<FONT FACE="ARIAL"><B>Curso de programación en VBA para Excel</B></FONT>
+</A> 
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>
+AULA MACEDONIA
+</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>
+
+
+

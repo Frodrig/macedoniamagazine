@@ -1,0 +1,417 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Cap&iacute;tulo 4. Cuadros de diálogo (Userforms). Segunda parte.</H3>
+<P ALIGN="justify">
+Seguimos con los UserForms y los controles. En esta entrega vamos a ampliar el di&aacute;logo sobre datos personales, a&ntilde;adi&eacute;ndole m&aacute;s opciones, y vamos a crear dos nuevos userforms: uno para convertir de pesetas a euros y viceversa, y otro para hacer operaciones (sumar, restar...) sobre un rango seleccionado (algo parecido a lo que hicimos antes, pero m&aacute;s completo). 
+</P>
+
+<BR>
+<HR WIDTH="75%" SIZE="3">
+<TABLE ALIGN="CENTER">
+	<TR>	
+		<TD><FONT SIZE="-1">Todos los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="Excel4.xls">Excel4.xls</A><BR>
+(116kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel4.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD></TR>
+</TABLE>
+<HR WIDTH="75%" SIZE="3">
+<BR>
+<P  ALIGN="JUSTIFY">Primero vamos a volver a hacer un di&aacute;logo de &quot;<I>Datos Personales</I>&quot; como el de la entrega anterior, pero a&ntilde;adiendo algunas cosas. Partimos del userform de la entrega anterior, que ten&iacute;a un cuadro de edici&oacute;n para el nombre y otro para el apellido, y los dos botones cl&aacute;sicos (Aceptar y Cancelar). </P>
+
+<P  ALIGN="JUSTIFY">Hab&iacute;amos escrito el c&oacute;digo necesario para que al abrirse el di&aacute;logo (evento <B>Initialize</B> del Userform) los cuadros de edici&oacute;n se llenen con el texto de las celdas de la hoja de c&aacute;lculo, y tambi&eacute;n para que cuando el usuario pulse Aceptar (evento <B>Click</B> del bot&oacute;n) se copie el texto de los cuadros de edici&oacute;n a la hoja de c&aacute;lculo. Para hacer estos traspasos entre la hoja de c&aacute;lculo y el Userform hab&iacute;amos escrito un par de l&iacute;neas de c&oacute;digo en los eventos indicados, pero vamos a ver que hay otro m&eacute;todo para hacerlo: 
+</P>
+
+<P  ALIGN="JUSTIFY">Todos los controles tienen la propiedad &quot;<B>ControlSource</B>&quot;, que se utiliza para decirle al control cu&aacute;l es la &quot;fuente&quot; de su informaci&oacute;n, que ser&aacute; una celda o un rango de una hoja de c&aacute;lculo. Por ejemplo, en el cuadro de edici&oacute;n del Nombre podemos poner como ControlSource la celda de la hoja de c&aacute;lculo en la que est&aacute; ese dato. Como siempre, no vamos a utilizar referencias absolutas a celdas y rangos (p.ej. Hoja1!A5), sino que vamos a utilizar nombres de rango. Por ejemplo, vamos a la hoja de c&aacute;lculo y damos a la celda &quot;fuente&quot; el nombre &quot;<I>rngNombre</I>&quot; (rng porque es un rango de una hoja de c&aacute;lculo). Luego vamos al editor VBE, seleccionamos el control de edici&oacute;n Nombre y en su propiedad ControlSource escribimos el nombre del rango que queremos que sea su &quot;fuente&quot;, en este caso &quot;rngNombre&quot;.</P>
+
+<P  ALIGN="JUSTIFY">Ahora hacemos lo mismpo para el apellido: primero damos el nombre &quot;rngApellido&quot; a la celda de la hoja de c&aacute;lculo y luego escribimos rngApellido en la propiedad ControlSource del control de edici&oacute;n de Apellido.</P>
+
+<IMG SRC="gif/rocky.gif" WIDTH="129" HEIGHT="114" ALIGN="Right" BORDER="0" ALT="Rocky"><P ALIGN="JUSTIFY">Ahora tenemos que borrar el c&oacute;digo que hab&iacute;amos escrito para pasar la informaci&oacute;n de hoja de c&aacute;lculo al Userform y viceversa. Mejor que borrarlo, lo que haremos ser&aacute; &quot;comentarlo&quot;, utilizando una comilla simple <B>'</B>, que indica a Excel que todo lo que escribamos en esa l&iacute;nea detr&aacute;s de la comilla son cosas nuestras y que las ignore (el texto &quot;comentado&quot; aparecer&aacute; en otro color, normalmente en verde). Aprovechando que explico lo de los comentarios, nunca est&aacute; de m&aacute;s recordar la importancia que tiene a&ntilde;adir al c&oacute;digo todos los comentarios que sean necesarios. Cuando est&aacute;s escribiendo una rutina sabes perfectamente c&oacute;mo funciona y qu&eacute; es lo que hace, y todos pensamos que los comentarios son innecesarios, pero cuando tras algunas semanas tienes que volver a ver la rutina te encuentras con un mont&oacute;n de l&iacute;neas que no sabes para qu&eacute; sirven ni c&oacute;mo lo hacen, y si no las has comentado tienes que &quot;bucear&quot; en ellas para averiguarlo.</P>
+
+<P  ALIGN="JUSTIFY">A lo que &iacute;bamos, est&aacute;bamos borrando el c&oacute;digo de los eventos <B>Initialize</B> del Userform y <B>Click</B> del bot&oacute;n Aceptar. Vamos al editor VBE, hacemos doble-click sobre el Userform y nos aparece la rutina <B>Userform_Initialize()</B>. Ponemos una comilla delante de las dos l&iacute;neas que se encargan de copiar los datos de la hoja de c&aacute;lculo al userform, y veremos que dichas l&iacute;neas cambian de color, indic&aacute;ndonos que para Excel son comentarios y los va a ignorar. Ahora volvemos al Userform y hacemos doble-click en el bot&oacute;n Aceptar, y nos aparece la rutina <B>btnAceptar_Click()</B>. Volvemos a poner las comillas en las dos l&iacute;neas de c&oacute;digo que queremos quitar y ya est&aacute;.</P>
+
+<P  ALIGN="JUSTIFY">Si probamos ahora el di&aacute;logo, veremos que la propieda ControlSource funciona, y que antes de mostrar el di&aacute;logo &quot;lee&quot; el contenido de la hoja de c&aacute;lculo y lo pone en el Userform, y cuando pulsamos Aceptar copia el contenido de los controles del Userform en la hoja de c&aacute;lculo.</P> 
+
+<P  ALIGN="JUSTIFY">Sin embargo he detectado un problema con el uso de ControlSource. Si hacemos alg&uacute;n cambio en el Userform y luego pulsamos el bot&oacute;n de &quot;Cancelar&quot;, los cambios que hemos hecho en los datos se actualizan en la hoja de c&aacute;lculo, cuando no deber&iacute;an actualizarse porque hemos pulsado Cancelar. En cambio, si hacemos alg&uacute;n cambio y pulsamos la tecla Escape los cambios no se actualizan en la hoja de c&aacute;lculo. Es un poco raro. Creo que &quot;<I>se me escapa</I>&quot; algo, si alguien descubre por qu&eacute; ocurre esto que me avise.</P>
+
+<P  ALIGN="JUSTIFY">Bueno, ahora vamos a a&ntilde;adir un control nuevo, que Excel llama &quot;cuadro combinado&quot; (el nombre en ingl&eacute;s es <B>ComboBox</B>), que es la t&iacute;pica persiana que estamos hartos de ver en cualquier di&aacute;logo, y permite al usuario escoger una opci&oacute;n entre varias que le presentamos. En este caso vamos a mostrar una persiana para el &quot;<I>Estado Civil</I>&quot;, y las opciones que vamos a presentar son &quot;soltero, casado, viudo y divorciado&quot;.</P>
+<BR>
+Las <B>propiedades</B> m&aacute;s importantes de un <B>ComboBox</B> son:<BR><BR>
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="JUSTIFY"><B>List</B>: un conjunto de cadenas de caracteres (<I>strings</I>) que representan a todos los elementos de la lista. Para acceder a un elemento en concreto utilizamos MiComboBox.List( 3 ), que nos devolver&iacute;a el cuarto elemento de la lista, ya que el primero tiene el n&uacute;mero 0.<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>ListCount</B>: el n&uacute;mero de elementos que hay en la lista. Si utilizamos MiComboBox.List( MiComboBox.ListCount-1 ) obtendremos el &uacute;ltimo elemento de la lista.<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>ListIndex</B>: el n&uacute;mero del elemento seleccionado actualmente por el usuario. Para obtener el texto del elemento seleccionado utilizar&iacute;amos MiComboBox.List( MiComboBox.ListIndex ). Si hemos definido el control como &quot;multiselecci&oacute;n&quot; (es decir, que el usuario pueda escoger m&aacute;s de un elemento), esta propiedad no se puede usar, pero por ahora no nos vamos a meter en esto.<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>Rowsource</B>: es el rango del que queremos que el ComboBox lea los elementos. Podemos utilizar esta propiedad, o bien introducir nosotros mismos mediante c&oacute;digo los elementos (utilizando el m&eacute;todo AddItem).<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>ControlSource</B>: la celda en la que el ComboBox lee y escribe el elemento seleccionado. Igual que con RowSource, podemos utilizar esta propiedad para que el ComboBox nos escriba en una celda el elemento seleccionado o podemos utilizar c&oacute;digo para obtener el elemento seleccionado (utilizando ListIndex).<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>Style</B>: identifica el tipo de ComboBox que queremos. Tiene dos valores posibles: 
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="JUSTIFY"><B>fmStyleDropDownCombo</B>: el usuario puede escoger uno de los valores de la lista o escribir otro distinto.
+<LI><P ALIGN="JUSTIFY"><B>fmStyleDropDownList</B>:  el usuario s&oacute;lo puede escoger uno de los valores de la lista.
+</UL><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>ControlTipText</B>: esta propiedad se aplica a todos los controles, pero como todav&iacute;a no la he explicado, la pongo aqu&iacute;. Esta propiedad sirve para mostrar al usuario un peque&ntilde;o texto de ayuda sobre el control cuando ponga el rat&oacute;n sobre el mismo, el ya cl&aacute;sico cuadrito amarillo.
+</UL>
+<BR>
+Una vez vistas las propiedades, vamos con los <B>m&eacute;todos</B> del objeto ComboBox:<BR>
+<BR>
+
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="JUSTIFY"><B>AddItem</B>: sirve para a&ntilde;adir un elemento a la lista. Su sintaxis es MiComboBox.AddItem( 'Mi texto', 3 ). El primer par&aacute;metro es el texto del elemento, y el segundo par&aacute;metro (que es opcional), es la posici&oacute;n dentro de la lista que queremos para el nuevo elemento. Si no utilizamos el segundo par&aacute;metro, nuestro nuevo elemento se a&ntilde;adir&aacute; al final de la lista.<BR><BR>
+
+<LI><P ALIGN="JUSTIFY"><B>RemoveItem</B>: para borrar un elemento. Su sintaxis es MiComboBox.RemoveItem( 3 ), para borrar el elemento n&uacute;mero 3.<BR><BR>
+<LI><P ALIGN="JUSTIFY"><B>Clear</B>: borra todos los elementos de la lista.
+</UL>
+
+<P  ALIGN="JUSTIFY">Como siempre, hay muchos m&aacute;s m&eacute;todos y propiedades, que est&aacute;n bastante bien explicados en la ayuda de Excel.</P>
+
+<P  ALIGN="JUSTIFY">Vamos a colocar nuestro ComboBox en el Userform, y una vez colocado vamos a las propiedades. Primero vamos a establecer la propiedad <B>Style</B> como <I>fmStyleDropDownList</I>, para que el usuario s&oacute;lo pueda escoger uno de los valores que le presentamos (es decir, que no le dejamos que se invente un nuevo estado civil). Ahora vamos a la hoja de c&aacute;lculo y escribimos en una celda cualquiera &quot;Soltero&quot;, debajo &quot;Casado&quot;, debajo &quot;Divorciado&quot; y debajo &quot;Viudo&quot;. Ahora vamos a dar un nombre a este rango, seleccionando las cuatro celdas y escribiendo en el &quot;Cuadro de Nombres&quot; (en la parte superior izquierda) el nombre &quot;<I>rngEstadoCivil</I>&quot;. Ya que estamos vamos a seleccionar cualquier otra celda para que el ComboBox almacene el elemento seleccionado por el usuario, y le damos a esta celda el nombre &quot;<I>rngValorEstadoCivil</I>&quot;.</P>
+
+<P  ALIGN="JUSTIFY">Ahora vamos otra vez al editor de Visual Basic (VBE), seleccionamos nuestro ComboBox, y en la propiedad <B>RowSource</B> escribimos &quot;rngEstadoCivil&quot;. En la propiedad <B>ControlSource</B> escribimos &quot;rngValorEstadoCivil&quot;.</P>
+
+<P  ALIGN="JUSTIFY">Como propina, vamos a poner en la propiedad <B>ControlTipText</B> el texto &quot;<I>Selecciona tu estado civil</I>&quot;, que es lo que el usuario ver&aacute; en un cuadrito amarillo cuando ponga el rat&oacute;n sobre el ComboBox. Recuerda que esta propiedad la tienen todos los controles.</P>
+
+<P  ALIGN="JUSTIFY">Ya tenemos nuestro ComboBox, y si lo probamos veremos que funciona perfectamente. Recuerda que el ComboBox coge los valores del rango establecido en RowSource, y almacena el valor seleccionado por el usuario en la celda establecida en ControlSource.</P>
+
+<IMG SRC="gif/teacher.gif" WIDTH="129" HEIGHT="114" ALIGN="Left" BORDER="0" ALT="Rocky"><P  ALIGN="JUSTIFY">Como <U>ejercicio</U> podemos hacer lo siguiente: borramos las propiedades <B>ControlSource</B> y <B>RowSource</B>, y hacemos que el control funcione igual pero encarg&aacute;ndonos nosotros mismos de poner los valores en la lista y luego identificar la selecci&oacute;n del usuario y poner su valor en la celda que queremos. Para ello tendremos que utilizar las propiedades <B>List</B> y <B>ListIndex</B>, y los m&eacute;todos <B>Clear</B> y <B>AddItem</B>, poniendo el c&oacute;digo en los eventos <B>Userform_Initialize()</B> y <B>btnAceptar_Click()</B>.</P> 
+
+<P  ALIGN="JUSTIFY">Ahora que ya dominamos el ComboBox, una buena noticia: el control <B>ListBox</B> (&quot;<I>Cuadro de Lista</I>&quot; seg&uacute;n la traducci&oacute;n de Excel) funciona pr&aacute;cticamente igual. El ComboBox es el control en el que s&oacute;lo se ve una l&iacute;nea y pulsando un bot&oacute;n sale una &quot;persiana&quot; con las distintas opciones, y en cambio en el control ListBox se ve siempre la lista de opciones, no hay persiana. Aparte de esta diferencia &quot;<I>visual</I>&quot;, los dos tipos de controles son pr&aacute;cticamente iguales.</P>
+
+<P  ALIGN="JUSTIFY">Vamos a por otro control, el <B>SpinButton</B> (<I>Bot&oacute;n de n&uacute;mero</I>). Este bot&oacute;n se utiliza normalmente combinado con un Cuadro de edici&oacute;n: si pulsamos el SpinButton hacia arriba aumentamos el valor del cuadro de edici&oacute;n, y viceversa.</P>
+
+Las <B>propiedades</B> m&aacute;s importantes del <B>SpinButton</B> son:<BR>
+<BR>
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="JUSTIFY"><B>Value</B>: el valor del SpinButton, un n&uacute;mero.
+<LI><P ALIGN="JUSTIFY"><B>Min</B>: el valor m&iacute;nimo que puede tener el SpinButton.
+<LI><P ALIGN="JUSTIFY"><B>Max</B>: el m&aacute;ximo.
+<LI><P ALIGN="JUSTIFY"><B>SmallChange</B>: el incremento/decremento que sufrir&aacute; la variable Value cada vez que el usuario pulse el SpinButton. Normalmente es 1, pero lo podemos cambiar.
+</UL>
+
+<P  ALIGN="JUSTIFY">Vamos a utilizar el control <B>SpinButton</B> combinado con un cuadro de edici&oacute;n que vamos a utilizar para almacenar la edad. Primero ponemos un cuadro de edici&oacute;n, que llamaremos &quot;<I>editEdad</I>&quot; (ya sabes, cambiando la propiedad Name). En una hoja de c&aacute;lculo daremos el nombre &quot;<I>rngEdad</I>&quot; a una celda, y utilizaremos esta celda para la propiedad <B>ControlSource</B> de nuestro control &quot;<I>editEdad</I>&quot;.</P>
+
+<P  ALIGN="JUSTIFY">Ahora colocamos un control <B>SpinButton</B>. Normalmente se suelen colocar a la derecha del cuadro de edici&oacute;n al que van asociados. En el cuadro de propiedades vamos a poner a <B>Min</B> el valor 0 (edad m&iacute;nima) y a Max el valor <B>150</B> (edad m&aacute;xima). El nombre del control lo dejamos como est&aacute; (<I>SpinButton1</I>).</P> 
+
+<P  ALIGN="JUSTIFY">Ahora tenemos que jugar un poco con los eventos: cada vez que el usuario pulsa el SpinButton se produce el evento <B>Change</B>. Cada vez que se produzca este evento queremos cambiar el valor del cuadro de edici&oacute;n &quot;editEdad&quot;. Hacemos doble-click en el SpinButton y aparece la ventana de c&oacute;digo, en la que escribiremos:</P>
+
+<PRE>
+<FONT COLOR="#0000FF">Private Sub</FONT> SpinButton1_Change()
+    editEdad.Text = SpinButton1.Value
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+
+<P ALIGN="JUSTIFY">Bastante sencillo, ¿no? Simplemente damos a la propiedad <B>Text</B> del objeto &quot;editEdad&quot; el valor del SpinButton.</P>
+
+<P ALIGN="JUSTIFY">Ahora tenemos que hacer lo mismo pero &quot;al rev&eacute;s&quot;. Si el usuario va directamente al cuadro de edici&oacute;n y escribe una edad, queremos que el valor del SpinButton se actualice, ya que tanto el cuadro de edici&oacute;n como el SpinButton tienen que tener el mismo valor. Para ello usamos el evento <B>Change</B> del objeto editEdad. Hacemos doble-click sobre &eacute;l y en la ventana de c&oacute;digo escribimos:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> editEdad_Change()
+    SpinButton1.Value = editEdad.Value
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN="JUSTIFY">Pr&aacute;cticamente igual que antes. El &uacute;nico cambio es que utilizamos la propiedad <B>Value</B> de editEdad en lugar de la propiedad <B>Text</B>, porque queremos el valor num&eacute;rico, y no la cadena de caracteres. Si en el control de edici&oacute;n escribes alguna letra en lugar de un n&uacute;mero ver&aacute;s que el Userform se detiene mostr&aacute;ndote un mensaje de error porque no puede calcular la propiedad <B>Value</B> de editEdad. En una aplicaci&oacute;n &quot;<I>de verdad</I>&quot; deber&iacute;amos escribir algo de c&oacute;digo para evitar estos errores, pero todav&iacute;a no hemos visto el control de errores (ya llegaremos).</P>
+
+<P ALIGN="JUSTIFY">Todav&iacute;a nos queda un peque&ntilde;o detalle respecto al SpinButton. Cuando el Userform se carga por primera vez, el control editEdad lee de la hoja de c&aacute;lculo la edad (porque se lo hemos dicho en la propiedad ControlSource), pero el control SpinButton no est&aacute; actualizado, tenemos que darle el mismo valor que tiene el control editEdad. Para ello usaremos el evento <B>Initialize</B> el Userform, que ya conocemos de sobra:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> UserForm_Initialize()
+    SpinButton1.Value = editEdad.Value
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+
+<P ALIGN="JUSTIFY">El c&oacute;digo es el mismo que el utilizado en el evento editEdad_Change(). Si probamos ahora el di&aacute;logo veremos que la combinaci&oacute;n editEdad + SpinButton1 funciona perfectamente (aparte de la detecci&oacute;n de errores, que veremos m&aacute;s adelante).</P>
+
+<P ALIGN="JUSTIFY">Ahora vamos con otros tipos de controles: las <I>casillas de verificaci&oacute;n</I> (<B>CheckBoxes</B> en ingl&eacute;s), y los <I>botones de opci&oacute;n</I> (<B>OptionButtons</B>). Para utilizarlos vamos a suponer que queremos que el usuario nos indique si utiliza o no una hoja de c&aacute;lculo, y en caso de que s&iacute; la utilice nos diga cu&aacute;l es su preferida.</P>
+
+<P ALIGN="JUSTIFY">Lo primero es preguntar si utiliza una hoja de c&aacute;lculo, y para ello vamos a utilizar una casilla de verificaci&oacute;n, que puede tener el valor verdadero o falso. Como siempre colocamos el control sobre el userform y le damos el nombre &quot;<I>cboxUtilizaHoja</I>&quot;. En la propiedad <B>ControlSource</B> vamos a escribir &quot;<I>rngUtilizarHoja</I>&quot;, que es el nombre que hemos dado a un rango de una hoja de c&aacute;lculo (en el fichero de ejemplo es la celda C18 de la Hoja1). Y en la propiedad <B>Caption</B> escribimos el texto del control, algo as&iacute; como &quot;<I>Utiliza hoja de c&aacute;lculo</I>&quot;. Tambi&eacute;n podemos escribir algo en la propiedad <B>ControlTipText</B>.</P>
+
+<P ALIGN="JUSTIFY">Adem&aacute;s de todas esas propiedades que ya conocemos las <B>propiedades</B> importantes de un control de verificaci&oacute;n o <B>CheckBox</B> son:</P>
+
+<UL TYPE="CIRCLE">
+<LI><P ALIGN="JUSTIFY"><B>Value</B>: el valor del control. Puede ser verdadero o falso.<BR><BR>
+<LI><P ALIGN="JUSTIFY"><B>TripleState</B>: puede ser verdadero o falso (esto &uacute;ltimo por defecto). Si le damos el valor verdadero el control tiene tres estados: verdadero, falso y nada (cuando se pone gris). En algunas ocasiones puede ser &uacute;til pero normalmente lo dejaremos como falso.
+</UL>
+
+<P ALIGN="JUSTIFY">Ahora vamos a ver cu&aacute;l es la hoja de c&aacute;lculo preferida del usuario. Para ello vamos a utilizar unos botones de opci&oacute;n, para darle la opci&oacute;n de elegir entre Excel, Lotus 1-2-3 u otra hoja de c&aacute;lculo.</P>
+
+<P ALIGN="JUSTIFY">Lo primero que tenemos que hacer es colocar un control marco (<B>Frame</B> en ingl&eacute;s). Estos controles s&oacute;lo sirven para agrupar controles y para mejorar la presentaci&oacute;n del userform. Tambi&eacute;n tienen sus propiedades y eventos, pero casi nunca se utilizan.</P>
+
+<P ALIGN="JUSTIFY">Bueno, colocamos un control <B>Frame</B> en el userform, y ahora vamos a poner dentro de &eacute;l los tres botones de opci&oacute;n. Para poner un control dentro del marco lo que hay que hacer es seleccionar el marco y sin quitar la selecci&oacute;n a&ntilde;adir el nuevo control. Vamos a hacer esto tres veces, y a&ntilde;adiremos <B>tres</B> botones de opci&oacute;n dentro del marco.</P> 
+
+<P ALIGN="JUSTIFY">Para guardar los valores de los botones de opci&oacute;n vamos a dar nombres a tres celdas de la hoja de c&aacute;lculo (en el ejemplo E16, E17 y E18), a las que nombraremos &quot;<I>rngExcel</I>&quot;, &quot;<I>rngLotus</I>&quot; y &quot;<I>rngOtros</I>&quot;. Ahora vamos a los tres botones de opci&oacute;n que hemos puesto en el userform y en la propiedad <B>ControlSource</B> de cada uno de ellos escribimos una de los nombres que acabamos de crear. Tambi&eacute;n convendr&iacute;a cambiar la propiedad <B>Caption</B> de cada uno de los botones para mostrar el texto adecuado.</P>
+
+<P ALIGN="JUSTIFY">Las propiedades <B>Value</B> y <B>TripleState</B> de un bot&oacute;n de opci&oacute;n funcionan igual que en el control de verificaci&oacute;n, y el resto de <B>propiedades</B> no son demasiado importantes.</P> 
+
+<P ALIGN="JUSTIFY">Si probamos ahora el userform deber&iacute;a funcionar perfectamente, excepto un peque&ntilde;o detalle. Si el usuario nos dice que no utiliza ninguna hoja de c&aacute;lculo, los botones de opci&oacute;n siguen pregunt&aacute;ndole cu&aacute;l es su hoja de c&aacute;lculo preferida, lo que evidentemente no tiene ning&uacute;n sentido. Lo que tenemos que hacer es desactivar los botones de opci&oacute;n: para desactivar cualquier control (no s&oacute;lo los botones de opci&oacute;n) se utiliza la propiedad <B>Enabled</B>; si esta propiedad es verdadera, el control est&aacute; activado, y si es falso el control estar&aacute; desactivado (aparece en color gris), y el usuario no puede interactuar con &eacute;l.</P>
+
+<P ALIGN="JUSTIFY">Lo que nos queda ahora es saber cu&aacute;ndo ha cambiado de estado (verdadero, falso) la casilla de verificaci&oacute;n <I>cboxUtilizaHoja</I>. Como siempre, lo hacemos con un evento, el evento <B>Change</B> del control de verificaci&oacute;n, que se ejecuta cada vez que cambia el estado del control. Por lo tanto, en el evento <B>Change</B> tendremos que cambiar el estado (activado, desactivado) de los botones de opci&oacute;n. El c&oacute;digo es:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> cboxUtilizaHoja_Change()
+    Frame2.Enabled = cboxUtilizaHoja.Value
+    OptionButton1.Enabled = cboxUtilizaHoja.Value
+    OptionButton2.Enabled = cboxUtilizaHoja.Value
+    OptionButton3.Enabled = cboxUtilizaHoja.Value
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN="JUSTIFY">F&iacute;jate que damos a la propiedad <B>Enabled</B> de los botones de opci&oacute;n y el marco el valor de la propiedad <B>Value</B> del control de verificaci&oacute;n. Tambi&eacute;n podr&iacute;amos haber escrito:</P>
+
+<PRE>    <FONT COLOR="#0000FF">If</FONT> cboxUtilizaHoja.Value = True <FONT COLOR="#0000FF">Then</FONT>
+         OptionButton1.Enabled = True
+         .....
+    <FONT COLOR="#0000FF">Else</FONT>
+         OptionButton1.Enabled = False
+         .....
+    <FONT COLOR="#0000FF">End If</FONT>
+</PRE>
+<P ALIGN="JUSTIFY">El resultado es el mismo, pero la primera opci&oacute;n es bastante m&aacute;s elegante.</P>
+
+<P ALIGN="JUSTIFY">Un peque&ntilde;o detalle. Cuando el userform se inicia tambi&eacute;n deber&iacute;amos activar/desactivar los botones seg&uacute;n el valor de la casilla de verificaci&oacute;n. Una soluci&oacute;n r&aacute;pida ser&iacute;a escribir dentro del evento <B>Userform_Initialize</B> (que ya conocemos) el mismo c&oacute;digo que en <B>cboxUtilizaHoja_Change</B>, pero no es lo m&aacute;s adecuado porque estar&iacute;amos escribiendo el mismo c&oacute;digo en dos sitios distintos, cosa que hay que evitar porque si luego tenemos que hacer alg&uacute;n cambio en el c&oacute;digo tendremos que hacerlo en dos sitios.</P>
+
+<P ALIGN="JUSTIFY">Lo mejor es llamar a <B>cboxUtilizaHoja_Change()</B> desde el evento <B>Userform_Initialize()</B>. La rutina <B>cboxUtilizaHoja_Change</B> es llamada cada vez que se produce el evento <B>Change</B>, pero nada nos impide llamarla por nuestra cuenta en cualquier otro momento, como por ejemplo cuando se inicia el userform. El evento <B>Userform_Initialize</B> quedar&aacute; as&iacute;:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> UserForm_Initialize()
+    cboxUtilizaHoja_Change
+    SpinButton1.Value = editEdad.Value
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Pues ya tenemos el userform de datos personales completo, y ya hemos aprendido a usar pr&aacute;cticamente todos los controles. La apariencia final del userform de datos personales es la siguiente.</P>
+<CENTER><IMG SRC="gif/datos2.gif" WIDTH="344" HEIGHT="404" BORDER="0" ALT="Di&aacute;logo de datos personales" ALIGN="TOP"></CENTER>
+<BR>
+<P ALIGN="JUSTIFY">Como ejercicio, vamos a hacer otro userform, en el que no vamos a utilizar ning&uacute;n control nuevo pero s&iacute; vamos a ver un evento nuevo (<B>KeyUp</B>). Lo que vamos a hacer es un di&aacute;logo en el que el usuario pueda escribir una cifra en pesetas y autom&aacute;ticamente le diremos cu&aacute;ntos euros son. Y al rev&eacute;s, si escribe los euros calcularemos cu&aacute;ntas pesetas son.</P>
+
+<P ALIGN="JUSTIFY">Pues vamos al VBE, creamos un userform, y ponemos en &eacute;l dos controles de edici&oacute;n, que llamaremos <B>editPesetas</B> y <B>editEuros</B>, dos <B>etiquetas</B> al lado de cada control de edici&oacute;n, y un <B>bot&oacute;n</B> para cerrar el di&aacute;logo.</P>
+
+<P ALIGN="JUSTIFY">Primero lo m&aacute;s f&aacute;cil. En el bot&oacute;n de cerrar (al que cambiaremos el <B>Caption</B> para que ponga &quot;<I>Cerrar</I>&quot;, y que llamaremos <B>btnCerrar</B>) tenemos que poner el c&oacute;digo para cerrar el userform:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> btnCerrar_Click()
+    Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Ahora vamos a los cuadros de edici&oacute;n. Lo que queremos hacer es que cada vez que el usuario pulse una tecla se actualice el otro cuadro de edici&oacute;n. Por ejemplo, si el usuario va a escribir 2500 pts, nosotros actualizaremos el cuadro de edici&oacute;n de euros cada vez que el usuario pulse una tecla, sin esperar a que termine. Para eso vamos a utilizar el <B>evento KeyUp</B>, que se produce cada vez que el usuario pulsa una tecla.</P>
+
+<P ALIGN="JUSTIFY">Para escribir el c&oacute;digo de este evento vamos a la ventana de c&oacute;digo de nuestro userform, y en las persianas de la parte superior seleccionamos el control <B>editPesetas</B> y en la parte derecha el evento <B>KeyUp</B>. Excel nos habr&aacute; puesto la declaraci&oacute;n de la rutina (con los par&aacute;metros adecuados, que en este caso no nos interesan y vamos a ignorar) y el &quot;<FONT COLOR="#0000FF">End Sub</FONT>&quot; correspondiente. Ahora s&oacute;lo tenemos que poner lo del medio:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> editPesetas_KeyUp(<FONT COLOR="#0000FF">ByVal</FONT> KeyCode As MSForms.ReturnInteger, <FONT COLOR="#0000FF">ByVal</FONT> Shift As <FONT COLOR="#0000FF">Integer</FONT>)
+    <FONT COLOR="#0000FF">If</FONT> editPesetas.Text &lt;&gt; &quot;&quot; <FONT COLOR="#0000FF">Then</FONT>
+        editEuros.Text = Format(editPesetas.Value / 168, &quot;0.00&quot;)
+    <FONT COLOR="#0000FF">Else</FONT>
+        editEuros.Text = &quot;&quot;
+    <FONT COLOR="#0000FF">End If
+End Sub</FONT>
+</PRE>
+
+<P ALIGN="JUSTIFY">El &quot;<B>If</B>&quot; lo utilizo como una peque&ntilde;a forma de detecci&oacute;n de errores, por si el cuadro de edici&oacute;n est&aacute; vac&iacute;o (de todas formas, se pueden producir muchos errores, como por ejemplo si el usuario introduce una letra en lugar de un n&uacute;mero, pero no vamos a ponernos ahora a escribir c&oacute;digo para detectar todos esos errores). El resto es bastante sencillo, se trata de poner en el cuadro <B>editEuros</B> el importe de <B>editPesetas</B> dividido por 168 (el valor en pesetas de un euro), y utilizando la funci&oacute;n <B>Format</B> para que s&oacute;lo presente dos decimales. (la funci&oacute;n <B>Format</B> es muy sencilla de utilizar, si quieres m&aacute;s informaci&oacute;n consulta la ayuda).</P>
+
+<P ALIGN="JUSTIFY">Podemos probar a ejecutar ahora el di&aacute;logo y veremos que cada vez que introduzcamos un car&aacute;cter en el cuadro editPesetas se actualiza el cuadro editEuros.</P>
+
+<P ALIGN="JUSTIFY">Ahora tenemos que hacer que cuando escribamos algo en editEuros se actualice editPesetas. El procedimiento es exactamente el mismo:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> editEuros_KeyUp(<FONT COLOR="#0000FF">ByVal</FONT> KeyCode As MSForms.ReturnInteger, <FONT COLOR="#0000FF">ByVal</FONT> Shift As <FONT COLOR="#0000FF">Integer</FONT>)
+    <FONT COLOR="#0000FF">If</FONT> editEuros.Text &lt;&gt; &quot;&quot; <FONT COLOR="#0000FF">Then</FONT>
+      editPesetas.Text = Format(editEuros.Value * 168, &quot;0.00&quot;)
+    <FONT COLOR="#0000FF">Else</FONT>
+      editPesetas.Text = &quot;&quot;
+    <FONT COLOR="#0000FF">End If
+End Sub</FONT>
+</PRE>
+<P ALIGN="JUSTIFY">Igual que antes, pero multiplicando por 168 en lugar de dividir.</P>
+
+<P ALIGN="JUSTIFY">Hasta ahora, todos los botones que hemos utilizado en los userforms serv&iacute;an para cerrar el userform, con la diferencia de que solemos poner uno para <I>Aceptar</I> y otro para <I>Cancelar</I>. Pero tambi&eacute;n podemos poner en un userform un bot&oacute;n que realice cualquier otra acci&oacute;n pero no cierre el userform. Lo m&aacute;s t&iacute;pico es que este bot&oacute;n haga alg&uacute;n cambio sobre los controles del userform.</P>
+
+<P ALIGN="JUSTIFY">En este caso, aprovechando nuestro conversor de euros, vamos a crear <U>dos botones</U>, uno al lado de cada cuadro de edici&oacute;n, que van a pegar en la celda activa de la hoja de c&aacute;lculo el contenido del cuadro de edici&oacute;n asociado.</P>
+
+<P ALIGN="JUSTIFY">Colocamos los dos botones, uno al lado de cada cuadro de edici&oacute;n, y les damos los nombres <B>btnPegarPts</B> y <B>btnPegarEuros</B>, y les ponemos como <B>Caption</B> algo como &quot;<I>Pegar</I>&quot;. Ahora vamos al c&oacute;digo:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> btnPegarPts_Click()
+    ActiveCell.Value = editPesetas.Value
+<FONT COLOR="#0000FF">End Sub</FONT>
+
+<FONT COLOR="#0000FF">Private Sub</FONT> btnPegarEuros_Click()
+    ActiveCell.Value = editEuros.Value
+<FONT COLOR="#0000FF">End Sub</FONT></PRE>
+
+<P ALIGN="JUSTIFY">El evento que utilizamos es el evento <B>Click</B>, que ya conocemos de sobra. Y el c&oacute;digo tampoco tiene ninguna dificultad, simplemente es poner en <B>ActiveCell</B> el valor del control de edici&oacute;n, <B>editPesetas</B> o <B>editEuros</B>.</P>
+
+<P ALIGN="JUSTIFY">Como ver&aacute;s, al pulsar estos botones se pega el contenido en la hoja de c&aacute;lculo, pero no se cierra el userform. Si quisi&eacute;ramos que despu&eacute;s de hacer el pegado se cerrara el userform tendr&iacute;amos que a&ntilde;adir el cl&aacute;sico &quot;<B>Unload Me</B>&quot; a las dos rutinas anteriores.</P>
+
+<P ALIGN="JUSTIFY">As&iacute; nos ha quedado el userform del conversor de euros:</P><BR>
+<CENTER><IMG SRC="gif/converso.gif" WIDTH="371" HEIGHT="196" BORDER="0" ALT="Di&aacute;logo conversor de euros"></CENTER>
+<BR>
+<BR>
+<P ALIGN="JUSTIFY">Y para terminar esta entrega, vamos a hacer un <U>di&aacute;logo para hacer operaciones sobre un rango</U>, como los que ya hemos hecho, pero m&aacute;s completo. El di&aacute;logo va a permitirnos cambiar el rango seleccionado, y luego nos permitir&aacute; seleccionar la operaci&oacute;n aritm&eacute;tica que queremos hacer sobre el rango (sumar, restar, multiplicar, dividir) utilizando para ello unos botones de opci&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">En este di&aacute;logo vamos a utilizar un control nuevo, el <B>RefEdit</B>, que sirve para que el usuario pueda introducir una referencia (un rango). Puede hacerlo escribiendo la referencia absoluta o el nombre del rango (como si fuese un cuadro de edici&oacute;n), o pulsando en el botoncito que aparece a la derecha, que hace que desaparezca el userform y el usuario puede seleccionar el rango con el rat&oacute;n o el teclado.</P>
+
+<P ALIGN="JUSTIFY">Los controles que vamos a poner en este userform son:</P>
+<CENTER><TABLE BORDER="1">
+    <TR><TD><B>Tipo de control</B></TD><TD><B>Name</B></TD><TD><B>Caption</B></TD></TR>
+	<TR><TD>RefEdit</TD><TD>RefEdit1</TD><TD>N/A</TD></TR>
+	<TR><TD>TextBox</TD><TD>tbValor</TD><TD>N/A</TD></TR>
+	<TR><TD>Frame</TD><TD>Frame1</TD><TD>Operaci&oacute;n</TD></TR>
+	<TR><TD>OptionButton</TD><TD>obSumar</TD><TD>Sumar</TD></TR>
+	<TR><TD>OptionButton</TD><TD>obRestar</TD><TD>Restar</TD></TR>
+	<TR><TD>OptionButton</TD><TD>obMultiplicar</TD><TD>Multiplicar</TD></TR>
+	<TR><TD>OptionButton</TD><TD>obDividir</TD><TD>Dividir</TD></TR>
+	<TR><TD>CommandButton</TD><TD>btnAceptar</TD><TD>Aceptar</TD></TR>
+	<TR><TD>CommandButton</TD><TD>btnCancelar</TD><TD>Cancelar</TD></TR>
+</TABLE>
+</CENTER>
+
+<P ALIGN="JUSTIFY">El resultado final ser&aacute; algo as&iacute;:</P>
+<CENTER><IMG SRC="gif/operacio.gif" WIDTH="278" HEIGHT="269" BORDER="0" ALT="Di&aacute;logo de Operaciones sobre rango"></CENTER><BR>
+
+<P ALIGN="JUSTIFY">Lo &uacute;nico nuevo que tenemos que aprender es que el rango que el usuario ha introducido en el <B>RefEdit</B> se guarda en la propiedad <B>Text</B>. Pero Text es una cadena de caracteres, por lo que si queremos hacer referencia al rango deberemos usar <B>Range(RefEdit1.Text)</B>.</P>
+
+<P ALIGN="JUSTIFY">Vamos con el c&oacute;digo:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> UserForm_Initialize()
+    obSumar.Value = <FONT COLOR="#0000FF">True</FONT>
+    RefEdit1.Text = Selection.Address
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN="JUSTIFY">Primero hacemos que la operaci&oacute;n seleccionada por defecto sea sumar (alguna tiene que ser) y que en el <B>RefEdit</B> aparezca como rango la selecci&oacute;n que ten&iacute;a hecha el usuario antes de llamar al di&aacute;logo.</P>
+
+<P ALIGN="JUSTIFY">Ahora los botones:</P>
+
+<PRE><FONT COLOR="#0000FF">Private Sub</FONT> btnAceptar_Click()
+   HacerOperacion
+   Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT>
+
+<FONT COLOR="#0000FF">Private Sub</FONT> btnCancelar_Click()
+   Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT>
+</PRE>
+<P ALIGN="JUSTIFY">La &uacute;nica diferencia entre los dos botones es que uno de ellos llama a la rutina <B>HacerOperacion</B> antes de cerrar el userform. La rutina <B>HacerOperacion</B> es la siguiente:</P>
+
+<PRE><FONT COLOR="#0000FF">Sub</FONT> HacerOperacion()
+    <FONT COLOR="#0000FF">Dim</FONT> r <FONT COLOR="#0000FF">As Range</FONT>
+    <FONT COLOR="#0000FF">Dim</FONT> c <FONT COLOR="#0000FF">As Object</FONT>
+    <FONT COLOR="#0000FF">Dim</FONT> i <FONT COLOR="#0000FF">As Double</FONT>
+    
+    Set r = Range(RefEdit1.Text)
+    i = tbValor.Value
+    <FONT COLOR="#0000FF">For Each</FONT> c <FONT COLOR="#0000FF">In</FONT> r.Cells
+        If obSumar.Value = True <FONT COLOR="#0000FF">Then</FONT>
+           c.Value = c.Value + i
+        <FONT COLOR="#0000FF">ElseIf</FONT> obRestar.Value = True <FONT COLOR="#0000FF">Then</FONT>
+           c.Value = c.Value - i
+        <FONT COLOR="#0000FF">ElseIf</FONT> obMultiplicar.Value = True <FONT COLOR="#0000FF">Then</FONT>
+           c.Value = c.Value * i
+        <FONT COLOR="#0000FF">ElseIf</FONT> obDividir.Value = True <FONT COLOR="#0000FF">Then</FONT>
+           c.Value = c.Value / i
+        <FONT COLOR="#0000FF">End If</FONT>
+    <FONT COLOR="#0000FF">Next c
+End Sub</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Primero obtenemos el rango seleccionado y lo almacenamos en &quot;<B>r</B>&quot;. Luego obtenemos el valor que hay que utilizar, que el usuario ha escrito en <B>tbValor</B>, y lo almacenamos en &quot;<B>i</B>&quot;. Luego hacemos un bucle &quot;<B>For Each - Next</B>&quot;, que ya conocemos, para repetir el mismo c&oacute;digo para todas las celdas del rango. El &quot;<B>If</B>&quot; tan largo que utilizamos es bastante m&aacute;s sencillo de lo que parece: lo &uacute;nico que hace es comprobar cu&aacute;l es el bot&oacute;n de opci&oacute;n activado (Value = True) y efect&uacute;a la operaci&oacute;n asociada a ese bot&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">Y aqu&iacute; termina la cuarta entrega del curso. Si tienes cualquier duda o comentario que hacer, no dudes en contactar <A HREF="mailto:ecenaitu@arrakis.es">conmigo</A>. En la pr&oacute;xima entrega hablaremos de la creaci&oacute;n de men&uacute;s y barras de herramientas personalizadas.</P>
+<BR>
+<HR WIDTH="75%" SIZE="3">
+<TABLE ALIGN="CENTER">
+	<TR>	
+		<TD><FONT SIZE="-1">Recuerda que los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="Excel4.xls">Excel4.xls</A><BR>
+(116kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel4.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD></TR>
+</TABLE>
+<HR WIDTH="75%" SIZE="3">
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulae.htm"><font FACE="ARIAL"><B>[Curso de VBA para Excel]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

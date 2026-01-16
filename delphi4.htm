@@ -1,0 +1,260 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programación.</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 5.<br> Desarrollo de un componente
+</H3>
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">
+En este cap&iacute;tulo vamos a centrarnos en un aspecto muy importante, comercialmente hablando, de la programaci&oacute;n en Delphi. Me refiero al desarrollo de componentes.</P>
+<P ALIGN="JUSTIFY">La creaci&oacute;n de componentes para Delphi y para otros muchos lenguajes que permiten a&ntilde;adir funcionalidades extras a sus entornos de programaci&oacute;n son un lucrativo negocio dentro del mundo de Internet.</P>
+<P ALIGN="JUSTIFY">Actualmente, cuando se quiere hacer algo particularmente tedioso, o dif&iacute;cil, o simplemente cuando no se tiene tiempo, lo primero que hace uno es conectarse a Internet y buscar en los servidores de componentes si existe uno que cumpla nuestras necesidades, pudiendo encontrarse con que ya hay hecho exactamente lo que se quiere, o que por &quot;desgracia&quot; tendr&aacute; que hacerlo por s&iacute; mismo.</P>
+<P ALIGN="JUSTIFY">Componentes hay de todos los tipos, tama&ntilde;os y funcionalidades, que van desde simples &quot;apa&ntilde;os&quot; a los componentes que incorpora Delphi, hasta ejemplos magistrales de lo que es programar bien.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En el c&oacute;digo que se incluye al final de este cap&iacute;tulo, se encuentra la implementaci&oacute;n de un componente, el cual, y a trav&eacute;s de los comentarios pertinentes, vamos a ir conociendo poco a poco. Veremos de qu&eacute; se trata eso de hacernos nuestros propio Objeto (componente) para poder usarlo posteriormente en nuestros programas.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>¿Qu&eacute; hay que hacer?</h4>
+<P ALIGN="JUSTIFY">El componente que he creado a continuaci&oacute;n es muy simple.</P>
+<P ALIGN="JUSTIFY">Supongo que ya conocer&eacute;is el TShape que viene con Delphi (paleta Additional), y si no es el caso, es el momento de ejecutar Delphi y probarlo.</P>
+<P ALIGN="JUSTIFY">Lo que se pretende conseguir es que cuando el cursor entre en una zona determinada del formulario, nuestro programa sea capaz de darse cuenta de que ha entrado y podamos hacer algo en ese momento (y lo mismo cuando salga).</P>
+<P ALIGN="JUSTIFY">Se puede hacer un apa&ntilde;o de compromiso mediante el evento OnMouseMove del formulario, el cual nos d&aacute; la coordenada X e Y del cursor del rat&oacute;n, pero esto va a provocar que cada vez que mueva el rat&oacute;n, se ejecute la comprobaci&oacute;n de si est&aacute; en las coordenadas que me interesan, cosa que hay que evitar para no sobrecargar el procesador.</P>
+<P ALIGN="JUSTIFY">As&iacute; que lo que se busca en realidad es una forma de crearnos nuestros propios eventos OnMouseEnter y OnMouseExit o OnRatonEntra y OnRatonSale, como prefir&aacute;is, de forma que tan solo se generen estos eventos una vez, y no cada vez que movemos el rat&oacute;n con la pertinente comprobaci&oacute;n de coordenadas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para realizar esto tenemos que decirle a Delphi que vamos a &quot;crear&quot; un nuevo evento, que va a ser provocado por el mensaje pertinente del propio Windows, cada vez que entre el rat&oacute;n (CM_MOUSEENTER), y que salga (CM_MOUSELEAVE).</P>
+<P ALIGN="JUSTIFY">No pretendo que sea f&aacute;cil de entender en este punto del tutorial sobre Delphi, ya que no es f&aacute;cil debido a que maneja muchos conceptos avanzados de Windows, pero con saber someramente de qu&eacute; va la cosa, es suficiente. Basta con especificar exactamente qu&eacute; es lo que hay que decirle a Delphi para que nos cree unos nuevos eventos como los que ya tiene por defecto:</P>
+<P ALIGN="JUSTIFY"></P>
+<Pre><b>procedure</B> CMMouseEnter(<B>var</B> msg:<B>TMessage</B>); <B>message</B> <B>CM</B>_<B>MOUSEENTER</B>;
+<B>procedure</B> CMMouseLeave(<B>var</B> msg: <B>TMessage</B>); <B>message</B> <B>CM_MOUSELEAVE</B>;</Pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Estos 2 procedimientos se van a incluir en nuestro componente que va a ser un &quot;hijo&quot; de TShape.</P>
+<P ALIGN="JUSTIFY">He elegido TShape porque puede hacerse completamente invisible a nuestros ojos con tan solo poner:</P>
+<Pre>shape.Brush.Style:=bsClear;
+shape.Pen.Style:=psClear;</Pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">y de esta forma aunque el control est&eacute; sobre el formulario, no tendr&aacute; ni bordes ni nada, aunque no deje de estar ah&iacute;… y si encima hacemos que nos permita saber cu&aacute;ndo entra el rat&oacute;n en &eacute;l, y cu&aacute;ndo sale… pues es lo que buscamos.</P>
+<P ALIGN="JUSTIFY">Una aplicaci&oacute;n para nuestro TShape &quot;Plus&quot; es por ejemplo, cambiar un gr&aacute;fico de la pantalla cuando el cursor est&eacute; en un sitio determinado. Este sitio (rectangular) va a ser el que ocupa el control TShape que no se ve pero que s&iacute; est&aacute;. </P>
+<P ALIGN="JUSTIFY">Imaginemos que tenemos un gr&aacute;fico en pantalla que queremos que se &quot;encienda&quot; cuando el cursor entre en &eacute;l, y que se &quot;apague&quot; cuando el cursor salga. </P>
+<P ALIGN="JUSTIFY">¡Pues usamos nuestro componente y pan comido (o bit devorado)!</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Sigamos. </P>
+<P ALIGN="JUSTIFY">Va a ser necesario conocer al menos lo que es la programaci&oacute;n orientada a objetos, ya que lo que vamos a hacer en realidad es hacer una herencia del objeto TShape, a&ntilde;adirle dos procedimientos m&aacute;s y redefinir los m&eacute;todos de creaci&oacute;n y destrucci&oacute;n. Pero no es nada dif&iacute;cil, ya que gracias a Borland, la sintaxis no se parece para nada a la de C.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>¡Y por f&iacute;n, el C&oacute;digo!</h4>
+<P ALIGN="JUSTIFY">Pasemos ya al c&oacute;digo y a los comentarios &quot;en l&iacute;nea&quot;</P>
+<P ALIGN="JUSTIFY"></P>
+<pre><font size=1 face="arial">// EL nombre del fichero .pas en el que se guardará el componente será ShapeAvanzado.pas
+<b>unit</b> ShapeAvanzado;
+
+<b>interface</b>
+
+<b>uses</b> Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  ExtCtrls;
+
+<b>type</b>
+
+//  Al componente lo llamaremos TShapeAvanzado, hijo de la clase TShape
+  TShapeAvanzado = <b>class</b>(TShape)		
+
+  //Ahora se define lo nuevo que se va a incorporar el antiguo TShape
+
+ <B> private</b>
+// "private" quiere indicar que lo que se defina en esta parte no va a ser visto desde fuera, es 
+// decir, no vamos a poder poner ShapeAvanzado.FOnEnter. Tan solo será "visible" desde
+// dentro del propio componente y por los hijos que declaremos sobre él igual que hemos 
+// hecho con TShape. Un ejemplo sería:  TShapeMasAvanzado = class (TShapeAvanzado);
+
+// Con lo siguiente decimos que en estas variables vamos a "almacenar" los mensajes 
+// que Windows nos envíe cuando el cursor entre y salga.
+FOnEnter, FOnExit: <b>TNotifyEvent</b>;
+
+  <b>protected</b>
+// "protected" es prácticamente igual que "private", con la excepción de que lo que en esta 
+// parte se ponga no será visible para los hijos de nuestro componente. Además, es el lugar
+// donde se tienen que declar los manejadores de eventos de los controles (los On…)
+    	<b>procedure</b> CMMouseEnter(<b>var</b> msg:<b>TMessage</b>); <b>message CM_MOUSEENTER</b>;
+    	<b>procedure</b> CMMouseLeave(<b>var</b> msg:<b>TMessage</b>); <b>message CM_MOUSELEAVE</b>;
+
+  <b>public</b>
+// "public" es para la redefinición de los métodos del padre de nuestro componente, o sea que,
+// como lo que hacen "Create" y "Destroy" de TShape se nos queda corto, los vamos a 
+// modificar. Más concretamente le vamos a añadir al código que tengan, lo que nos hace falta.
+// Esto se dice con "override", es decir, que mantenga lo que tenía y que añada (sobrecarge) 
+// lo nuevo que le vamos a definir.
+    	<b>constructor</b> Create(AOwner:<b>TComponent</b>);<b>override</b>;
+    	<b>destructor</b> Destroy;<b>override</b>;
+
+  <b>published</b>
+// "published" es lo que vamos a ver desde fuera del componente, o sea, cuando ya lo estemos 
+// usando como uno más. Así, cuando ya lo tengamos, en el Inspector de Objetos de Delphi, en
+// la pestaña de "Events" aparecerán nuestros 2 nuevos eventos: OnEnter y OnExit.
+	<b>property</b> OnEnter: TNotifyEvent read FOnEnter write FOnEnter;
+	<b>property</b> OnExit: TNotifyEvent read FOnExit write FOnExit;
+
+  <b>end</b>;
+
+<b>procedure</b> Register;
+
+<b>implementation</b>
+
+<b>procedure</b> Register;
+<b>begin</b>
+// El componente, cuando se añada a la paleta de Delphi, se hará en una nueva pestaña 
+// llamada "Macedonia"
+	<b>RegisterComponents</b>('Macedonia', [TShapeAvanzado]);
+<b>end</b>;
+
+<b>procedure</b> TShapeAvanzado.CMMouseEnter(<b>var</b> msg:<b>TMessage</b>);
+<b>begin</b>
+// Lo que hay que hacer cuando se reciba un mensaje de Windows, es almacenarlo en las 
+// variables que hemos definido
+    	<b>if</b> Assigned(FOnEnter) <b>then</b>
+    	FOnEnter(<b>Self</b>);
+<b>end</b>;
+
+<b>procedure</b> TShapeAvanzado.CMMouseLeave(<b>var</b> msg: <b>TMessage</b>);
+<b>begin</b>
+// Lo que hay que hacer cuando se reciba un mensaje de Windows, es almacenarlo en las 
+// variables que hemos definido
+    	<b>if</b> Assigned(FOnExit) <b>then</b>
+     	FOnExit(<b>Self</b>);
+<b>end</b>;
+
+<b>constructor</b> TShapeAvanzado.Create(AOwner:<b>TComponent</b>);
+<b>begin</b>
+	// Heredamos el código del padre…
+     	<b>inherited</b> Create(AOwner);
+	// … y le añadimos el nuestro
+	Brush.Style:=bsClear;
+	Pen.Style:=psClear;
+<b>end</b>;
+
+<b>destructor</b> TShapeAvanzado.Destroy;
+<b>begin</b>
+	// La redeclaración del método Destroy podríamos habernosla ahorrado, pero por convención
+	// la redeclaramos y la dejamos tal cual… en vistas a en un futuro añadir más funcionalidad a
+	// nuestro componente.
+	<b>inherited</b> Destroy;
+<b>end</b>;
+
+<b>end</b>.</font></pre>
+
+<font size=2 face="arial">
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<h4>El Final</h4>
+<P ALIGN="JUSTIFY">Y por fin nuestro nuevo y flamante componente TShapeAvanzado est&aacute; listo para ser codificado, guardado, compilado, e instalado en Delphi.</P>
+<P ALIGN="JUSTIFY">Pero antes, una cosa:</P>
+<P ALIGN="JUSTIFY">&#9;¿Donde se escribe todo esto?</P>
+<P ALIGN="JUSTIFY">Pues hacemos los siguiente en Delphi 3:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B>&quot;Men&uacute; Component&quot;</P>
+</B><P ALIGN="JUSTIFY">&#9;<B>&quot;New Component&quot;</P>
+</B><P ALIGN="JUSTIFY">&#9;&#9;Elegimos el &quot;Ancestor Type&quot; (o sea, el TShape)…</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;… y rellenamos el resto.</P>
+<P ALIGN="JUSTIFY">&#9;&#9;Bot&oacute;n <B>&quot;Create Unit&quot;</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">Y y&aacute; estamos en la ventana de edici&oacute;n, as&iacute; que a rellenar lo que le falta.&#9;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+¡Feliz Programaci&oacute;n!… o como dicen lo anglosajones: Happy Codding!</P>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulac.htm"><font FACE="ARIAL"><B>[Curso de Delphi]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

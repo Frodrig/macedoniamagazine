@@ -1,0 +1,220 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<HR>		  
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>rónicas de una Creación</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+<br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:eruiz@coma.es">Eduardo Ruiz.</A>
+
+</b></FONT>
+
+<br><br><FONT color="#000000" size=2 face="arial">
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+
+<FONT color="#000000">        
+
+<H3>Así se hizo y así funciona "pTOOL"</h3>
+
+<P ALIGN=justify>
+
+<table width="320" align="left"> 
+<td><img src="jpg/ptool0.jpg"></TD> 
+<TR> 
+<TD><font size=1 face=arial><center>Pantalla de inicio de pTOOL</center></font></td> 
+</table>
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La idea la tuve hace casi 4 a&ntilde;os, por aquel entonces programaba mucho en ensamblador y C, y me gustaba realizar "intentos" :-) de juego, porque si eres programador ya sabr&aacute;s que a veces te pones a hacer algo y luego cuesta acabarlo y m&aacute;s si nadie lo espera. El modo normal de los juegos por aquel entonces era el modo 13h (320x200x256), lo m&aacute;s importante era tener en cuenta que con 256 colores ya era suficiente aunque utilizar resoluciones de 640x480 u 800x600 tambi&eacute;n pod&iacute;a ser aceptable.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El programa que m&aacute;s utilizaba era el DeluxePaint, pero ten&iacute;a el problema, de que para realizar operaciones con la paleta de colores, el trabajo era imposible ya que los p&iacute;xels cambiaban su color y no se pod&iacute;a hacer nada, y tampoco se pod&iacute;a hacer nada con cualquier otro programa. La &uacute;nica funci&oacute;n que aportaban era la de convertir un gr&aacute;fico a otro bas&aacute;ndose en la paleta de otra imagen.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Al principio no pens&eacute; que merecer&iacute;a la pena hacer un programa para manipular las paletas, porque ya ten&iacute;a algunas funciones sencillas para hacer operaciones simples con la paleta, y hacer un programa entero para eso, con todo el esfuerzo que supone y las horas de programaci&oacute;n, no ser&iacute;a un trabajo aprovechable.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora si hubiera sabido el partido que le iba a sacar lo hubiera hecho a&uacute;n mejor. El aspecto visual del programa es parecido al del DeluxePaint, pero la funci&oacute;n principal del programa es la de manipular las paletas sin que se vean cambios aparentes en la imagen, y no la de realizar funciones gr&aacute;ficas como pintar l&iacute;neas, cuadrados, o llenar regiones, ya que para eso ya est&aacute; el propio DeluxePaint.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con este programa se puede editar la paleta y modificar el orden de los colores, agrupar tonos de colores, detectar colores iguales para suprimir repetidos, etc... sin que la imagen se vea alterada ya que los p&iacute;xels cambian su valor al nuevo color en la paleta.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si por ejemplo se quiere mezclar dos im&aacute;genes con paletas diferentes, una forma es convertir una imagen a otra nueva utilizando la paleta de la otra imagen (como ya he comentado antes) pero lo normal es que los tonos sean diferentes y el cambio no quede bien.</P>
+<center><table width="522" > 
+<td><img src="gif/ptool02.gif"></TD> 
+</table>
+</center>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con "paleta TOOLS" se cogen los 2 gr&aacute;ficos, se suprimen los colores no utilizados, y se sustituyen los que sean parecidos o iguales, as&iacute; se deja espacio para poder juntar las 2 paletas y tener una sola imagen.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Adem&aacute;s, cuenta con funciones para cambiar el tama&ntilde;o de los sprites, editar la imagen, e incluso una funci&oacute;n para componer una animaci&oacute;n en donde todos los sprites tienen un tama&ntilde;o fijo y van seguidos en la pantalla (como es normal al grabar los sprites de una animaci&oacute;n en un fichero).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Se pueden tener 10 im&aacute;genes a la vez en memoria (y a&uacute;n se podr&iacute;a ampliar a las que fuera: 1Mb=15 pantallas, 32Mb=480 pantallas).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Soporta la lectura y grabaci&oacute;n de todos los formatos gr&aacute;ficos t&iacute;picos de las im&aacute;genes en 256 colores: PCX, BMP, LBM y GIF en cualquier tama&ntilde;o hasta 320x200 (estas funciones se realizaron con mucho trabajo en ensamblador desde 0, sin tener documentaci&oacute;n de la estructura del fichero, realizando miles de pruebas para comprobar que funcionaban perfectamente y que cualquier visualizador pod&iacute;a mostrarlas).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como todos los programas; la mejor forma de ver como funciona y de entenderlo, es manejarlo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si ten&eacute;is alguna duda, quer&eacute;is que os informe m&aacute;s, o incluso lo veis tan &uacute;til que quer&eacute;is que le a&ntilde;ada alguna funci&oacute;n, hac&eacute;dmelo saber.</P></FONT>
+<hr width=60%>
+<CENTER>
+<FONT size=2 color="#cc0000" face="Arial">
+<b>Puedes conseguir el pTOOL pulsando </b><A HREF="zip/ptool.zip"><B>aquí</B></a>
+</CENTER>
+<hr width=70%>
+
+
+
+<BR><BR>
+
+
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>JULIO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="dhispb.htm"><font FACE="ARIAL"><B>[Crónicas de una Creación]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

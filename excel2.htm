@@ -1,0 +1,305 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Cap&iacute;tulo 3. Cuadros de di&aacute;logo (Userforms).</H3>
+<P ALIGN="justify">Este cap&iacute;tulo va a tratar sobre los cuadros de di&aacute;logo, que se utilizan para obtener informaci&oacute;n del usuario. Una aclaraci&oacute;n respecto a versiones: uno de los cambios m&aacute;s importantes de Excel 95 a Excel 97 en el apartado de programaci&oacute;n es la parte de cuadros de di&aacute;logo. La verdad es que hay muchas diferencias entre ambos y eso hace imposible hablar de las dos versiones a la vez, por lo que este cap&iacute;tulo est&aacute; dirigido s&oacute;lo a Excel 97.
+</P><HR WIDTH="75%" SIZE="3">
+<TABLE>
+	<TR>
+		<TD><FONT SIZE="-1">Todos los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel3.xls">Excel3.xls</A><BR>
+(117kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel3.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD>
+	</TR>
+</TABLE>
+<HR WIDTH="75%" SIZE="3">
+<P ALIGN="justify">Los cuadros de di&aacute;logo en Office 97 son mucho m&aacute;s potentes que en la versi&oacute;n anterior. Se han a&ntilde;adido muchas opciones, como la posibilidad de definir eventos, utilizar controles ActiveX adem&aacute;s de los incluidos en Excel (si no sabes qu&eacute; es un control ActiveX no tiene demasiada importancia, es un tema avanzado que quiz&aacute; alg&uacute;n d&iacute;a tratemos), etc.</P>
+
+<P ALIGN="JUSTIFY">Nuestro primer cuadro de di&aacute;logo va a ser muy sencillo: vamos a presentar un cuadro de di&aacute;logo en el que el usuario puede introducir un n&uacute;mero, y si pulsa &quot;<I>Aceptar</I>&quot; copiaremos el n&uacute;mero introducido en la celda activa. Si el usuario pulsa &quot;<I>Cancelar</I>&quot; no haremos nada.</P>
+
+<P ALIGN="JUSTIFY">Lo primero es ir al editor de Visual Basic, utilizando la opci&oacute;n &quot;Herramientas, Macro, Editor de Visual Basic&quot;, o simplemente pulsando Alt-F11.</P> 
+
+<P ALIGN="JUSTIFY">En la parte izquierda de la pantalla tendremos el &quot;Explorador de Proyectos&quot; y la ventana de &quot;Propiedades&quot;. Igual que antes, si no puedes ver estas ventanas utiliza el men&uacute; &quot;Ver&quot; para hacer que aparezcan. En el &quot;Explorador de Proyectos&quot; aparecen todos los &quot;proyectos&quot; de VBA: cada libro que tengamos abierto es un proyecto. Dentro de cada libro aparecen todas las hojas del libro y tambi&eacute;n los m&oacute;dulos y cuadros de di&aacute;logo que crearemos m&aacute;s adelante.</P>
+
+<P ALIGN="JUSTIFY">En la ventana de &quot;Propiedades&quot; aparecen las propiedades del objeto que tengamos seleccionado en ese momento. Supongo que a estas alturas ya debe estar claro el concepto de &quot;propiedad&quot; de un objeto. Por ejemplo, vamos a ir a un proyecto de VBA en el &quot;<I>Explorador de Proyectos</I>&quot;. Dentro de &eacute;l veremos las hojas de c&aacute;lculo del libro, y vamos a seleccionar una de ellas. En la ventana de &quot;<I>Propiedades</I>&quot; van a aparecer las propiedades de la hoja seleccionada. Por ejemplo, la primera propiedad que vemos es la propiedad <B>Name</B>, que ya conocemos. Podemos utilizar la ventana de &quot;<I>Propiedades</I>&quot; para cambiar las propiedades del objeto seleccionado.</P>
+
+<P ALIGN="JUSTIFY">Ahora para crear nuestro cuadro de di&aacute;logo vamos a utilizar la opci&oacute;n &quot;Insertar, Userform&quot; (<B>Userform</B> es el nombre que da Excel 97 a los cuadros de di&aacute;logo).</P><IMG SRC="gif/tools.gif" WIDTH="186" HEIGHT="170" BORDER="0" ALT="Cuadro de herramientas" ALIGN="RIGHT">
+
+<P ALIGN="JUSTIFY">En este momento vemos en la parte derecha un cuadro de di&aacute;logo vac&iacute;o, y por otro lado veremos el &quot;<B>Cuadro de herramientas</B>&quot;, en el que est&aacute;n todos los controles que podemos poner en el cuadro de di&aacute;logo. Si no aparece el <I>Cuadro de Herramientas</I> utiliza la opci&oacute;n &quot;<I>Ver, Cuadro de herramientas</I>&quot; para que aparezca.</P>
+
+<P ALIGN="JUSTIFY">Los controles del &quot;<I>Cuadro de herramientas</I>&quot; son los t&iacute;picos de cualquier cuadro de di&aacute;logo que podemos ver en cualquier aplicaci&oacute;n de Windows:</P><IMG SRC="gif/controle.gif" WIDTH="336" HEIGHT="282" ALIGN="Right" BORDER="0" ALT="Di&aacute;logo con los controles m&aacute;s utilizados">
+<UL TYPE="CIRCLE">
+<LI><B>Etiqueta</B>: para mostrar un texto en el cuadro de di&aacute;logo. El usuario no puede editarlo.
+<LI><B>Cuadro de texto</B>: para que el usuario introduzca un texto.
+<LI><B>Cuadro combinado</B>: el cl&aacute;sico control de persiana para que el usuario seleccione una opci&oacute;n entre varias.
+<LI><B>Cuadro de lista</B>: para que el usuario seleccione una opci&oacute;n de entre las que le presentamos.
+<LI><B>Casilla de verificaci&oacute;n</B>: verdadero o falso 
+<LI><B>Bot&oacute;n de opci&oacute;n</B>: tambi&eacute;n para que el usuario seleccione una opci&oacute;n entre varias.
+<LI><B>Bot&oacute;n de comando</B>: un bot&oacute;n normal y corriente, como los t&iacute;picos de &quot;<I>Aceptar</I>&quot; y &quot;<I>Cancelar</I>&quot;
+<LI><B>Marco</B>: para agrupar varios controles. Su uso es b&aacute;sicamente por razones est&eacute;ticas. Como puedes ver en el di&aacute;logo de ejemplo un marco puede tener distintas apariencias.
+</UL>
+
+<P ALIGN="JUSTIFY">Primero vamos a ver las <B>propiedades del objeto UserForm</B>. Para ello seleccionamos el Userform de la parte derecha simplemente puls&aacute;ndolo con el rat&oacute;n. En la parte inferior izquierda, en la ventana de Propiedades, tenemos la lista de propiedades del objeto UserForm. Utilizando esta ventana podemos cambiar el valor de cualquier propiedad del Userform. Algunas de las propiedades m&aacute;s importantes son:</P>
+<UL TYPE="CIRCLE">
+<LI><B>Name</B>: el nombre con el que vamos a identificar el UserForm. Tiene que ser &uacute;nico y no puede tener espacios ni otros caracteres raros. Yo suelo ponerles un nombre que empiece por &quot;uf&quot; (por ejemplo, <I>ufDatosPersonales</I>), porque as&iacute; cuando en el c&oacute;digo VB haga una referencia a este objeto s&eacute; que se trata de un objeto UserForm.
+<LI><B>Caption</B>: es el t&iacute;tulo que el usuario ver&aacute; en el cuadro de di&aacute;logo. Se puede poner cualquier texto, incluyendo espacios.
+<LI><B>BackColor</B>: el color de fondo del cuadro de di&aacute;logo. Por defecto es el color gris que suelen tener todos los cuadros de di&aacute;logo en Windows.
+<LI><B>ForeColor</B>: el color de primer plano, es decir, del texto que aparezca en el cuadro de di&aacute;logo.
+<LI><B>Font</B>: el tipo de letra por defecto para el cuadro de di&aacute;logo. Este es el tipo de letra que tendr&aacute;n todos los controles que insertemos en el cuadro de di&aacute;logo, pero si luego queremos cambiarlo para cualquier control puede hacerse.
+<LI><B>StartupPosition</B>: la posici&oacute;n en la que aparecer&aacute; el cuadro de di&aacute;logo. Si le damos el valor &quot;CenterScreen&quot; el di&aacute;logo saldr&aacute; en el centro de la pantalla.
+<LI><B>SpecialEffect</B>: para cambiar un poco los bordes del cuadro de di&aacute;logo.
+<LI><B>Picture, PictureAlignment, PictureSizeMode, PictureTiling</B>: se utilizan para poner un dibujo como fondo del cuadro de di&aacute;logo.
+</UL>
+
+<P ALIGN="JUSTIFY">Hay m&aacute;s propiedades, pero su uso es bastante sencillo, y consultando la ayuda encontrar&aacute;s la descripci&oacute;n de todas las propiedades.</P>
+
+<P ALIGN="JUSTIFY">Vamos con nuestro di&aacute;logo: lo primero es cambiarle el nombre; vamos a la ventana de Propiedades y en la propiedad Name, escribimos por ejemplo &quot;<I>ufPrimero</I>&quot;. Luego en la propiedad &quot;Caption&quot; escribiremos &quot;<I>Mi primer UserForm</I>&quot;. Las dem&aacute;s propiedades las dejamos como est&aacute;n, aunque si quieres cambiar alguna que afecte a la presentaci&oacute;n del di&aacute;logo (color de fondo, efectos especiales, etc) puedes hacerlo tranquilamente.</P>
+
+<P ALIGN="JUSTIFY">En cualquier momento puedes probar tu cuadro de di&aacute;logo seleccion&aacute;ndolo con el rat&oacute;n y utilizando la opci&oacute;n &quot;Ejecutar, Ejecutar Sub/Userform&quot; (o m&aacute;s r&aacute;pido pulsando F5 o el bot&oacute;n de ejecutar <IMG SRC="gif/ejecutar.gif" WIDTH="23" HEIGHT="22" BORDER="0" ALT="Bot&oacute;n para ejecutar una macro/userform" ALIGN="Absmiddle">). Para cerrar el di&aacute;logo tendr&aacute;s que utilizar la &quot;X&quot; que aparece en la parte superior derecha, porque todav&iacute;a no hemos a&ntilde;adido ning&uacute;n bot&oacute;n para cerrar el di&aacute;logo.</P>
+
+<P ALIGN="JUSTIFY">Como hemos dicho antes, en nuestro cuadro de di&aacute;logo queremos que el usuario escriba un n&uacute;mero. Para que pueda hacerlo, tendremos que poner un <B>cuadro de texto</B> en el di&aacute;logo. Para ello pulsamos en el UserForm para que aparezca el &quot;Cuadro de Herramientas&quot; y en &eacute;ste pulsamos sobre el control &quot;Cuadro de Texto&quot; <IMG SRC="gif/edit.gif" WIDTH="23" HEIGHT="22" BORDER="0" ALT="Cuadro de texto" ALIGN="Absmiddle">. Una vez seleccionado el &quot;Cuadro de Texto&quot; pulsamos en cualquier parte del UserForm y veremos que aparece un cuadro de edici&oacute;n. Podemos utilizar el rat&oacute;n para moverlo y cambiarle el tama&ntilde;o.</P> 
+
+<P ALIGN="JUSTIFY">Pulsando con el rat&oacute;n, seleccionaremos el cuadro de edici&oacute;n, y como de costumbre veremos que en la ventana de &quot;Propiedades&quot; aparecen todas las propiedades del objeto &quot;<I>Cuadro de Texto</I>&quot; (<I>TextBox</I> en ingl&eacute;s), entre las que se encuentran:</P>
+<UL TYPE="CIRCLE">
+<LI><B>Name</B>: el nombre del objeto. Como antes, no puede incluir espacios ni caracteres especiales. Yo suelo utilizar nombres que empiecen por &quot;tb&quot;, para identificar estos objetos como un TextBox, pero se puede utilizar cualquier nombre.
+<LI><B>Text</B>: es el texto que va dentro del cuadro de edici&oacute;n, es decir, el que ha escrito el usuario.
+<LI><B>TextAlign</B>: alineaci&oacute;n del texto dentro del cuadro de di&aacute;logo. Normalmente si lo que queremos es que el usuario introduzca una cadena de texto se suele alinear a la izquierda, y si queremos que introduzca n&uacute;meros se suele alinear a la derecha.
+<LI><B>MultiLine</B>: los valores posibles son verdadero y falso, indicando si queremos que el control permita al usuario escribir m&aacute;s de una l&iacute;nea o no.
+</UL>
+
+<P ALIGN="JUSTIFY">Las propiedas sobre la apariencia del control son parecidas a las que hemos visto antes (BackColor, ForeColor, SpecialEffects). El resto de propiedades se pueden consultar en la ayuda. Aunque parezca que nos estamos dejando muchas cosas, una vez que empezamos a tener claras las cosas el utilizar propiedades que no hemos usado nunca es muy sencillo. O sea, que por ahora nos centramos en lo b&aacute;sico.</P>
+
+<P ALIGN="JUSTIFY">Bueno, ahora vamos a nuestro cuadro de di&aacute;logo. Seleccionamos nuestro cuadro de edici&oacute;n, lo colocamos en una posici&oacute;n que nos guste, y vamos a las propiedades. Primero la propiedad Name, que en este caso vamos a dejar tal como est&aacute;, TextBox1. No suele ser aconsejable dejar estos nombres, porque si tienes varios cuadros de edici&oacute;n en un di&aacute;logo al final no sabes a cu&aacute;l te est&aacute;s refiriendo, pero como en este caso s&oacute;lo vamos a tener un cuadro de edici&oacute;n no nos importa demasiado. Ahora vamos a la propiedad &quot;TextAlign&quot; y vamos a seleccionar la opci&oacute;n &quot;fmTextAlignRight&quot; para alinear el texto a la derecha, ya que lo que queremos es que le usuario introduzca un n&uacute;mero. Por ahora no vamos a hacer nada m&aacute;s con este control.</P>
+
+<P ALIGN="JUSTIFY">Si ejecutamos el cuadro de di&aacute;logo veremos que podemos introducir un valor en el cuadro de edici&oacute;n que hemos creado, pero aparte de eso no podemos hacer mucho m&aacute;s.</P> 
+
+<P ALIGN="JUSTIFY">Lo siguiente que vamos a hacer es poner un texto descriptivo para el cuadro de edici&oacute;n. Para ello seleccionamos del &quot;Cuadro de herramientas&quot; el control &quot;Etiqueta&quot; <IMG SRC="gif/label.gif" WIDTH="23" HEIGHT="22" BORDER="0" ALT="Etiqueta" ALIGN="Absmiddle">, y pulsamos en el UserForm para crear un control del tipo etiqueta. Utilizando el rat&oacute;n le podemos cambiar el tama&ntilde;o y moverlo, para ponerlo a la izquierda del control de edici&oacute;n que hemos creado antes.</P>
+
+<P ALIGN="JUSTIFY">En la ventana de propiedades de nuestro nuevo control (recuerda que tienes que seleccionarlo para poder ver sus propiedades en la ventana de propiedades) veremos como siempre la lista de propiedades. La propiedad Name la vamos a dejar como est&aacute;, ya que no vamos a referirnos a este control en el c&oacute;digo, y no nos interesa su nombre: normalmente los controles de etiqueta se utilizan s&oacute;lo para poner un texto en el di&aacute;logo, y no se suelen referenciar desde el c&oacute;digo VB. La propiedad que nos interesa es &quot;Caption&quot;, en la que escribiremos el texto que queremos que aparezca en el cuadro de di&aacute;logo, por ejemplo &quot;Escribe un n&uacute;mero:&quot;. </P>
+
+<P ALIGN="JUSTIFY">Si colocamos bien los dos controles (utilizando por ejemplo la opci&oacute;n &quot;Formato, Alinear, Medio), ya tenemos un di&aacute;logo algo m&aacute;s completo.</P>
+
+<P ALIGN="JUSTIFY">Lo t&iacute;pico en estos cuadros de di&aacute;logo es que en la parte inferior haya dos botones, uno para &quot;<I>Aceptar</I>&quot; y el otro para &quot;<I>Cancelar</I>&quot;. Vamos a colocar estos dos botones, empezando por el de &quot;Cancelar&quot; que es un poco m&aacute;s f&aacute;cil.</P>
+
+<P ALIGN="JUSTIFY">Como antes, vamos al &quot;<I>Cuadro de Herramientas</I>&quot; y seleccionamos el control &quot;<B>Bot&oacute;n de comando</B>&quot; <IMG SRC="gif/boton.gif" WIDTH="23" HEIGHT="22" BORDER="0" ALT="Bot&oacute;n de comando" ALIGN="Absmiddle">. Pulsamos sobre el UserForm y hemos creado nuestro primer bot&oacute;n, que podemos mover y cambiar de tama&ntilde;o utilizando el rat&oacute;n. Una vez seleccionado nuestro nuevo control podremos ver sus propiedades en la ventana de &quot;<I>Propiedades</I>&quot;:</P>
+<UL TYPE="CIRCLE">
+<LI><B>Name</B>: el nombre del control. Vamos a darle el nombre &quot;<I>cbCancel</I>&quot; (cb viene de <I>CommandButton</I>).
+<LI><B>Caption</B>: el texto del bot&oacute;n. L&oacute;gicamente, vamos a poner &quot;<I>Cancelar</I>&quot;.
+<LI><B>Cancel</B>: puede ser verdadero o falso. S&oacute;lo puede haber un control en el cuadro de di&aacute;logo con la propiedad Cancel establecida como verdadero. Si le damos a Cancel el valor verdadero, cuando se est&eacute; ejecutando el cuadro de di&aacute;logo si el usuario pulsa &quot;Escape&quot; ser&aacute; como si hubiese pulsado con el rat&oacute;n sobre este bot&oacute;n. En este caso nos interesa que ocurra, o sea que vamos a darle el valor verdadero.
+<LI><B>Default</B>: verdadero o falso, indica si el bot&oacute;n es el bot&oacute;n por defecto del cuadro de di&aacute;logo. Si el usuario pulsa &quot;<I>Enter</I>&quot; cuando est&aacute; viendo el di&aacute;logo ser&aacute; como si pulsa con el rat&oacute;n sobre el bot&oacute;n que tenga la propiedad Default (s&oacute;lo puede haber uno). En este caso vamos a dejar la propiedad en False porque queremos que el bot&oacute;n por defecto sea el de &quot;Aceptar&quot;, que crearemos m&aacute;s adelante.
+</UL>
+
+<P ALIGN="JUSTIFY">Por ahora dejamos el resto de propiedades de los botones. Bueno, hasta ahora le hemos dado a nuestro bot&oacute;n el nombre &quot;<I>cbCancel</I>&quot;, le hemos puesto el texto &quot;<I>Cancelar</I>&quot; y hemos dado el valor &quot;Verdadero&quot; a la propiedad &quot;<I>Cancel</I>&quot;.</P>
+
+<P ALIGN="JUSTIFY">Si ejecutamos el cuadro de di&aacute;logo veremos que tenemos un bot&oacute;n muy bonito, pero que no hace absolutamente nada. Para que haga algo tenemos que meternos con un concepto muy importante de la programaci&oacute;n orientada a objetos, los <B>Eventos</B>.</P>
+
+<P ALIGN="JUSTIFY">A estas alturas ya deber&iacute;an estar claros los conceptos de <B>Objeto</B>, <B>Propiedad</B> y <B>M&eacute;todo</B>. En Excel, un objeto es una variable que representa cualquier elemento de Excel, como un rango, un libro, una celda, o un UserForm. Todos los objetos tienen propiedades (como Cell.Value, Workbook.Name o UserForm.BackColor), y m&eacute;todos (como Range.ClearContents o UserForm.Show).</P>
+
+<P ALIGN="JUSTIFY">Adem&aacute;s de propiedades y m&eacute;todos los objetos tienen tambi&eacute;n &quot;<B>eventos</B>&quot;. He mirado en la ayuda y no he encontrado una definici&oacute;n de evento, y tampoco me atrevo a dar una, pero voy a ver si puedo explicar el concepto. Imaginemos que tenemos un control, como por ejemplo el control de edici&oacute;n que hemos colocado en nuestro di&aacute;logo. Cuando sucede un &quot;evento&quot; de los que este control &quot;entiende&quot;, Excel llamar&aacute; a una funci&oacute;n con un nombre especial, siempre que hayamos definido esa funci&oacute;n (si no la hemos definido, no pasa nada, el &quot;<I>evento</I>&quot; se ignora).
+Un ejemplo de evento es que el usuario mueva el rat&oacute;n por encima de nuestro control. Cada vez que el rat&oacute;n se mueve se produce un evento &quot;<I>MouseMove</I>&quot;, y entonces Excel llamar&aacute; a la rutina <I>TextBox1_MouseMove</I>( ... ), en caso de que hayamos definido esa rutina, lo que haremos en caso de que nos interese hacer algo cada vez que el rat&oacute;n pase por encima de nuestro control. El nombre de la rutina es especial: primero va el nombre del control (recuerda que lo hab&iacute;amos dejado tal como nos lo hab&iacute;a puesto Excel, <I>TextBox1</I>), luego un car&aacute;cter de subrayado (&quot;_&quot;), y luego el nombre del evento.</P>
+<P ALIGN="JUSTIFY">Otro ejemplo de evento: queremos que el usuario introduzca un n&uacute;mero en el cuadro de edici&oacute;n, pero si lo probamos veremos que se puede escribir cualquier car&aacute;cter que no sea un n&uacute;mero. Cada vez que el usuario pulsa una tecla se produce el evento &quot;<I>KeyPress</I>&quot;, que podemos utilizar para ignorar la tecla pulsada por el usuario si &eacute;ste pulsa una tecla que no es un n&uacute;mero. M&aacute;s adelante veremos c&oacute;mo se hace.</P>
+
+<P ALIGN="JUSTIFY">Bueno, no s&eacute; si ha quedado muy claro, pero creo que con un poco de pr&aacute;ctica espero que s&iacute;. Dominar los conceptos de <B>objeto</B>, <B>propiedad</B>, <B>m&eacute;todo</B> y <B>evento</B> es muy importante, pero no s&oacute;lo para programaci&oacute;n en Visual Basic for Applications, sino que estos conceptos son b&aacute;sicos en todos los lenguajes de <U>programaci&oacute;n orientada a objetos</U> (Visual Basic, Borland Delphi, Java, etc.). De hecho, si dominas esos conceptos con cuatro cosas m&aacute;s podr&aacute;s programar en cualquiera de esos otros lenguajes.</P>
+
+<P ALIGN="JUSTIFY">Bueno, sigamos con los eventos. Vamos a centrarnos ahora en nuestro bot&oacute;n de &quot;<I>Cancelar</I>&quot;. El evento m&aacute;s normal para un bot&oacute;n es que el usuario lo pulse con el rat&oacute;n (o con el teclado). Cuando esto ocurra, se generar&aacute; un evento <B>Click</B>, y llamar&aacute; a la rutina <B>cbCancelar_Click</B>(). (<I>cbCancelar</I> es el nombre que hab&iacute;amos dado al control, y Click es el nombre del evento). Lo m&aacute;s f&aacute;cil para crear un evento es seleccionar un control y luego pulsar el bot&oacute;n derecho y seleccionar la opci&oacute;n &quot;<I>Ver C&oacute;digo</I>&quot;. Veremos una p&aacute;gina de c&oacute;digo VB en la que Excel habr&aacute; escrito la cabecera de un evento para dicho control (la verdad es que no s&eacute; cu&aacute;l de los eventos coge, supongo que coger&aacute; el m&aacute;s utilizado). En nuestro caso, si pulsamos sobre el bot&oacute;n &quot;<I>Cancelar</I>&quot; con el bot&oacute;n derecho y luego &quot;<I>Ver c&oacute;digo</I>&quot; en la p&aacute;gina de c&oacute;digo veremos lo siguiente:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> cbCancelar_Click()
+
+<FONT COLOR="#0000FF">End Sub</FONT></FONT></PRE>
+<P ALIGN="JUSTIFY">Excel nos ha creado la cabecera para la funci&oacute;n que queremos crear. En este caso la funci&oacute;n no tiene ning&uacute;n par&aacute;metro, pero en otros eventos la funci&oacute;n tiene una lista de par&aacute;metros, y Excel tambi&eacute;n nos los pone en la cabecera.</P> 
+
+<P ALIGN="JUSTIFY">Otra cosa, la p&aacute;gina de c&oacute;digo que estamos viendo es como un m&oacute;dulo normal en el que escribimos nuestro c&oacute;digo, con la particularidad de que no sale en la lista de m&oacute;dulos en el &quot;Explorador de Proyectos&quot;, ya que es un m&oacute;dulo asociado al Userform.</P>
+
+<P ALIGN="JUSTIFY">Para crear una funci&oacute;n para cualquier otro evento tenemos en la parte superior de la ventana de c&oacute;digo dos &quot;<I>persianas</I>&quot;. En la persiana de la izquierda tenemos el objeto sobre el que queremos definir una funci&oacute;n para un evento. En la persiana de la derecha tenemos todos los eventos que pueden ocurrir para el control seleccionado en la persiana de la izquierda. Si queremos definir la funci&oacute;n para otro evento lo &uacute;nico que tenemos que hacer es seleccionar otro evento en esta persiana, y Excel insertar&aacute; en el c&oacute;digo la cabecera para la funci&oacute;n que se va a ejecutar cuando se de ese evento.</P>
+
+<P ALIGN="JUSTIFY">Bueno, lo que queremos hacer cuando el usuario pulsa el bot&oacute;n de Cancelar es simplemente cerrar el cuadro de di&aacute;logo. Tendremos que cerrar el cuadro de di&aacute;logo cuando Excel nos avise de que ha ocurrido un evento Click, es decir, dentro de la funci&oacute;n cbCancelar_Click().</P>
+
+<P ALIGN="JUSTIFY">La instrucci&oacute;n que se utiliza para cerrar el UserForm es &quot;Unload&quot;, que sirve para quitar un objeto de la memoria. La instrucci&oacute;n Unload requiere un par&aacute;metro, que utilizaremos para indicarle cu&aacute;l es el objeto. En nuestro caso utilizaremos la palabra clave &quot;Me&quot;, que apunta al objeto en el que se est&aacute; ejecutando el c&oacute;digo, es decir, nuestro UserForm.</P>
+
+<P ALIGN="JUSTIFY">Nuestro &quot;manejador de eventos&quot; para el evento Click del bot&oacute;n cbCancel quedar&iacute;a as&iacute;:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> cbCancelar_Click()
+   Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT></FONT>
+</PRE><IMG SRC="gif/primero.gif" WIDTH="320" HEIGHT="207" ALIGN="Right" BORDER="0" ALT="Nuestro primer Userform">
+<P ALIGN="JUSTIFY">Cuando el usuario pulse el bot&oacute;n de Cancelar se generar&aacute; un evento Click, y Excel llamar&aacute; a nuestra funci&oacute;n, que utilizar&aacute; la instrucci&oacute;n Unload para cerrar el di&aacute;logo. F&iacute;jate en que si pulsas la tecla &quot;Escape&quot; el di&aacute;logo se cierra igual que si hubieses pulsado con el rat&oacute;n sobre el bot&oacute;n: esto es debido a que hemos dado el valor verdadero a la propiedad &quot;Cancel&quot; del bot&oacute;n Cancelar.</P>
+
+<P ALIGN="JUSTIFY">Despu&eacute;s de probar el cuadro de di&aacute;logo y comprobar que nuestro bot&oacute;n de Cancelar funciona perfectamente nos queda a&ntilde;adir el bot&oacute;n de Aceptar. Para crear el bot&oacute;n seleccionamos en el &quot;Cuadro de Herramientas&quot; el &quot;Bot&oacute;n de comando&quot; y lo colocamos en el UserForm. Luego le ponemos su nombre (cbAceptar por ejemplo), cambiamos su texto (ponemos Aceptar) y le damos el valor &quot;Verdadero&quot; a la propiedad Default para que si el usuario pulsa Enter sea como si hubiese pulsado con el rat&oacute;n sobre el bot&oacute;n.</P>
+
+<P ALIGN="JUSTIFY">Ahora nos queda todo el tema de los eventos. El procedimiento es el mismo que con el bot&oacute;n de Cancelar, con la &uacute;nica diferencia de que antes de cerrar el cuadro de di&aacute;logo (con la instrucci&oacute;n Unload) deberemos hacer lo que queremos que nuestro di&aacute;logo haga, es decir, copiar el contenido del cuadro de edici&oacute;n TextBox1. La funci&oacute;n ser&iacute;a la siguiente:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> cbAceptar_Click()
+    ActiveCell.Value = TextBox1.Value
+    Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT></FONT>
+</PRE>
+<P ALIGN="JUSTIFY">Esta funci&oacute;n es pr&aacute;cticamente igual que la que hemos escrito para el bot&oacute;n <I>Cancelar</I>, con la excepci&oacute;n de que antes de cerrar el cuadro de di&aacute;logo escribimos otra l&iacute;nea, que se encarga de copiar en la celda activa (ActiveCell) el contenido del cuadro de edici&oacute;n. F&iacute;jate como accedemos al contenido del cuadro de edici&oacute;n, a trav&eacute;s del nombre del control (TextBox1) y su propiedad Value, que nos devuelve el valor num&eacute;rico de lo que se ha introducido en el control (si hay caracteres no num&eacute;ricos la propiedad Value nos devolver&aacute; el valor 0).</P>
+
+<P ALIGN="JUSTIFY">Si probamos ahora el cuadro de di&aacute;logo veremos que ya funciona perfectamente, ya hemos conseguido que nuestro primer UserForm funcione. El &uacute;nico problema que tiene es que en el cuadro de edici&oacute;n el usuario puede escribir cualquier caracter adem&aacute;s de n&uacute;meros. Para evitar esto ya he adelantado antes que hay que utilizar el evento KeyPress del cuadro de edici&oacute;n, pero eso lo veremos m&aacute;s adelante. </P>
+
+<H4>- El segundo cuadro de di&aacute;logo.</H4>
+<IMG SRC="gif/datosper.gif" WIDTH="344" HEIGHT="199" ALIGN="Right" BORDER="0" ALT="Userform de Datos Personales">
+
+<P ALIGN="JUSTIFY">Vamos a hacer otro cuadro de di&aacute;logo: tenemos en una hoja de c&aacute;lculo una celda con el nombre de una persona y otra celda con el apellido. Queremos crear un Userform que permita al usuario editar ese nombre y apellido, y si pulsa Aceptar en el cuadro de di&aacute;logo los valores de esas celdas deben actualizarse con lo introducido por el usuario.</P>
+<P ALIGN="JUSTIFY">Si te fijas en el fichero de ejemplo ver&aacute;s las dos celdas que incluyen el nombre y el apellido. A estas celdas les he dado el nombre &quot;rngNombre&quot; y &quot;rngApellido&quot;, respectivamente. Cuando hagamos referencias a celdas de hojas de c&aacute;lculo en nuestro c&oacute;digo es muy conveniente utilizar nombres de rangos en lugar de referencias absolutas (como por ejemplo C12), ya que si utilizamos nombres de rangos y movemos esas celdas no tenemos que hacer ning&uacute;n cambio en el c&oacute;digo, lo que deberemos hacer si utilizamos referencias absolutas.</P>
+
+Repetimos los pasos anteriores:<BR>
+<UL TYPE="CIRCLE">
+<LI>Crear el UserForm, utilizando &quot;Insertar, Userform&quot; en el editor de Visual Basic. Vamos a dar al UserForm el nombre &quot;ufDatosPersonales&quot;
+<LI>Insertamos dos cuadros de texto, uno para el nombre y otro para el apellido, a los que daremos los nombres tbNombre y tbApellido.
+<LI>Insertamos dos etiquetas que colocaremos a la izquierda de cada uno de los dos cuadros de texto.
+<LI><P ALIGN="JUSTIFY">Insertamos un bot&oacute;n para Cancelar el cuadro de di&aacute;logo, al que cambiaremos el nombre a &quot;cbCancelar&quot;, el texto a &quot;Cancelar&quot; (utilizando la propiedad Caption&quot;) y daremos a la propiedad Cancel el valor Verdadero.
+<LI>Insertamos un bot&oacute;n para Aceptar, cambi&aacute;ndole el nombre a &quot;cbAceptar&quot;, el texto a &quot;Aceptar&quot; y damos a la propiedad Default el valor Verdadero.
+</UL> 
+
+<P ALIGN="JUSTIFY">Vamos con los eventos: para el bot&oacute;n Cancelar la funci&oacute;n que debemos escribir es exactamente igual que en el caso anterior:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> cbCancelar_Click()
+   Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT></FONT></PRE>
+
+<P ALIGN="JUSTIFY">Lo &uacute;nico que hace es cerrar el cuadro de di&aacute;logo al producirse el evento &quot;Click&quot; del bot&oacute;n Cancelar.</P>
+
+<P ALIGN="JUSTIFY">La funci&oacute;n para el bot&oacute;n Aceptar tambi&eacute;n es muy similar a la anterior:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> cbAceptar_Click()
+    Range(&quot;rngNombre&quot;).Value = tbNombre.Text
+    Range(&quot;RngApellido&quot;).Value = tbApellido.Text
+    Unload Me
+<FONT COLOR="#0000FF">End Sub</FONT></FONT></PRE>
+
+<P ALIGN="JUSTIFY">Esta funci&oacute;n se ejecuta tambi&eacute;n cuando se produce el evento Click del bot&oacute;n llamado cbAceptar. Antes de cerrar el cuadro de di&aacute;logo debemos guardar en las celdas de la hoja de c&aacute;lculo los valores de los cuadros de texto. Para ello utilizamos un objeto Range (a estas alturas somos unos autenticos expertos en el objeto Range), y le asignamos a su propiedad Value el valor de la propiedad Text del objeto TextBox. Esta es la &uacute;nica novedad, la utilizaci&oacute;n de una propiedad de los objetos TextBox (tbNombre y tbApellido).</P>
+
+<P ALIGN="JUSTIFY">Si ejecutamos ahora el cuadro de di&aacute;logo veremos que funciona perfectamente: si cambiamos los nombres en el UserForm y pulsamos Aceptar veremos que las celdas de la hoja de c&aacute;lculo han cambiado y ahora contienen los nuevos nombres.</P>
+
+<P ALIGN="JUSTIFY">Pero hay una peque&ntilde;a opci&oacute;n que se nos ha escapado: si vamos directamente a la hoja de c&aacute;lculo, cambiamos los nombres en sus celdas, y ejecutamos el Userform, veremos que los controles de edici&oacute;n no tienen ahora los nombres actualizados, ya que no recogen los cambios que hemos hecho nosotros directamente en la hoja de c&aacute;lculo.</P>
+
+<P ALIGN="JUSTIFY">Para eso vamos a utilizar tambi&eacute;n los eventos. En esta ocasi&oacute;n vamos a utilizar un evento del Userform (s&iacute;, los UserForms tambi&eacute;n tienen eventos). Se trata del evento Initialize, que se produce justo antes del que el UserForm aparezca en la pantalla. Ese es el momento para hacer cualquier cambio en el Userform, como poner un texto en un control, que es lo que queremos hacer.</P>
+
+<P ALIGN="JUSTIFY">Por lo tanto, seleccionamos el UserForm, pulsamos con el bot&oacute;n derecho y luego la opci&oacute;n &quot;Ver c&oacute;digo&quot; (tambi&eacute;n se puede hacer doble-click sobre el Userform) y en la persiana de la derecha seleccionaremos el evento Initialize. Excel crear&aacute; en ese momento la cabecera de nuestra funci&oacute;n:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> UserForm_Initialize()
+
+<FONT COLOR="#0000FF">End Sub</FONT>
+</FONT></PRE>
+<P ALIGN="JUSTIFY">Ahora tenemos que escribir el c&oacute;digo que queremos que se ejecute antes de que se muestre el Userform. Lo que queremos hacer es poner en los dos cuadros de texto (el de nombre y el de apellido) el contenido de las celdas que tienen esos datos. Para ello utilizaremos el siguiente c&oacute;digo:</P>
+
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Private Sub</FONT> UserForm_Initialize()
+    tbNombre.Text = Range(&quot;rngNombre&quot;).Value
+    tbApellido.Text = Range(&quot;rngApellido&quot;).Value
+<FONT COLOR="#0000FF">End Sub</FONT>
+</FONT></PRE>
+<P ALIGN="JUSTIFY">No creo que tenga demasiada dificultad. Es lo mismo que hemos escrito para el bot&oacute;n Aceptar pero al rev&eacute;s, es decir, damos a los cuadros de texto del Userform el valor que tienen las celdas de la hoja de c&aacute;lculo.</P>
+
+<P ALIGN="JUSTIFY">Pues ya est&aacute;, ahora s&iacute; que el cuadro de di&aacute;logo funciona perfectamente, tanto si hacemos los cambios en el UserForm (se actualizar&aacute; la hoja de c&aacute;lculo si pulsamos Aceptar) como si hacemos los cambios en la hoja de c&aacute;lculo (se actualizar&aacute; el UserForm antes de aparecer en pantalla, porque se habr&aacute; ocurrido un evento Initialize).</P>
+
+<P ALIGN="JUSTIFY">Bueno, hasta aqu&iacute; llega esta tercera entrega. Todav&iacute;a nos queda mucho por ver sobre los cuadros de di&aacute;logo (o UserForms, o formularios, como prefieras), pero eso lo dejamos para la pr&oacute;xima entrega. Hasta entonces te toca practicar, y sobre todo recuerda que lo m&aacute;s importante es tener claros los conceptos importantes: <B>objetos, propiedades, m&eacute;todos y eventos</B>.
+</P>
+
+<BR>
+
+<TABLE>
+	<TR>	
+		<TD><FONT SIZE="-1">Recuerda que los ejemplos de este cap&iacute;tulo est&aacute;n inclu&iacute;dos en este fichero:</FONT> </TD>
+		<TD ALIGN="CENTER"><FONT SIZE="-1"><A HREF="zip/excel3.xls">Excel3.xls</A><BR>
+(117kbs)</FONT></TD>
+		<TD ALIGN="CENTER"><A HREF="zip/excel3.xls"><IMG SRC="gif/xl7_lg.gif" WIDTH="38" HEIGHT="36" BORDER="0"></A></TD>
+	</TR>
+</TABLE>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulae.htm"><font FACE="ARIAL"><B>[Curso de VBA para Excel]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

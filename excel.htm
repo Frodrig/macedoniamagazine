@@ -1,0 +1,293 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+<br><br>
+
+
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>Capítulo 1. Introducción y primeros pasos</h3>
+
+<P ALIGN=JUSTIFY>Este curso va dirigido a aprender a programar en Visual Basic for Applications (VBA) para la hoja de c&aacute;lculo Microsoft Excel. El VBA es muy similar en el resto de herramientas de Microsoft Office (Word, PowerPoint, etc), por lo que los conocimientos aqu&iacute; adquiridos pueden aplicarse en esos otros programas. Adem&aacute;s el VBA es tambi&eacute;n muy similar al Visual Basic de verdad, por lo que puede ser una puerta de acceso a la programaci&oacute;n de aplicaciones (utilizando Visual Basic) para personas sin conocimientos previos de programaci&oacute;n.
+<P ALIGN=JUSTIFY>
+Desde los primeros tiempos de las hojas de c&aacute;lculo, con las m&iacute;ticas primeras versiones de Lotus 1-2-3, exist&iacute;an macros (el nombre completo era macro-comandos), que serv&iacute;an para automatizar tareas repetitivas. En aquellos tiempos las macros se limitaban b&aacute;sicamente a simular pulsaciones del teclado el usuario, es decir, al ejecutar una macro era como si el usuario estuviese pulsando las teclas que la macro "pulsaba", lo que a pesar de su sencillez permit&iacute;a hacer cosas interesantes. Con el tiempo las macros fueron evolucionando, pudi&eacute;ndose incluir en ellas sentencias que no se traduc&iacute;an en pulsaciones de teclas, aunque todo ello se hac&iacute;a introduciendo f&oacute;rmulas en las celdas de la hoja de c&aacute;lculo, lo que dejaba bastante que desear. Con la llegada de Excel 5.0, Microsoft introdujo las macros basadas en el popular Visual Basic, creando lo que ha llamado Visual Basic for Applications, compartido por todas las aplicaciones de Microsoft, y que añade a las mismas unas posibilidades enormes de personalizaci&oacute;n y creaci&oacute;n de soluciones a medida de las necesidades de cada usuario. De hecho, creo que el nombre "macro" deber&iacute;a dejar de utilizarse en favor de otros conceptos m&aacute;s relacionados con los lenguajes de programaci&oacute;n (como rutinas, subrutinas y funciones), pero yo creo que se mantiene por razones hist&oacute;ricas.
+<P ALIGN=JUSTIFY>
+<IMG SRC="gif/clipo.gif" HEIGHT="89" WIDTH="96" BORDER="0" ALIGN="RIGHT" ALT="Clipo">Lo primero que tuve que decidir antes de escribir este curso sobre programaci&oacute;n en Excel fue hacia qui&eacute;n iba a ir dirigido: por un lado est&aacute;n todas las personas que dominan uno o m&aacute;s lenguajes de programaci&oacute;n, y con poco esfuerzo pueden aprender los detalles espec&iacute;ficos de Visual Basic for Applications para Excel. Por otro lado est&aacute;n todas aquellas personas que utilizan Excel simplemente como una hoja de c&aacute;lculo que hace operaciones aritm&eacute;ticas, que desaprovechan toda la potencia de Excel. He decidido que este curso va a ir dirigido a estos &uacute;ltimos, porque creo que es el perfil del usuario habitual de Excel, y aquellas personas que est&eacute;n en el primer grupo pueden tambi&eacute;n utilizar el curso, deteni&eacute;ndose en las partes que expliquen cosas espec&iacute;ficas de Excel y salt&aacute;ndose otras como los conceptos generales de programaci&oacute;n.
+<P ALIGN=JUSTIFY>
+Una nota sobre versiones de Excel: la &uacute;ltima versi&oacute;n de Excel es la de Office 97 (llamada Excel 97), aunque todav&iacute;a existen muchos sitios en los que se utiliza la versi&oacute;n de Office 95 (Excel 95). Casi todo lo que vamos a hacer funciona en las dos versiones, y en los casos en los que no sea as&iacute; procurar&eacute; indicarlo.
+<P ALIGN=JUSTIFY>
+El mejor m&eacute;todo para aprender VBA es utilizar la opci&oacute;n de grabar macros de Excel: todo lo que hagamos mientras Excel est&aacute; grabando una macro se traduce en la instrucciones de VBA necesarias para repetir nuestras acciones. Vamos a utilizar esa opci&oacute;n para crear nuestra primera macro. Primero selecciona la opci&oacute;n "<I>Herramientas, Grabar Macro</I>", y escribe algo en la celda A1. Luego selecciona la opci&oacute;n <I>"Herramientas, Grabar macro..., Detener grabaci&oacute;n"</I> para que Excel debe de grabar. Para ver la macro que acabamos de crear el m&eacute;todo es distinto en Excel 95 y Excel 97: en Excel 95, las macros se almacenan en m&oacute;dulos, que son como una hoja m&aacute;s del libro, podemos ver una hoja llamada <I>"M&oacute;dulo1"</I> en las pestañas que est&aacute;n en la parte inferior. En Excel 97, para escribir macros se utiliza el Visual Basic Editor, y accedemos a &eacute;l mediante la opci&oacute;n Herramientas, Macros, Abrir Editor Visual Basic. En cualquiera de las dos versiones veremos que Excel ha escrito algo parecido a esto:
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0"><I></I>
+<FONT COLOR="#0000FF">Sub</FONT> Macro1()
+    ActiveCell.Formula = "Mi primera macro"
+    Range("A2").Select
+<FONT COLOR="#0000FF">End Sub</FONT>
+</FONT></PRE><P ALIGN=JUSTIFY>
+Esta rutina escribe "Mi primera macro" en la celda activa y luego se desplaza a la celda inferior, en este caso la celda A2 (esto ocurre porque Excel tiene por defecto la opci&oacute;n de que cuando pulsas "Intro" el cursor se desplaza a la celda de abajo, y Excel tambi&eacute;n ha incluido eso en la macro).
+<P ALIGN=JUSTIFY>
+Vamos a ir poco a poco. La primera l&iacute;nea define una subrutina llamada <I>Macro1</I> (es el nombre que le ha puesto Excel, pero podemos cambiarlo a lo que nosotros queramos). Cada rutina que escribamos debe empezar con <B>Sub</B> y terminar con una sentencia "<B>End Sub</B>". 
+<P ALIGN=JUSTIFY>
+Antes de explicar la segunda l&iacute;nea, una explicaci&oacute;n sobre los <B><I>"objetos"</I></B>: un objeto es una variable de VBA que representa cualquier elemento de Excel. Por ejemplo, para representar un rango de una hoja de c&aacute;lculo se utiliza el objeto Range, o para representar una hoja de c&aacute;lculo se utiliza el objeto Worksheet. En nuestra macro estamos utilizando el objeto "ActiveCell", que es un objeto de tipo Range que siempre apunta a la celda activa.
+<P ALIGN=JUSTIFY>
+Los objetos tienen "<B>propiedades</B>" y "<B>m&eacute;todos</B>". Una propiedad es un atributo del objeto que define una caracter&iacute;stica del mismo. Por ejemplo, la propiedad "<I>Row</I>" del objeto "<I>ActiveCell</I>" nos indica en qu&eacute; fila de la hoja de c&aacute;lculo est&aacute; la celda activa. Para acceder a una propiedad de un objeto se utiliza el nombre del objeto, un punto y el nombre de la propiedad (p.ej. ActiveCell.Row). Unas propiedades muy utilizadas son las propiedades "<I>Value</I>" y "<I>Formula</I>" que se aplican a todos los objetos Range. En nuestro ejemplo de macro, asignamos a la propiedad "<I>Formula</I>" del objeto <I>ActiveCell</I> un texto, que es como si el usuario escribiera ese texto en esa celda.
+<P ALIGN=JUSTIFY>
+Los "m&eacute;todos" son acciones que se pueden llevar a cabo sobre un objeto, son rutinas que se aplican sobre el objeto. Para llamar a un m&eacute;todo se utiliza el nombre del objeto, un punto y el nombre del m&eacute;todo. Por ejemplo, el m&eacute;todo "ActiveCell.ClearContents" borra el contenido de la celda activa (es decir, como si el usuario pulsa la tecla "Suprimir").
+<P ALIGN=JUSTIFY>
+Volvamos a nuestra primera macro. La segunda l&iacute;nea asigna un valor a la propiedad "<I>Formula</I>" del objeto ActiveCell. En realidad no es una formula sino una cadena, pero da lo mismo.  F&iacute;jate en que en VBA siempre que escribamos una cadena de car&aacute;cteres hay que encerrarla entre comillas dobles ("), igual que en otros lenguajes. Si dentro de una cadena queremos poner unas comillas dobles, s&oacute;lo tenemos que escribirlas dos veces ("en esta cadena hay unas comillas "" dobles")
+<P ALIGN=JUSTIFY>
+La tercera l&iacute;nea llama al m&eacute;todo Select del rango "A2" de la hoja activa. F&iacute;jate en la forma de obtener el objeto que representa a la celda "A2", utilizando Range("A2").
+La &uacute;ltima l&iacute;nea se encarga de indicar d&oacute;nde termina la rutina. Por cada <I>Sub</I> que escribamos obligatoriamente tenemos que escribir un "<I>End Sub</I>".
+<P ALIGN=JUSTIFY>
+<H4>Ejecutar una subrutina</H4>
+<P ALIGN=JUSTIFY>
+Para ejecutar una rutina hay varios m&eacute;todos.
+<UL TYPE="CIRCLE">
+<LI><P ALIGN=JUSTIFY>Con la opci&oacute;n <I>"Herramientas, Macro..."</I> Excel te lista todas las macros disponibles y puedes seleccionar la que quieras y ejecutarla.
+<LI><P ALIGN=JUSTIFY>Asignar una macro a una nueva opci&oacute;n del <B>men&uacute; de Herramientas</B>.
+<LI><P ALIGN=JUSTIFY>Asignar una "<B>tecla r&aacute;pida</B>" a la macro, que se ejecutar&aacute; cada vez que pulsemos esa tecla.
+<LI><P ALIGN=JUSTIFY>Crear un <B>bot&oacute;n</B> y asignar a ese bot&oacute;n la rutina, de forma que &eacute;sta se ejecutar&aacute; cada vez que pulsemos el bot&oacute;n. Para crear un bot&oacute;n tenemos que mostrar la barra de herramientas de "Di&aacute;logo" (pulsa con el bot&oacute;n derecho sobre cualquier barra de herramientas, y en el men&uacute; que aparece selecciona "Di&aacute;logo" y ver&aacute;s que aparece la nueva barra de herramientas). En esa barra de herramientas hay un bot&oacute;n que sirve para colocar botones (valga la redundancia) en nuestra hoja. Pulsa ese bot&oacute;n y crea el tuyo en cualquier parte de una hoja de c&aacute;lculo, con el tamaño que quieras. Luego pulsa sobre ese bot&oacute;n con el bot&oacute;n derecho y del men&uacute; contextual selecciona la opci&oacute;n "Asignar macro". Ver&aacute;s una lista de macros disponibles, selecciona la que acabamos de crear (Macro1). Ahora cada vez que pulsemos el bot&oacute;n se ejecutar&aacute; la macro Macro1.
+<LI><P ALIGN=JUSTIFY>Mientras estamos editando una hoja de m&oacute;dulos, un m&eacute;todo muy pr&aacute;ctico de ejecutar las rutinas es situar el cursor dentro de una rutina y pulsar el bot&oacute;n de "<B>Ejecutar macro</B>" de la barra de herramientas de Visual Basic. Hay que tener cuidado con este m&eacute;todo en Excel 95, porque en algunos casos puede dar errores: por ejemplo, con este m&eacute;todo nuestra primera macro no funciona porque "ActiveCell" no existe, ya que estamos en una hoja de m&oacute;dulo, por lo que Excel nos dar&aacute; un mensaje de error. En Excel 97 este problema no ocurre porque no existen hojas de módulo, sino módulos dentro del Visual Basic Editor.
+<P ALIGN=JUSTIFY></UL>
+Podemos utilizar cualquiera de estos m&eacute;todos (y otros que ya veremos) para ejecutar nuestra rutina, y comprobaremos que cada vez que la ejecutamos escribe un texto en la celda activa y luego desplaza la selecci&oacute;n a la celda de abajo.
+<P ALIGN=JUSTIFY>
+<H4>Utilizar funciones de VBA</H4>
+<P ALIGN=JUSTIFY>
+Adem&aacute;s de los objetos con sus m&eacute;todos y propiedades Excel tambi&eacute;n tiene funciones. Para llamar a una funci&oacute;n simplemente hay que escribir su nombre y luego los par&aacute;metros necesarios. Por ejemplo, vamos a hacer una pequeña macro que utilice la funci&oacute;n MsgBox. Esta funci&oacute;n sirve para presentar cuadros de di&aacute;logo con mensajes para el usuario, aunque no tenemos muchas opciones para diseñar el di&aacute;logo, s&oacute;lo se puede elegir el tipo de icono entre varios predefinidos (interrogaci&oacute;n, exclamaci&oacute;n, etc.) y unas cuantas opciones sobre los botones del cuadro de di&aacute;logo (Aceptar, Cancelar, S&iacute;, No...). A pesar de todo es muy &uacute;til para presentar informaci&oacute;n al usuario, por ejemplo cuando se ha terminado un proceso con &eacute;xito, cuando ha ocurrido un error, o para pedir informaci&oacute;n del tipo de "¿Est&aacute;s seguro de que quieres hacer....?", lo que hace que se una funci&oacute;n bastante utilizada.
+<P ALIGN=JUSTIFY>
+Pues nada, aqu&iacute; tenemos una pequeña rutina que utiliza la funci&oacute;n MsgBox:
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<FONT COLOR="#0000FF">Sub</FONT> MiMacro()
+    MsgBox "Hola mundo", vbOkOnly + vbInformation, 
+           "Mi segunda macro"
+<FONT COLOR="#0000FF">End Sub</FONT>
+</FONT></PRE><P ALIGN=JUSTIFY>
+Recuerda que para escribir la macro tienes que situarte en una hoja de m&oacute;dulo en Excel 95, o ir al editor de VB en Excel 97, y dentro de &eacute;l seleccionar un m&oacute;dulo. Por ejemplo, podemos escribir esta macro debajo de la que hemos creado antes utilizando la "grabadora" de Excel.
+<P ALIGN=JUSTIFY>
+<IMG SRC="gif/hello.gif" HEIGHT="119" WIDTH="146" ALIGN="Right" ALT="Hola mundo" BORDER="0" HSPACE="5" >Si ejecutamos esta macro, veremos que sale un cuadro de di&aacute;logo con el t&iacute;tulo "Mi segunda macro" y con el texto "Hola mundo", adem&aacute;s de un icono que indica que es un cuadro de informaci&oacute;n, y el bot&oacute;n aceptar. 
+Hemos llamado a MsgBox, pas&aacute;ndole como primer par&aacute;metro el texto del cuadro de mensaje, como segundo par&aacute;metro los botones e icono que queremos que tenga y como tercer par&aacute;metro el t&iacute;tulo del cuadro de di&aacute;logo. Como habr&aacute;s podido observar los argumentos van separados por comas. Tambi&eacute;n se pueden poner m&aacute;s par&aacute;metros para indicar qu&eacute; fichero de ayuda queremos que se abra si el usuario pulsa F1 mientras est&aacute; viendo el cuadro de di&aacute;logo. Si quieres m&aacute;s informaci&oacute;n sobre dichos par&aacute;metros, as&iacute; como una lista de todas las opciones que puedes utilizar como segundo par&aacute;metro (distintos botones e iconos) utiliza la ayuda de Excel, que es bastante completa.
+La mejor forma de utilizar la ayuda es colocar el cursor sobre la instrucci&oacute;n sobre la que queremos buscar la ayuda y pulsar F1. Si Excel encuentra esa palabra en el archivo de ayuda, nos mostrar&aacute; la p&aacute;gina de ayuda sobre ella.
+<P ALIGN=JUSTIFY>
+Otra pequeña macro que utiliza MsgBox:
+<P ALIGN=JUSTIFY>
+<PRE><FONT SIZE="+0">
+<FONT COLOR="#0000FF">Sub</FONT> Macro3()
+    <FONT COLOR="#0000FF">If</FONT> MsgBox("Pulsa Aceptar o Cancelar",
+	       vbOKCancel) = vbOK <FONT COLOR="#0000FF">Then</FONT>
+        MsgBox ("Has pulsado Aceptar")
+    <FONT COLOR="#0000FF">Else</FONT>
+        MsgBox ("Has pulsado Cancelar")
+    <FONT COLOR="#0000FF">End If
+End Sub</FONT></FONT>
+</PRE><P ALIGN=JUSTIFY>
+Bueno, varias cosas nuevas. En primer lugar el "<B>If - Then - Else - End If</B>". Como su nombre indica, esta instrucci&oacute;n (la ayuda de Excel los llama enunciados) se utiliza para evaluar condiciones. Su forma general es:
+    <FONT COLOR="#0000FF">If</FONT> &lt;condici&oacute;n&gt; <FONT COLOR="#0000FF">Then</FONT>
+        ....
+    <FONT COLOR="#0000FF">Else</FONT>
+        ....
+    <FONT COLOR="#0000FF">End If</FONT>
+<P ALIGN=JUSTIFY>
+Si el resultado de la condici&oacute;n es verdadero, se ejecutan las instrucciones que hay entre el <B>If</B> y el <B>Else</B>. Si es falso, se ejecutan las instrucciones que hay entre el <B>Else</B> y el <B>End If</B>. El <B>Else</B> no es obligatorio, o sea que si no nos interesa ejecutar nada en caso de que la condici&oacute;n no sea verdadera, simplemente ponemos un <B>End If</B> y ya est&aacute;.
+<P ALIGN=JUSTIFY>
+<IMG SRC="gif/ridondo.gif" HEIGHT="89" WIDTH="96" ALIGN="LEFT" ALT="Ridondo" 
+BORDER="0" HSPACE="8" >Volvamos a nuestra funci&oacute;n: lo que hacemos es llamar a la funci&oacute;n MsgBox con un texto y un par&aacute;metros (vbOkCancel) indicando los botones que queremos que tenga. Hasta aqu&iacute; todo claro. Lo &uacute;nico que cambia respecto al ejemplo anterior es que como hemos puesto MsgBox detr&aacute;s del If, Excel nos obliga a poner los par&aacute;metros entre par&eacute;ntesis.
+Lo que hacemos despu&eacute;s es comprobar el valor que nos devuelve la funci&oacute;n <I>MsgBox</I> una vez que el usuario ha cerrado el cuadro de di&aacute;logo. El usuario va a tener dos botones (Aceptar y Cancelar), y dependiendo de cu&aacute;l de ellos pulse obtendremos un valor u otro, representados por Excel mediante unas constantes: vbOk si el usuario pulsa Aceptar, vbCancel si el usuario pulsa Cancelar, vbYes si el usuario pulsa S&iacute; (que en este ejemplo no existe pero podemos ponerlo), etc. Como siempre, en la ayuda de Excel est&aacute;n todas los valores posibles que puede devolver MsgBox.
+<P ALIGN=JUSTIFY>
+Bueno, entendido esto supongo que el resto de la macro es f&aacute;cil de entender: lo que hace es mostrar un mensaje con dos botones (Aceptar y Cancelar), y dependiendo de lo que el usuario seleccione muestra otro mensaje informando al usuario de lo que ha pulsado. No es que sea demasiado &uacute;til pero nos ha servido para aprender algo m&aacute;s.
+<P ALIGN=JUSTIFY>
+Vamos hacer otra macro un poco m&aacute;s complicada, que utilice la funci&oacute;n MsgBox y las propiedades de los objetos que hemos aprendido antes:
+<P ALIGN=JUSTIFY>
+<PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">Sub</FONT> Macro4()
+    <FONT COLOR="#0000FF">If</FONT> MsgBox("Informaci&oacute;n 
+	sobre la celda activa: " & Chr(13) & _
+           "F&oacute;rmula: " & ActiveCell.Formula 
+           & Chr(13) & _ "Valor: " & ActiveCell.Value 
+           & Chr(13) & Chr(13) & _ "Pulsa Aceptar 
+           para borrar el contenido de la celda 
+           activa " _ & "y Cancelar para dejarla como 
+           est&aacute;", _ vbOKCancel + vbInformation, 
+           "Mi cuarta macro") = vbOK <FONT COLOR="#0000FF">Then</FONT>
+       ActiveCell.Value = ""
+    <FONT COLOR="#0000FF">End If</FONT>
+<FONT COLOR="#0000FF">End Sub</FONT>
+</FONT></PRE><P ALIGN=JUSTIFY>
+Bueno, hay varias cosas que explicar: con el caracter "_" al final de una l&iacute;nea queremos decirle a Excel que la l&iacute;nea contin&uacute;a, pero lo vamos a escribir debajo (por razones de legibilidad). Es decir, es como si desde el "If" de la segunda l&iacute;nea hasta el "Then" de la s&eacute;ptima l&iacute;nea estuviese todo en la misma l&iacute;nea, pero si lo puesi&eacute;semos en la misma l&iacute;nea ser&iacute;a bastante dif&iacute;cil de leer. 
+<P ALIGN=JUSTIFY>
+El car&aacute;cter "&" se utiliza para concatenar dos cadenas de caracteres. Por ejemplo, la cadena "Macedonia Magazine" es igual que la cadena "Macedonia " & "Magazine".
+<P ALIGN=JUSTIFY>
+La funci&oacute;n <I>Chr</I>() se utiliza para obtener el car&aacute;cter representado por un c&oacute;digo ASCII. No es demasiado utilizada, tan s&oacute;lo nos interesa saber que c&oacute;digo ASCII n&uacute;mero 13 representa el cambio de l&iacute;nea, y en este caso lo utilizamos para empezar una nueva l&iacute;nea en el texto que vamos a presentar en el cuadro de di&aacute;logo.
+<P ALIGN=JUSTIFY>
+F&iacute;jate c&oacute;mo obtenemos informaci&oacute;n sobre la celda activa utilizando las propiedades <I>Formula</I> y <I>Value</I> del objeto ActiveCell. Podemos observar que las propiedades Formula y Value son distintas cuando las leemos (una tiene la f&oacute;rmula, y la otra tiene el valor) mientras que para dar un valor a la celda nos da lo mismo utilizar una u otra: la linea que dice ActiveCell.Value = "" puede sustituirse por ActiveCell.Formula = "", obteniendo el mismo resultado.
+<P ALIGN=JUSTIFY>
+Para ejecutar esta rutina, vamos a probar el m&eacute;todo de asignar a una tecla esta macro. Para ello vamos a <I>Herramientas, Macro</I>. De la lista de macros, seleccionamos &eacute;sta y pulsamos el bot&oacute;n "Opciones...", que nos llevar&aacute; a una ventana donde aparecen varias opciones para nuestra macro. En este di&aacute;logo podemos decir a Excel que ponga la macro como una opci&oacute;n del menu de Herramientas, y tambi&eacute;n como tecla r&aacute;pida. Podemos poner por ejemplo la tecla Ctrl-M. Ahora vamos a una hoja de c&aacute;lculo, e introducimos en cualquier celda la f&oacute;rmula "=5+2". Si pulsamos ahora las teclas Ctrl-M ejecutaremos nuestra macro y veremos lo siguiente:
+<P ALIGN=JUSTIFY>
+Bueno, espero que haya quedado relativamente claro. Hasta ahora hemos aprendido lo que es una macro o rutina, c&oacute;mo ejecutarla, unos conceptos b&aacute;sicos sobre objetos y la instrucci&oacute;n "<I>If-Then-Else</I>", una de las m&aacute;s utilizadas.
+<P ALIGN=JUSTIFY>
+Vamos a avanzar un poco m&aacute;s, aprendiendo a utilizar otra instrucci&oacute;n muy &uacute;til, el bucle "For", y a profundizar un poco en el uso del objeto Range, que es seguramente el m&aacute;s utilizado. Despu&eacute;s de haber hecho el t&iacute;pico programa "<I>Hola mundo</I>" (el primero que hemos hecho todos cuando hemos aprendido un lenguaje de programaci&oacute;n) vamos a hacer ahora otro cl&aacute;sico: vamos a pedirle al usuario que nos de un n&uacute;mero y le vamos a dar la tabla de multiplicar de ese n&uacute;mero.
+<P ALIGN=JUSTIFY>
+Aqu&iacute; va la rutina completa, y luego la explicamos:
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<FONT COLOR="#0000FF">Sub</FONT> TablaMultiplicar()
+    <FONT COLOR="#0000FF">Dim</FONT> n, i As <FONT COLOR="#0000FF">Integer</FONT>
+    <FONT COLOR="#0000FF">Dim</FONT> s As String
+    <FONT COLOR="#0000FF">Dim</FONT> r As Range
+    
+    s = InputBox("Tabla de multiplicar del n&uacute;mero: ",
+                 "T&iacute;tulo")
+    <FONT COLOR="#0000FF">If</FONT> s &lt;&gt; "" Then
+        n = Val(s)
+        ActiveSheet.Range("C2").Value = "Tabla de 
+        multiplicar del " & n
+        <FONT COLOR="#0000FF">Set</FONT> r = ActiveSheet.Range("C4")
+        <FONT COLOR="#0000FF">For</FONT> i = 0 <FONT COLOR="#0000FF">To</FONT> 10
+            r.Offset(i, 0).Value = i
+            r.Offset(i, 1).Value = i * n
+        <FONT COLOR="#0000FF">Next</FONT> i
+    <FONT COLOR="#0000FF">End If</FONT>
+<FONT COLOR="#0000FF">End Sub</FONT></FONT>
+</PRE><P ALIGN=JUSTIFY>
+
+Pulsa <A HREF="zip/multipl.xls">aqu&iacute;</A> para bajarte un fichero de Excel que contiene este ejemplo.
+
+Lo primero es la <U>declaraci&oacute;n de variables</U>. Una variable es un espacio de memoria que reservamos para almacenar datos. Con la sentencia "<I>Dim n,i as Integer</I>" estamos diciendo que queremos reservar memoria para dos variables (n, i) de tipo entero, para almacenar n&uacute;meros enteros. Igualmente en las siguientes l&iacute;neas reservamos memoria para una variable de cadena (<I>string</I>), que almacenar&aacute; cadenas de caracteres, y para una variable de tipo Range. 
+En VBA no es obligatorio declarar las variables antes de utilizarlas, a no ser que en cada m&oacute;dulo escribamos al principio "Options Explicit", con lo que estaremos indicando a VBA que debe comprobar que todas las variables que utilicemos est&eacute;n previamente declaradas. No voy a entrar en la eterna pol&eacute;mica de si es mejor declarar las variables o no hacerlo, pero personalmente creo que es mejor hacerlo, para que el tipo de datos que almacena cada variable est&eacute; claro y para evitar errores al escribir los nombres de variables que luego pueden ser dif&iacute;ciles de localizar.
+<P ALIGN=JUSTIFY>
+<IMG SRC="gif/genious.gif" WIDTH="96" HEIGHT="89" ALIGN="Left" BORDER="0" HSPACE="5" ALT="Genio">En la siguiente l&iacute;nea utilizamos la funci&oacute;n "<I>InputBox</I>", que sirve para mostrar un cuadro de di&aacute;logo simple en el que el usuario puede escribir un dato. El primer par&aacute;metro es el texto descriptivo que se mostrar&aacute; en el cuadro de di&aacute;logo y el segundo par&aacute;metro es el t&iacute;tulo del cuadro de di&aacute;logo. El usuario puede utilizar el cuadro de edici&oacute;n del di&aacute;logo para introducir el dato que le pedimos y luego pulsar Aceptar o Cancelar. Si pulsa Aceptar, la funci&oacute;n InputBox devuelve una cadena de caracteres con el dato introducido por el usuario. Si pulsa Cancelar, la funci&oacute;n devuelve una cadena de caracteres vac&iacute;a ("").
+Utilizamos la funci&oacute;n InputBox para que el usuario nos diga qu&eacute; tabla de multiplicar quiere, y almacenamos el valor devuelto por la funci&oacute;n en la variable s, que previamente hemos declarado como una variable de tipo cadena de car&aacute;cteres (string).
+<P ALIGN=JUSTIFY>
+Despu&eacute;s de llamar a InputBox, comprobamos que variable "s" no est&aacute; vac&iacute;a, lo que significa que el usuario ha escrito algo en el di&aacute;logo y luego ha pulsado Aceptar. Si "s" esta vac&iacute;a, la rutina termina sin hacer nada m&aacute;s.
+<P ALIGN=JUSTIFY>
+Nuestro siguiente paso es obtener el n&uacute;mero que ha introducido el usuario. Es importante distinguir entre n&uacute;meros y cadenas: en este momento tenemos la cadena de car&aacute;cteres "<B>s</B>" que contiene la cadena introducida por el usuario, y como queremos hacer operaciones aritm&eacute;ticas necesitamos el n&uacute;mero contenido en esa cadena. Por ejemplo, si el usuario ha escrito "3", la variable "<B>s</B>" contendr&aacute; una cadena de car&aacute;cteres de un solo car&aacute;cter ("3"), y lo que nosotros queremos obtener es el valor num&eacute;rico 3. Para ello utilizamos la funci&oacute;n Val(), que dada una cadena de car&aacute;cteres no da su valor num&eacute;rico: p.ej: Val("3") nos devuelve 3.
+El resultado de la funci&oacute;n Val lo almacenamos en la variable <B>n</B>, que previamente hemos declarado como variable de tipo entero.
+<P ALIGN=JUSTIFY>
+Como siempre suele suceder, existe la posibilidad de que el usuario haya escrito un valor con decimales o que haya escrito letras en lugar de n&uacute;meros. En una macro m&aacute;s profesional deber&iacute;amos comprobar esas posibilidades para asegurarnos de que nuestra macro no sufre ning&uacute;n error en caso de que el usuario introduzca alg&uacute;n dato inesperado, pero por ahora no vamos a meternos en l&iacute;os de esos.
+<P ALIGN=JUSTIFY>
+La siguiente l&iacute;nea deber&iacute;a ser f&aacute;cil de entender a estas alturas: damos un valor a la propiedad "Value" del rango C2 de la hoja activa, al que accedemos utilizando "ActiveSheet.Range("C2")". Una pequeña recomendaci&oacute;n: siempre que hagas referencia a rangos de hojas de c&aacute;lculo desde VBA es recomendable utilizar nombres definidos de rango en lugar de referencias tipo C2. Por ejemplo, podemos dar a la celda C2 el nombre "T&iacute;tulo tabla" y acceder a ella utilizando Range("T&iacute;tulo tabla"). La ventaja de esto es que si luego queremos que en lugar de en la celda C2 lo escriba en cualquier otra celda s&oacute;lo tenemos que cambiar el nombre, sin tocar el c&oacute;digo.
+<P ALIGN=JUSTIFY>
+En la siguiente l&iacute;nea utilizamos el enunciado "<I>Set</I>" para que la variable <B>r</B> (de tipo <I>Range</I>) apunte al rango C4 de la hoja activa.
+<P ALIGN=JUSTIFY>
+Luego viene la sentencia "<I>For - Next</I>", que tiene varias formas, pero esta es la m&aacute;s sencilla: lo que hacemos es que la variable "<B>i</B>" (como siempre, previamente declarada como de tipo entero) tome los valores comprendidos entre el 0 y el 10 (ambos inclusive), y para cada uno de esos valores se ejecute el c&oacute;digo comprendido entre las l&iacute;neas <I>For</I> y <I>Next</I>. Es decir, las dos l&iacute;neas que hay entre el <I>For</I> y el <I>Next</I> se van a ejecutar once veces: la primera vez que se ejecuten, la variable <B>i</B> tendr&aacute; el valor 0; la segunda vez, <B>i</B> tendr&aacute; el valor 1; y la &uacute;ltima vez <B>i</B> tendr&aacute; el valor 10. El bucle "For - Next" es muy utilizado, y en VBA funciona de forma muy parecida a cualquier otro lenguaje de programaci&oacute;n.
+<P ALIGN=JUSTIFY>
+Las dos l&iacute;neas que hay entre el For y el Next son pr&aacute;cticamente iguales. El m&eacute;todo "<I>Offset</I>" es un m&eacute;todo que se aplica a los objetos de tipo Range (como nuestra variable "<B>r</B>") para desplazar el rango al que apunta. El primer par&aacute;metro del m&eacute;todo Offset es el n&uacute;mero de filas que queremos desplazar el rango (positivo hacia abajo, negativo hacia arriba), y el segundo par&aacute;metro es el n&uacute;mero de columnas que queremos desplazar el rango. Vamos a verlo con un ejemplo: si nuestra variable "<B>r</B>" apunta al rango C4:<BR><BR>
+<TABLE ALIGN="CENTER" BORDER="0" WIDTH="80%">
+	<TR>
+		<TD><FONT SIZE="-1">r.Value = 1</TD>
+		<TD><FONT SIZE="-1">Pone el valor 1 en la celda <U>C4</U></TD>
+	</TR>
+	<TR>
+		<TD><FONT SIZE="-1">r.Offset(1,0).Value = 2</TD>
+		<TD><FONT SIZE="-1">Pone el valor 2 en la celda <U>C5</U></TD>
+	</TR>
+	<TR>
+		<TD><FONT SIZE="-1">r.Offset(-1,0).Value = 3</TD>
+		<TD><FONT SIZE="-1">Pone el valor 3 en la celda <U>C3</U></TD>
+	</TR>
+	<TR>
+		<TD><FONT SIZE="-1">r.Offset(0,1).Value = 4</TD>
+		<TD><FONT SIZE="-1">Pone el valor 4 en la celda <U>D4</U></TD>
+	</TR>
+	<TR>
+		<TD><FONT SIZE="-1">r.Offset(-1,-1).Value = 5</TD>
+		<TD><FONT SIZE="-1">Pone el valor 5 en la celda <U>B3</U></TD>
+	</TR>
+</TABLE><BR>
+Las dos l&iacute;neas de nuestra rutina lo que hacen es crear una tabla de dos columnas, poniendo en la primera columna los n&uacute;meros del 0 al 10 (es decir, los valores que va tomando <B>i</B> cada vez que se ejecutan estas dos l&iacute;neas) y en la segunda columna el resultado de multiplicar el valor de <B>i</B> por el n&uacute;mero que nos ha indicado anteriormente el usuario (<B>n</B>).
+<P ALIGN=JUSTIFY>
+Antes de terminar con este ejemplo hay que dejar claro que la tabla de multiplicar puede hacerse de forma mucho m&aacute;s sencilla y r&aacute;pida sin utilizar macros, utilizando tan s&oacute;lo funciones de hoja de c&aacute;lculo, pero nos ha servido como ejemplo sencillo para aprender algunas cosas m&aacute;s sobre VBA.
+<P ALIGN=JUSTIFY>
+Bueno, hasta aqu&iacute; ha llegado la primera entrega de este curso. Con lo que hemos aprendido hasta aqu&iacute; se pueden hacer ya algunas cosas. Que a nadie le de miedo hacer todos los experimentos que quiera, que es la mejor forma de aprender. Tambi&eacute;n es muy &uacute;til consultar a menudo la ayuda de Excel, que es bastante completa. Espero que alguno de los que hab&eacute;is llegado hasta aqu&iacute; me <A HREF="mailto:ecenaitu@arrakis.es">escrib&aacute;is</A> dici&eacute;ndome qu&eacute; os ha parecido. 
+</p>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulae.htm"><font FACE="ARIAL"><B>[Curso de VBA para Excel]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

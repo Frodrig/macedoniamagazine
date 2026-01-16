@@ -1,0 +1,278 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>A</b></font>nexos / Otros.</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Anexo 1
+</H3>
+
+<FONT color="#000000" size=2 face="arial">
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">
+De vez en cuando, ser&aacute;n introducidos anexos de este tipo, que tratar&aacute;n sobre el tema que se est&eacute; exponiendo en ese momento, extraidos de Internet, y que suelen ser de gran ayuda a la hora del aprendizaje de Delphi. </P>
+<P ALIGN="JUSTIFY">Este FAQ (Frecuently Asqued Question) pertenece a <B>Pablo</B> <B>Le&oacute;n</B>, y aqu&iacute; tan solo se ha incluido su trabajo, por lo que cualquier derecho pertenece exclusivamente a &eacute;l. </P>
+<P ALIGN="JUSTIFY">En este caso que tratamos ahora, es un FAQ sobre los componentes de Delphi, su instalaci&oacute;n, su anejo, su reutilizaci&oacute;n, etc.</P>
+<P ALIGN="JUSTIFY">Tiene un nivel mucho m&aacute;s elevado que el dado hasta ahora, pero estoy seguro de que servir&aacute;n de referencia para aquellos que profundicen en el tema. </P>
+</FONT><P><BR>
+<ol>
+<li><P ALIGN="JUSTIFY"><A NAME="P1"></A><FONT SIZE=2></FONT><A HREF="#R1"><FONT SIZE=2>¿C&oacute;mo crear un nuevo componente?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P2"></A><FONT SIZE=2></FONT><A HREF="#R2"><FONT SIZE=2>¿C&oacute;mo a&ntilde;ado una propiedad a mi nuevo componente?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P3"></A><FONT SIZE=2></FONT><A HREF="#R3"><FONT SIZE=2>¿C&oacute;mo a&ntilde;ado un evento a mi nuevo componente?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P4"></A><FONT SIZE=2></FONT><A HREF="#R4"><FONT SIZE=2>A mi componente le sobran algunas propiedades que ha heredado de su antecesor; ¿Como las elimino?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P5"></A><FONT SIZE=2></FONT><A HREF="#R5"><FONT SIZE=2>¿C&oacute;mo pongo un manejador de mensajes est&aacute;ndar de windows?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P6"></A><FONT SIZE=2></FONT><A HREF="#R6"><FONT SIZE=2>¿C&oacute;mo puedo modicar el aspecto de un control est&aacute;ndar de windows?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P7"></A><FONT SIZE=2></FONT><A HREF="#R7"><FONT SIZE=2>¿C&oacute;mo elijo un antecesor para mi componente?</FONT></A> </li>
+<li><P ALIGN="JUSTIFY"><A NAME="P8"></A><FONT SIZE=2></FONT><A HREF="#R8"><FONT SIZE=2>¿C&oacute;mo creo un control en tiempo de ejecuci&oacute;n?</FONT></A> </li>
+</ol><FONT FACE="Arial" SIZE=2>
+<h4><P ALIGN="JUSTIFY"><A NAME="R1"></A><B>1.- ¿C&oacute;mo crear un nuevo componente?</B> </P></h4>
+<FONT FACE="Arial" SIZE=2>
+<ol>
+<li><P ALIGN="JUSTIFY">En el men&uacute; del delphi, seleccionar Component y luego New.</li>
+<li><P ALIGN="JUSTIFY">Como Class Name hay que poner el nombre del componente precedido de una T, p.e. TMiNuevoComponente.</li>
+<li><P ALIGN="JUSTIFY">En Ancestor Type hay que seleccionar el componente del que vas a&nbsp;&nbsp;&nbsp; derivar p.e. TGraphicControl.</li>
+<li><P ALIGN="JUSTIFY">En Palette Page pon el nombre de la solapa en la que quieres que vaya tu nuevo componente. Si no existe una solapa con el mismo nombre, esta se crear&aacute;.</li>
+<li><P ALIGN="JUSTIFY">Al pulsar OK se genera el fichero fuente de tu objeto. Guardalo con un nombre apropiado, que debe ser dirente que el del componente, p.e. MisComponentes.pas</li>
+<li><P ALIGN="JUSTIFY">En el men&uacute; de delphi selecciona Component y luego Install. Con el Bot&oacute;n add, a&ntilde;ade el fichero del punto 5.</li>
+<li><P ALIGN="JUSTIFY">¡Ya has creado un componente id&eacute;ntico al Ancestor!</li>
+</ol>
+</FONT><H6><A HREF="#P1"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<P>&nbsp;</P>
+
+<h4><A NAME="R2"></A>2.- ¿C&oacute;mo a&ntilde;ado una propiedad a mi nuevo componente?</h4><DIR>
+
+<B><FONT SIZE=1><P>Interface</B></FONT> </P>
+<FONT SIZE=1><P><B>type</B> TMarcos = <B>class</B> (TPadre_de_Marcos)</FONT> </P>
+<B><FONT SIZE=1><P>private</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; fMarcos:string;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; fAcierto:boolean;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; fOnFallo:TNotifyEvent;</FONT> <BR>
+<B><FONT SIZE=1>&nbsp;&nbsp;&nbsp; procedure </B>SetMarcos(M:string);</FONT> </P>
+<B><FONT SIZE=1><P>published</B></FONT> </P>
+<FONT SIZE=1><P>&nbsp;&nbsp;&nbsp; // He aqui la propiedad</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; <B>property</B> Marcos:string <B>read</B> fMarcos <B>write</B> SetMarcos;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ---------</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-- Procedimiento donde se pone</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;la propiedad</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (tambi&eacute;n puede ser una varible)</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-- Variable de donde se lee la propiedad</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (tambien puede ser una funci&oacute;n)</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +-- Nombre de la propiedad tal como aparece en el<br> 
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inspector de objetos</FONT> </P>
+<FONT SIZE=1><P>&nbsp;&nbsp;&nbsp; // Esto es un evento</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; <B>property</B> OnFallo:TNotifyEvent<B> read</B> fOnFallo <B>write</B> fOnFallo;</FONT> </P>
+<B><FONT SIZE=1><P>end;</B></FONT> </P>
+<B><FONT SIZE=1><P>implementation</B></FONT> </P>
+<B><FONT SIZE=1><P>procedure</B> tMarcos.SetMarcos(M:string);</FONT> <BR>
+<B><FONT SIZE=1>begin</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Asignamos la propiedad</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fMarcos:=M;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Y hacemos algunas otras cosas</FONT> <BR>
+<B><FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if </B>Upper(fMarcos)='MMMMMMM' <B>then</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fAcierto:=true</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>else if</B> fOnFallo&lt;nil <B>then</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fOnFallo(self);</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Repaint;</FONT> <BR>
+<B><FONT SIZE=1>end;</P></DIR>
+
+</B></FONT><H6><A HREF="#P2"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<h4><A NAME="R3"></A>
+3.- ¿ C&oacute;mo a&ntilde;ado un evento a mi nuevo componente? </h4>
+<P ALIGN="JUSTIFY"><FONT SIZE=2>Un evento es muy parecido a una propiedad, solo que el tipo de la misma es TNoSeCuantosEvent,</FONT><FONT FACE="Arial"> </FONT><FONT FACE="Arial" SIZE=2>o sea, tipo funci&oacute;n. Si no te vale TNotifyEvent a algun otro ya definido,</FONT><FONT FACE="Arial"> <BR>
+</FONT><FONT FACE="Arial" SIZE=2>tienes que definirtelo t&uacute;:</FONT><FONT FACE="Arial"> </P><DIR>
+
+</FONT><B><FONT SIZE=1><P>Interface</B></FONT> </P>
+<FONT SIZE=1><P><B>type</B> T_A_Este_Evento_Le_Paso_Un_Entero_Event = <B>procedure</B> (Sender:TComponent;I:integer) <B>of </B>object;</FONT> </P>
+<FONT SIZE=1><P><B>type</B> T_Este_Objeto_Usa_Eventos =<B> Class</B> (T_Padre)</FONT> <BR>
+<FONT SIZE=1>&nbsp;<B> private</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; fOnQuieroPasarUnEntero:T_A_Este_Evento_Le_Paso_Un_Entero_Event;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; fOnMeValeElEventoEst&aacute;ndar:TNotifyEvent;</FONT> <BR>
+<B><FONT SIZE=1>&nbsp; public</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;<B> constructor</B> Create(AOwner:Tcomponent);<B> override</B>;</FONT> <BR>
+<B><FONT SIZE=1>&nbsp; published</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; // He aqui los eventos</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; OnQuieroPasarUnEntero:T_A_Este_Evento_Le_Paso_Un_Entero_Event</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>read </B>fOnQuieroPasarUnEntero <B>write </B>fOnQuieroPasarUnEntero;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; OnMeValeElEventoEst&aacute;ndar:TNotifyEvent</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>read</B> fOnMeValeElEventoEst&aacute;ndar <B>write</B> fOnQuieroPasarUnEntero;</FONT> <BR>
+<FONT SIZE=1>&nbsp; <B>end;</B></FONT> </P>
+<B><FONT SIZE=1><P>implementation</B></FONT> </P>
+<FONT SIZE=1><P><B>procedure</B> T_Este_Objeto_Usa_Eventos.Create(AOwner:Tcomponent);</FONT> <BR>
+<B><FONT SIZE=1>begin</B></FONT> <BR>
+<B><FONT SIZE=1>inherited;</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; // ***Atencion***: Es imprescindible comprobar que el evento est&aacute; asignado antes de llamarlo</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; <B>if</B> fOnQuieroPasarUnEntero&lt;<B>nil then</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fOnQuieroPasarUnEntero(self,33); //Los a&ntilde;os de cristo</FONT> <BR>
+<B><FONT SIZE=1>end;</P></DIR>
+
+</B></FONT><H6><A HREF="#P3"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<h4><A NAME="R4"></A>4.- A mi componente le sobran algunas propiedades que ha heredado de su antecesor; ¿Cómo las elimino?</h4>
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>No puedes eliminaralas. Lo siento. Si te molestan mucho, intenta derivar de objetos</FONT><FONT FACE="Arial">
+</FONT><FONT FACE="Arial" SIZE=2>m&aacute;s primitivos. Aunque la tentacion sea fuerte NO MODIFIQUES LOS FUENTES QUE VIENEN</FONT><FONT FACE="Arial"> </FONT><FONT FACE="Arial" SIZE=2>CON EL DELPHI.</P>
+</FONT><H6><A HREF="#P4"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<P>&nbsp;</P>
+<h4><A NAME="R5"></A>5.- ¿ C&oacute;mo pongo un manejador de mensajes est&aacute;ndar de windows?</h4><DIR>
+
+</FONT><FONT SIZE=1><P>As&iacute;:</FONT> </P>
+<B><FONT SIZE=1><P>Interface</B></FONT> </P>
+<B><FONT SIZE=1><P>type</B> MiComponente=<B>Class</B>(TComponent);</FONT>&nbsp; <BR>
+<B><FONT SIZE=1>&nbsp; private</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; // Este mensaje indica que se ha soltado el bot&oacute;n izquierdo del rat&oacute;n</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; <B>procedure </B>WMLBUTTONUP(<B>var</B> Msg:TWMLBUTTONUP); <B>message </B>WM_LBUTTONUP;</FONT> <BR>
+<B><FONT SIZE=1>&nbsp; end;</B></FONT> </P>
+<FONT SIZE=1><P><B>Implementation</B></FONT> </P>
+<FONT SIZE=1><P><B>&nbsp; procedure </B>MiComponente.WMLBUTTONUP(<B>var </B>Msg:TWMLBUTTONUP);</FONT> <BR>
+<B><FONT SIZE=1>&nbsp; begin</B></FONT> <BR>
+<B><FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inherited;</B></FONT> <BR>
+<B><FONT SIZE=1>&nbsp; end;</P></DIR>
+
+</B></FONT><H6><A HREF="#P5"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<P>&nbsp;</P>
+<h4><A NAME="R6"></A>6.- ¿ C&oacute;mo puedo modificar el aspecto de un control est&aacute;ndar de windows?</h4>
+<FONT FACE="Arial" SIZE=2>Derivar la rutina CreateParams suele ser el quid de la cuesti&oacute;n:</FONT><FONT FACE="Arial"> </P><DIR>
+
+</FONT><FONT SIZE=1><P><B>Interface</B></FONT> </P>
+<FONT SIZE=1><P><B>type</B> MiEditor = <B>Class</B>(Tedit);</FONT> </P>
+<B><FONT SIZE=1><P>protected</B></FONT> <BR>
+<FONT SIZE=1><B>&nbsp; procedure </B>CreateParams(<B>var</B> Params:TCreateParams); <B>override;</B></FONT> <BR>
+<FONT SIZE=1><B>end;</B></FONT> </P>
+<FONT SIZE=1><P><B>Implementation</B></FONT> </P>
+<FONT SIZE=1><P><B>procedure</B> MiEditor.CreateParams(<B>var</B> Params:TCreateParams);</FONT> <BR>
+<B><FONT SIZE=1>begin</B></FONT> <BR>
+<B><FONT SIZE=1>&nbsp;&nbsp;&nbsp; inherited;</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; Style:=Style or ES_RIGHT; //¡Un Edit que se alinea a la derecha!</FONT> <BR>
+<B><FONT SIZE=1>end;</P></DIR>
+
+</B></FONT><H6><A HREF="#P6"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<h4><A NAME="R7"></A>7.- ¿ C&oacute;mo elijo un antecesor para mi componente?</h4>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Si es como otro componente al que le falta alguna carateristica, pues de ese componente. </LI>
+<LI><P ALIGN="JUSTIFY">Si es parecido a otro componente, y este deriva de TCustomAlgo, prueba con &eacute;l. </LI>
+<LI><P ALIGN="JUSTIFY">Si es un control de windows entonces de TWinControl puede servir. </LI>
+<LI><P ALIGN="JUSTIFY">Si es un componente que puede tener el foco de windows, de TCustomControl. </LI>
+<LI><P ALIGN="JUSTIFY">Si es un componente que no necesita el foco de windows, de TGraphicControl. </LI>
+<LI><P ALIGN="JUSTIFY">Si es un componente no-visual (no se v&eacute;) de TComponent.</LI>
+</UL>
+
+</FONT><P><A HREF="#P7"><FONT SIZE=2>Volver</FONT></A>&nbsp; </P>
+<P ALIGN="JUSTIFY"><BR>
+<h4><A NAME="R8"></A>8.- ¿ C&oacute;mo creo un control en tiempo de ejecuci&oacute;n?</h4><DIR>
+<FONT SIZE=1><P>Pues...</FONT> </P>
+<FONT SIZE=1><P><B>procedure </B>PonEdit;</FONT> <BR>
+<B><FONT SIZE=1>var</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp; pEdit:tEdit;</FONT> <BR>
+<B><FONT SIZE=1>begin</B></FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp; pEdit:=TEdit.Create;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp; pEdit.Left:=10;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp; pEdti.Right:=50;</FONT> <BR>
+<FONT SIZE=1>&nbsp;&nbsp;&nbsp;&nbsp; pEdit.parent:=self;</FONT> <BR>
+<B><FONT SIZE=1>end;</B></FONT> </P>
+</dir>
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>F&iacute;jate, que al tener el objeto un padre (propiedad parent), no necesitas</FONT><FONT FACE="Arial">  </FONT><FONT FACE="Arial" SIZE=2>liberarlo explictamente (con free), debido a que un padre de windows</FONT><FONT FACE="Arial">  </FONT><FONT FACE="Arial" SIZE=2>libera a sus hijos antes de liberarse &eacute;l.</P>
+<P ALIGN="JUSTIFY">No confundas un padre con un antecesor: Padre se aplica a los controles de windows, mientras que antecesor se aplica a los objetos de delphi.</P>
+
+</FONT><H6><A HREF="#P8"><FONT SIZE=2>Volver</FONT></A>&nbsp; </H6>
+<P>&nbsp;</P>
+<B><FONT SIZE=2><ADDRESS>(Creado originalmente por Pablo Le&oacute;n)</ADDRESS></B></FONT></BODY>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulac.htm"><font FACE="ARIAL"><B>[Curso de Delphi]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

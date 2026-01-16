@@ -1,0 +1,373 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+
+
+<!-- INICIO DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+<CENTER>
+<TABLE BORDER=0 ALIGN="CENTER" WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" ALIGN="CENTER" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT COLOR="#009933" SIZE=7 FACE="ARIAL"><B>D</B></font>
+<FONT COLOR="#000000" SIZE=7 FACE="ARIAL"><B>esarrollo de juegos</B></FONT>
+<!-- LO QUE ESTA DESPUES DE ESTE COMENTARIO ES OPCIONAL Y LO PUEDES BORRAR -->
+<HR>
+<p align="right"><FONT COLOR="#CC0000" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=3 face="arial"><B>ula Macedo<font color="#cc0000">n</font>ia</B></FONT></p>
+
+
+<!-- LO QUE ESTA ANTES DE ESTE COMENTARIO ES OPCIONAL Y LO PUEDES BORRAR -->
+</CENTER>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+</CENTER>
+
+<BR>
+<HR>		  
+<!-- FINAL DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+
+<!-- INICIO DE LAS SECCION 3 DEL DOCUMENTO -->
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<FONT COLOR="#009933" size=3 face="arial"><B>E</B></font><FONT color="#000000" size=2 face="arial"><B>ntornos 2D</B></FONT></a>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+<!-- FINAL DE LAS SECCION 3 DEL DOCUMENTO -->
+
+<BR><BR>
+
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "CID"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Tratamiento de Imágenes: Rotación Y Escalación</P>
+</H3>
+
+<FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY"></P></b>
+<P ALIGN="JUSTIFY">&#9;Saludos de nuevo, en este reci&eacute;n salido n&uacute;mero diez de Macedonia, os quiero hablar sobre un tema importante, el tratamiento de las im&aacute;genes y m&aacute;s espec&iacute;ficamente de la rotaci&oacute;n y escalaci&oacute;n de las mismas.</P>
+<P ALIGN="JUSTIFY"></P>
+<hr width=60%>
+<CENTER>
+<FONT size=2 color="#cc0000" face="Arial">
+<b>El código del artículo se encuentra en <A HREF="zip/demo1.zip"><B>demo1.zip</B></a> y <A HREF="zip/demo2.zip"><B>demo2.zip</B></a></b></font>
+</CENTER>
+<hr width=70%>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;En un principio se puede pensar en que estos procesos solo obtengan resultados con im&aacute;genes fijas, pero el uso de estas t&eacute;cnicas en sprites por ejemplo, es muy normal, sobre todo podremos encontrar en muchos juegos la rotaci&oacute;n de un sprite, que no deja de ser la rotaci&oacute;n de una imagen, para conseguir de esa imagen, todas las dem&aacute;s posiciones posibles.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;A continuaci&oacute;n haremos un breve repaso de las matem&aacute;ticas que se van a utilizar en el siguiente documento (no os preocup&eacute;is, que ver&eacute;is que sencillo), seguiremos con un planteamiento del problema y su soluci&oacute;n l&oacute;gica, y terminaremos con una soluci&oacute;n mas depurada.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">LAS MATEMATICAS PARA ROTAR Y ESCALAR</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Bien, empecemos por la escalaci&oacute;n, proceso que es muy sencillo y que seguro a nadie le cueste nada asimilar. Para escalar una imagen tan solo tenemos que multiplicar esa imagen por una constante, por ejemplo por dos, si estamos hablando de una imagen 320x200 pixeles y escalasemos por dos tendr&iacute;amos una imagen de 640x400 y si por ejemplo escalasemos la imagen por 0.5 tendr&iacute;amos una imagen 160x100, f&aacute;cil no?. Pues ahora el c&oacute;digo, supongamos que es cierto que tenemos una imagen en pantalla de 320x200 y deseamos escalarla, el c&oacute;digo seria como sigue a continuaci&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;</P>
+</FONT>
+
+<FONT FACE="Courier New" SIZE=2><P ALIGN="JUSTIFY">
+for( j = 0; j &lt; 200; j++ )<br>
+{<br>
+<dir>
+nXAux = (int) (i * FactorEscalar);<br>
+nYAux = (int) (j * FactorEscalar);<br>
+if( nXAux &gt;= 0 &amp;&amp; nXAux &lt; 320 &amp;&amp; nYAux &gt;= 0 &amp;&amp; nYAux &lt; 200 )<br>
+Pantalla[ (nYAux*320) + nXAux ] = Imagen[ (j*320) + i];<br>
+</dir>}</br>
+</FONT>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bueno, el c&oacute;digo no necesita muchas explicaciones no?, pero tranquilos que si hay alg&uacute;n despistado lo explico encantado :)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El codigo recorre la imagen para cada i (que seria la X de la imagen) y cada j (la Y de la imagen) calcula un nuevo punto multiplicando (o dividiendo tambien es posible) estas variables por la constante FactorEscalar, que podra tomar valores con varios decimales. Entonces, recorriendo toda la imagen y calculando la nueva posici&oacute;n de los puntos recorridos podemos aumentar el tama&ntilde;o de una imagen o reducirla.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora nos llega la parte a la rotaci&oacute;n de la imagen, donde entra en juego el seno y el coseno, pero os prometo que no es nada complicado. Para rotar una imagen nos basamos en lo mismo de antes, vamos a recorrer la imagen y por cada punto de esta, vamos a calcular una nueva posicion, que vendra dada por los angulos que deseemos rotar la imagen. Para explicar el siguiente proceso os quiero comentar que si despues de esto no lo comprendeis os deis una paseo hasta una de nuestra seccione, Matematicas Basicas, donde se comentan mas ampliamente el sencillo proceso de la ratacion y de las tres dimensiones.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, para rotar un punto de pantalla, usaremos un sencillo proceso que yo utilizo a menudo como podeis imaginar :), el cual consiste en multiplicar el punto por una matriz de rotacion. Existen tres matrices para rotar un punto en pantalla, una matriz por cada dimensi&oacute;n del espacio, es decir, una para rotar en el eje de las X, otra para rotar en el eje de las Y y otra para en eje de las Z, esta ultima matriz es la que nos interesa. Y como se multiplica un punto por una matriz? Direis ustedes no? Pues gracias a dios es facilisimo!!, tanto que hasta yo se hacerlo ;).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, hagamos las presentaciones y expliquemoslo con un ejemplo, esta es la matriz de rotacion Z:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<FONT FACE="Courier New" SIZE=2><P ALIGN="JUSTIFY">
+float RotarZ[4][4] =<br>
+{<br>
+<dir>
+cos(nAngulo*6.28/360),sin(nAngulo*6.28/360), 0, 0,<br>
+-sin(nAngulo*6.28/360),cos(nAngulo*6.28/360), 0, 0,<br>
+                     0,                    0, 1, 0,<br>
+                           0,                    0, 0, 1<br>
+</dir>
+}<br>
+</FONT>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como veis es una matriz muy simple, en ella podemos ver una variable, nAngulo, que son los grados que deseemos rotar el punto, ademas esta variable la multiplicamos por 6.28/360, esto se debe a que deseamos pasar los angulos a Radianes, una unidad mas acorde con esta matematica.</P>
+<P ALIGN="JUSTIFY">Y como se multiplica esta matriz por un punto? Dira mas de uno, pues aqu&iacute; teneis el codigo de la funcion completa, se basa en multiplicar x e y por filas, pero mejor sera que lo veais vosotros mismos.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<FONT FACE="Courier New" SIZE=2>
+//<br>
+// Rota en el eje de las Z un punto X,Y los radianes pasados por<br>
+// parametros<br>
+//<br>
+void RotarZ( int X, int Y, int nAngulo, int *NuevaX, int *NuevaY )<br>
+{<br><dir>
+</P>
+&#9;float aMatCoo[4];<br>
+&#9;float vector[4];<br>
+&#9;float rotadora[4][4] =<br>
+&#9;{<br>
+&#9;&#9; cos(nAngulo*6.28/360),sin(nAngulo*6.28/360), 0, 0,<br>
+&#9;&#9;-sin(nAngulo*6.28/360),cos(nAngulo*6.28/360), 0, 0,<br>
+                                 0,                    0, 1, 0,<br>
+                                 0,                    0, 0, 1<br>
+&#9;};<br>
+<br>
+&#9;aMatCoo[0] = X;<br>
+&#9;aMatCoo[1] = Y;<br>
+&#9;aMatCoo[2] = 0;<br>
+&#9;aMatCoo[3] = 1;<br>
+<br>
+&#9;// Multiplico la matriz de coordenadas por la matriz de rotaci¢n y<br>
+&#9;// lo asigno a un nuevo vector.<br>
+&#9;vector[0] = aMatCoo[0]*rotadora[0][0]+aMatCoo[1]*rotadora[0][1]+<br>
+&#9;&#9;  aMatCoo[2]*rotadora[0][2]+aMatCoo[3]*rotadora[0][3];<br>
+&#9;vector[1] = aMatCoo[0]*rotadora[1][0]+aMatCoo[1]*rotadora[1][1]+<br>
+&#9;&#9;  aMatCoo[2]*rotadora[1][2]+aMatCoo[3]*rotadora[1][3];<br>
+&#9;vector[2] = aMatCoo[0]*rotadora[2][0]+aMatCoo[1]*rotadora[2][1]+<br>
+&#9;&#9;  aMatCoo[2]*rotadora[2][2]+aMatCoo[3]*rotadora[2][3];<br>
+&#9;vector[3] = aMatCoo[0]*rotadora[3][0]+aMatCoo[1]*rotadora[3][1]+<br>
+&#9;&#9;  aMatCoo[2]*rotadora[3][2]+aMatCoo[3]*rotadora[3][3];<br>
+<br>
+&#9;//  Asigno el nuevo vector a la matirz de coordenadas<br>
+&#9;*NuevaX = vector[0];<br>
+&#9;*NuevaY = vector[1];<br>
+</dir>
+}<br>
+</FONT>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, como podeis observar la matriz Rotadora se multiplica por el vector aMatCoo donde hemos introducido las variables y la multiplicaci&oacute;n se guarda en Vector. Cuando finaliza la multiplicaci&oacute;n tenemos en la posici&oacute;n 0 y 1 de Vector la x y la y respectivamente ya rotadas seg&uacute;n los angulos que introducimos anteriormente.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y ya esta, estamos preparados para realizar un programa que escale y rote a nuestro antojo, y para ello hemos creado la demostraci&oacute;n 1, en el que se recoje lo anteriormente citado. Para observar el codigo y la demostraci&oacute;n tendras que bajartela, aqu&iacute; tan solo explicaremos por encima las distintas partes de la que se compone, ya que no creo necesario mas explicaciones. El programa comienza con la creacion de dos buffer de pantalla, uno lo utilizaremos para cargar un PCX que nos servira como imagen a rotar, esta rotacion la guardaremos en el buffer ESC y este buffer que es la imagen rotado la escalaremos, guardando el resultado en la propia pantalla para ver los resultados, este podria ser el funcional:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>Inicializacion de la pantalla</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Creaccion de los buffer, Buffer y BufferESC.</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Carga del PCX en Buffer y Pantalla.</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Inicializacion de las variables Angulo y Escalar</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Mirar teclas =&gt; Si tecla pulsada se modifica Angulo o Escalar</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Rotarmos Buffer en BufferESC</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Escalamos BufferESC en Pantalla</LI></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI>Volvemos al paso 5 hasta que se pulse ESC</LI></P></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Lo mejor sera que hagais una pausa para ver la demostraci&oacute;n, pues sobre ella seguiremos comentando el enorme error que tiene, asi que si no habeis bajado aun los ZIP ahora es el momento de bajar los dos que se adjuntan con el curso. Lo que se ha visto hasta ahora se proporciana en la demo1.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Pues bien, supongo que todos habeis estado viendo la demo y habreis jugado un poco con ella, pues para el que no se haya fijado, tiene un serio problema, cuando una imagen se escala demasiado, los puntos empiezan a separase, cosa normal por otro lado. Aqu&iacute; podemos ver dos im&aacute;genes, una punteada y otra sin puntear, es decir, como deberia quedar para que la imagen fuera nitida y digamos perfecta.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+
+
+<center><table>
+<TD><IMG SRC="gif/sprite01.gif"></TD>
+<tr>
+<td><center><FONT FACE="Arial" SIZE=1>Imagen punteada debido a una mala escalación.</CENTER></td>
+</table></center>
+<BR>
+<center><table>
+<TD><IMG SRC="gif/sprite02.gif"></TD>
+<tr>
+<td><center><FONT FACE="Arial" SIZE=1>Imagen nitida.</CENTER></td>
+</table></center>
+
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Pues si la imagen uno es lo que podemos conseguir hasta ahora, vamos a explicar como conseguir la escalaci&oacute;n y rotaci&oacute;n como la imagen dos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">FORMA AVANZADA DE ROTACION Y ESCALACI&Oacute;N</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, llegamos al final del articulo para descubrir el metodo para eliminar esos puntos muertos que aparecen cuando rotamos o escalamos, la soluci&oacute;n es bastante sencilla si nos paramos a observar el problema. El proble reside que para que recorriendo la imagen, alterando los puntos mediante los procesos descritos y obteniendo mas tarde la imagen con estos puntos alterados aparecen puntos muertos en la imagen, es decir, puntos x,y que no han sido rellenados por la imagen alterada, y que deseamos nosotros? Pues sencillamente que al procesar la imagen todos los puntos de esta aparezcan, y como conseguirlo? Pues si no podemos recorrer la imagen y calcular las nuevas posiciones para cada punto en pantalla haremos una cosa, recorrer la pantalla y calcular que punto le corresponde la imagen, asi, recorriendo cada uno de los puntos de la pantalla no nos dejaremos atr&aacute;s ningun punto y la imagen saldra nitida, pero como hacemos el proceso a la inversa? Es decir, como calculamos el punto de la imagen al que corresponde el punto en pantalla? Pues muy facil, pensando al reves :).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si anteriormente usabamos este codigo para Escalar y rotar:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+// Rotar<br>
+for( i = 0; i &lt; 320; i++ )<br>
+{<br><dir>
+&#9;for( j = 0; j &lt; 200; j++ )<br>
+&#9;{<br><dir>
+&#9;&#9;RotarZ( i, j, Grados, &amp;nXAux, &amp;nYAux );<br>
+&#9;&#9;if( nXAux &gt;= 0 &amp;&amp; nXAux &lt; 320 &amp;&amp; nYAux &gt;= 0 &amp;&amp; nYAux &lt; 200 )<br>
+&#9;&#9;&#9;BufferEsc[ (nYAux*320) + nXAux ] = Buffer[ (j*320)+i];<br>
+&#9;</dir>}<br>
+</dir>}<p>
+
+ClsVideo( Pantalla );<p>
+
+// Escalar<br>
+for( i = 0; i &lt; 320; i++ )<br>
+{<br><dir>
+&#9;for( j = 0; j &lt; 200; j++ )<br>
+&#9;{<br><dir>
+&#9;&#9;nXAux = (int) (i * FactorEscalar);<br>
+&#9;&#9;nYAux = (int) (j * FactorEscalar);<br>
+&#9;&#9;if( nXAux &gt;= 0 &amp;&amp; nXAux &lt; 320 &amp;&amp; nYAux &gt;= 0 &amp;&amp; nYAux &lt; 200 )<br>
+&#9;&#9;&#9;Pantalla[ (nYAux*320) + nXAux ] = BufferEsc[ (j*320)+i] ;<br>
+&#9;</dir>}<br>
+</dir>}<br>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con nuestra filosofia usaremos el siguiente dejando el resto del codigo inalterado.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<FONT FACE="Courier New" SIZE=2><P>
+// Rotar<br>
+for( i = 0; i &lt; 320; i++ )<br>
+{<br><dir>
+&#9;for( j = 0; j &lt; 200; j++ )<br>
+&#9;{<br><dir>
+&#9;&#9;RotarZ( i, j, -Grados, &amp;nXAux, &amp;nYAux );<br>
+&#9;&#9;if( nXAux &gt;= 0 &amp;&amp; nXAux &lt; 320 &amp;&amp; nYAux &gt;= 0 &amp;&amp; nYAux &lt; 200 )<br>
+&#9;&#9;&#9;BufferEsc[ (j*320) + i ] = Buffer[ (nYAux*320)+nXAux];<br>
+&#9;</dir>}<br>
+</dir>}<p>
+
+ClsVideo( Pantalla );<P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+// Escalar<br>
+for( i = 0; i &lt; 320; i++ )<br>
+{<br><dir>
+for( j = 0; j &lt; 200; j++ )<br>
+&#9;{<br><dir>
+&#9;&#9;nXAux = (int) (i / FactorEscalar);<br>
+&#9;&#9;nYAux = (int) (j / FactorEscalar);<br>
+&#9;&#9;if( nXAux &gt;= 0 &amp;&amp; nXAux &lt; 320 &amp;&amp; nYAux &gt;= 0 &amp;&amp; nYAux &lt; 200 )<br>
+&#9;&#9;Pantalla[ (j*320) + i ] = BufferEsc[ (nYAux*320)+nXAux];<br>
+&#9;</dir>}<br>
+</dir>}<br>
+</FONT>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, las diferencias son muy sencillas de ver, en las asignaciones de los buffers a pantalla o a buffer, hemos sustituido la i y la j por nXAux y nYAux. Como observareis es un cambio muy sencillo pero con un resultado importantisimo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Eso es todo en este numero por lo referente a los entornos 2D, pero por supueso no es el unico material que te hemos preparado en este numero, date un paseo por la secci&oacute;n, y ya veras , yo me despido hasta el numero once, que lo disfruteis bien :).</P></FONT></BODY>
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>JULIO</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="epj.htm"><font FACE="ARIAL"><B>[Entornos 2D]</B></font></a> <br>
+
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>
+DESARROLLO DE VIDEOJUEGOS</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>
+
+
+

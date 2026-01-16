@@ -1,0 +1,385 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>sí funciona</B></FONT></a>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img src="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Así funciona un Tetris
+
+</H3>
+
+<font size=2 face=arial>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">
+En este art&iacute;culo vamos a investigar, mediante planteamientos, algunas formas posibles de abordar la creaci&oacute;n de un Tetris. Como todos sabr&eacute;is ya, el Tetris sent&oacute; c&aacute;tedra en lo que a juegos de habilidad / inteligencia se refiere. Lanzado, aproximadamente, en 1987 pronto se convertir&iacute;a en un &eacute;xito que, a d&iacute;a de hoy, sigue siendo jugado por miles de usuarios de todo el mundo. Junto a su publicaci&oacute;n para ordenadores de 8 bits, el Tetris, tambi&eacute;n tuvo versi&oacute;n en m&aacute;quinas recreativas. En fin, es dif&iacute;cil encontrar alg&uacute;n formato en el que el Tetris no haya triunfado o persona que no lo haya probado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Antes de proceder a realizar el art&iacute;culo, comentar que una parte muy importante de las capturas est&aacute;n sacadas del juego "Petris". Este programa, ha sido creado por Macedonia y regalado en el n&uacute;mero 8. Es un Tetris que funciona bajo Windows 9x. y NT de car&aacute;cter muy b&aacute;sico. Puede servir de ayuda para analizar el funcionamiento de este tipo de juegos.</P>
+
+<hr width=60%>
+<CENTER>
+<FONT size=2 color="#cc0000" face="Arial">
+<b>Puedes conseguir el Petris pulsando </b><A HREF="zip/petrise.zip"><B>aquí</B></a>
+</CENTER>
+<hr width=70%>
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">Analizando, por encima, el funcionamiento del Tetris</h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La complejidad que entra&ntilde;a crear un Tetris no es muy compleja, sin embargo, tiene algunos detalles que nos podr&aacute;n dar alg&uacute;n que otro problema. Antes de comenzar a realizar un juego debemos de proceder a analizar todas las dificultades que nos podemos encontrar a la hora de codificar. La mec&aacute;nica del Tetris es bien sencilla. El jugador ha de colocar las piezas que le van apareciendo por la parte superior de la pantalla dentro de una tabla de <I>m</I> filas y <I>n</I> columnas. Se ha de intentar que las piezas que van cayendo se sit&uacute;en de tal forma que formen una l&iacute;nea con las que ya se encuentren en la tabla (con los fragmentos de otras piezas). En caso de que lo logremos, las porciones de las piezas que intervienen en la formaci&oacute;n de la misma l&iacute;nea desaparecer&aacute;n haciendo que todas las que se encuentren de esa l&iacute;nea, para arriba, desciendan una fila hacia abajo (y, por lo tanto, dejen m&aacute;s filas para que el jugador pueda manipular las piezas futuras). En el caso de que el jugador no logre hacer una l&iacute;nea la pieza quedar&aacute; ubicada &iacute;ntegramente, con lo que limitar&aacute; el espacio de juego, haciendo que aumente la dificultad para colocar la pieza que venga a continuaci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Otro de los aspectos que no podemos pasar por alto, es el referido a la forma y orientaci&oacute;n de las piezas que manejamos en el juego. Si nos fijamos, hay un total de 5 piezas b&aacute;sicas que van cambiando de color de forma aleatoria. Aqu&iacute; est&aacute;n todas las piezas del Tetris b&aacute;sico:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<CENTER><IMG SRC="gif/figtet0.gif"></CENTER>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Todas giran hacia la izquierda cada vez que pulsamos la tecla de giro, es decir, no hay piezas que giren hacia la izquierda y piezas que lo hagan a la derecha. La pregunta que nos deberemos de hacer entonces es c&oacute;mo poder representar de forma eficiente las piezas y los giros. Teniendo siempre presente las colisiones que se puedan producir (contra otras piezas o contra los l&iacute;mites del &aacute;rea del juego, esto es, la tabla en donde vamos alojando las piezas).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">Qu&eacute; es lo que deberemos de implementar </h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">De la observaci&oacute;n del juego podemos sacar varias conclusiones. Para empezar que vamos a necesitar almacenar en alg&uacute;n sitio las piezas que vayamos colocando en la tabla (<B>representaci&oacute;n del &aacute;rea de juego</B>). Por otro lado, deberemos de implementar un m&eacute;todo para almacenar las figuras y conocer su forma (<B>representaci&oacute;n de las figuras</B>). Tambi&eacute;n habr&aacute; que hablar de las colisiones que se puedan producir en nuestro juego. Estas colisiones podr&aacute;n deberse a que hemos chocado contra alg&uacute;n l&iacute;mite del &aacute;rea de juego (<B>colisiones entre los l&iacute;mites del &aacute;rea de juego</B>) o que hemos colisionado con alguna otra pieza (<B>colisiones entre piezas</B>). Una vez que sepamos c&oacute;mo detectar una colisi&oacute;n (contra l&iacute;mite y contra pieza), ser&aacute; el momento de pensar c&oacute;mo &quot;adivinar&quot; que hemos hecho una l&iacute;nea (<B>C&oacute;mo averiguar si hemos hecho l&iacute;nea</B>). Por &uacute;ltimo, habr&aacute; que implementar un temporizador o similar que nos ayude a actualizar de forma m&aacute;s o menos r&aacute;pida (seg&uacute;n la dificultad) el estado de las piezas que vayan cayendo<B> </B>(<B>evoluci&oacute;n del juego</B>). Todo esto ser&aacute; lo que veremos a continuaci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">Representaci&oacute;n del &aacute;rea de juego</h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La parte m&aacute;s importante de todas es la referida a la representaci&oacute;n del &aacute;rea del juego (supongo que todo el mundo que est&aacute; leyendo este art&iacute;culo ha jugado alguna vez al Tetris). Como todos recordar&eacute;is, en el Tetris vamos alojando las piezas en una tabla seg&uacute;n &eacute;stas van cayendo de la parte superior de la pantalla a la base de la misma, con una determinada velocidad. La tabla ser&aacute; rectangular con mayor altura que anchura. Dicho esto, la forma m&aacute;s f&aacute;cil de implementar la tabla ser&iacute;a con un array de mxn. A esta soluci&oacute;n est&aacute;tica tambi&eacute;n hay que a&ntilde;adir la soluci&oacute;n din&aacute;mica, es decir, en el caso de que quer&aacute;is hacer un c&oacute;digo actualizable y robusto, os recomendar&iacute;a que os creaseis una clase que implementara arrays mediante listas de listas, es decir, de forma din&aacute;mica. Esto permitir&iacute;a incluso definir el &aacute;rea de juego en tiempo de ejecuci&oacute;n. Pero si lo que nos interesa es hacer un programa cerrado sin ning&uacute;n otro objetivo que ejercitarnos, un array vale m&aacute;s que de sobra y ahorrar&aacute; algo de tiempo de trabajo, sobre todo de cara a la depuraci&oacute;n.</P>
+
+<CENTER><IMG SRC="gif/figtet1.gif"></CENTER>
+
+<P ALIGN="JUSTIFY">As&iacute; pues, un &aacute;rea como el que sale en la figura perfectamente puede implementarse con una matriz (array bidimensional o una lista de listas) de m filas y n columnas. Ahora la siguiente pregunta es ¿qu&eacute; guardo en cada posici&oacute;n de la matriz?. Para responder a esta pregunta, convendr&iacute;a estudiar tambi&eacute;n la forma en la que vamos a implementar las piezas, pues el &aacute;rea del juego, esto es, la matriz, no hace otra cosa que guardar las piezas que el jugador ha ido utilizando, y utiliza, durante la partida. La aproximaci&oacute;n m&aacute;s b&aacute;sica nos dice que hay zonas del &aacute;rea de juego que est&aacute;n ocupadas y otras que no lo est&aacute;n. Para poder representar esto, bastar&iacute;a con tener un valor 0 en las posiciones de la matriz libres y un 1 en las ocupadas. Sin embargo, como vamos a utilizar piezas de distintos colores (o, incluso, de distintas propiedades), convendr&iacute;a generalizar el valor 1 a valores distintos de 0, de tal forma que valores como el 2, el 3, el 4 o 14, tambi&eacute;n indicaran que esa zona est&aacute; ocupada. As&iacute;, si a cada c&oacute;digo distinto de 0 le asignamos un color, podr&iacute;amos identificar cada zona de la matriz ocupada por una porci&oacute;n de pieza de un determinado color. Por ejemplo, veamos la figura siguiente:</P>
+
+<CENTER><IMG SRC="gif/figtet2.gif"></CENTER>
+
+<P ALIGN="JUSTIFY">Como podemos ver, un c&oacute;digo 0 en el &aacute;rea de juego, esto es, en la matriz o array, representa casilla libre (que no hay pieza o, en otras palabras, que puede ocuparse) mientras que todos aquellos valores distintos de 0 representan una porci&oacute;n de pieza de un determinado color. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta forma de representar el &aacute;rea de juego, ya nos puede permitir pensar en la forma de almacenamiento que llevar&aacute;n nuestras piezas o figuras.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<h4><FONT FACE="Arial">Representaci&oacute;n de las figuras</h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hasta ahora hemos quedado en que una matriz (implementada a gusto de cada cual) va a ser la estructura de datos que represente, internamente, el &aacute;rea de juego. Tambi&eacute;n hemos fijado que la matriz va a contener distintos c&oacute;digos que se pueden agrupar en dos conjuntos: </P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Los que representan <B>casilla vac&iacute;a</B>, esto es, el conjunto formado por el <B>c&oacute;digo 0</B>.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Los que representan <B>presencia de pieza</B>, esto es, los formados por <B>c&oacute;digos distintos de 0</B>.</LI></P></OL>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El siguiente paso es pensar en la forma de almacenar y representar las figuras. Conviene, sin embargo, tener presente qu&eacute; tipo de figuras existen en un Tetris b&aacute;sico as&iacute; como los giros o diferentes estados que pueden tener. En la figura [A] vemos un &aacute;rea de juego de un Tetris con rejilla (para constatar un par de puntos que nos van a ayudar a razonar el modo de representaci&oacute;n de piezas). </P>
+
+<CENTER><IMG SRC="gif/figtet3.gif"></CENTER>
+
+<P ALIGN="JUSTIFY">Observando la figura [A], uno se da cuenta de los siguientes detalles:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>Todas las piezas est&aacute;n formadas por cuadrados.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Todas las piezas tienen el mismo n&uacute;mero de cuadrados. </LI></P></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El que todas las piezas est&eacute;n formadas por cuadrados, nos permite ajustar de forma muy elegante los sprites que vamos a utilizar. Si todas las piezas est&aacute;n formadas por cuadrados, bastar&aacute; con tener un cuadrado, es decir, una porci&oacute;n de pieza, por cada color posible de pieza. En otras palabras, si en nuestro Tetris las piezas pueden tener color rojo, azul, verde y amarillo, bastar&aacute; con tener un cuadrado de color rojo, azul, verde y amarillo ya que la uni&oacute;n de varios de ellos (de cuatro), nos formar&aacute; una pieza del juego. As&iacute; de simple y claro. ¿Esto que nos evita?, pues nos evita tener que almacenar un gr&aacute;fico por cada pieza en cada una de sus posiciones posibles o estados. Pensemos que cada pieza tiene 4 estados de giro, si tenemos un total de 5 piezas distintas tendr&iacute;amos que dibujar 4*5=20 estados diferentes (20 sprites diferentes). Mediante este m&eacute;todo construimos las piezas durante el transcurso de juego, ahorrando espacio en disco y memoria para gr&aacute;ficos (adem&aacute;s los c&aacute;lculos ser&aacute;n m&iacute;nimos). Y, sobre todo, dando una mayor flexibilidad al programa de cara a modificaciones o inserci&oacute;n de nuevas piezas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Sin embargo, y tal como pod&iacute;amos ver cuando se mostraron todas las figuras que intervienen en un Tetris b&aacute;sico (primera figura del art&iacute;culo), es necesario implementar una serie de posiciones diferentes para cada pieza. A&uacute;n m&aacute;s, es necesario, para este sistema de almacenamiento, implementar alg&uacute;n modo de saber c&oacute;mo se han de disponer los cuadrados para formas las piezas. En otras palabras, ¿c&oacute;mo sabemos cu&aacute;l es la pieza que hay que poner en pantalla cuando se realiza un giro?. Para resolver este problema, deberemos de almacenar tantas plantillas como posiciones de giro haya por pieza. As&iacute;, si cualquier pieza tiene 4 posibles posiciones de giro, deberemos de almacenar 4 plantillas. ¿C&oacute;mo podemos construir esas plantillas?. Bien, bastar&aacute; con disponer de un array de pxq, donde p = anchura de la pieza y q = altura de la pieza, que contenga un "1" en donde haya que poner cuadrado de la figura y un "0" donde no haga falta. Obviamente, habr&aacute; que disponer un array de estas dimensiones por plantilla. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una buena forma de implementar esta idea, es construir una lista din&aacute;mica circular (despu&eacute;s del &uacute;ltimo nodo va el primero), en la que cada nodo contenga la plantilla del frame actual. Cada vez que la pieza pega un giro, pasamos al siguiente nodo de la lista y construimos la pieza en base a la plantilla que nos encontremos. He aqu&iacute; un ejemplo de c&oacute;mo podr&iacute;a verse esto gr&aacute;ficamente:</P>
+<P ALIGN="JUSTIFY"></P>
+<CENTER><IMG SRC="gif/figtet4.gif"></CENTER>
+<P ALIGN="JUSTIFY">Si nos construimos una clase que contenga todas las propiedades y m&eacute;todos necesarios para una pieza (mantenimiento de la lista, atributos de la pieza, plantillas, etc), crear una nueva pieza para el juego ser&iacute;a tan sencillo como crear una nueva instancia a esa clase. Es m&aacute;s, si lo implementamos de tal forma que las plantillas se carguen desde disco, la flexibilidad estar&iacute;a garantizada de por vida (seg&uacute;n se carga el juego, se abre el fichero que contiene la plantilla para cada pieza. Se crean tantos objetos distintos como piezas diferentes existan en el juego y se cargan sus plantillas en sus respectivas listas de frames. Estos objetos, simplemente servir&aacute;n de modelo pues, durante el juego, deberemos de disponer de uno temporal que ser&aacute; el que vaya modificando los atributos de la pieza que vamos manejando. As&iacute;, cuando aparezca la pieza "barra" por la parte superior, bastar&aacute; con igualar el objeto temporal al objeto que contiene la plantilla para la pieza "barra" y comenzar a manipularlo. Cuando una pieza acaba su periplo por la pantalla, se reutilizar&aacute; el objeto temporal igual&aacute;ndose al objeto que sea pertinente. Esto es mejor que disponer de un solo objeto ya que por este m&eacute;todo, deber&iacute;amos de acceder a disco para cargar su plantilla de forma continuada). </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">Evoluci&oacute;n del juego</h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hasta ahora, ya hemos analizado una posible forma de almacenar y mantener las piezas. Est&aacute; claro que ahora llega el turno de meternos m&aacute;s a fondo con los que es el "runtime" del juego, esto es, el bucle de ejecuci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Durante el transcurso de la partida al Tetris, disponemos de un tiempo l&iacute;mite para realizar todas las acciones pertinentes sobre la pieza que estamos manipulando. Dependiendo del nivel en el que nos encontremos, el tiempo ser&aacute; mayor o menor y, por lo tanto, variar&aacute; la dificultad del mismo. Al ir pasando los segundos, la pieza ir&aacute; cayendo una posici&oacute;n tras otra hacia la parte final de la tabla. Esto continuar&aacute; hasta que la pieza toque el fondo del &aacute;rea de juego o bien, hasta que colisione con otra y le sea imposible seguir bajando.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Podemos imaginarnos que en una partida al Tetris, el tiempo se encuentra "ranurado". Es decir, hay celdas de tiempo y, en cada una de ellas, se realizan una serie de acciones. Pasado el tiempo que dura una celda, se baja una posici&oacute;n la pieza y volvemos a realizar las acciones que se pueden llevar dentro de esa celda de tiempo. Cada pieza dispondr&aacute; de su propio espacio ranurado de tiempo hasta que le es imposible descender m&aacute;s por el &aacute;rea de juego. En ese momento, la pieza actual deja de existir y aparece otra con su nuevo espacio ranurado de tiempo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Est&aacute; claro, que hay que implementar alg&uacute;n tipo de temporizador para el juego. Un temporizador permite al programador establecer se&ntilde;ales de alarma que, pasado un intervalo de tiempo (milisegundos o segundos), se activan ejecutando la funci&oacute;n que tengan encomendada. En nuestro caso, no ser&iacute;a otra que disminuir en una posici&oacute;n la componente "y" de la pieza y redibujarla en pantalla (para saber c&oacute;mo hacer pod&eacute;is consultar este estupendo art&iacute;culo sobre <B><a href="epja2.htm">Sprites</a></B>). Una vez hecho esto, se volver&aacute;n a ejecutar las operaciones comunes a una celda de tiempo hasta que, de nuevo, vuelva a vencer el temporizador.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si trabaj&aacute;ramos bajo MS-DOS, no quedar&iacute;a m&aacute;s remedio que acudir a la rutina del vector de interrupciones (1Ch) que se ejecuta tras la llamada a la interrupci&oacute;n que mantiene el reloj del sistema (8Ch). Desde ah&iacute;, deber&iacute;amos de medir cu&aacute;ntos segundos (o milisegundos) han pasado desde que comenz&oacute; la ranura de tiempo. Dependiendo de la dificultad del juego, podremos bajar la pieza cada 1 segundo, 2, 3... Si la programaci&oacute;n se efect&uacute;a desde Windows, har&aacute; falta acudir al bucle despachador de mensajes y optimizarlo al m&aacute;ximo para que trabaje para nuestra aplicaci&oacute;n a&uacute;n cuando no se est&eacute; emitiendo ning&uacute;n tipo de mensaje a nuestra ventana. Una buena forma de controlar los intervalos de tiempo es con la funci&oacute;n </FONT><FONT FACE="Courier New" SIZE=2>GetTickCount </FONT><FONT FACE="Arial" SIZE=2>que nos devuelve el n&uacute;mero de milisegundos que lleva ejecut&aacute;ndose la sesi&oacute;n de Windows actual. Si guardamos en variables est&aacute;ticas un valor, por ejemplo</FONT><FONT FACE="Courier New" SIZE=2>, Xo = GetTickCount ()</FONT><FONT FACE="Arial" SIZE=2> y luego vamos haciendo </FONT><FONT FACE="Courier New" SIZE=1>if (Xo + [Tiempo que dura una ranura] == GetTickCount () )</FONT><FONT FACE="Courier New" SIZE=2>. </FONT><FONT FACE="Arial" SIZE=2>Podremos temporizar el juego. El uso de los temporizadores es muy interesante de cara al desarrollo de videojuegos, y bien merecer&iacute;an un art&iacute;culo a parte.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">Colisiones</h4>
+</FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Uno de los aspectos m&aacute;s importantes del an&aacute;lisis, es el referido a las colisiones que puedan sufrir nuestras piezas. Debemos de tener en cuenta que las colisiones deben de separarse en dos grupos:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Las que se producen cuando chocamos con los l&iacute;mites del &aacute;rea del juego.</P></LI>
+<LI><P ALIGN="JUSTIFY">Las que se producen cuando chocamos con fragmentos de otras piezas del juego.</P></LI>
+</UL>
+
+</FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Vamos a proceder a su an&aacute;lisis a continuaci&oacute;n.</P>
+</FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P><B>Colisiones entre los l&iacute;mites del &aacute;rea de juego</B></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las piezas pueden colisionar contra los l&iacute;mites del &aacute;rea de juego, siempre que intentemos moverlas m&aacute;s all&aacute; de los l&iacute;mites izquierdo, derecho y base de nuestra "matriz" de juego. Es decir, si el jugador comienza a pulsar de forma continuada a la tecla derecha, llegar&aacute; un momento en el que la pieza chocar&aacute; contra la parte lateral derecha. Esto mismo suceder&aacute; en la parte lateral izquierda si el jugador comienza a pulsar continuamente la tecla de movimiento a la izquierda. ¿Y en la base?. Pues esta colisi&oacute;n ocurrir&aacute; cuando el usuario haga que su pieza colisione con el fondo de la matriz. Esto producir&aacute; que el tiempo de vida de la pieza que estamos manejando termine y que salga otra por la parte superior. He aqu&iacute; un dibujo explicativo de cada tipo de colisi&oacute;n.</P>
+<CENTER><IMG SRC="gif/figtet5.gif"></CENTER>
+<P ALIGN="JUSTIFY">Pero no s&oacute;lo debemos de pensar que una colisi&oacute;n se produce cuando se intenta mover en sentido horizontal (izquierda - derecha) o vertical (hacia abajo); tambi&eacute;n puede darse el caso de que la colisi&oacute;n se produzca cuando vayamos a realizar un giro de una pieza. S&iacute;, puede ocurrir que estemos en un lateral de la pantalla y que por la naturaleza de la pieza que estamos utilizando (por ejemplo, suponed que estamos usando una barra en horizontal), el realizar un giro supone que nuestra pieza va a ocupar hacia el lateral por el que no podemos movernos m&aacute;s, una colisi&oacute;n. En este caso, deberemos de detectar tambi&eacute;n la colisi&oacute;n y no permitir que nuestra pieza realice el giro. En la figura siguiente, se ve c&oacute;mo la barra en horizontal no puede realizar un giro estando en el tope del lateral derecho. M&aacute;s a&uacute;n, puesto que tiene una longitud de 4 casillas, no podr&aacute; realizar un giro estando en posici&oacute;n vertical, a menos que est&eacute; a 3 casillas de distancia del lateral. En caso contrario, la barra en horizontal se saldr&iacute;a del &aacute;rea de juego.</P>
+
+<CENTER><IMG SRC="gif/figtet6.gif"></CENTER>
+
+<P ALIGN="JUSTIFY">Seg&uacute;n estos datos, deberemos de contener en todo momento las posiciones (x,y) de inicio de nuestras piezas para que, siempre que el usuario vaya a realizar un movimiento, calculemos por adelantado las nuevas posiciones de nuestras piezas, entrando en juego las alturas y anchuras propias (que variar&aacute;n dependiendo del frame en el que nos encontremos. Por ejemplo, la barra en horizontal tendr&aacute; una anchura de 4 casillas y una altura de 1 casilla y, la barra en vertical tendr&aacute; una altura de 4 casillas y una anchura de 1 casilla. Todo esto deber&iacute;a de figurar ligado a cada una de las plantillas de la figura).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una sencilla forma de ver el proceso de c&aacute;lculo de colisi&oacute;n podr&iacute;a ser:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY">Nota:</P>
+<P ALIGN="JUSTIFY">Sea </FONT><FONT FACE="Courier New" SIZE=1>(x, y)</FONT><FONT FACE="Arial" SIZE=1> la posici&oacute;n de nuestra figura.<br>
+Sea un movimiento a la derecha un incremento de la x y un movimiento a la izquierda un decremento.<BR>
+Sea un movimiento hacia abajo un incremento de la y (no hay movimientos hacia arriba).<BR>
+Sea </FONT><FONT FACE="Courier New" SIZE=1>anchura</FONT><FONT FACE="Arial" SIZE=1> el ancho de nuestra pieza menos 1 (La barra horizontal tendr&iacute;a ancho 0).<BR>
+Sea </FONT><FONT FACE="Courier New" SIZE=1>altura</FONT><FONT FACE="Arial" SIZE=1> la altura de nuestra pieza menos 1 (La barra en horizontal tendr&iacute;a alto 3).<BR>
+Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteDerecho</FONT><FONT FACE="Arial" SIZE=1> la posici&oacute;n x m&aacute;s a la derecha del &aacute;rea de juego (la posici&oacute;n x mayor).<BR>
+Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteIzquierdo</FONT><FONT FACE="Arial" SIZE=1> la posici&oacute;n x m&aacute;s a la izquierda del &aacute;rea de juego (suponemos que 0).<BR>
+Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" SIZE=1> la posici&oacute;n y m&aacute;s al fondo del &aacute;rea de juego (la posici&oacute;n y mayor)<BR>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"><B>Colisi&oacute;n con l&iacute;mite derecho</B>: Si el usuario pulsa la tecla de movimiento hacia la derecha, deberemos de hacer la comprobaci&oacute;n:</P>
+</FONT><FONT FACE="Courier New" SIZE=1><P ALIGN="JUSTIFY">if ( (x+1)+ancho &lt;= limiteDerecho ) { permitimos movimiento }</P>
+<P ALIGN="JUSTIFY">else { no permitimos movimiento }
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>Colisi&oacute;n con l&iacute;mite izquierdo</B>: Si el usuario pulsa la tecla de movimiento hacia la izquierda, deberemos de hacer la comprobaci&oacute;n:</P>
+</FONT><FONT FACE="Courier New" SIZE=1><P ALIGN="JUSTIFY">if ( (x-1) &gt;= limiteIzquierdo ) { permitimos movimiento }</P>
+<P ALIGN="JUSTIFY">else { no permitimos movimiento }</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>Colisi&oacute;n con l&iacute;mite de base</B>: Si el usuario pulsa la tecla de movimiento hacia la abajo o la pieza toca la base al llegar por si s&oacute;la.</P>
+</FONT><FONT FACE="Courier New" SIZE=1><P ALIGN="JUSTIFY">if ( (y+1)+ alto &lt;= limiteDerecho ) { permitimos movimiento }</P>
+<P ALIGN="JUSTIFY">else { no permitimos movimiento }</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Como se puede observar, el proceso es bastante simple en lo b&aacute;sico. ¿C&oacute;mo har&iacute;amos para detectar una colisi&oacute;n al realizar un giro?. Bien sencillo. No habr&aacute; que escribir un c&oacute;digo especial, bastar&aacute; con obtener la </FONT><FONT FACE="Courier New" SIZE=2>anchura</FONT><FONT FACE="Arial" SIZE=2> y la </FONT><FONT FACE="Courier New" SIZE=2>altura</FONT><FONT FACE="Arial" SIZE=2> del "frame" o plantilla que viene a continuaci&oacute;n de la pieza actual, y aplicarle exactamente las mismas comprobaciones que antes. Lo &uacute;nico que hacemos, es sustituir "virtualmente" la pieza actual por la siguiente y comprobar si un movimiento de &eacute;sta &uacute;ltima producir&iacute;a alg&uacute;n tipo de colisi&oacute;n.</P>
+
+
+<b>Colisiones entre piezas</b>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las colisiones entre piezas a&ntilde;aden algo m&aacute;s de dificultad a la hora de hacer giros, ya que la pieza actual puede chocar con los fragmentos que hayan en su camino de giro y por ello no poder realizar el cambio de posici&oacute;n. Por lo dem&aacute;s, tambi&eacute;n deberemos de realizar una comprobaci&oacute;n de colisi&oacute;n cuando nuestra pieza se mueva hacia la izquierda, derecha o hacia abajo. Debemos de tener en cuenta que se nos puede presentar una situaci&oacute;n como la siguiente:</P>
+<CENTER><IMG SRC="gif/figtet7.gif"></CENTER>
+<P ALIGN="JUSTIFY">En este ejemplo, vemos c&oacute;mo una pieza que intenta moverse hacia la derecha no puede por el sencillo motivo de que hay fragmentos de otras piezas que le impiden el movimiento. Poder controlar esto es muy f&aacute;cil, pues tan s&oacute;lo deberemos de comprobar, internamente, si al mover una posici&oacute;n nuestra figura (a la izquierda, derecha o hacia abajo), ocupa alguna zona que ya estaba previamente ocupada. En este caso, no podremos permitir el movimiento. Si este tipo de colisi&oacute;n se da, por ejemplo, cuando el temporizador asignado a la figura que estamos manejando vence y hace que &eacute;sta tenga que bajar una posici&oacute;n, significar&aacute; que no podr&aacute; bajar y que, por lo tanto, se ha acabado su tiempo de vida en el juego y tiene que salir otra por la parte superior.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El otro problema que pod&iacute;a darse al manejar una pieza, era el referido al de girarla. Si nuestra figura va a ser girada en un determinado sentido y encuentra fragmentos de otras figuras, &eacute;sta no podr&aacute; girar. ¿C&oacute;mo podemos solucionar este problema?. Bien, lo primero que deberemos de hacer es tomar las propiedades del frame siguiente al actual, m&aacute;s concretamente la anchura y la altura. Una vez hecho esto, deberemos de discutir dichos valores: </P>
+<P ALIGN="JUSTIFY">&#9;</P><DIR>
+<DIR>
+
+<B><P ALIGN="JUSTIFY">Si la anchura y la altura son iguales</B>. En este caso, nos encontramos con que la figura realmente ocupa la misma zona al realizar un giro. Esto ocurrir&aacute; si nuestra figura es un cuadrado y, por tanto, no haremos nada.</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si la altura es mayor que la anchura.</B> Lo que deberemos de hacer es recorrer la porci&oacute;n del array del &aacute;rea de juego que va desde la posici&oacute;n (x,y) hasta la posici&oacute;n (x+altura-1,y+altura-1). Esto es as&iacute;, porque esa es la porci&oacute;n que se supone "barrer&iacute;a" nuestra pieza al girar. As&iacute; pues, bastar&aacute; saber si en esa &aacute;rea hay alguna posici&oacute;n del &aacute;rea de juego distinta a 0 (es decir, que contiene alg&uacute;n fragmento de pieza) ya que, en ese caso, no podr&iacute;amos realizar el giro.</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si la altura es menor que la anchura. </B>Es id&eacute;ntico que en el caso anterior, salvo que en lugar de sumar altura, sumar&iacute;amos anchura. Recorrer&iacute;amos la porci&oacute;n de &aacute;rea de juego que ir&iacute;a de (x,y) a (x+anchura-1,y+anchura-1).</P>
+<B><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</B><P ALIGN="JUSTIFY">Una vez estudiadas las colisiones, convendr&iacute;a hacerse la pregunta ¿y cu&aacute;l de las dos compruebo antes?. Es obvio que, en cada movimiento de pieza, hay que realizar una comparaci&oacute;n de colisi&oacute;n en el escenario. Lo ideal ser&iacute;a tratar ambas colisiones por separado. Si al encontrarnos una colisi&oacute;n en los l&iacute;mites del &aacute;rea de juego, ya no realizar&iacute;amos comprobaci&oacute;n de colisi&oacute;n con los fragmentos de piezas y viceversa.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><h4><FONT FACE="Arial">C&oacute;mo averiguar si hemos hecho l&iacute;nea</h4>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Siempre que la vida de una pieza ha terminado, esto es, en el mismo instante que vence la ranura de tiempo y no puede bajar una posici&oacute;n porque hay colisi&oacute;n (contra la base del &aacute;rea de juego o contra otros fragmentos de piezas), hay que comprobar si ha hecho l&iacute;nea. Una pieza har&aacute; l&iacute;nea cuando alguno de sus fragmentos logren hacer que la fila en la que se han colocado todas las casillas est&eacute;n ocupadas. Para verlo m&aacute;s claro, esta figura:</P>
+<CENTER><IMG SRC="gif/figtet8.gif"></CENTER>
+
+<P ALIGN="JUSTIFY">Aqu&iacute; podemos ver c&oacute;mo la barra que acabamos de colocar hace que dos de sus casillas hagan l&iacute;nea (la casilla 1 y 3, comenzando a contar de arriba a abajo). ¿C&oacute;mo detectar esto?. Bien, antes de explicar c&oacute;mo detectar l&iacute;nea, convendr&iacute;a que pens&aacute;ramos mejor lo que pasa cuando una pieza hace l&iacute;nea. Puntos a tener en cuenta:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Las &uacute;nicas filas que podr&aacute;n hacer l&iacute;nea ser&aacute;n aquellas en las que la nueva pieza se haya alojado.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Cuando hacemos l&iacute;nea, debemos de tener en cuenta que baja la altura de los montones de fragmentos de piezas situados en el &aacute;rea de juego. Si nuestra pieza hace n l&iacute;neas, habr&aacute; que bajar todos los fragmentos que se encuentran desde la fila m&aacute;s baja (m&aacute;s cercana a la base del &aacute;rea de juego) en donde nuestra pieza ha hecho l&iacute;nea, n posiciones.</LI></P>
+<P ALIGN="JUSTIFY"><LI>Obviamente, deberemos de efectuar actualizaciones gr&aacute;ficas, de puntuaci&oacute;n, de pase de nivel, etc.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez definidos estos tres puntos b&aacute;sicos, podr&iacute;amos establecer los siguientes pasos:</P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><P ALIGN="JUSTIFY">Comprobar s&iacute; hemos hecho l&iacute;nea</B>. Para ello deberemos de examinar todas las filas del &aacute;rea de juego en los que nuestra pieza se ha establecido, recorri&eacute;ndolas. Si en alg&uacute;n momento encontramos que hay un valor igual a 0, significar&aacute; que ha quedado un hueco sin ocupar y, por lo tanto, que no se ha hecho l&iacute;nea. Aqu&iacute; yo recomendar&iacute;a que se hiciera un recorrido derecha - izquierda o izquierda - derecha, es decir, que se evitara recorrer una fila de forma secuencial (todo el rato a la derecha o todo el rato a la izquierda). En lugar de ello, una alternancia extremo derecho - extremo izquierdo aumentar&iacute;a en gran medida la efectividad de los c&aacute;lculos pues, de no existir l&iacute;nea, habr&iacute;a m&aacute;s posibilidad de saberlo antes. Se guardar&aacute; un contador que indique el n&uacute;mero m&aacute;ximo de filas que han hecho l&iacute;nea y un buffer que nos indique las filas que han hecho l&iacute;nea.</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si hay alguna l&iacute;nea, procedemos. </B>En el caso de que el contador de l&iacute;neas hechas sea distinto de 0, significar&aacute; que se ha hecho l&iacute;nea y que debemos de bajar la altura de los "montones de fragmentos". B&aacute;sicamente, el proceso ser&aacute; una recolocaci&oacute;n de las filas del &aacute;rea de juego. El mont&oacute;n bajar&aacute; una altura igual al n&uacute;mero de filas que han hecho l&iacute;nea. En l&iacute;neas generales, el mecanismo consistir&aacute; en evaluar todas las filas desde la &uacute;ltima que ha hecho l&iacute;nea hacia arriba, marcando, en un principio, todas las filas como "desocupadas". Una vez hecho esto, se evaluar&aacute;n las filas que no hacen l&iacute;nea (porque son las que tienen las piezas que van a ser recolocadas) y se ir&aacute;n situando en las filas marcadas como vac&iacute;as, hasta que no quede ninguna. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Actualizamos estructuras internas. </B>Como es l&oacute;gico, una vez que se hace l&iacute;nea habr&aacute; que evaluar unas cuantas cosas como son los puntos que recibe el jugador, si ha pasado de fase o si tiene que salir otra pieza, etc.</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</FONT><h4><FONT FACE="Arial">En resumen</h4>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Lo expuesto aqu&iacute; no es m&aacute;s que un an&aacute;lisis bastante acelerado de todo lo que ser&iacute;a el mecanismo interno de cara a la realizaci&oacute;n de un Tetris b&aacute;sico. Algunos temas no se han enfocado m&aacute;s a fondo por el simple hecho de que no se pretend&iacute;a hacer de este art&iacute;culo un listado en donde copiar la soluci&oacute;n para hacer un Tetris. Creo que la mayor parte de las bases de este juego est&aacute;n expuestas. Ahora bien, todo aquel que quiera hacer un Tetris, que se olvide de agarrarse a este documento &uacute;nicamente pues un juego tan trivial como el Tetris, esconde unos cuantos secretos m&aacute;s que s&oacute;lo se desvelan cuando se toma en serio el proyecto. As&iacute; que, si quieres hacer un Tetris l&eacute;ete este documento una vez, obt&eacute;n una idea general y luego ponte a escribir tu propia documentaci&oacute;n.</P></FONT>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>JULIO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+<br><hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="fpj.htm"><font FACE="ARIAL"><B>[Así Funciona]</B></font></a> 
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

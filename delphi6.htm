@@ -1,0 +1,662 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programación.</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 6.<br> OpenGL y Delphi 4.
+</H3>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Bienvenidos a una nueva entrega
+del curso de Delphi.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Como los tiempos de actualizaci&oacute;n
+en la inform&aacute;tica siempre est&aacute;n presentes, a partir de ahora,
+y tras las introducciones anteriores a Delphi 4, sobre esta nueva versi&oacute;n
+es sobre la que vamos a trabajar.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Como ya habr&eacute;is comprobado
+si hab&eacute;is echado un vistazo a los anteriores cap&iacute;tulos, este
+curso es un curso at&iacute;pico. En &eacute;l estamos tratando muchos
+y variados temas del mundo de la programaci&oacute;n, desde la interpretaci&oacute;n
+de ficheros MP3 y la creaci&oacute;n de componentes personalizados, hasta
+lo que vamos a ver a continuaci&oacute;n: OpenGL</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>OpenGL es, al igual que las
+m&aacute;s conocidas DirectX, una poderosa librer&iacute;a de programaci&oacute;n
+para crear representaciones tridimensionales.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Pero aqu&iacute; no vamos
+a explicar lo que es OpenGL, ya que para eso est&aacute; el curso de Oscar
+sobre OpenGL, aqu&iacute; en Macedonia, el cual trata el aspecto te&oacute;rico
+de lo que hay que conocer para entender lo que es una representaci&oacute;n
+tridimensional.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Y llegado aqu&iacute;, he
+de reconocer, que, gracias a su curso, fue como me interes&eacute; por
+OpenGL... sobre todo porque sus ejemplos estaban en C y yo decid&iacute;
+que: &iquest;por qu&eacute; no tratar de hacer lo mismo pero en Delphi.
+&iexcl;Pues dicho y hecho!</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>&iexcl;Ahora tenemos el
+siguiente art&iacute;culo, fruto de la curiosidad y del af&aacute;n de
+demostrar que este lenguaje es capaz de estar a la altura de otros en cualquiera
+de los temas variados de que consta el mundo de la inform&aacute;tica!</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Pero antes que nada, os
+recomiendo que os pas&eacute;is por el curso de OpenGL de Oscar, ya que
+su aprendizaje es requisito m&iacute;nimo para comprender el c&oacute;digo
+que se incluye aqu&iacute;.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=+1>&iquest;Y DirectX?</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Otro punto que me gustar&iacute;a
+que conoci&eacute;rais es una duda que tuve en mi largo a&ntilde;o ya de
+programaci&oacute;n con OpenGL: &iquest;y por qu&eacute; OpenGL en lugar
+de DirectX?</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Pues la respuesta es muy
+sencilla. Primero empec&eacute; con OpenGL, y cuando comenc&eacute; a hacer
+pruebas con DirectX (Direct3D en mi caso particular)... bueno... pues que
+de cada 3 ejecuciones de prueba me cascaba el ordenador 2 veces.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Direct3D es tremendamente
+complejo, y no es que esto sea un fallo, el fallo es que es tremendamente
+complejo cuando no es necesario.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Comparando la elegancia
+de OpenGL(y eso que tambien puede parecer confuso) con las barrabasadas
+de c&oacute;digo de Direct3D, es algo as&iacute; como ver un c&oacute;digo
+fuente en Delphi, y otro que haga lo mismo, pero en Visual? C++, y es que
+Direct3D es como una extensi&oacute;n de C++ y toma de &eacute;l su filosof&iacute;a
+de locura de c&oacute;digo (y lo dice un ex–enamorado del C++).</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Una cosa que hay que tener
+en cuenta, es que todos los programas que utilizan OpenGL se basan en unas
+DLLs que se encuentran en el directorio System si la versi&oacute;n de
+Windows es la OSR2 o superior. Por esto, no es necesario preocuparse de
+tener que instalar nada adicional.</font></font>
+
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=+1>GLUT, GL y GLU</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>No, no me estoy ahogando
+;-)</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>GLUT es una librer&iacute;a
+de utilidades freeware. Est&aacute; disponible para la mayor&iacute;a de
+los sistemas operativos que soportan OpenGL, y proporciona una gran portabilidad
+(a trav&eacute;s de C/C++) debido a que es independiente del sistema operativo.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Aunque existe una unidad
+GLUT para Delphi, no es necesario utilizarla (para algo es un lenguaje
+superior), debido a que las capacidades est&aacute;ndar de Delphi nos proporcionan
+mecanismos para utilizar directamente los mensajes de repintado (WM_PAINT)
+y de otro tipo, que suplen esa necesidad.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>En el directorio System,
+se encuentra el fichero GLU32.DLL, que es la versi&oacute;n de Microsoft
+que implementa la librer&iacute;a de OpenGL desarrollada por Silicon Graphics.
+Tambien es posible instalar las librer&iacute;as de Silicon, que por cierto
+y c&oacute;mo no, son superiores a las de Microsoft, pero vamos a utilizar
+lo que disponemos todos en nuestro Windows.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Para poder utilizar esta
+DLL, nos bastar&iacute;a con saber cu&aacute;les son las rutinas que implementa,
+y la sint&aacute;xis para llamarlas, con lo que un vistazo al curso de
+OpenGL de Oscar ser&iacute;a necesario.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Pero debido a que Delphi
+cada vez es m&aacute;s popular, existen cientos de sitios de internet en
+los que encontrar unas unidades (.PAS) que se han difundido como la p&oacute;lvora
+entre todos los usuarios de Delphi.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Se trata de GL.PAS y GLU.PAS.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Han sido desarrolladas por:</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Artemis Alliance, Inc.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>289 E. 5th St, #211</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>St. Paul, Mn 55101</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>(612) 227-7172</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>71043.2142@compuserve.com</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Estas unidades de las cuales
+no tenemos que preocuparnos ya est&aacute;n incluidas en este art&iacute;culo,
+nos facilitar&aacute;n la tarea (a&uacute;n m&aacute;s) de importar y llamar
+las cabeceras de los procedimientos, funciones y tipos de datos de la librer&iacute;a
+DLL.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Para su uso, tan solo hay
+que copiarlas en el directorio "Lib" de Delphi, siendo compatibles con
+las versiones 2, 3 y 4.</font></font>
+
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=+1>Yo he programado en OpenlGL
+desde C++</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Pues si este es tu caso,
+encontrar&aacute;s que todo lo que hac&iacute;as antes podr&aacute;s hacerlo
+ahora sin ninguna limitaci&oacute;n. Tan solo habr&aacute; que acostumbrarse
+a la sintaxis de Delphi a la hora de llamar a las funciones.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Lo suyo ser&iacute;a echar
+un vistazo a los dos ficheros anteriores, para comprobar las diferencias.
+Pero seguro que al poco tiempo los programadores de C++ se echar&aacute;n
+las manos a la cabeza al ver que no existen ni la mitad de las parafernalias
+que hay que armar para inicializar el formulario en el que mostrar "algo"
+en OpenGL... y es que eso lo hace Delphi por nosotros.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>En cuestiones de velocidad,
+no puedo decir que sean m&aacute;s r&aacute;pidas las ejecuciones en Delphi
+que en alg&uacute;n compilador de C++ cuando usamos OpenGL, ya que ni siquiera
+me he preocupado de usar el C++ para esto. Pero lo que s&iacute; se puede
+asegurar es que como m&iacute;nimo, Delphi ir&aacute; igual de r&aacute;pido...
+y ya no hablemos del tiempo dedicado a la programaci&oacute;n, que en este
+caso, con absoluta seguridad, Delphi consume menos tiempo... y menos quebraderos
+de cabeza.</font></font>
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=+1>&iexcl;Codigo, quiero C&oacute;digo!</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Pues aqu&iacute; lo ten&eacute;is,
+y en el cual podr&eacute;is ver c&oacute;mo se utiliza OpenGL.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>En esta unidad que viene
+a continuaci&oacute;n lo que se hace es mostrar un conjunto de cubos que
+forman un cubo a su vez, es decir, un cubo formado por 3 cubitos de ancho
+y 3 de largo bajo los efectos de un foco de luz y que rota sobre uno de
+sus ejes.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Si se redimensiona el formulario,
+el tama&ntilde;o de los cubos cambia de forma proporcional.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Los que sepan OpenGL, podr&aacute;n
+notar el uso del renderizado de listas de objetos.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>El c&oacute;digo tiene un
+nivel muy avanzado, no apto para los no iniciados, ya que hace uso del
+sistema de captura de mensajes de Windows, desde Delphi, as&iacute; como
+de opciones avanzadas del propio Windows.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Si se quiere utilizar este
+c&oacute;digo para ver los resultados, descargarlo aqu&iacute;: <a href="zip/demogl.zip">Demo.zip</a></font></font>
+<br><font face="Arial,Helvetica"><font size=-1>(No olvidar grabar los ficheros
+GL.PAS y GLU.PAS en el directorio Lib de Delphi, y descargarlas aqu&iacute;:
+<a href="zip/gl.zip">GL.zip</a>)</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>&iexcl;Pues aqu&iacute; ten&eacute;is
+el c&oacute;digo!</font></font>
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>unit</b> demo;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>interface</font></font></b>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>uses</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Windows, Messages, SysUtils,
+Classes, Graphics, Controls, Forms, Dialogs, GL, GLU, ExtCtrls;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>const</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>DRAWCUBE = 1;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>type</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>TfrmCubo = class(TForm)</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>Timer: TTimer;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>procedure FormCreate(Sender:
+TObject);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>procedure FormResize(Sender:
+TObject);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>procedure FormDestroy(Sender:
+TObject);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>procedure TimerTimer(Sender:
+TObject);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>private</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>DC: HDC;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>hrc: HGLRC;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Palette: HPALETTE;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Angle: GLfloat; // Lo usaremos
+para saber el &aacute;ngulo de rotaci&oacute;n en</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// el que se encuentran
+las figuras</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> CreateDisplayList;
+// Aqu&iacute; crearemos la estructura de cubos</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> DrawScene;
+// Para dibujar la estructura</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> InitializeRC;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> SetDCPixelFormat;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>protected</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Cazamos los mensajes
+que Windows manda al formulario</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> WMPaint(var
+Msg: TWMPaint); message WM_PAINT;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> WMQueryNewPalette(var
+Msg: TWMQueryNewPalette); message WM_QUERYNEWPALETTE;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>procedure</b> WMPaletteChanged(var
+Msg: TWMPaletteChanged); message WM_PALETTECHANGED;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>public</font></font></b>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br><b><font face="Arial,Helvetica"><font size=-1>var</font></font></b>
+<br><font face="Arial,Helvetica"><font size=-1>frmCubo: TfrmCubo;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>implementation</font></font></b>
+<p align="justify"><i><font face="Arial,Helvetica"><font size=-1>{$R *.DFM}</font></font></i>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.SetDCPixelFormat;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>var</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>hHeap: THandle;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>nColors, i: Integer;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette: PLogPalette;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>byRedMask, byGreenMask,
+byBlueMask: Byte;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>nPixelFormat: Integer;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>pfd: TPixelFormatDescriptor;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<br>&nbsp;
+<blockquote><font face="Arial,Helvetica"><font size=-1>FillChar(pfd, SizeOf(pfd),
+0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>with</b> pfd <b>do</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>nSize := sizeof(pfd);
+// Tama&ntilde;o de esta estructura</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>nVersion := 1; // N&uacute;mero
+de Versi&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>dwFlags := PFD_DRAW_TO_WINDOW
+or</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>PFD_SUPPORT_OPENGL or</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>PFD_DOUBLEBUFFER; // Flags</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>iPixelType:= PFD_TYPE_RGBA;
+// Valores RGBA pixel</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>cColorBits:= 24; // 24-bit
+color</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>cDepthBits:= 32; // 32-bit
+depth buffer</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>iLayerType:= PFD_MAIN_PLANE;
+// Tipo de Layer</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b></blockquote>
+
+<blockquote><font face="Arial,Helvetica"><font size=-1>nPixelFormat :=
+ChoosePixelFormat(DC, @pfd);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>SetPixelFormat(DC, nPixelFormat,
+@pfd);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>DescribePixelFormat(DC,
+nPixelFormat, sizeof(TPixelFormatDescriptor), pfd);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if</b> ((pfd.dwFlags
+and PFD_NEED_PALETTE) &lt;> 0) <b>then</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>nColors := 1 shl
+pfd.cColorBits;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>hHeap := GetProcessHeap;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette := HeapAlloc(hHeap,
+0, sizeof(TLogPalette) + (nColors * sizeof(TPaletteEntry)));</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette^.palVersion :=
+$300;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette^.palNumEntries
+:= nColors;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>byRedMask := (1 shl pfd.cRedBits)
+- 1;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>byGreenMask := (1 shl pfd.cGreenBits)
+- 1;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>byBlueMask := (1 shl pfd.cBlueBits)
+- 1;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>for</b> i := 0<b> to</b>
+nColors - 1<b> do</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>lpPalette^.palPalEntry[i].peRed
+:= (((i shr pfd.cRedShift) and byRedMask) * 255) DIV byRedMask;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette^.palPalEntry[i].peGreen
+:= (((i shr pfd.cGreenShift) and byGreenMask) * 255) DIV byGreenMask;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette^.palPalEntry[i].peBlue
+:= (((i shr pfd.cBlueShift) and byBlueMask) * 255) DIV byBlueMask;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>lpPalette^.palPalEntry[i].peFlags
+:= 0;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br><font face="Arial,Helvetica"><font size=-1>Palette := CreatePalette(lpPalette^);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>HeapFree(hHeap, 0, lpPalette);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if </b>(Palette &lt;>
+0) <b>then</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>SelectPalette(DC,
+Palette, False);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>RealizePalette(DC);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.InitializeRC;</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>const</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glfLightAmbient
+: Array[0..3] of GLfloat = (0.1, 0.1, 0.1, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glfLightDiffuse : Array[0..3]
+of GLfloat = (0.7, 0.7, 0.7, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glfLightSpecular: Array[0..3]
+of GLfloat = (0.0, 0.0, 0.0, 1.0);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Habilita "Depth
+testing" y "Backface culling"</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glEnable(GL_DEPTH_TEST);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glEnable(GL_CULL_FACE);</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>// Ponemos una luz en la
+escena, para que se vean los objetos</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glLightfv(GL_LIGHT0, GL_AMBIENT,
+@glfLightAmbient);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glLightfv(GL_LIGHT0, GL_DIFFUSE,
+@glfLightDiffuse);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glLightfv(GL_LIGHT0, GL_SPECULAR,@glfLightSpecular);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glEnable(GL_LIGHTING);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glEnable(GL_LIGHT0);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.CreateDisplayList;</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>const</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glfMaterialColor:
+Array[0..3] of GLfloat = (0.0, 0.0, 1.0, 1.0);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Creamos la lista
+de representaci&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glNewList(DRAWCUBE, GL_COMPILE);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Definimos las propiedades
+de reflexi&oacute;n de las caras de cada cubo</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE,
+@glfMaterialColor);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Un cubo tiene 6 caras,
+as&iacute; que vamos a montarlo</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Cada cara es un pol&iacute;gono</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(0.0,
+0.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, 1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(0.0,
+0.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, -1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(-1.0,
+0.0, 0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, 1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(1.0,
+0.0, 0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, -1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(0.0,
+1.0, 0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, 1.0, -1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>glBegin(GL_POLYGON);</font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glNormal3f(0.0,
+-1.0, 0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, -1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(1.0, -1.0, 1.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glVertex3f(-1.0, -1.0, 1.0);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>glEnd;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glEndList();</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure </b>TfrmCubo.DrawScene;</font></font>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>var</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>i, j, k: GLdouble;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<br>&nbsp;
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Hay que crear
+los bufers de profundidad y color</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glClear(GL_COLOR_BUFFER_BIT
+or GL_DEPTH_BUFFER_BIT);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Y definir el modelo de
+transformaci&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glMatrixMode(GL_MODELVIEW);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glLoadIdentity;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glTranslatef(0.0, 0.0, -32.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glRotatef(30.0, 1.0, 0.0,
+0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Rotamos la escena con
+el &aacute;ngulo apropiado</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glRotatef(Angle, 0.0, 1.0,
+0.0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// Ahora dibujamos un array
+tridimensional de cubos</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>i := -3.0;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>while</b> (i &lt;= 3.0)
+<b>do</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>j := -3.0;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>while</b> (j &lt;= 3.0)
+<b>do</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>k := -3.0;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>while</b> (k &lt;= 3.0)<b>
+do</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>glPushMatrix;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glTranslatef(i, j, k);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glCallList(DRAWCUBE);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glPopMatrix;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>k := k + 3.0;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br><font face="Arial,Helvetica"><font size=-1>j := j + 3.0;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br><font face="Arial,Helvetica"><font size=-1>i := i + 3.0;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br><font face="Arial,Helvetica"><font size=-1>// Intercambiamos los buffers
+de representaci&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>SwapBuffers(DC);</font></font></blockquote>
+
+<p align="justify"><br><b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.FormCreate(Sender:
+TObject);</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Primero hay que
+crear un contexto para renderizar</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Angle := 0;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>DC := GetDC(Handle);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>SetDCPixelFormat;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>hrc := wglCreateContext(DC);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>wglMakeCurrent(DC, hrc);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>InitializeRC;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>CreateDisplayList;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Timer.Enabled := True;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.FormResize(Sender:
+TObject);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>var </b>gldAspect : GLdouble;</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Si se cambia
+el tama&ntilde;o del formulario, hay que cambiar el tama&ntilde;o de</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// la representaci&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>gldAspect := Width / Height;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glMatrixMode(GL_PROJECTION);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>glLoadIdentity;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>gluPerspective(30.0, //
+Angulo del campo de visi&oacute;n</font></font>
+<blockquote>
+<blockquote><font face="Arial,Helvetica"><font size=-1>gldAspect, // Aspect
+ratio del volumem de visionado</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>1.0, // Distancia al plano
+de corte cercano</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>100.0); // Distancia al
+plano de corte lejano</font></font></blockquote>
+</blockquote>
+<font face="Arial,Helvetica"><font size=-1>glViewport(0, 0, Width, Height);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>InvalidateRect(Handle, nil,
+False);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.WMPaint(var
+Msg: TWMPaint);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>var </b>ps : TPaintStruct;</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// En cada evento
+de repintado del formulario, representamos la escena</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>BeginPaint(Handle, ps);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>DrawScene;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>EndPaint(Handle, ps);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.FormDestroy(Sender:
+TObject);</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Antes de cerrar
+el formulario, hay que liberar los recursos utilizados</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Timer.Enabled := False;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>wglMakeCurrent(0, 0);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>wglDeleteContext(hrc);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>ReleaseDC(Handle, DC);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if</b> (Palette &lt;>
+0) <b>then</b></font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>DeleteObject(Palette);</font></font></blockquote>
+</blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.WMQueryNewPalette(var
+Msg : TWMQueryNewPalette);</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// En el caso en
+que el programa est&eacute; usando una paleta de color</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// (en configuraciones de
+color peque&ntilde;as como 256 colores en Windows)</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// hay que "realizar" la
+paleta y actualizar el &aacute;rea de cliente cuando</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// el formulario recibe
+el foco, ya que si no, se mantendr&iacute;an los colores</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// de la paleta de la otra
+ventana que estaba activa antes, y se ver&iacute;an</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// los colores horrorosos.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if</b> (Palette &lt;>
+0) <b>then</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>Msg.Result := RealizePalette(DC);</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>if (Msg.Result &lt;> GDI_ERROR)
+then</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>InvalidateRect(Handle, nil,
+False);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.WMPaletteChanged(var
+Msg : TWMPaletteChanged);</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// Igual que antes,
+pero en este caso es para cuando otro programa</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// "realiza" su paleta</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if </b>((Palette &lt;>
+0)<b> and</b> (THandle(TMessage(Msg).wParam) &lt;> Handle))<b> then</b></font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1><b>if </b>(RealizePalette(DC)
+&lt;> GDI_ERROR)<b> then</b></font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>UpdateColors(DC);</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>Msg.Result := 0;</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1><b>procedure</b> TfrmCubo.TimerTimer(Sender:
+TObject);</font></font>
+<br><b><font face="Arial,Helvetica"><font size=-1>begin</font></font></b>
+<blockquote><font face="Arial,Helvetica"><font size=-1>// En cada evento
+del timer, se establece un nuevo &aacute;ngulo de rotaci&oacute;n</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>// y se fuerza el repintado
+de la escena</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Angle := Angle + 2.0;</font></font>
+<br><font face="Arial,Helvetica"><font size=-1><b>if</b> (Angle >= 90.0)
+<b>then</b></font></font>
+<blockquote><font face="Arial,Helvetica"><font size=-1>Angle := 0.0;</font></font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>InvalidateRect(Handle, nil,
+False);</font></font></blockquote>
+<b><font face="Arial,Helvetica"><font size=-1>end;</font></font></b>
+<p align="justify"><b><font face="Arial,Helvetica"><font size=-1>end.</font></font></b>
+<br>&nbsp;
+<p align="justify"><font face="Arial,Helvetica"><font size=+1>&iquest;Puedo hacer algo
+m&aacute;s con este c&oacute;digo?</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Para empezar, sirve como
+ilustraci&oacute;n de que OpenGL funciona en Delphi ^_^</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Se puede juguetear con &eacute;l,
+modificando los colores de los cubos, cambiando &eacute;stos por pir&aacute;mides,
+a&ntilde;adiendo una barra de scroll (TScrollBar) que cambie el valor del
+temporizador del TTimer para aumentar o disminuir la velocidad de rotaci&oacute;n.
+Tambien se puede hacer que no solo rote en un eje, sino en los otros dos...</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>Probando es como se aprende.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Ya dispon&eacute;is de los
+elementos necesarios para usar OpenGL en Delphi. Ahora es el turno para
+que cada uno aprenda por su cuenta, ya que este art&iacute;culo tan solo
+ha tratado de hacer una introducci&oacute;n.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>En internet existen muchos
+sitios donde encontrar informaci&oacute;n adicional sobre OpenGL y Delphi
+para profundizar lo comenzado aqu&iacute;. Tan solo queda poner ganas y
+tiempo.</font></font>
+<p ALIGN="justify"><font face="Arial,Helvetica"><font size=-1>Hasta el pr&oacute;ximo art&iacute;culo.</font></font>
+
+<br>&nbsp;
+<div align=right><font face="ARIAL"><b><font color="#0080C0"><font size=-1>&Uacute;</font></font></b><font color="#000000"><font size=-2>LTIMA
+REVISI&Oacute;N EN </font></font><b><font color="#CC0000"><font size=-1>JULIO
+</font></font></b><font color="#000000"><font size=-2>DE
+</font></font><b><font color="#CC0000"><font size=-1>1999</font></font></b></font><!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<br>
+<hr><!-- INICIO DEL RECUADRO DE ENLACES --></div>
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulac.htm"><font FACE="ARIAL"><B>[Curso de Delphi]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

@@ -1,0 +1,542 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+<br><br>
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Introducción a DirectDraw
+</H3>
+
+<P ALIGN=JUSTIFY>Las librer&iacute;as <B>DirectX</B> han sido creadas por Microsoft para
+facilitar la creaci&oacute;n de juegos para el entorno Windows, ya que
+hasta su aparici&oacute;n casi todos los juegos se desarrollaban para DOS.
+Existen otras librer&iacute;as gr&aacute;ficas para Windows, siendo una
+de las m&aacute;s conocidas <A HREF="http://www.sgi.com/Technology/openGL/index.html">OpenGL</A>
+
+<p align=justify>B&aacute;sicamente DirectX est&aacute; dividido en las siguientes partes:
+<BR>&nbsp;
+<UL>
+<LI>
+<B>DirectDraw</B>: utilizado para dibujar gr&aacute;ficos en dos dimensiones.</LI>
+
+<LI>
+<B>DirectSound</B>: para efectos de sonido y m&uacute;sica.</LI>
+
+<LI>
+<B>DirectInput</B>: para leer el teclado, joystick, rat&oacute;n, etc.</LI>
+
+<LI>
+<B>Direct3D</B>: para hacer gr&aacute;ficos en 3D.</LI>
+
+<LI>
+<B>DirectPlay</B>: para jugar por Internet, por modem, por cable serie,
+etc.</LI>
+
+<BR>&nbsp;</UL>
+<p align=justify>
+Este art&iacute;culo pretende ser una introducci&oacute;n a <B>DirectDraw</B>,
+el sistema de dibujo de gr&aacute;ficos en 2D y animaci&oacute;n. Hoy en
+d&iacute;a parece que todo lo que no sea un juego en 3D no sirve para nada,
+pero todav&iacute;a se pueden hacer buenos juegos en 2D, muy divertidos
+y adictivos, que no tienen nada que envidiar a un mega-juego en 3D que
+ocupa tropecientos megas.&nbsp; (el que no me crea, que le eche un vistazo
+a <B><A HREF="http://www.geocities.com/TimesSquare/Dungeon/5885/Bubble_bubble_e.htm" target="_new">Bubble
+Puzzle</A></B> )
+
+<p align=justify>En este art&iacute;culo vamos a crear un <A HREF="zip/ddraw.zip">programa</A>
+que nos va a permitir mover un peque&ntilde;o comecocos por un fondo de
+estrellas. Aprenderemos a inicializar DirectDraw, reservar espacio en memoria
+para incluir los sprites y el fondo, y a hacer la sencilla animaci&oacute;n
+mediante el conocido page-flipping (intercambio de p&aacute;ginas).
+
+<p align=justify>Para su creaci&oacute;n he utilizado <B>Borland C++ 4.5</B>, aunque
+el programa deber&iacute;a funcionar perfectamente con otros compiladores
+de C como <B>Visual C++</B> o <B>Watcom C</B>. Tambi&eacute;n tengo que
+decir que he utilizado la <B>versi&oacute;n 3 de DirectX</B>: hace poco
+ha aparecido la versi&oacute;n <B>5</B> de DirectX, pero todav&iacute;a
+no la he mirado. La verdad es que no s&eacute; si este programa se compilar&aacute;
+utilizando el SDK de DirectX-5, pero el ejecutable por lo menos supongo
+que funcionar&aacute;.
+<br>
+<H4>1. Inicializaci&oacute;n de DirectDraw:</H4>
+<p align=justify>
+
+Lo primero que tenemos que hacer es inicializar DirectDraw. He agrupado
+todo lo que hay que hacer en la funci&oacute;n <I>DirectDrawInit() </I>que
+devuelve un valor VERDADERO si no encuentra ning&uacute;n problema, y FALSO
+si hay alg&uacute;n problema, como por ejemplo que DirectX no est&eacute;
+instalado en el ordenador, o que no haya suficiente memoria. Si hay alg&uacute;n
+problema, antes de cerrar el programa se presenta un mensaje al usuario.
+
+<P>Lo primero que tenemos que hacer es <B>crear un objeto DirectDraw</B>,
+que representa la pantalla del ordenador, de la siguiente forma:
+</p>
+
+<font size=2 face="arial">
+<pre><b>
+LPDIRECTDRAW lpDD;  // este es el objeto DirectDraw <br>
+HRESULT ddrval;     // esta variable contendr&aacute; el valor devuelto
+                    // por las funciones DirectDraw
+
+ddrval = DirectDrawCreate(NULL, lpDD, NULL );
+
+if( ddrval != DD_OK ) 
+        return CleanupAndExit("Error en DirectDrawCreate!");
+</pre></b>
+</font>
+
+<p align=justify>
+La funci&oacute;n <I>CleanupAndExit()</I> es una funci&oacute;n que
+hemos creado nosotros, que lo que hace es borrar todos los objetos DirectDraw
+creados y luego presentar al usuario un mensaje de error. Utilizaremos
+la variable <B>ddrval</B> para almacenar el valor devuelto por las distintas
+funciones de DirectDraw. Si el valor es <B>DD_OK</B> no ha habido ning&uacute;n
+problema. En caso contrario, <B>ddrval</B> nos indicar&aacute; cu&aacute;l
+ha sido el problema (aunque en este caso no lo analizamos, en un programa
+serio deber&iacute;a hacerse)
+<BR>&nbsp;
+<BR>Ahora tenemos que decirle a DirectDraw <B>c&oacute;mo va a comportarse
+nuestro programa</B>. Para un juego lo normal es que queramos un acceso
+exclusivo a la pantalla y utilizando la pantalla completa:
+<br>
+<font size=2 face="arial">
+<pre><b>
+ddrval = lpDD->SetCooperativeLevel(hwnd, 
+               DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN );
+
+if( ddrval != DD_OK ) 
+    return  CleanupAndExit("Error en SetCooperativeLevel!!");
+</b>
+</pre>
+</font>
+<br>
+<p align=justify>Si por ejemplo quisi&eacute;ramos que nuestro juego se ejecutase en
+una ventana Windows, cambiari&aacute;mos los flags que hemos utilizado
+en SetCooperativeLevel(), utilizando por ejemplo DDSCL_NORMAL.
+<br><br>
+<p align=justify>Ahora tenemos que <B>elegir la resoluci&oacute;n gr&aacute;fica</B>
+que queramos, lo cual es bastante simple.
+<br>
+<font size=2 face="arial"><pre><b>
+ddrval = lpDD->SetDisplayMode(AnchoPixels, AltoPixels, BitsPorPixel )
+
+if( ddrval != DD_OK ) 
+    return CleanupAndExit("Error en SetDisplayMode!");
+</b></pre></font>
+<br>
+<p align=justify>Los par&aacute;metros de llamada a la funci&oacute;n son bastante evidentes,
+&iquest;no? Valores t&iacute;picos ser&iacute;an 640x480x8 (8 bits significa
+256 colores), 320x200x8 (que es el modo 13h), etc. Como siempre, en <B>ddrval</B>
+obtendremos el valor devuelto por la funci&oacute;n, que puede ser <I>DDERR_INVALIDMODE</I>,
+indic&aacute;ndonos que el modo gr&aacute;fico que hemos pedido no est&aacute;
+disponible. Para saber todos los modos gr&aacute;ficos que soporta un ordenador,
+se puede usar la funci&oacute;n <I>EnumDisplayModes().</I>
+
+<p align=justify>Ahora tenemos que crear las <I>superficies</I> (surfaces en ingl&eacute;s)
+en las que vamos a dibujar. Para ello primero tenemos&nbsp; una variable
+(<I>lpDDSPrimary</I>) que apunte a la superficie que vamos a crear, y otra
+variable m&aacute;s ( <I>ddsd </I>) que vamos a utilizar para decir a DirectDraw
+c&oacute;mo queremos que sea la superficie.
+<br>
+<font size=2 face="arial">
+<pre><b>
+LPDIRECTDRAWSURFACE lpDDSPrimary;  // Superficie primaria
+DDSURFACEDESC       ddsd;
+
+// Poner a 0 todos los bytes de la estructura
+memset( &amp;ddsd, 0, sizeof(ddsd));  
+
+//  Hay que decirle el tama&ntilde;o de la estructura
+// (por si cambia en futuras versiones de DirectX)
+
+ddsd.dwSize = sizeof( ddsd );
+
+// Ahora le decimos cu&aacute;les de todos los campos de la 
+// estructura DDSURFACEDESC vamos a definir en esta llamada.
+
+ddsd.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT;
+
+// Los flags para decirle que queremos crear una superficie 
+// primaria, compleja (?), y con capacidad de Flip.
+
+ddsd.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE 
+                      | DDSCAPS_FLIP | DDSCAPS_COMPLEX;
+
+//  S&oacute;lo vamos a poner un back-buffer 
+// (podemos poner m&aacute;s, tantos como quepan en la memoria de la tarjeta)
+
+ddsd.dwBackBufferCount = 1;
+
+// Ahora creamos la superficie primaria
+
+ddrval = lpDD->CreateSurface( &amp;ddsd,&amp;lpDDSPrimary, NULL );
+
+if( ddrval != DD_OK ) 
+return CleanupAndExit("Error en CreateSurface Superficie Primaria!");
+</b></pre></font>
+<br>
+<p align=justify>Bueno, ahora que ya tenemos la superficie primaria vamos a obtener mediante
+la funci&oacute;n <I>GetAttachedSurface()</I> un puntero al back buffer
+que hemos creado en esa superficie primaria:
+<br>
+<font size=2 face="arial"><pre><b>
+
+LPDIRECTDRAWSURFACE lpDDSBack;   //Back Buffer
+
+ddscaps.dwCaps = DDSCAPS_BACKBUFFER;
+ddrval = lpDDSPrimary->GetAttachedSurface(&amp;ddscaps, &amp;lpDDSBack );
+
+if( ddrval != DD_OK ) 
+       return CleanupAndExit("Error en GetAttachedDurface!");
+</b></pre></font>
+<p align=justify>
+Bueno, si hemos llegado hasta aqu&iacute;, ya tenemos DirectDraw incializado,
+hemos puesto la resoluci&oacute;n de pantalla que queremos, y tenemos una
+superficie primaria y un back-buffer en los que podemos dibujar e intercambiar
+las p&aacute;ginas para hacer animaciones.
+<br>
+<H4>2 - Dibujar en una superficie DirectDraw:</H4>
+<p align=justify>
+Est&aacute; claro que las superficies no nos sirven de nada si no podemos
+dibujar en ellas. Para esto tenemos varios m&eacute;todos:
+<UL><B>a)</B> Obtener el DC (Device Context)&nbsp; de la superficie, y
+utilizar las funciones GDI&nbsp; de Windows. El siguiente ejemplo utiliza
+GDI para escribir <I>MiTexto</I> en la superficie primaria:</UL>
+
+<UL>
+<font size=2 face=arial><pre><b>
+HDC hdc;
+
+if ( lpDDSPrimary->GetDC(&amp;hdc)&nbsp; == DD_OK)
+{
+      SetBkColor(hdc, RGB(0, 0, 255));
+      SetTextColor(hdc, RGB(255, 255, 0));
+      TextOut(hdc, 0, 0,&nbsp; MiTexto , lstrlen(MiTexto) );
+      lpDDSPrimary->ReleaseDC(hdc);
+}
+</b></pre></font>
+<p align="justify">
+Bastante evidente, &iquest;no? No hay que olvidarse de liberar el DC mediante
+<I>ReleaseDC(). </I>Bueno, he supuesto que sabes utilizar las funciones
+GDI, que son funciones de Windows de toda la vida, seguro que en la ayuda
+de tu compilador vienen explicadas, no tienen mayor misterio.</UL>
+
+<UL>&nbsp;
+<BR><B>b)</B> Obtener un puntero lineal a la superficie. Con este m&eacute;todo
+obtendremos un puntero lineal a la superficie (igual que en el modo 13h),
+y utilizando dicho puntero podremos dibujar lo que queramos:
+<BR>
+<font size=2 face="arial"><pre><b>
+DDSD ddsd;
+unsigned char *pointer;
+
+while (lpDDSBack->Lock(NULL, &amp;ddsd,0, NULL)
+       == DDERR_WASSTILLDRAWING );
+      pointer = (unsigned char *) ddsd.lpSurface;
+
+// aqu&iacute; dibujamos lo que queramos.
+// por ejemplo, una l&iacute;nea horizontal desde (0,0) 
+// hasta (50,0), en el color 100
+
+    for(i=0; i&lt;=50; i++); *(pointer+i) = 100;
+
+// ahora una l&iacute;nea vertical desde (50,0)
+// a (50,50), en el color 150
+
+for(i=0; i&lt;=50; i++) *(pointer + 50 + i*AnchoEnPixels)= 150;
+
+lpDDSBack->Unlock(ddsd.lpSurface);
+</b></pre></font>
+</ul>
+
+<p align=justify>
+Bueno, es bastante sencillo. Lo bueno de este m&eacute;todo es que&nbsp;
+puedes crear tus propias rutinas de dibujo, y aprovechar las rutinas que
+ya tienes hechas para DOS. Incluso se pueden programar en ensamblador.
+<BR>Es importante no olvidarse del <I>Unlock()</I> del final, para liberar
+el puntero. Si queremos volver a dibujar, tendremos que volver a obtener
+el puntero con <I>Lock()</I>, no nos vale el anterior.
+<BR>&nbsp;
+</UL>
+
+<H4>3 - Intercambio de p&aacute;ginas ( page-flipping )</H4><p align=justify>
+Supongamos que ya hemos dibujado en el back-buffer todo lo que queremos
+ver en pantalla. Ahora lo que tenemos que hacer es intercambiar el back-buffer
+y el front-buffer. Para ello s&oacute;lo tenemos que llamar a <B><I>lpDDSPrimary->Flip(NULL,
+0)</I></B>. Ahora el back-buffer est&aacute; en la pantalla y lo que antes
+era el front-buffer ahora est&aacute; como back-buffer, para que dibujemos
+el siguiente frame. B&aacute;sicamente es como he dicho, pero la llamada
+al Flip() es mejor hacerla de la siguiente forma:
+<br>
+<font size=2 face=arial><pre><b>
+
+while(1) {
+
+HRESULT ddrval;
+
+ddrval = lpDDSPrimary->Flip(NULL, 0);
+
+if(ddrval == DD_OK) break;
+if(ddrval == DDERR_SURFACELOST) {
+
+   ddrval = lpDDSPrimary->Restore();
+
+      if(ddrval != DD_OK) break;
+      if(ddrval != DDERR_WASSTILLDRAWING) break;
+
+}
+
+</b></pre></font>
+<p align=justify>
+Si lo hacemos de esta forma no aseguramos que no haya problemas con el
+flip. Por un lado, si la funci&oacute;n Flip() nos devuelve el mensaje
+<I>DDERR_WASSTILLDRAWING</I>, eso significa que todav&iacute;a no se ha
+terminado de hacer la &uacute;ltima operaci&oacute;n en este surface, por
+lo que tenemos que volver a llamar a <I>Flip()</I>. Por otro lado, si Flip()
+nos devuelve <I>DDERR_SURFACELOST</I> significa que DirectDraw ha perdido
+la memoria reservada para ese surface, por lo que debe reservarla otra
+vez mediante <I>Restore().</I>
+<BR>
+<H4>4 - Crear superficies off-screen</H4><p align=justify>
+En cualquier juego que hagamos, tendremos que reservar un espacio para
+guardar los bitmaps y el fondo que vamos a dibujar. Para ello vamos a utilizar
+las superficies off-screen (no s&eacute; c&oacute;mo traducirlo al espa&ntilde;ol).
+Crear una superficie de este tipo es bastante parecido a crear una superficie
+primaria, lo que ya hicimos en el punto 1.
+<br>
+<font size=2 face=arial><pre><b>
+LPDIRECTDRAWSURFACE lpDDSSprite;
+
+// Aqui guardaremos los sprites
+
+ddsd.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH;
+ddsd.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN;
+ddsd.dwWidth = 38;
+
+// esta es la anchura del bitmap del ejemplo.
+ddsd.dwHeight = 43;
+
+// y esta la altura
+ddrval = lpDD->CreateSurface( &amp;ddsd, &amp;lpDDSSprite, NULL );
+
+if( ddrval != DD_OK ) 
+   return CleanupAndExit("Error en CreateSurface lpDDSSprite!");
+</b></pre></font><br>
+<p align=justify>
+En <I>dwFlags</I> le hemos dicho que vamos a fijar la anchura y altura
+de la superficie,&nbsp; adem&aacute;s de sus caracter&iacute;sticas. En
+<I>dwCaps</I> le decimos que va a ser un buffer off-screen, y en <I>dwWidth</I>
+y <I>dwHeight</I> le damos las medidas. En este caso le damos las medidas
+del bitmap (<I><FONT SIZE=-1>PACMAN.BMP</FONT></I>) que incluye los bitmaps
+del pacman. En el programa de ejemplo se crea otra superficie off-screen
+para el fondo, que en ese caso tendr&aacute; la anchura y altura de la
+pantalla completa.
+<BR>
+<BR>En las superficies off-screen puedes dibujar de la misma forma que
+en la superficie primaria o en el back-buffer (ver punto 2). En el programa
+de ejemplo, puedes mirar las rutinas <I>SetupFondo()</I> que dibuja en
+una superficie off-screen un fondo negro con unas "estrellas" al azar,
+y tambi&eacute;n la rutina <I>LoadPacmanBitmap()</I> que lee el fichero
+<FONT SIZE=-1>PACMAN.BMP</FONT>&nbsp; y lo dibuja en otra superficie off-screen.
+<br><br>
+<p align=justify>Nuestro siguiente paso es c&oacute;mo hacer que aparezca en la pantalla
+algo que tenemos en una superficie off-screen. Lo que haremos ser&aacute;
+primero copiar de la superficie off-screen al back-buffer, y luego haremos
+un <I>Flip()</I> como ya hemos aprendido.
+<br><br>
+<p align=justify>Para copiar de una superficie off-screen al back-buffer ( o a cualquier
+otra superficie ) utilizamos <I>Blt</I>() o <I>BltFast</I>(). Por ejemplo,
+en el programa de ejemplo la funci&oacute;n <I>CopyFondo2Back</I>() copia
+en el back-buffer el fondo que hemos preparado en la superficie <I>lpDDSFondo</I>,
+de la siguiente forma:
+<BR>
+<font size=2 face=arial><pre><b>
+RECT rc = {0,0,XSize,YSize};
+
+while( 1 ) {
+
+   ddrval =; 
+   lpDDSBack->BltFast(0, 0, lpDDSFondo, &amp;rc, FALSE);
+   
+       if( ddrval == DD_OK )  break;
+	   if( ddrval != DDERR_WASSTILLDRAWING)  return;
+
+}
+</b></pre></font>
+<br><p align=justify>
+Bueno, es bastante simple, &iquest;no? Fijaos en que&nbsp; tenemos que
+asegurarnos de que siempre que las funciones de DirectDraw nos devuelvan
+el valor <I>DDERR_WASSTILLDRAWING</I> tenemos que volver a llamar a la
+funci&oacute;n, porque si no lo hacemos no consiguemos hacer lo que quer&iacute;amos
+(en este caso, la copia del fondo).
+<br><br>
+<p align=justify>Los par&aacute;metros a la funci&oacute;n <I>BltFast</I>() son las coordenadas
+de destino (0,0), la superficie de origen (<I>lpDDSFondo</I>), el rect&aacute;ngulo
+que queremos copiar (rc) y el tipo de transferencia.
+<br><br>
+<p align=justify>&iquest;Qu&eacute; es eso de tipo de transferencia? Nos sirve para indicarle
+a <I>BltFast</I>() un color-key (color-clave o algo as&iacute;) para que
+DirectDraw al hacer el blit ignore ese color, es decir, lo utilizamos para
+dibujar bitmaps transparentes. En el fichero pacman.bmp del ejemplo, las
+partes que no son del pacman est&aacute;n en color negro (n&uacute;mero
+0), y no queremos que DirectDraw dibuje lo que est&aacute; en negro, porque
+el pacma aparecer&iacute;a como un cuadrado cuando en realidad es redondo.
+Para ello, primero le decimos a DirectDraw que en la superficie <I>lpDDSSprite
+</I>el color-key va a ser el color n&uacute;mero 0:
+<BR>
+<font size=2 face=arial><pre><b>
+DDCOLORKEY ddck;
+
+ddck.dwColorSpaceLowValue = 
+ddck.dwColorSpaceHighValue = ddck.dwColorSpaceLowValue;
+
+lpDDSSprite->SetColorKey(DDCKEY_SRCBLT,&amp;ddck);
+</b></pre></font>
+<br><p align=justify>Ahora, cuando hagamos el blit para copiar de <I>lpDDSSprite</I> al
+back-buffer, le diremos a la funci&oacute;n <I>BltFast</I>() que utilice
+el color-key de la superficie de origen:
+<BR>
+<font size=2 face=arial><pre><b>
+ddrval = lpDDSBack->BltFast(XPos, YPos, lpDDSSprite, 
+         &amp;rc, DDBLTFAST_SRCCOLORKEY);
+</b></pre></font>
+<br><p align=justify>
+Tambi&eacute;n podemos utilizar el color-key de la superficie de destino
+en caso de que nos interese.
+<br><br>
+<p align=justify>El programa de ejemplo muestra un pacman que se mueve por la pantalla
+con las teclas del cursor. Con las teclas <FONT SIZE=-1>+ / -</FONT> puedes
+variar la velocidad a la que se mueve. Como podr&aacute;s ver, tenemos
+una superficie primaria y un back-buffer, adem&aacute;s de dos superficies
+off-screen, una que contiene el fondo que nosotros mismos creamos, y otra
+que contiene los distintos bitmaps del pacman (mirando hacia arriba, hacia
+la derecha, etc., con la boca abierta, cerrada). Para cada "frame" lo que
+hacemos es copiar primero el fondo en el back-buffer, luego copiamos el
+pacman en el back-buffer de forma "transparente" (ignorando el color negro),
+y luego hacemos un flip para que el back-buffer se vea por la pantalla.
+<br><br>
+<P align=justify>Al principio del programa hay dos "defines", XSIZE e YSIZE, que puedes
+cambiar para probar con distintas resoluciones de pantalla
+<br>
+<P align=justify>Pulsa <A HREF="zip/ddraw.zip">aqu&iacute;</A> para llevarte el programa
+de ejemplo (incluye c&oacute;digo fuente y ejecutable).
+<br>
+<H4> Algunos links de recomendada visita:</H4><p align=justify>
+<A HREF="http://www.microsoft.com/directx" target="_new">Microsoft DirectX SDK</A> (Software
+Development Kit) : Aqu&iacute; est&aacute; todo lo que necesitas para hacer
+un programa en DirectX. Acaba de salir la versi&oacute;n 5. Cuidado, porque
+son m&aacute;s de 30 megas...
+<BR><A HREF="http://www.yahoo.com/Recreation/Games/Computer_Games/Programming/DirectX/" target="_new">DirectX
+en Yahoo</A>
+<BR><A HREF="http://members.aol.com/mreiferson/index.htm" target="_new">Game Programming
+Megasite</A>: tiene muchas cosas de programaci&oacute;n de juegos, y tambi&eacute;n
+una secci&oacute;n de DirectX
+<BR><A HREF="ftp://x2ftp.oulu.fi/pub/msdos/programming/directx" target="_new">x2ftp.oulu.fi</A>:
+el mejor ftp-site de programaci&oacute;n de juegos tiene tambi&eacute;n
+un directorio de DirectX. Todav&iacute;a no hay muchas cosas, pero supongo
+que las habr&aacute;.
+<br><br>
+<P align=justify>Antes de terminar, tengo que dar las gracias a <I>pipero</I> (de <I>#programaci&oacute;n</I>
+y <I>#programacion_d_juegos</I>) que lo sabe absolutamente todo sobre DirectX
+y programaci&oacute;n de juegos.
+<br>
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

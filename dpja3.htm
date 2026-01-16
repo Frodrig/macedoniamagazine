@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.06 [en] (WinNT; I) [Netscape]">
+   <TITLE>Deteccion de Colisiones en deformables</TITLE>
+   <BASE TARGET="TEXTO">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+&nbsp;
+<CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#009933" >
+<TR>
+<TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="arial"><FONT SIZE=+4><FONT COLOR="#009933">P</FONT><FONT COLOR="#000000">rogramaci&oacute;n
+de Juegos</FONT></FONT></FONT></B>
+<HR></CENTER>
+
+<DIV ALIGN=right><B><FONT FACE="arial"><FONT SIZE=+0><FONT COLOR="#CC0000">A</FONT><FONT COLOR="#000000">ula
+Macedo</FONT><FONT COLOR="#CC0000">n</FONT><FONT COLOR="#000000">ia</FONT></FONT></FONT></B></DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<P>
+<HR>
+<TABLE ALIGN=LEFT BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#009933" >
+<TR>
+<TD>
+<TABLE ALIGN=LEFT BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD><B><FONT FACE="arial"><FONT COLOR="#009933"><FONT SIZE=+0>M</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=-1>undos
+3D
+<HR></FONT></FONT><FONT COLOR="#009933"><FONT SIZE=+0>S</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=-1>imulaci&oacute;n
+f&iacute;sica</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+
+<P><IMG SRC="g_misc/69.gif"  ALIGN=RIGHT>
+<DIV ALIGN=right><B><FONT FACE="arial"><FONT SIZE=-1><FONT COLOR="#CC0000">A</FONT><FONT COLOR="#000000">rt&iacute;culo
+realizado por</FONT></FONT></FONT></B>
+<BR><B><FONT FACE="arial"><FONT COLOR="#000000"><FONT SIZE=-1><A HREF="mailto:oscarg@salleurl.edu">Oscar
+Garc&iacute;a "Kokopus"</A></FONT></FONT></FONT></B></DIV>
+
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<H3>
+<FONT FACE="Arial"><FONT COLOR="#000000">Detecci&oacute;n de Colisiones
+entre objetos&nbsp; deformables</FONT></FONT></H3>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1><P ALIGN="JUSTIFY">En los dos anteriores
+art&iacute;culos hemos visto como poner en marcha una simulaci&oacute;n
+e incluso como optimizarla en cuanto al error y a la velocidad utilizando
+el paso adaptativo. Ahora vamos a centrarnos en como detectar colisiones
+entre los objetos de nuestra escena. Queremos evitar <B>interpenetraci&oacute;n</B>
+entre los objetos a toda costa pues es un fen&oacute;meno que se detectar&aacute;
+visualmente por parte del usuario, que quedar&aacute; probablemente muy
+decepcionado con las expectativas que ten&iacute;a del juego. &iquest;D&oacute;nde
+se ha visto agua que traspase las paredes o dos pedazos de tela que se
+rebasan entre ellos?, hay que evitar efectos de este tipo....y sobretodo
+nunca subestimar al usuario que lo pilla todo !</FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Centr&aacute;ndonos
+en los objetos deformables tenemos que recordar que trabajamos con sistemas
+de part&iacute;culas, es decir, cientos de particulillas con su masa y
+dem&aacute;s atributos interconectadas entre ellas mediante resortes (muelles).
+Parece f&aacute;cil imaginar como modelar un pedazo de tela o un oc&eacute;ano...bastar&aacute;
+con crear una malla de resortes y part&iacute;culas, pintarla adecuadamente
+en base a tri&aacute;ngulos o colocarle texturas encima...y a simular!!!...&iquest;pero
+y las colisiones?</FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Trabajando con
+deformables no tenemos como entidad m&iacute;nima al objeto (Sistema de
+Part&iacute;culas) sin&oacute; a la part&iacute;cula en s&iacute;. Por
+lo tanto est&aacute; claro que las colisiones se producir&aacute;n entre
+part&iacute;culas o entre una part&iacute;cula y la cara de un objeto.
+Pueden darse casos cr&iacute;ticos (<B>singularidades</B>) como por ejemplo
+dos caras triangulares formadas por 3 muelles y 3 part&iacute;culas cada
+una, que chocan con sus centros y sin ninguna part&iacute;cula implicada
+en la colisi&oacute;n....de momento vamos a lo "normal" y ya analizaremos
+los casos raros m&aacute;s adelante.</FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=+1>Vamos a lo ideal
+pu&eacute;s...</FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Vamos a suponer
+que nuestro objeto est&aacute; formado a partir de caras triangulares formadas
+por 3 muelles / 3 part&iacute;culas cada una. Es lo m&aacute;s recomendable
+dada la flexibilidad de los tri&aacute;ngulos. Recordad que:</FONT></FONT></FONT>
+<UL>
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Los tri&aacute;ngulos
+siempre residen en un &uacute;nico plano, sin pliegues. Sus 3 v&eacute;rtices
+son coplanares.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Los tri&aacute;ngulos
+se procesan a velocidad de v&eacute;rtigo por los pipeline's gr&aacute;ficos,
+m&aacute;s si los aceleramos v&iacute;a Hardware (aceleradoras 3D).</FONT></FONT></FONT></LI>
+</UL>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Supongamos que deseamos
+estar preparados para el caso en que una part&iacute;cula de un objeto
+impacte con la cara (tri&aacute;ngulo) de otro objeto. &iquest;C&oacute;mo
+nos enteraremos de que eso ocurre?...recurriremos a una t&eacute;cnica
+llamada de "<B>Bisecci&oacute;n</B>" o "<B>Backtracking</B>". Mirad la
+figura:</FONT></FONT></FONT>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig1dc.gif" HEIGHT=194 WIDTH=244></CENTER>
+
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Ah&iacute; tenemos a una
+part&iacute;cula (bolita negra) que va a chocar con un plano (l&iacute;nea
+recta negra). Veamos que ocurre en cada una de las 3 situaciones numeradas:</FONT></FONT>
+<OL>
+<LI>
+<FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Estamos en un estadio intermedio
+de la animaci&oacute;n. Hemos llegado a un tiempo de simulaci&oacute;n
+de valor <B>T0</B> y nos disponemos a iterar de nuevo. A&uacute;n no sabemos
+que la colisi&oacute;n es inminente.</FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Hemos iterado el sistema usando
+un paso de valor <B>IncT</B> y ooopsss!!!!...resulta que observamos que
+estamos literalmente metidos dentro de otro objeto!!!...ha habido interpenetraci&oacute;n
+y eso tiene que evitarse a toda costa.</FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial,Helvetica"><FONT SIZE=-1>La soluci&oacute;n. Volvemos
+al estado 1, del que habiamos hecho c&oacute;pia, e iteramos de nuevo pero
+usando la mitad del paso, es decir<B> IncT / 2</B>. Entonces observamos
+de nuevo si hay o no interpenetraci&oacute;n. Si es as&iacute;, volveremos
+a 1 de nuevo y usaremos <B>IncT / 4 </B>y as&iacute; sucesivamente; sin&oacute;
+verificaremos que la distancia entre la part&iacute;cula y el plano sea
+o no inferior o igual a una determinada <B>Epsilon</B> (la figura la muestra).
+Si la distancia hasta el plano cumple ese requisito entonces podemos afirmar
+que SI, acabamos de detectar una colisi&oacute;n!</FONT></FONT></LI>
+</OL>
+<FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Observad por tanto que se trata
+de detectar primero una interpenetraci&oacute;n para despu&eacute;s volver
+hacia atr&aacute;s e irte acercando poco a poco hasta que te encuentres
+a una distancia m&iacute;nima que ya consideras colisi&oacute;n. Una buena
+manera de optimizar el sistema ser&iacute;a aplicar la Epsilon tanto por
+fuera como por dentro, es decir a ambos lados del plano de la figura. De
+esta manera puedes considerar que hay colisi&oacute;n con interpenetraci&oacute;n
+m&iacute;nima tanto acerc&aacute;ndote como pas&aacute;ndote y en el mejor
+de los casos reducir&aacute;s las iteraciones a la mitad (el sistema global
+ser&aacute; + r&aacute;pido).</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Obviamente si se trabaja
+en "tiempo real" no se dibuja hasta que se ha detectado la colisi&oacute;n....sin&oacute;
+el usario ver&aacute; el sistema oscilando hacia adelante y hacia detr&aacute;s
+hasta estabilizarse.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>&iquest;Queda claro el Backtracking?</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=+1>C&aacute;lculo de distancias</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>S&oacute;lo queda saber como
+calcular la distancia de nuestra part&iacute;cula al plano o cara. Aqui
+veremos que la cosa es bastante sencilla aparentemente aunque se plantea
+un peque&ntilde;o problema.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>La <B>distancia de un punto
+a un plano</B> (recordad que nuestra part&iacute;cula tiene una posici&oacute;n
+3D en el espacio y por tanto puede considerarse como un punto) es muy f&aacute;cil
+de evaluar:</FONT></FONT>
+<p align="justify"><BR>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig2dc.gif" HEIGHT=141 WIDTH=331></CENTER>
+<p align="justify">
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Considerando el plano de
+la primera l&iacute;nea de la figura (es el plano en el que reside la cara-tri&aacute;ngulo),
+podemos encontrar la distancia <B>d</B> de un punto <B>( X1, Y1, Z1)</B>
+al plano tal y c&oacute;mo se indica. Esta distancia <B>d</B> ser&aacute;
+la que contrastaremos con nuestra Epsilon.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>El problema es distinguir
+entre distancias positivas y negativas, es decir, mientras estamos fuera
+y nos vamos acercando no hay problema pero &iquest;como discernimos que
+ha habido interpenetraci&oacute;n a partir de la distancia del punto al
+plano?, &iquest;c&oacute;mo sabemos si es negativa o positiva?</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Os puedo decir que hay varios
+art&iacute;culos publicados por prestigiosos doctores en relaci&oacute;n
+a la posible manera de solventar este problema. Nosotros seremos algo m&aacute;s
+humildes y dejaremos de lado las complejas eculubraciones para ir a lo
+pr&aacute;ctico. No reinventaremos la rueda sin&oacute; que reutilizaremos
+material y a eso voy ahora!</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=+1>R.A.P.I.D. de Stefan Gottschalk</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>RAPID es una librer&iacute;a
+"freeware" de Stefan Gottschalk para la detecci&oacute;n de colisiones
+entre tri&aacute;ngulos. Funciona asombrosamente r&aacute;pido y es una
+opci&oacute;n perfecta para los no iniciados en el tema. Sabed que la detecci&oacute;n
+de colisiones es un tema de investigaci&oacute;n abierto y no resuelto
+completamente.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Lo que os sugiero es que
+implementeis el Backtracking en vuestro sistema utilizando una libreria
+como RAPID o similar para la detecci&oacute;n entre tri&aacute;ngulos.
+Es una buena opci&oacute;n de despegue y para cualquiera que haya programado
+algunas l&iacute;neas de c&oacute;digo es muy sencilla de aplicar. Incluye
+un TXT de documentaci&oacute;n sobre el &uacute;so de la librer&iacute;a
+que tendreis que leer en un rato para no liaros despu&eacute;s....no nos
+pasemos de autodidactas!!!....8)</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Podeis encontrar la libreria
+<A HREF="http://www.cs.unc.edu/~geom/OBB/OBBT.html">aqui</A>.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=+1>Optimizaci&oacute;n: "Bounding
+Boxes"</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Ya para acabar mencionar
+un preproceso que podemos aplicar a la detecci&oacute;n para aligerar los
+c&aacute;lculos y, como siempre, acelerar el sistema global. Se trata de
+utilizar las "archiconocidas Bounding Boxes" o <B>cajas envolventes</B>
+para cada uno de nuestros sistemas de part&iacute;culas (objetos de la
+animaci&oacute;n).</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Podemos definir un cubo o
+una esfera que englobe completamente a cada uno de nuestros objetos. Para
+detectar colisiones lo primero que haremos ser&aacute; verificar colisiones
+entre estos cubos o esferas. Si no las hay nos olvidamos pero en caso contrario
+pasaremos a un nivel de detalle m&aacute;s profundo con el Backtracking.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Podemos evaluar cual es la
+caja envolvente de cada objeto observando cuales son sus valors m&aacute;ximos
+y m&iacute;nimos de XYZ. En el caso de ser r&iacute;gidos, el envolvente
+no variar&aacute; nunca pero si son deformables, que es nuestro caso en
+principio, puede ser que al irse produciendo deformaciones tengamos que
+ir recalculando la caja. En la figura pod&eacute;is ver en que consiste
+el proceso general:</FONT></FONT>
+<p align="justify"><BR>
+<CENTER>
+<p align="justify"><IMG SRC="jpg/fig3dc.jpg" HEIGHT=383 WIDTH=460></CENTER>
+<p align="justify"><BR>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>En la figura se ilustra un
+posible caso. Detectamos colisi&oacute;n entre las cajas y como no sabemos
+si tambi&eacute;n la hay entre objetos tendremos que aplicar Backtracking
+aunque realmente no es necesario. De todas formas habr&aacute; muchas iteraciones
+en las que ni tan s&oacute;lo las cajas intersectar&aacute;n y no ser&aacute;
+necesaria la aplicaci&oacute;n de librerias como RAPID.</FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Las condiciones a evaluar
+entre las cajas de dos objetos cualesquiera para la detecci&oacute;n son
+obvias:</FONT></FONT>
+<p align="justify"><BR>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig4dc.gif" HEIGHT=312 WIDTH=208></CENTER>
+<p align="justify"><BR>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>...d&oacute;nde los valores
+que v&eacute;is en las condiciones se corresponden a las fronteras que
+definen a las cajas. Si s&oacute;lo una de estas condiciones se cumple
+entre dos cajas pod&eacute;is asegurar que no colisionan entre ellas. A
+este test se le conoce como el de <B>MinMax</B>. En el caso de envolventes
+esf&eacute;ricos tan s&oacute;lo hay que verificar que la distancia entre
+los centros de las dos esferas sea mayor que la suma de los dos radios....&iquest;lo
+v&eacute;is no?</FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Creo que de momento
+ya teneis bastante informaci&oacute;n como para iros divirtiendo un poco...en
+el siguiente n&uacute;mero os comentar&eacute; el m&oacute;dulo de respuesta
+a las colisiones (una vez detectadas que hacer con el sistema) as&iacute;
+como algunas singularidades que se pueden producir en la detecci&oacute;n.</FONT></FONT></FONT>
+<BR>&nbsp;
+<BR>&nbsp;
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>JULIO</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<DIV ALIGN=right>
+<HR></DIV>
+
+
+<CENTER><TABLE CELLPADDING=2 WIDTH="100%" >
+<TR>
+<TD ALIGN=LEFT VALIGN=TOP WIDTH="50%">
+<TABLE BORDER CELLSPACING=0 CELLPADDING=2 WIDTH="100%" HEIGHT="0" BGCOLOR="#CC0000" >
+<TR>
+<TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="100%" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="ARIAL"><FONT SIZE=-1><A HREF="pjuegos.htm">[Desarrollo de Videojuegos]
+<HR></A><A HREF="dpj.htm">[Mundos 3D]</A></FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<CENTER>
+<P>
+<HR></CENTER>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA
+Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+</BODY>
+</HTML>

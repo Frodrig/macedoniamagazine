@@ -1,0 +1,309 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>I</B></font><FONT color="#000000" size=2 face="arial"><B>ntroducción a las DirectX</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:handman@jet.es">Joan Teruel Planas.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 1. Introducción a las APIs DirectX.
+</H3>
+
+
+<P>Las DirectX consisten en diferentes APIS dentro de ella, aqu&iacute; tienes una lista de ellas:</P>
+<UL>
+<LI>DirectDraw. </LI>
+<LI>DirectSound.</LI>
+<LI>DirectInput.</LI>
+<LI>DirectPlay.</LI>
+<LI>Dire1ct3D.</LI></UL>
+<P ALIGN="JUSTIFY">De momento vamos a tocar la DirectDraw (para los amigos DDraw). Con las DDraw podremos controlar el v&iacute;deo, funciones gr&aacute;ficas de todo tipo, funciones de bliteaje, scrolles y fundidos, entre otras cosas. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Tenemos diferentes objetos, os dar&eacute; una peque&ntilde;a explicaci&oacute;n sobre estos objetos, de momento los m&aacute;s b&aacute;sicos y m&aacute;s importantes.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">El objeto DIRECTDRAW:</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Interfaz: IDirectDraw. </B>Este objeto sirve para iniciar las DirectX, con este objeto, hasta podremos saber que modos de v&iacute;deo soporta nuestra tarjeta, entre muchas cosas m&aacute;s, que ya iremos explicando y ampliando.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">El objeto DIRECTDRAWSURFACE:</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Interfaz: IDirectDrawSurface. </B>Este objeto (que lo m&aacute;s normal es llamarle Surface) nos permite almacenar datos (como im&aacute;genes) y despu&eacute;s ser visualizados en pantalla. Necesitamos tener el Surface Primario y el Secundario (m&aacute;s conocido como BACK) para poder enviar los datos de los otros Surfaces a estos, para poder sacarlos en pantalla. </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">El objeto DIRECTDRAWPALETTE:</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Interfaz: IDirectDrawPalette. </B>Este objeto  representa una paleta de 256 colores en DirectX,  se puede utilizar solamente, en los modos de 8 bits o inferiores.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora crearemos un peque&ntilde;o programa para saber como iniciar las DirectX, el modo de v&iacute;deo y como crear el Surface primario y el Surface secundario y despu&eacute;s os explicar&eacute; un poco todo lo que hacemos en este ejemplo. El tutorial que he hecho y lo ten&eacute;is a vuestra disposici&oacute;n para bajarlo desde esta misma p&aacute;gina, el c&oacute;digo esta un poco m&aacute;s ampliado, mirarlo os ir&aacute; muy bien.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">#define NAME "MDEjemplo1"</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/* El nombre de la ventana */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">#define TITLE "Ejemplo de DirecDraw by Metasoft Entertainemnt"</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">#define WIN32_LEAN_AND_MEAN</P>
+<P ALIGN="JUSTIFY">#include &lt;windows.h&gt;</P>
+<P ALIGN="JUSTIFY">#include &lt;windowsx.h&gt;</P>
+<P ALIGN="JUSTIFY">#include &lt;stdlib.h&gt;</P>
+<P ALIGN="JUSTIFY">#include &lt;stdarg.h&gt;</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/* Definiciones del DDRaw */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">#include &lt;ddraw.h&gt;</P>
+<P ALIGN="JUSTIFY">#include &lt;ddutil.h&gt;</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P>LPDIRECTDRAW&#9;MD_lpDD; </B>/* Objeto DirectDraw */</P>
+<B><P>LPDIRECTDRAWSURFACE&#9;MD_Primary; </B>/* Surface Primario */</P>
+<B><P>LPDIRECTDRAWSURFACE&#9;MD_Back; /* </B>Surface Secundario o Back */</P>
+<B><P>LPDIRECTDRAWSURFACE&#9;MD_Imagen; /*</B> Surface para almacenar la imagen */</P>
+<B><P>DDSURFACEDESC                       MD_ddsd; /* </B>Acceso directo a la memoria del Surface*/</P>
+<B><P ALIGN="JUSTIFY"></P>
+</B></FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * MD_InitDDraw - Aqui tenemos todo lo necesario para empezar a trabajar              * con las DirectX.</P>
+<P ALIGN="JUSTIFY"> *                </P>
+<P ALIGN="JUSTIFY"> */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">BOOL MD_InitDDraw(HWND hwnd)</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">HRESULT error;</P>
+<P ALIGN="JUSTIFY">HBITMAP Imagen;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">   </FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"> /*</P>
+<P ALIGN="JUSTIFY">     * Creamos el objeto DirectDraw</P>
+<P ALIGN="JUSTIFY">     */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">    DirectDrawCreate( NULL, &amp;<B>MD_lpDD</B>, NULL );</P>
+<P ALIGN="JUSTIFY"> </P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/* Niveles de cooperatividad */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B>MD_lpDD</B>-&gt;SetCooperativeLevel( hwnd,</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN );</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/* Iniciamos el modo de video (640x480x8bpp) */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;    <B>MD_lpDD</B>-&gt;SetDisplayMode( 640, 480, 8 );</P>
+<P ALIGN="JUSTIFY">&#9;    </P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000">
+<P>/* Creamos el Surface Primario y apartir de este el 1 &#9;&#9;Surface Secundario o Back */</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwSize = sizeof( <B>MD_ddsd </B>);</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE |</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;      DDSCAPS_FLIP | </P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;      DDSCAPS_COMPLEX;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwBackBufferCount = 1;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_lpDD</B>-&gt;CreateSurface( &amp;<B>MD_ddsd</B>, &amp;<B>MD_Primary</B>,NULL);</P>
+<P ALIGN="JUSTIFY">&#9;&#9;</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY">/* Creamos el Surface Secundario o Back atacando al &#9;&#9;Primario */&#9;&#9;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;&#9;    ddscaps.dwCaps = DDSCAPS_BACKBUFFER;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;    <B>MD_Primary</B>-&gt;GetAttachedSurface(&amp;ddscaps, </P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;&#9;&#9;  &amp;<B>MD_Back</B>);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">} </FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000">/* Fin de la funcion MD_InitDDraw*/</P>
+</FONT><FONT FACE="Arial" SIZE=2>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">DirectDrawCreate</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, despu&eacute;s de un poco de c&oacute;digo, siempre viene bien un poco de explicaci&oacute;n. Mirar, tenemos al principio del c&oacute;digo la funci&oacute;n <B>DirectDrawCreate </B>esa funci&oacute;n permite iniciar todo, desde el modo de v&iacute;deo hasta crear los Surfaces y un sin fin de cosas. El objeto DirectDraw es el interfaz principal, de el depende todo. </P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">SetCooperativeLevel</P>
+</B></FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">Despu&eacute;s tenemos la funci&oacute;n <B>SetCooperativeLevel</B>, los niveles de cooperatividad indican c&oacute;mo el DirectDraw se debe comportar con el dispositivo de v&iacute;deo o elementos que lo hagan cambiar, por ejemplo, si nuestro programa puede maximizarse o minimizarse, cambiar de tarea, etc... Como lo indicamos ahora en nuestro programa la aplicaci&oacute;n se ejecuta en FULL SCREEN, los par&aacute;metros son estos:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9; <B>MD_lpDD</B>-&gt;SetCooperativeLevel( hwnd,</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN );</P>
+<I><P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">El flag <B>DDSCL_EXCLUSIVE </B>y el <B>DDSCL_FULLSCREEN</B>, indica que nuestra aplicaci&oacute;n se ejecutar&aacute; en modo EXCLUSIVO i en FULL SCREEN teniendo as&iacute;, toda la capacidad del hardware (cambiar paletas, el modo de v&iacute;deo, etc...). De momento, para empezar, lo haremos en FULL SCREEN. En modo de ventana, tiene sus particularidades, pero ver&eacute;is que es f&aacute;cil.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">SetDisplayMode</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La siguiente funci&oacute;n que viene es la <B>SetDisplayMode</B>, esta funci&oacute;n nos permite iniciar el modo de v&iacute;deo en DirectX, naturalmente, en FULL SCREEN; en modo ventana, no se puede indicar el modo de v&iacute;deo que se quiere iniciar, ya que coge el modo de v&iacute;deo que tengas puesto en el Windows. Esta funci&oacute;n tiene estos par&aacute;metros:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;&#9;SetDisplayMode( SCREEN_W, SCREEN_H, BPP );</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">SCREEN_W es el Ancho de la pantalla.</P>
+<P ALIGN="JUSTIFY">SCREEN_H es el Alto de la pantalla.</P>
+<P ALIGN="JUSTIFY">BPP (Bits por p&iacute;xel) formato de p&iacute;xel.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los modos de v&iacute;deo principales son estos:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B>320x200  VGA</P>
+<P ALIGN="JUSTIFY">&#9;320x240  VGA</P>
+<P ALIGN="JUSTIFY">&#9;512x384  SVGA</P>
+<P ALIGN="JUSTIFY">&#9;640x480  SVGA</P>
+<P ALIGN="JUSTIFY">&#9;800x600  SVGA</P>
+<P ALIGN="JUSTIFY">&#9;1024x768  SVGA</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y los principales y los m&aacute;s utilizados formatos de p&iacute;xel son estos:</P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><P>8 bpp (paleta).</P>
+<P>16 bpp (sin paleta);</P>
+<P>24 bpp (sin paleta);</P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">CreateSurface</B></FONT><FONT FACE="Arial" SIZE=2> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Esta funci&oacute;n sirve para crear una zona para almacenar datos (por ejemplo una imagen).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P>Surfaces de Volcado:</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora tocaremos los surfaces para poder visualizar los datos almacenados en los otros surfaces, en pantalla. Tenemos el Surface Primario y el Surface Secundario o Back y estos surfaces, son los que utilizaremos para volcar los datos de los otros surfaces, que ser&aacute;n visualizados en pantalla.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwSize = sizeof( <B>MD_ddsd </B>);</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE |</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;      DDSCAPS_FLIP | </P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;      DDSCAPS_COMPLEX;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_ddsd</B>.dwBackBufferCount = 1;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;<B>MD_lpDD</B>-&gt;CreateSurface( &amp;<B>MD_ddsd</B>, &amp;<B>MD_Primary</B>,NULL);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Aqu&iacute; le decimos que el Surface primario, ser&aacute; el que se encargue de volcar a la pantalla la informaci&oacute;n guardada en otros Surfaces, <B>DDSCAPS_FLIP </B>entre otras flags y despu&eacute;s creamos el Surface Secundario o Back:</P>
+</FONT><FONT FACE="Arial" SIZE=2 COLOR="#008000"><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&#9;&#9;    ddscaps.dwCaps = DDSCAPS_BACKBUFFER;</P>
+<P ALIGN="JUSTIFY">&#9;&#9;    <B>MD_Primary</B>-&gt;GetAttachedSurface(&amp;ddscaps, &amp;<B>MD_Back</B>);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para visualizar una imagen primero la tendremos que enviar al surface Secundario o Back con la funci&oacute;n <B>BLTFAST O BLT</B> y despu&eacute;s con la funci&oacute;n <B>FLIP </B>autom&aacute;ticamente la enviar&aacute; directamente al Surface primario y ya podremos ver la imagen visualizada en pantalla.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial"><P ALIGN="JUSTIFY"><B>Surfaces de almacenamiento:</B></P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">Estos Surfaces (por fin) son los encargados de guardar una imagen entre otras cosas,  vamos a ver los pasos a seguir para crear uno:</P>
+<P ALIGN="JUSTIFY"></P>
+
+
+<B><P ALIGN="JUSTIFY">MD_ddsd</B>.dwFlags = DDSD_CAPS | DDSD_HEIGHT | DDSD_WIDTH;   <BR>  <B>MD_ddsd</B>.ddsCaps.dwCaps = DDSCAPS_OFFSCREENPLAIN;</P>
+<P ALIGN="JUSTIFY">    <B>MD_ddsd</B>.dwWidth = 640; /* Alto del Surface */</P>
+<P ALIGN="JUSTIFY">&#9;    <B>MD_ddsd</B>.dwHeight = 480; /* Ancho del Surface */</P>
+<B><P ALIGN="JUSTIFY">    MD_lpDD</B>-&gt;CreateSurface( &amp;<B>MD_ddsd</B>, &amp;<B>MD_Imagen</B>, NULL );</P>
+
+<P ALIGN="JUSTIFY">Primero le ponemos unos flags, os explicar&eacute; los m&aacute;s importantes, el <B>DDSD_HEIGHT</B> y el <B>DDSD_WIDTH</B> sirve para decirle que el surface tendr&aacute; un tama&ntilde;o determinado, que luego los definiremos m&aacute;s abajo en <B>dw.width</B> y <B>dw.height</B>. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esto es lo principal sobre el tema de Surfaces, espero que lo entend&aacute;is. Es un tema muy importante sobre las DirectX.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora solo, tendr&iacute;amos que cargar una imagen y enviarla a este Surface, cada imagen necesita un Surface, pero en el pr&oacute;ximo art&iacute;culo, veremos como crear una buena funci&oacute;n para automatizar el proceso.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Funciones de Bliteaje</P>
+</B></FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">En DirectX tenemos 2 funciones para dibujar en pantalla, son estas:</P>
+<P ALIGN="JUSTIFY"></P>
+
+
+</FONT><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY"><B>BltFast.</B></P>
+<P ALIGN="JUSTIFY"><B>Blt.</B></P>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">Ahora os explicar&eacute; la <B>BltFast</B>, es la m&aacute;s f&aacute;cil de utilizar.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Surfaces Secundario -&gt; <B>BltFast</B>( x,  y,  Surfaces de la imagen,  Rect de la imagen,  flag);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Primero le decimos que la imagen la env&iacute;e al Surface Secundario.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">X = La posici&oacute;n X en pantalla;</P>
+<P ALIGN="JUSTIFY">Y = La posici&oacute;n Y en pantalla;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Despu&eacute;s tenemos el Surface donde se halla la imagen almacenada.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Despu&eacute;s viene el <B>RECT</B> esta definici&oacute;n sirve para crear un cuadrado d&oacute;nde le diremos el ancho y el alto de la imagen, para poder dibujarla (Mirar el c&oacute;digo adjunto, en la funci&oacute;n MD_draw). </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y despu&eacute;s tenemos unos cuantos flags, explicar&eacute; los m&aacute;s utilizados:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">DDBLTFAST_NOCOLORKEY</B> dibuja la imagen sin transparencia.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">DDBLTFAST_SRCCOLORKEY </B>dibuja la imagen con transparencia.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para dibujar la imagen con transparencia tendremos que hacer algunos pasos m&aacute;s, que ya veremos m&aacute;s adelante.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bueno, yo ya me despido hasta el siguiente n&uacute;mero, veremos cosas m&aacute;s avanzadas. Como puede ser dibujar im&aacute;genes transparentes y un sin fin de cosas, espero que os vaya bien este tutorial y a programar!.</P><br><br>
+<hr><center><font size=2 face=arial color="#cc0000">
+Puedes obtener el código fuente de los ejemplos mostrados pulsando <a href="zip/dx1.zip">aquí</a>
+</center><hr>
+<br><br>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaq.htm"><font FACE="ARIAL"><B>[Introducción a las DirectX]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

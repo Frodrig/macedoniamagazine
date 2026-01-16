@@ -1,0 +1,284 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programación.</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 4.<br> Trabajando con la Visual Component Library
+</H3>
+
+
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<B><FONT FACE="Arial" SIZE=4>1. Introducci&oacute;n</P>
+</B></FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">
+Las secciones anteriores han estado dedicadas al entorno, al lenguaje Object Pascal, y a la exposici&oacute;n de todo lo que rodea a la programaci&oacute;n con Delphi (orientaci&oacute;n a objetos, programaci&oacute;n visual, desarrollo r&aacute;pido…)</P>
+<P ALIGN="JUSTIFY">Tras todo esto, lo recomendable ser&iacute;a que se hubiera practicado haciendo uso del entorno, &quot;soltando&quot; componentes sobre el formulario principal, editando las propiedades de esos componentes (mediante el Inspector de Objetos), probando qu&eacute; es lo que resulta tras esas modificaciones, y en definitiva, haberse &quot;peleado&quot; con la mayor&iacute;a de las opciones principales que el entorno del lenguaje Delphi nos ofrece.</P>
+<P ALIGN="JUSTIFY">Y ahora es el momento en el que hay que conocer un apartado fundamental en el mundo de la programaci&oacute;n con Delphi.</P>
+<P ALIGN="JUSTIFY">Este apartado es la VCL.</P>
+
+<h4><P ALIGN="JUSTIFY">2.¿Qu&eacute; es una VCL?</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pues, ni m&aacute;s ni menos, una VCL es un objeto que podemos utilizar en nuestros programas, que podremos &quot;soltar&quot; sobre nuestro formulario, y al que podremos cambiar sus propiedades a trav&eacute;s del Inspector de Objetos.</P>
+<P ALIGN="JUSTIFY">Supongo que algunos se habr&aacute;n dado cuenta de que esto es precisamente lo que se puede hacer con los componentes que se encuentran disponibles en las paletas de componentes de Delphi (botones, etiquetas, listas desplegables…). Pues ahora se puede decir que esos componentes que hemos estado utilizando hasta ahora (y que no olvidemos, son objetos), son tambi&eacute;n VCL.</P>
+<P ALIGN="JUSTIFY">VCL o Visual Component Library no es m&aacute;s que un objeto que se dise&ntilde;a en Object Pascal, y que incluimos en la paleta de componentes de Delphi.</P>
+<P ALIGN="JUSTIFY">El modo en que esto se hace lo afrontaremos despu&eacute;s. Tan solo basta con saber, por ahora, que adem&aacute;s de los componentes que ofrece Delphi, podremos crear los nuestros propios o utilizar los de otras personas (en este aspecto, cabe destacar que existen en Internet servidores exclusivamente dedicados a la difusi&oacute;n de VCL Free y Shareware),</P>
+
+<h4><P ALIGN="JUSTIFY">3.Tipos de Componentes</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En una aplicaci&oacute;n Delphi es posible utilizar tanto componentes Delphi, (las VCL), como componentes OCX (o tambi&eacute;n conocidos como componentes OLE).</P>
+<P ALIGN="JUSTIFY">Esto es v&aacute;lido para los compiladores de Delphi versiones 2 y 3, pero para la versi&oacute;n 1, los OCX estaban vetados, ya que al ser la primera versi&oacute;n de Delphi para 16 bits, tan s&oacute;lo estaban disponibles los VBX (versiones de 16 bits de los OCX que son de 32 bits).</P>
+<P ALIGN="JUSTIFY">Aclarado esto, en la etapa de dise&ntilde;o de nuestro programa, mientras estemos trabajando con los componentes sobre el formulario, no notaremos ninguna diferencia entre VCL y OCX (VBX). Pero esto no quiere decir que sean lo mismo.</P>
+<P ALIGN="JUSTIFY">Existe una diferencia fundamental entre ambos tipos de componentes, y es que mientras el c&oacute;digo de las VCL pasa a formar parte del ejecutable que genera Delphi, (o sea, que la VCL est&aacute; incluida en la propia aplicaci&oacute;n), los OCX se mantienen en un archivo separado, con extensi&oacute;n OCX, que ser&aacute; necesario distribuir e instalar en el sistema junto con la aplicaci&oacute;n (tal y como se har&iacute;a si utiliz&aacute;semos una DLL… pero eso ya lo veremos alg&uacute;n otro d&iacute;a).</P>
+<P ALIGN="JUSTIFY">La mayor parte de los componentes que encontraremos en la paleta de Delphi son del tipo VCL, excepto la subpaleta donde pone OCX (en Delphi 2) o ActiveX (en Delphi 3).</P>
+
+<h4><P ALIGN="JUSTIFY">4. Instalaci&oacute;n de un Componente</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los componentes son tan importantes a la hora de realizar un programa debido a que pueden facilitarnos nuestra tarea sobremanera.</P>
+<P ALIGN="JUSTIFY">Supongamos que necesitamos incluir en nuestra aplicaci&oacute;n m&uacute;sica en un formato tan popular &uacute;ltimamente como el MP3.</P>
+<P ALIGN="JUSTIFY">Cuando se va a realizar un programa &quot;supuestamente profesional&quot;, no se puede perder el tiempo con experimentos, porque lo que queremos (m&aacute;s bien, lo que nos exigen) es productividad. Lo primero que se va a hacer es irse a Internet a buscar algo que lo haga por nosotros… vamos, que nos convertiremos en montadores de puzles si nos descuidamos un poco ya que lo que impera es sacar el producto cuanto antes frente a la satisfacci&oacute;n de haberlo realizado nosotros &iacute;ntegramente.</P>
+<P ALIGN="JUSTIFY">As&iacute; que cuando tengamos lo que buscamos, lo hayamos hecho nosotros o sea de un tercero, tendremos que pasar a la instalaci&oacute;n en la paleta de Delphi para poder utilizarlo en nuestro proyecto.</P>
+<P ALIGN="JUSTIFY">El proceso de instalaci&oacute;n dar&aacute; como resultado una nueva entrada en la paleta de componentes de Delphi, pasando a estar disponible como si hubiera &quot;venido de f&aacute;brica&quot;. Este proceso var&iacute;a para cada una de las versiones del compilador, as&iacute; que nos centraremos en la m&aacute;s est&aacute;ndar, en la de Delphi 2. </P>
+<P ALIGN="JUSTIFY">Primero hay que seleccionar la opci&oacute;n <I>Install</I> del men&uacute; <I>Component</I>. En la ventana que aparece, podremos ver en una lista los distintos componentes que actualmente se encuentran instalados en nuestro sistema.</P>
+<P ALIGN="JUSTIFY">Pulsando el bot&oacute;n <I>Add…</I> podremos pasar a instalar una VCL, y pulsando el bot&oacute;n <I>OCX…</I>podremos instalar un OCX/OLE/ActiveX.</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<LI><P ALIGN="JUSTIFY">En el primer caso tan s&oacute;lo tendremos que facilitar el nombre del m&oacute;dulo en el que est&aacute; contenido el componente (o sea, el nombre del fichero &quot;.pas&quot; si tenemos el fuente, o &quot;.dcu&quot; si lo tenemos compilado), con el path para localizarlo.</P> </LI>
+<LI ><P ALIGN="JUSTIFY">En el segundo caso deberemos seleccionar el OCX de la lista de OCX registrados en el Registro del Sistema de W95 (o como preferimos llamarlo algunos: el Infierno de W95), ya que tan s&oacute;lo aparecer&aacute;n en esa lista los que est&eacute;n instalados.</P></LI></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hay que tener en cuenta que en cualquier momento podemos desinstalar el componente que no nos interese (incluso los que vienen por defecto con Delphi… ¡Nooo, dejad eso para m&aacute;s tarde!). Esto lo podremos hacer pulsando el bot&oacute;n <I>Remove</I>. Esto no quiere decir que se borre f&iacute;sicamente el componente del disco duro, sino que lo hace inaccesible desde la paleta de componentes de Delphi, por lo que posteriormente se podr&aacute; volver a incluir.</P>
+<P ALIGN="JUSTIFY">Y algunos ahora se preguntar&aacute;n: ¿y entonces para qu&eacute; se &quot;remueve&quot; el componente?</P>
+<P ALIGN="JUSTIFY">Pues como los componentes se incluyen en los ejecutables, si eliminamos los que no utilizamos, el ejecutable generado ser&aacute; m&aacute;s peque&ntilde;o, con lo que ir&aacute; m&aacute;s r&aacute;pida su carga y utilizaci&oacute;n… motivo suficiente ¿no?</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pues bien, una vez realizada la instalaci&oacute;n ya podremos utilizar el nuevo componente como cualquier otro, y recordemos que nos dar&aacute; igual en principio que sea VCL, OCX, OLE, ActiveX, VBX… ¿no se cansa la gente de crear tantas siglas?</P>
+
+<h4>5. Componentes, Componentes, Componentes</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pasemos ahora a un breve repaso por todo lo que nos ofrece Delphi a trav&eacute;s de sus componentes &quot;de f&aacute;brica&quot; (<FONT FACE="Wingdings">&#223;</FONT>
+ No me gusta la palabra est&aacute;ndar, estandard o como diablos se diga en espa&ntilde;ol)</P>
+<P ALIGN="JUSTIFY">Partiendo de que ya ha existido un previo &quot;tute&quot; entre el entorno y nosotros, (al cual le hemos expuesto que no nos va a dominar por sus ilimitadas opciones, men&uacute;s, submen&uacute;s y contramen&uacute;s), que hemos m&aacute;s o menos tanteado las posibilidades de cada uno de los botones, listas desplegables, listas combo (¿y esto como diablos se dice en nuestro idioma?), y dem&aacute;s… ahora es el turno de una mayor profundizaci&oacute;n en algo que va a ser el aspecto que va a presentar nuestro programa: los controles o componentes que aparecer&aacute;n en pantalla… y esto es algo que, por experiencia, provoca el inmediato rechazo o predisposici&oacute;n a aceptarlo por parte de los usuarios.</P>
+<P ALIGN="JUSTIFY">Puede parecer que esta parte va a ser algo tediosa, con una exposici&oacute;n de tantas opciones y subopciones, pero para justificarla, junto a cada una expondr&eacute; un ejemplo del uso que se le puede dar en un programa de los que todos vemos.</P>
+<P ALIGN="JUSTIFY">De lo que se trata es de conocer las propiedades m&aacute;s habituales, los eventos y los m&eacute;todos que est&aacute;n disponibles para cada uno de ellos.</P>
+
+<h4>5.1 Propiedades de un Componente</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando, desde el c&oacute;digo de nuestro programa queramos acceder a las propiedades, eventos o m&eacute;todos de un componente, podremos utilizar dos formas distintas.</P>
+<P ALIGN="JUSTIFY">Supongamos que tenemos un componente sobre nuestro formulario que se llama &quot;Chiquitin&quot;. Supongamos tambi&eacute;n que tiene dos propiedades llamadas &quot;Cabeza&quot; y &quot;Piernas&quot;, y un m&eacute;todo llamado &quot;Llora&quot;.</P>
+<P ALIGN="JUSTIFY">Si queremos acceder al componente &quot;Chiquitin&quot; lo podemos hacer de la siguiente forma:</P>
+<P ALIGN="JUSTIFY"></P>
+<pre><font size=2>
+&#9;Chiquitin.Cabeza:=’Gorda’;
+&#9;Chiquitin.Piernas:=’Cortas’;
+&#9;Chiquitin.Llora;</font>
+</pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Puede parecer un ejemplo tonto, pero lo que importa no es el exterior… (bueno, eso era de Disney)… lo que importa es que cuando se quiere acceder a las propiedades del mismo componente de manera seguida, podemos hacer lo siguiente:</P>
+
+<pre><font size=2>
+&#9;<b>with</b> Chiquitin <b>do</b>
+&#9;<b>begin</b>
+&#9;&#9;Cabeza:=’Gorda’;
+&#9;&#9;Piernas:=’Cortas’;
+&#9;&#9;Llora;
+&#9;<b>end;</b></font>
+</pre>
+<P ALIGN="JUSTIFY">Esta forma de acceder al objeto (componente) como si fuera un vulgar registro, es la m&aacute;s recomendable y elegante, y adem&aacute;s la que ahorra m&aacute;s escritura de c&oacute;digo por nuestra parte, y aunque ya lo hayamos visto en anteriores cap&iacute;tulos, nunca viene mal recordar… (a no ser que sea nuestro abuelo el que recuerde y diga: cuando yo era joven…)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Visto esto, pasemos ahora a comentar las propiedades que suelen compartir casi todos los componentes:</P>
+
+<h4><P ALIGN="JUSTIFY">5.1.1 Posici&oacute;n y Dimensiones.</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Todos los componentes est&aacute;n colocados en una determinada posici&oacute;n de la ficha (formulario) que los contiene, incluso aquellos que en tiempo de ejecuci&oacute;n no est&aacute;n visibles.</P>
+<P ALIGN="JUSTIFY">La posici&oacute;n de un componente puede ser consultada y modificada a trav&eacute;s de las propiedades <I>Left </I>y<I> Top</I> para las coordenadas izquierda y superior, respectivamente, siendo de tipo Integer, con lo que aunque la esquina superior izquierda del formulario sea (0,0), podremos dar coordenadas negativas (con lo que parte de &eacute;l o su totalidad no aparecer&aacute;n). Hay que tener en cuenta que estas coordenadas son relativas al formulario en que se encuentran, y si el formulario est&aacute; situado en un rinconcito a la derecha, la coordenada (0,0) para cualquier componente representar&aacute; la posici&oacute;n (0,0) dentro del formulario, no dentro de la pantalla del monitor, por lo que aparecer&aacute; en la esquina superior izquierda dentro del formulario.</P>
+<P ALIGN="JUSTIFY">El tama&ntilde;o se encuentra en las propiedades <I>Width </I>y<I> Height</I>, para ancho y alto, respectivamente, siendo esta vez de tipo Word, o sea, que no pueden ser negativos (¿como ser&iacute;a un partido de baloncesto con jugadores que midiesen -1’90?)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Un aspecto a notar es que si desplazamos durante el dise&ntilde;o un componente por el formulario o cambiamos su tama&ntilde;o con el rat&oacute;n, en el Inspector de Objetos podremos ver c&oacute;mo autom&aacute;ticamente se van actualizando los valores de <I>Top, Left, Widht </I>y<I> Height.</P>
+</I><P ALIGN="JUSTIFY">Y no olvidar que estas propiedades pueden ser cambiadas tanto en dise&ntilde;o (desde el Inspector de Objetos o con el rat&oacute;n), como en ejecuci&oacute;n (desde el c&oacute;digo del programa).</P>
+<P ALIGN="JUSTIFY">Como ejemplo de esto, podemos ver que en algunos programas, seg&uacute;n las opciones que est&aacute;n disponibles, aumentan o disminuyen los tama&ntilde;os de las ventanas, e incluso podemos modificar sus tama&ntilde;os. Pues todo esto se realiza a partir de estas propiedades.</P>
+
+<h4><P ALIGN="JUSTIFY">5.1.2 T&iacute;tulos, Colores y Tipos de Letra</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Muchos componentes tienen una propiedad llamada <I>Caption</I>, (el bot&oacute;n, la etiqueta, el panel, el propio formulario…), que sirve para almacenar el texto que aparecer&aacute; en pantalla en cada uno de ellos. Esta propiedad es de tipo String, con lo que podremos especificar una cadena de tipo alfanum&eacute;rico. </P>
+<P ALIGN="JUSTIFY">Por poner un ejemplo, el formulario que contiene el explorador desde el cual est&aacute;is viendo esta p&aacute;gina, tiene una barra superior donde se encuentran los botones de maximizado, minimizado y dem&aacute;s, pues bien, el texto que aparece a la izquierda es el <I>Caption</I> de ese formulario, y los textos que aparecen en los botones son los <I>Caption</I> de los botones.</P>
+<P ALIGN="JUSTIFY">Otro apartado son los colores. El color de un componente se refiere al fondo de lo que se va a ver en pantalla para ese componente. El color se especifica en la propiedad <I>Color</I>, que es de tipo TColor, al que podremos darle unos valores predefinidos o en hexadecimal.</P>
+<P ALIGN="JUSTIFY">Por &uacute;ltimo, el tipo de letra puede ser modificado a trav&eacute;s de la propiedad <I>Font</I>, que es de tipo TFont. Para modificarla probad a hacer click sobre el botoncito con 3 puntos que aparece junto a ella en el Inspector de Objetos, con lo que aparecer&aacute; un men&uacute; donde podremos elegir la configuraci&oacute;n que deseemos.</P>
+
+<h4><P ALIGN="JUSTIFY">5.1.3 M&aacute;s Propiedades Comunes</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Todo lo que se ve en pantalla puede ser ocultado o deshabilitado. Esto se realiza mediante las propiedades <I>Visible </I>y <I>Enabled</I>.</P>
+<P ALIGN="JUSTIFY">Ambas son de tipo Boolean. Con lo que un valor de True permitir&aacute; que se vea en pantalla y que se pueda utilizar.</P>
+<P ALIGN="JUSTIFY">En todos los programas hay opciones que est&aacute;n disponibles siempre, y otras que o bien no aparecen (<I>Visible</I>:=False) o que no se pueden seleccionar y suelen aparecer en gris (<I>Enabled</I>:=False)</P>
+
+<h4><P ALIGN="JUSTIFY">5.2 Eventos de un Componente</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los eventos, al igual que las propiedades, son miembros de un objeto (componente), y por lo tanto se puede acceder a ellos igual que a las propiedades. </P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">La diferencia entre una propiedad y un evento es que el evento es un procedimiento o funci&oacute;n y la propiedad una variable que almacena un valor. </P></LI>
+<LI><P ALIGN="JUSTIFY">La diferencia entre un evento y un m&eacute;todo es que el evento es como una reacci&oacute;n del componente a algo que pasa (y lo escribimos nosotros), y el m&eacute;todo es algo que nosotros llamamos, nunca el propio componente (y no lo escribimos nosotros).</P></LI></UL>
+
+<P ALIGN="JUSTIFY">Como esto puede parecer algo lioso, pongamos un ejemplo:</P>
+<P ALIGN="JUSTIFY">Cuando pulsamos sobre un bot&oacute;n, el bot&oacute;n genera el evento <I>OnClick</I>, en el cual pondremos el c&oacute;digo que queremos que se realice cuando se pulse el bot&oacute;n.</P>
+<P ALIGN="JUSTIFY">Si llamamos al m&eacute;todo Hide del bot&oacute;n, &eacute;ste se ocultar&aacute;, pero el c&oacute;digo no lo habremos hecho nosotros, tan s&oacute;lo habremos utilizado la llamada al procedimiento que lo hace y que ya est&aacute; implementado.</P>
+<P ALIGN="JUSTIFY">Y tambi&eacute;n hay que hacer menci&oacute;n de que todos los eventos empiezan por &quot;On&quot;.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La mayor&iacute;a de los eventos son generados por el rat&oacute;n, pero hay algunos otros que son generados por el propio sistema, como por ejemplo los pulsos de un temporizador (est&aacute; en la paleta System, componente Timer).</P>
+
+<h4><P ALIGN="JUSTIFY">5.2.1 Eventos del Rat&oacute;n</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El rat&oacute;n es sin duda el dispositivo de entrada por excelencia en Windows, ya que mediante &eacute;l es posible controlar pr&aacute;cticamente la totalidad de las funciones de una aplicaci&oacute;n, si exceptuamos la entrada de datos tales como textos. Cada vez que movemos el rat&oacute;n, pulsamos o liberamos cualquiera de sus botones, estamos generando un evento (en realidad es tal la ensalada-foll&oacute;n que se crea internamente con los mensajes entre las aplicaciones y sus controles, con lo eventos y los procesos, que me extra&ntilde;a que Windows no casque mucho m&aacute;s).</P>
+<P ALIGN="JUSTIFY">El evento <I>OnMouseMove</I> lo recibe un control (componente visible en tiempo de ejecuci&oacute;n) cuando el puntero del rat&oacute;n se est&aacute; desplazando sobre &eacute;l. Este evento cuenta con varios par&aacute;metros especiales (estado de las teclas Alt,Control, May&uacute;s; y la posici&oacute;n X e Y del puntero).</P>
+<P ALIGN="JUSTIFY">Al pulsar y liberar un bot&oacute;n cualquiera, se generan dos eventos: <I>OnMouseDown </I>y <I>OnMouseUp.</I> Ambos comparten los par&aacute;metros del evento anterior, adem&aacute;s de otro donde se indica qu&eacute; bot&oacute;n es el que lo ha producido (izquierdo, central o derecho).</P>
+<P ALIGN="JUSTIFY">Tambi&eacute;n est&aacute; el evento <I>OnDblClick</I> que se refiere a cuando se hace un doble click, adem&aacute;s de <I>OnDragDrop</I>, que se produce al arrastrar el cursor sobre el control con un bot&oacute;n pulsado; y otros muchos m&aacute;s (decenas, cientos, miles… y eso que con Delphi es m&aacute;s f&aacute;cil).</P>
+
+<h4><P ALIGN="JUSTIFY">5.2.2 Eventos de Teclado</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Algunos controles como el formulario (Form) o la caja de texto (Edit), tienen la capacidad de recibir eventos de teclado, que permiten, por ejemplo, interceptar la pulsaci&oacute;n de una tecla.</P>
+<P ALIGN="JUSTIFY">Cada vez que se pulsa una tecla que se corresponde directamente con un car&aacute;cter se genera el evento <I>OnKeyPress</I>, que nos pasa como par&aacute;metro el car&aacute;cter pulsado.</P>
+<P ALIGN="JUSTIFY">Como veremos, existe analog&iacute;a entre los eventos del rat&oacute;n y del teclado, ya que cuando se pulsa una tecla y se suelta, tambi&eacute;n se generan los eventos: <I>OnKeyDown </I>y <I>OnKeyUp</I>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y existen muchos tipos m&aacute;s de eventos, pero como introducci&oacute;n ya basta.</P>
+
+<h4><P ALIGN="JUSTIFY">5.3 M&eacute;todos de un Componente</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por &uacute;ltimo, vamos a ver los m&eacute;todos. </P>
+<P ALIGN="JUSTIFY">Un m&eacute;todo es un procedimiento o funci&oacute;n perteneciente a un objeto.</P>
+<P ALIGN="JUSTIFY">Ya hemos comentado algo sobre ellos.</P>
+<P ALIGN="JUSTIFY">Nosotros tan solo nos limitamos a llamarlos, ya que el c&oacute;digo est&aacute; ya hecho y no se puede cambiar.</P>
+<P ALIGN="JUSTIFY">Habitualmente est&aacute;n siempre disponibles en cualquier componente los m&eacute;todos: <I>Show </I>y <I>Hide</I>, que muestran u ocultan el control, (podemos hacer lo mismo con <I>Visible</I>:=True o a False, respectivamente).</P>
+<P ALIGN="JUSTIFY">Supongamos que queremos que cuando &quot;pase algo&quot;, el foco del control activo pase al control que m&aacute;s coraje nos d&eacute; (a m&iacute; particularmente me cae fatal el RadioButton, tan pretencioso y con esas curvas tan remarcadas… y esa forma de activarse ¡ahggg!). Eso se hace mediante el m&eacute;todo <I>SetFocus</I>, y podemos saber si un control puede ser &quot;focuseado&quot; (<FONT FACE="Wingdings">&#223;</FONT>
+ que me perdone Cervantes) mediante el m&eacute;todo <I>CanFocus</I>, que nos devuelve un Booleano.</P>
+<P ALIGN="JUSTIFY">Y podemos tambi&eacute;n hacer que una ventana se muestre por encima o por debajo mediante: <I>BringToFront </I>y <I>SendToBack</I>.</P>
+
+<h4><P ALIGN="JUSTIFY">6. Resumen</P></h4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Reconozco que tantos conceptos de golpe abruman a cualquiera que se enfrente a ellos por primera vez, y m&aacute;s cuando diga que hemos visto el 5% de las propiedades, eventos y m&eacute;todos del 2% de los componentes que existen.. Pero no hay que agobiarse. Esto no se aprende de golpe, sino con el uso y la necesidad de utilizar un control en concreto. Y nadie por muy profesional que sea, conoce exacta y absolutamente todo lo que existe bajo un simple TButton.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hasta aqu&iacute; este cap&iacute;tulo, donde hemos repasado lo que es el manejo de los componentes (habr&eacute; escrito esta palabra unas 46 veces aprox.), y que pretende ser una especie de introducci&oacute;n o de afianzamiento para todos aquellos que se han &quot;currado&quot; algo el entorno de Delphi. Pero todo esto no caer&aacute; en saco roto (<FONT FACE="Wingdings">&#223;</FONT>
+expresi&oacute;n tonta pero que me gusta), ya que en el pr&oacute;ximo cap&iacute;tulo vamos a realizar nuestra primera aplicaci&oacute;n medio seria. As&iacute;, sin m&aacute;s, ya que la mejor forma de aprender esto es haciendo un programa. Palabra.</P>
+
+<h4><P ALIGN="JUSTIFY">Cuelgues Mentales</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Vamos a relajarnos ahora y a re&iacute;rnos un poco de lo absurdo que suelen ser algunos pretenciosos. Esto no es inventado, es un hecho real y publicado en revistas y peri&oacute;dicos americanos.</P>
+<P ALIGN="JUSTIFY">En el transcurso de una feria inform&aacute;tica reciente (no, no es cuando a Guillermo Puertas se le casc&oacute; el G&uuml;indows &quot;95+3 chorradas&quot;, sino en otro llamado Comdex), Bill Gates compar&oacute; la industria inform&aacute;tica con la del autom&oacute;vil afirmando: </P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><P ALIGN="JUSTIFY">&quot;Si General Motors hubiera renovado tanto su tecnolog&iacute;a como la industria inform&aacute;tica, ahora conducir&iacute;amos coches de 25$ que consumir&iacute;an un gal&oacute;n cada 1000 millas&quot;.</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</B><P ALIGN="JUSTIFY">La respuesta de General Motors no se hizo esperar. Vino en forma de <B><U>Comunicado Oficial</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Ciertamente, pero ¿desearla usted que su coche se parara dos veces por d&iacute;a?</LI>
+<LI><P ALIGN="JUSTIFY">Cada vez que las l&iacute;neas divisorias de las carreteras fueran repintadas usted se ver&iacute;a obligado a cambiar de coche.</LI>
+<LI><P ALIGN="JUSTIFY">De vez en cuando, en plena autopista, su coche se parar&iacute;a sin raz&oacute;n aparente, y usted deber&iacute;a aceptarlo, volver a ponerlo en marcha y continuar.</LI>
+<LI><P ALIGN="JUSTIFY">De vez en cuando, haciendo una maniobra, su coche se parar&iacute;a y usted deber&iacute;a volver a instalar el motor.  De una manera un tanto sorprendente, usted lo aceptar&iacute;a igualmente.</LI>
+<LI><P ALIGN="JUSTIFY">No podr&iacute;a haber m&aacute;s de una persona a la vez en su coche, a no ser que usted compre "Coche95' o 'CocheNT.  Pero entonces, usted deber&iacute;a comprar los asientos aparte.</LI>
+<LI><P ALIGN="JUSTIFY">Apple fabricar&iacute;a un coche que funcionar&iacute;a con energ&iacute;a solar, fiable, cinco veces m&aacute;s r&aacute;pido, dos veces m&aacute;s f&aacute;cil de conducir.  Pero s&oacute;lo funcionar&iacute;a en un 5% de las carreteras.</LI>
+<LI><P ALIGN="JUSTIFY">Los poseedores de coches Macintosh a&ntilde;adir&iacute;an actualizaciones Microsoft a sus coches...  que los volver&iacute;an m&aacute;s lentos.</LI>
+<LI><P ALIGN="JUSTIFY">Las luces del aceite, gasolina y alternador se ver&iacute;an reemplazadas por una &uacute;nica de 'Error general del coche.'</LI>
+<LI><P ALIGN="JUSTIFY">Los nuevos asientos obligar&iacute;an a todo el mundo a tener el mismo tama&ntilde;o de culo.</LI>
+<LI><P ALIGN="JUSTIFY">El sistema de airbag avisar&iacute;a ‘¿Est&aacute; usted seguro?’, antes de abrirse.</LI>
+<LI><P ALIGN="JUSTIFY">En caso de accidente usted no sabr&iacute;a lo que ha sucedido.</LI></UL>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulac.htm"><font FACE="ARIAL"><B>[Curso de Delphi]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

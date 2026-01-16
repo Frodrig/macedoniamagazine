@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.06 [en] (WinNT; I) [Netscape]">
+   <TITLE>Paso Adaptativo</TITLE>
+   <BASE TARGET="TEXTO">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+&nbsp;
+<CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#009933" >
+<TR>
+<TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="arial"><FONT SIZE=+4><FONT COLOR="#009933">D</FONT><FONT COLOR="#000000">esarrollo
+de Juegos</FONT></FONT></FONT></B>
+<HR></CENTER>
+
+<DIV ALIGN=right>
+<P><B><FONT FACE="arial"><FONT SIZE=+0><FONT COLOR="#CC0000">A</FONT><FONT COLOR="#000000">ula
+Macedo</FONT><FONT COLOR="#CC0000">n</FONT><FONT COLOR="#000000">ia</FONT></FONT></FONT></B></DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<P>
+<HR>
+<TABLE ALIGN=LEFT BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#009933" >
+<TR>
+<TD>
+<TABLE ALIGN=LEFT BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="0" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD><B><FONT FACE="arial"><FONT COLOR="#009933"><FONT SIZE=+0>M</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=-1>undos
+3D
+<HR></FONT></FONT><FONT COLOR="#009933"><FONT SIZE=+0>S</FONT></FONT><FONT COLOR="#000000"><FONT SIZE=-1>imulaci&oacute;n
+f&iacute;sica</FONT></FONT></FONT></B></TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+
+<P><IMG SRC="g_misc/69.gif"  ALIGN=RIGHT>
+<DIV ALIGN=right>
+<P><B><FONT FACE="arial"><FONT SIZE=-1><FONT COLOR="#CC0000">A</FONT><FONT COLOR="#000000">rt&iacute;culo
+realizado por</FONT></FONT></FONT></B>
+<BR><B><FONT FACE="arial"><FONT COLOR="#000000"><FONT SIZE=-1><A HREF="mailto:oscarg@salleurl.edu">Oscar
+Garc&iacute;a "Kokopus"</A></FONT></FONT></FONT></B></DIV>
+
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>
+<BR>
+<BR>
+<H3>
+<FONT FACE="Arial"><FONT COLOR="#000000">Paso adaptativo</FONT></FONT></H3>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1><p align="justify">En este segundo
+art&iacute;culo vamos a ver una de las formas de refinar nuestro motor
+de inferencia num&eacute;rico. Anteriormente hablamos de m&eacute;todos
+num&eacute;ricos aplicables al c&aacute;lculo de las sucesivas posiciones
+/ velocidades ( "Phase Space" ) de nuestras part&iacute;culas. Vimos que
+necesit&aacute;bamos evaluar ecuaciones diferenciales de primer orden y
+que lo har&iacute;amos a una determinada velocidad de animaci&oacute;n
+en el tiempo. Simpre siguiendo un cierto paso de nuestro sistema. Con el
+paso nos referimos al tiempo que dura una secuencia de animaci&oacute;n,
+una iteraci&oacute;n...pero no al tiempo real que tarda el sistema en calcularla
+sin&oacute; al tiempo de "escena" que se supone que pasa entre un cuadro
+(frame) y otro.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Recordemos un
+poquito el diagrama b&aacute;sico de nuestro sistema de <B>simulaci&oacute;n
+f&iacute;sica</B>:</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig1pa.gif" HEIGHT=108 WIDTH=452></CENTER>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Recordemos para
+que sirve cada cosa:</FONT></FONT></FONT>
+<BR><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>&nbsp;
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>El solver evalua
+cual es el Phase Space de cada una de las part&iacute;culas de nuestro
+sistema en un momento dado. Al tiempo que suponemos que pasa entre c&aacute;lculo
+y c&aacute;lculo le denominamos <B>paso</B>.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>En este art&iacute;culo
+os comentar&eacute; una t&eacute;cnica muy sencilla, que no por eso menos
+eficiente, para <B>regular el paso</B> a cada iteraci&oacute;n haciendo
+nuestro sistema m&aacute;s r&aacute;pido, robusto y correcto num&eacute;ricamente
+hablando.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Tras haber "movido"
+todo el sistema durante un tiempo igual al paso, tendremos que evaluar
+si se han producido, o no, colisiones entre los objetos de la escena. Esta
+parte la abordar&eacute; en el siguiente art&iacute;culo.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Por &uacute;ltimo
+tenemos que reaccionar a las colisiones si se producen. En caso afirmativo
+hay que "reaccionar" y modificar las trayectorias de los objetos implicados
+para evitar "interpenetraci&oacute;n" entre ellos.</FONT></FONT></FONT></LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><BR><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Despu&eacute;s
+de cada ciclo empezamos de nuevo. Recordad que siempre tenemos un tiempo
+inicial de simulaci&oacute;n y uno final. Como un bucle, iteraremos el
+sistema hasta que el tiempo inicial m&aacute;s un n&uacute;mero N de pasos
+igualen o rebasen al tiempo final.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=+1>Ajustemos pu&eacute;s...</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Y &iquest;qu&eacute;
+es eso de ajustar el paso?, &iquest;qu&eacute; quiere decir hacerlo adaptativo?...y
+&iquest;para qu&eacute; despu&eacute;s de todo?. Seguid leyendo y os responder&eacute;
+a todas esas dudas.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><B><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>&iquest;Es
+lo mismo simular una pelota de golf botando entre hierbas ca&oacute;ticas
+que animar una pelotita cayendo sobre suelo llano?...obviamente no pero
+&iquest;por qu&eacute;?</FONT></FONT></FONT></B><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>.
+En el primer caso la simulaci&oacute;n ser&aacute; increiblemente m&aacute;s
+compleja. Tendremos que evaluar cientos de miles de colisiones y rozamientos
+de la pelota con la hierba, variar su velocidad y trayectoria a cada momento
+y hacerlo muy poquito a poco para no dar una sensaci&oacute;n visual err&oacute;nea.
+En cambio en el segundo caso podemos casi predecir lo que ocurrir&aacute;
+a cada momento...caer&aacute; debido a la gravedad aceler&aacute;ndose,
+rebotar&aacute; invirtiendo su velocidad...y volver&aacute; a subir y as&iacute;
+a cada momento. Los cambios en la velocidad ser&aacute;n obvios, tan s&oacute;lo
+invertir el signo al chocar con el suelo, y el movimiento es todo el rato
+vertical, de arriba a abajo. Nada de trayectorias extra&ntilde;as que se
+modifican cada milisegundo.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>&iquest;Vais
+viendo a donde quiero llegar?...En el primer caso tenemos que simular a
+velocidad muy lenta para no equivocarnos. Las derivadas varian casi cont&iacute;nuamente
+y si tomamos intervalos de tiempo muy largos para evaluarlas cometeremos
+un error grave. En el segundo caso las derivadas varian m&iacute;nimamente
+pues los cambios en la trayectoria son insignificantes, s&oacute;lo subimos
+y bajamos en vertical!!!, as&iacute; que podemos acelerar la animaci&oacute;n
+tomando pasos m&aacute;s grandes seguros de no equivocarnos.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Por lo tanto
+lo que haremos ser&aacute; adaptar el paso que utiliza nuestro sistema
+a cada momento seg&uacute;n estemos en un "momento" de la simulaci&oacute;n
+m&aacute;s o menos complejo. Si es f&aacute;cil, corremos m&aacute;s y
+aumentamos el paso. Si es dif&iacute;cil disminuimos el paso yendo m&aacute;s
+lentos pero tambi&eacute;n manteniendo la cota m&aacute;xima de error permitida.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>De esta forma
+siempre iremos a la <B>m&aacute;xima velocidad posible cometiendo un error
+inferior al m&aacute;ximo</B>. Si mantenemos el paso est&aacute;tico e
+immutable como antes iremos siempre a igual velocidad, demasiado deprisa
+a veces y demasiado lentos otras...nunca contentos!!</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Recordad que
+nos interesa simular eventos f&iacute;sicamente correctos pero tampoco
+queremos eternizar la simulaci&oacute;n con horas y horas de c&aacute;lculo...y
+no hablemos del tiempo real!!!</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=+1>&iquest;C&oacute;mo
+lo implemento en mi sistema?</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Hay varias formas
+de hacerlo, mejores y peores como siempre. Yo os comentar&eacute; una muy
+sencilla que ya d&aacute; resultados satisfactorios y visibles incluso
+a simple vista. De hecho he probado con varias simulaciones y usando un
+simple p&eacute;ndulo oscilante la velocidad de la animaci&oacute;n se
+incrementaba notablemente ya que el paso se aumentaba muchas veces manteniendo
+el error ( hacia el render a tiempo real...es decir calcular y dibujar,
+calcular y dibujar, y as&iacute; secuencialmente ).</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>La idea es sencilla
+y adem&aacute;s es <B>totalmente independiente del solver num&eacute;rico
+empleado</B>. Funciona igual usando el m&eacute;todo de Euler, que el punto
+medio o Runge Kutta-4. Obviamente a mejor solver mejor sistema global pero
+a efectos de implementaci&oacute;n del paso adaptativo, las l&iacute;neas
+de c&oacute;digo son pr&aacute;cticamente las mismas. A cada iteraci&oacute;n
+del sistema haremos dos c&aacute;lculos distintos para todas las part&iacute;culas.
+De su diferencia averiguaremos cu&aacute;l es el error que estamos cometiendo
+y seg&uacute;n la magnitud de este, aumentaremos, disminuiremos o dejaremos
+igual el paso de simulaci&oacute;n.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>El algoritmo
+podr&iacute;a expresarse as&iacute;:</FONT></FONT></FONT>
+<OL>
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Hacemos un "Back-Up"
+de la situaci&oacute;n inicial del sistema (posici&oacute;n y velocidad
+de todas las part&iacute;culas).</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Evaluamos el nuevo
+Phase-Space de todas las part&iacute;culas con el solver usando nuestro
+paso de valor <B>H</B>.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Guardamos los resultados
+en un array temporal.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Ahora, y usando
+el Back-Up inicial, volvemos a evaluar el sistema pero de la siguiente
+forma:</FONT></FONT></FONT></LI>
+
+<UL>
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Una primera evaluaci&oacute;n
+usando un paso de <B>H / 2</B>.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Los resultados obtenidos
+se vuelven a iterar durante otro paso de valor <B>H / 2</B>.</FONT></FONT></FONT></LI>
+</UL>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Guardamos los resultados
+en otro array temporal.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Restamos part&iacute;cula
+a part&iacute;cula las posiciones / velocidades y buscamos si alguna de
+las diferencias supera el error m&aacute;ximo permitido en el sistema.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Si es as&iacute;,
+disminuiremos el paso y volveremos a iterar desde el Back-Up inicial utiliz&aacute;ndolo.</FONT></FONT></FONT></LI>
+
+<LI>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Sin&oacute; miraremos
+si podemos aumentarlo y cuanto !!. Si lo aumentamos podemos iterar de nuevo
+desde el Back-Up o usar el paso reci&eacute;n aumentado para la pr&oacute;xima
+vez ( as&iacute; nos ahorramos tiempo ahora y aprovechamos el nuevo paso
+luego ).</FONT></FONT></FONT></LI>
+</OL>
+<FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Fijaros que lo que
+hacemos son dos cosas aparentemente id&eacute;nticas ... aunque <B>no</B>
+en realidad. Por una parte iteramos el sistema durante un tiempo <B>H</B>.
+Tambi&eacute;n lo iteramos durante dos intervalos de tiempo consecutivos
+de tiempo <B>H / 2</B>. Si el sistema fuese perfecto la diferencia seria
+nula pero como el segundo se acerca m&aacute;s a lo real ( ya que hemos
+calculado dos veces usando un paso de la mitad de valor para el mismo intervalo,
+las derivadas seguro que est&aacute;n mejor calculadas) habr&aacute; diferencias.
+Nosotros deberemos de decidir si son lo suficientemente grandes como para
+ajustar o no el sistema. Puede parecer una soluci&oacute;n burda pero no
+lo es.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Para la primera
+iteraci&oacute;n (me refiero a la inicial de todas, la primera) se parte
+de un paso <B>H</B> predefinido en el programa como por ejemplo de valor
+1 / 25 ( 0.04 ). Luego el sistema lo va ajustando iteraci&oacute;n tras
+iteraci&oacute;n.</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>En cuanto al
+error...pues hombre valores t&iacute;picos son errores m&aacute;ximos de
+0.001, 0.0001, 0.00001 y en adelante. A menos error permitido m&aacute;s
+lenta ir&aacute; la simulaci&oacute;n pues m&aacute;s ser&aacute;n los
+ajustes. Hay que vigilar mucho aqu&iacute;. No os paseis con las restricciones
+porque sin&oacute; el sistema os ir&aacute; a velocidad de caracol y seg&uacute;n
+lo que esteis simulando no tiene porqu&eacute; ser necesaria tanta <B>TANT&Iacute;SIMA</B>
+perfecci&oacute;n!!! ( como v&eacute;is en temas de Inform&aacute;tica
+siempre se llega a un compromiso...;)</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<p align="justify"><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1>Bi&eacute;n.
+Hasta aqu&iacute; sabemos calcular el error en el sistema a cada iteraci&oacute;n
+pero no sabemos ajustar el paso en consecuencia. La formulita m&aacute;gica
+es la siguiente:</FONT></FONT></FONT><FONT FACE="Arial"><FONT COLOR="#000000"><FONT SIZE=-1></FONT></FONT></FONT>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig2pa.gif" HEIGHT=237 WIDTH=270></CENTER>
+
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Bueno veamos que es cada
+cosa. El triangulito es el error aproximado que estamos cometiendo. Como
+podeis observar, es la diferencia entre los dos estados del sistema, el
+correspondiente a un paso de valor <B>H</B> y el referido a dos pasos consecutivos
+de valor <B>H / 2</B>.</FONT></FONT><FONT FACE="Arial,Helvetica"><FONT SIZE=-1></FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>En cuanto a la f&oacute;rmula
+de abajo aqu&iacute; es d&oacute;nde llega la novedad. El paso nuevo a
+calcular ( es decir el paso &oacute;ptimo, mayor o menor al anterior )
+es lo que deseamos conocer y es <B>h0</B>. El valor <B>h1</B> se corresponde
+con el paso que hemos utilizado para calcular el error (el que yo he estado
+nombrando como <B>H</B> ). En cuanto a los triangulitos:</FONT></FONT>
+<CENTER>
+<p align="justify"><IMG SRC="gif/fig3pa.gif" HEIGHT=150 WIDTH=539></CENTER>
+
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Si el denominador es mayor
+que el numerador, la ecuaci&oacute;n nos estar&aacute; diciendo cuanto
+hay que disminuir el paso para recortar el error hasta el valor deseado.
+En caso contrario, la ecuaci&oacute;n nos dir&aacute; en que medida podemos
+incrementar el paso sin peligro alguno para la siguiente iteraci&oacute;n.
+Vaya!, que <B>h0</B> es el paso &oacute;ptimo a utilizar para conseguir
+un error controlado y una velocidad siempre acorde con &eacute;l.</FONT></FONT><FONT FACE="Arial,Helvetica"><FONT SIZE=-1></FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT SIZE=-1>Si a cada iteraci&oacute;n
+implementamos este paso adaptativo estamos cargando a nuestro sistema con
+m&aacute;s c&aacute;lculos, obvio, pero la recompensa aumenta con creces
+el rendimiento final del sistema que se acelera cuando puede y se equivoca
+siempre lo m&iacute;nimo!!!</FONT></FONT><FONT FACE="Arial,Helvetica"><FONT SIZE=-1></FONT></FONT>
+<p align="justify"><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000"><FONT SIZE=-1>Un
+abrazo para todos/as. Nos vemos detectando colisiones en el siguiente art&iacute;culo
+!</FONT></FONT></FONT>
+<BR>&nbsp;
+<BR>&nbsp;
+<BR><B><FONT FACE="arial"><FONT COLOR="#CC0000"><FONT SIZE=-1></FONT></FONT></FONT></B>
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>JULIO</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<DIV ALIGN=right>
+<P>
+<HR></DIV>
+
+<CENTER><TABLE CELLPADDING=2 WIDTH="100%" >
+<TR>
+<TD ALIGN=LEFT VALIGN=TOP WIDTH="50%">
+<TABLE BORDER CELLSPACING=0 CELLPADDING=2 WIDTH="100%" HEIGHT="0" BGCOLOR="#CC0000" >
+<TR>
+<TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2 WIDTH="100%" HEIGHT="0" BGCOLOR="#FDEDBD" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="ARIAL"><FONT SIZE=-1><A HREF="pjuegos.htm">[Desarrollo de Videojuegos]
+<HR></A><A HREF="dpj.htm">[Mundos 3D]</A></FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<CENTER>
+<P>
+<HR></CENTER>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA
+Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+</BODY>
+</HTML>

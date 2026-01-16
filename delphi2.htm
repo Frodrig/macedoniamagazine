@@ -1,0 +1,559 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programación.</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 3.<br> Nuestros primeros pasos con el entorno Delphi
+</H3>
+
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<B><FONT FACE="Arial" SIZE=4>1. Los Proyectos</P>
+</B></FONT><FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">Vamos por fin a meternos de lleno en la programaci&oacute;n propiamente dicha ya que hasta ahora hemos visto lo que rodea a Delphi.</P>
+</FONT><FONT FACE="Arial" SIZE=1></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Toda aplicaci&oacute;n desarrollada se basa en un proyecto, nombre con que se denomina al conjunto de fichas, m&oacute;dulos del c&oacute;digo y cualquier otro elemento que forman parte del programa. </P>
+El proyecto que se crea por defecto al iniciar Delphi solo cuenta con una ficha y el m&oacute;dulo de c&oacute;digo asociado.</P>
+</P><P ALIGN="JUSTIFY">
+A este proyecto m&iacute;nimo nosotros podemos ir a&ntilde;adiendo otros elementos.</P>
+<P ALIGN="JUSTIFY">
+Cada proyecto Delphi se compone de m&uacute;ltiples archivos, los cuales almacenan la informaci&oacute;n de cada ficha, el c&oacute;digo de cada objeto, los recursos y la propia definici&oacute;n del proyecto. </P>
+</FONT><FONT FACE="Arial" SIZE=1> </P>
+</FONT><B><FONT FACE="Arial" SIZE=3>1.1 Gesti&oacute;n del proyecto.</P>
+</B></FONT><FONT FACE="Arial" SIZE=1></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Para los novatos en este tema, lo mejor que se puede hacer nada m&aacute;s comenzar a aprender un lenguaje, es familiarizarse con el entorno en el que se basa ese lenguaje. El entorno de Delphi es muy sencillo e intuitivo de manejar. Como dijimos en el cap&iacute;tulo anterior, el entorno de Dephi es el IDE, para el desarrollo visual de aplicaciones, en el que la manera de trabajar parte de un formulario o ficha central, en la que se sueltan los distintos componentes hasta llegar a formar nuestro interfaz del programa. A continuaci&oacute;n vamos a&ntilde;adiendo el c&oacute;digo pertinente para cada uno de esos componentes o controles (que recordemos, son objetos).</P>
+ </P><P ALIGN="JUSTIFY">
+No vamos a detenernos en la explicaci&oacute;n del manejo de este entorno, ya que ser&iacute;a demasiado tedioso y creo que es una tarea que debe resolver cada uno particularmente, ya que si no se ejercita personalmente, no se puede tener una idea real por mucho que se lea sobre el (lo que suele pasar en las universidades).</P>
+ </P><P ALIGN="JUSTIFY">
+Como hemos dicho antes, un proyecto es lo que va a constituir el centro de nuestro programa o aplicaci&oacute;n. Podemos pensar que el centro de una aplicaci&oacute;n es el formulario que aparece por defecto cada vez que iniciamos un nuevo proyecto. Este formulario va ser el principal que llega a considerarse como el centro de todo. Es en s&iacute; mismo un objeto, y cada vez que seleccionemos un componente, por ejemplo un bot&oacute;n, y lo soltemos sobre este formulario (este bot&oacute;n que tambi&eacute;n es un objeto), va a formar parte de los hijos del formulario. </P>
+<P ALIGN="JUSTIFY">
+De esta forma, un formulario ser&aacute; el padre de todos los componentes que est&eacute;n en su interior. Si por ejemplo nuestra aplicaci&oacute;n tiene dos formularios, cada uno ser&aacute; el padre de todos los componentes que tenga en su interior, y para referenciar a un componente que est&aacute; en otro formulario lo &uacute;nico que hay que hacer es poner el nombre del formulario, un punto y continuaci&oacute;n el nombre del componente que deseemos. </P>
+ </P><P ALIGN="JUSTIFY">
+Ya hemos dicho que el entorno de Delphi es capaz de generar autom&aacute;ticamente c&oacute;digo para nosotros, as&iacute; que cuando soltemos un bot&oacute;n sobre un formulario, autom&aacute;ticamente se generar&aacute; el c&oacute;digo en el que se diga que ese bot&oacute;n es un objeto heredero de la clase bot&oacute;n. Y esto suceder&aacute; con todo lo que hagamos.</P>
+ </P>
+</FONT><B><FONT FACE="Arial" SIZE=3>1.2 El C&oacute;digo de un Proyecto</P>
+</B></FONT><FONT FACE="Arial" SIZE=1></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Lo mejor es que antes de nada se pase a crear un proyecto en Delphi y se comience a soltar componentes sobre la ficha o formulario principal, y ver c&oacute;mo autom&aacute;ticamente el c&oacute;digo que se va generando se corresponde con lo que vamos haciendo, y todo esto sin que tengamos que escribir una sola l&iacute;nea manualmente. </P>
+<P ALIGN="JUSTIFY">Pero por supuesto, una aplicaci&oacute;n que se precie no va a consistir solamente en un mont&oacute;n de botones, etiquetas y listas desplegables que no van a hacer absolutamente nada, ya que si ejecutamos nuestros maravillosos formularios llenos de todo tipo de controles, no har&aacute;n absolutamente nada. As&iacute; antes de comenzar a poner controles a lo loco lo suyo es pensar en qu&eacute; es lo que se supone que nuestro programa tiene que hacer y cu&aacute;l va a ser la mejor forma en que el usuario se puede comunicar con &eacute;l para que &eacute;ste haga lo que se desee.</P>
+<P ALIGN="JUSTIFY">Veamos ahora el c&oacute;digo que se genera autom&aacute;ticamente cuando un formulario est&aacute; reci&eacute;n creado, es decir, cuando a&uacute;n no hemos hecho nada sobre &eacute;l. </P>
+ </P>
+
+<CENTER>
+<TABLE><TD>
+<PRE><FONT SIZE=2>
+<B>unit </B>Unit1<B>;
+interface
+
+uses</B>
+Windows, Messages, SysUtils, Classes, 
+Graphics, Controls, Forms, Dialogs;
+
+<B>type
+</B>  TForm1 = <B>class</B>(TForm)
+<B>private
+</B>    { Private declarations }
+<B>  public
+</B>    { Public declarations }
+<B>  end;
+var
+</B>  Form1: TForm1;
+<B>
+implementation
+</B>{$R *.DFM}
+<B>end.
+</B>
+&nbsp;
+</FONT></PRE></TD></TABLE>
+</CENTER><P ALIGN="JUSTIFY">
+En la primera l&iacute;nea nos encontramos con la declaraci&oacute;n del nombre de la unidad:</P>
+</P>
+&#9;<B>unit </B>Unit1<B>;</P>
+</B></P><P ALIGN="JUSTIFY">
+Este nombre ser&aacute; con el que se grabar&aacute; el fichero (.PAS). </P>
+<P ALIGN="JUSTIFY">
+En este c&oacute;digo existen dos partes bien diferenciadas: la parte de "interface" y la de "implementation".</P>
+<P ALIGN="JUSTIFY">
+En la primera nos encontramos con la palabra reservada: </P>
+</P>
+<B>uses</B> </P>
+</P><P ALIGN="JUSTIFY">
+que indica las librer&iacute;as que se utilizan por defecto. </P>
+<P ALIGN="JUSTIFY">
+En esta parte tambien se van a incluir la declaraci&oacute;n de los tipos de las constantes, de la variables globales… en fin de todo lo que conforman la declaraci&oacute;n de los objetos que vamos a utilizar.</P>
+Se puede ver tambien la l&iacute;nea en la que se indica que nuestro formulario es un objeto heredado de la clase TForm:</P><DIR>
+<DIR>
+
+TForm1 = <B>class</B>(TForm)</P>
+</P></DIR>
+</DIR>
+<P ALIGN="JUSTIFY">
+Supongamos que ahora soltamos un bot&oacute;n sobre el formulario (con soltar me refiero a elegir un bot&oacute;n del interfaz de Delphi, y pulsar sobre el formulario, lo que provoca que aparezca un bot&oacute;n autom&aacute;ticamente sobre &eacute;ste). El c&oacute;digo autom&aacute;ticamente generado es el siguiente: </P>
+</P><CENTER>
+<TABLE><TD><PRE><FONT SIZE=2>
+
+<B>unit </B>Unit1<B>;
+interface
+uses</B>  
+Windows, Messages, SysUtils, Classes, 
+Graphics, Controls, Forms, Dialogs;
+<B>type
+</B>  TForm1 = <B>class</B>(TForm)
+    Button1: TButton;
+<B>private
+</B>    { Private declarations }
+<B>  public
+</B>    { Public declarations }
+<B>  end;
+var
+</B>  Form1: TForm1;
+<B>
+implementation
+</B>{$R *.DFM}
+<B>end.
+</B></FONT></PRE></TD></TABLE></CENTER>
+<P ALIGN="JUSTIFY">
+Y la siguiente l&iacute;nea que se ha a&ntilde;adido:</P><DIR>
+<DIR>
+
+<B>Button1: TButton;</B></P></DIR>
+</DIR>
+<P ALIGN="JUSTIFY">
+indica que se ha declarado un objeto llamado Button1 de tipo Tbutton (la clase de los botones).</P>
+<P ALIGN="JUSTIFY">
+ Podemos ver c&oacute;mo autom&aacute;ticamente se ha creado un a objeto (una herencia de la clase Bot&oacute;n) </P>
+ </P><P ALIGN="JUSTIFY">
+Y como lo mejor es verlo para creerlo, pruebe para verlo por s&iacute; mismo, y pruebe tambi&eacute;n la facilidad con que se a&ntilde;ade c&oacute;digo para cada uno de los eventos que se pueden producir normalmente en Windows.</P>
+</P>
+</FONT><FONT FACE="Arial" SIZE=1>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4>2. Object Pascal</P>
+</B></FONT><FONT FACE="Arial" SIZE=1></P>
+</FONT><FONT FACE="Arial" SIZE=2>A continuaci&oacute;n vamos a dar un repaso general a las caracter&iacute;sticas del lenguage Object Pascal</P>
+</FONT><FONT FACE="Arial" SIZE=1></P>
+</FONT><B><FONT FACE="Arial" SIZE=3>2.1 Comentarios</P>
+</FONT><FONT FACE="Arial" SIZE=2></P>
+</B>Existen tres formas de poner comentarios en Delphi:</P>
+</P><CENTER><TABLE><TD><PRE><FONT SIZE=2><FONT SIZE=2>
+&#9;(* Comentario de tipo uno 
+&#9;y multil&iacute;neas *)
+
+&#9;{ Comentario de tipo dos
+&#9;y multil&iacute;neas }
+
+&#9;// Comentario de tipo 3 pero de una sola l&iacute;nea
+</FONT></PRE></TD></TABLE></CENTER>
+</P>
+<P ALIGN="JUSTIFY">
+</FONT><FONT FACE="Arial" SIZE=1></P>
+&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=3>2.2 Declaraciones</P>
+</B></FONT><FONT FACE="Arial" SIZE=2></P><P ALIGN="JUSTIFY">
+En Object Pascal a diferencia de lo que ocurre en otros lenguajes como Visual Basic por ejemplo, cualquier variable debe ser declarada antes de utilizarse. Esto, en principio puede parecer algo estricto e incluso inc&oacute;modo, pero es una gran ventaja, ya que no existe la posibilidad de encontrar un identificador desconocido introduciendo as&iacute; en el programa un error latente (si el int&eacute;rprete o el compilador no lo chequean).</P>
+ </P>
+<P ALIGN="JUSTIFY">Un identificador debe comenzar siempre con una letra seguida de cualquier n&uacute;mero de caracteres. Y hay que tener en cuenta que las vocales acentuadas no son v&aacute;lidas, as&iacute; como la &ntilde; (habr&aacute; que aguantarse). Tampoco se permiten los espacios en blanco en el interior de un identificador. No podr&aacute;n existir dos identificadores iguales a no ser que est&eacute;n en &aacute;mbitos diferentes. De esta forma, los procedimientos diferentes podr&aacute;n declarar variables con el mismo nombre sin problema alguno  (no es absurdo esto puesto que en algunos lenguajes no existe el &aacute;mbito de las variables, y una variable es global y visible para todo el mundo, con lo que 2 variables con el mismo nombre no pueden coexistir).</P>
+ </P>
+</FONT><B><FONT FACE="Arial" SIZE=3>2.3 Tipos</P>
+</B></FONT><FONT FACE="Arial" SIZE=2> </P>
+<P ALIGN="JUSTIFY">Tanto para declarar una variable como para utilizar un valor constante, es necesario el que conozcamos los diferentes tipos de datos con los que puede trabajar. </P>
+<P ALIGN="JUSTIFY">Estos tipos nos permitir&aacute;n trabajar con n&uacute;meros de diferentes precisiones, adem&aacute;s de caracteres, punteros, etc&eacute;tera. </P>
+<P ALIGN="JUSTIFY">A continuaci&oacute;n se enumeran los tipos m&aacute;s habituales.. </P>
+</FONT>
+
+<center><TABLE BORDER CELLSPACING=1 BORDERCOLOR="#000000" CELLPADDING=5 WIDTH=401>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<P ALIGN="CENTER"><B><FONT FACE="Arial" SIZE=2>Tipo</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Rango</B></FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Bytes que ocupa</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Byte</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[0,255]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">1 Byte</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">ShortInt</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-128.127]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">1 Byte</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">SmallInt</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-32768,32767]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">2 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Word</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[0,65535]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">2 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Integer</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-65536,65535]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">4 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">LongInt</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-2147483648,214748367]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">4 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Cardinal</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[0,2147483647]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">4 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Boolean</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">{True,False}</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">1 Byte</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">ByteBool</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">{True,False}</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">1 Byte</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">WordBool</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">{True,False}</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">2 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">LongBool</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">{True,False}</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">4 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Real</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[2.9 x 10-39 , 1.7 x 1038]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">6 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Single</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[1.5 x 10-45 , 3.4 x 1038]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">4 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Double</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[5.0 x 10-324 , 1.7 x 10308]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">8 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Extended</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[3.4 x 10-4932 , 1.1 x 104932]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">10 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Comp</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-263+1 , 263 -1]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">8 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">Currency</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">[-922337203685477.5808 , 922337203685477.5807]</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">8 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="24%" VALIGN="TOP">
+<B><FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">String</B></FONT></TD>
+<TD WIDTH="47%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">ASCII</FONT></TD>
+<TD WIDTH="29%" VALIGN="TOP">
+<FONT FACE="Arial" SIZE=1><P ALIGN="CENTER">1 Byte - 4 GBytes</FONT></TD>
+</TR>
+</TABLE></center>
+
+</FONT><FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">Hay otros m&aacute;s, pero estos son los m&aacute;s importantes.</P>
+<P ALIGN="JUSTIFY">La forma de utilizarlos es mediante la palabra reservada: var</P>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+&#9;
+&#9;<B>var</B> contador, auxiliar:<B>Integer</B>;
+&#9;      cadena:<B>String</B>[7500];
+&#9;      vector:<B>Array</B> [1..50] <B>of</B> <B>Word</B>;
+</FONT></PRE></TD></TABLE></CENTER>
+</P>
+<P ALIGN="JUSTIFY">Otra de las cosas fundamentales son los registros, conjuntos, matrices…</P>
+<P ALIGN="JUSTIFY">Veamos unos ejemplos de declaraciones:&#9;&#9;&#9;</P>
+</P>
+<CENTER>
+<TABLE><TD><PRE><FONT SIZE=2>
+&#9;<B>type</B> TDiaSemana = (Lunes,Martes,Miercoles,
+                              Jueves,Viernes,Sabado,
+                              Domingo)
+&#9;         TMiRegistro = <B>Record&#9;
+</B>&#9;&#9;&#9;&#9;Nombre:<B>String</B>;
+&#9;&#9;&#9;&#9;Direccion:<B>String</B>;&#9;
+&#9;&#9;&#9;&#9;Edad:<B>Byte</B>;
+&#9;&#9;&#9;<B>end</B>;
+&#9;<B>var </B>Matriz: <B>Array</B> [1..25] [0-35] <B>of Single</B>;
+&#9;      Jose:TMiRegistro;
+&#9;      Conjunto:TDiaSemana;&#9;
+</FONT></PRE></TD></TABLE></CENTER>
+</P>
+&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=3>2.4 Estructuras de Control</P>
+</B></FONT><FONT FACE="Arial" SIZE=2></P>
+<P ALIGN="JUSTIFY">Las estructuras de control son las t&iacute;picas que existen en cualquier lenguaje de programaci&oacute;n:</P>
+</P>
+<B>Condicional</P>
+</B></P>
+<CENTER>
+<TABLE>
+<TD>
+<PRE><FONT SIZE=2>
+&#9;<B>if</B> Delphi&gt;C <B>then
+&#9;   begin
+</B>         ShowMessage('Est&aacute;s en lo cierto);
+         MessageBeep(0);&#9;
+&#9;<B>end
+&#9;else
+&#9;begin
+&#9;         </B>ShowMessage('Esto nunca suceder&aacute;');
+&#9;         MessageBeep(1);
+<B>&#9;end;
+</PRE>
+</TD></TABLE></CENTER>
+</P>
+<b>Decisi&oacute;n M&uacute;ltiple</B> </P>
+</P>
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+&#9;<B>case</B> numero <B>of
+&#9;</B>         1: <B>begin
+</B>&#9;&#9;ShowMessage('El n&uacute;mero es el 1');
+&#9;&#9;MessageBeep(numero);
+&#9;        <B>end;
+</B>&#9;        2: <B>begin
+</B>&#9;&#9;ShowMessage('El n&uacute;mero es el 1');
+&#9;&#9;MessageBeep(numero);
+<B>&#9;        end;&#9;
+&#9;end;</PRE></TD></TABLE></CENTER>
+</B>&#9;<FONT SIZE=2>
+<B>Bucle For
+</B><CENTER><TABLE><TD><PRE><FONT SIZE=2>
+&#9;<B>for</B> contador:=1 <B>to</B> 25 <B>do
+&#9;begin
+</B>&#9;        ShowMessage('Hola Mundo');
+    &#9;        MessageBeep(contador);
+<B>&#9;end;
+</PRE></TD></TABLE></CENTER>
+</B></P><FONT SIZE=2>
+<B>Bucle While</P>
+</B>&#9;</P>
+<CENTER><TABLE><TD><PRE><FONT SIZE=2><FONT SIZE=2>
+&#9;contador:=1;
+&#9;<B>while</B> contador&lt;25 <B>do
+&#9;begin
+</B>&#9;        ShowMessage('Hola Mundo');
+    &#9;        MessageBeep(contador);
+&#9;        Inc(contador);
+<B>&#9;end;
+</PRE></TD></TABLE></CENTER>
+</B></P><FONT SIZE=2>
+<B>Bucle Repeat</P>
+</B></P>
+<CENTER><TABLE><TD><PRE><FONT SIZE=2><FONT SIZE=2>
+&#9;contador:=1;
+&#9;<B>repeat
+</B>&#9;        ShowMessage('Hola Mundo');
+    &#9;        MessageBeep(contador);
+&#9;        Inc(contador);
+<B>&#9;until </B>contador&gt;25;
+</PRE></TD></TABLE></CENTER>
+
+
+
+
+
+
+</P>
+&#9;</P>
+</FONT><B><FONT FACE="Arial" SIZE=3>2.5 Funciones y Procedimientos</P>
+</B></FONT><FONT FACE="Arial" SIZE=2> </P>
+<P ALIGN="JUSTIFY">La diferencia entre uno y otro tipo es que las funciones devuelven un valor y los procedimientos no. Pero esto pr&aacute;cticamente ya lo sabe todo el mundo.  </P>
+<P ALIGN="JUSTIFY">Tambien es posible la diferenciaci&oacute;n del paso de par&aacute;metros por valor o por referencia.</P>
+<P ALIGN="JUSTIFY">Veamos unos ejemplos:</P>
+</P><CENTER><TABLE><TD><PRE><FONT SIZE=2><FONT SIZE=2>
+&#9;<B>procedure</B> MuestraMensaje(mensaje:<B>String</B>[25]);
+<B>&#9;begin
+&#9;         </B>ShowMessage(mensaje);
+<B>&#9;end;
+</B></P>
+&#9;<B>function</B>
+&#9;   IntercambiarYSumar(<B>var</B> x,y:<B>Integer</B>):<B>Integer</B>;
+
+&#9;<B>var</B> auxiliar:<B>Integer</B>;
+<B>&#9;begin
+</B>&#9;         auxiliar:=x;
+&#9;         x:=y;
+&#9;         y:=auxiliar;
+&#9;         Result:=x+y;
+<B>&#9;end;</B>
+</PRE></TD></TABLE></CENTER>
+</P><P ALIGN="JUSTIFY">
+<P ALIGN="JUSTIFY">Pues hasta aqu&iacute; el repaso al lenguaje Object Pascal.</P>
+<P ALIGN="JUSTIFY">No ha pretendido ser exhaustivo, sino una introducci&oacute;n a &eacute;l para que sea el propio lector el que profundice por su cuenta. </P>
+<P ALIGN="JUSTIFY">Ya sabemos m&aacute;s o menos la sintaxis, y podemos comenzar a hacer nuestros primeros pinitos.</P>
+<P ALIGN="JUSTIFY">As&iacute; que lo que queda por decir en este cap&iacute;tulo es que traten de hacer el primer programa por excelencia que es obligatorio cada vez que se aprende un lenguaje. Este programa es el : ¡HOLA MUNDO!</P>
+<P ALIGN="JUSTIFY">Que cada uno lo haga a su forma, con los componentes que sean, pero que practiquen con todo.</P>
+</P>
+
+<B><h3>Cuelgues Mentales.</H3></P>
+</P><P ALIGN="JUSTIFY">
+</B>Otra contribuci&oacute;n a la inform&aacute;tica desde Internet de un Ex-Supervisor de ventas de una tienda de inform&aacute;tica. (Dice que es un caso real).</P>
+</P><P ALIGN="JUSTIFY">
+Yo sol&iacute;a trabajar en una tienda de inform&aacute;tica, en la secci&oacute;n de software y un d&iacute;a un caballero llam&oacute; con un problema sobre una fuente de alimentaci&oacute;n que echaba humo.</P>
+<P ALIGN="JUSTIFY">El servicio de respuesta al cliente se encontr&oacute; con un problema al intentar convencer al se&ntilde;or de que ten&iacute;a un problema de hardware, no de software</P>
+</P><P ALIGN="JUSTIFY">
+<B>Servicio:</B> Se&ntilde;or, algo est&aacute; cortocicuitado en su fuente de alimentaci&oacute;n y provoca el humo.</P>
+<P ALIGN="JUSTIFY">
+<P ALIGN="JUSTIFY"><B>Cliente:</B> Apuesto a que hay un comando que si lo pongo en el Autoexec.bat lo solucionar&aacute;.</P>
+<P ALIGN="JUSTIFY"><B>Servicio:</B> No hay nada que el software pueda hacer para ayudarle a resolver ese problema.</P>
+<P ALIGN="JUSTIFY"><B>Cliente:</B> S&eacute; que hay algo que puedo poner… alg&uacute;n comando, quiz&aacute;s una orden… quiz&aacute;s sea poni&eacute;ndolo en el Config.sys</P>
+</P>
+<P ALIGN="JUSTIFY">Despu&eacute;s de unos cuantos minutos de r&eacute;plicas y contrarr&eacute;plicas…</P>
+</P>
+<P ALIGN="JUSTIFY"><B>Servicio:</B>  ¡De acuerdo!. Se supone que no puedo revelarle esto, pero hay un comando oculto en algunas versiones del MS-DOS que puede utilizar. Quiero que edite su Autoexec.bat y a&ntilde;ada en la &uacute;ltima l&iacute;nea lo siguiente:  C:/DOS/NOSMOKE y luego reinicie su ordenador.</P>
+</P>
+<P ALIGN="JUSTIFY">El cliente as&iacute; lo hace.</P>
+<B></P>
+<P ALIGN="JUSTIFY">Cliente:</B> ¡Todav&iacute;a humea!</P>
+<P ALIGN="JUSTIFY"><B>Servicio:</B> Entonces debe dirigirse a Microsoft. Ll&aacute;melos y pregunte por un patch para NOSMOKE.EXE.</P>
+</P><P ALIGN="JUSTIFY">
+El cliente colg&oacute;. Pens&aacute;bamos que ya no &iacute;bamos a saber nada m&aacute;s que &eacute;l. No fue algo muy profesional por nuestra parte, pero no pod&iacute;amos perder nuestro precioso tiempo con tonter&iacute;as como esta… pero result&oacute; al final que cuatro horas m&aacute;s tarde llam&oacute;.</P>
+ </P><P ALIGN="JUSTIFY">
+<B>Servicio:</B> Buenas se&ntilde;or, ¿como est&aacute; su ordenador?</P>
+<P ALIGN="JUSTIFY"><B>Cliente:</B> Llam&eacute; a Microsoft y me dijeron que mi fuente de alimentaci&oacute;n era incompatible con su  NOSMOKE.EXE, y que lo que tengo que hacer es conseguir una nueva. Me gustar&iacute;a saber si puedo sustiturirla por una nueva, y cu&aacute;nto me costar&iacute;a…</P>
+</P><P ALIGN="JUSTIFY">
+Y yo me pregunto, ¿qu&eacute; diablos le dir&iacute;an en Microsoft para convencerlo de lo que en un principio no quer&iacute;a? </P></FONT>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulac.htm"><font FACE="ARIAL"><B>[Curso de Delphi]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

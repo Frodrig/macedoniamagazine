@@ -1,0 +1,245 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de SQL bajo WindowsNT</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:morzart@activanet.es">Emilio Rubio.</A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial">
+<FONT color="#000000"><br><br><br>
+<H3>
+Cap&iacute;tulo 3. <br> Instalación.
+</H3>
+<P ALIGN=justify>
+
+Antes de instalar el producto, conviene que sepamos los requerimientos que necesita para que funcione m&iacute;nimamente y adem&aacute;s de forma correcta.</P>
+<P ALIGN="JUSTIFY">&#9;Microsoft SQL Server 6.0 y Microsoft SQL Server 6.5 se pueden instalar, sin ning&uacute;n problema en computadoras basadas en los siguientes microprocesadores:</P>
+<ul>
+<li>Alpha AXP.</li>
+<li>Intel de 32 bits, comenzando por el 80486 hacia adelante.</li>
+<li>Arquitectura MIPS.</li>
+</ul>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Adem&aacute;s son necesarios los siguiente requerimientos:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">M&iacute;nimo, 16 MBytes de memoria RAM, aunque la experiencia de qui&eacute;n escribe, le recomiendan encarecidamente, al menos, el doble. La cosa se vuelve algo fea, cuando utilizamos los <I>servicios de replicaci&oacute;n de datos</I>. Particularmente, instal&eacute; por primera vez  SQL Server v.6.0, en un sistema 486, con 16 MBytes de RAM y bajo Windows NT v.3.51. Las consultas eran solicitadas a tablas <I>relativamente</I> grandes (unos 2.000 registros) y, la verdad, entre espera y espera, me llegu&eacute; a atiborrar de caf&eacute; (aunque, me salv&oacute;, que el caf&eacute; era de las mejores marcas que se pueden encontrar en el mercado).</LI></P></UL>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">En cuanto al espacio requerido en disco duro, lo m&iacute;nimo son 65 MBytes, aunque, nuevamente, unos cuantos megas m&aacute;s, no perjudicar&aacute;n a nadie. Evidentemente, cuanto m&aacute;s datos tengamos en nuestro sistema, m&aacute;s espacio se requerir&aacute;, aunque con 100 es m&aacute;s que suficiente para comenzar. M&aacute;s adelante, aprenderemos como es posible aumentar la capacidad de almacenamiento de SQL Server. Otro dato a tener en cuenta, si procedemos a la instalaci&oacute;n de los libros de ayuda que trae el producto, que suponen 20 MBytes adicionales, a menos, claro est&aacute;, que utilice el CD-ROM para su consulta, en cuyo caso, s&oacute;lo necesitar&aacute; 2 MBytes extra.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">El sistema operativo bajo el que se ejecutar&aacute; SQL Server, es Microsoft Windows NT Server, versi&oacute;n 3.51 para la SQL 6.0 y NT 4.0 para la SQL 6.5. En este punto podremos observar, como este gestor de bases de datos, se amolda a la perfecci&oacute;n a NT, utilizando caracter&iacute;sticas y servicios que proporciona este sistema operativo. L&oacute;gicamente, se recomienda la &uacute;ltima versi&oacute;n de NT que haya disponible en el mercado.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Si disponemos de una red, esta puede ser cualquiera que soporte a MS Windows 3.11 para Trabajo en Grupo, ya sea bajo protocolo NetBios, TCP/IP o IPX/SPX, como las anteriormente utilizadas Unless Banyan Vines o DEC PATHWORKS. De la misma forma, si disponemos de una red operativa, ser&aacute; necesario un adaptador de red, siendo cualquiera que soporte NT (caracter&iacute;stica, por cierto muy bien documentada en el sistema operativo). L&oacute;gicamente, podemos ejecutar a SQL Server en una m&aacute;quina <B>aislada</B> de una red de datos, en cuyo caso, como es de esperar, no se necesitar&aacute; la tarjeta.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">El sistema de ficheros, es un aspecto muy importante a la hora de realizar la instalaci&oacute;n. Si vamos a tener que disponer de un arranque dual (MS-DOS y NT, por ejemplo), se recomienda que se utilice FAT (<I>File Allocation Table</I>), mientras que si esto no es necesario, NTFS (<I>New Tecnology File System</I>) ser&aacute; el utilizado, ya que, este &uacute;ltimo, proporciona bastante seguridad y recuperaci&oacute;n de datos, ante ca&iacute;das inesperadas del sistema, adem&aacute;s de ser m&aacute;s r&aacute;pido. Tambi&eacute;n se podr&iacute;a instalar en un volumen comprimido NTFS, pero, la penalizaci&oacute;n en cuanto a rendimiento, ser&iacute;a directamente proporcional a la cantidad de datos de que dispongamos.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;A modo de an&eacute;cdota, decir, que durante los dos a&ntilde;os que llevo trabajando con SQL Server, he sufrido varias y serias ca&iacute;das de sistema. Algunas de ellas, adem&aacute;s. cuando se realizaban procesos transaccionales de suma importancia. Gracias a NTFS, el problema no conllev&oacute; males excesivos. Si esto hubiese ocurrido utilizando un sistema de ficheros, basado en FAT, quiz&aacute;s en estos momentos, no estar&iacute;a escribiendo estas l&iacute;neas, y s&iacute;, intentando reconstruir mis pobres y malogradas bases de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;En cuanto a los clientes se refiere, podr&iacute;a utilizar cualquier CPU a partir de la 386 de Intel, necesitando como m&iacute;nimo 16 MBytes de RAM y ejecutando tanto sistemas de 32 bits, como NT Server, NT Workstation y Windows 95, como sistemas operativos de 16 bits, a saber, Microsoft Windows para Trabajo en Grupo y MS-DOS. En cuando a disco duro, se desear&iacute;a  7 MBytes m&iacute;nimo, cantidad que considera Microsoft, suficiente para acceder al servidor.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Como &uacute;ltimo punto, queda la dif&iacute;cil tarea de obtener el n&uacute;mero de clientes que van a acceder al sistema. Una aproximaci&oacute;n bien meditada es absolutamente imprescindible, para evitar sobresaltos de &uacute;ltima hora, ya que es posible, que el sistema, no acepte la carga transaccional que generen m&aacute;s usuarios de la cuenta. Si, por ejemplo, se piensa que acceder&aacute;n entre 20 y 30 usuarios al sistema, durante muchas horas diarias y todos a la vez, no bastar&aacute; con equipar al servidor con un microprocesador Pentium a 133 MHz, 48 MBytes de RAM y 500 Megas de HD, siendo preferible un sistema, por ejemplo, con dos microprocesadores Intel Pentium PRO a 200 MHz cada uno, un disco duro de 4 Gigas SCSI y 128 MBytes de memoria RAM, y de paso, podremos apreciar la capacidad que tiene Windows NT para realizar el multiproceso sim&eacute;trico (SMP). Tambi&eacute;n decir que, es preferible utilizar varios discos duros de peque&ntilde;a capacidad, a utilizar un gran HD cuya capacidad se equipare a todos los anteriores.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY"><h4>Comenzando con la instalación</h4></P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;El producto, en principio se puede instalar directamente desde el CD o, como alternativa, se puede instalar copiando el contenido de dicho CD, en un directorio compartido de nuestra red, y comenzar la instalaci&oacute;n desde all&iacute;.</P>
+<P ALIGN="JUSTIFY">&#9;Otro dato a tener en cuenta, son sus privilegios, en cuando al sistema NT donde va a instalar a SQL Server, ya que deber&aacute;n ser los adecuados para que, pueda realizar tareas administrativas. Si este no es su caso, deber&aacute; ponerse de acuerdo con el administrador de su sistema, para la instalaci&oacute;n del gestor.</P>
+<P ALIGN="JUSTIFY">&#9;El CD, contiene tres directorios separados, siendo cada uno de ellos, el relativo a la arquitectura para la que se vaya a utilizar, (/I386 para Intel, /MIPS, para microprocesadores MIPS y /Alpha para las computadoras basadas en el chip de Digital). Desde el directorio que eligamos, ejecutaremos el programa SETUP.EXE, el cual nos presentar&aacute; una serie de cajas de di&aacute;logo que iremos rellenando.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B>Opciones de instalaci&oacute;n.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;La primera de ellas, nos invita a especificar las opciones de instalaci&oacute;n, teni&eacute;ndolas presente por medio de diversos botones de opci&oacute;n, a saber:</P>
+<ul>
+<li><b><i>Install SQL Server and utilies</i></b>. Instalación del paquete completo junto con las utilidades de cliente que trae consigo.</li>
+<li><b><i>Upgrade SQL Server</i></b>. Actualización de una versión de SQL Server.</li>
+<li><b><i>Install Utilies only</i></b>. Sólo las utilidades para con el sistema de cliente.</li>
+<li><b><i>Add languaje</i></b>. A SQL Server se le pueden añadir otros conjunto de caracteres.</li>
+<li><b><i>Rebuild Master Database</i></b>. La reconstrucción de la base de datos Master, es un aspecto importante del que hablaremos con posterioridad.</li>
+<li><b><i>Set Server option</i></b>. Establecer las opciones que contará el servidor.</li>
+<li><b><i>Set security option</i></b>. Establecer modelos de seguridad para el sistema.</li>
+<li><b><i>Remove SQL Server</i></b>. Quitar de la computadora a SQL Server.</li>
+</ul>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Si estamos instalando el software en una computadora remota, habr&aacute; que elegir el bot&oacute;n denominado <I>Remote,</I> y una vez hecho esto, procederemos pulsando el bot&oacute;n <I>OK</I>. Un detalle a tener en cuenta, es este sentido, es que el servidor, se configura por defecto como si s&oacute;lo tuviese 16 MBytes de memoria RAM. Esto, a todas luces, no es del todo correcto por motivos obvios, y habr&aacute; que acceder con posterioridad al <B>SQL Enterprise Manager</B> o ejecutar el procedimiento almacenado (store procedure) <B>sp_configure</B>, en la computadora remota, para cambiar dicha configuraci&oacute;n de memoria.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>Identificaci&oacute;n.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Una vez hallamos elegido el tipo de instalaci&oacute;n, tendremos que introducir un nombre identificativo y el id del producto. Por ejemplo, en SQL Server v.6.0, dicho identificador no est&aacute; sujeto a revisi&oacute;n, por lo que si nos equivocamos no nos aparecer&aacute; el cl&aacute;sico mensaje de ID inv&aacute;lido.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>Ubicaci&oacute;n de archivos.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;A continuaci&oacute;n, tendremos que proporcionarle la ubicaci&oacute;n de los archivos que conforman el servidor. La mayor&iacute;a de las causas por la que la instalaci&oacute;n de SQL Server falla, es por insuficiente espacio en disco. De ah&iacute;, que sea importante verificar que dispongamos del espacio suficiente para el tipo de instalaci&oacute;n que tengamos que efectuar. Casi siempre, el problema radica en que el fichero de memoria virtual de Windows NT, <I>PAGEFILE.SYS</I>, se incrementa durante la instalaci&oacute;n. En estas ocasiones, el mensaje que se apuntar&aacute; en el visor de sucesos de Windows NT, indicar&aacute; un fallo por falta de memoria (<I>memory allocation error</I>). Para SQL Server, el fichero PAGEFILE.SYS deber&iacute;a de tener 12 MBytes m&aacute;s, que la cantidad de memoria que tengamos instalada en nuestro sistema. As&iacute;, y a modo de ejemplo, un sistema que tenga 16 MBytes de memoria, tendr&aacute; un fichero PAGEFILE.SYS con un tama&ntilde;o de 28 MBytes. Por tanto, contra m&aacute;s memoria tenga instalada en su computadora, m&aacute;s espacio necesitar&aacute; en este fichero.</P>
+<P ALIGN="JUSTIFY">&#9;Las posibles soluciones a este problema, conlleva, el intentar borrar ficheros que consideremos innecesarios de nuestro disco duro, o bien, acceder al panel de control de Windows NT, y por medio del icono Sistema, intentar establecer el fichero PAGEFILE.SYS a un tama&ntilde;o recomendado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>Licencias.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Una vez establecida la ubicaci&oacute;n del gestor, se nos preguntar&aacute; por el modo de licencias que utilizaremos. Microsoft SQL Server, y en definitiva, todos los productos de la familia BackOffice, requieren una licencia para el servidor m&aacute;s una licencia por cada cliente que vaya a acceder a dicho servidor. La licencia del server, vendr&aacute; incluida con el software que vamos a instalar, pero la de los clientes se tendr&aacute; que comprar a parte. Estas licencias de clientes, podr&aacute;n ser usadas de dos modos diferentes, que comentaremos a continuaci&oacute;n. </P>
+<P ALIGN="JUSTIFY">&#9;Seg&uacute;n Microsoft, se ofrecen 2 modos que permiten ofrecer mayor flexibilidad a la hora de elegir la opci&oacute;n que mejor se adapte a nuestros requerimientos.</P>
+<P ALIGN="JUSTIFY">&#9;Estos dos modos son:</P>
+<P ALIGN="JUSTIFY">&#9;- <I>Per Seat</I> (por puesto), en donde cada computadora deber&iacute;a de adquirir una licencia para acceder al servidor.</P>
+<P ALIGN="JUSTIFY">&#9;- <I>Per Server</I> (por servidor), en donde se especifica un n&uacute;mero m&aacute;ximo de conexiones simult&aacute;neas por parte de los clientes al servidor.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Durante la instalaci&oacute;n, se le preguntar&aacute; sobre que tipo de licencia desea, y cu&aacute;ntas tiene. Una vez hecho esto, se le presentar&aacute; el ya cl&aacute;sico contrato de acuerdo en pantalla.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Nuevamente, como noto curiosa, decir que, trabajando en un servidor con licencias <I>per server</I>, ciertos d&iacute;as, se llegaban al l&iacute;mite de dichas conexiones, rehusando, como cabr&iacute;a de esperar, m&aacute;s accesos. En esos determinados momentos, algunos de estos clientes no obten&iacute;an respuesta coherentes por parte del servidor, como resultados inveros&iacute;miles y operaciones totalmente descabelladas, llegando a la conclusi&oacute;n, de que dichos resultados se obten&iacute;an cuando eran rehusadas dichas conexiones. El problema se arregl&oacute; comprando m&aacute;s licencias, de forma que siempre hay 2 &oacute; 3 que nunca son utilizadas. La versi&oacute;n con la que ocurrieron estos errores, era la 6.0. Vuelvo a reiterar, desde que se aumentaron el n&uacute;mero de licencias, no ha vuelto a ocurrir, pero me cost&oacute; llegar a esta conclusi&oacute;n much&iacute;simas pruebas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>Master Device.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;El siguiente paso que nos encontramos es el dedicado a la creaci&oacute;n del llamado <I>MASTER DEVICE</I>. En la terminolog&iacute;a de SQL Server, un dispositivo es un fichero que puede contener una o varias bases de datos. De igual forma, una base de datos puede ser almacenada en varios dispositivos. SQL Server, utiliza, por el momento, dos tipos diferentes de dispositivos. Por un lado, est&aacute;n los dispositivos de bases de datos, comentados anteriormente, y por otro lado, tenemos los dispositivos de copia (device dump), en donde se podr&aacute;n almacenar las copias de seguridad que vayamos a realizar de nuestra bases de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;En este paso, se nos solicitar&aacute; la creaci&oacute;n del dispositivo Master, que contendr&aacute; a la base de datos del mismo nombre. Esta base de datos es un elemento <B>vital</B> del sistema, ya que contendr&aacute; informaci&oacute;n sobre los usuarios, operaciones que estos pueden realizar, variables de entorno del sistema, datos sobre otros servidores, sobre las dem&aacute;s bases de datos y en definitiva, informaci&oacute;n que cubre en su totalidad todo lo que introduzcamos en SQL Server.</P>
+<P ALIGN="JUSTIFY">&#9;Aportaremos pues, la ubicaci&oacute;n de este dispositivo y el espacio que ocupar&aacute; la base de datos master. En principio nos bastar&aacute; con lo que se nos dice por defecto, es decir 25 MBytes, aunque, si tenemos previsto, que de golpe, se a&ntilde;adan muchos usuarios y m&uacute;ltiples bases de datos, comenzaremos con 30 MBytes, y con posterioridad, lo ampliaremos cuando sea necesario.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>Caracteres y ordenaci&oacute;n.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;El siguiente paso que debemos de dar durante la instalaci&oacute;n del producto, ser&aacute; escoger el juego de caracteres a utilizar y la ordenaci&oacute;n que se establecer&aacute; en el sistema. De igual forma, podemos especificar que tanto SQL Server como el servicio SQL Execute (comentado con posterioridad), se inicien cuando accedamos al sistema y sin que lo tengamos que hacer de forma manual. </P>
+<P ALIGN="JUSTIFY">&#9;La elecci&oacute;n del conjunto de caracteres a utilizar, es un aspecto realmente importante, ya que si necesitamos cambiarlo con posterioridad, habr&iacute;a que reconstruir las bases de datos y volver a volcar los datos que los contienen.</P>
+<P ALIGN="JUSTIFY">&#9;Los conjuntos de caracteres que ofrece SQL Server son:</P>
+<P ALIGN="JUSTIFY">&#9;</P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>ISO 8859-1 (Latin 1 o ANSI). Es el conjunto de caracteres por defecto, adem&aacute;s de ser compatible con los caracteres ANSI usados por los sistemas operativos Microsoft Windows y Microsoft Windows NT.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Code Page 850 (Multiling&uuml;e). Incluye caracteres de la mayor&iacute;a de los lenguajes europeos, de Am&eacute;rica de Sur y de Norte Am&eacute;rica. Se deber&iacute;a usar este conjunto de caracteres cuando se dispongan de aplicaciones clientes que se ejecuten bajo el sistema operativo MS-DOS que utilicen caracteres extendidos (&uacute;ltimos 128 caracteres).</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Code Page 437 (Ingl&eacute;s americano). Este ofrece caracteres que no son muy comunes de almacenar en bases de datos. Se recomienda que para la mayor compatibilidad con caracteres americanos, se escoga el conjunto Code Page 850.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Por otro lado, la ordenaci&oacute;n es un conjunto de reglas que va a determinar como SQL Server compara y presenta los datos, como respuesta a las consultas que se le realizar&aacute;n a las bases de datos. Estas consultas, normalmente incluyen cl&aacute;usulas GROUP BY, ORDER BY y DISTINCT, del lenguaje SQL. Nuevamente se recomienda que se escoga la opci&oacute;n por defecto que se nos presenta.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;A continuaci&oacute;n tendremos que escoger, el soporte de red que se va a utilizar. Microsoft SQL Server, usa librer&iacute;as de red, conocidas como Net-Libraries, para establecer la comunicaci&oacute;n entre los clientes y el servidor. Normalmente se presentan como librer&iacute;as de enlace din&aacute;mico (Dll's). Se nos da pues, la posibilidad de elegir entre las siguientes Net-Libraries:</P>
+
+<ul>
+<li>Multiprotocol.</li>
+<li>NWLink IPX/SPX.</li>
+<li>TCP/IP sockets.</li>
+<li>Banyan Vines.</li>
+<li>Apple Talk ADSP.</li>
+<li>Decnet.</li>
+
+</ul>
+<P ALIGN="JUSTIFY">&#9;De igual forma, procederemos como en el caso anterior, de elegir la opci&oacute;n por defecto.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;<B><U>SQL Executive Log on account.</P>
+</B></U><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;El siguiente, y &uacute;ltimo paso, se refiere a la creaci&oacute;n de una cuenta para el servicio SQL Executive. Nuevamente, Setup le preguntar&aacute; sobre el dominio, nombre de usuario y password de una cuenta NT, que asignar&aacute; al servicio SQL Executive, aunque por defecto, el programa asignar&aacute; la cuenta LocalSystem al server, siendo posible con posterioridad cambiarla mediante la secuencia panel de Control - Servicios.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Una vez solventados todos estos pasos, SQL comenzar&aacute; a instalarse en nuestro disco duro, tardando entre 10 y 20 minutos en realizarlo (dependiendo, como el lector esperar&aacute; de las caracter&iacute;sticas del computador).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Como el lector se puede imaginar, los pasos aqu&iacute; tratados para la instalaci&oacute;n del producto, no son m&aacute;s que la <I>punta del iceberg</I> de unas amplias alternativas de instalaci&oacute;n que se nos ofrece (como por ejemplo, la instalaci&oacute;n desatendida). Tampoco se tratar&aacute;n, de igual forma, posibles errores que podr&iacute;an surgir, como el visionado de los diarios de error (error log), que mantiene el servidor, usando cualquier editor de texto.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;En los pr&oacute;ximos cap&iacute;tulos, aprenderemos a utilizar SQL Server y daremos nuestros primeros pasos en la administraci&oacute;n del sistema.</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulan.htm"><font FACE="ARIAL"><B>[Curso de SQL bajo WindowsNT]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

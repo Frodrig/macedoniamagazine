@@ -1,0 +1,243 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de SQL bajo WindowsNT</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:morzart@activanet.es">Emilio Rubio.</A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial">
+<FONT color="#000000"><br><br><br>
+<H3>
+Cap&iacute;tulo 4. <br>Configuración del servidor. 
+</H3>
+<P ALIGN=justify>
+<h4>4.1.- Lo que se obtiene después de la instalación.</h4>
+<P ALIGN="JUSTIFY"></P>
+
+
+En el cap&iacute;tulo anterior explicamos con un cierto nivel de detalle, el proceso de instalaci&oacute;n de SQL Server. Como pudimos observar, muchas de las opciones de configuraci&oacute;n las dej&aacute;bamos con su valor por defecto. Debido a esta causa, una vez terminado de instalar el servidor de bases de datos, podremos ejecutarlo sin ajustar ning&uacute;n par&aacute;metro adicional (es posible que si modificamos alguno de estos par&aacute;metros, el servidor no funcione correctamente, debido a esto, se prefiere realizar la instalaci&oacute;n con las opciones que se nos dan, y m&aacute;s adelante, proceder a modificarlos desde el entorno de administraci&oacute;n del sistema gestor).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez finalizada la instalaci&oacute;n, podemos observar la carpeta que se nos ha creado en el sistema, la cual, como es de suponer, contendr&aacute; programas e informaci&oacute;n relativa a SQL Server. El nombre de la carpeta va en consonancia con la versi&oacute;n instalada, as&iacute; que no creo que tenga ning&uacute;n problema para encontrarla. S&oacute;lo especificar&eacute; lo que se obtiene exteriormente, en forma de programas. Dentro del servidor tambi&eacute;n nos encontramos con objetos creados por defecto durante la instalaci&oacute;n. Estos objetos se relacionar&aacute;n y explicar&aacute;n posteriormente. Una instalaci&oacute;n b&aacute;sica crear&aacute; los siguientes elementos de programa:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<LI><P ALIGN="JUSTIFY"><B>ISQL_w. Int&eacute;rprete de &oacute;rdenes SQL</B>. Ser&aacute; con esta utilidad con la que se pregunte a la base de datos y con la que se ejecuten procedimientos almacenados, entre otras cosas.</p></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Client Configuration Utility</B>. Establece por defecto la Net-Library (esta librer&iacute;a de funciones sirve para gestionar las conexiones de red y enrutado, cada Net-Library permite a su computadora el uso de un protocolo particular de red), y la informaci&oacute;n de conexi&oacute;n con el servidor por parte de los clientes. Adem&aacute;s muestra el n&uacute;mero de versi&oacute;n y busca copias de la DB-Library y Net-Library en el path.</p></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Enterprise Manager</B>. Herramienta b&aacute;sica para la administraci&oacute;n y configuraci&oacute;n del servidor, ya que a trav&eacute;s de ella, podemos realizar, de una manera gr&aacute;fica toda la gestiones que necesitemos. Es sin duda una de las mejores actualizaciones que hizo Microsoft con respecto a versiones anteriores a SQL Server 6.0,, ya que anteriormente la administraci&oacute;n y configuraci&oacute;n se hac&iacute;a de forma totalmente escrita, bajo el gobierno de los procedimientos almacenados. A&uacute;n de esta forma, todav&iacute;a quedan t&eacute;cnicas avanzadas de administraci&oacute;n que no tendremos m&aacute;s remedio que realizarlas mediante comandos, en un interfaz de &oacute;rdenes (ISQL_w, por ejemplo). As&iacute;, la potencia que nos proporciona el comando DBCC todav&iacute;a no se puede comparar con la administraci&oacute;n visual del servidor. Por cierto, esta orden es realmente recomendable aprenderla. Esta aplicaci&oacute;n s&oacute;lo se puede instalar en los clientes que ejecuten sistemas operativos de 32 bits, como Windows 95, NT WorkStation o NT Server.</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Performance Editor</B>. En Windows NT disponemos de un monitor de rendimiento que nos informa de como se encuentra el sistema, as&iacute; de qui&eacute;n lo ocupa. Dicho monitor se ha migrado a SQL Server. En este punto podemos ver como realmente SQL Server se integra con Windows NT.</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Security Manager</B>. Mediante esta utilidad, las cuentas relativas a los usuarios del sistema pueden ser gestionadas.</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Web Server Assistant</B>. Esta aplicaci&oacute;n es nueva para la versi&oacute;n 6.5 del servidor, y como habr&aacute; podido imaginar, est&aacute; orientada al fastuoso mundo de Internet. A trav&eacute;s de ella se nos da la oportunidad de publicar datos que tengamos almacenados en nuestras bases de datos, ya que, a trav&eacute;s de este programa, se crear&aacute; de forma totalmente autom&aacute;tica c&oacute;digo HTML que contendr&aacute; a nuestros datos. Puedo, por tanto, conectarse por medio de Internet a un servidor Web (¿a probado Internet Information Server?) y preguntar a  SQL Server. Una vez hecho obtendremos de el una bonita p&aacute;gina con el resultado de nuestra consulta (bueno, la verdad es que las he visto mejores :) ).</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Service Manager</B>. Se utiliza para comenzar, hacer una pausa o parar, tanto el servicio SQL Server (coraz&oacute;n del sistema) y el servicio SQL Executive (calendarios y tareas monitorizadas)</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Setup</B>. Como su nombre indica, se utilizar&aacute; para reconfigurar nuestro sistema. Podemos utilizar este programa desde para cambiar el soporte de red, o a&ntilde;adir un nuevo driver de lenguaje a nuestro sistema hasta reconstruir la base de datos <I>master</I> o cambiar las reglas de ordenaci&oacute;n impuestas en la primera instalaci&oacute;n. Es como si volvi&eacute;semos a instalar el producto, pero modificando s&oacute;lo aquellas opciones que deseemos.</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Trace</B>. Nueva utilidad introducida en la versi&oacute;n 6.5 del producto (al igual que SQL Web Server). Es de bastante utilidad para los programadores de aplicaciones, ya que en ella se muestra en tiempo real el estado del servidor con respecto a programas que ejecuta, sentencias SQL en proceso, bases de datos accedidas y un largo etc.</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>SQL Transfer Manager</B>. Esta herramienta no se encuentra en la versi&oacute;n 6.5 del producto, pero si en las anteriores (en la nueva versi&oacute;n se encuentra unida al SQL Enterprise Manager). Sirve para realizar transferencias de datos entre servidores SQL, no limitados a arquitecturas hardware, es decir, podemos transferir datos de una tabla que se encuentra en un servidor SQL con procesador Intel a otro con un procesador Alpha</P></LI>
+<LI><P ALIGN="JUSTIFY"><B>La ayuda tambi&eacute;n aparecer&aacute; en la carpeta</B>. Es recomendable instalar los Books Online, ya que todos los manuales f&iacute;sicos que se entregan, se pueden estudiar en su formato electr&oacute;nico.</P></LI></OL>
+
+
+<h4><P ALIGN="JUSTIFY">4.2.- ¿Y ahora qué?</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Finalizada pues la instalaci&oacute;n aprenderemos en este cap&iacute;tulo (entre otras cosas), a:</P>
+<UL>
+<LI><B><P ALIGN="JUSTIFY">Registrar un servidor</B> (paso b&aacute;sico que sirve para proporcionar un nombre l&oacute;gico y un m&eacute;todo de acceso a los datos que englobar&aacute;n a ese nombre l&oacute;gico). Normalmente, antes de registrar un servidor se nos va a solicitar que creemos un grupo de servidores. Este paso no sirve sino para acomodarnos al modelo de organizaci&oacute;n del que hace gala SQL Server, es decir, tendremos un grupo de servidores identificados bajo un nombre com&uacute;n, lo cual, por ejemplo nos va a facilitar su administraci&oacute;n en un futuro. Durante la instalaci&oacute;n del servidor se crea uno por defecto, en cual ubicaremos nuestro servidor que vamos a registrar. De todas formas este concepto se hace m&aacute;s palpable cuando empezamos a disponer de bastantes servidores repartidos por multitud de sitios. En mi caso particular, por ejemplo, s&oacute;lo dispongo de un servidor, por lo que el crear un grupo de ellos me es indiferente, pero en un modelo organizativo que disponga de varios servidores no estar&iacute;a de m&aacute;s agruparlos por funciones (Microsoft para este concepto proporciona el siguiente ejemplo: Si somos los responsables de realizar las copias de seguridad de varios servidores, ser&iacute;a de gran ayuda colocarlos a todos, dentro de un grupo de servidores, para de esta forma, poder administrarlos centralizadamente). Una &uacute;ltima cuesti&oacute;n acerca de los grupos de servidores. Por razones de seguridad, cuando estos se forman (recordemos, a trav&eacute;s de la utilidad SQL Enterprise Manager), se crean de forma local a la m&aacute;quina donde se ejecuta esta aplicaci&oacute;n. Quiere esto decir que, si tenemos otras estaciones de trabajo, en las cuales se ejecuta SQL Enterprise Manager, estas no ver&aacute;n a dichos grupos. Para que se vean podemos crearlos all&iacute;, como lo hicimos en el servidor o bien copiar el fichero /SQL65/BINN/SERVERS.BIN en dichas computadoras.</P></LI>
+<LI><B><P ALIGN="JUSTIFY">Cambiar la contrase&ntilde;a</B> (password) <B>del Administrador del sistema</B> (desde ahora en adelante, SA). Es realmente conveniente cambiarla, ya que la instalaci&oacute;n, por defecto, no proporciona ninguna al administrador. ¡¡Cuidado, pues si se olvida habr&aacute; que reinstalar todo el servidor de nuevo!!. Un administrador de un sistema SQL Server, deber&aacute; de disponer de ciertos conocimientos acerca de lo que est&aacute; manejando. Es decir podr&aacute; monitorizar todo lo referente a gesti&oacute;n de discos, permisos, dispositivos (devices), resoluci&oacute;n de problemas, transferencia de datos a otros servidores y hasta har&aacute; de informador para los desarrolladores de aplicaciones, ya que es la persona indicada para dar a conocer la estructura de las bases de datos y objetos que conformen el sistema. Tambi&eacute;n podr&aacute; configurar y manejar opciones especiales del servidor. Como habr&aacute; adivinado, siendo administrador no se chequean para nada los permisos, pues los posee todos. Normalmente, en instituciones amplias, con muchas estaciones de trabajo y bastante personal, se suelen cuidar todos estos detalles, pero en la mayor&iacute;a de los casos, se suelen dejar sin contrase&ntilde;a, ya que la seguridad no es un elemento esencial dentro del devenir del sistema (aunque muy usualmente, se suelen encontrar enteradillos).</P></LI>
+<LI><B><P ALIGN="JUSTIFY">Tener un conocimiento m&aacute;s amplio acerca de los par&aacute;metros de configuraci&oacute;n</B>. No se puede imaginar el lector la cantidad de opciones y par&aacute;metros ajustables que nos podemos encontrar al administrar SQL Server (eso s&iacute;, sirva de consuelo que otros SGBDR requieren m&aacute;s del doble de los que se precisa aqu&iacute;). Si ha esto le a&ntilde;adimos que cada uno de ellos tiene un rango especificado, deberemos de tener extremo cuidado al modificarlos (una fr&iacute;a tarde de invierno el mundo se me vino encima, por no saber que los valores del par&aacute;metro <I>tempdb in RAM</I>, se median en p&aacute;ginas de 2KBytes cada una, en fin, dicen que la experiencia es un grado, pero todav&iacute;a recuerdo los escalofr&iacute;os que tuve durante todo el resto del d&iacute;a).</P></LI>
+<LI><B><P ALIGN="JUSTIFY">A&ntilde;adir soporte para otro tipos de redes, lenguajes y protocolos</B>. Como puede observar, los miembros de Microsoft se dejan poca cosa en el tintero, y es que hay que ser justos con estos chicos afirmando que muchas temas los tratan con verdadera profesionalidad.</P></LI></UL>
+<h4><P ALIGN="JUSTIFY">4.3.- Comenzando a ejecutar SQL Server.</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hay varias maneras de comenzar SQL Server y SQL Executive. Una forma f&aacute;cil para hacerlo es usar el SQL Service Manager. Luego nos movemos a la carpeta creada y ejecutamos dicha aplicaci&oacute;n. En ella se nos mostrar&aacute; un sem&aacute;foro (inicialmente sin ning&uacute;n color). Este di&aacute;logo lo rellenaremos con los datos relativos al servidor que vayamos a iniciar (en el caso de que los tengamos de forma remota), as&iacute; como el servicio que habilitaremos. Vemos igualmente que tiene tres estado definibles. El estado rojo significa que el servidor se encuentra parado, el estado verde significa que se encuentra ejecut&aacute;ndose y admitiendo peticiones por parte de los clientes. El esto de pausa (&aacute;mbar) provocar&aacute; que el servidor mantenga a los clientes actualmente conectados, pero que no permita ninguna conexi&oacute;n adicional. Se suele utilizar como un paso anterior al cierre del sistema, es decir, se coloca el servidor en este estado, no permitiendo ninguna conexi&oacute;n m&aacute;s, y se avisa mediante un mensaje a todos los clientes conectados de que se proceder&aacute; al cierre del sistema. El estado de pausa s&oacute;lo lo puede adoptar el servicio MSSQL Server y no SQL Executive.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si tuvi&eacute;semos servidores remotos, nos aparecer&iacute;a activado un bot&oacute;n denominado &quot;Connect&quot;, al lado del nombre del servidor. La conexi&oacute;n a un servidor remoto conlleva a que se rellene el texto &quot;Service&quot; con el nombre del servicio que queremos se inicien en la computadora remota. N&oacute;tese que el texto &quot;Server&quot;, s&oacute;lo aparecer&aacute; en el caso de que la opci&oacute;n &quot;Remote Control&quot; se encuentre verificada en el men&uacute; de sistema de la caja de di&aacute;logo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Existe otra forma de comenzar SQL Server, pero esta requiere antes, que tengamos un servidor registrado. Este ser&aacute; precisamente nuestro punto siguiente.</P>
+
+<h4><P ALIGN="JUSTIFY">4.4.- Registrar un servidor.</h4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando ejecutemos por vez primera la aplicaci&oacute;n SQL Enterprise Manager nos encontraremos con que el sistema requiere de nuestra parte, que registremos un servidor en su lista de servidores. ¿Qu&eacute; es eso de registrar a un servidor?. Aunque parezca mentira, es un concepto realmente f&aacute;cil, ver&aacute;, el modelo organizativo de SQL Server, requiere que primeramente, se defina un nombre l&oacute;gico que identificar&aacute; a un conjunto de objetos. Estos objetos podr&aacute;n ser dispositivos, bases de datos, disparadores .... etc, y a ese nombre l&oacute;gico se le denomina servidor. Por ejemplo, imagines&eacute; que tenemos seis computadoras que tienen la aplicaci&oacute;n SQL Enterprise Manager instalada, y usted quiere que desde todas ellas se pueda administrar un servidor recientemente instalado, de tal forma que desde cualquiera de esas seis computadoras se pudiese iniciar SQL Enterprise Manager y usar el procedimiento que se explica m&aacute;s tarde para registrar el nuevo servidor.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El nombre de servidor que utilizar&aacute; SQL Server se tomar&aacute; del nombre que tenga la computadora, as&iacute; que, asegures&eacute; de que dicho nombre es v&aacute;lido para SQL (debe comenzar por una letra o un car&aacute;cter underscore (_) y los restantes caracteres pueden ser letras, n&uacute;meros o s&iacute;mbolos #, $, o _. No puede contener espacios en blanco).</P>
+<P ALIGN="JUSTIFY">Los pasos que debemos de seguir para registrar un servidos son los siguientes:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<LI VALUE=1><P ALIGN="JUSTIFY">Ejecutar SQL Enterprise Manager.</P></LI>
+<LI><P ALIGN="JUSTIFY">En el texto &quot;Server&quot; deberemos escribir el nombre del servidor a registrar, o tambi&eacute;n, en el caso de que haya servidores instalados, escoger uno de ellos.</P></LI>
+<LI><P ALIGN="JUSTIFY">Se puede escoger entre &quot;Seguridad Standard&quot; o &quot;Seguridad integrada&quot; (trusted), que establecer&aacute; el tipo de seguridad que usted quiere para su servidor. La diferencia entre ellas es clara. Mientras que la seguridad integrada es gestionada por Windows NT, la seguridad standard requiere de un identificador (login) y una contrase&ntilde;a (password) ya establecidos, para poder acceder al sistema De antemano le comento que se prefiere la seguridad integrada, ya que es Windows NT el que hace el trabajo sucio de comprobar permisos, liberando a SQL Server de gestionar esta tarea. Atenci&oacute;n, esto no significa que SQL Server vaya a aumentar su rendimiento ni que Windows NT lo disminuir&aacute;.</P></LI>
+<LI><P ALIGN="JUSTIFY">Abajo del cuadro de di&aacute;logo tenemos una opci&oacute;n denominada &quot;Display Server status in Server Manager&quot;, que aparece seleccionada por defecto. Cuando terminemos de registrar el servidor, SQL Server crear&aacute; una ventana en la cual se mostrar&aacute;n todos los servidores que haya registrados. Estos servidores pueden tener diferentes estados, como &quot;parados&quot;, &quot;en pausa&quot;, o &quot;ejecut&aacute;ndose&quot;. Esta opci&oacute;n permite que el servidor le muestre precisamente uno de estos estados.</P></LI>
+<LI><P ALIGN="JUSTIFY">Seleccionar un grupo de servidores al cual pertenecer&aacute; el nuestro, siempre y cuando los haya definidos. Nuevamente, el modelo organizativo de SQL Server introduce el concepto de grupo de servidores, que no es m&aacute;s que englobar bajo un identificativo com&uacute;n a una conjunto de servidores registrados para, de esta forma, facilitar su administraci&oacute;n (por ejemplo, imagine que tiene que hacer copias de seguridad de m&uacute;ltiples bases de datos que pertenezcan a diferentes servidores, si los agrupa, dicha tarea se podr&aacute; realizar de una manera mucho m&aacute;s c&oacute;moda que si estuvieran por separado).</P></LI>
+<LI><P ALIGN="JUSTIFY">Pulsar sobre el bot&oacute;n &quot;Register&quot;, y si todo va bien, habr&aacute; registrado el servidor en cuesti&oacute;n.</P></LI></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ni que decir tiene, que si desea registrar m&aacute;s servidores, debe de realizar exactamente los mismo pasos. En cuanto al tema correspondiente a los grupos de servidores, le invito a que investigue por su cuenta, una vez tenga registrado un primer servidor, para que se cree sus propios grupos de servidores. Si despu&eacute;s de mucho investigar no da con la &quot;tecla&quot;, le remito a mi e-mail para cualquier consulta sobre el tema.</P>
+
+<h4><P ALIGN="JUSTIFY">4.5.- Qué se ha instalado en el sistema</h4>
+<P ALIGN="JUSTIFY"></p>
+<P ALIGN="JUSTIFY">El programa de instalaci&oacute;n ha instalado dispositivos, bases de datos, tablas, procedimientos almacenados algunos usuarios por defecto y unas reglas de ordenaci&oacute;n en el sistema. Veamos cada uno de estos elementos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Un <B>dispositivo</B> (device) es un fichero que mantiene el sistema para almacenar las bases de datos. Una base de datos puede ser almacenada en varios dispositivos. SQL Server posee dos tipos de dispositivos, <I>dispositivos de bases de datos</I>, en donde como se dijo anteriormente, se almacenan las bases de datos, y <I>dispositivos de copia o volcado</I> (dump devices), en donde se almacenan las copias de seguridad de una base de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Al terminar de instalar SQL Server y ya entrado en el Enterprise Manager, vemos que se han creado por defecto tres dispositivos de bases de datos, llamados <B>MASTER</B>, <B>MSDBDATA</B> y <B>MSDBLOG</B>. Dentro del dispositivo MASTER se habr&aacute;n creado las bases de datos <B>master</B>, <B>model</B>, <B>tempdb</B> y <B>pubs</B>. Dentro del dispositivo MSDBDATA se crear&aacute;n la base de datos <B>msdb</B> y dentro de MSDBLOG se almacenar&aacute; el diario de transacciones denominado <B>msdb</B>. Normalmente estos dispositivos creados por defecto no se utilizan para las nuevas bases de datos que se vayan a crear. As&iacute; pues, es recomendable que comience a crear sus propios dispositivos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">La base de datos master.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como dijimos anteriormente, el dispositivo MASTER contendr&aacute; al a base de datos master. ¿Qu&eacute; informaci&oacute;n contiene esta base de datos?, pues bien, en ella se almacenan usuarios del sistema y las totalidad de operaciones que SQL Server realiza. Adem&aacute;s de mantener la pista de las cuentas de usuario, cuentas de usuarios remotos, servidores remotos con los que el nuestro puede comunicarse, los procesos que se encuentran ejecut&aacute;ndose, las variables de entorno configurables, el sistema de mensajes de errores, las bases de datos que hay en SQL Server, la cantidad de espacio reservado para cada base de datos, las unidades de cinta y discos disponibles en el sistema y todos los bloqueos activos. Esta ser&aacute; la base de datos por defecto para el administrador del sistema (por defecto significa que es a la que se conectar&aacute; cuando entre al sistema).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Aunque es posible a&ntilde;adir usuarios a esta base de datos, no es precisamente lo recomendado, ya que aqu&iacute; se almacenan muchos objetos que ser&aacute; utilizados por el administrador del sistema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una cuesti&oacute;n importante, cada vez que se altere alg&uacute;n objeto significativo del sistema, hay que hacer una copia de seguridad de esta base de datos. Por ejemplo cada vez que cree, modifique o elimine un dispositivo o base de datos, o cada vez que se cree altere o borre un objeto base de datos de master, o cada vez que ejecute un procedimiento almacenado que cambie dicha base de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Conozco a personas que han hecho copias de seguridad de sus bases de datos pero no de la de master. Con posterioridad alg&uacute;n que otro sistema debi&oacute; recuperarse con estas copias y se encontraron con que no pod&iacute;an volcarla debido a que no ten&iacute;an datos acerca de los dispositivos que conformaban el sistema en esos momentos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Base de datos model.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">Igual que master, se crea por defecto durante la instalaci&oacute;n dentro del dispositivo MASTER. Esta base de datos proporciona una plantilla o prototipo en las que se basar&aacute;n las nuevas bases de datos creadas. Por tanto, cada vez que una base de datos se cree, SQL Server realiza una copia de la base de datos model en la nueva que se va a crear, es por tanto que dicha base de datos nunca ser&aacute; de menos tama&ntilde;o que la base de datos model.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">¿ Y qu&eacute; contiene esta base de datos?, pues entre otras cosas contiene el sistema de tablas requerido para cada usuarios de la base de datos. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Podr&iacute;a ser modificada para personalizarla con una nueva estructura que se utilizar&aacute; para las nuevas creaciones. Por ejemplo, algunos de los cambios que podemos realizar podr&aacute;n ser :</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Tipos de datos, restricciones y reglas.</LI>
+<LI><P ALIGN="JUSTIFY">Privilegios por defecto</LI>
+<LI>Opciones de configuraci&oacute;n (como <B>select into/bulk copy</B>)..</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como era de esperar, los usurarios del sistema no tendr&aacute;n permisos para modificar dicho modelo, necesitar&aacute;n por tanto los permisos que concede el administrador, pero igualmente se aconseja que no se proporcionen.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Base de datos msdb.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta base de datos el la utilizada por el servicio SQL Executive y proporciona un &aacute;rea de almacenamiento para toda la informaci&oacute;n relativa a calendarios de tareas. Recordemos que SQL Executive se encarga de administrar todo tipos de tareas que forman parte de un calendario, como copias de seguridad, validaciones y chequeos de las bases de datos ... etc. Tendremos creados dos dispositivos. En el de 2 Mbytes se colocar&aacute; lo relativo a la base de datos master (MSDBDATA, y el diario de transacciones se colocar&aacute; en el de 1 Mbyte (MSDBLOG).</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Base de datos tempdb.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como su nombre indica, esta base de datos se utiliza para almacenar temporalmente, tablas y objetos temporales necesarios para trabajar. No se necesitan permisos para utilizarla. El tama&ntilde;o inicial es de 2 Mbytes, y entre los datos temporales que puede guardar, encontramos :</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Tablas temporales de gran tama&ntilde;o.</LI>
+<LI><P ALIGN="JUSTIFY">Ordenaciones</LI>
+<LI><P ALIGN="JUSTIFY">Subconsultas utilizando la cl&aacute;usula GROUP BY</LI>
+<LI><P ALIGN="JUSTIFY">Cursores abiertos</LI>
+<LI><P ALIGN="JUSTIFY">Etc.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN="JUSTIFY">Hay que dejar constancia que, esta base de datos se comporta de manera compartida a todo el sistema. Cuando el usuario (o el sistema) termine de realizar una consulta, todo lo que haya en dicha base de datos ser&aacute; borrada, aunque, mi experiencia personal indica, que hay algunas situaciones en las que esto no se produce (posiblemente en los casos de ca&iacute;da del sistema). Es pues recomendable, al finalizar una sesi&oacute;n con el sistema, comprobar que dicha base de datos no contiene procedimientos almacenados hu&eacute;rfanos ni tablas perdidas (son m&aacute;s comunes los primeros).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Comentamos anteriormente que el tama&ntilde;o por defecto son 2mbytes. Si nos encontramos con que van a acceder m&aacute;s de 5 clientes a las bases de datos, y estos clientes seguramente van a realizar consultas pesadas y tendr&aacute;n bastante actividad con el sistema, es conveniente y necesario ampliar el tama&ntilde;o de la base de datos y de su diario de transacciones, ya que es posible que se nos quede sin espacio.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">La base de datos pubs.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta base de datos nos la proporciona Microsoft por motivos de ejemplos. Ya que la documentaci&oacute;n del producto se refiere bastante a ella. Cuando llegue el momento de interactuar con las bases de datos, nosotros no nos referiremos a ella, sino que nos crearemos nuestros propios objetos de bases de datos. Si por &uacute;ltimo, no se necesita, se puede borrar sin ning&uacute;n problema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por &uacute;ltimo, estudiaremos los usuarios que el sistema crea por defecto, y que se pueden utilizar posteriormente. Ve&aacute;moslos:</P>
+
+<h4><P ALIGN="JUSTIFY">4.6.- Usuarios especiales de SQL Server
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hay tres tipos de usuarios que pueden administrar y controlar a SQL Server, estos son los Administradores del sistema(SA), los propietarios de bases de datos (DBO) y los propietarios de los objetos de bases de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El propietario de la base de datos (DBO) es el usuario que ha creado una base de datos. Cada base de datos tiene un s&oacute;lo propietario. El DBO contendr&aacute; todos los privilegios dentro de la base de datos y determinado poder para asignar permisos a otros usuarios El SA puede ser el DBO de algunas o todas las bases de datos del sistema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El propietario de un objeto base de datos es el usuario que crea un objeto bases de datos (tablas, vistas, disparadores, reglas ...etc). Cada objeto de la base de datos tiene un s&oacute;lo propietario y este contiene autom&aacute;ticamente todos los permisos sobre dicho objeto, adem&aacute;s de poder otorgar permisos a otros usuarios. La propiedad de un objeto base de datos no puede ser transferida.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando se instala SQL se crean por defecto tres login de usuarios, como son <B>probe,</B> <B>repl_publisher</B> y <B>repl_subscriber</B>, que existir&aacute;n independientemente de la configuraci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El nombre de <B>probe</B>, se utiliza normalmente en un contexto de seguridad para algunas aplicaciones administrativas (por ejemplo, el SQL performance Monitor)</P>
+<P ALIGN="JUSTIFY">&#9;Cuando un servidor se utiliza para participar en servicios de replicaci&oacute;n en un servidor de subscripci&oacute;n, se crear&aacute; el login <B>repl_publisher</B>.</P>
+<P ALIGN="JUSTIFY">Cuando el servidor se utilice para replicaci&oacute;n en un servidor de publicaci&oacute;n, el login <B>repl_subscriber</B> se crear&aacute;.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por ahora los dejaremos apartados , y posteriormente lo estudiaremos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hasta aqu&iacute; se ha enumerado lo que se nos ofrece por defecto. En el siguiente cap&iacute;tulo sabremos como se hacen los dispositivos bases de datos, procedimientos almacenados (veremos algo de SQL) que es en definitiva, lo que denominaremos &quot;Administraci&oacute;n del sistema&quot;.</P></FONT></BODY>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulan.htm"><font FACE="ARIAL"><B>[Curso de SQL bajo WindowsNT]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

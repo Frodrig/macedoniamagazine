@@ -1,0 +1,1272 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<br>
+
+<HR>		  
+
+
+
+
+
+
+
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="left">
+
+<FONT COLOR="#009933" size=3 face="arial"><B>M</B></font><FONT color="#000000" size=2 face="arial"><B>undos 3D</B></FONT></a><hr>
+
+<FONT COLOR="#009933" size=3 face="arial"><B>S</B></font><FONT color="#000000" size=2 face="arial"><B>imulación física</B></FONT></a>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></TD>
+
+</TABLE>
+
+<br><br>
+
+
+
+<img SRC="g_misc/69.gif" align=right>
+
+<P align=right>
+
+<FONT color="#cc0000" size=2 face="arial">
+
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus"</A>
+
+</b></FONT>
+
+<br><br>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+
+<H3>
+
+Métodos numéricos.
+
+</H3>
+
+<font size=2 face=arial>
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Bi&eacute;n est&aacute; claro que deseamos
+
+animar objetos deformables. Para poder hacerlo necesitamos un
+
+motor de c&aacute;lculo num&eacute;rico muy robusto. Este ser&aacute;
+
+el motor encargado de calcular el nuevo valor para todas las posiciones
+
+y velocidades de cada una de nuestras <U>part&iacute;culas</U>.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><I><FONT FACE="Arial">&iquest;Qu&eacute; has dicho Oscar?,
+
+&iquest;part&iacute;culas?....&iquest;y eso qu&eacute; es?</FONT></I><FONT
+
+ FACE="Arial">. Pues bi&eacute;n. Crearemos <U>modelos deformables</U>
+
+a partir de part&iacute;culas conectadas entre s&iacute; con <U>muelles</U>.
+
+De esta manera conseguiremos interesant&iacute;simos comportamientos
+
+como la simulaci&oacute;n del agua de mar, del fuego, del polvo,
+
+bandadas de p&aacute;jaros, estampidas, todo es posible!!!!</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Pero antes de empezar a disfrutar como cosacos
+
+tenemos que &quot;zamparnos&quot; algo de matem&aacute;tica.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Como os iba diciendo, generar <U>fuerzas</U>
+
+que ser&aacute;n aplicadas a part&iacute;culas requiere evaluar
+
+<U>ecuaciones</U>. De hecho son ecuaciones <U>diferenciales de
+
+primer orden</U> en las que hay <U>derivadas</U> implicadas. &iquest;Qui&eacute;n
+
+es el guapo que evaluar&aacute; esas derivadas?...pues el motor
+
+de inferencia din&aacute;mica, o sea, el motor interno de c&aacute;lculo
+
+num&eacute;rico.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Evaluaci&oacute;n de las ecuaciones
+
+diferenciales</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Una ecuaci&oacute;n diferencial describe
+
+la relaci&oacute;n entre una funci&oacute;n cualquiera y el valor
+
+de sus derivadas. Para verificar la ecuaci&oacute;n deber&aacute;n
+
+cumplirse algunas condiciones. En la mayor&iacute;a de los casos,
+
+y en el nuestro por supuesto, hablaremos de lo que se conoce como
+
+&quot;<U>problemas de valor inicial</U>&quot; d&oacute;nde el
+
+comportamiento del sistema puede resumirse como una funci&oacute;n
+
+derivada del tipo:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image1.gif" WIDTH="76"
+
+HEIGHT="24" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Aqu&iacute; <B><I>f</I></B> es una funci&oacute;n
+
+conocida que depende de <B><I>x</I></B> y de <B><I>t</I></B>;
+
+<B><I>x</I></B> es el estado del sistema y <B><I>x&#146;</I></B>
+
+su derivada. Esto es una <U>ecuaci&oacute;n diferencial ordinaria</U>
+
+o <U>EDO</U>.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Normalmente sabremos algo as&iacute;...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial"><IMG SRC="gif/image2.gif" WIDTH="65" HEIGHT="27"
+
+ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">...es decir el valor del estado para un
+
+cierto tiempo, y a partir de aqu&iacute; el sistema tendr&aacute;
+
+que ir variando su comportamiento seg&uacute;n las fuerzas externas
+
+que se le apliquen.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Intentaremos obtener la derivada de una
+
+funci&oacute;n en distintos <U>intervalos discretos</U> ya que
+
+no podemos hacerlo de forma cont&iacute;nua. Aplicaremos por tanto
+
+una <U>soluci&oacute;n num&eacute;rica</U> para resolver este
+
+tipo de problemas.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Tenemos una funci&oacute;n derivada <B><I>f</I></B>
+
+que nos evalua los cambios en el estado del sistema <B><I>x</I></B>,
+
+que son lo que denominamos <B><I>Incx</I></B>, y lo hace a lo
+
+largo de un intervalo de tiempo llamado <B><I>Inct</I></B>. Entonces
+
+lo que haremos ser&aacute; incrementar el estado, o sea <B><I>x</I></B>,
+
+con el valor calculado <B><I>Incx</I></B>, obteniendo as&iacute;
+
+el nuevo estado.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Los m&eacute;todos num&eacute;ricos evaluan
+
+una o m&aacute;s derivadas en un mismo intervalo de tiempo. Esto
+
+los hace distintos en cuanto a eficiencia y robustez.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Os comentar&eacute; un par de ellos para
+
+ir entrando en materia y poderlos aplicar a posteriori a nuestra
+
+animaci&oacute;n de objetos deformables.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">M&eacute;todo de Euler</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Este m&eacute;todo es el m&aacute;s simple
+
+de todos ellos. Si partimos de una condici&oacute;n inicial como:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial"><IMG SRC="gif/image2.gif" WIDTH="65" HEIGHT="27"
+
+ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">entenderemos que un paso de tiempo despu&eacute;s
+
+tendremos</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image4.gif" WIDTH="60"
+
+HEIGHT="28" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">d&oacute;nde <B><I>h</I></B> es lo que se
+
+llama <U>paso</U> (<U>delta</U> o <U>incremento</U>).</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">En el m&eacute;todo de Euler se evalua un
+
+nuevo estado del sistema partiendo de los valores conocidos del
+
+estado anterior...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image5.gif" WIDTH="161"
+
+HEIGHT="28" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">De esta forma sabemos cual es el valor de
+
+nuestro sistema un tiempo <B><I>h</I></B> despu&eacute;s del tiempo
+
+anterior <B><I>to</I></B>, gracias a conocer el estado anterior<B><I>
+
+xo</I></B> y la derivada <B><I>x&#146;(to)</I></B>.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Me parece que alguno se estar&aacute; poniendo
+
+vizco de leer y no entender nada...ya s&eacute; que es muy oscuro
+
+al principio pero hay que digerirlo a base de cocotazos con la
+
+pared y una vez lo tienes en el est&oacute;mago te lo pasas pipa
+
+simulando!!!</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Tranquilos que luego hablaremos de ejemplillos
+
+y lo ir&eacute;is viendo bastante m&aacute;s claro.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Este m&eacute;todo es <U>altamente inestable</U>
+
+y <U>poco eficaz</U>. Puede &quot;colgarnos&quot; literalmente
+
+el ordenador en muchas ocasiones (no por falta de recursos sin&oacute;
+
+por problemas de tendencias a infinito y dem&aacute;s...) y suele
+
+evaluar valores de derivada incorrectos con lo cual lo que vemos
+
+en pantalla dista much&iacute;simo de ser f&iacute;sicamente correcto
+
+o incluso visualmente aceptable.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">De hecho esto es de esperar si hac&eacute;is
+
+un poco de mem&oacute;ria e intent&aacute;is recordar la famosa
+
+f&oacute;rmula de la <U>s&eacute;rie de Taylor</U> para una funci&oacute;n
+
+cualquiera. Si recordais, con Taylor podiamos aproximar una funci&oacute;n
+
+cualquiera por una s&eacute;rie infinita de polinomios de orden
+
+creciente. Algo as&iacute;:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image6.gif" WIDTH="358"
+
+HEIGHT="44" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">d&oacute;nde el valor de nuestra funci&oacute;n
+
+un pasito m&aacute;s lejos del punto <B><I>t0</I></B>, es decir
+
+en <B><I>t0+h</I></B>, se aproxima tal y c&oacute;mo os muestro.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">La f&oacute;rmula de Euler proviene del
+
+truncamiento de esta f&oacute;rmula a partir del segundo t&eacute;rmino
+
+con lo cual el error cometido en la aproximaci&oacute;n de la
+
+funci&oacute;n es notable y por tanto la soluci&oacute;n es incorrecta.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Habra casos donde el error sea negligible,
+
+&iacute;nfimo, pero en muchos otros no ser&aacute; as&iacute;
+
+creedme.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Existen m&eacute;todos mucho m&aacute;s
+
+robustos, que evaluan 4 o 5 derivadas por iteraci&oacute;n, que
+
+a&uacute;n haciendo el coste computacional de nuestra aplicaci&oacute;n
+
+m&aacute;s alto, nos dan unos resultados f&iacute;sicamente casi
+
+correctos y visualmente geniales.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Hablemos pues del m&eacute;todo que encarecidamente
+
+os recomiendo usar para evaluar derivadas. El m&eacute;todo <U>Runge-Kutta
+
+de orden 4</U>.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">M&eacute;todo de Runge-Kutta,
+
+de orden 4 (RK4)</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Dos matem&aacute;ticos alemanes, Runge y
+
+Kutta como pod&eacute;is imaginar, desarrollaron diversos algoritmos
+
+para resolver ecuaciones diferenciales eficientemente y manteniendo
+
+siempre un error m&iacute;nimo.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Con uno de sus m&eacute;todos, el Runge-Kutta
+
+de orden 4, conseguimos mejorar en mucho lo que Euler nos ofrec&iacute;a.
+
+De hecho Euler es un Runge-Kutta de orden 2. El problema es que
+
+Euler avanza el sistema un intervalo de tiempo <B><I>h</I></B>
+
+usando la informaci&oacute;n de la derivada s&oacute;lo al principio
+
+del intervalo. Con el RK4 evaluamos cuatro derivadas distintas,
+
+una al principio del intervalo, otra al final y dos en el medio.
+
+Despu&eacute;s lo <U>promediamos</U> todo y obtenemos algo que
+
+se parece mucho a lo que realmente debiera ser. En una palabra,
+
+nos estamos quedando con m&aacute;s t&eacute;rminos de la s&eacute;rie
+
+de Taylor y por tanto cometemos menos error al aproximar nuestra
+
+funci&oacute;n.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">En un RK4 hay que evaluar en cada intervalo
+
+lo siguiente:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image7.gif" WIDTH="252"
+
+HEIGHT="186" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Y gr&aacute;ficamente echadle ojo a este
+
+diagramilla para ver como nuestro sistema pasa de un estado <B><I>Yn</I></B>
+
+a otro <B><I>Yn+1</I></B> seg&uacute;n este m&eacute;todo:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><CENTER><FONT FACE="Arial"><IMG SRC="gif/fig1din.gif" WIDTH="297"
+
+HEIGHT="266" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Tal y como os comentaba se evaluan4 derivadas
+
+que se promedian para obtener un valor final creible.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Pero paraaaaa!!!...Oscar paraaaa el carro
+
+que nos vas a matarrrr!!!...&iquest;pero a que viene todo este
+
+megarollo?...vale, un peque&ntilde;o mini ejemplillo para que
+
+veais que haremos con todo esto.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Ejemplillo:</FONT><FONT FACE="Arial">
+
+<U>Queremos modelar un trozo de tela</U>. Modelamos la tela como
+
+una <U>malla poligonal</U> de triangulos interconectados entre
+
+si. Bien pues ahora en cada v&eacute;rtice de cada triangulo ponemos
+
+una particula con su masa, posici&oacute;n XYZ inicial, velocidad
+
+XYZ inicial, y entonces hacemos que todos los lados de cada triangulo
+
+sean muelles con una determinada rigidez y longitud en reposo,
+
+es decir, le damos valor a las constantes de cada uno de los resortes.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Ahora aplicamos fuerzas a las part&iacute;culas
+
+y, &iquest;qu&eacute; ocurre?..pues que como bien imaginais todo
+
+empieza a moverse ya que est&aacute; interconectado y si lo que
+
+hacemos es crear una fuerza de gravedad y dejamos caer el &quot;pa&ntilde;o&quot;
+
+desde 10 metros, entonces tendremos que el estado del sistema
+
+variar&aacute; cont&iacute;nuamente debido a la gravedad.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Cada part&iacute;cula tiene masa y posici&oacute;n/velocidad
+
+inicial. Al haber gravedad hay aceleraci&oacute;n &iquest;no?,
+
+y si hay aceleraci&oacute;n var&iacute;a la velocidad, y si var&iacute;a
+
+&eacute;sta var&iacute;a la posici&oacute;n, y si esto ocurre
+
+nos encontramos con un modelo 3D de un trozo de tela que se precipita
+
+desde 10 metros hasta el suelo!!!!!...tach&aacute;nnnnn...ah&iacute;
+
+lo teneis!!!...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">&iquest;Y qui&eacute;n calcular&aacute;
+
+en cada momento las variaciones en la aceleraci&oacute;n de cada
+
+part&iacute;cula debidas a las fuerzas existentes en la escena?...pues
+
+precisamente un m&eacute;todo num&eacute;rico como Euler o el
+
+RK4.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">De hecho aunque el algoritmo pueda parecer
+
+intratable, no es demasiado complejo de codificar. Introducimos
+
+los valores de las variables independientes de nuestro sistema
+
+y obtenemos los nuevos valores tras &quot;mover&quot; todo &eacute;ste
+
+durante un tiempo <B><I>h</I></B>.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">En otro art&iacute;culo hablar&eacute; de
+
+<U>paso adaptativo</U> para que veais como variando el valor de
+
+<B><I>h </I></B>en cada iteraci&oacute;n podemos conseguir minimizar
+
+el error cont&iacute;nuamente. M&aacute;s adelante que por ahora
+
+ya os he mareado demasiado...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">A por las particulitas....</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Bueno pues vamos a aplicar las matem&aacute;ticas
+
+a nuestra idea de las part&iacute;culas y los muelles. Como os
+
+dec&iacute;a podemos construir un objeto como un entramado de
+
+part&iacute;culas conectadas por muelles y despu&eacute;s aplicar
+
+fuerzas, dejando que las &quot;leyes de la f&iacute;sica&quot;
+
+hagan el resto del trabajo.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Seg&uacute;n la popular <U>ley de Newton</U>,
+
+una part&iacute;cula se gobierna seg&uacute;n la f&oacute;rmula
+
+<B><I>f = ma</I></B><I>, </I>que puede expresarse tambi&eacute;n
+
+como<I> <B>x'' = f/m</B>.</I> Es decir, que si conocemos la fuerza
+
+que actua sobre una part&iacute;cula y la masa de &eacute;sta,
+
+ya sabemos cual es el valor de la aceleraci&oacute;n, es decir,
+
+de la segunda derivada de la posici&oacute;n respecto del tiempo.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Pero esto no es una EDO de primer orden
+
+sino de segundo!!!...&iquest;y eso como lo solucionamos?, pues
+
+la convertimos en dos de primer orden y solucionaremos cada una
+
+de ellas con uno de los m&eacute;todos comentados anteriormente.
+
+Por tanto a partir de <B><I>x'' = f/m</I></B><I>, </I>podemos
+
+deducir:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><B><I><FONT FACE="Arial">v' = f/m</FONT></I></B></P>
+
+
+
+<P ALIGN=JUSTIFY><B><I><FONT FACE="Arial">x' = v</FONT></I></B></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">lo cual es exactamente lo mismo y nos ha
+
+simplificado el problema de una ecuaci&oacute;n de 2&ordm; orden
+
+a dos de orden 1, resolubles ya con lo que sabemos.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Por tanto para cada part&iacute;cula de
+
+nuestro objeto, de nuestro <U>sistema de part&iacute;culas</U>,
+
+deberemos evaluar estas dos ecuaciones cada vez que iteremos de
+
+nuevo todo el sistema. Por tanto para cada part&iacute;cula tenemos
+
+algo as&iacute; como <U>6 valores</U> muy importantes a calcular.
+
+Es lo que se llama el &quot;<U>phase space</U>&quot; de una part&iacute;cula.
+
+Consiste en un vector de la forma:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><CENTER><TABLE WIDTH="60%" BORDER="1" CELLSPACING="2" CELLPADDING="0">
+
+  <TR>
+
+    <TD WIDTH="50%" ALIGN="CENTER">
+
+    &nbsp;<FONT SIZE="-1" FACE="Arial"><IMG SRC="gif/image9.gif" WIDTH="288"
+
+    HEIGHT="45" NATURALSIZEFLAG="0" ALIGN="BOTTOM"></FONT></TD> 
+
+    <TD WIDTH="50%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig2din.gif" WIDTH="276" HEIGHT="161" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+  </TR>
+
+</TABLE></CENTER></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">para cada una de las <B><I>n</I></B> part&iacute;culas
+
+que tiene el sistema. <B><I>N</I></B> part&iacute;culas implica
+
+evaluar <B><I>n </I></B>vectores como este a cada iteraci&oacute;n.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Centr&eacute;monos <U>m&aacute;s</U>
+
+en las particulillas...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Las part&iacute;culas tienen <U>masa</U>,
+
+<U>posici&oacute;n</U> y <U>velocidad</U> como <U>atributos principales</U>.
+
+&Eacute;stas deber&iacute;an reaccionar fielmente a las fuerzas
+
+que se les aplican. Por tanto una buena simulaci&oacute;n no s&oacute;lo
+
+las implica a ellas sin&oacute; tambi&eacute;n a los <U>objetos-fuerza</U>
+
+definidos en el sistema.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Podemos a&ntilde;adir algunos atributos
+
+a una part&iacute;cula como un <U>identificador</U>, un <U>ancla</U>
+
+(seg&uacute;n el valor del ancla sabemos si la part&iacute;cula
+
+es libre, se mueve, o es est&aacute;tica, est&aacute; anclada
+
+y no debe moverse ) y tambi&eacute;n un <U>acumulador de fuerza</U>
+
+para ir a&ntilde;adiendo a &eacute;ste todas las fuerzas que actuan
+
+sobre ella y al final calcular la aceleraci&oacute;n que tiene
+
+tomando este &quot;sumatorio&quot; como referencia.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Nuestros objetos a simular seran <U>sistemas
+
+de part&iacute;culas</U>. Estaran formados por una lista de part&iacute;culas,
+
+una lista de muelles de conexi&oacute;n, un identificador, una
+
+lista de fuerzas, incluso podemos a&ntilde;adirles unos tiempos
+
+iniciales y finales de simulaci&oacute;n as&iacute; como el incremento
+
+de tiempo a usar ( <B><I>h</I></B> ) en cada iteraci&oacute;n.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Digamos que algo como en la figura:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><CENTER><FONT FACE="Arial"><IMG SRC="gif/fig3din.gif" WIDTH="500"
+
+HEIGHT="300" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Por tanto para simular uno de nuestros sistemas
+
+de part&iacute;culas empezamos por el &quot;<U>tiempo inicial</U>&quot;
+
+e iteramos usando el incremento <B><I>h</I></B> cada vez hasta
+
+llegar al &quot;<U>tiempo final</U>&quot;. Por tanto todas las
+
+part&iacute;culas variar&aacute;n su &quot;phase space&quot; a
+
+cada iteraci&oacute;n seg&uacute;n las fuerzas que actuen sobre
+
+ellas.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Hablemos de fuerzas...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">La <U>din&aacute;mica</U>, el movimiento
+
+implica aplicar fuerzas sobre un cuerpo. En nuestro caso tenemos
+
+objetos construidos por part&iacute;culas conectadas entre s&iacute;
+
+por muelles.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Tenemos que mantener una <U>lista de objetos-fuerza</U>
+
+para cada sistema de part&iacute;culas definido. Cada objeto-fuerza
+
+afectar&aacute; a algunas part&iacute;culas o incluso a todas.
+
+Cada vez que el sistema itere tendremos que aplicar cada fuerza
+
+a su grupo de part&iacute;culas asociado.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Mirad la figura para verlo gr&aacute;ficamente:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><CENTER><FONT FACE="Arial"><IMG SRC="gif/fig4din.gif" WIDTH="467"
+
+HEIGHT="295" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Hablemos de gravedad...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">La gravedad es muy f&aacute;cil de implementar
+
+y simular. Seg&uacute;n la 2a ley de Newton:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><B><I><FONT FACE="Arial">f = ma</FONT></I></B></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">y si conocemos la constante de gravitaci&oacute;n
+
+<B><I>g</I></B>, podemos decir que:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><B><I><FONT FACE="Arial">fi = mi &middot; g</FONT></I></B></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">d&oacute;nde el valor de <B><I>g </I></B>para
+
+las tres coordenadas XYZ depende del lugar f&iacute;sico de simulaci&oacute;n
+
+y <B><I>mi</I></B> es la masa de la part&iacute;cula <B><I>i</I></B>.
+
+En principio el vector <B><I>g</I></B> apuntar&aacute; verticalmente
+
+hac&iacute;a abajo pero podemos variar esta caracter&iacute;stica
+
+para conseguir comportamientos distintos a los habituales.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Si todas las part&iacute;culas estan afectadas
+
+por la gravedad tan s&oacute;lo tendremos que recorrelas y a&ntilde;adir
+
+esta fuerza a sus acumuladores de fuerza.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Podemos tener diferentes gravedades en el
+
+mismo sistema de part&iacute;culas, en la misma simulaci&oacute;n.
+
+Tan s&oacute;lo asociaremos cada una a un conjunto de part&iacute;culas
+
+diferente.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Hablemos de fricci&oacute;n...</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Una fuerza de fricci&oacute;n ideal tiene
+
+la forma:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><B><I><FONT FACE="Arial">fi = -kf &middot; vi</FONT></I></B></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">d&oacute;nde <B><I>kf</I></B> es el coeficiente
+
+de fricci&oacute;n de la fuerza en cuesti&oacute;n y <B><I>vi</I></B>
+
+es el vector de velocidad de la part&iacute;cula afectada. La
+
+part&iacute;cula se ver&aacute; m&aacute;s o menos afectada seg&uacute;n
+
+sea su velocidad.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">El efecto que produce la fricci&oacute;n
+
+es el de restar velocidad, evitar el movimiento, hasta parar a
+
+la part&iacute;cula si &eacute;sta no recibe otras influencias.
+
+El mismo viento es un buen ejemplo de este efecto.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Es recomendable aplicar una cierta fricci&oacute;n
+
+al sistema no s&oacute;lo por los efectos que podamos conseguir
+
+sin&oacute; tambi&eacute;n para evitar problemas de estabilidad
+
+num&eacute;rica.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT SIZE="+1" FACE="Arial">Fuerzas de tipo muelle</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">&iquest;C&oacute;mo podemos modelar una
+
+cierta afinidad entre part&iacute;culas?, pu&eacute;s por ejemplo
+
+siguiendo la popular ley del resorte, ampliamente estudiada por
+
+casi todos nosotros en nuestros estudios secundarios en el instituto.
+
+Todo puede conectarse usando muelles para ello y podemos conseguir
+
+interesant&iacute;simos efectos si procuramos valores correctos
+
+para las constantes de cada resorte.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">La fuerza que se ejerce sobre dos part&iacute;culas
+
+<B><I>a</I></B> y <B><I>b</I></B> conectadas por un muelle puede
+
+escribirse as&iacute;:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial"><IMG SRC="gif/fig12din.gif" WIDTH="188" HEIGHT="75"
+
+ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">d&oacute;nde <B><I>fa</I></B> y <B><I>fb</I></B>
+
+es la fuerza en cada part&iacute;cula, <B><I>l</I></B> equivale
+
+al valor <B><I>pa-pb</I></B> (posici&oacute;n de <B><I>a</I></B>
+
+menos posici&oacute;n de <B><I>b</I></B>),<B><I> l'</I></B> es
+
+la derivada de<B><I> l</I></B> y por tanto equivale a <B><I>va-vb</I></B>
+
+(velocidad de <B><I>a</I></B> menos velocidad de <B><I>b</I></B>),
+
+<B><I>ks</I></B> es la constante del muelle y <B><I>kd</I></B>
+
+es la constante de p&eacute;rdidas por rozamiento de &eacute;ste.
+
+El valor de <B><I>r </I></B>se corresponde con la longitud en
+
+reposo del muelle.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Podemos observar, y de hecho la misma l&oacute;gica
+
+ya nos lo indica, que la fuerza que ejerce el muelle es proporcional
+
+a la distancia entre ambas part&iacute;culas. El rozamiento es
+
+proporcional a la velocidad con la que ambas se acercan/alejan.
+
+Ambas art&iacute;culas reciben exactamente la misma cantidad de
+
+fuerza pero con signos contrarios.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Implementar un muelle con p&eacute;rdidas
+
+es muy simple. Simplemente tendremos que crear una estructura
+
+de tipo muelle que guarde informaci&oacute;n sobre sus caracter&iacute;sticas
+
+internas (longitud en reposo y constantes) as&iacute; como dos
+
+punteros a las dos part&iacute;culas que interconecta. Para aplicarlo,
+
+buscamos las part&iacute;culas, calculamos la expresi&oacute;n
+
+anteriormente mostrada y a&ntilde;adimos los valores de las fuerzas
+
+calculadas a los acumuladores de cada una.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><CENTER><FONT FACE="Arial"><IMG SRC="gif/fig5din.gif" WIDTH="226"
+
+HEIGHT="217" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Seg&uacute;n el valor de las constantes
+
+conseguiremos que nuestros muelles sean m&aacute;s o menos r&iacute;gidos
+
+lo cu&aacute;l nos conduce a conseguir mucha flexibilidad en el
+
+comportamiento final del sistema.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Aqu&iacute; ten&eacute;is uno de los ejemplos
+
+de modelo deformable que he programado. En la simulaci&oacute;n
+
+de mi &quot;PSF system&quot; (Particle System File system) he
+
+introducido gravedad y fricci&oacute;n, y el modelo est&aacute;
+
+creado a partir de part&iacute;culas y muelles interconectados.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">La secuencia debe observarse en este orden:</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial"></FONT><TABLE WIDTH="450" BORDER="1" CELLSPACING="2"
+
+CELLPADDING="0">
+
+  <TR>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    &nbsp;1er frame</TD>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    2o frame</TD>
+
+    <TD WIDTH="34%" ALIGN="CENTER">
+
+    3er frame</TD>
+
+  </TR>
+
+  <TR>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    6o frame</TD>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    5o frame</TD>
+
+    <TD WIDTH="34%" ALIGN="CENTER">
+
+    4o frame</TD>
+
+  </TR>
+
+</TABLE><FONT FACE="Arial"></FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Ah&iacute; va!!</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><center><TABLE CELLSPACING="2" CELLPADDING="0">
+
+  <TR>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig6din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    <IMG SRC="gif/fig7din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3">
+
+</TD><tr>
+
+    <TD WIDTH="34%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig8din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig9din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+	</tr><tr>
+
+    <TD WIDTH="33%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig10din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+    <TD WIDTH="34%" ALIGN="CENTER">
+
+    &nbsp;<IMG SRC="gif/fig11din.gif" WIDTH="260" HEIGHT="277" ALIGN="BOTTOM"
+
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+
+  </TR>
+
+</TABLE></center>
+
+<br><br><p align="justify">
+
+<FONT FACE="Arial">&nbsp;En este caso se ha programado
+
+tambi&eacute;n un sistema de detecci&oacute;n de colisiones con
+
+lo cu&aacute;l el pendulo rebota en el suelo, perdiendo as&iacute;
+
+energ&iacute;a, al colisionar.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">&iquest;Lo v&aacute;is viendo?, espero que
+
+s&iacute; porque de verdad que vale mucho la pena meterse en estos
+
+temas...muy duro al inicio pero super reconfortante una vez ya
+
+est&aacute;s de pleno !!!</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Bueno para m&aacute;s informaci&oacute;n
+
+conectaros a la p&aacute;gina de un genio de la simulaci&oacute;n
+
+din&aacute;mica de objetos deformables, <A HREF="http://www.cs.cmu.edu/people/baraff/">David
+
+Baraff</A>. All&iacute; tiene su curso on-line sobre simulaci&oacute;n
+
+din&aacute;mica que presenta cada a&ntilde;o en SIGGRAPH con el
+
+cual yo he aprendido much&iacute;simo.</FONT></P>
+
+
+
+<P ALIGN=JUSTIFY><FONT FACE="Arial">Bueno...seguir&eacute; con estos temas en
+
+la pr&oacute;xima edici&oacute;n de nuestra querida Macedonia!!!</FONT>
+
+<BR><BR>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+<hr>
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="dpj.htm"><font FACE="ARIAL"><B>[Mundos 3D]</B></font></a> <br>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

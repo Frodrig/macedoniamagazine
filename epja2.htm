@@ -1,0 +1,321 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>D</B></font><FONT color="#000000" size=7 face="arial"><B>esarrollo de Videojuegos</B></FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+
+<BR>
+<HR>		  
+<!-- FINAL DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+
+<!-- INICIO DE LAS SECCION 3 DEL DOCUMENTO -->
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<FONT COLOR="#009933" size=3 face="arial"><B>E</B></font><FONT color="#000000" size=2 face="arial"><B>ntornos 2D</B></FONT></a>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+<!-- FINAL DE LAS SECCION 3 DEL DOCUMENTO -->
+
+<BR><BR>
+
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:cidcampeador@xoommail.com">David Isla "CID"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+PROGRAMACIÓN DE SPRITES
+</H3>
+
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+
+<b>
+INTRODUCCION 
+</b>
+<P ALIGN="JUSTIFY">Este articulo esta pensado para todos los lectores que deseen aprender sobre el mundo de la programaci&oacute;n de videojuegos. En &eacute;l, intento explicar de una forma llana, un "m&eacute;todo" para comenzar a realizar tus primeros juegos. </P>
+<P ALIGN="JUSTIFY">En el mundo de programaci&oacute;n, existen t&eacute;cnicas usadas por todos los programadores que no dependen, de un determinado tipo de juego, ni de las herramientas utilizadas, ni del lenguaje de programaci&oacute;n o engine. Estas t&eacute;cnicas ser&aacute;n las que intentar&eacute; explicaros para que pod&aacute;is adquirir una base. </P>
+<P ALIGN="JUSTIFY">Adem&aacute;s de &eacute;ste art&iacute;culo, tambi&eacute;n os invito a leer el titulado "<a href="epja2.htm">¿Qu&eacute; g&eacute;nero elegir?</a>" (publicado en este mismo n&uacute;mero y secci&oacute;n). Es una gu&iacute;a fant&aacute;stica para evitar que vuestras intenciones para convertiros en programadores de videojuegos terminen en multitud de pruebas y juegos no terminados. </P>
+<P ALIGN="JUSTIFY">Ya, sin mas, entramos en el tema . Deseo que disfrut&eacute;is del documento tanto como yo me he divertido escribi&eacute;ndolo. </P>
+
+<hr width=60%>
+<CENTER>
+<FONT size=2 color="#cc0000" face="Arial">
+<b>Puedes conseguir las fuentes y el ejecutable del artículo pulsando </b><A HREF="zip/spr01.zip"><B>aquí</B></a>
+</CENTER>
+<hr width=70%>
+</font>
+
+<B><P ALIGN="JUSTIFY">RESOLUCION CONTRA PROFUNDIDAD </P>
+</B><P ALIGN="JUSTIFY">Esta es una cuesti&oacute;n que est&aacute; empezando a tomar un car&aacute;cter secundario con las nuevas tecnolog&iacute;as que existen hoy d&iacute;a. Cuando "un Byte era un Byte", &eacute;sta era una cuesti&oacute;n fundamental. La resoluci&oacute;n, como ya sab&eacute;is, es el tama&ntilde;o en pixel de la pantalla (los formatos comunes pueden ser 320x200, 640x480 o 800x600) y la profundidad es el n&uacute;mero de colores que la paleta puede soportar. Cuando se realice un juego, se debe tomar en cuenta qu&eacute; tipo de pantalla vamos a utilizar pues, cuanta m&aacute;s resoluci&oacute;n tenga y contra mas colores tenga, nuestros gr&aacute;ficos ser&aacute;n mayores y ocupar&aacute;n m&aacute;s en memoria. Para elegir, es conveniente saber que se suele sacrificar la resoluci&oacute;n de una pantalla ante su profundidad; una pantalla 640x480 y 32000 colores alcanzar&aacute; una definici&oacute;n mejor que una pantalla 800x600 y 256 colores, y por lo tanto, nuestros juegos ganar&aacute;n en calidad, rapidez y ocuparan menos recursos. </P>
+<B><P ALIGN="JUSTIFY">BACKBUFFER </P>
+</B><P ALIGN="JUSTIFY">Esta t&eacute;cnica es, seguramente, la m&aacute;s utilizada en cualquier juego. Se basa en que el programador no dibuja directamente en pantalla, en vez de eso, crea una pantalla virtual en la que dibujar&aacute; los gr&aacute;ficos necesarios y cuando finalice mover&aacute; dicha pantalla virtual hacia la pantalla real. Esto, que pudiera ser confuso, se realiza de la siguiente forma: </P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>El programador cambia la pantalla a modo v&iacute;deo 320x200x256 colores. Esta pantalla se maneja como un array de bytes de 64000 posiciones que comienza en la direcci&oacute;n 0xA000. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se crea un array de bytes, que ser&aacute; el BACKBUFFER, de igual tama&ntilde;o a la pantalla, o sea, 64000 posiciones de bytes para que pueda guardar una pantalla completa. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se escribe en el array BACKBUFFER el gr&aacute;fico o gr&aacute;ficos que se deseen como si fuera la pantalla real. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se copia el array BACKBUFFER en la pantalla para mostrar lo que hab&iacute;amos dibujado. Esta copia es recomendable que se haga utilizando alguna funci&oacute;n de alta velocidad (al estilo memcpy() de C) o usar una sencilla funci&oacute;n en ensamblador (muy recomendable). </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se repiten los pasos 3º y 4º hasta que el programa finalice o no se desee dibujar m&aacute;s en pantalla. </LI></P></OL>
+
+<P ALIGN="JUSTIFY">Usar esta t&eacute;cnica de programaci&oacute;n evita que los gr&aacute;ficos parezcan estar 'a medias' en algunos momentos y, si estamos realizando animaciones, que la pantalla parpadee demasiado. Adem&aacute;s de usar esta t&eacute;cnica, creando una pantalla virtual y actualizando la pantalla con continuos volcados del BackBuffer, podemos utilizar el mismo sistema pero tan solo para partes de la pantalla como veremos mas profundamente en los apartados siguientes dedicados a SPRITES. </P>
+<P ALIGN="JUSTIFY">Tambi&eacute;n decir que habr&aacute; operaciones tan simples y r&aacute;pidas que no necesitaran estas t&eacute;cnicas y que se acceder&aacute; directamente a la memoria de v&iacute;deo, (por ejemplo un borrado de pantalla). </P>
+<B><P ALIGN="JUSTIFY">COLOR TRANSPARENTE </P>
+</B><P ALIGN="JUSTIFY">&Eacute;sta es otra de las ideas importantes. Si has practicado Backbuffer con diferentes im&aacute;genes, habr&aacute;s observado que si la superpones una encima de la otra, la que queda abajo queda oculta, ¿normal no?, pues ¿qu&eacute; ocurre si deseamos poner un fondo en la pantalla y una imagen encima de &eacute;sta, como alg&uacute;n dibujo o men&uacute; gr&aacute;fico?, pues que al dibujar el men&uacute; gr&aacute;fico o el dibujo, &eacute;ste se muestra tal y como es, pudi&eacute;ndose diferenciar el marco de la imagen sobre el fondo. Para que &eacute;sto no ocurra se elige un color transparente, es decir, un color que cuando el dibujo tenga que ser pintado en pantalla, o en el Backbuffer, se pase por alto y no borre lo que estuviera debajo. Para que lo ve&aacute;is mas claro pongo un ejemplo: </P></FONT>
+<center>
+<table>
+<tr>
+	<td>
+		<img src="jpg/spr02a.jpg">
+		<center>
+		<FONT size=1 color="#000000" face="Arial">Un menu que no respeta el fondo.</font>
+	</td>
+	<td>
+		<img src="jpg/spr02b.jpg">
+		<center>
+		<FONT size=1 color="#000000" face="Arial">Un menu que respeta el fondo.</font>
+	</td>
+</tr>
+</table>
+</center>
+<P ALIGN="JUSTIFY">
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2>
+<B><P ALIGN="JUSTIFY">ANIMACION </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Llegamos a lo m&aacute;s interesante del documento, ¡¡la animaci&oacute;n!!. &Eacute;sta es la parte que nos va a permitir ver a nuestros "grafiquitos", correr y rebotar por pantalla, saltar, disparar, explotar e infinidad de efectos que deseemos realizar, todo basado en la t&eacute;cnica mas b&aacute;sica y sencilla en la programaci&oacute;n de videojuegos, los SPRITES. A continuaci&oacute;n paso a explicar dos formas de animar im&aacute;genes en pantalla. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">ROTACION DE LA PALETA DE COLORES </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta es una forma curiosa de animar im&aacute;genes est&aacute;ticas en nuestros gr&aacute;ficos. Se basa en modificaciones que se realizan en la paleta de colores. Tomando como ejemplo el modo 320x200 y 256 colores (13h), la paleta de colores de este modo gr&aacute;fico trabaja con un formato RGB de 3 bytes, es decir, cada color (256) se especifica con 3 bytes, cada byte corresponde a la intensidad de un color siendo el byte 1 para el color ROJO (RED), el byte 2 para el color VERDE (GREEN) y el tercero para el color AZUL (BLUE), estas tonalidades est&aacute;n entre 0 y 63, o sea, que el byte solo alcanzara valores entre ese rango. Veamos de nuevo un ejemplo sobre una posible configuraci&oacute;n de la paleta de colores: </P>
+
+<CENTER>
+<IMG SRC="jpg/spr01.jpg" ALIGN=CENTER><P ALIGN="JUSTIFY">
+</CENTER>
+	
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Como veis en esta tabla, el color 1 corresponder&iacute;a al negro, el 2 al rojo m&aacute;s intenso y el color 3 seria el blanco m&aacute;s brillante. Pues bien, llegados a este punto, podemos jugar con estas configuraciones de tonalidades para que im&aacute;genes en pantalla cambien de color, y as&iacute; conseguir un cierto dinamismo, por ejemplo, colores que pasan de un color intenso a blanco simulando efectos de reflejos, radiactividad, sombras, etc... </P>
+<B><P ALIGN="JUSTIFY">SPRITES </P>
+</B><P ALIGN="JUSTIFY">Esta es la base de la programaci&oacute;n de videojuegos. Se basa en las t&eacute;cnicas anteriormente descritas para conseguir animaciones con movimientos parecido al que se podr&iacute;a dise&ntilde;ar en una pel&iacute;cula. Dibujando los diferentes estados en los que debe pasar la imagen mientras se mueve por la pantalla. En este apartado final, explicaremos primero como trabaja cualquier sprite, seguiremos con algunos sistemas optimizados para mostrar el sprite y concluiremos explicando las formas en las que podremos mantener estos sprites en memoria y disco. </P>
+<b>
+MOVER EL SPRITE Y GUARDAR EL FONDO
+</b>
+	<P ALIGN="JUSTIFY">
+
+	<table>
+	<tr>
+	<td>
+	<FONT size=2 color="#000000" face="Arial">
+	<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Bien, partamos de la idea de que tenemos una imagen de 32x32 pixel que debemos mover por la pantalla. Para conseguirlo, bastar&iacute;a con dibujar este sprite en las diferentes posiciones que le corresponda, por ejemplo, si la imagen fuera un personaje que se mueve de izquierda a derecha en la pantalla, dibujar&iacute;amos el gr&aacute;fico del personaje en posiciones x crecientes, es decir, primero en x=0, seguido de x=2, x=4, x=6, etc... hasta que el personaje cruzara por la pantalla entera, momento en que x volver&iacute;a a ser 0 y comenzara de nuevo la operaci&oacute;n. Pero si hacemos esta operaci&oacute;n sin borrar las im&aacute;genes anteriores tendr&iacute;amos multitud de gr&aacute;ficos por pantalla, es decir, un gr&aacute;fico en x=0, otro en x=2, etc., uno en cada posici&oacute;n en el que hemos dibujado el personaje. Como la idea era que pareciera c&oacute;mo se mov&iacute;a nuestro personaje (uno solo) y no llenar la pantalla completamente de dibujos, adoptaremos la idea de antes de dibujar un gr&aacute;fico en pantalla, borraremos el anterior, as&iacute; siempre tendremos una sola imagen en pantalla. Esta operaci&oacute;n la podr&iacute;amos realizar de la siguiente forma: </FONT>
+	</td>
+	<td>
+	<center>
+	<IMG SRC="jpg/spr03b.jpg">
+	<FONT size=1 color="#000000" face="Arial">Dibujar un sprite sin borrar el fondo.</font>
+	</center>
+	</td>
+	</tr>
+	</table>
+	<P ALIGN="JUSTIFY">
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"><LI>Posici&oacute;n = 0 </LI></P>
+<P ALIGN="JUSTIFY"><LI>Borramos la imagen en Posici&oacute;n dibujando encima de &eacute;sta un cuadro del color del fondo de la pantalla, seguramente en negro, para que el cuadro oculte la imagen. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Aumentamos Posici&oacute;n por ejemplo en dos unidades para as&iacute; calcular la pr&oacute;xima posici&oacute;n del personaje. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Dibujamos el personaje en Posici&oacute;n </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se repiten las operaciones desde 2 a 5 hasta que se pulse una tecla </LI></P>
+<P ALIGN="JUSTIFY"><LI>Fin </LI></P></OL>
+
+<P ALIGN="JUSTIFY">Este pseudocodigo muestras las operaciones a realizar. La primera vez que se ejecuta la orden 2º no tiene mucho sentido, pues aun no se ha dibujado el personaje en pantalla, pero en conjunto funciona (¿Qu&eacute; pseudocodigo no funciona?). </P>
+<P ALIGN="JUSTIFY">Bien, pues llegados a este punto tenemos a nuestro personajes movi&eacute;ndose por pantalla, de izquierda a derecha, en un fondo negro. Sin embargo, muy pocos juegos usar&iacute;an un fondo de un solo color, en realidad ninguno. En vez de eso, nuestro personaje deber&iacute;a estar caminando sobre una carretera, un edificio, sobre un cielo azul de nubes blancas o sobre el mar y tal como esta por ahora nuestro personaje al borrar la imagen en el paso 2º tambi&eacute;n borrar&iacute;a el dibujo de fondo con lo que nos encontrar&iacute;amos con un problema ¿Qu&eacute; hacer?, pues sencillo, en vez de machacar el fondo de la pantalla con un cuadrado en negro, lo que hacemos es guardar el fondo en memoria antes de dibujar nuestro personaje y cuando este vaya a cambiar de posici&oacute;n, dibujar de nuevo el fondo guardado donde estaba, aqu&iacute; tenemos la modificaci&oacute;n al pseudocodigo para que realice esta ultima funci&oacute;n de guardar el fondo: </P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI>Posici&oacute;n = 0 </LI></P>
+<P ALIGN="JUSTIFY"><LI>Si hay fondo guardado en memoria lo pinto en la posici&oacute;n Posici&oacute;n. </LI></P>
+<P ALIGN="JUSTIFY"><LI>Aumentamos Posici&oacute;n en dos unidades </LI></P>
+<P ALIGN="JUSTIFY"><LI>Antes de imprimir guardo la zona del fondo donde voy a imprimir en memoria para mas tarde poder restaurarla </LI></P>
+<P ALIGN="JUSTIFY"><LI>Dibujo a nuestro personaje </LI></P>
+<P ALIGN="JUSTIFY"><LI>Se repiten las operaciones desde 2 a 6 hasta que se pulse una tecla </LI></P>
+<P ALIGN="JUSTIFY"><LI>Fin </LI></P></OL>
+
+<P ALIGN="JUSTIFY">Como se puede observar solo hemos insertado una nueva funci&oacute;n, la de guardar el fondo de la pantalla, en memoria y hemos sustituido el dibujar un cuadro en negro por dibujar lo que hab&iacute;amos guardado en memoria. </P>
+<P ALIGN="JUSTIFY">Ahora s&iacute; que nuestro personaje puede moverse por cualquier tipo de pantalla, tenga un fondo en negro, multicolor o como queramos. El siguiente paso que vamos a ver es c&oacute;mo, adem&aacute;s de este movimiento, el sprite deber&iacute;a tomar diferentes formas para conseguir un movimiento mas real, es decir, imaginemos a nuestro personaje visto lateralmente, si solo tuviera una imagen parecer&iacute;a como si flotara en pantalla, en vez de eso podr&iacute;amos dibujar a nuestro personaje en distintas posiciones, por ejemplo, moviendo piernas y brazos con lo que conseguir&iacute;amos un mejor movimiento. </P>
+<P ALIGN="JUSTIFY"></P></FONT>
+<b>
+FRAMES
+</b>
+	<P ALIGN="JUSTIFY">
+
+	<IMG SRC="jpg/spr03a.jpg" ALIGN=RIGHT><P ALIGN="JUSTIFY">
+	
+	<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">¿Qu&eacute; es un Frame?. Un Frame es un instante de la animaci&oacute;n. Volviendo a nuestro personaje, un frame podr&iacute;a ser el estado, digamos de reposo, donde el dibujo queremos que est&eacute; parado, otro podr&iacute;a ser con la piernas separadas y brazos separados, el siguiente estar&iacute;a mas separado y as&iacute; sucesivamente, separ&aacute;ndose y cerr&aacute;ndose imitando el movimiento humano, cada imagen descrita es un Frame. </P>
+	<P ALIGN="JUSTIFY">
+
+<P ALIGN="JUSTIFY">Un sprite lo forma, como m&iacute;nimo, un Frame. Seg&uacute;n eso podemos decir que contra mas Frames tenga el sprite, mejor estar&aacute; definido el movimiento. Cuando dibujamos el sprite, en realidad vamos dibujando las distintas posiciones de &eacute;ste por pantalla, se suele usar un contador de frames que indica por cu&aacute;l vamos, es decir, qu&eacute; frame del sprite toca dibujar. En nuestro ejemplo, tenemos un sprite con 5 frames que se ejecutan c&iacute;clicamente de izquierda a derecha. Del uno al cinco y de vuelta al uno. Pero no tiene por qu&eacute; ser todos los sprites c&iacute;clicos, por ejemplo, el caso de una explosi&oacute;n deber&iacute;a mostrar c&oacute;mo al principio una peque&ntilde;a masa blanca crece convirti&eacute;ndose en amarilla y roja hasta desaparecer. Ese tipo de efecto seria un sprite en pantalla que mostrar&iacute;a sus frames por orden pero tan solo una vez. </P>
+<B><P ALIGN="JUSTIFY">MODELOS Y ESTRUCTURAS DE MEMORIA </P>
+</B><P ALIGN="JUSTIFY">Bueno, y una vez que tenemos pensado que sprites va a necesitar nuestro juego (nuestro personaje, los malos, explosiones, etc. ), ¿c&oacute;mo los dibujamos? y m&aacute;s importante a&uacute;n ¿c&oacute;mo lo guardamos para que nuestra aplicaci&oacute;n pueda usarlos?. Pues para estas preguntas hay varias respuesta que paso a explicar. </P>
+<B><P ALIGN="JUSTIFY">USAR UN ARCHIVO GRAFICO </P>
+</B><P ALIGN="JUSTIFY">Esta opci&oacute;n se basa en dibujar con nuestra herramienta de dibujo preferida los frames del sprite y despu&eacute;s guardarlos todos en un archivo gr&aacute;fico. La mayor&iacute;a de juegos que usan este m&eacute;todo adoptan los PCX aunque no todos (y no voy a explicar ahora el por qu&eacute; este formato es id&oacute;neo para estas im&aacute;genes). Pero adem&aacute;s de que el fichero contenga la im&aacute;genes, &eacute;ste debe tener una estructura definida por nosotros para que podamos localizar r&aacute;pidamente, en la imagen, d&oacute;nde se encuentra el frame que buscamos. Para ello podemos optar en dividir el gr&aacute;fico en celdillas. En cada una de estas celdillas, colocaremos un frame del sprite. Algo as&iacute;, he hecho con la demo de estos art&iacute;culos; he divido el archivo PCX en celdas de 64x64 pixel, o sea, que cada uno de mis frames empiezan en m&uacute;ltiplos de 64, el primero en la 0, el siguiente en el 64, el tercero en 128, y as&iacute; hasta el quinto. </P>
+<P ALIGN="JUSTIFY">Este m&eacute;todo suele ser el mejor que podemos adoptar por varias razones. La primera seria que hay multitud de herramientas en el mercado para dibujar nuestros sprites en cualquier formato, PCX, BMP, JPG, etc. Otra gran ventaja es que estos tipos de gr&aacute;ficos ya tienen incorporado un sistema de compresi&oacute;n como puede ser el RLE del PCX, con lo que ocupar&aacute;n menos en disco. Como &uacute;nica desventaja puedo destacar que estos ficheros no han sido dise&ntilde;ados para construir sprites y que pueden tener algunas pegas a la hora de aprovechar el espacio, es decir, en nuestro ejemplo decid&iacute; dividir las celdas entre 64 para que el tama&ntilde;o del PCX (320x200) me diera para incluir 5 frames, sin en vez de un tama&ntilde;o de 64 tuviera que haber elegido uno de 60x60, existir&iacute;a espacio no usado por el sprite, y para poner un ejemplo mas claro, mirad todo el espacio que desaprovecho en el PCX de nuestro personaje, tan solo he utilizado los 64 pixel altos de los 200 que dispon&iacute;a la altura de la imagen. </P>
+<B><P ALIGN="JUSTIFY">USAR UN FICHERO PROPIO DE ALMACENAMIENTO </P>
+</B><P ALIGN="JUSTIFY">Esta opci&oacute;n tambi&eacute;n es muy usada aunque necesita de un mejor nivel para llevarla acabo. Se basa en la construcci&oacute;n de nuestro propio tipo de gr&aacute;fico sprite. Aunque no quiero hablar mucho sobre el tema, pues en pr&oacute;ximos n&uacute;meros de Macedonia hablaremos sobre &eacute;l (incluso en la construcci&oacute;n de nuestro propio editor de sprites), adelantare algunas ideas. Para realizar esta 'proeza', deber&iacute;amos primero en pensar el formato del fichero, por ejemplo, deber&iacute;a tener una cabecera donde indicara el tama&ntilde;o en pixel de cada imagen, el tama&ntilde;o en x y en y, el numero de frames, paleta adicional, nombre, etc. despu&eacute;s de esta cabecera, vendr&iacute;an los frames uno por uno. Entonces este formato creado tendr&iacute;a que ser usado en nuestros programas, e incluso estar&iacute;a bien crear herramientas de conversi&oacute;n entre archivos gr&aacute;ficos comunes como los PCX y nuestro formato, a la inversa, y para finalizar aumentar nuestro fichero de sprites al concepto de librer&iacute;a de sprites, donde este nuevo fichero pudiera soportar varios sprites, del mismo modo que creamos una cabecera indicando cuantos frames tiene el sprite, ahora indicar&iacute;amos cu&aacute;ntos sprites tiene la librer&iacute;a, etc. </P>
+<P ALIGN="JUSTIFY">Todo esto que he comentado ser&aacute; expuesto mas extensamente con la elaboraci&oacute;n de nuestro propio formato de sprite y nuestro propio editor de sprites, adem&aacute;s de demostrar en un programa real (el editor) las t&eacute;cnicas antes comentadas sobre colores transparente, backbuffer, etc.. Todo ello llegara en nuestros pr&oacute;ximos n&uacute;mero. Por ahora os dejo con la demostraci&oacute;n de este numero en C, que la disfrut&eacute;is :). </P>
+
+<hr width=60%>
+<CENTER>
+<FONT size=2 color="#cc0000" face="Arial">
+<b>No olvides llevarte las fuentes y el ejecutable del artículo pulsando </b><A HREF="zip/spr01.zip"><B>aquí</B></a>
+</CENTER>
+<hr width=70%>
+</font>
+	
+
+	<P ALIGN="JUSTIFY">
+
+<BR><BR>
+
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>ABRIL</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+
+<TD>
+
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+
+<TR>
+
+<TD>
+
+<DIV align="CENTER">
+
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="epj.htm"><font FACE="ARIAL"><B>[Entornos 2D]</B></font></a> <br>
+
+</DIV>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+</TD>
+
+</TABLE>
+
+
+
+
+
+<br>
+
+<HR>
+
+
+
+
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+
+<TR>
+
+<TD>
+
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">DESARROLLO DE VIDEOJUEGOS</FONT></FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE>
+
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+
+<TR>
+
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+
+<TR>
+
+<TD>
+
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+
+</TD>
+
+</TR>
+
+</TABLE></DIV>
+
+</TD>
+
+</TR>
+
+</TABLE></CENTER>
+
+</HTML>
+
+
+

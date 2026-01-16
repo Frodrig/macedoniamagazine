@@ -1,0 +1,370 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+</b></FONT>
+<br><br>
+
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<br>
+<H3>Introducción a DirectSound</H3>
+
+<P ALIGN=JUSTIFY>Despu&eacute;s del art&iacute;culo del mes pasado sobre DirectDraw ahora
+le toca el turno al DirectSound que tampoco tiene demasiada complicaci&oacute;n.
+<br><br>
+<P ALIGN=JUSTIFY>Antes que nada, deciros que ya he probado la versi&oacute;n 5 de DirectX,
+y he probado el ejemplo del mes pasado y se compila y funciona perfectamente
+con la nueva versi&oacute;n. Adem&aacute;s la nueva versi&oacute;n trae
+librer&iacute;as para Borland C++, o sea que los que usamos Borland lo
+tenemos ahora un poco m&aacute;s f&aacute;cil.
+<br><br>
+<P ALIGN=JUSTIFY>Bueno, en este art&iacute;culo vamos a aprender un poco de DirectSound,
+que es bastante sencillo. Al final haremos un sencillo <A HREF="zip/dsound.zip">ejemplo</A>
+que tocar&aacute; una m&uacute;sica de fondo (premio para el que adivine
+de d&oacute;nde he sacado la m&uacute;sica) y con los botones del rat&oacute;n
+se har&aacute;n los efectos. Por cierto, el ejemplo lo he hecho utilizando
+<B>Borland C++ 4.51</B>, pero no usa ninguna caracter&iacute;stica espec&iacute;fica
+de ese compilador, por lo que supongo que no habr&aacute; ning&uacute;n
+problema para compilarlo con <B>Visual C++</B> o <B>Watcom</B>.
+<br>
+Bueno, empezamos.
+<BR>
+<H4>1. Inicializaci&oacute;n de DirectSound:</H4><P ALIGN=JUSTIFY>
+Como ocurr&iacute;a con DirectDraw, lo primero que tenemos que hacer es
+inicializar DirectSound.o primero que tenemos que hacer es inicializar
+DirectDraw. Como hice en el ejemplo de DirectDraw, he agrupado todo lo
+relativo a la inicializaci&oacute;n en la funci&oacute;n <I>DirectSoundInit()</I>,
+que devuelve un valor VERDADERO si no encuentra ning&uacute;n problema,
+y FALSO si hay alg&uacute;n problema. En este &uacute;ltimo caso, antes
+de cerrar el programa se presenta un mensaje al usuario.
+<BR><BR>
+<P ALIGN="JUSTIFY">Por cierto, el ejemplo no funciona si ocurre alg&uacute;n problema al
+inicializar DirectDraw, pero en un juego real se podr&iacute;a seguir ejecutando
+el juego pero sin utilizar el sonido, simplemente habr&iacute;a que crear
+una variable global que indicara si ha habido alg&uacute;n problema con
+DirectSound, para no llamar a ninguna funci&oacute;n de DirectSound si
+ha habido alg&uacute;n problema al principio. Bueno, esto es bastante elemental
+y supongo que todo el mundo lo habr&iacute;a pensado antes de leer este
+p&aacute;rrafo, pero por si acaso ah&iacute; queda.
+<BR><BR>
+<P ALIGN="JUSTIFY">Vamos a ver qu&eacute; es lo que hay dentro de la funci&oacute;n <I>DirectSoundInit()</I>.
+Lo primero que hay que hacer es crear un objeto DirectSound:<BR>
+<font size=2 face=arial><pre><b>
+LPDIRECTSOUND lpDD; // este es el objeto DirectSound
+HRESULT ddrval;     // esta variable contendr&aacute; el valor devuelto
+                    // por las funciones DirectX
+
+hr = DirectSoundCreate(NULL, &amp;lpDirectSound, NULL);
+
+if( hr != DS_OK ) 
+return CleanupAndExit("Error en DirectSoundCreate!");
+</b></pre></font>
+<br>
+<p align=justify>
+La funci&oacute;n <I>CleanupAndExit()</I> es una funci&oacute;n que hemos
+creado nosotros, que lo que hace es borrar todos los objetos DirectSound
+creados y luego presentar al usuario un mensaje de error. Utilizaremos
+la variable <B>ddrval</B> para almacenar el valor devuelto por las distintas
+funciones de DirectSound. Si el valor es <B>DD_OK</B> no ha habido ning&uacute;n
+problema. En caso contrario, <B>ddrval</B> nos indicar&aacute; cu&aacute;l
+ha sido el problema (aunque en este caso no lo analizamos, en un programa
+serio deber&iacute;a hacerse).
+<br>
+<P ALIGN="JUSTIFY">El p&aacute;rrafo anterior lo he copiado del art&iacute;culo de DirectDraw,
+cambiando Draw por Sound :-)
+<br><br>
+<P ALIGN="JUSTIFY">Ahora tenemos que establecer el nivel de cooperaci&oacute;n de nuestra
+aplicaci&oacute;n:
+<font size=2 face=arial><pre><b>
+hr = lpDirectSound->SetCooperativeLevel(hwnd, DSSCL_NORMAL);
+
+if( hr != DS_OK) 
+return CleanupAndExit("Error en SetCooperativeLevel!");
+</b></pre></font>
+<br>
+Los distintos valores posibles para el segundo par&aacute;metro de la funci&oacute;n
+<I>SetCooperativeLevel()</I> son:
+<UL>
+<LI>
+DDSCL_EXCLUSIVE</LI>
+<LI>
+DDSCL_PRIORITY</LI>
+<LI>
+DDSCL_NORMAL</LI>
+<LI>
+DDSCL_WRITEPRIMARY</LI>
+</UL>
+<p align=justify>
+En la ayuda de DirectX se recomienda que para la mayor&iacute;a de las
+aplicaciones el mejor par&aacute;metro debe ser DDSCL_NORMAL, dice que
+es mejor en un entorno multi-tarea como es Windows (???). Si usas otros
+par&aacute;metros tienes acceso m&aacute;s directo al hardware, y dice
+que eso puede dar problemas cuando el usuario cambie entre distintas aplicaciones
+activas. No lo s&eacute;, yo s&oacute;lo he probado el par&aacute;metro
+DDSCL_NORMAL, pero lo que se me ocurre es que si el usuario est&aacute;
+con un juego seguramente no querr&aacute; cambiar a otra aplicaci&oacute;n,
+o sea que no creo que hay ning&uacute;n problema utilizando los otros par&aacute;metros.
+Es cuesti&oacute;n de probar.
+
+<P ALIGN="JUSTIFY">Ahora podemos obtener las "capabilities" ( &iquest;capacidades? ) del
+hardware instalado. Esto no es necesario, pero puede ser interesante para
+obtener datos del sistema en el que se est&aacute; ejecutando el programa,
+para por ejemplo tocar m&aacute;s o menos sonidos en funci&oacute;n del
+hardware instalado.
+<font size=2 face=arial><pre><b>
+
+DSCAPS dscaps;
+
+dscaps.dwSize = sizeof( DSCAPS );
+lpDirectSound->GetCaps( &amp;dscaps )
+</b></pre></font>
+<br>
+<h4>2. Crear los buffers de&nbsp; sonido</H4><p align=justify>
+El siguiente paso es crear los buffers de sonido. Al inicializar DirectSound
+se crea autom&aacute;ticamente el <B>buffer de sonido primario</B>, usado
+para mezclar los sonidos y enviarlos a la tarjeta de sonido. El buffer
+primario no lo vamos a utilizar normalmente; de hecho, si hemos establecido
+el nivel de cooperaci&oacute;n DDSCL_NORMAL en la llamada a <I>SetCooperativeLevel(),</I>
+DirectSound nos permitir&aacute; acceder al buffer primario. Seg&uacute;n
+la ayuda, el buffer primario puede ser utilizado para mezclar t&uacute;
+mismo los efectos, pero no lo he probado nunca.
+<br><br>
+<P ALIGN="JUSTIFY">Bueno, ya que no vamos a preocuparnos del buffer primario, vamos a crear
+los <B>buffers secundarios</B>, que ser&aacute;n los que contengan los
+efectos de sonido que vamos a utilizar. Para cada efecto que tengamos (un
+disparo, una puerta que se abre, etc) crearemos un buffer secundario.
+<br><br>
+<P ALIGN="JUSTIFY">Los buffers secundarios pueden ser de dos tipos, "<I>static</I>" o "<I>streaming</I>".
+Los buffers static contienen un sonido completo, a diferencia de los bufferes
+streaming, que s&oacute;lo contienen una parte del sonido, y tu programa
+debe de encargarse de ir cargando en la memoria reservada para el buffer
+las distintas partes del sonido, antes de que DirectSound vaya a tocarlo.
+Por ejemplo, puedes tener una canci&oacute;n de 3 minutos y un buffer secundario
+de 10 segundos, y tu programa debe que DirectSound se vaya encontrando
+en esos 10 segundos de memoria el trozo de canci&oacute;n que debe tocar.
+Evidentemente, los buffers "streaming" ahorran memoria, pero para efectos
+de sonido cortos (disparos, pro ejemplo) no son necesarios.
+<br><br>
+<P ALIGN="JUSTIFY">Cuando creas un buffer secundario, DirectSound intentar&aacute; primero
+reservar memoria de la tarjeta de sonido para guardar el sonido, y si no
+la encuentra lo guardar&aacute; en la memoria del ordenador. Tocar los
+sonidos que est&eacute;n en la memoria de la tarjeta de sonido es m&aacute;s
+r&aacute;pido, por lo que debes procurar que aquellos sonidos que se vayan
+a utilizar m&aacute;s habitualmente durante el juego se carguen antes que
+los menos usados, para que as&iacute; los sonidos m&aacute;s importantes
+est&eacute;n almacenados en la memoria de la tarjeta de sonido.<br>
+El c&oacute;digo para crear un buffer de sonido secundario ser&aacute;:
+<br><font size=2 face=arial><pre><b>
+DirectSoundBuffer *SoundBuffer = NULL;
+DSBUFFERDESC dsdesc;
+
+dsdesc.dwSize = sizeof(dsdesc);
+dsdesc.dwFlags = DSBCAPS_STATIC;
+
+lpDirectSound->CreateSoundBuffer( &amp;dsdesc,&nbsp;&amp;SoundBuffer, NULL );
+</b></pre></font>
+<BR>
+<p align=justify>
+El tipo DSBUFFERDESC tiene un mont&oacute;n de campos para poner informaci&oacute;n,
+pero te remito a la ayuda de DirectX para consultarlos.
+<br><br>
+<P ALIGN="JUSTIFY">Bueno, nuestro siguiente paso es poner el buffer de sonido el efecto
+de sonido que queremos tocar. Si se trata de un efecto de sonido, lo normal
+ser&aacute; que lo tengamos en un fichero WAV. Lo que hay que hacer es
+leer el fichero WAV, y sacar de &eacute;l los datos del sonido, y copiarlos
+en la memoria del buffer. Bueno, esto tiene m&aacute;s que ver con el formato
+WAV (que no conozco) que con DirectSound, por lo que no vamos a pararlos
+en ello. Pero eso no significa que no vayamos a leer ficheros WAV, si no
+vaya gracia...
+<br><br>
+<P ALIGN="JUSTIFY">Si te fijas en el directorio SDK/SAMPLES/MISC&nbsp; del SDK de DirectX,
+encontrar&aacute;s un fichero llamada DSUTIL.C. Este fichero tiene varias
+rutinas &uacute;tiles para DirectSound, y entre ellas la funci&oacute;n
+<I>DSLoadSoundBuffer()</I>, que se encarga de crear un buffer secundario
+y luego leer un fichero WAV que est&eacute; almacenado como <B>recurso</B>
+de nuestro programa y ponerlo en el buffer secundario. Por ejemplo:<br>
+<font size=2 face=arial><pre><b>
+LPDIRECTSOUNDBUFFER ChaingunBuffer = NULL;
+ChaingunBuffer = DSLoadSoundBuffer( lpDirectSound,"CHAINGUN" );
+</b></pre></font>
+<br>
+<P ALIGN="JUSTIFY">
+Esta instrucci&oacute;n crear&aacute; un buffer secundario llamado ChaingunBuffer,
+en el que la rutina almacenar&aacute; el sonido que hemos definido como
+CHAINGUN en nuestra definici&oacute;n de recursos (el fichero .RC), de
+la siguiente forma:<br>
+<FONT SIZE=2><pre><b>CHAINGUN WAV chaingun.wav</b></pre></FONT>
+<br>
+<P ALIGN="JUSTIFY">
+Repito que esa rutina lee sonidos que est&aacute;n almacenados como recursos
+de nuestro programa (es decir, est&aacute;n dentro del ejecutable .exe),
+pero no creo que tengas ning&uacute;n problema en cambiarla para que lea
+directamente ficheros .wav del disco, o incluso que extraiga un fichero
+.wav de un fichero de datos en el que incluyas todos los sonidos o im&aacute;genes
+del programa.
+<BR>
+<BR>En el programa de ejemplo hay dos efectos de sonido, y los buffers
+se llaman ChaingunBuffer y DanceBuffer.
+<br>
+
+<H4>3. Tocar los sonidos</H4>
+<p align = justify>
+Una vez tenemos los sonidos almacenados en el buffer, ahora s&oacute;lo
+tenemos que tocarlos. Es muy f&aacute;cil:
+
+<FONT SIZE=2 face=arial><pre><b>DanceBuffer->Play(0,0,0);</b></pre></FONT>
+<p align = justify>
+Con s&oacute;lo eso decimos a DirectSound que queremos que toque el sonido
+almacenado en DanceBuffer. En el tercer par&aacute;metro podemos decirle
+a DirectSound que queremos que cuando el sonido acabe vuelva a empezar
+(es decir, un loop), por ejemplo si queremos hacer una ametralladora:<br>
+
+<font size=2 face=arial><pre><b>ChaingunBuffer->Play(0,0,DSBPLAY_LOOPING);</pre></b></FONT>
+
+Hay otras funciones como <I>Stop()</I>, <I>SetVolume()</I>, <I>SetPanning()</I>,
+etc. cuyo significado es bastante evidente, y no creo que necesiten mayor
+explicaci&oacute;n.<br>
+
+<H4>4. M&uacute;sica de fondo</H4>
+<p align= justify>
+En esta parte s&oacute;lo voy a tratar sobre c&oacute;mo tocar
+un fichero MID de fondo. La cosa es bastante sencilla desde Windows, s&oacute;lo
+hay que utilizar&nbsp; las funciones que trae Windows para ello, en particular
+<I>mciSendString()</I>. Para hacer las cosas m&aacute;s f&aacute;ciles,
+he cogido un fichero que ven&iacute;a con uno de los ejemplos de DirectX,
+que trae varias funciones para tocar un fichero mid, pararlo, hacer una
+pausa, etc. El fichero se llama <B>midi.c </B>y est&aacute; bastante claro,
+o sea que no me voy a parar en ello.
+<br><br>
+<P ALIGN="JUSTIFY">Para tocar ficheros MOD ( o XM, S3M, etc), hay una librer&iacute;a llamada
+<B>MIKMOD</B>, que tiene una versi&oacute;n que utiliza DirectSound. No
+he probado la versi&oacute;n de DirectSound, pero la versi&oacute;n para
+DOS s&iacute; la he visto y es buena. Si quieres conseguirla, vete al <A HREF="ftp://x2ftp.oulu.fi/pub/msdos/programming/directx/">site
+de siempre</A>.
+<br><BR>Tambi&eacute;n hay otra librer&iacute;a muy conocida, llamada <B>Midas</B>,
+y creo que en sus &uacute;ltimas versiones soporta DirectSound, pero no
+s&eacute; nada concreto.
+<br>
+<H4>5. Antes de terminar: limpiar DirectSound:</H4><p align = justify>
+Antes de terminar nuestra aplicaci&oacute;n tenemos que liberar toda la
+memoria utilizada por DirectSound. Bueno, esto es bastante sencillo, s&oacute;lo
+hay que llamar al m&eacute;todo <I>Release()</I> de los objetos que hemos
+creado, tanto el objeto de DirectSound como los buffers secundarios. Todo
+esto lo hago en la funci&oacute;n <I>DirectSoundEnd()</I>:
+<font size=2 face=arial><pre><b>
+void DirectSoundEnd( void )
+ {
+   bActive = FALSE;
+
+   if( DanceBuffer) DanceBuffer->Release();
+   if( ChaingunBuffer) ChaingunBuffer->Release();
+   if( lpDirectSound) lpDirectSound->Release();
+ }
+</b></pre></font>
+
+<P ALIGN="JUSTIFY">Bueno, ya est&aacute;. Por si no lo has cogido ya, aqu&iacute; tienes
+otro link al <A HREF="zip/dsound.zip">programa de ejemplo</A> para
+este mes. Lo &uacute;nico que hace es tocar un m&uacute;sica de fondo y
+un par de sonidos cuando pulses los botones del rat&oacute;n, pero espero
+que sea bastante did&aacute;ctico. Como ejercicio, puedes intentar unir
+el programa del mes pasado (el comecocos que se mov&iacute;a) con el de
+este mes, y hacer un comecocos que se mueva mientras suena una m&uacute;sica
+de fondo y de vez en cuando suene alg&uacute;n efecto.
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+
