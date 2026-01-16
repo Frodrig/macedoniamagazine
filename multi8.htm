@@ -1,0 +1,447 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 8. <br> Programación de tarjetas de vídeo (VI).
+</h3>
+<H4>2.2.- VGA 4 Planos. 320x200x4x256c</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Hasta ahora, nos hemos aprovechado de la tarjeta de v&iacute;deo usando
+su modo 13h, pero por su dise&ntilde;o y circuiter&iacute;a este modo s&oacute;lo
+permite el acceso a 64kbytes de su espacio de memoria. Pero hay un hecho
+importante, todas las tarjetas VGA tienen como m&iacute;nimo 256kbytes
+de RAM, por lo tanto: &iquest;d&oacute;nde est&aacute; esa memoria que
+no puedo utilizar desde el modo est&aacute;ndar?
+
+<P align="justify">Para afrontar la entrada al modo 4 Planos o 4 Canales (CHAIN-4), es
+necesario explicar un poco la organizaci&oacute;n de la memoria de v&iacute;deo
+en su relaci&oacute;n con las limitaciones impuestas por la BIOS del sistema.
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.2.1.- La Circuiter&iacute;a de V&iacute;deo en Profundidad</U></B>
+<BR>&nbsp;
+<BR>La memoria est&aacute; separada en 4 planos de bits. La raz&oacute;n
+estriba en la EGA, tarjeta de v&iacute;deo anterior a la VGA, y sus modos
+de 16 colores. Al utilizar los planos de bits, los desarrolladores permiten
+que cada p&iacute;xel sea direccionable por un s&oacute;lo byte del segmento
+de v&iacute;deo. Si asuminos que la paleta de colores no ha sido variada
+de la que est&aacute; por defecto al arrancar el sistema, cada plano representar&aacute;
+uno de los colores primarios de la EGA, es decir, R, G y B, as&iacute;
+como la intensidad. Cuando se var&iacute;a el bit que representa el p&iacute;xel,
+el registro de Activar Plano de Escritura (Write Plane Enable) se sit&uacute;a
+con el color adecuado. La lectura de p&iacute;xel es m&aacute;s complicada
+y lenta, ya que s&oacute;lo se puede leer de uno de los planos a la vez,
+activando el Registro de Selecci&oacute;n de Planos para Lectura (Read
+Plane Select Register).
+
+<P align="justify">Como cada direcci&oacute;n del segmento de v&iacute;deo puede acceder
+a 4 p&iacute;xels, y hay 64 kb de direcciones posibles, 8x65536 = 524288
+p&iacute;xels de 16 colores pueden accederse.
+
+<P align="justify">En un modo de 320x200 y 16 colores se pueden tener 8 p&aacute;ginas
+(524288/(320x200)) y casi 2 de ellas si el modo es de 640x480 (524288/(640x480)).
+
+<P align="justify">La cosa cambia cuando la paleta es de 256 colores en vez de s&oacute;lo
+16. Los fabricantes de la VGA decidieron fijar el n&uacute;mero en 4 planos,
+ya que la l&oacute;gica de 8 planos y 256 colores no hubiese funcionado.
+En su lugar, una de las metas que se marcaron fue la de hacer un modo de
+256 colores que resultase lo m&aacute;s f&aacute;cil de acceder posible,
+y la verdad es que despu&eacute;s de comparar el m&eacute;todo de 8 p&iacute;xels/direcci&oacute;n
+en los modos de 16 colores con la correspondencia 1 a 1 del modo 13h, se
+puede decir que tuvieron &eacute;xito, eso s&iacute;, no sin un cierto
+costo, esto es, un verdadero desperdicio de la memoria.
+
+<P align="justify">El espacio de direccionamiento del modo 13h est&aacute; dividido por
+igual entre los cuatro planos de bits. Cuando un color de 8 bits es escrito
+en una direcci&oacute;n de memoria de 16 bits en el segmento de la VGA
+(0A000h), un plano de bit es autom&aacute;ticamente seleccionado por los
+2 bits menos significativos de la direcci&oacute;n en el plano de bit seleccionado.
+La lectura funciona de igual manera.
+
+<P align="justify">Ya que los planos de bit est&aacute;n tan ligados a la direcci&oacute;n
+de memoria, s&oacute;lo cada cuatro bytes se puede acceder a un byte en
+la memoria de v&iacute;deo, con lo que se desperdician 192 de los 256 kb
+de la memoria m&iacute;nima de la VGA.
+
+<P align="justify">Desde luego que la eliminaci&oacute;n de la molestia de trabajar con
+los planos de bit es conveniente y beneficiosa, pero para la mayor&iacute;a
+de la gente, perder &frac34; de la memoria de la VGA resulta imperdonable.
+(Al menos para el autor de este Proyecto).
+
+<P align="justify">Para acomodar este nuevo m&eacute;todo de acceder a la memoria de v&iacute;deo,
+los dise&ntilde;adores de la tarjeta VGA introdujeron una nueva configuraci&oacute;n
+denominada CHAIN-4 que reside en el bit 3 del &iacute;ndice 4 del secuenciador.
+
+<P align="justify">En los modos de 16 colores, el estado por defecto de este bit es 0 y
+en la VGA funciona como se ha explicado antes, o sea se sit&uacute;a con
+valor 1 en los modos de 256 colores, modo 13h, con lo cual se activa este
+ingenioso, pero costoso, sistema de direccionamiento. En este estado, los
+planos de bit se dice que est&aacute;n encadenados, por lo que al modo
+13 se le llama con frecuencia Modo Encadenado (Chained). Debe notarse que
+el CHAIN-4 no es suficiente por s&iacute; s&oacute;lo para cambiar a un
+modo de 256 colores, hay otros registros que tambi&eacute;n tratan con
+el proceso de cambio entre los modos de 16 colores y este &uacute;ltimo.
+
+<P align="justify">Con este planteamiento, se puede dilucidar que si se pone a 0 el bit
+llamado CHAIN-4 del secuenciador, una vez que el modo 13h est&aacute; activo,
+podremos tener acceso a los 256Kb de la VGA, ya que los 2 bits menos significativos
+(l&oacute;gica de Intel) de la direcci&oacute;n de memoria de v&iacute;deo
+no se desperdiciar&aacute;n al seleccionar el plano de bit. Pero por otro
+lado, habr&aacute; que olvidarse del esquema simple de direccionamiento
+del modo 13h.
+
+<P align="justify">En el momento que el bit CHAIN-4 es puesto a 0, cada cuarto p&iacute;xel
+pertenecer&aacute; al mismo plano. Antes de escribir a un desplazamiento
+dentro de el segmento de v&iacute;deo, deberemos asegurarnos de que la
+m&aacute;scara de 4 bits del registro Write Plane Enable est&aacute; correctamente
+situada, de acuerdo con los cuatro p&iacute;xels direccionables que se
+quieren cambiar. En esencia, funciona como un modo de 16 colores con unas
+peque&ntilde;as variaciones.
+
+<P align="justify"><B><U>2.2.2.- El Modo Desencadenado (Unchained)</U></B>
+
+<P align="justify">Los motivos por los que este engorroso-dif&iacute;cil modo de v&iacute;deo
+ha sido implementado e incluido aqu&iacute; ha sido por su plasmosa suavidad
+en los desplazamientos de pantalla. Aqu&iacute; se incluir&aacute; una
+rutina para hacer un desplazamiento vertical a trav&eacute;s de dos pantallas
+gr&aacute;ficas distintas dando la impresi&oacute;n de que est&aacute;n
+unidas, ideal para los desplazamientos de t&iacute;tulos al estilo del
+cine. Adem&aacute;s, otro procedimiento utilizar&aacute; este modo de configurar
+la tarjeta para hacer un espectacular desplazamiento "rectangular" (el
+mismo que se ve en la "Intro" del Editor) a trav&eacute;s de cuatro pantallas
+adyacentes dando la impresi&oacute;n de que conforman un todo.
+
+<P align="justify">Para comprender un poco mejor qu&eacute; es este modo, pensemos en 4
+pantallas distintas con resoluci&oacute;n de 320x200 cada una. Imaginemos
+que las unimos conformando un cuadrado, es decir, dos arriba y dos abajo.
+El modo de v&iacute;deo real es de 320x200, con lo que en el monitor tan
+s&oacute;lo 64000 p&iacute;xels ser&aacute;n visualizados a la vez (una
+sola pantalla). Pero en memoria almacenaremos las cuatro y tendremos que
+ver al monitor como una especie de "ventana" que s&oacute;lo nos permite
+ver una parte de esas cuatro pantallas juntas.
+
+<P align="justify">&nbsp;
+
+<P align="justify">Primeramente veremos el procedimiento que programa este modo.
+
+<P align="justify"><B><FONT COLOR="#990000">void ModoGraficoMcga4P(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0x13</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Modo 13h seleccionado</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0x404</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,ax</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Apagado el bit CHAIN-4</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3d4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0x014</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,ax</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Apaga el modo de dobles palabras. Pone a 1 el Underline Location</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xc317</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,ax</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Pone a 1 el Mode Control Register del CRT Controller</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,80</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x13</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Para evitar el
+feo efecto hardware al cambiar el modo</I></B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>PaletaNegra();</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Borra la memoria
+de v&iacute;deo</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BorrarBuffer4P();</B>
+<BR><B>}</B>
+
+<P align="justify">Como antes se indic&oacute;, el monitor ser&aacute; una ventana al contenido
+de la memoria. El siguiente procedimiento posiciona esa ventana en un espacio
+virtual de 640x400.
+
+<P align="justify"><B>void PosicionVentana4P(int,int);</B>
+
+<P align="justify">Debido al uso de los planos de bit, las rutinas gr&aacute;ficas tienden
+a hacerse m&aacute;s complicadas que las del modo 13h. Un ejemplo de esto
+es el procedimiento que pone un p&iacute;xel en cualquier posici&oacute;n
+del espacio virtual de 640x400, donde se pueden apreciar las operaciones
+extras que hay que realizar como el c&aacute;lculo del desplazamiento y
+la selecci&oacute;n del plano.
+
+<P align="justify"><B><FONT COLOR="#990000">void PonerP&iacute;xelMcga4P(int x,int y,char
+color)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE desp;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; desp=0x1&lt;&lt;(x&amp;3);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,desp</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,SEG_VGA</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,x</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr bx,2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,y</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,7</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Cabe mencionar que en este modo el Write Plane Register no est&aacute;
+limitado a la selecci&oacute;n de s&oacute;lo un plano de bit, como el
+registro Read Plane Enable. Se puede activar cualquier combinaci&oacute;n
+de los cuatro planos que van a ser escritos.
+
+<P align="justify">Esta posibilidad de acceder a los cuatro p&iacute;xels con s&oacute;lo
+una instrucci&oacute;n ayuda a cuadruplicar la velocidad en ciertas ocasiones,
+especialmente cuando queremos dibujar l&iacute;neas horizontales o rellenamos
+un pol&iacute;gono con un color s&oacute;lido. Tambi&eacute;n, la gran
+mayor&iacute;a de los algoritmos de dibujo de bloques se pueden optimizar
+de forma que s&oacute;lo necesiten un n&uacute;mero constante de operaciones
+OUT en el registro Write Plane Enable, que normalmente son cuatro. Adem&aacute;s,
+esta instrucci&oacute;n es relativamente lenta, luego cuantas menos utilicemos
+mejor.
+
+<P align="justify">Con lo visto de la teor&iacute;a de la VGA, estos conocimientos nos
+permiten acceder a los 256kb de la memoria VGA que permitir&aacute; cambiar
+p&aacute;ginas visibles y otras opciones como scroll suave en grandes superficies
+y animaci&oacute;n r&aacute;pida y sin parpadeo, haciendo estas posibilidades
+oscurecer la complejidad de su programaci&oacute;n.
+
+<P align="justify">Adem&aacute;s de los procedimientos ya vistos, hay otros que se encargan
+de la gesti&oacute;n de este modo, y sus cabeceras son:
+
+<P align="justify"><I>// Limpia la memoria de v&iacute;deo</I>
+
+<P align="justify"><B><I>void BorrarBuffer4P(void);</I></B>
+
+<P align="justify"><I>// Lee un p&iacute;xel de la memoria de v&iacute;deo. Rango = 640x400</I>
+
+<P align="justify"><B><I>unsigned char LeerPixelMcga4P(int,int);</I></B>
+
+<P align="justify"><I>// Copia 64000 bytes en una de las 4 posiciones esquina; zona: 0=izq,arr;</I>
+
+<P align="justify"><I>//1=der,arr; 2=izq,abj; 3=der,abj</I>
+
+<P align="justify"><B><I>void VolcarPantalla4P(char,BYTE *);</I></B>
+
+<P align="justify"><I>// Copia 64000 bytes en cualquier posici&oacute;n dentro de los 640x400</I>
+
+<P align="justify"><B><I>void VolcarPantalla4PA(int,int,int,int,int,BYTE *);</I></B>
+
+<P align="justify">El &uacute;ltimo procedimiento que veremos es el que pone un bloque
+en la pantalla (igual que <I>BloqueMcga</I>, pero para este modo de v&iacute;deo).
+
+<P align="justify"><B><FONT COLOR="#990000">void Bloque4P(int xi,int yi,int xf,int yf,int
+ancho,int alto,BYTE *pantalla)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE *puntero,color,desp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register int x,y;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int xfi,yfi,desplaza;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; xfi=xf+ancho;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; yfi=yf+alto;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; desplaza=320-ancho;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; puntero=pantalla;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; puntero+=320*yi+xi;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; for (y=yf;y&lt;yfi;y++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (x=xf;x&lt;xfi;x++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+color=*puntero;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+desp=0x1&lt;&lt;(x&amp;3);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,desp</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,SEG_VGA</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,x</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr bx,2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,y</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,7</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+puntero++;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; puntero+=desplaza;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">&nbsp;
+ 
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

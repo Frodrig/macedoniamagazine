@@ -1,0 +1,227 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso Acelerado de HTML</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>Cap&iacute;tulo 2.<br>Directivas y estructura de un documento HTML</h3>
+<p align=justify>
+
+A pesar de que existen montones de programas para crear p&aacute;ginas web de un
+modo super automatizado, nosotros nos vamos a valer de nuestro procesador
+de textos preferidos para crear los documentos html, o lo que es lo mismo,
+los archivos .htm que los distintos navegadores entienden y son capaces
+de interpretar.Una vez que nos encontremos frente a nuestro procesador de textos ya podemos
+empezar a darle a la tecla.
+<br>
+<br>
+Bien, aqu&iacute; vamos a ver la estructura que debe de tener todo documento  HTML
+que creemos, de esta forma, siempre partiremos de un esqueleto b&aacute;sico, al que
+tan s&oacute;lo tendremos que a&ntilde;adir comandos y textos para hacer que se adapte
+a lo que nostros queramos.
+<br>
+<br>
+Antes de comentaros las tres zonas b&aacute;sicas en las que se divide un documento
+HTML, os dir&eacute; qu&eacute; son las directivas. Durante la creaci&oacute;n de cualquier 
+documento HTML es necesario utilizar las directivas, marcas o tags, dichas
+directivas, van entre los s&iacute;mbolos de mayor y menor, esto es, van entre
+&lt; y &gt;.  Para indicar a qu&eacute; es a lo que afectan las directivas, lo que
+se hace es poner una directiva al comienzo de lo que se quiere afectar y
+otra al final, con la peculiaridad de que esta &uacute;ltima tendr&aacute; tambi&eacute;n la
+barra /. De esta forma, el esquema de una directiva ser&iacute;a:
+<br>
+&lt;directiva&gt; Zona del documento afectada &lt;/directiva&gt;
+<br>
+Una vez entendida esta tonter&iacute;a pasamos a describir las 3 zonas de un
+documento HTML.
+<br>
+<br>
+Todo documento HTML tiene o dispone de tres zonas claramente diferenciadas,
+estas son:
+<BR>
+<BR>
+</p>
+<h5>1. Zona Cabecera.</h5> 
+<p align=justify>
+En esta zona es la que indica el comienzo de nuestro documento HTML, la 
+verdad es que es algo tan chorra como tener que poner la directivas
+&lt;HTML&gt; y &lt;HTML/&gt; en el documento. La primera de ellas sirve
+para indicar que empezamos ah&iacute;, mientras que la &uacute;ltima (la que tiene 
+/) indica que terminaremos ah&iacute; (todo esto ya os lo cont&eacute; m&aacute;s arriba).
+Cabe decir que es indiferente (y esto se va a aplicar a todo lo que veamos) que se escriban las directivas HTML
+en may&uacute;sculas o en min&uacute;sculas.
+<br>
+Otra de las directivas que se puede considerar dentro de la zona de cabecera
+y que va dentro de la directiva HTML (todo el documento va dentro de la
+directiva HTML) es la de HEAD. Esta directiva, indica el comienzo de la
+zona en donde podemos poner el t&iacute;tulo de nuestra p&aacute;gina WEB, es decir, el
+t&iacute;tulo de la ventana del navegador cuando carge nuestra p&aacute;gina WEB. Para
+ello basta utilizar, dentro de HEAD, la directiva TITLE que nos permite
+escribir el t&iacute;tulo. 
+<br>
+Un ejemplo de todo lo visto hasta ahora podr&iacute;a ser el siguiente:
+<br>
+<br>
+<I>
+&lt;HTML&gt;<br>
+&lt;HEAD&gt;<br>
+&lt;TITLE&gt;Macedonia Magazine&lt;/TITLE&gt;<bR>
+&lt;/HEAD&gt;<br>
+&lt;/HTML&gt;<bR>
+</I>
+<br>
+Si metieramos esto en un archivo de texto normal y corriente con la extensi&oacute;n
+htm y lo cargaramos en nuestro navegador favorito, ver&iacute;amos que en la zona
+de t&iacute;tulos de la ventana se leer&iacute;a Macedonia Magazine.
+<br>
+<br>
+</p>
+<h5>2. Cuerpo del Documento. </h5>
+<p align=justify>
+En esta zona escriberemos la mayor parte de nuestra p&aacute;gina WEB, ya que mediante
+las directiva &lt;BODY&gt; podemos escribir texto para que
+aparezca en la p&aacute;gina o tambi&eacute;n podemos incluir otras directivas que nos
+permitan poner gr&aacute;ficos, enlaces, m&uacute;sica, en definitiva, todo lo que nos
+ofrece la amplia gama de directivas del HTML. De esta forma, si queremos
+escribir algo s&oacute;lo tenemos que ponerlo entre la directiva de BODY. 
+<br>
+<br>
+</p>
+<h5>3. Zona final. </h5>
+<p align=justify>
+En esta zona, deber&aacute;n de estar las directivas de cierre, esto es, las que
+llevan incluido la barra /. Asegurate que al final del documento encuentras
+las directivas &lt;/BODY&gt; y &lt;/HTML&gt;.
+<br>
+<br>
+</p>
+<h4> Resumen de todo lo visto. </h4>
+<p align=justify>
+1. Siempre hay que acordarse que hay que comenzar la escritura de una p&aacute;gina
+WEB con &lt;HTML&gt;.<br>
+2. Si deseamos que aparezca algo en la ventana del navegador al cargarse
+nuestra p&aacute;gina, deberemos de incluir la cabecera del documento y en
+su interior poner el t&iacute;tulo. Esto se consegu&iacute;a con &lt;HEAD&gt;&lt;TITLE&gt;
+T&iacute;tulo de la p&aacute;gina&lt;/TITLE&gt;&lt;/HTML&gt;.<br>
+3. Todo lo que queremos contar, los gr&aacute;ficos, el sonido, los enlaces, todo
+eso, ha de ir entre dos directivas, estas son &lt;BODY&gt; y &lt;/BODY&gt;.<br>
+4. Debemos de asegurarnos que al final de la p&aacute;gina leemos el cierre de
+la directiva HTML, esto es, que leemos &lt;/HTML&gt;.
+<br>
+<br>
+</p>
+<h4>Un ejemplo para aclarar todo</h4>
+<p align=justify>
+A continuaci&oacute;n teneis un ejemplo que si lo meteeis en un archivo .htm y
+lo cargais en vuestro navegador leereis &quot;Se supone que tengo que salir
+en pantalla.&quot;, como podeis
+comprobar es una chorrada.
+<br><br>
+<I>
+&lt;HTML&gt;<br>
+&lt;HEAD&gt;<br>
+&lt;TITLE&gt;Ejemplo de HTML&lt;/TITLE&gt;<br>
+&lt;BODY&gt;<br>
+Se supone que tengo que salir en pantalla.<br>
+&lt;/BODY&gt;<br>
+&lt;/HEAD&gt;<br>
+&lt;/HTML&gt;
+</I>
+<br><br>
+En el siguiente cap&iacute;tulo veremos como sacar el texto m&aacute;s bonito ;-).
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulap.htm"><font FACE="ARIAL"><B>[Curso Acelerado de HTML]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

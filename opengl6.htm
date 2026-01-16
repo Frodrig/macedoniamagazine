@@ -1,0 +1,739 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 6<br>
+Transformaciones geom&eacute;tricas.
+</H3>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Parece que ya vamos empezando a meternos
+de lleno en el mundillo del 3D. Ya estamos hablando en t&eacute;rminos
+bastante m&aacute;s serios que al principio y en poco tiempo seremos
+capaces de programar alguna que otra aplicaci&oacute;n 3D de calidad.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En este n&uacute;mero os presento varias
+capturas de un <U>ejemplo hecho a medida para Macedonia</U>, o
+sea para vosotros. Al final os dar&eacute; tambi&eacute;n el c&oacute;digo
+para que pod&aacute;is compilarlo, ejecutarlo y alterarlo a vuestro
+gusto.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Vamos pues con m&aacute;s materia y.....ya
+que a&uacute;n no os hab&iacute;a visto, &iexcl; Feliz A&ntilde;o
+Nuevo !</FONT></P>
+
+<h4>Coordenadas Homog&eacute;neas</h4>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Todos estamos acostumbrados a utilizar coordenadas
+cartesianas para representar los v&eacute;rtices que definen a
+nuestra geometr&iacute;a. Es decir un punto es algo as&iacute;:</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">P = ( x, y, z)</FONT></B><FONT FACE="Arial">
+y representa una determinada localizaci&oacute;n en un espacio
+3D.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Pero cuando programamos Gr&aacute;ficos
+hablamos de <U>puntos</U> y de <U>vectores</U> y pueden confundirse
+en cuanto a representaci&oacute;n. Si entendemos que un vector
+es una resta entre dos puntos...</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">Vector v = Punto1 - Punto2 = (x1, y1,
+z1) - (x2, y2, z2) = (a, b, c)</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">y acaso <B>(a, b, c)</B> <U>no parece tambi&eacute;n
+un punto</U> ???</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Por otra parte trabajaremos <U>modelando
+geometr&iacute;a para luego transformarla</U>....traslad&aacute;ndola
+a otra posici&oacute;n, rot&aacute;ndola respecto de un eje, escal&aacute;ndola
+para cambiar su tama&ntilde;o...Estas son las llamadas <U>transformaciones
+afines/r&iacute;gidas/lineales</U>. Dado que operamos usando matrices
+para efectuar estas transformaciones necesitamos modificarlas
+ligeramente por dos motivos:</FONT></P>
+
+<UL>
+  <LI><FONT FACE="Arial">Para que no alteren de igual forma a un
+  vector y a un punto, lo cual ser&iacute;a incorrecto.</FONT>
+  <LI><FONT FACE="Arial">Para poder efectuar algunas transformaciones
+  afines como la traslaci&oacute;n, imposibles de efectuar multiplicando
+  matrices si no se usan coordenadas homog&eacute;neas.</FONT>
+</UL>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Es muy sencillo convertir un vector o un
+punto <U>cartesiano</U> a su representaci&oacute;n <U>homog&eacute;nea</U>.
+De hecho lo que se hace es a&ntilde;adir una nueva coordenada
+a las t&iacute;picas XYZ. <U>A&ntilde;adimos la componente W</U>
+de esta forma:</FONT></P>
+
+<UL>
+  <LI><FONT FACE="Arial">Punto <B>P1 = (x1, y1, z1)</B> en cartesianas
+  es <B>P1 = (x1, y1, z1, w1)</B> en homog&eacute;neas.</FONT>
+  <LI><FONT FACE="Arial">Vector <B>v = (a, b, c)</B> en cartesianas
+  es <B>v = (a, b, c, w)</B> en homog&eacute;neas.</FONT>
+</UL>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Los valores t&iacute;picos para la nueva
+componente son:</FONT></P>
+
+<UL>
+  <LI><B><FONT FACE="Arial">W = 1</FONT></B><FONT FACE="Arial">,
+  cuando tratemos con puntos.</FONT>
+  <LI><B><FONT FACE="Arial">W = 0</FONT></B><FONT FACE="Arial">,
+  cuando sean vectores.</FONT>
+</UL>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Por tanto el caso anterior queda modificado
+de la siguiente manera:</FONT></P>
+
+<UL>
+  <LI><FONT FACE="Arial">Punto <B>P1 = (x1, y1, z1, 1)</B> en homog&eacute;neas.</FONT>
+  <LI><FONT FACE="Arial">Vector <B>v = (a, b, c, 0)</B> en homog&eacute;neas.</FONT>
+</UL>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Ver&eacute;is m&aacute;s adelante en este
+cap&iacute;tulo como este convenio nos permite operar transformando
+un punto en otro punto y un vector en otro vector....y nada de
+cruces extra&ntilde;os entre uno y otro !!!</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">Pero y si W es diferente de lo que dices
+... ?</FONT></U></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En ese caso tendremos que efectuar una sencilla
+operaci&oacute;n para transformar un punto homog&eacute;neo en
+uno cartesiano. Si tenemos el punto...:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Punto<B> P1 = (x1, y1, z1, w1)</B> en homog&eacute;neas...</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">...entonces en cartesianas el punto es <B>P1
+= (x1/w1, y1/w1, z1/w1)</B></FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Es decir que <U>normalizamos</U> cada una
+de las componentes XYZ del punto por su componente W. Claro en
+el caso de W = 1 no hay que hacer nada pues la divisi&oacute;n
+es obvia pero puede pasar que nos interese variar W y entonces
+no podremos usar las XYZ hasta haberlas normalizado seg&uacute;n
+os acabo de explicar.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Seg&uacute;n lo que os acabo de decir deber&iacute;ais
+ver clar&iacute;simo que:</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">P = (1, 2, 3, 1) = (2, 4, 6, 2) = (5,
+10, 15, 5)</FONT></B><FONT FACE="Arial">.......est&aacute;is de
+acuerdo conmigo ???</FONT></P>
+
+<h4>Vengan las transformaciones afines!!!</h4>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Utilizaremos el <U>convenio</U> t&iacute;pico
+es decir, <B>w=1</B> para puntos y <B>w=0</B> para vectores, ok?.
+Vamos a ver que podemos hacerle a un determinado objeto una vez
+lo hemos modelado (&quot;creado&quot;).</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">Una observaci&oacute;n importante:</FONT></U><FONT
+ FACE="Arial"> podemos transformar de dos maneras distintas pero
+totalmente equivalentes. Es exactamente lo mismo transformar un
+v&eacute;rtice respecto de un sistema de referencia que transformar
+en orden inverso el sistema de referencia dibujando despu&eacute;s
+el v&eacute;rtice en &eacute;ste. Vaya l&iacute;o de palabras
+no?...B&aacute;sicamente vengo a decir que el resultado final
+es el mismo si yo voy andando a la tienda a comprar pipas que
+si la tienda se mueve y se acerca a mi !!!...lo veis ahora??</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Las transformaciones afines se llaman as&iacute;
+porque <U>conservan las lineas</U>. Mirad la figura:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f1a6.gif" WIDTH="200"
+HEIGHT="200" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 1. Las transformaciones
+afines conservan las lineas.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Se observa que tan s&oacute;lo transformando
+los v&eacute;rtices y uni&eacute;ndolos de nuevo obtendremos como
+resultado final la linea que los une transformada. De esta forma
+queda claro que s&oacute;lo tendremos que aplicar transformaciones
+a los puntos, v&eacute;rtices, de nuestra geometr&iacute;a, uni&eacute;ndolos
+despu&eacute;s con segmentos rectos.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Escalar</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Gracias a la funci&oacute;n de escalado
+podemos <U>aumentar/disminuir</U> un objeto en cuanto a tama&ntilde;o.
+Tan s&oacute;lo tendremos que multiplicar a cada uno de sus v&eacute;rtices
+por la matriz que sigue, uni&eacute;ndolos despu&eacute;s con
+l&iacute;neas tal y como estaban al inicio:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f2a6.gif" WIDTH="207"
+HEIGHT="227" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 2. Escalar un cubo.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En el ejemplo se observa el efecto claramente.
+He dibujado los ejes en amarillo para que sea posible orientar
+los cubos visualmente. El cubo original es el de color rojo y
+como veis est&aacute; centrado en el origen. El cubo escalado
+es el de color verde. Es 2 veces mayor que el original al haber
+efectuado un escalado de 2.0 sobre todas sus componentes.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">La matriz que se ha aplicado a cada uno
+de los v&eacute;rtices del cubo la ten&eacute;is en la </FONT><A
+HREF="#figu9"><FONT FACE="Arial">figura 9</FONT></A><FONT FACE="Arial">.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Trasladar</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Esta es precisamente una transformaci&oacute;n
+af&iacute;n imposible de realizar en cartesianas si no se incluye
+una suma de matrices. Pero nosotros no queremos sumar, tan s&oacute;lo
+multiplicar. Y es que la mayor&iacute;a de los &quot;pipeline's&quot;
+gr&aacute;ficos implementados v&iacute;a hard en aceleradoras
+3D o tarjetas de video esperan recibir matrices para concatenarlas
+y multiplicarlas.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Si quer&eacute;is haced la prueba. Intentad
+aplicar la transformaci&oacute;n que veis en la figura sin usar
+coordenadas homog&eacute;neas, es decir con un vector y una matriz
+de 3 x 3, y ya ver&eacute;is como es imposible hacerlo. Necesitareis
+sumar &quot;algo&quot; al resultado para lograrlo.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En cuanto a la figura:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f3a6.gif" WIDTH="206"
+HEIGHT="227" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 3. Trasladar un cubo.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Al igual que anteriormente, el cubo original
+es de color rojo y est&aacute; centrado en el origen. Al cubo
+verde se le ha aplicado una traslaci&oacute;n de 30 unidades positivas
+siguiendo la direcci&oacute;n del eje X. Obviamente el tama&ntilde;o
+se conserva pues no he aplicado ning&uacute;n escalado. La matriz
+que implementa esta transformaci&oacute;n la ten&eacute;is en
+la </FONT><A HREF="#figu9"><FONT FACE="Arial">figura 9</FONT></A><FONT
+ FACE="Arial">.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Rotar</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">La rotaci&oacute;n debe realizarse siempre
+<U>alrededor de un determinado eje de referencia</U>. Podemos
+rotar alrededor del eje X, del eje Y o del eje Z, y seg&uacute;n
+el caso la matriz a aplicar ser&aacute; una o ser&aacute; otra.
+En el caso de la figura:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f4a6.gif" WIDTH="207"
+HEIGHT="228" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 4. Rotar un cubo.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Seguimos con el mismo criterio que antes.
+El cubo rojo sigue est&aacute;tico en el origen. El cubo verde
+tiene exactamente las mismas dimensiones pero se ha rotado 45
+grados alrededor del eje vertical, que en este caso es el eje
+Y y no el Z al que tanto nos hemos acostumbrado desde siempre.
+La matriz a emplear est&aacute; en la </FONT><A HREF="#figu9"><FONT
+ FACE="Arial">figura 9</FONT></A><FONT FACE="Arial">.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Pensad que en Gr&aacute;ficos se utiliza
+siempre <U>la Z como unidad de profundidad</U> y no de altura.
+Incluso se habla del &quot;Z buffer&quot; o buffer de profundidad
+que almacena el orden de profundidad de unos pol&iacute;gonos
+respecto de otros para que no se solapen (eliminaci&oacute;n de
+superf&iacute;cies ocultas).</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Otra consideraci&oacute;n importante es
+la convenci&oacute;n en cuanto a <U>&quot;&iquest;hacia donde
+se supone que roto si digo que el &aacute;ngulo es positivo?...&iquest;y
+si es negativo?</U>....Obviamente existe una convenci&oacute;n
+establecida para que cuando se hable de un &aacute;ngulo positivo,
+sea el mismo para todo el mundo!!!...Hay que seguir el siguiente
+criterio:</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT FACE="Arial">&quot;El &aacute;ngulo de rotaci&oacute;n
+se define como positivo si supone girar en direcci&oacute;n contraria
+a las manecillas del reloj (CCW-Counter Clockwise) al mirar el
+eje sobre el que se rota de fuera hacia a dentro (mirar hacia
+el origen)&quot;</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Y ahora es cuando me odi&aacute;is porque
+no os hab&eacute;is enterado de nada...bueno lo ten&eacute;is
+en la figura:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f5a6.gif" WIDTH="200"
+HEIGHT="200" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 5. Sentido positivo de
+rotaci&oacute;n.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En ella pod&eacute;is ver como si miramos
+hac&iacute;a el origen a trav&eacute;s del eje de las X, una rotaci&oacute;n
+contra-reloj es la indicada. Pues esa rotaci&oacute;n se considera
+positiva. As&iacute; pues si digo que voy a rotar 30 grados CCW
+alrededor del eje X me refiero a que rotar&eacute; 30 grados siguiendo
+la direcci&oacute;n y el eje de la figura.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Deformar</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Es la llamada transformaci&oacute;n de &quot;<U>Shearing</U>&quot;.
+Consiste en hacer que alguna de las componentes de un v&eacute;rtice
+<U>var&iacute;e linealmente</U> en funci&oacute;n de otra. Me
+explico, se trata por ejemplo de alterar el valor de la X y de
+la Y en funci&oacute;n del de la Z. Se consiguen efectos de <U>distorsi&oacute;n</U>
+muy interesantes para ciertas animaciones. Os dejo las matrices
+a aplicar:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f6a6.gif" WIDTH="160"
+HEIGHT="251" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 6. Matrices de deformaci&oacute;n
+o &quot;shearing&quot;.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">El punto resultante es el de la izquierda.
+A la derecha tenemos la matriz a aplicar y un punto gen&eacute;rico
+al cu&aacute;l se aplica &eacute;sta. En el primer caso variamos
+las componentes Y y Z en funci&oacute;n de X, en el segundo X
+y Z en funci&oacute;n de Y y en el tercero X e Y en funci&oacute;n
+de Z. Efectuad las multiplicaciones y mirad como queda el punto
+transformado.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Se entiende que los valores Sxy, Sxz, Syx,
+etc...son <U>escalares reales</U>, es decir <U>n&uacute;meros</U>,
+que vosotros mismos deber&eacute;is escoger para conseguir el
+efecto deseado.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Estar&iacute;a bien que modificarais el
+ejemplo que os entrego con este cap&iacute;tulo para efectuar
+pruebas de deformaci&oacute;n en el cubo.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Concatenaci&oacute;n de transformaciones</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Ahora supongamos que deseamos aplicar m&uacute;ltiples
+transformaciones a un determinado objeto geom&eacute;trico. Para
+hacerlo tenemos que concatenar una detr&aacute;s de otra todas
+las matrices por las que sus v&eacute;rtices deben multiplicarse.
+Para cada transformaci&oacute;n creo una matriz, las multiplico
+todas y obtengo una matriz resultante m&aacute;s o menos compleja.
+Esa es la matriz que aplicar&eacute; a mis v&eacute;rtices para
+que se vean afectados &quot;de golpe&quot; por todas las transformaciones.</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">Pero cuidado</FONT></U><FONT FACE="Arial">
+con una cosa. <U>La multiplicaci&oacute;n de matrices no es conmutativa</U>
+y eso implica que:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Si A y B son matrices...entonces...A
+&middot; B es distinto de B &middot; A !!!</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Lo cu&aacute;l equivale a decir que <U>el
+orden de las matrices afecta al resultado final</U>, es decir,
+a la posici&oacute;n y orientaci&oacute;n de nuestro objeto geom&eacute;trico
+3D. Una prueba viviente es la siguiente figura:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><TABLE WIDTH="80%" BORDER="0" CELLSPACING="2" CELLPADDING="0">
+  <TR>
+    <TD WIDTH="50%" ALIGN="RIGHT">
+    &nbsp;<IMG SRC="gif/f8a6.gif" WIDTH="209" HEIGHT="228" ALIGN="BOTTOM"
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+    <TD WIDTH="50%">
+    &nbsp;<IMG SRC="gif/f9a6.gif" WIDTH="209" HEIGHT="227" ALIGN="BOTTOM"
+    BORDER="0" NATURALSIZEFLAG="3"></TD> 
+  </TR>
+</TABLE></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 7. El orden afecta al
+resultado.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Se observa con toda claridad que el resultado
+de aplicar las mismas dos transformaciones pero con el orden cambiado
+da como resultados dos bien distintos. Como siempre el cubo rojo
+y centrado es el inicial y el verde el resultado final. En el
+primer caso he aplicado una traslaci&oacute;n de 30 a lo largo
+de X y despu&eacute;s una rotaci&oacute;n de 45&ordm; alrededor
+del Y. En el segundo caso primero roto los 45&ordm; alrededor
+del mismo eje y despu&eacute;s me traslado 30 unidades sigui&eacute;ndo
+el eje X.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Las matrices a aplicar para cada v&eacute;rtice
+del cubo en ambos casos provienen de la concatenaci&oacute;n de
+dos. Ten&eacute;is ambos casos resueltos en la </FONT><A HREF="#figu9"><FONT
+ FACE="Arial">figura 9</FONT></A><FONT FACE="Arial">.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Premultiplicaci&oacute;n y
+postmultiplicaci&oacute;n</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">M&aacute;s convenciones !!!...si no nos
+podemos todos de acuerdo nos volveremos locos. &iquest;Pero en
+qu&eacute; quieres que lleguemos un acuerdo ahora, Oscar?...&iquest;no
+hay suficiente con el tema de los &aacute;ngulos de rotaci&oacute;n?...pues
+no !!!...Existe otra cosa muy importante por aclarar.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Existen <U>dos convenciones</U> en cuanto
+a uso de transformaciones geom&eacute;tricas: <U>la de Rob&oacute;tica
+/ Ingenier&iacute;a y la de Gr&aacute;ficos</U>. En ambos casos
+se realizan exactamente las mismas operaciones pues tanto puedo
+querer mover un brazo robot como un personaje sobre mi juego 3D.
+Pero en cada caso se sigue una metodolog&iacute;a distinta.</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">En la convenci&oacute;n de Gr&aacute;ficos</FONT></U><FONT
+ FACE="Arial">, que es la que yo he estado asumiendo durante todo
+el art&iacute;culo y en concreto en la figura 9, se <U>postmultiplican</U>
+las matrices. &iquest;Y eso qu&eacute; eeeeeeehhhhhh?...pues que
+los puntos se toman como vectores en columna que se multiplican
+a las matrices por la derecha. Y adem&aacute;s el orden de las
+transformaciones, de primera a &uacute;ltima a aplicar, es de
+derecha a izquierda.</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">En cambio en Rob&oacute;tica</FONT></U><FONT
+ FACE="Arial"> se utilizan vectores de tipo fila, o rengl&oacute;n,
+que se multiplican por la izquierda. Las matrices se ordenan de
+izquierda a derecha en cuanto a orden de las transformaciones.
+Es decir, se <U>premultiplica</U>.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Aqu&iacute; ten&eacute;is gr&aacute;ficamente
+lo que buenamente he intentado expresar escribiendo:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f10a6.gif" WIDTH="565"
+HEIGHT="220" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 8. Premultiplicar y postmultiplicar.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">D&oacute;nde <B>Pf</B> es el punto transformado
+final, <B>Pi</B> el inicial del que parto, <B>T1</B> la primera
+transformaci&oacute;n a aplicar, <B>T2</B> la segunda y as&iacute;
+sucesivamente.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Pero ojo que en ambos casos tenemos que
+multiplicar las matrices como siempre nos han ense&ntilde;ado,
+es decir, de izquierda a derecha. S&oacute;lo hay que fijarse
+en la convenci&oacute;n que se usa porque eso define que forma
+tienen nuestros puntos, por que lado los he de multiplicar y en
+que orden debo ir a&ntilde;adiendo las transformaciones. &iquest;S&iacute;?</FONT></P>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial">Aqu&iacute; ten&eacute;is la famosa figura
+9</FONT></U><FONT FACE="Arial"> a la que me he ido refiriendo
+varias veces ya:</FONT><A NAME="figu9"></A></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f7a6.gif" WIDTH="580"
+HEIGHT="230" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 9. Ejemplos presentados.</FONT></B></CENTER></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Por cierto y antes de que se me olvide comentarlo.
+La figura siguiente os muestra cuales son las <U>matrices gen&eacute;ricas</U>
+a utilizar. Ah&iacute; est&aacute;n deducidas y vosotros os encarg&aacute;is
+de darles valores a los n&uacute;meros. Los escalares son todos
+n&uacute;meros reales a definir por vosotros y los <B>cos</B>
+/ <B>sin</B> asumen un &aacute;ngulo cualquiera tambi&eacute;n
+a vuestro libre albedr&iacute;o:</FONT></P>
+
+<P ALIGN="JUSTIFY"><CENTER><FONT FACE="Arial"><IMG SRC="gif/f11a6.gif" WIDTH="534"
+HEIGHT="380" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"></FONT></CENTER></P>
+
+<P ALIGN="JUSTIFY"><CENTER><B><FONT FACE="Arial">Figura 10. Matrices gen&eacute;ricas.</FONT></B></CENTER></P>
+
+<h4>Implementaci&oacute;n</h4>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Bueno...y <U>&iquest;c&oacute;mo usa OpenGL
+todo esto?, &iquest;c&oacute;mo le indico las transformaciones?,
+&iquest;a qu&eacute; afectan &eacute;stas?</U>....</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En cualquier aplicaci&oacute;n o paquete
+gr&aacute;fico, tambi&eacute;n en OpenGL por supuesto, toda la
+geometr&iacute;a se ve afectada por la <U>CTM (Current Transformation
+Matrix) o matriz de transformaci&oacute;n actual</U>. Esta guarda
+la informaci&oacute;n sobre todas las matrices que se han ido
+acumulando. Cualquier v&eacute;rtice que pase por el &quot;pipeline&quot;
+ser&aacute; multiplicado por esta matriz y consecuentemente transformado.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En OpenGL la CTM se compone de dos matrices.
+La <U>&quot;Model-View matrix&quot; o matriz de transformaci&oacute;n</U>
+y la <U>&quot;Projection matrix&quot; o matriz de proyecci&oacute;n</U>.
+Ambas se concatenan y de su producto se crea la CTM para el &quot;pipeline&quot;
+que controla OpenGL. De la segunda ya profundizaremos m&aacute;s
+adelante pues se encarga de la conversi&oacute;n 3D (mundo virtual)
+a 2D (pantalla) es decir de la proyecci&oacute;n. La primera nos
+interesa mucho ahora pues almacena todas las transformaciones
+afines que definamos en nuestro c&oacute;digo.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Lo primero que debe hacerse es <U>inicializar</U>
+la matriz. Esto se hace cargando en ella la <U>matriz identidad</U>
+que como ya sabr&eacute;is es el <U>elemento neutro de la multiplicaci&oacute;n</U>
+de matrices. Con esto me aseguro de &quot;limpiarla&quot; por
+completo antes de empezar a a&ntilde;adir transformaciones. Si
+no lo hiciera correr&iacute;a el riesgo de a&ntilde;adir transformaciones
+a otras ya existentes con lo cu&aacute;l el resultado en pantalla
+ser&iacute;a de todo menos el esperado. Esto lo hago con:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glMatrixMode(GL_MODELVIEW); /* Activo
+la matriz */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glLoadIdentity(); /* La limpio antes
+de nada !!! */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Una vez hecho esto puedo acumular transformaciones
+sucesivas mediante las funciones:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glScalef(GLfloat sx, GLfloat sy, GLfloat
+sz); /* Escalar seg&uacute;n sean los factores sx, sy y sz*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glTranslatef(GLfloat tx, GLfloat ty,
+GLfloat tz); /* Trasladar seg&uacute;n los factores tx, ty y tz
+*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glRotatef(GLfloat angulo, GLfloat
+vx, GLFloat vy, GLfloat vz); /* Rotar &quot;angulo&quot; seg&uacute;n
+el eje que define el vector (vx,vy,vz) */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En el caso de la rotaci&oacute;n podemos
+indicar cualquier eje que se nos ocurra. Lo t&iacute;pico es el
+eje X o (1,0,0), el Y o (0,1,0) o bien el Z que es (0,0,1).</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">A medida que vamos definiendo transformaciones
+se acumulan postmultiplicando en la matriz de transformaci&oacute;n.
+Queda por tanto claro que OpenGL utiliza la convenci&oacute;n
+de Gr&aacute;ficos como era de esperar. Cuidado porque l<U>a regla
+en esta librer&iacute;a es que la transformaci&oacute;n que se
+ha definido &uacute;ltima ser&aacute; la primera en aplicarse
+a la geometr&iacute;a</U>. Eso quiere decir que si tengo 3 l&iacute;neas
+de c&oacute;digo tal que:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glScalef......</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glRotatef....</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glTranslatef....</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">...la primera en aplicarse ser&aacute; la
+transformaci&oacute;n de la tercera l&iacute;nea, seguida por
+la de la segunda y finalizando con la primera. Eso &quot;altera&quot;
+un poco nuestra idea de ejecuci&oacute;n secuencial al programar
+estructuradamente pero es as&iacute; con OpenGL y debe tenerse
+en cuenta.</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Concepto de &quot;pila&quot;
+o &quot;stack&quot;</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">La matriz de transformaci&oacute;n, la &quot;model-view&quot;
+debe entenderse como una pila. Asumo que todos sab&eacute;is a
+lo que me refiero pues es un concepto fundamental de programaci&oacute;n.
+Si alguien se pierde aqu&iacute; que me lo comunique y gustoso
+le explico lo que es.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Pues bien, cada transformaci&oacute;n que
+a&ntilde;adimos entra a la pila como la &uacute;ltima y por tanto
+al salir ser&aacute; la primera. Ah&iacute; ten&eacute;is el porque
+OpenGL funciona tal y como os comentaba dos p&aacute;rrafos m&aacute;s
+arriba.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Podemos salvar el estado de la pila en cualquier
+momento para recuperarlo despu&eacute;s. Esto la haremos mediante
+las funciones:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glPushMatrix( ); /* Salvamos el estado
+actual de la matriz */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glPopMatrix( ); /* Recuperamos el
+estado de la matriz */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Esto nos servir&aacute; en el caso de que
+tengamos que aplicar algunas transformaciones a una peque&ntilde;a
+parte de la geometr&iacute;a. El resto no debiera verse afectado
+por esos cambios. Lo que se hace es definir las transformaciones
+generales que afectan a todos. Entonces se salva la matriz y se
+a&ntilde;aden otras. Se dibuja la geometr&iacute;a &quot;especial&quot;
+y inmediatamente despu&eacute;s se recupera la matriz. Ahora podemos
+dibujar todo el resto estando tranquilos pues no se ver&aacute;
+afectado por las transformaciones que hayamos definido entre el
+</FONT><FONT FACE="Courier New">glPush</FONT><FONT FACE="Arial">...
+y el </FONT><FONT FACE="Courier New">glPop</FONT><FONT FACE="Arial">...</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Si lo quer&eacute;is imaginar con c&oacute;digo
+aqu&iacute; va un <U>mini-ejemplo</U>:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">.....</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glRotatef... /* afectar&aacute; a
+toda la geometr&iacute;a que dibuje a partir de ahora */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glTranslatef.... /* afectar&aacute;
+a toda la geometr&iacute;a que dibuje a partir de ahora */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glPushMatrix( ); /* salvo el estado
+actual de la matriz, es decir, las 2 transformaciones anteriores
+*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glTranslatef.... /* afectar&aacute;
+a s&oacute;lo a la geometr&iacute;a que dibuje antes del glPop...
+*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glScalef..... /* afectar&aacute; a
+s&oacute;lo a la geometr&iacute;a que dibuje antes del glPop...
+*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">dibujo_geometr&iacute;a_espec&iacute;fica(
+); /* Render de la geometr&iacute;a que pasar&aacute; por 4 transformaciones
+*/</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glPopMatrix( ); /* recupero el estado
+de la matriz anterior */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">dibujo_el_resto( ); /* Render de la
+geometr&iacute;a que pasar&aacute; por 2 transformaciones */</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">.....</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Espero que se entienda lo que pretendo deciros
+con este ejemplo. Son conceptos muy simples pero a veces abstractos
+al principio. Posteriormente todo es programar, equivocarse una
+y otra vez y acabar dominando el tema a la perfecci&oacute;n!!!</FONT></P>
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE="+1" FACE="Arial">Crear matrices &quot;a medida&quot;</FONT></B></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Por &uacute;ltimo comentar que tambi&eacute;n
+podemos crearnos matrices &quot;a mano&quot; para despu&eacute;s
+pasarlas a la matriz de transformaci&oacute;n de OpenGL. No disponemos
+tan s&oacute;lo de las funciones de traslaci&oacute;n, rotaci&oacute;n...
+que os he comentado sin&oacute; que tambi&eacute;n podemos usar:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glLoadMatrixf(puntero_a_matriz);</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">glMultMatrixf(puntero_a_matriz);</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">En el primer caso substituimos a la matriz
+actual con la que le pasamos precalculada por nosotros mismos.
+En el segundo caso multiplicamos a lo que ya haya en la matriz
+por lo que nosotros pasamos.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">El puntero a una matriz se asume como variable
+del tipo:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">GLfloat M[16];</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">o</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Courier New">GLfloat M[4][4];</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">y lo important&iacute;simo es que OpenGL
+asume que la matriz que se le pasar&aacute; est&aacute; definida
+por columnas, es decir:</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">|a0 a4 a8 a12|<BR>
+|a1 a5 a9 a13|<BR>
+|a2 a6 a10 a14|<BR>
+|a3 a7 a11 a15|</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Primero definimos a0, despu&eacute;s a1,
+a2, a3, a4 ... y as&iacute; sucesivamente.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Si utiliz&aacute;is estas funciones provad
+antes con ejemplos sencillos hasta entender perfectamente como
+pasar la matriz para que ocurra lo que esper&aacute;is !!!</FONT></P>
+
+<h4>Y se acab&oacute; !!!</h4>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">El ejemplo del que os he mostrado capturas
+durante todo el art&iacute;culo lo ten&eacute;is <A HREF="zip/art6.c">aqu&iacute;</A>.
+No pretende ser &oacute;ptimo ni mucho menos. Podr&iacute;a mejorarse
+enormemente pero no pretendo eso. Lo que quiero es que sea docente
+y claro pues son los conceptos los que ten&eacute;is que entender
+para poder hacer virguerias programando m&aacute;s tarde. Espero
+que lo compil&eacute;is y ejecut&eacute;is y sobretodo que entend&aacute;is
+lo que hace. Modificadlo a vuestro gusto y probad tanto como os
+sea posible.</FONT></P>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial">Nos vemos en el siguiente n&uacute;mero
+con m&aacute;s material !!!...hasta ahora !!!</FONT>
+
+
+<br>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR><hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

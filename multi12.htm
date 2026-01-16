@@ -1,0 +1,432 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Código fuente para el capítulo 2.
+</h3>
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<B><FONT SIZE=+1>RATON.H</FONT></B>
+
+<P>// LIBRERIA DEL RATON
+
+<P>#include &lt;dos.h>
+
+<P>// Mascara-dibujo del cursor
+
+<P>int cursor1 [32+32] = {
+<BR>&nbsp;0x3FFF, 0x1FFF, 0x0FFF, 0x07FF,
+<BR>&nbsp;0x03FF, 0x01FF, 0x00FF, 0x007F,
+<BR>&nbsp;0x003F, 0x001F, 0x000F, 0x0007,
+<BR>&nbsp;0x0007, 0xF81F, 0xFC0F, 0xFE0F,
+
+<P>&nbsp;0x0000, 0x4000, 0x6000, 0x7000,
+<BR>&nbsp;0x7800, 0x7C00, 0x7E00, 0x7F00,
+<BR>&nbsp;0x7F80, 0x7FC0, 0x7FE0, 0x7FF0,
+<BR>&nbsp;0x0780, 0x03C0, 0x01E0, 0x0000 };
+
+<P>// Detecta la existencia del driver del rat&oacute;n
+<BR>int&nbsp; DetectarRaton(void);
+<BR>// Muestra la flecha
+<BR>void MostrarRaton(void);
+<BR>// Oculta la flecha
+<BR>void OcultarRaton(void);
+<BR>// Establece una zona rectangular de la que el rat&oacute;n no puede
+salir
+<BR>void EstablecerLimRaton(int,int,int,int);
+<BR>// Pone la flecha en una coordenada
+<BR>void EstablecerPosRaton(int,int);
+<BR>// Espera a que se pulse un bot&oacute;n determinado
+<BR>void EsperarPulsadoBoton(int *);
+<BR>// Espera a que se suelte el bot&oacute;n determinado
+<BR>void EsperarSoltadoBoton(int);
+<BR>// Espera a que se pulse el bot&oacute;n izquierdo
+<BR>void EsperarPulsadoBotonI(void);
+<BR>// Espera a que se suelte el bot&oacute;n izquierdo
+<BR>void EsperarSoltadoBotonI(void);
+<BR>// Espera a que se pulse el bot&oacute;n derecho
+<BR>void EsperarPulsadoBotonD(void);
+<BR>// Espera a que se suelte el bot&oacute;n derecho
+<BR>void EsperarSoltadoBotonD(void);
+<BR>// Lee la coordenada del rat&oacute;n y el estado de los botones
+<BR>void LeerEstadoRaton(int *,int *,int *);
+<BR>// Lee s&oacute;lo la coordenada del rat&oacute;n
+<BR>void LeerPosRaton(int *,int *);
+<BR>// Lee s&oacute;lo el estado de los botones
+<BR>void PulsadoBoton(int *);
+<BR>// Espera a que se pulse cualquier bot&oacute;n
+<BR>void EsperarPulsadoCualquierBoton(int *);
+<BR>// Cambia el puntero
+<BR>void CambiaPunteroRaton(void);
+<BR>// Inicializa el driver del rat&oacute;n
+<BR>void InicializaRaton(int *,int *,char *);
+<BR>// Adec&pound;a la coordenada del rat&oacute;n para las BGI de Borland
+C
+<BR>void EvitaIncompRaton1(int,int);
+<BR>// Guarda la coordenada actual y oculta la flecha
+<BR>void AlejaRaton(int *,int *);
+<BR>// Deshace el alejamiento del rat&oacute;n guardando la compatibilidad
+con las BGI
+<BR>void AcercaRaton(int,int);
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>RATON.C</FONT></B>
+
+<P>#include "raton.h"
+
+<P>int DetectarRaton(void)
+<BR>{
+<BR>&nbsp;int w;
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,0
+<BR>&nbsp;&nbsp; mov bx,2
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;&nbsp; mov w,ax
+<BR>&nbsp;}
+<BR>&nbsp;return(w);
+<BR>}
+
+<P>void MostrarRaton( void )
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,1
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;}
+<BR>}
+
+<P>void OcultarRaton( void )
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,2
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;}
+<BR>}
+
+<P>void EstablecerLimRaton(int xi,int yi,int xf,int yf)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,7
+<BR>&nbsp;&nbsp; mov cx,xi
+<BR>&nbsp;&nbsp; mov dx,xf
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;&nbsp; mov ax,8
+<BR>&nbsp;&nbsp; mov cx,yi
+<BR>&nbsp;&nbsp; mov dx,yf
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;}
+<BR>}
+
+<P>void EstablecerPosRaton(int x,int y)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,4
+<BR>&nbsp;&nbsp; mov cx,x
+<BR>&nbsp;&nbsp; mov dx,y
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;}
+<BR>}
+
+<P>void EsperarPulsadoBoton(int *bot)
+<BR>{
+<BR>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while ((*bot!=1)&amp;&amp;(*bot!=2));
+<BR>}
+
+<P>void EsperarSoltadoBoton(int bot)
+<BR>{
+<BR>&nbsp;int *boton;
+
+<P>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(boton);
+<BR>&nbsp;}
+<BR>&nbsp;while (*boton==bot);
+<BR>}
+
+<P>void EsperarPulsadoBotonI(void)
+<BR>{
+<BR>&nbsp;int *bot;
+
+<P>&nbsp;*bot=1;
+<BR>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while (*bot!=1);
+<BR>}
+
+<P>void EsperarSoltadoBotonI(void)
+<BR>{
+<BR>&nbsp;int *bot;
+
+<P>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while (*bot==1);
+<BR>}
+
+<P>void EsperarPulsadoBotonD(void)
+<BR>{
+<BR>&nbsp;int *bot;
+
+<P>// *bot=2;
+<BR>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while (*bot!=2);
+<BR>}
+
+<P>void EsperarSoltadoBotonD(void)
+<BR>{
+<BR>&nbsp;int *bot;
+
+<P>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while (*bot==2);
+<BR>}
+
+<P>void LeerEstadoRaton(int *x,int *y,int *bot)
+<BR>{
+<BR>&nbsp;int xx,yy,boton;
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,3
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;&nbsp; mov boton,bx
+<BR>&nbsp;&nbsp; mov xx,cx
+<BR>&nbsp;&nbsp; mov yy,dx
+<BR>&nbsp;}
+<BR>&nbsp;// Si vale 1 es el izquierdo, si vale 2 es el derecho,si vale
+4 el central
+<BR>&nbsp;*x=xx;
+<BR>&nbsp;*y=yy;
+<BR>&nbsp;*bot=(int)boton;
+<BR>}
+
+<P>void LeerPosRaton(int *x,int *y)
+<BR>{
+<BR>&nbsp;int xx,yy;
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,3
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;&nbsp; mov xx,cx
+<BR>&nbsp;&nbsp; mov yy,dx
+<BR>&nbsp;}
+<BR>&nbsp;*x=xx;
+<BR>&nbsp;*y=yy;
+<BR>}
+
+<P>void PulsadoBoton(int *bot)
+<BR>{
+<BR>&nbsp;int boton;
+<BR>&nbsp;asm{
+<BR>&nbsp; mov ax,3
+<BR>&nbsp; int 0x33
+<BR>&nbsp; mov boton,bx
+<BR>&nbsp; }
+<BR>&nbsp;// Si vale 1 es el izquierdo, si vale 2 es el derecho,si vale
+4 el central
+<BR>&nbsp;*bot=(int)boton;
+<BR>}
+
+<P>void EsperarPulsadoCualquierBoton(int *bot)
+<BR>{
+<BR>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; PulsadoBoton(bot);
+<BR>&nbsp;}
+<BR>&nbsp;while ((*bot==2)||(*bot==1));
+<BR>}
+
+<P>void CambiaPunteroRaton(void)
+<BR>{
+<BR>&nbsp;long dir;
+<BR>&nbsp;int dir2,dir3;
+
+<P>&nbsp;dir=(long)cursor1;
+<BR>&nbsp;dir2=(int)dir;
+<BR>&nbsp;dir3=(int)(dir>>16);
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,9
+<BR>&nbsp;&nbsp; mov bx,0
+<BR>&nbsp;&nbsp; mov cx,0
+<BR>&nbsp;&nbsp; mov dx,dir2
+<BR>&nbsp;&nbsp; mov es,dir3
+<BR>&nbsp;&nbsp; int 0x33
+<BR>&nbsp;}
+<BR>}
+
+<P>void InicializaRaton(int *posx,int *posy,char *hayraton)
+<BR>{
+<BR>&nbsp;*hayraton=DetectarRaton();
+<BR>&nbsp;if (*hayraton==-1)
+<BR>&nbsp;{
+<BR>&nbsp; CambiaPunteroRaton();
+<BR>&nbsp; EstablecerPosRaton(360,250);
+<BR>&nbsp; // EstablecerPosRaton(650,490);
+<BR>&nbsp; MostrarRaton();
+<BR>&nbsp; LeerPosRaton(posx,posy);
+<BR>&nbsp;}
+<BR>}
+
+<P>void EvitaIncompRaton(int posx,int posy)
+<BR>{
+<BR>&nbsp;if ((posx!=650)||(posy!=490))
+<BR>&nbsp;{
+<BR>&nbsp; EstablecerLimRaton(0,0,630,470);
+<BR>&nbsp;}
+<BR>}
+
+<P>void AlejaRaton(int *posx,int *posy)
+<BR>{
+<BR>&nbsp;LeerPosRaton(posx,posy);
+<BR>&nbsp;OcultarRaton();
+<BR>}
+
+<P>void AcercaRaton(int posx,int posy)
+<BR>{
+<BR>&nbsp;EstablecerLimRaton(0,0,650,490);
+<BR>&nbsp;EstablecerPosRaton(650,490);
+<BR>&nbsp;MostrarRaton();
+<BR>&nbsp;EstablecerPosRaton(posx,posy);
+<BR>&nbsp;EstablecerLimRaton(0,0,630,470);
+<BR>}
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>EJEMPLO DE USO</FONT></B>
+
+<P>void main(void)
+<BR>{
+<BR>&nbsp;int bot;
+
+<P>&nbsp;DetectarRaton();
+<BR>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; sound(700);
+<BR>&nbsp; // Esperar pulsaci&oacute;n del bot&oacute;n izquierdo
+<BR>&nbsp; EsperarPulsadoBoton(&amp;bot);
+<BR>//&nbsp; do
+<BR>//&nbsp; {
+<BR>// asm{
+<BR>//&nbsp; mov ax,3
+<BR>//&nbsp; int 0x33
+<BR>//&nbsp; mov bot,bx
+<BR>// }
+<BR>//&nbsp; }
+<BR>//&nbsp; while ((bot!=1)&amp;&amp;(bot!=2));
+<BR>&nbsp; nosound();
+<BR>&nbsp; if (bot==1) EsperarSoltadoBotonI();
+<BR>&nbsp; if (bot==2) EsperarSoltadoBotonD();
+
+<P>&nbsp;}
+<BR>&nbsp;while (!kbhit());
+<BR>}
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

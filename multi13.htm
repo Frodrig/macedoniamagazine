@@ -1,0 +1,2445 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Código fuente para los capítulos 3,4,5,6,7,8 y 9.
+</h3>
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<B><FONT SIZE=+1>GRAFICOS.H</FONT></B>
+
+<P>#include &lt;alloc.h>
+<BR>#include &lt;stdio.h>
+<BR>#include &lt;dos.h>
+<BR>#include &lt;stdlib.h>
+<BR>#include &lt;time.h>
+
+<P>/////////////
+<BR>// GENERAL //
+<BR>/////////////
+
+<P>// Modos de video
+<BR>#define TEXTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x3
+<BR>#define MCGA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x13
+<BR>#define VGA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x12
+<BR>// Buffer para el modo 4 planos
+<BR>#define ANCHO_BUFFER 640
+<BR>// Direcci&cent;n de comienzo de la memoria de video "Compact"
+<BR>#define SEG_VGA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0xA000
+
+<P>#define BYTE unsigned char
+<BR>#define WORD unsigned int
+
+<P>/////////
+<BR>// FLI //
+<BR>/////////
+
+<P>// Memoria de video "Large" para los .FLI
+<BR>#define video ((char far*)0xa0000000L) /* Handy for loading a GIF directly
+*/
+<BR>// Buffer para aumentar la velocidad en la exposici&cent;n de un .FLI
+<BR>#define BUFSIZE&nbsp; 15000
+<BR>// Tipos de bloques de un .FLI
+<BR>#define FLI_COLOR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11
+<BR>#define FLI_LC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+12
+<BR>#define FLI_BLACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13
+<BR>#define FLI_BRUN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15
+<BR>#define FLI_COPY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 16
+<BR>// Buffer de entrada y salida para los .FLI
+<BR>static char *VBuf;
+<BR>// Estructura de la cabecera de un .FLI
+<BR>typedef struct
+<BR>{
+<BR>&nbsp;unsigned long size;
+<BR>&nbsp;WORD&nbsp; magic;
+<BR>&nbsp;WORD&nbsp; frames;
+<BR>&nbsp;WORD&nbsp; width;
+<BR>&nbsp;WORD&nbsp; height;
+<BR>&nbsp;WORD&nbsp; bits;
+<BR>&nbsp;WORD&nbsp; flags;
+<BR>&nbsp;WORD&nbsp; speed;
+<BR>&nbsp;unsigned long next;
+<BR>&nbsp;unsigned long frit;
+<BR>&nbsp;BYTE expand[102];
+<BR>}CABECERA_FLI;
+<BR>// Estructura de la cabecera de los frames de un .FLI
+<BR>typedef struct
+<BR>{
+<BR>&nbsp;unsigned long size;
+<BR>&nbsp;WORD&nbsp; magic;
+<BR>&nbsp;WORD&nbsp; chunks;
+<BR>&nbsp;BYTE expand[8];
+<BR>}CABECERA_FRAME;
+
+<P>////////////////////////
+<BR>// Variables Globales //
+<BR>////////////////////////
+
+<P>// Declaraci&cent;n del array de la paleta: 0-767 de ternas de RGB
+<BR>typedef BYTE PALETA[768];
+
+<P>/////////////////////////////
+<BR>// Modo de v&iexcl;deo 80x25x16c //
+<BR>/////////////////////////////
+
+<P>void ModoTexto(void);
+<BR>void Humo(void);
+
+<P>//////////////////////
+<BR>// MCGA 320x200x256 //
+<BR>//////////////////////
+
+<P>// Modo de v&iexcl;deo 320x200x256c
+<BR>void ModoMcga();
+<BR>// Lee un fichero .PCX de 320x200x256c y asigna la paleta directamente
+<BR>void LeePcxMcga(char [12], BYTE *);
+<BR>// Lee un fichero .PCX de 320x200x256c y almacena la paleta
+<BR>void LeePcxMcgaR(char [12],BYTE *,PALETA);
+<BR>// Espera un refresco vertical con una duraci&cent;n de 14.2 ms entre
+cada uno
+<BR>void EsperarBarrido(void);
+<BR>// Lee del DAC de video una terna de valores RGB pertenecientes a un
+color
+<BR>void Leer1ColorPaleta(BYTE,BYTE *,BYTE *,BYTE *);
+<BR>// Establece los tres valores RGB de un color en el DAC de video
+<BR>void Establecer1ColorPaleta(BYTE,BYTE,BYTE,BYTE);
+<BR>// Establece 256 colores en el DAC de video
+<BR>void EstablecerPaleta(PALETA);
+<BR>// Pone todos los colores de la paleta a R=0,G=0,B=0
+<BR>void PaletaNegra(void);
+<BR>// Pone todos los colores de la paleta a R=63,G=63,B=63
+<BR>void PaletaBlanca(void);
+<BR>// Lee la paleta del DAC de video y la almacena
+<BR>void SalvarPaleta(PALETA);
+<BR>// Hace un filtro de color a la paleta; =1 Rojo,=2 Verde, =3 Azul,
+=4 Gris
+<BR>// =5 oscurece.
+<BR>void FiltroDePaleta(char);
+<BR>// Enciende una paleta partiendo de una paleta negra a la paleta dada
+<BR>// El retardo nulo es 1, retardo>=1
+<BR>void EncenderPaleta(PALETA,BYTE);
+<BR>// Rota la paleta hasta que se pulse una tecla. Par&nbsp;metro de velocidad>=0
+<BR>void RotarPaleta(BYTE);
+<BR>// Apaga la paleta usando como partida la dada y decrementa los valores
+<BR>// hasta R=0,G=0,B=0 en todos los registros del DAC de video; retardo>=1
+<BR>void ApagarPaleta(PALETA,BYTE);
+<BR>// Pone un p&iexcl;xel en memoria de video en el modo 320x200x256c
+<BR>void PonerPixelMcga(int,int,char);
+<BR>// Lee un p&iexcl;xel de la memoria de video en el modo 320x200x256c
+<BR>BYTE LeerPixelMcga(int,int);
+<BR>// Lee un p&iexcl;xel=byte de la zona de memoria accedida por 320*y+x1
+<BR>BYTE LeerPixelMem(int,int,BYTE *);
+<BR>// Vuelca un bloque de memoria de 64000 bytes a partir de A000
+<BR>void VuelcaPantallaMcga(BYTE *);
+<BR>// Vuelca el contenido de la memoria de v&iexcl;deo en la zona de memoria
+dada
+<BR>void VuelcaMcgaPantalla(BYTE *);
+<BR>// Copia 64000 bytes de una direcci&cent;n en otra; origen->destino
+<BR>void CopiaPantallaMem(BYTE *,BYTE *);
+<BR>// Vuelca 64000 bytes a la memoria de video con un determinado orden
+<BR>void VuelcaEfecto(BYTE *,BYTE *,BYTE);
+<BR>// Vuelca 64000 bytes con un valor &pound;nico y determinado = CLS
+<BR>void VolcarPantallaColor(BYTE);
+<BR>// Dibuja una l&iexcl;nea en el modo 320x200x256c xi,yi,xf,yf,color
+<BR>void Linea(int,BYTE,int,BYTE,BYTE);
+<BR>// Copia un bloque dentro de una zona de memoria a otra zona de memoria;
+<BR>// xi,yi,xf,yf,ancho,alto
+<BR>// El ancho debe ser un n&pound;mero par, si es impar, el bloque saldr&iexcl;a
+oblicuo
+<BR>void BloqueMem(int,int,int,int,int,int,BYTE *,BYTE *);
+<BR>// Copia un bloque a excepci&cent;n de los bytes con valor 0 a una
+zona de
+<BR>// memoria; xi,yi,xf,yf,ancho,alto
+<BR>void SpriteMem(int,int,int,int,int,int,BYTE *,BYTE *);
+<BR>// Copia un bloque a la memoria de video; xi,yi,xf,yf,ancho,alto
+<BR>void BloqueMcga(int,int,int,int,int,int,BYTE *);
+<BR>// Copia un bloque menos los bytes=0 a la memoria de video;
+<BR>// xi,yi,xf,yf,ancho,alto
+<BR>void SpriteMcga(int,int,int,int,int,int,BYTE *);
+<BR>// Lee y visualiza un fichero .FLI en el modo 320x200x256c; velocidad>=0
+<BR>void VerFLIMcga(char [12],int,BYTE *);
+<BR>// Reduce una zona de memoria sobre otra
+<BR>void ReducePantalla(BYTE *,BYTE *,int,int,int,int,int,int,int);
+
+<P>////////////////////
+<BR>// 4P 320x200x256 //
+<BR>////////////////////
+
+<P>// Establece el modo de video 320x200 encadenado
+<BR>void ModoGraficoMcga4P(void);
+<BR>// Establece la esquina superior izquierda de la visualizaci&cent;n
+<BR>void PosicionVentana4P(int,int);
+<BR>// Limpia la memoria de video con un color
+<BR>void VolcarColor4P(BYTE);
+<BR>// Pone un p&iexcl;xel en memoria de video con unos l&iexcl;mites virtuales
+de 640x400
+<BR>void PonerPixelMcga4P(int,int,char);
+<BR>// Lee un p&iexcl;xel de la memoria de video. Rango = 640x400
+<BR>BYTE LeerPixelMcga4P(int,int);
+<BR>// Copia un bloque a la memoria de v&iexcl;deo
+<BR>void Bloque4P(int xi,int yi,int xf,int yf,int ancho,int alto,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla);
+<BR>// Copia 64000 bytes en una de las 4 posiciones; zona:0=izq,arr;1=der,arr;
+<BR>// 2=izq,abj;3=der,abj
+<BR>void VolcarPantalla4P(char,BYTE *);
+<BR>// Copia 64000 bytes en cualquier posici&cent;n dentro de los 640x400
+<BR>void VolcarPantalla4PA(int,int,int,int,int,BYTE *);
+
+<P>//////////////////////
+<BR>// VESA 640x480x256 //
+<BR>//////////////////////
+
+<P>// Establece el modo de video de 640x480x256c VESA
+<BR>void ModoVESA64x48(void);
+<BR>// Cambia el banco de escritura dentro de la tarjeta de video
+<BR>void CambiaBancoVESA(BYTE);
+<BR>// Lee un fichero .PCX y lo segmenta en 4 partes de 65535 bytes y
+<BR>// uno de 45060 bytes. Asigna la paleta al DAC de video
+<BR>void LeePcx64x48(char [12],BYTE *,BYTE *,BYTE *,BYTE *,BYTE *);
+<BR>// Lee un fichero .PCX y lo segmenta en 4 partes de 65535 bytes y
+<BR>// uno de 45060 bytes. Almacena la paleta
+<BR>void LeePcx64x48R(char [12],BYTE *,BYTE *,BYTE *,BYTE *,BYTE *,PALETA);
+<BR>// Vuelca 307200 bytes divididos en 5 segmentos
+<BR>void VuelcaPantalla64x48(BYTE *,BYTE *,BYTE *,BYTE *,BYTE *);
+<BR>// Borra la pantalla con el color dado
+<BR>void ClsPantalla64x48(BYTE);
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>GRAFICOS.C</FONT></B>
+
+<P>#include "graficos.h"
+
+<P>/////////////////////
+<BR>// TEXTO 80x25x16c //
+<BR>/////////////////////
+
+<P>void ModoTexto(void)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov al,TEXTO
+<BR>&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp;}
+<BR>}
+
+<P>void Humo(void)
+<BR>{
+<BR>&nbsp;char far *mem_video=(char far *)0xb8000000;
+<BR>&nbsp;register char far *p;
+<BR>&nbsp;int bandera=0;
+
+<P>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; bandera=0;
+<BR>&nbsp; for (p=mem_video;p&lt;mem_video+80*25*2;p++,p++)
+<BR>&nbsp; {
+<BR>&nbsp;if ((*p!=0) &amp;&amp; (*p!=32))
+<BR>&nbsp;{
+<BR>&nbsp; (*p)++;
+<BR>&nbsp; bandera=1;// A&pound;n quedan caracteres
+<BR>&nbsp;}
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;while (bandera);
+<BR>}
+
+<P>///////////////////////
+<BR>// MCGA 320x200x256c //
+<BR>///////////////////////
+
+<P>void ModoMcga(void)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; // Modo 13h
+<BR>&nbsp;&nbsp; mov al,MCGA
+<BR>&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp;&nbsp; // Limpia la memoria de v&iexcl;deo
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; xor ax,ax
+<BR>&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp;}
+<BR>}
+
+<P>void LeePcxMcga(char nombre[12],BYTE *pantalla)
+<BR>{
+<BR>&nbsp;register WORD cont,cont2;
+<BR>&nbsp;BYTE *direscrt,byte,r,g,b,filas;
+<BR>&nbsp;FILE *fichero;
+
+<P>&nbsp;fichero=fopen(nombre,"rb");
+<BR>&nbsp;if (!fichero)
+<BR>&nbsp;{
+<BR>&nbsp; ModoTexto();
+<BR>&nbsp; printf("\nNo se encuentra el fichero %s",nombre);
+<BR>&nbsp; exit (0);
+<BR>&nbsp;}
+<BR>&nbsp;fseek(fichero,128,0);
+<BR>&nbsp;direscrt=pantalla;
+<BR>&nbsp;cont=64000;
+<BR>&nbsp;while (cont>0)
+<BR>&nbsp;{
+<BR>&nbsp; byte=getc(fichero);
+<BR>&nbsp; if (byte&lt;=192)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; *direscrt++=byte;
+<BR>&nbsp;&nbsp; cont--;
+<BR>&nbsp; }
+<BR>&nbsp; else
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; cont2=byte&amp;63;
+<BR>&nbsp;&nbsp; byte=getc(fichero);
+<BR>&nbsp;&nbsp; for(;cont2>0;cont2--)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; *direscrt++=byte;
+<BR>&nbsp;&nbsp;&nbsp; cont--;
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;getc(fichero);
+<BR>&nbsp;for (cont2=0;cont2&lt;256;cont2++)
+<BR>&nbsp;{
+<BR>&nbsp; r=getc(fichero)>>2;
+<BR>&nbsp; g=getc(fichero)>>2;
+<BR>&nbsp; b=getc(fichero)>>2;
+<BR>&nbsp; Establecer1ColorPaleta(cont2,r,g,b);
+<BR>&nbsp;}
+<BR>&nbsp;fclose(fichero);
+<BR>}
+
+<P>void LeePcxMcgaR(char nombre[12],BYTE *pantalla,PALETA paleta)
+<BR>{
+<BR>&nbsp;register WORD cont,cont2;
+<BR>&nbsp;BYTE *direscrt,byte,r,g,b,filas;
+<BR>&nbsp;FILE *fichero;
+
+<P>&nbsp;fichero=fopen(nombre,"rb");
+<BR>&nbsp;if (!fichero)
+<BR>&nbsp;{
+<BR>&nbsp; ModoTexto();
+<BR>&nbsp; printf("\nNo se encuentra el fichero %s",nombre);
+<BR>&nbsp; exit (0);
+<BR>&nbsp;}
+<BR>&nbsp;fseek(fichero,128,0);
+<BR>&nbsp;direscrt=pantalla;
+<BR>&nbsp;cont=64000;
+<BR>&nbsp;while (cont>0)
+<BR>&nbsp;{
+<BR>&nbsp; byte=getc(fichero);
+<BR>&nbsp; if (byte&lt;=192)
+<BR>&nbsp; {
+<BR>&nbsp;*direscrt++=byte;
+<BR>&nbsp;cont--;
+<BR>&nbsp; }
+<BR>&nbsp; else
+<BR>&nbsp; {
+<BR>&nbsp;cont2=byte&amp;63;
+<BR>&nbsp;byte=getc(fichero);
+<BR>&nbsp;for(;cont2>0;cont2--)
+<BR>&nbsp;{
+<BR>&nbsp; *direscrt++=byte;
+<BR>&nbsp; cont--;
+<BR>&nbsp;}
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;getc(fichero);
+<BR>&nbsp;for (cont2=0;cont2&lt;768;cont2++)
+<BR>&nbsp;{
+<BR>&nbsp; paleta[cont2]=getc(fichero)>>2;
+<BR>&nbsp;}
+<BR>&nbsp;fclose(fichero);
+
+<P>}
+
+<P>void EsperarBarrido(void)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3da
+<BR>&nbsp;}
+<BR>&nbsp;l1:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; in al,dx
+<BR>&nbsp; and al,0x08
+<BR>&nbsp;&nbsp;&nbsp; jnz l1
+<BR>&nbsp;}
+<BR>&nbsp;l2:
+<BR>&nbsp;asm{
+<BR>&nbsp; in al,dx
+<BR>&nbsp;&nbsp;&nbsp; and al,0x08
+<BR>&nbsp; jz l2
+<BR>&nbsp; }
+<BR>}
+
+<P>void Leer1ColorPaleta(BYTE color,BYTE *rojo,BYTE *verde,BYTE *azul)
+<BR>{
+<BR>&nbsp;BYTE rrojo,vverde,aazul;
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,0x3c7
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov rrojo,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov vverde,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp; al,dx
+<BR>&nbsp;&nbsp; mov aazul,al
+<BR>&nbsp;}
+<BR>&nbsp;*rojo=rrojo;
+<BR>&nbsp;*verde=vverde;
+<BR>&nbsp;*azul=aazul;
+<BR>}
+
+<P>void Establecer1ColorPaleta(BYTE color,BYTE rojo,BYTE verde,BYTE azul)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov dx,0x3c8
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,rojo
+<BR>&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,verde
+<BR>&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,azul
+<BR>&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;}
+<BR>}
+
+<P>void EstablecerPaleta(PALETA paleta)
+<BR>{
+<BR>&nbsp;register int cont,cont2;
+
+<P>&nbsp;for (cont=0,cont2=0;cont&lt;256;cont2+=3,cont++)
+<BR>&nbsp;{
+<BR>&nbsp; Establecer1ColorPaleta(cont,paleta[cont2],paleta[cont2+1],paleta[cont2+2]);
+<BR>&nbsp;}
+<BR>}
+
+<P>void PaletaNegra(void)
+<BR>{
+<BR>&nbsp;register int cont;
+
+<P>&nbsp;for (cont=0;cont&lt;=255;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; Establecer1ColorPaleta(cont,0,0,0);
+<BR>&nbsp;}
+<BR>}
+
+<P>void PaletaBlanca(void)
+<BR>{
+<BR>&nbsp;register int cont;
+
+<P>&nbsp;for (cont=0;cont&lt;=255;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; Establecer1ColorPaleta(cont,63,63,63);
+<BR>&nbsp;}
+<BR>}
+
+<P>void SalvarPaleta(PALETA paleta)
+<BR>{
+<BR>&nbsp;register int cont,cont2;
+<BR>&nbsp;BYTE *rojo,*verde,*azul;
+<BR>&nbsp;
+
+<P>&nbsp;for (cont=0,cont2=0;cont&lt;256;cont++,cont2+=3)
+<BR>&nbsp;{
+<BR>&nbsp; Leer1ColorPaleta(cont,rojo,verde,azul);
+<BR>&nbsp; paleta[cont2]=*rojo;
+<BR>&nbsp; paleta[cont2+1]=*verde;
+<BR>&nbsp; paleta[cont2+2]=*azul;
+<BR>&nbsp;}
+<BR>}
+
+<P>void FiltroDePaleta(char valor)
+<BR>{
+<BR>&nbsp;register int cont,cont2;
+<BR>&nbsp;BYTE r,g,b;
+<BR>&nbsp;div_t division;
+
+<P>&nbsp;for (cont=0;cont&lt;256;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; Leer1ColorPaleta(cont,&amp;r,&amp;g,&amp;b);
+<BR>&nbsp; switch (valor)
+<BR>&nbsp; {
+<BR>&nbsp;case 1: // Paleta Roja
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont,r,0,0);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; break;
+<BR>&nbsp;case 2: // Paleta Verde
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont,0,g,0);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; break;
+<BR>&nbsp;case 3: // Paleta Azul
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont,0,0,b);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; break;
+<BR>&nbsp;case 4: // Paleta Gris
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; cont2=r+g+b; division=div(cont2,3); cont2=division.quot;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont,cont2,cont2,cont2);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; break;
+<BR>&nbsp;case 5: // Paleta m&nbsp;s oscura
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; division=div(r,2); r=division.quot;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; division=div(g,2); g=division.quot;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; division=div(b,2); b=division.quot;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont,r,g,b);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; break;
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>}
+
+<P>void RotarPaleta(BYTE velocidad)
+<BR>{
+<BR>&nbsp;WORD cont1,cont2;
+<BR>&nbsp;BYTE cont3,r1,g1,b1,r2,g2,b2;
+
+<P>&nbsp;do
+<BR>&nbsp;{
+<BR>&nbsp; for(cont2=0;cont2&lt;256;cont2++)
+<BR>&nbsp; {
+<BR>&nbsp;Leer1ColorPaleta(1,&amp;r1,&amp;g1,&amp;b1);
+<BR>&nbsp;for (cont1=1;cont1&lt;255;cont1++)
+<BR>&nbsp;{
+<BR>&nbsp; Leer1ColorPaleta(cont1+1,&amp;r2,&amp;g2,&amp;b2);
+<BR>&nbsp; for (cont3=0;cont3&lt;velocidad;cont3++)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; Leer1ColorPaleta(cont1+1,&amp;r2,&amp;g2,&amp;b2);
+<BR>&nbsp; }
+<BR>&nbsp; Establecer1ColorPaleta(cont1,r2,g2,b2);
+<BR>&nbsp;}
+<BR>&nbsp;Establecer1ColorPaleta(255,r1,g1,b1);
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;while(!kbhit());
+<BR>}
+
+<P>void ApagarPaleta(PALETA paleta,BYTE retardo)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp; push ds
+<BR>&nbsp;&nbsp;&nbsp; xor cx,cx
+<BR>&nbsp;&nbsp;&nbsp; mov ah,retardo
+<BR>&nbsp;}
+<BR>&nbsp;SIGUE_APAGANDO:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3C8
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp; mov dx,0x3DA
+<BR>&nbsp;}
+<BR>&nbsp;ESPERA_FIN_RETR:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; in al,dx
+<BR>&nbsp;&nbsp;&nbsp; and al,0x8
+<BR>&nbsp;&nbsp;&nbsp; jnz ESPERA_FIN_RETR
+<BR>&nbsp;}
+<BR>&nbsp;ESPERA_INI_RETR:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; in al,dx
+<BR>&nbsp; and al,0x8
+<BR>&nbsp;&nbsp;&nbsp; jz ESPERA_INI_RETR
+<BR>&nbsp;&nbsp;&nbsp; dec ah
+<BR>&nbsp;&nbsp;&nbsp; jnz ESPERA_FIN_RETR
+<BR>&nbsp;&nbsp;&nbsp; mov ah,retardo
+<BR>&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp;&nbsp; lds SI,paleta
+<BR>&nbsp;}
+
+<P>&nbsp;OTRO_DAC:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si]
+<BR>&nbsp;&nbsp;&nbsp; sub al,ch
+<BR>&nbsp;&nbsp;&nbsp; jge DEC_ROJO
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;DEC_ROJO:
+<BR>&nbsp;asm{
+<BR>&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si+1]
+<BR>&nbsp; sub al,ch
+<BR>&nbsp;&nbsp;&nbsp; jge DEC_VERDE
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;DEC_VERDE:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si+2]
+<BR>&nbsp;&nbsp;&nbsp; sub al,ch
+<BR>&nbsp;&nbsp;&nbsp; jge DEC_AZUL
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;DEC_AZUL:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; add si,3
+<BR>&nbsp;&nbsp;&nbsp; inc cl
+<BR>&nbsp;&nbsp;&nbsp; jnz OTRO_DAC
+<BR>&nbsp;&nbsp;&nbsp; inc ch
+<BR>&nbsp;&nbsp;&nbsp; cmp ch,00111111b
+<BR>&nbsp;&nbsp;&nbsp; jl&nbsp; SIGUE_APAGANDO
+<BR>&nbsp;&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void EncenderPaleta(PALETA paleta,BYTE retardo)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; push ds
+<BR>&nbsp; mov ah,retardo
+<BR>&nbsp;&nbsp;&nbsp; mov ch,00111111b
+<BR>&nbsp;&nbsp;&nbsp; xor cl,cl
+<BR>&nbsp;}
+<BR>&nbsp;SIGUE_ENCENDIEN:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3C8
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3da
+<BR>&nbsp;}
+<BR>&nbsp;ESPERA_FIN_RET:
+<BR>&nbsp;asm{
+<BR>&nbsp; in al,dx
+<BR>&nbsp;&nbsp;&nbsp; test al,00001000b
+<BR>&nbsp; jnz&nbsp; ESPERA_FIN_RET
+<BR>&nbsp;}
+<BR>&nbsp;ESPERA_INI_RET:
+<BR>&nbsp;asm{
+<BR>&nbsp; in al,dx
+<BR>&nbsp;&nbsp;&nbsp; test al,00001000b
+<BR>&nbsp;&nbsp;&nbsp; jz ESPERA_INI_RET
+<BR>&nbsp;&nbsp;&nbsp; dec ah
+<BR>&nbsp;&nbsp;&nbsp; jnz ESPERA_FIN_RET
+<BR>&nbsp;&nbsp;&nbsp; mov ah,retardo
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp;&nbsp; lds SI,paleta
+<BR>&nbsp;}
+<BR>&nbsp;OTR_DAC:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si]
+<BR>&nbsp;&nbsp;&nbsp; sub al,ch
+<BR>&nbsp;&nbsp;&nbsp; jge INC_ROJO
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;INC_ROJO:
+<BR>&nbsp;asm{
+<BR>&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si+1]
+<BR>&nbsp; sub al,ch
+<BR>&nbsp;&nbsp;&nbsp; jge INC_VERDE
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;INC_VERDE:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov al,[si+2]
+<BR>&nbsp;&nbsp;&nbsp; sub al,ch
+<BR>&nbsp; jge INC_AZUL
+<BR>&nbsp;&nbsp;&nbsp; xor al,al
+<BR>&nbsp;}
+<BR>&nbsp;INC_AZUL:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; add si,3
+<BR>&nbsp;&nbsp;&nbsp; dec cl
+<BR>&nbsp;&nbsp;&nbsp; jnz OTR_DAC
+<BR>&nbsp; cmp ch,00000000b
+<BR>&nbsp;&nbsp;&nbsp; jz&nbsp; FIN_ENCENDER
+<BR>&nbsp; dec ch
+<BR>&nbsp;&nbsp;&nbsp; jmp SIGUE_ENCENDIEN
+<BR>&nbsp;}
+<BR>&nbsp;FIN_ENCENDER:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+<BR>&nbsp;
+
+<P>void PonerPixelMcga(int x,int y,char color)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp; mov ax,0xA000
+<BR>&nbsp; mov es,ax
+<BR>&nbsp; mov bx,x
+<BR>&nbsp; mov dx,y
+<BR>&nbsp; mov di,bx
+<BR>&nbsp; mov bx,dx
+<BR>&nbsp; shl dx,8
+<BR>&nbsp; shl bx,6
+<BR>&nbsp; add dx,bx
+<BR>&nbsp; add di,dx
+<BR>&nbsp; mov al,color
+<BR>&nbsp; stosb
+<BR>&nbsp;}
+<BR>}
+
+<P>BYTE LeerPixelMcga(int x,int y)
+<BR>{
+<BR>&nbsp;char color;
+
+<P>&nbsp;asm{
+<BR>&nbsp;mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>/* Lo de abajo entre barras es lo mismo que esto. Hay que comprobar
+*/
+<BR>/* cu&nbsp;l v&nbsp; m&nbsp;s r&nbsp;pido */
+<BR>&nbsp;&nbsp; mov bx,x
+<BR>&nbsp;&nbsp; mov dx,y
+<BR>&nbsp;&nbsp; mov di,bx
+<BR>&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;shl bx,6
+<BR>&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;add di,dx
+<BR>&nbsp;&nbsp; /*
+<BR>&nbsp;&nbsp; mov bx,y
+<BR>&nbsp;&nbsp; mov bh,bl
+<BR>&nbsp;xor bl,bl
+<BR>&nbsp;&nbsp; mov ax,y
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; xor al,al
+<BR>&nbsp;&nbsp; shr ax,2
+<BR>&nbsp;&nbsp; add ax,bx
+<BR>&nbsp;&nbsp; add ax,x
+<BR>&nbsp;&nbsp; mov di,ax
+<BR>&nbsp;&nbsp; */
+<BR>&nbsp;mov cl,es:[di]
+<BR>&nbsp;&nbsp; mov color,cl
+<BR>&nbsp;}
+<BR>&nbsp;return(color);
+<BR>}
+
+<P>BYTE LeerPixelMem(int x,int y,BYTE *pantalla)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento;
+<BR>&nbsp;char color;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov ax,segmento
+<BR>&nbsp;mov es,ax
+<BR>&nbsp;&nbsp; mov bx,y
+<BR>&nbsp;&nbsp; mov bh,bl
+<BR>&nbsp;&nbsp; xor bl,bl
+<BR>&nbsp;mov ax,y
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; xor al,al
+<BR>&nbsp;&nbsp; shr ax,2
+<BR>&nbsp;&nbsp; add ax,bx
+<BR>&nbsp;&nbsp; add ax,x
+<BR>&nbsp;&nbsp; mov di,ax
+<BR>&nbsp;&nbsp; add di,desplazamiento
+<BR>&nbsp;&nbsp; mov cl,es:[di]
+<BR>&nbsp;mov color,cl
+<BR>&nbsp;}
+<BR>&nbsp;return(color);
+<BR>}
+
+<P>void VuelcaPantallaMcga(BYTE *pantalla)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplazamiento
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void VuelcaMcgaPantalla(BYTE *pantalla)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; push ds
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,segmento
+<BR>&nbsp;&nbsp; mov ds,ax
+<BR>&nbsp;&nbsp; mov di,desplazamiento
+<BR>&nbsp;&nbsp; xor si,si
+<BR>&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void CopiaPantallaMem(BYTE *pantalla,BYTE *memoria)
+<BR>{
+<BR>&nbsp;int segmento1,desplazamiento1,segmento2,desplazamiento2;
+
+<P>&nbsp;segmento1=FP_SEG(pantalla);
+<BR>&nbsp;segmento2=FP_SEG(memoria);
+<BR>&nbsp;desplazamiento1=FP_OFF(pantalla);
+<BR>&nbsp;desplazamiento2=FP_OFF(memoria);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov es,segmento2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,desplazamiento2
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplazamiento1
+
+<P>&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void VuelcaEfecto(BYTE *pantalla,BYTE *efecto,BYTE numcol)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento,valor=0x0A000;
+<BR>&nbsp;register int x,y;
+<BR>&nbsp;BYTE *puntero,gris;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;for (gris=0;gris&lt;numcol;gris++)
+<BR>&nbsp;{
+<BR>&nbsp; puntero=efecto;
+<BR>&nbsp; for (y=0;y&lt;200;y++)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; for (x=0;x&lt;320;x++)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; if ((*puntero==gris))
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;mov es,segmento
+<BR>&nbsp;mov bx,x
+<BR>&nbsp;mov di,bx
+<BR>&nbsp;mov dx,y
+<BR>&nbsp;mov bx,dx
+<BR>&nbsp;shl dx,8
+<BR>&nbsp;shl bx,6
+<BR>&nbsp;add dx,bx
+<BR>&nbsp;add di,dx
+<BR>&nbsp;add di,desplazamiento
+<BR>&nbsp;mov al,es:[di]
+<BR>&nbsp;mov es,valor
+<BR>&nbsp;sub di,desplazamiento
+<BR>&nbsp;stosb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; puntero++;
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>}
+<BR>&nbsp;
+
+<P>void VolcarPantallaColor(BYTE color)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep stosw
+<BR>&nbsp;}
+<BR>}
+
+<P>int Signo(float a)
+<BR>{
+<BR>&nbsp;if (a>0)&nbsp; {return (+1);}
+<BR>&nbsp;if (a&lt;0)&nbsp; {return (-1);}
+<BR>&nbsp;if (a==0) {return (0);}
+<BR>}
+
+<P>void Linea(int a,BYTE b,int c,BYTE d,BYTE color)
+<BR>{
+<BR>&nbsp;BYTE h,d1y,d2y;
+<BR>&nbsp;register int i,s,m,n,u,d1x,d2x,v;
+
+<P>&nbsp;u=c-a;
+<BR>&nbsp;v=d-b;
+<BR>&nbsp;d1x=Signo(u);
+<BR>&nbsp;d1y=Signo(v);
+<BR>&nbsp;d2x=d1x;
+<BR>&nbsp;d2y=0;
+<BR>&nbsp;m=abs(u);
+<BR>&nbsp;h=m;
+<BR>&nbsp;n=abs(v);
+<BR>&nbsp;if (!(m>n))
+<BR>&nbsp;{
+<BR>&nbsp; d2x=0;
+<BR>&nbsp; d2y=d1y;
+<BR>&nbsp; m=n;
+<BR>&nbsp; n=h;
+<BR>&nbsp;}
+<BR>&nbsp;s=m>>2;
+<BR>&nbsp;for (i=0;i&lt;=m;i++)
+<BR>&nbsp;{
+<BR>&nbsp; asm{
+<BR>&nbsp; mov ax,0xA000
+<BR>&nbsp; mov es,ax
+<BR>&nbsp; mov bx,a
+<BR>&nbsp; xor dh,dh
+<BR>&nbsp; mov dl,b
+<BR>&nbsp; mov di,bx
+<BR>&nbsp; mov bx,dx
+<BR>&nbsp; shl dx,8
+<BR>&nbsp; shl bx,6
+<BR>&nbsp; add dx,bx
+<BR>&nbsp; add di,dx
+<BR>&nbsp; mov al,color
+<BR>&nbsp; stosb
+<BR>&nbsp;}
+<BR>&nbsp; s=s+n;
+<BR>&nbsp; if (!(s&lt;m))
+<BR>&nbsp; {
+<BR>&nbsp;s=s-m;
+<BR>&nbsp;a=a+d1x;
+<BR>&nbsp;b=b+d1y;
+<BR>&nbsp; }
+<BR>&nbsp; else
+<BR>&nbsp; {
+<BR>&nbsp;a=a+d2x;
+<BR>&nbsp;b=b+d2y;
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>}
+
+<P>void BloqueMem(int xi,int yi,int xf,int yf,int ancho,int alto,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla,BYTE *memoria)
+<BR>{
+<BR>&nbsp;int segmento1,desplazamiento1,segmento2,desplazamiento2;
+
+<P>&nbsp;segmento1=FP_SEG(pantalla);
+<BR>&nbsp;segmento2=FP_SEG(memoria);
+<BR>&nbsp;desplazamiento1=FP_OFF(pantalla);
+<BR>&nbsp;desplazamiento2=FP_OFF(memoria);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov es,segmento2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,desplazamiento2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,yf
+<BR>&nbsp;&nbsp; add di,xf
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add di,dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplazamiento1
+<BR>&nbsp;&nbsp; mov dx,yi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,xi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,ancho
+<BR>&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; sub dx,ax
+<BR>&nbsp;&nbsp; shr ax,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,alto
+<BR>&nbsp;}
+<BR>&nbsp;salto:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov cx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; dec bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jnz salto
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void SpriteMem(int xi,int yi,int xf,int yf,int ancho,int alto,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla,BYTE *memoria)
+<BR>{
+<BR>&nbsp;int segmento1,desplazamiento1,segmento2,desplazamiento2;
+
+<P>&nbsp;segmento1=FP_SEG(pantalla);
+<BR>&nbsp;segmento2=FP_SEG(memoria);
+<BR>&nbsp;desplazamiento1=FP_OFF(pantalla);
+<BR>&nbsp;desplazamiento2=FP_OFF(memoria);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp; push bp
+<BR>&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp; mov es,segmento2
+<BR>&nbsp;&nbsp; mov di,desplazamiento2
+<BR>&nbsp;&nbsp; mov dx,yf
+<BR>&nbsp;&nbsp; add di,xf
+<BR>&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp; add di,dx
+
+<P>&nbsp;&nbsp; mov ds,segmento1
+<BR>&nbsp;&nbsp; mov si,desplazamiento1
+<BR>&nbsp;&nbsp; mov dx,yi
+<BR>&nbsp;&nbsp; add si,xi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+
+<P>&nbsp;&nbsp; mov ax,ancho
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; sub dx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bp,alto
+<BR>&nbsp;}
+<BR>&nbsp;salto:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,ax
+<BR>&nbsp;}
+<BR>&nbsp;salto2:
+<BR>&nbsp;asm{
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov bl,ds:[si]
+<BR>&nbsp;&nbsp; cmp bl,0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jz salto5
+<BR>&nbsp;&nbsp; movsb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jmp salto3
+<BR>&nbsp;}
+<BR>&nbsp;salto5:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc di
+<BR>&nbsp;}
+<BR>&nbsp;salto3:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; dec cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jnz salto2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+<BR>&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; dec bp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jnz salto
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; pop ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; pop bp
+<BR>&nbsp;}
+<BR>}
+
+<P>void BloqueMcga(int xi,int yi,int xf,int yf,int ancho,int alto,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,yf
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,xf
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add di,dx
+
+<P>&nbsp;&nbsp; mov ds,segmento
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplazamiento
+<BR>&nbsp;&nbsp; mov dx,yi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,xi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,ancho
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp; sub dx,ax
+<BR>&nbsp;&nbsp; shr ax,1
+<BR>&nbsp;&nbsp; mov bx,alto
+<BR>&nbsp;}
+<BR>&nbsp;salto:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; mov cx,ax
+<BR>&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; add si,dx
+<BR>&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp; dec bx
+<BR>&nbsp;&nbsp; jnz salto
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void SpriteMcga(int xi,int yi,int xf,int yf,int ancho,int alto,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla)
+<BR>{
+<BR>&nbsp;int segmento,desplazamiento;
+
+<P>&nbsp;segmento=FP_SEG(pantalla);
+<BR>&nbsp;desplazamiento=FP_OFF(pantalla);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push bp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,yf
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,xf
+<BR>&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add di,dx
+
+<P>&nbsp;&nbsp; mov ds,segmento
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplazamiento
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,yi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,xi
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; shl dx,8
+<BR>&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,ancho
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; sub dx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov bp,alto
+<BR>&nbsp;}
+<BR>&nbsp;salto:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,ax
+<BR>&nbsp;}
+<BR>&nbsp;salto2:
+<BR>&nbsp;asm{
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov bl,ds:[si]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; cmp bl,0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jz salto5
+<BR>&nbsp;&nbsp; movsb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jmp salto3
+<BR>&nbsp;}
+<BR>&nbsp;salto5:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc di
+<BR>&nbsp;}
+<BR>&nbsp;salto3:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; dec cx
+<BR>&nbsp;&nbsp; jnz salto2
+<BR>&nbsp;&nbsp; add si,dx
+<BR>&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp; dec bp
+<BR>&nbsp;&nbsp; jnz salto
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;&nbsp; pop bp
+<BR>&nbsp;}
+<BR>}
+
+<P>void VerFLIMcga(char fichero[12],int retardo,BYTE *pant)
+<BR>{
+<BR>&nbsp;register WORD pixel,vc;
+<BR>&nbsp;int segmento,desplazamiento;
+<BR>&nbsp;FILE *fli;
+<BR>&nbsp;CABECERA_FLI hdr;
+<BR>&nbsp;CABECERA_FRAME frm;
+<BR>&nbsp;unsigned long size;
+<BR>&nbsp;WORD type,pakets,cnt,lines,change,i,c,f,cont,cont2;
+<BR>&nbsp;BYTE skip,v,*aux,rojo,verde,azul;
+<BR>&nbsp;signed char s;
+<BR>&nbsp;clock_t tiks;
+<BR>&nbsp;PALETA paleta;
+
+<P>&nbsp;// Apertura del fichero
+<BR>&nbsp;fli=fopen(fichero,"rb");
+<BR>&nbsp;if (!fli)
+<BR>&nbsp;{
+<BR>&nbsp; ModoTexto();
+<BR>&nbsp; printf("\nNo se encuentra el fichero %s",fichero);
+<BR>&nbsp; exit (0);
+<BR>&nbsp;}
+<BR>&nbsp;// M&nbsp;ximo buffer para dar velocidad en la carga del fichero
+<BR>&nbsp;setvbuf(fli,VBuf,_IOFBF,BUFSIZE);
+<BR>&nbsp;// Lectura de la cabeza
+<BR>&nbsp;fread(&amp;hdr,sizeof(CABECERA_FLI),1,fli);
+
+<P>&nbsp;// Para cada frame...
+<BR>&nbsp;for (f=0;f&lt;hdr.frames;f++)
+<BR>&nbsp;{
+<BR>&nbsp; tiks=clock();
+<BR>&nbsp; // Lee una cabecera de frame
+<BR>&nbsp; fread(&amp;frm,sizeof(CABECERA_FRAME),1,fli);
+<BR>&nbsp; if (frm.size!=0L)
+<BR>&nbsp;for (i=0;i&lt;frm.chunks;i++)
+<BR>&nbsp;{
+<BR>&nbsp; // Cabecera del chunk
+<BR>&nbsp; fread(&amp;size,sizeof(long),1,fli);
+<BR>&nbsp; type=getw(fli);
+<BR>&nbsp; // Dependiendo del tipo del frame
+<BR>&nbsp; switch (type)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; // L&iexcl;nea comprimida
+<BR>&nbsp;&nbsp; case FLI_LC:
+<BR>&nbsp;&nbsp; // N&pound;mero de l&iexcl;neas que son iguales al frame
+anterior
+<BR>&nbsp;&nbsp; lines=getw(fli);
+<BR>&nbsp;&nbsp; // N&pound;mero de l&iexcl;neas que han cambiado
+<BR>&nbsp;&nbsp; change=getw(fli);
+<BR>&nbsp;&nbsp; // Pasado a ensamblador: cont=(256*lines+64*lines) ==
+320*lines
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov vc,4
+<BR>&nbsp;&nbsp;&nbsp; mov ax,lines
+<BR>&nbsp;&nbsp;&nbsp; mov bx,ax
+<BR>&nbsp;&nbsp;&nbsp; shl ax,8
+<BR>&nbsp;&nbsp;&nbsp; shl bx,6
+<BR>&nbsp;&nbsp;&nbsp; add ax,bx
+<BR>&nbsp;&nbsp;&nbsp; mov cont,ax
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; cont2=cont;
+<BR>&nbsp;&nbsp; for(c=0;c&lt;change;c++)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp; pakets=getc(fli);
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; inc vc
+<BR>&nbsp; }
+<BR>&nbsp; while (pakets>0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; skip=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; dec pakets
+<BR>&nbsp;&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp;&nbsp; mov al,skip
+<BR>&nbsp;&nbsp;&nbsp; add cont,ax
+<BR>&nbsp;&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; s=getc(fli);
+<BR>&nbsp;&nbsp; if (s>0)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add vc,ax
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; salto:
+<BR>&nbsp;&nbsp; rojo=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp; mov di,cont
+<BR>&nbsp;&nbsp;&nbsp; mov al,rojo
+<BR>&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp;&nbsp;&nbsp; inc cont
+<BR>&nbsp;&nbsp;&nbsp; dec s
+<BR>&nbsp;&nbsp;&nbsp; jnz salto
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; else
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; s=-s;
+<BR>&nbsp;&nbsp;&nbsp; v=getc(fli);
+<BR>&nbsp;&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ch,ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cl,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,cont
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,v
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep stosb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add cont,ax
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; add cont2,320
+<BR>&nbsp; }
+<BR>&nbsp; cont=cont2;
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Si ha habido un n&pound;mero impar de bytes, se lee
+el de relleno
+<BR>&nbsp;&nbsp; if (vc&amp;1) getc(fli);
+<BR>&nbsp;&nbsp; break;
+
+<P>&nbsp;&nbsp; case FLI_BRUN:
+<BR>&nbsp;&nbsp; // Para contar el n&pound;mero de bytes descomprimidos
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov vc,0
+<BR>&nbsp;&nbsp;&nbsp; mov cont,0
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Compresi&cent;n l&iexcl;nea por l&iexcl;nea
+<BR>&nbsp;&nbsp; for (skip=0;skip&lt;200;skip++)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp; // N&pound;mero de paquetes en la l&iexcl;nea
+<BR>&nbsp; pakets=getc(fli);
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; inc vc
+<BR>&nbsp; }
+<BR>&nbsp; while (pakets>0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; // N&pound;mero de veces que se repite un byte
+<BR>&nbsp;&nbsp; s=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp;&nbsp; dec pakets
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Si s es negativo, el n&pound;mero de bytes es -s y
+est&nbsp;n en
+<BR>&nbsp;&nbsp; // los siguientes s bytes: no est&nbsp; comprimido
+<BR>&nbsp;&nbsp; if (s&lt;0)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; s=-s;
+<BR>&nbsp;&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add vc,ax
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; salto1:
+<BR>&nbsp;&nbsp;&nbsp; rojo=getc(fli);
+<BR>&nbsp;&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,cont
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,rojo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc cont
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; dec s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; jnz salto1
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Si es positivo, se repite el siguiente byte s veces:
+<BR>&nbsp;&nbsp; // est&nbsp; comprimido
+<BR>&nbsp;&nbsp; else
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; v=getc(fli);
+<BR>&nbsp;&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,cont
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,v
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cl,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ch,ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep stosb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,s
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add cont,ax
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Si se han obtenido un n&pound;mero inpar de bytes,
+entonces falta
+<BR>&nbsp;&nbsp; // otro byte que es de relleno
+<BR>&nbsp;&nbsp; if (vc&amp;1) getc(fli);
+<BR>&nbsp;&nbsp; break;
+<BR>&nbsp;&nbsp; // Cambiar un n&pound;mero determinado de colores
+<BR>&nbsp;&nbsp; case FLI_COLOR:
+<BR>&nbsp;&nbsp; // N&pound;mero de paquetes comprimidos
+<BR>&nbsp;&nbsp; pakets=getw(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov vc,2
+<BR>&nbsp;&nbsp;&nbsp; mov c,0
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; while (pakets--)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp; // Cu&nbsp;ntos colores se saltan
+<BR>&nbsp; skip=getc(fli);
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; inc vc
+<BR>&nbsp;&nbsp; // Cada 3 bytes representa 1 color: rojo, verde y azul,
+por lo
+<BR>&nbsp;&nbsp; // que se saltar&nbsp;n 3*n&pound;mero de colores bytes
+<BR>&nbsp;&nbsp; mov al,skip
+<BR>&nbsp;&nbsp; xor ah,ah
+<BR>&nbsp;&nbsp; mov cl,3
+<BR>&nbsp;&nbsp; mul cl
+<BR>&nbsp;&nbsp; add c,ax
+<BR>&nbsp;&nbsp; inc vc
+<BR>&nbsp; }
+<BR>&nbsp; // Cu&nbsp;ntos colores se cambian
+<BR>&nbsp; cnt=getc(fli);
+<BR>&nbsp; // Si es 0, se interpreta como 256, de 0 a 255 colores a cambiar
+<BR>&nbsp; if (cnt==0)
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; mov cnt,256
+<BR>&nbsp; }
+<BR>&nbsp; while (cnt--)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; // Se asignan los valores RGB de cada color a la paleta
+<BR>&nbsp;&nbsp; paleta[c]=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; inc c
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; paleta[c]=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; inc c
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; paleta[c]=getc(fli);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; inc c
+<BR>&nbsp;&nbsp;&nbsp; add vc,3
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Se hace efectivo el cambio de paleta
+<BR>&nbsp;&nbsp; for (lines=0,change=0;lines&lt;256;change+=3,lines++)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp; rojo=paleta[change];
+<BR>&nbsp; verde=paleta[change+1];
+<BR>&nbsp; azul=paleta[change+2];
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; mov ax,lines
+<BR>&nbsp;&nbsp; mov dx,0x3c8
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,rojo
+<BR>&nbsp;&nbsp; mov dx,0x3c9
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,verde
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; mov al,azul
+<BR>&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp; // Si ha habido un n&pound;mero impar de bytes, se lee el de
+relleno
+<BR>&nbsp; if (vc&amp;1) getc(fli);
+<BR>&nbsp; break;
+<BR>&nbsp; // 64000 bytes sin comprimir
+<BR>&nbsp; case FLI_COPY:
+<BR>&nbsp; aux=pant;
+<BR>&nbsp; // Se leen los 64000 p&iexcl;xeles de la pantalla
+<BR>&nbsp; for (pixel=0;pixel&lt;64000;pixel++) *aux++=getc(fli);
+<BR>&nbsp; // Se vuelcan de una vez
+<BR>&nbsp; segmento=FP_SEG(pant);
+<BR>&nbsp; desplazamiento=FP_OFF(pant);
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; push ds
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; mov ds,segmento
+<BR>&nbsp;&nbsp; mov si,desplazamiento
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; pop ds
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Aqu&iexcl; no hay comprobaci&cent;n del n&pound;mero
+de vc, 64000 es par
+<BR>&nbsp;&nbsp; break;
+<BR>&nbsp;&nbsp; // Cls a negro
+<BR>&nbsp;&nbsp; case FLI_BLACK:
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp;&nbsp; xor ax,ax
+<BR>&nbsp;&nbsp;&nbsp; mov cx,32000
+<BR>&nbsp;&nbsp;&nbsp; rep stosw
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; break;
+
+<P>&nbsp;&nbsp; // Si no se reconoce se intenta avanzar hasta algo conocido
+<BR>&nbsp;&nbsp; default:
+<BR>&nbsp;&nbsp;&nbsp; ModoTexto();
+<BR>&nbsp;&nbsp;&nbsp; printf("\nVersi&cent;n incorrecta de archivo FLI");
+<BR>&nbsp;&nbsp;&nbsp; exit (0);
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;// Espera hasta el n&pound;mero especificado de ticks del reloj
+<BR>&nbsp;while (clock()-tiks&lt;retardo);
+<BR>&nbsp;}
+<BR>&nbsp;fclose(fli);
+<BR>}
+
+<P>void ReducePantalla(BYTE *origen,BYTE *destino,int orgx,int orgy,int
+destx,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int desty,int destancho,int
+destalto,int factor)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp; push ds
+<BR>&nbsp; mov ax,orgy
+<BR>&nbsp;&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp;&nbsp; mul dx
+<BR>&nbsp;&nbsp;&nbsp; add ax,word ptr orgx
+<BR>&nbsp;&nbsp;&nbsp; add word ptr origen,ax
+<BR>&nbsp;&nbsp;&nbsp; mov ax,desty
+<BR>&nbsp;&nbsp;&nbsp; mov dx,320
+<BR>&nbsp;&nbsp;&nbsp; mul dx
+<BR>&nbsp;&nbsp;&nbsp; add ax,word ptr destx
+<BR>&nbsp;&nbsp;&nbsp; add word ptr destino,ax
+<BR>&nbsp;&nbsp;&nbsp; lds si,origen
+<BR>&nbsp;&nbsp;&nbsp; les di,destino
+<BR>&nbsp;&nbsp;&nbsp; mov cx,destancho
+<BR>&nbsp;&nbsp;&nbsp; mov dx,destalto
+<BR>&nbsp;&nbsp;&nbsp; cld
+<BR>&nbsp;}
+<BR>&nbsp;REDUCE_MAS:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; push cx
+<BR>&nbsp;&nbsp; push si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push di
+<BR>&nbsp;}
+<BR>&nbsp;REDUCE_LINE:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,[si]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es:[di],al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; add si,factor
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; inc di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; loop REDUCE_LINE
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; pop di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; pop si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,factor
+<BR>&nbsp;}
+<BR>&nbsp;REDUCELO:
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; add si,320
+<BR>&nbsp;&nbsp;&nbsp; loop REDUCELO
+<BR>&nbsp; add di,320
+<BR>&nbsp;&nbsp;&nbsp; pop cx
+<BR>&nbsp; dec dx
+<BR>&nbsp; jnz REDUCE_MAS
+<BR>&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+<BR>&nbsp;
+
+<P>//////////////////////////////
+<BR>// 4 PLANOS 320x200x256 x 4 //
+<BR>//////////////////////////////
+
+<P>void ModoGraficoMcga4P(void)
+<BR>{
+<BR>&nbsp;asm {
+<BR>&nbsp;mov ax,0x13
+<BR>&nbsp;int 0x10
+<BR>&nbsp;mov dx,0x3c4
+<BR>&nbsp;mov ax,0x404
+<BR>&nbsp;out dx,ax
+<BR>&nbsp;mov dx,0x3d4
+<BR>&nbsp;mov ax,0x014
+<BR>&nbsp;out dx,ax
+<BR>&nbsp;mov ax,0xc317
+<BR>&nbsp;out dx,ax
+<BR>&nbsp;mov ah,80
+<BR>&nbsp;mov al,0x13
+<BR>&nbsp;out dx,ax
+<BR>&nbsp;}
+<BR>&nbsp;PaletaNegra();
+<BR>&nbsp;VolcarColor4P(0);
+<BR>}
+
+<P>void PosicionVentana4P(int x,int y)
+<BR>{
+<BR>&nbsp;unsigned long offset;
+
+<P>&nbsp;offset=(long)ANCHO_BUFFER*(long)y+(long)x;
+<BR>&nbsp;outportb(0x3d4,0x0d);
+<BR>&nbsp;outportb(0x3d5,offset>>2);
+<BR>&nbsp;outportb(0x3d4,0x0c);
+<BR>&nbsp;outportb(0x3d5,offset>>10);
+<BR>&nbsp;outportb(0x3c0,0x13|0x20);
+<BR>&nbsp;outportb(0x3c0,(offset&amp;3)&lt;&lt;1);
+<BR>}
+
+<P>void VolcarColor4P(BYTE color)
+<BR>{
+<BR>&nbsp;register unsigned long i;
+
+<P>&nbsp;asm{
+<BR>&nbsp; mov al,0x2
+<BR>&nbsp; mov dx,0x3c4
+<BR>&nbsp; out dx,al
+<BR>&nbsp;}
+<BR>&nbsp;for (i=0;i&lt;65536L;i++)
+<BR>&nbsp;{
+<BR>&nbsp; asm{
+<BR>&nbsp; mov al,15
+<BR>&nbsp; mov dx,0x3c5
+<BR>&nbsp; out dx,al
+<BR>&nbsp; }
+<BR>&nbsp; *((BYTE *)MK_FP(SEG_VGA,i))=color;
+<BR>&nbsp;}
+<BR>}
+
+<P>void PonerPixelMcga4P(int x,int y,char color)
+<BR>{
+<BR>&nbsp;BYTE desp;
+
+<P>&nbsp;desp=0x1&lt;&lt;(x&amp;3);
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c4
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp; mov bx,x
+<BR>&nbsp;&nbsp;&nbsp; shr bx,2
+<BR>&nbsp;&nbsp;&nbsp; mov di,bx
+<BR>&nbsp; mov dx,y
+<BR>&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp; shl bx,7
+<BR>&nbsp;&nbsp;&nbsp; shl dx,5
+<BR>&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp;}
+<BR>}
+
+<P>BYTE LeerPixelMcga4P(int x,int y)
+<BR>{
+<BR>&nbsp;BYTE desp,color;
+
+<P>&nbsp;desp=x&amp;3;
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x4
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3ce
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp; mov bx,x
+<BR>&nbsp;&nbsp;&nbsp; shr bx,2
+<BR>&nbsp;&nbsp;&nbsp; mov di,bx
+<BR>&nbsp;&nbsp;&nbsp; mov dx,y
+<BR>&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp; shl bx,7
+<BR>&nbsp;&nbsp;&nbsp; shl dx,5
+<BR>&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp;&nbsp;&nbsp; add di,dx
+<BR>&nbsp;&nbsp;&nbsp; mov cl,es:[di]
+<BR>&nbsp;&nbsp;&nbsp; mov color,cl
+<BR>&nbsp;}
+<BR>&nbsp;return (color);
+<BR>}
+
+<P>void Bloque4P(int xi,int yi,int xf,int yf,int ancho,int alto,BYTE *pantalla)
+<BR>{
+<BR>&nbsp;BYTE *puntero,color,desp;
+<BR>&nbsp;register int x,y;
+<BR>&nbsp;int xfi,yfi,desplaza;
+<BR>&nbsp;
+
+<P>&nbsp;xfi=xf+ancho;
+<BR>&nbsp;yfi=yf+alto;
+<BR>&nbsp;desplaza=320-ancho;
+<BR>&nbsp;puntero=pantalla;
+<BR>&nbsp;puntero+=320*yi+xi;
+<BR>&nbsp;for (y=yf;y&lt;yfi;y++)
+<BR>&nbsp;{
+<BR>&nbsp; for (x=xf;x&lt;xfi;x++)
+<BR>&nbsp; {
+<BR>&nbsp;color=*puntero;
+<BR>&nbsp;desp=0x1&lt;&lt;(x&amp;3);
+<BR>&nbsp;asm{
+<BR>&nbsp; mov al,0x2
+<BR>&nbsp; mov dx,0x3c4
+<BR>&nbsp; out dx,al
+<BR>&nbsp; inc dx
+<BR>&nbsp; mov al,desp
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov ax,SEG_VGA
+<BR>&nbsp; mov es,ax
+<BR>&nbsp; mov bx,x
+<BR>&nbsp; shr bx,2
+<BR>&nbsp; mov di,bx
+<BR>&nbsp; mov dx,y
+<BR>&nbsp; mov bx,dx
+<BR>&nbsp; shl bx,7
+<BR>&nbsp; shl dx,5
+<BR>&nbsp; add dx,bx
+<BR>&nbsp; add di,dx
+<BR>&nbsp; mov al,color
+<BR>&nbsp; stosb
+<BR>&nbsp;}
+<BR>&nbsp;puntero++;
+<BR>&nbsp; }
+<BR>&nbsp; puntero+=desplaza;
+<BR>&nbsp;}
+<BR>}
+
+<P>void VolcarPantalla4P(char zona,BYTE *pantalla)
+<BR>{
+<BR>&nbsp;BYTE *color,desp,col;
+<BR>&nbsp;register int cont,cont2,cont3,salto,incre;
+
+<P>&nbsp;switch (zona)
+<BR>&nbsp;{
+<BR>&nbsp; case 0:salto=0;incre=80;break;
+<BR>&nbsp; case 1:salto=80;incre=160;break;
+<BR>&nbsp; case 2:salto=32000;incre=32080;break;
+<BR>&nbsp; case 3:salto=32080;incre=32160;break;
+<BR>&nbsp;}
+
+<P>&nbsp;color=pantalla;
+<BR>&nbsp;cont2=salto;
+<BR>&nbsp;cont3=incre;
+<BR>&nbsp;desp=0x01;
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c4
+<BR>&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;}
+
+<P>&nbsp;for (cont=0;cont&lt;16000;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; if ((cont3-cont2)==0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; cont3+=160;
+<BR>&nbsp;&nbsp; cont2+=80;
+<BR>&nbsp; }
+<BR>&nbsp; col=*color;
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,cont2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,col
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp; }
+<BR>&nbsp; cont2++;
+<BR>&nbsp; color+=4;
+<BR>&nbsp;}
+
+<P>&nbsp;desp=0x01&lt;&lt;1;
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp; mov dx,0x3c4
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;}
+
+<P>&nbsp;cont2=salto;
+<BR>&nbsp;cont3=incre;
+<BR>&nbsp;color=pantalla;
+<BR>&nbsp;color++;
+<BR>&nbsp;for (cont=0;cont&lt;16000;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; if ((cont3-cont2)==0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; cont3+=160;
+<BR>&nbsp;cont2+=80;
+<BR>&nbsp; }
+<BR>&nbsp; col=*color;
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov di,cont2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,col
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp; }
+<BR>&nbsp; cont2++;
+<BR>&nbsp; color+=4;
+<BR>&nbsp;}
+
+<P>&nbsp;desp=0x01&lt;&lt;2;
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c4
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;}
+
+<P>&nbsp;cont2=salto;
+<BR>&nbsp;cont3=incre;
+<BR>&nbsp;color=pantalla;
+<BR>&nbsp;color+=2;
+<BR>&nbsp;for (cont=0;cont&lt;16000;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; if ((cont3-cont2)==0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; cont3+=160;
+<BR>&nbsp;&nbsp; cont2+=80;
+<BR>&nbsp; }
+<BR>&nbsp; col=*color;
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; mov di,cont2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,col
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp; }
+<BR>&nbsp; cont2++;
+<BR>&nbsp; color+=4;
+<BR>&nbsp;}
+
+<P>&nbsp;desp=0x01&lt;&lt;3;
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c4
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;}
+
+<P>&nbsp;cont2=salto;
+<BR>&nbsp;cont3=incre;
+<BR>&nbsp;color=pantalla;
+<BR>&nbsp;color+=3;
+<BR>&nbsp;for (cont=0;cont&lt;16000;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; if ((cont3-cont2)==0)
+<BR>&nbsp; {
+<BR>&nbsp;cont3+=160;
+<BR>&nbsp;cont2+=80;
+<BR>&nbsp; }
+<BR>&nbsp; col=*color;
+<BR>&nbsp; asm{
+<BR>&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; mov di,cont2
+<BR>&nbsp;&nbsp; mov al,col
+<BR>&nbsp;&nbsp; stosb
+<BR>&nbsp; }
+<BR>&nbsp; cont2++;
+<BR>&nbsp; color+=4;
+<BR>&nbsp;}
+<BR>}
+
+<P>// Avance indica
+<BR>void VolcarPantalla4PA(int avance,int x0,int y0,int tamx,int tamy,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *pantalla)
+<BR>{
+<BR>&nbsp;BYTE *puntero,color,desp;
+<BR>&nbsp;int x,y,xf,yf;
+<BR>&nbsp;char far *punto;
+
+<P>&nbsp;xf=x0+tamx;
+<BR>&nbsp;yf=y0+tamy;
+<BR>&nbsp;puntero=pantalla;
+<BR>&nbsp;puntero+=avance*320;
+<BR>&nbsp;for (y=y0;y&lt;yf;y++)
+<BR>&nbsp;{
+<BR>&nbsp; for (x=x0;x&lt;xf;x++)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; color=*puntero;
+<BR>&nbsp;&nbsp; desp=0x1&lt;&lt;(x&amp;3);
+<BR>&nbsp;&nbsp; asm{
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov dx,0x3c4
+<BR>&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; inc dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,desp
+<BR>&nbsp;&nbsp;&nbsp; out dx,al
+<BR>&nbsp;&nbsp;&nbsp; mov ax,SEG_VGA
+<BR>&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp; mov bx,x
+<BR>&nbsp; shr bx,2
+<BR>&nbsp;&nbsp;&nbsp; mov di,bx
+<BR>&nbsp;&nbsp;&nbsp; mov dx,y
+<BR>&nbsp;&nbsp;&nbsp; mov bx,dx
+<BR>&nbsp;&nbsp;&nbsp; shl bx,7
+<BR>&nbsp;&nbsp;&nbsp; shl dx,5
+<BR>&nbsp;&nbsp;&nbsp; add dx,bx
+<BR>&nbsp; add di,dx
+<BR>&nbsp;&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp;&nbsp; }
+
+<P>&nbsp;&nbsp; puntero++;
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>}
+
+<P>//////////////////////
+<BR>// VESA 640x480x256 //
+<BR>//////////////////////
+
+<P>void ModoVESA64x48(void)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x2
+<BR>&nbsp;&nbsp;&nbsp; mov bx,0x101
+<BR>&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp;}
+<BR>}
+
+<P>void CambiaBancoVESA(BYTE banco)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp;&nbsp; mov dl,banco
+<BR>&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp;}
+<BR>}
+
+<P>void LeePcx64x48(char nombre[12],BYTE *p1,BYTE *p2,BYTE *p3,BYTE *p4,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *p5)
+<BR>{
+<BR>&nbsp; register unsigned long total;
+<BR>&nbsp; register BYTE byte,contador;
+<BR>&nbsp; BYTE r,g,b;
+<BR>&nbsp; int cont;
+<BR>&nbsp; FILE *fichero;
+<BR>&nbsp; BYTE *aux,*aux2,*aux3,*aux4,*aux5;
+
+<P>&nbsp; fichero=fopen(nombre,"rb");
+<BR>&nbsp; if (!fichero)
+<BR>&nbsp; {
+<BR>&nbsp;ModoTexto();
+<BR>&nbsp;printf("\nNo se encuentra el fichero %s",nombre);
+<BR>&nbsp;exit (0);
+<BR>&nbsp; }
+<BR>&nbsp; // Salta la cabecera de 128 bytes
+<BR>&nbsp; fseek(fichero,128,0);
+<BR>&nbsp; // Punteros auxiliares que apuntan a las cinco zonas de memoria
+en donde
+<BR>&nbsp; // se almacenara el fichero
+<BR>&nbsp; aux=p1;
+<BR>&nbsp; aux2=p2;
+<BR>&nbsp; aux3=p3;
+<BR>&nbsp; aux4=p4;
+<BR>&nbsp; aux5=p5;
+<BR>&nbsp; // 640 x 480 = 307200 bytes
+<BR>&nbsp; total=307200;
+<BR>&nbsp; while (total>0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; byte=getc(fichero);
+<BR>&nbsp;&nbsp; // Si no indica comprimido
+<BR>&nbsp;&nbsp; if(byte&lt;=0xC0)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp; // En cada zona de memoria se almacenar&nbsp;n 65535 bytes,
+menos en la &pound;ltima,
+<BR>&nbsp;&nbsp; // en la que se almacenar&nbsp;n 45060 bytes
+<BR>&nbsp;&nbsp;&nbsp; if(total>241665)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else if (total>176130)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux2++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp; else if (total>110595)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux3++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else if (total>45060)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux4++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else *aux5++=byte;
+
+<P>&nbsp;&nbsp;&nbsp; total--;
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;// Si indica comprimido
+<BR>&nbsp;else
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; contador=byte&amp;0x3F;
+<BR>&nbsp;&nbsp;&nbsp; byte=getc(fichero);
+<BR>&nbsp; for(;contador>0;contador--)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; // Igual al anterior caso
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; if(total>241665)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else if (total>176130)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux2++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else if (total>110595)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux3++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else if (total>45060)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux4++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else *aux5++=byte;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; total--;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; // Salta la indicaci&cent;n de separaci&cent;n entre pixels
+y paleta
+<BR>&nbsp; getc(fichero);
+<BR>&nbsp; // Asigna la paleta al DAC de video
+<BR>&nbsp; for(cont=0;cont&lt;256;cont++)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; r=getc(fichero)>>2;
+<BR>&nbsp;&nbsp; g=getc(fichero)>>2;
+<BR>&nbsp;&nbsp; b=getc(fichero)>>2;
+<BR>&nbsp;&nbsp; Establecer1ColorPaleta(cont,r,g,b);
+<BR>&nbsp; }
+<BR>&nbsp; fclose(fichero);
+<BR>}
+
+<P>void LeePcx64x48R(char nombre[12],BYTE *p1,BYTE *p2,BYTE *p3,BYTE *p4,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *p5,PALETA paleta)
+<BR>{
+<BR>&nbsp; register unsigned long total;
+<BR>&nbsp; register BYTE byte,contador;
+<BR>&nbsp; BYTE r,g,b;
+<BR>&nbsp; int cont;
+<BR>&nbsp; FILE *fichero;
+<BR>&nbsp; BYTE *aux,*aux2,*aux3,*aux4,*aux5;
+
+<P>&nbsp; fichero=fopen(nombre,"rb");
+<BR>&nbsp; if (!fichero)
+<BR>&nbsp; {
+<BR>&nbsp;ModoTexto();
+<BR>&nbsp;printf("\nNo se encuentra el fichero %s",nombre);
+<BR>&nbsp;exit (0);
+<BR>&nbsp; }
+
+<P>&nbsp; // Salta la cabecera de 128 bytes
+<BR>&nbsp; fseek(fichero,128,0);
+<BR>&nbsp; // Punteros auxiliares que apuntan a las cinco zonas de memoria
+en donde
+<BR>&nbsp; // se almacenara el fichero
+<BR>&nbsp; aux=p1;
+<BR>&nbsp; aux2=p2;
+<BR>&nbsp; aux3=p3;
+<BR>&nbsp; aux4=p4;
+<BR>&nbsp; aux5=p5;
+<BR>&nbsp; // 640 x 480 = 307200 bytes
+<BR>&nbsp; total=307200;
+<BR>&nbsp; while (total>0)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp; byte=getc(fichero);
+<BR>&nbsp;&nbsp; // Si no indica comprimido
+<BR>&nbsp;&nbsp; if(byte&lt;=0xC0)
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp; // En cada zona de memoria se almacenar&nbsp;n 65535 bytes,
+menos en la &pound;ltima,
+<BR>&nbsp;&nbsp; // en la que se almacenar&nbsp;n 45060 bytes
+<BR>&nbsp;&nbsp;&nbsp; if(total>241665)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else if (total>176130)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux2++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else if (total>110595)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp; *aux3++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else if (total>45060)
+<BR>&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; *aux4++=byte;
+<BR>&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp; else *aux5++=byte;
+
+<P>&nbsp; total--;
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; // Si indica comprimido
+<BR>&nbsp;&nbsp; else
+<BR>&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp; contador=byte&amp;0x3F;
+<BR>&nbsp;&nbsp;&nbsp; byte=getc(fichero);
+<BR>&nbsp;&nbsp;&nbsp; for(;contador>0;contador--)
+<BR>&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; // Igual al anterior caso
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; if(total>241665)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp; else if (total>176130)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux2++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else if (total>110595)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux3++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else if (total>45060)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; {
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *aux4++=byte;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; else *aux5++=byte;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; total--;
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; }
+<BR>&nbsp; }
+<BR>&nbsp;&nbsp; }
+<BR>&nbsp; // Salta la indicaci&cent;n de separaci&cent;n entre pixels
+y paleta
+<BR>&nbsp; getc(fichero);
+<BR>&nbsp; // Asigna la paleta a la variable de tipo PALETA
+<BR>&nbsp;for (cont=0;cont&lt;768;cont++)
+<BR>&nbsp;{
+<BR>&nbsp; paleta[cont]=getc(fichero)>>2;
+<BR>&nbsp;}
+
+<P>&nbsp; fclose(fichero);
+<BR>}
+
+<P>void VuelcaPantalla64x48(BYTE *banco0,BYTE *banco1,BYTE *banco2,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BYTE *banco3,BYTE
+*banco4)
+<BR>{
+<BR>&nbsp;register int segmento0,segmento1,segmento2,segmento3,segmento4;
+<BR>&nbsp;register int desplaza0,desplaza1,desplaza2,desplaza3,desplaza4;
+
+<P>&nbsp;segmento0=FP_SEG(banco0);
+<BR>&nbsp;desplaza0=FP_OFF(banco0);
+<BR>&nbsp;segmento1=FP_SEG(banco1);
+<BR>&nbsp;desplaza1=FP_OFF(banco1);
+<BR>&nbsp;segmento2=FP_SEG(banco2);
+<BR>&nbsp;desplaza2=FP_OFF(banco2);
+<BR>&nbsp;segmento3=FP_SEG(banco3);
+<BR>&nbsp;desplaza3=FP_OFF(banco3);
+<BR>&nbsp;segmento4=FP_SEG(banco4);
+<BR>&nbsp;desplaza4=FP_OFF(banco4);
+
+<P>&nbsp;asm{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; push ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento0
+<BR>&nbsp;&nbsp; mov si,desplaza0
+<BR>&nbsp; // Cambio de banco=0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dl,0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp; // 65534 veces [ds:si]->[es:di]. 65534 bytes = 32767 words
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,32767
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp; // El byte que falta de los 1&sect;s 65535. 1 vez [ds:si]->[es:di]
+<BR>&nbsp;&nbsp; movsb
+
+<P>&nbsp; // Primer byte de la segunda zona de memoria y que completan
+<BR>&nbsp; // los 65536 bytes -> 64 kbytes asignables al primer banco de
+la Svga
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplaza1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp; // Cambio al banco 1
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dl,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino, buffer de video
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp; // Forzar posici&cent;n par en memoria
+<BR>&nbsp;&nbsp; movsb
+<BR>&nbsp; // 65532 veces lo mismo que antes
+<BR>&nbsp;&nbsp; mov cx,32766
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp; // Ahora el desfase es de 2 bytes y se ir&nbsp; incrementando
+en 1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplaza2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsw
+<BR>&nbsp; // Cambio al banco 2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dl,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Y vuelta a empezar con la siguiente zona de memoria
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp; // 65532 veces lo mismo que antes
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,32766
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp; // Byte que falta: 32766 words + 1 byte = 65533
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp; // Desfase= 3 bytes
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplaza3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp; // Cambio al banco 3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Siguiente zona de memoria
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp; // Forzar posici&cent;n par en memoria
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp; // 65530 veces lo mismo que antes
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,32765
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+<BR>&nbsp;&nbsp; movsb
+<BR>&nbsp; // Desfase= 4 bytes
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ds,segmento4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov si,desplaza4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; movsw
+<BR>&nbsp; // Cambio al banco 4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov dl,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Siguiente zona de memoria y ultima
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; xor di,di
+<BR>&nbsp; // 45056 veces lo mismo que antes 22528
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; mov cx,22528
+<BR>&nbsp;&nbsp;&nbsp;&nbsp; rep movsw
+
+<P>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+
+<P>void ClsPantalla64x48(BYTE color)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp;&nbsp; push ds
+
+<P>&nbsp; // Cambio de banco=0
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,0
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; mov cx,32768
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp; // Cambio de banco=1
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,1
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; mov cx,32768
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp; // Cambio de banco=2
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,2
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; mov cx,32768
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp; // Cambio de banco=3
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,3
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; mov cx,32768
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp; // Cambio de banco=4
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,4
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp;&nbsp; mov cx,32768
+<BR>&nbsp;&nbsp; rep stosw
+<BR>&nbsp; // Cambio de banco=5
+<BR>&nbsp;&nbsp; mov ah,0x4f
+<BR>&nbsp;&nbsp; mov al,0x5
+<BR>&nbsp;&nbsp; xor bx,bx
+<BR>&nbsp;&nbsp; xor dh,dh
+<BR>&nbsp;&nbsp; mov dl,5
+<BR>&nbsp;&nbsp; int 0x10
+<BR>&nbsp; // Destino: la memoria buffer a la que accede la tarjeta:A000h
+<BR>&nbsp;&nbsp; mov ax,0xA000
+<BR>&nbsp;&nbsp; mov es,ax
+<BR>&nbsp;&nbsp; xor di,di
+<BR>&nbsp;&nbsp; mov al,color
+<BR>&nbsp;&nbsp; mov ah,al
+<BR>&nbsp; // 45056 veces lo mismo que antes 22528
+<BR>&nbsp;&nbsp; mov cx,22528
+<BR>&nbsp;&nbsp; rep movsw
+
+<P>&nbsp;&nbsp; pop ds
+<BR>&nbsp;}
+<BR>}
+<BR>&nbsp;
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

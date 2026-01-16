@@ -1,0 +1,483 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Creación de alias</H3>
+<p align=justify>
+
+
+Un alias es una especie de &quot;atajo&quot; que podemos crear y que nos permitir&aacute; ejecutar un n&uacute;mero ilimitado de comandos de una sola vez. Podemos pensar en un alias como un nuevo comando u orden para mIRC que creamos nosotros mismos. Lo que conseguimos es la ejecuci&oacute;n ordenada de todos los comandos que deseemos escribiendo una sola orden. Podemos encontrar todos los alias de que disponemos en un momento determinado en el men&uacute; TOOLS opci&oacute;n "aliases". Es ah&iacute; donde debemos escribir los nuevos alias que creemos, o modificar los existentes. </P>
+
+<P>No obstante, antes de empezar a crear y modificar alias es preciso tener un buen conocimiento de los comandos del mIRC, puesto que son ellos los que forman el n&uacute;cleo fundamental de las ordenes que se emplean en un alias. Los comandos del mIRC est&aacute;n incluidos en este cursillo.</P>
+<h4>¿Dónde podemos usar los alias?</h4>
+
+<P>Los Aliases se pueden usar en las ventanas donde normalmente ponemos lo que pensamos o escribimos, tambi&eacute;n en los popups y en los remotes cosa que explicare mas adelante. Las teclas que nunca usamos, o pocas veces son las teclas de funci&oacute;n, las cuales se pueden configurar en los aliases usando a nicks seleccionados o en el canal, dependiendo de como hayamos definido el alias. </P>
+
+<P>Tambi&eacute;n podemos llamar a otros alias desde un alias o usarlos como un loop, para conseguir distintas cosas. Para que no se caiga en la tentaci&oacute;n de cometer un fallo y crear un loop infinito (cosa que nos bloquear&iacute;a el ordenador) existe un comando que es el /maxdepth que puede cambiar las veces que se repite algo que esta puesto por defecto en 5 como m&aacute;ximo y m&iacute;nimo como 1. Para lo que sirve este comando es ni mas ni menos que el alias pueda llamar a solo 5 alias mas, con un nivel m&aacute;ximo de 100 si usamos /maxdepth 100</P>
+
+<center>       UNA SOLUCION CUANDO ENTRE UN ALIAS EN UN LOOP, PULSAD CTROL+BREAK PARA PARAR EL LOOP.</center>
+<P>&nbsp;</P>
+<B><I><h4>Creación de alias.</h4>
+</B></I>
+<P>La definici&oacute;n de un alias se compone de dos partes: el nombre o patr&oacute;n del alias, y las instrucciones que se ejecutar&aacute;n cada vez que llamemos a este alias. Vamos a verlo con un ejemplo sencillo: </P>
+
+<B><P>                                           /entra /join #canal</P>
+</B>
+<P>Este alias se llama "entra", y cada vez que en la l&iacute;nea de escritura pongamos: /entra, el programa ejecutar&aacute; el comando  /join #canal </P>
+
+<P>Obs&eacute;rvese que el nombre del alias debe de ir precedido del s&iacute;mbolo de comando "/" al se ejecutado en una ventana del mIRC. A la hora de crear el alias no es necesario el signo &quot;/&quot;, pero es conveniente ponerlo. A continuaci&oacute;n del nombre pondremos un espacio en blanco, y las ordenes que queremos que el alias ejecute al ser invocado. Estas ordenes ser&aacute;n normalmente otros comandos u otros alias. No es recomendable el uso de la recursividad, es decir, emplear el nombre del alias que estamos definiendo dentro de su propia definici&oacute;n.</P>
+
+<P>Si en la definici&oacute;n del alias queremos especificar varios comandos u ordenes, no nos vale la sintaxis anterior, a estos efectos disponemos de las llaves {} para encerrar todas las l&iacute;neas del alias. Podemos poner el alias de dos formas:</P>
+
+<B><P>                 /entra {</P>
+<P>               /nick GaTo</P>
+<P>               /join #amigos</P>
+<P>               /mode GaTo +i</P>
+<P>&#9;/say Hola a todos</P>
+<P>                 }</P>
+
+</B><P>Podr&iacute;a ser tambi&eacute;n: </P>
+<B><P>/entra { /nick GaTo | /join #amigos | /mode GaTo +i | /say Hola a todos }  </P>
+
+</B><P>En este caso hemos separado las instrucciones usado el signo  | (Alt Gr+1) en lugar de pulsar Enter.</P>
+
+<P>Este alias cambiar&aacute; nuestro nick, nos introducir&aacute; en el canal #amigos, y pondr&aacute; nuestro modo de usuario en +i (invisible).</P>
+
+<P>Evidentemente los alias no serian lo que son si no permitieran una mayor flexibilidad en sus definiciones. Para ello usaremos los identificadores, que se pueden encontrar en este curso en su secci&oacute;n espec&iacute;fica. Imaginemos que  no queremos especificar un nick para el alias /entra, ni tampoco los canales en que este nos debe de introducir, sino que deseamos que estos sean los que decidamos en cada momento que ejecutamos el alias. Esto es posible utilizando identificadores posicionales del tipo $nº de la siguiente forma:</P>
+<B>
+<P>                 /entra {</P>
+<P>                 nick $1</P>
+<P>                 join $2</P>
+<P>                 mode $1 +i</P>
+<P>                 }</P>
+</B>
+<P>De esta forma el alias esperar&aacute; que nosotros especifiquemos el nick y los canales a continuaci&oacute;n de la llamada, y sustituir&aacute; $1, $2, y $3 por la primera, segunda, y tercera palabra que escribamos detr&aacute;s de la orden /entra. Para lograr el mismo resultado que antes deberemos escribir:</P>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>/entra GaTo #amigos </P>
+</B></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P> A&uacute;n m&aacute;s, podemos hacer que el propio programa nos pregunte en una ventana de di&aacute;logo cual es el valor que queremos introducir en el alias, empleando el par&aacute;metro $? o $$?. Por ejemplo:</P>
+<B>
+<P>                                           /j /join $?="¿A qu&eacute; canal quieres entrar? (con # delante)"</P>
+</B>
+<P>Cuando llamemos a alias /j, nos aparecer&aacute; una ventana que nos dir&aacute;: "¿A qu&eacute; canal quieres entrar? (con # delante)", y el programa nos introducir&aacute; en el canal que especifiquemos.</P>
+
+<P>Un identificador muy &uacute;til que se usa en combinaci&oacute;n con $? es $!. Este nos permite recuperar el valor que hemos introducido en la ventana de di&aacute;logo, sin necesidad de tenerlo que escribir de nuevo. Por ejemplo:</P>
+<B>
+<P>                 /minick {</P>
+<P>                   /nick $?="Introduce tu nuevo nick"</P>
+<P>                   /say ¿Que os parece mi nuevo nick: $! ?</P>
+<P>                 }</P>
+</B>
+<P>El comando /say es una orden que solo se ejecuta desde dentro de un script, y equivale al comando /msg #. Es decir env&iacute;a un mensaje al canal actual.</P>
+
+<P>Si a la hora de invocar un alias que contiene par&aacute;metros posicionales o del tipo $? omitimos la palabra por la cual estos deben de ser sustituidos (no ponemos un nick o unos nombres de canal en los ejemplos anteriores), el programa intentar&aacute; ejecutar de todos modos el alias, y en la mayor&iacute;a de los casos se producir&aacute; un error. Una alternativa interesante es hacer  uso de la variaci&oacute;n $$nº &oacute; $$?. El doble signo $ hace saber al programa que si en la llamada a un alias no se da un valor a ese par&aacute;metro, debe de ignorar la orden. Por ejemplo:</P>
+
+<B><P>                            /saludo /say Hola $$1 , $2 , $3 .Este es el canal de la diversi&oacute;n !!</P>
+</B>
+<P>Podemos ejecutar el alias /saludo especificando hasta tres nombres o palabras para ser incluidas en la l&iacute;nea del /say, pero funcionar&aacute; igualmente si ponemos solo dos o una; sin embargo, si no damos al menos un valor tras la llamada /saludo el programa lo ignorar&aacute; y no ejecutar&aacute; acci&oacute;n alguna.</P>
+
+<P>Obs&eacute;rvese que hemos tenido la precauci&oacute;n de definir los identificadores bien separados del resto del texto por espacios en blancos a derecha e izquierda, si no lo hacemos as&iacute; el programa no los identificar&aacute; como tales y los tomar&aacute; literalmente como un texto. Si en alguna ocasi&oacute;n es preciso que la palabra que sustituya al identificador aparezca junto a otros caracteres que no sean blancos (signos ortogr&aacute;ficos, par&eacute;ntesis, el path de un fichero...etc.) podemos recurrir al identificador $+, este lo &uacute;nico que hace es eliminar los espacios en blanco que tiene a derecha e izquierda en la presentaci&oacute;n final de la l&iacute;nea.</P>
+
+<P>       Por ejemplo:</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>/fichero /say La ruta de mi cliente de IRC es: C:/mirc/ $+ $1</P>
+</B></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>       Si escribimos: </P><DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>/fichero mirc32.exe </P>
+</B></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>       Obtendremos la l&iacute;nea: </P><DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>La ruta de mi cliente de IRC es: C:/mirc/mirc32.exe</P>
+</B></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>Una variante interesante de los identificadores $nº, $?, $$nº, y $$? la podemos lograr anteponiendo a los mismos el s&iacute;mbolo #; esto nos evita el tener que escribir siempre este s&iacute;mbolo antes del nombre cuando queramos introducir el nombre de un canal, puesto que el programa lo insertar&aacute; autom&aacute;ticamente. Por ejemplo:</P>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<B><P>/j /join #$?="En que canal quieres entrar? (sin #)"</P>
+</B></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P>Otra opci&oacute;n muy &uacute;til de la creaci&oacute;n de aliases es la especificaci&oacute;n de alias dirigidos a las teclas de funci&oacute;n, es decir el nombre o patr&oacute;n se asocia con las teclas F1 a F12, o bien de combinaciones de estas con los botones Shift y Control; de este modo solo es necesario pulsar la combinaci&oacute;n de teclas correspondiente para que el alias se ejecute.</P>
+
+<P>       Ejemplos:</P><DIR>
+<DIR>
+
+<B><P>/F1 /say Hola $$?="Escribe el nick a saludar:" $+ . Bienvenido al canal</P>
+</B></DIR>
+</DIR>
+
+<P>       Con este alias no necesitamos m&aacute;s que pulsar F1 para que el programa nos pida un nick, y emita un mensaje de saludo a ese nick en el canal activo.</P>
+<DIR>
+<DIR>
+
+<B><P>/sF2 /quit Adi&oacute;s amigos, hasta pronto!</P>
+</B></DIR>
+</DIR>
+
+<P>Con este alias desconectaremos del server dejando un mensaje de despedida al pulsar las teclas Shift + F2</P>
+<DIR>
+<DIR>
+
+<B><P>/cF3 /ctcp $$?="nick?" ping</P>
+</B></DIR>
+</DIR>
+
+<P>Con este alias podremos enviar un ping solo pulsando la combinaci&oacute;n Control + F3 y escribiendo el nick que recibir&aacute; el ping.</P>
+
+<P>De lo visto hasta ahora se deduce f&aacute;cilmente que la principal potencia de los alias reside en el uso de los identificadores $; hay otros muchos adem&aacute;s de los que hemos descrito aqu&iacute;, que proporcionan diferentes utilidades, una lista m&aacute;s detallada de estos se puede consultar en el apartado IDENTIFICADORES DEL mIRC. Claro que hay otros recursos como el uso de variables, la instrucci&oacute;n if-then-else, etc. Veamos m&aacute;s a fondo los alias.</P>
+
+<h4>Creando secciones en un alias</h4>
+
+<P>En los alias podemos crear secciones o apartados es los que definiremos los comandos que se ejecutan en cada uno. Las secciones se definen poniendo :Nombre_secci&oacute;n. Para movernos de una a otra usamos el comando goto Nombre_secci&oacute;n. Si no decimos nada, no ponemos goto &quot;algo&quot; el mIRC ejecutar&aacute; el alias de forma normal, ignorando las secciones que existan. La mejor forma de entenderlo es vi&eacute;ndolo:</P>
+
+<B><P>/frase {</P>
+<P>  /set %num $$?=&quot;Del 1 al 3 ¿C&oacute;mo es de pesado $$1 ?&quot;</P>
+<P>  if (%num == 1) goto pesado1</P>
+<P>  if (%num == 2) goto pesado2</P>
+<P>  if (%num == 3) goto superpesado</P>
+<P>  :pesado1</P>
+<P>  /say Bueno a&uacute;n podemos aguantar a $$1 Hacedle un sitio y que se siente con nosotros.</P>
+<P>  /me invita a $$1 a una taza de caf&eacute; [__]D ~~~~~ reci&eacute;n hecho.</P>
+<P>  goto fin</P>
+<P>  :pesado2 </P>
+<P>  /say $$1 es un poco pesado. ¿Por qu&eacute; no cierras un poco la boquita majo?</P>
+<P>  goto fin</P>
+<P>  :superpesado</P>
+<P>  /say ¡¡Dios m&iacute;o que pesado que eres $$1 !! </P>
+<P>  /kick # $$1 Te he pateado de pesado que eres. Ajo y agua. </P>
+<P>  /say Menos mal que se ha ido $$1 . Qu&eacute; tranquilos nos ha dejado.</P>
+<P>  goto fin</P>
+<P>  :fin</P>
+<P>}</P>
+
+</B><P>Aqu&iacute; vemos que hay tres secciones claramente diferenciadas, son: pesado1, pesado2 y superpesado. Si escribimos /frase Luis nos aparecer&aacute; una ventana pregunt&aacute;ndonos &quot;Del 1 al 3 ¿C&oacute;mo es de pesado Luis?&quot;. Dependiendo del n&uacute;mero que digamos 1, 2 o 3 se ejecutar&aacute; una parte del alias espec&iacute;fica para ese valor.</P>
+<P ALIGN="CENTER">ES MUY IMPORTANTE AL FINAL DE UNA SECCI&Oacute;N PONER GOTO FIN PARA QUE SE TERMINE LA EJECUCI&Oacute;N DEL ALIAS.</P>
+<P> En caso de no poner nada se ejecutar&iacute;a entero, las tres secciones seguidas.</P>
+
+<B><P>Otro ejemplo bastante sencillo y vistoso:</P>
+
+<P>/dib {</P>
+<P>  /set %animal $$?=&quot;Elige: Vaca o Raton&quot;</P>
+<P>  if (%animal == Vaca) goto vaca</P>
+<P>  if (%animal == Raton) goto raton</P>
+<P>  :vaca</P>
+<P>  /say ------((__)) </P>
+<P>  /say -------(00) </P>
+<P>  /say nn--(o__o)--nn-</P>
+<P>  /say -------´--` -------- Muuuuu</P>
+<P>  goto fin</P>
+<P>  :raton</P>
+<P>  /say ------()_() </P>
+<P>  /say ------(o o) </P>
+<P>  /say -ooO--`o'--Ooo-</P>
+<P>  goto fin</P>
+<P>  :fin</P>
+<P>}</P>
+</B>
+<h4>Abreviaciones compartidas</h4>
+<P>M&uacute;ltiples comandos pueden compartir la misma abreviaci&oacute;n:</P>
+
+<B><P>       /jt /join $1 | /topic $1 Solo probando....</P>
+</B>
+<P>       En este alias el par&aacute;metro $1 es usado dos veces. Si ponemos /jt #prueba primero entrar&iacute;amos en el canal y luego cambiar&iacute;amos el comentario o topic de ese canal a &quot; Solo probando... &quot;. Podr&iacute;amos haber usado tambi&eacute;n <FONT FACE="Symbol">&#33;</FONT>
+$, que significar&iacute;a decir lo mismo que lo ya dicho.</P>
+
+<P>       Otro ejemplo:</P>
+
+<P>       <B>&#9;/amor /say ¡¡ Quiero a $1 ! | /say ¡¡ Realmente quiero a $1 !!</P>
+</B>
+<P>       Si pusi&eacute;ramos /amor Mar&iacute;a pondr&iacute;a:</P>
+<B><P> /say ¡¡ Quiero a Mar&iacute;a !! | /say ¡¡ Realmente quiero a Mar&iacute;a !!</P>
+</B>
+<B><P>CAMBIANDO MODOS (OPEANDO, ETC.)</P>
+</B>
+<P>       Antes de poner nada tienes que saber el funcionamiento de los modos, para eso esta el manual del mirc, asi que si no</P>
+<P>       sabes como funcionan te remito a el para que te enteres.</P>
+
+<B><P>       /mode #canal +ooo nick1 nick2 nick3</P>
+</B>
+<P>       ...lo cual dar&aacute; op a tres personas al mismo tiempo</P>
+
+<P>       Un bonito alias podr&iacute;a ser</P>
+
+<B><P>       /op /mode # +ooo $1 $2 $3</P>
+</B>
+<P>       Para dar op a Andr&eacute;s, Paco y Mar&iacute;a pondr&iacute;as /op Andr&eacute;s Paco Mar&iacute;a</P>
+
+<P>       El s&iacute;mbolo # en este alias nos muestra el uso de otra abreviaci&oacute;n predeterminada (# y $!).# siempre nos representa el nombre del canal del que usamos sobre el alias.</P>
+
+<P>       En el mismo sentido podemos usar:</P>
+
+<B><P>       /deop /mode # -ooo $1 $2 $3</P>
+<P>       /ban /mode # +b $1</P>
+<P>       /kick /kick # $1</P>
+<P>       /dbk /mode # -o $1 | /kick # $1 | /mode # +b $1</P>
+</B>
+<P>       IMPORTANTE: Es muy importante que dejes una separaci&oacute;n o espacio entre la abreviaci&oacute;n predeterminada y el texto, si no lo haces as&iacute; NO FUNCIONARA BIEN EL ALIAS.</P>
+
+<B><P>       /gusta /say ¡¡¡ me gusta $1!!!</P>
+</B>
+<P>NO FUNCIONARA debido a que le falta un espacio entre la abreviaci&oacute;n $1 y !!!. OJO CON ESTE FALLO QUE ES MUY FRECUENTE.</P>
+
+<B><P>       /gusta /say ¡¡¡ me gusta $1 !!!</P>
+</B>
+<P>...este si funciona bien.</P>
+
+<P>&nbsp;</P>
+<B><P>USANDO CORCHETES.</P>
+</B>
+<P>Podemos usar corchetes en los aliases para controlar el orden de evaluaci&oacute;n de los identificadores. Los identificadores se eval&uacute;an primero desde la izquierda hasta la derecha o de arriba a bajo, seg&uacute;n lo estructuremos con | o con el &quot;Enter&quot;. Por ejemplo</P>
+<B>
+<P>       /note /notice $1 " $+ [ $read [ -s + [ $2 ] ] c:/text/note.txt ] $+ "</P>
+<P>       /sayvar /say % [ $+ [ $1 ] ]</P>
+
+</B><P>-----------------------------------</P>
+<h4>Unos cuantos ejemplos de alias:</h4>
+<P>Yo creo que la mejor forma de comprender las cosas es con muchos ejemplos as&iacute; que aqu&iacute; tieneis un poco de todo. Empecemos de lo m&aacute;s sencillo a m&aacute;s complicado.</P>
+
+<P>Un dibujito, sin m&aacute;s podr&iacute;a ser:</P>
+
+<B><P>/pirch /say · : . ° &lt;º))))&gt;&lt; · : . ° · : . ° Todo lo que PIRCH&reg; puede hacer... ° · . ° ·:.° ° . . · : ° · : . ° el mIRC&reg; lo hace Mejor ! ° · . ° ·:° °· : . ° ° · . ° &lt;º))))&gt;&lt; El PIRCH&reg;?? jajajajajaaa..... ° · . °°°° · . °° °</P>
+
+<P>&nbsp;</P>
+</B><P>Si queremos hacer un dibujo vistoso, aunque sencillo, de un coraz&oacute;n podremos usar este ejemplo, que se puede colorear para crear un mejor efecto. Si escribo en un canal /corazon Mar&iacute;a podr&eacute; dejar alucinada a la tal Mar&iacute;a con esto:</P>
+
+<B><P>/corazon {</P>
+<P>  /say (¯`'·.¸(¯`'·.¸ $$1 ¸.·'´¯)¸.·'´¯) Te quiero...</P>
+<P>  /say (_¸.·'´(_¸.·'´ $$1 `'·.¸_)`'·.¸_) ...coraz&oacute;n</P>
+<P>}</P>
+
+</B><P>&nbsp;</P>
+<P>Si deseamos poner un topic florido al canal, pudiendo escribir el texto que deseemos cada vez que ejecutemos el alias, podemos crear el siguiente alias.</P>
+
+<B><P>/ctopic /topic # °º&copy;o¿,,¿o&copy;º°¨¨°º&copy; $$?="¿Mensaje?" &copy;º°¨¨°º&copy;o¿,,¿o&copy;º°¨¨ </P>
+
+</B><P>&nbsp;</P>
+<P>Definimos aqu&iacute; la tecla de funci&oacute;n F11 para que al pulsarla el mIRC ignore a todo el mundo que use arrakis como su servidor de Internet. Nos saldr&aacute; un mensaje en la ventana que estemos que nos avisar&aacute; de lo que hemos hecho.</P>
+<B>
+<P>/F11 { ignore *!*@arrakis.es | echo –a GaTo Script: Estas ignorando a todos los de Arrakis }</P>
+</B>
+<P>&nbsp;</P>
+<P>Este mismo ejemplo se puede hacer de forma que no podamos variar el servidor que deseamos ignorar. Oservese ien el uso del identificador $+ , que es fundamental ya que, como ya he dicho, NUNCA puede haber nada &quot;tocando&quot; al identificador, siempre debe tener un espacio delante y detr&aacute;s. Ser&aacute; as&iacute;:</P>
+
+<B><P>/F11 { ignore *!*@ $+ $$?=&quot;Qu&eacute; servidor?&quot; | echo –a GaTo Script: Estas ignorando a todos los de $$! }</P>
+
+</B><P>&nbsp;</P>
+<P>Aqu&iacute; tenemos otro muy sencillo. En este caso, al escribir /chiki el mIRC ir&aacute; a un fichero donde tengamos chistes del Chikito de la Cazada, eligir&aacute; uno al azar y lo mostrar&aacute;. Ser&aacute; de esta forma:</P>
+
+<B><P>/chiki say Chikitada: $read $mircdirsistema/docs/chiki.txt </P>
+</B>
+<P>&nbsp;</P>
+<P>Algo ya m&aacute;s complejo, aunque es bastante sencillo en el fondo, es este alias que dedica una canci&oacute;n a la persona que le indiquemos. Nos aparecer&aacute; una ventana donde elegir la canci&oacute;n y despu&eacute;s nos preguntar&aacute; por la persona a la que dedicar la musiquita. Lo que hace la primera orden es pedirnos la canci&oacute;n deseada y define una variable (%midi2) que es la ruta hasta el fichero, que nos servir&aacute; para ejecutar el archivo y para que en el mensaje final pueda ver el dedicado cual es el t&iacute;tulo de la m&uacute;sica elegida. Esto se hace as&iacute;:</P>
+<B>
+<P>/midi { </P>
+<P>  /set %midi2 $dir="Escoge un MIDI" *.mid </P>
+<P>  /sound $$?=&quot;¿A qui&eacute;n se la dedicas?&quot; %midi2 </P>
+<P>  /notice $$! $me dedica la canci&oacute;n [ $+ $nopath(%midi2) $+ ] en especial para  $$! </P>
+<P>}</P>
+</B>
+<P>&nbsp;</P>
+<P>Aqu&iacute; tenemos un alias creado expresamente para la guerra, el IRC WAR. &Eacute;ste alias manda un n&uacute;mero muy alto de informaci&oacute;n a la v&iacute;ctima, que es desconectada del servidor de IRC por sufrir un FLOOD o inundaci&oacute;n de datos. Es importante ver la &uacute;ltima instrucci&oacute;n, un DDE. Hablar&eacute; de ellas m&aacute;s adelante con tranquilidad. &Eacute;sta llama a un clon que tengas y le indica que ataque tambi&eacute;n a la v&iacute;ctima. De esta forma el ataque se dobla en eficacia. Aqu&iacute; lo ten&eacute;is: </P>
+<B>
+<P>/mortal {</P>
+<P>  /echo 3 -a GaTo Script: Mandando un Kill Script a $$1</P>
+<P>  /raw -q  NOTICE $$1 : SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-</P>
+<P>  /raw -q  NOTICE $$1 : SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-</P>
+<P>  /raw -q  NOTICE $$1 : SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-</P>
+<P>  /raw -q  NOTICE $$1 : SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-SoRpReSa-</P>
+<P>  dde ck1 command "" /mortal $$1 | /safeguard </P>
+<P>}</P>
+</B>
+<P>&nbsp;</P>
+<P>Otro ejemplo es este. Aqu&iacute; podremos ver un cuadro que nos informa sobre tu conexi&oacute;n actual . No he eliminado las instrucciones de colores para que ve&aacute;is c&oacute;mo se ponen:</P>
+
+<P>/<B>infome {</P>
+<P>  /echo &#3;9,1 -----------------------------</P>
+<P>  /echo &#3;4,1 Tu Informaci&oacute;n Personal es:&#3;1..</P>
+<P>  /echo &#3;9,1 -----------------------------</P>
+<P>  /echo &#3;8,2 *Mi Nick:&#3;9 $me &#3;2..........</P>
+<P>  /echo &#3;8,2 *Mi IP:&#3;9 $ip           &#3;2......</P>
+<P>  /echo &#3;8,2 *Mi Servidor:&#3;9 $server</P>
+<P>  /echo &#3;8,2 *Mi Puerto de Acceso:&#3;9 $port &#3;2..</P>
+<P>  /echo &#3;8,2 Tiempo Conectado:&#3;11 %hours $+ hrs %mins $+ mins</P>
+<P>  /echo &#3;8,2 *Hoy es:&#3;9 $fulldate</P>
+<P>  /echo &#3;9,1 -----------------------------</P>
+<P>}</P>
+</B>
+<P>Entramos por fin en el asunto y empezamos ya con alias verdaderamente complejos. El siguiente lo que hace es buscar a la direcci&oacute;n IP que le indiquemos y mostrarnos informaci&oacute;n sobre ella.  Ve&aacute;moslo:</P>
+
+<B><P>/buscaip {</P>
+<P>  if ($1 == $null) { set %IPScan.Address $$?="Pon la IP" } | else { set %IPScan.Address $1 }</P>
+<P>  echo 2 # GaTo Script: IP Scaneando:  # en:  %IPScan.Address | set %Var.Index 1 | set %IPScan.Index 0</P>
+<P>  :scan</P>
+<P>  set %Var.Temp $nick(%Var.Index,#) | if (%Var.Temp == $null) { goto end }</P>
+<P>  set %Var.Temp $address(%Var.Temp,2)</P>
+<P>  if (%IPScan.Address == %Var.Temp) { goto found }</P>
+<P>  if (%IPScan.Address isin %Var.Temp) { goto found }</P>
+<P>  if (%IPScan.Address iswm %Var.Temp) { goto found }</P>
+<P>  inc %Var.Index | goto scan</P>
+<P>  :found</P>
+<P>  inc %IPScan.Index | echo 2 #  %IPScan.Index $+ . $nick (%Var.Index,#) ( $+ %Var.Temp $+ )</P>
+<P>  inc %Var.Index | goto scan</P>
+<P>  :end</P>
+<P>  echo 2 # GaTo Script: Fin de la b&uacute;squeda! Total: %IPScan.Index | unset %IPScan.*</P>
+<P>}</P>
+</B>
+<P>&nbsp;</P>
+<P>Vamos a definir una lista en las variables de nuestros canales favoritos, a la que podremos a&ntilde;adir un canal cuando nos plazca. En los popups podremos seleccionar el canal que deseemos y entra a &eacute;l sin tener que hacer nada m&aacute;s. El n&uacute;mero m&aacute;ximo de canales de la lista ser&aacute; de 17. Veamos c&oacute;mo se hace:</P>
+
+<B><P>/favoritos { </P>
+<P>  inc %n </P>
+<P>  if ( %n == 17) { </P>
+<P>    echo GaTo Script: La lista de canales est&aacute; llena. </P>
+<P>    wavplay $mircdir $+ sonido/warning.wav </P>
+<P>    /set %sn $$?="Deseas empezar desde el principio? Si/No" </P>
+<P>    if ( %sn == Si ) { /set %n 1 | echo GaTo Script: Se iniciar&aacute; la lista desde el principio } </P>
+<P>    if ( %sn == no ) goto fin_malo</P>
+<P>  } </P>
+<P>  /set %ultcana $+ %n $$?="¿Qu&eacute; canal? (con #)"</P>
+<P>  /set %clave $?=&quot;¿Tiene clave? S/N&quot;</P>
+<P>  if (%clave == S) goto clave</P>
+<P>  echo GaTo Script: El canal [ $$! ] ha sido a&ntilde;adido a la lista como %n $+ º canal favorito.</P>
+<P>  goto end</P>
+<P>  :clave</P>
+<P>  /set %code $?=&quot;Introduce la clave de acceso al canal&quot;</P>
+<P>  goto end  </P>
+<P>  :fin_malo</P>
+<P>  echo GaTo Script: No se ha podido a&ntilde;adir el canal [ $+ $$! $+ ]  </P>
+<P>  :end</P>
+<P>}</P>
+</B>
+<P>Lo &uacute;nico que debemos hacer ahora es crear en los popups un apartado con las variables %ultcana1, %ultcana2, %ultcana3, etc. </P></FONT></BODY>
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

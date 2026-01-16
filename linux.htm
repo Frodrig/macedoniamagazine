@@ -1,0 +1,297 @@
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Introducción y Uso del Linux</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:pecapon@alumni.uv.es">Pedro A. Carrasco.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 1.<br> Introducción y primeros pasos con el Linux.
+</H3>
+<H4><A NAME="ss2.1">2.1 Introducci&oacute;n.</A></h4>
+
+<P ALIGN=justify>
+
+
+En estos &uacute;ltimos a&ntilde;os parece que se ha puesto de moda el llamado por algunas publicaciones &quot;Fen&oacute;meno Linux&quot;, est&aacute;n proliferando cantidad de art&iacute;culos y en las revistas del sector ya empiezan a hablar de &eacute;l, incluso a distribuirlo, tambi&eacute;n ha salido una publicaci&oacute;n dedicada exclusivamente a &eacute;l.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por lo tanto, mi misi&oacute;n a la hora de empezar a escribir esta serie de art&iacute;culos no es otra que ense&ntilde;ar un poco como entr&eacute; yo en este mundo hace 3 a&ntilde;os, y contar mis experiencias a la hora de instalar varias distribuciones y configurar miles de programas (incluso hacer o retocar alguno que otro para uso personal que espero en un futuro salgan), as&iacute; como explicar una serie de comando b&aacute;sicos para empezar a utilizar Linux sin perderse. El contenido de este curso al igual que Linux es din&aacute;mico y puede ser variado en cualquier momento a petici&oacute;n vuestra por lo que desde aqu&iacute; pido cualquier colaboraci&oacute;n que ayude a mejorarlo, a continuaci&oacute;n viene un resumen de lo que en principio tratar&aacute; el curso:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Qu&eacute; es Linux.</LI>
+<LI><P ALIGN="JUSTIFY">C&oacute;mo conseguirlo e instalarlo.</LI>
+<LI><P ALIGN="JUSTIFY">Primeros pasos. Fuentes de ayuda. Documentaci&oacute;n.</LI>
+<LI><P ALIGN="JUSTIFY">Configuraci&oacute;n del entorno X-Window.</LI>
+<LI>Primeros pasos en administraci&oacute;n b&aacute;sica de tu sistema Linux.</LI>
+<LI><P ALIGN="JUSTIFY">Configuraci&oacute;n del acceso a Internet.</LI></UL>
+
+
+<P ALIGN="JUSTIFY">Como he dicho antes el contenido es variable y seg&uacute;n el grado de aceptaci&oacute;n que tengan unos u otros contenidos se agregar&aacute;n o eliminar&aacute;n algunos y se potenciar&aacute; el contenido de otros.</P>
+
+<h4><P ALIGN="JUSTIFY">1. ¿Qu&eacute; es Linux?</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La primera pregunta que se puede hacer alguien que no lo conoce y el principio de todos los cursos es esta, ¿de qu&eacute; estoy hablando?. Por supuesto toda aquella persona que ya lo conozca se lo puede saltar. 
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Podr&iacute;a dedicar la totalidad del curso a explicar qu&eacute; es Linux, qu&eacute; es un Sistema Operativo (SO en adelante) y otra serie de cuestiones que no vienen a cuento en un curso de introducci&oacute;n. 
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En principio se puede decir que Linux es un cl&oacute;nico gratuito de UNIX portado para PC inicialmente (ahora funciona en m&aacute;s plataformas), y que a&ntilde;ade nuevas funcionalidades al UNIX, Linux es un SO de 32 bits, multiusario, multitarea, multiprocesador, multiplataforma, con soporte para comunicaciones, gesti&oacute;n de se&ntilde;ales, soporte de multitud de dispositivos (SCSI, tarjetas de sonido, m&oacute;dem, etc.), capaz de reconocer multitud de sistemas de ficheros (en la actualidad lee FAT32 y NTFS entre otras). Aunque al usuario no experimentado lo que le puede interesar es su estabilidad (a m&iacute; personalmente no se me ha ‘colgado’ a&uacute;n en 3 a&ntilde;os trabajando con &eacute;l), su aprovechamiento de la m&aacute;quina en la que trabaja (Linux no coge lo que no necesita), aunque ahora pueda sonar raro el tener el c&oacute;digo fuente del Kernel (n&uacute;cleo) y poder compilarlo a medida de tu m&aacute;quina, la poca cantidad de recursos que necesita para funcionar (en un 386 con 4Mb funciona perfectamente), el poder hacer varias cosas a la vez de forma r&aacute;pida, c&oacute;moda y sin fallos, y un largo etc. en el que incluir&iacute;a la cantidad de cosas que puedes aprender sobre inform&aacute;tica y SSOO con Linux.
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pero como no todo el monte es or&eacute;gano tambi&eacute;n tiene cosas que en un principio pueden resultar negativas o dif&iacute;ciles para un usuario inexperto; como es la configuraci&oacute;n, cada vez m&aacute;s cercana a un usuario inexperto debido a las interfaces gr&aacute;ficas y a las herramientas para tal efecto y el proceso de aprendizaje que es el tema de este curso. Sobre esto se podr&iacute;a leer m&aacute;s, desde aqu&iacute; insto al lector a recorrerse las diversas fuentes de informaci&oacute;n sobre Linux que se incluyen al final del cap&iacute;tulo.
+<h4>2. Conseguir Linux e instalarlo.</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Dejando ya la teor&iacute;a inicial vamos a conseguir una distribuci&oacute;n de Linux y a ponernos manos a la obra.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para conseguir una distribuci&oacute;n de Linux hay varios medios, desde comprarte una, hasta coger la que viene en el CD de tu revista de inform&aacute;tica y que no sab&iacute;as que hacer con &eacute;l. En principio voy a hablaros un poco de las distribuciones m&aacute;s famosas y d&oacute;nde conseguirlas:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY"><B>Slackware</B> : Fue una de las m&aacute;s famosas en los inicios de Linux y en la actualidad se utiliza bastante, aunque <U>desde mi punto de vista</U> es muy b&aacute;sica al carecer de un sistema de paquetes potente como otras distribuciones y de herramientas de configuraci&oacute;n suficientes. Para conseguirla puedes hacer un ftp a <A HREF="ftp://ftp.cdrom.com:/pub/Linux/slackware">ftp.cdrom.com:/pub/Linux/slackware</A>.</LI></UL>
+<UL>
+<LI><P ALIGN="JUSTIFY"><B>Debian</B>: Es la que yo utilizo y la m&aacute;s potente <U>desde mi punto de vista</U>, tiene una herramienta propia de paquetes (los paquetes en debian tienen la extensi&oacute;n deb) que te los instala y te los configura autom&aacute;ticamente, cuenta con gran cantidad de paquetes aunque en la versi&oacute;n 1.3.1 que es la &uacute;ltima de momento la herramienta de instalaci&oacute;n de paquetes es un poco complicada inicialmente. Para conseguirla puedes comprarte el n&uacute;mero 1 de Linux Actual o hacer ftp a <A HREF="ftp://ftp.debian.org/">ftp.debian.org</A> aunque en<A HREF="ftp://slug.ctv.es/">slug.ctv.es</A> tienen un espejo (mirror) de esta distribuci&oacute;n, est&aacute; realizada por un grupo de m&aacute;s de 200 voluntarios, espa&ntilde;oles incluidos.</LI></P></UL>
+<UL>
+<LI><P ALIGN="JUSTIFY"><B>Red</B> <B>Hat</B>: Es la distribuci&oacute;n m&aacute;s alabada por los medios de comunicaci&oacute;n, incluso gan&oacute; el premio al mejor SO del a&ntilde;o en EE.UU. el a&ntilde;o pasado, cuenta con una herramienta de instalaci&oacute;n de paquetes en modo gr&aacute;fico muy intuitiva y dicen que su formato (el rpm) es m&aacute;s funcional que el de debian, como contra tiene <U>desde mi punto de vista</U> la excesiva automatizaci&oacute;n en la instalaci&oacute;n y la poca cantidad de paquetes que trae, est&aacute; hecha por la empresa Red Hat Software. Para conseguirla puedes contactar con su sitio central en <A HREF="ftp://ftp.redhat.com/">ftp.redhat.com</A> o mirar en el n&uacute;mero 10 de Programaci&oacute;n Actual.</LI></P></UL>
+<UL>
+<LI><P ALIGN="JUSTIFY"><B>SuSe</B>: Esta distribuci&oacute;n es comercial, cuenta con 4 CD’s y cuesta 6500 pts (5500 para estudiantes), el sistema de ficheros es rpm como Red Hat y trae una cantidad impresionante de software (4 CD’s dan para mucho), el sistema de administraci&oacute;n y configuraci&oacute;n est&aacute;n muy cuidados y es muy apta para iniciados, en el n&uacute;mero 2 de Linux Actual puedes probarla directamente desde el CD, para pedirla puedes llamar al n&uacute;mero de tel&eacute;fono 96 5401513 de la empresa Orange Web Services S.L. de Crevillente.</LI></P></UL>
+
+<P ALIGN="JUSTIFY">Existen m&aacute;s distribuciones de Linux, pero ser&iacute;a extenderse demasiado. Vamos a comenzar con la instalaci&oacute;n de Linux, este proceso lo dividir&eacute; en dos partes, la primera que es independiente de la distribuci&oacute;n que utilices y la segunda que es dependiente de la distribuci&oacute;n.</P>
+
+<b>Parte 1: Com&uacute;n a todas las distribuciones.</b>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Al decir com&uacute;n a todas las distribuciones me refiero al caso m&aacute;s usual de compartir Linux con otros SSOO como MS-DOS o W95, en el caso de dedicarle el disco duro entero al Linux puedes pasar directamente a la segunda parte.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Inicialmente lo m&aacute;s usual es tener el disco duro con todo el espacio asignado a una partici&oacute;n de DOS o W95, para el caso de WNT o OS/2 con NTFS o HPFS respectivamente como sistema de archivos no vale lo dicho a partir de ahora, con la FAT o FAT32. En este caso lo que tendremos que hacer son dos cosas, o instalar la Slackware que es la &uacute;nica que se permite instalar bajo UMSDOS (en un directorio de tu partici&oacute;n de dos) o reparticionar el disco duro que es el tema de esta parte.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para reparticionar el disco duro existe un programa llamado FIPS, que se distribuye gratuitamente junto con los CD’s de Linux en un directorio llamado UTILS en Debian y DOSUTILS en RedHat, este programa hace la partici&oacute;n actual m&aacute;s peque&ntilde;a y el espacio que libera lo marca como una partici&oacute;n primaria de DOS sin formatear, actualmente se distribuye la versi&oacute;n 15 que no acepta la FAT32 pero versiones posteriores s&iacute; la aceptan, estas versiones se encuentran en Internet. Para crearte una partici&oacute;n por este m&eacute;todo tienes que:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<LI><P ALIGN="JUSTIFY">Defragmentar el disco duro y comprobar que todo est&aacute; bien con Scandisk o similar.</LI>
+<LI><P ALIGN="JUSTIFY">Formatear un diskette con format a: /s para darle sistema y copiar en &eacute;l los archivos del directorio donde hayas descomprimido FIPS: RESTRRB.EXE, FIPS.EXE y ERROR.TXT.</LI>
+<LI><P ALIGN="JUSTIFY">Arrancar el ordenador con el diskette creado en la disquetera y ejecutar FIPS.EXE.</LI>
+<LI><P ALIGN="JUSTIFY">Cuando pregunte si guardar el boot y root sector al diskette decir que s&iacute;, esto crear&aacute; una copia de seguridad de ambos sectores por si la l&iacute;as.</LI>
+<LI><P ALIGN="JUSTIFY">Elegir el disco a reparticionar si tienes m&aacute;s de un disco duro. Este disco ser&aacute; en el que instales Linux.</LI>
+<LI><P ALIGN="JUSTIFY">Elegir el cilindro de inicio de la nueva partici&oacute;n con las flechas de cursor; esto condicionar&aacute; el tama&ntilde;o de la partici&oacute;n que dejes para Linux, su tama&ntilde;o debe ser como m&iacute;nimo de unos 40Mb, una cosa normal suele rondar los 300Mb, el cilindro de inicio nunca podr&aacute; ser mayor del 1024.</LI>
+<LI><P ALIGN="JUSTIFY">Al elegir el cilindro de inicio preguntar&aacute; si se reedita la partici&oacute;n, si pulsas a ‘c’ volver&aacute;s atr&aacute;s para elegir el tama&ntilde;o y si pulsas ‘y’ grabar&aacute; y saldr&aacute;.</LI>
+<LI><P ALIGN="JUSTIFY">Cualquier paso se puede abortar con CTRL-C.</LI></P></OL>
+
+<P ALIGN="JUSTIFY">Bien, ya tenemos la partici&oacute;n preparada para Linux, para otros sistemas como WNT puede ser necesario reformatear, ahora mismo no s&eacute; si existen herramientas para reparticionar en estos sistemas. El siguiente paso es seg&uacute;n la distribuci&oacute;n que tengamos proceder a su instalaci&oacute;n.</P>
+
+<b>Parte 2: Instalaci&oacute;n dependiente de la distribuci&oacute;n.
+</b><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora seg&uacute;n nuestra distribuci&oacute;n tendremos que hacer una cosa u otra, al ser un tema bastante largo y venir bien documentado en las distribuciones, sobre todo si las has sacado de alguna revista donde explican como instalarla, lo dejo para que el lector lo mire en su distribuci&oacute;n.</P>
+
+<h4>3. Bien, ya lo tengo instalado, ¿ahora qu&eacute; hago?</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Lo primero que tienes que hacer si tu distribuci&oacute;n no lo ha hecho es CREARTE UNA CUENTA DE USUARIO, si entras como usuario root es que quiz&aacute;s no hayas creado tu cuenta de usuario, y debe ser lo primero que hagas, sobre todo si eres novato en esto, ya que puedes borrar alg&uacute;n archivo vital y cargarte tu flamante reci&eacute;n instalado Linux.</P>
+<P ALIGN="JUSTIFY">Para crear la cuenta de usuario, como root ejecutas:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">localhost # adduser &lt;nombre del usuario&gt;</P>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El comando adduser se encargar&aacute; de crear el directorio del usuario, a&ntilde;adirlo al fichero de claves (/etc/passwd) y al de grupos (/etc/group), darte una shell (como el command.com o el 4dos.com en DOS) que normalmente ser&aacute; <I>bash</I>, aunque existen m&aacute;s (tcsh, sh, etc.). Te pedir&aacute; un password que no debes olvidar, ya que en Linux al entrar hay que identificarse con login (nombre del usuario) y la clave, aunque ya lo habr&aacute;s hecho si has entrado como root. Algunas distribuciones dejan la cuenta de root sin password, lo que es un grave error de seguridad ya que cualquiera podr&iacute;a entrar como superusuario, si este es tu caso cuando entres la primera vez como root, teclea:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">localhost # passwd root</P>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y teclea la clave del root, esta clave no la debes olvidar y s&oacute;lo debes entrar como root para tareas administrativas de configuraci&oacute;n de dispositivos u otras cosas que un usuario normal no deber&iacute;a hacer.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez que te has creado la cuenta y que has entrado en ella (saliendo de la de root con exit y entrando con tu nombre de usuario y clave) empiezan los primeros pasos:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Teclea en el promp <I>ls</I>[intro] (de ahora en adelante supondremos que tras el comando se pulsa la tecla INTRO). Probablemente no te saldr&aacute; nada ya que no tienes nada en tu cuenta, por lo menos visible, ahora teclea <I>ls –a </I>(ojo a may&uacute;sculas y min&uacute;sculas que Linux s&iacute; las distingue), ahora s&iacute; te saldr&aacute; algo parecido a esto:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"> .&#9;.bashrc&#9;.bash_profile&#9;.bash_history&#9;.alias</P>
+<P ALIGN="JUSTIFY">..&#9;.bash_logout</P>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Este es el contenido inicial de tu cuenta, m&aacute;s o menos, los ficheros con un punto delante son ficheros ocultos, en Linux puedes tener .bashrc y bashrc en el mismo directorio, la opci&oacute;n –a de ls(<U>l</U>i<U>s</U>t) significa todos(all) y como puedes ver muestra los ficheros, en Linux cada directorio tiene como m&iacute;nimo dos ‘ficheros’ que en realidad son alias al directorio actual y al anterior, estos son . y .. respectivamente.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora teclea <I>man ls</I>, te saldr&aacute; una pantalla (en ingl&eacute;s probablemente, aunque hay grupos que est&aacute;n traduciendo las p&aacute;ginas del manual) con las instrucciones y opciones de uso de <I>ls</I>, para salir de ella tendr&aacute;s que pulsar la letra q o CTRL-C. El comando que acabas de utilizar es de vital importancia para el uso de Linux, es la ayuda del sistema (man viene de manual), tecleando <I>man &lt;comando&gt;</I> te mostrar&aacute; la p&aacute;gina del manual correspondiente a este comando, para buscar alguno en especial puedes hacer <I>man –k</I> &lt;palabra a buscar&gt; o apropos &lt;palabra a buscar&gt;. Tambi&eacute;n puedes hacer <I>man man</I> para ver el uso de este comando.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">A continuaci&oacute;n se detallan algunos de los comandos m&aacute;s usuales con una breve descripci&oacute;n de su uso, para m&aacute;s informaci&oacute;n ya sabes, <I>man &lt;comando&gt;</I>, o en algunos casos <I>comando –help o  -?</I> :</P>
+
+<UL>
+<LI><B>rm (remove)</B> Borra ficheros, con la opci&oacute;n –r borra directorios que no est&eacute;n vac&iacute;os (cuidado con esta opci&oacute;n).</LI>
+<LI><B>cp (copy)</B> Copia de origen a destino.</LI>
+<LI><B>mv (move)</B> Mueve de origen a destino.</LI>
+<LI><B>cat</B> Lista un fichero por la salida est&aacute;ndar (pantalla normalmente).</LI>
+<LI><B>type</B> Muestra el tipo de fichero y en su caso d&oacute;nde se encuentra en el PATH.</LI>
+<LI><B>find</B> Potente herramienta de b&uacute;squeda, mirar p&aacute;gina del manual.</LI>
+<LI><B>sort</B> Ordena el fichero o la entrada si se ejecuta sin opciones.</LI>
+<LI><B>wc(word count)</B> Cuenta palabras.</LI>
+<LI><B>grep</B> Busca la expresi&oacute;n dada en la entrada (puede ser un fichero).</LI>
+<LI><B>info</B> Es como el man y un poco m&aacute;s complicada de usar (todo con teclas) aunque al principio tiene un tutorial muy completo.</LI>
+<LI><B>ps</B> Muestra los procesos que se est&aacute;n ejecutando en este momento.</LI>
+<LI><B>kill</B> Sirve para enviarles se&ntilde;ales a los procesos (una de ellas –9 es la se&ntilde;al de matar el proceso por si se te bloquea).</LI>
+<LI><B>halt y reboot</B> Apaga y resetea respectivamente el sistema, s&oacute;lo pueden ser ejecutadas bajo root.</LI>
+<LI><B>su &lt;usuario&gt;</B> Hace un login a root (sin par&aacute;metros) o a un usuario, especificando su nombre, sirve para ejecutar instrucciones puntuales como root o como &lt;usuario&gt;.</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hay much&iacute;simos m&aacute;s comandos pero lo importante en Linux es saber informarse, para ello existen multitud de sitios en la red y un directorio llamado /usr/doc donde se encuentran los HOWTO (c&oacute;mo) y la documentaci&oacute;n de pr&aacute;cticamente casi todo lo que tienes instalado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los HOWTO son una fuente de informaci&oacute;n muy importante, ya que resuelven problemas como la impresi&oacute;n, el sonido, la conexi&oacute;n a internet, etc., adem&aacute;s hay grupos espa&ntilde;oles (LuCas y INSFLUG) que se dedican a traducirlos, puedes encontrar un mirror de estos grupos en <A HREF="http://slug.ctv.es/">http://slug.ctv.es</A> y desde all&iacute; acceder a muchas fuentes de informaci&oacute;n y a software.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">NUNCA apagues el ordenador con el bot&oacute;n de reset o apagando directamente el ordenador, ya que Linux hace uso intensivo de la cach&eacute; en memoria para disco y algunos datos y el propio sistema de ficheros podr&iacute;a corromperse, para apagarlo la mejor forma es en modo consola (sin el entorno de ventanas X-Window) pulsar CTRL-ALT-DEL y esperar a que vaya a reinicializar, entonces apagar el ordenador. Otro m&eacute;todo consiste en hacer lo siguiente su –c &quot;/sbin/halt&quot;, te pedir&aacute; el password del root y tras introducirlo correctamente empezar&aacute; a apagar el sistema hasta que ponga &quot;System halted&quot;, entonces puedes apagar el ordenador, para no escribir todo el comando cada vez puedes editar un archivo nuevo y poner dentro el comando:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">#!/bin/sh</P>
+<P ALIGN="JUSTIFY">#Archivo bye para apagar el sistema</P>
+<P ALIGN="JUSTIFY">su –c &quot;/sbin/halt&quot;</P>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Yo lo llamo bye, le cambias el modo para poder ejecutarlo con el comando chmod (mira el man para m&aacute;s informaci&oacute;n) de la siguiente manera:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">localhost $ chmod u+x bye </P>
+<P ALIGN="JUSTIFY">&oacute; chmod 700 bye</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando quieras apagar s&oacute;lo tienes que poner bye, poner el password del root y se apagar&aacute; bien el ordenador.</P>
+<h4>4. Notas a la instalaci&oacute;n de Linux con Windows 95 o NT:</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Al instalarte Linux, este carga el lilo (LInux LOader) en el sector de arranque del disco duro o de la partici&oacute;n de Linux, si tras instalarte Linux, instalas Windows 95 o Windows NT borrar&aacute;n ese sector por lo que no podr&aacute;s entrar en Linux, aunque no te preocupes, todo tiene soluci&oacute;n. Yo personalmente adopto la siguiente soluci&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El disco duro lo tengo como sigue:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000">
+<Pre>
+Name       Flags    Part Type      Fs Type   Size (MB)
+/dev/hda1  Boot     Primary Linux            750.10
+/dev/hda2           Primary Linux  Swap      49.22
+/dev/hda3           Primary Win95  FAT32     600.47
+/dev/hda4           Primary DOS    FAT16     226.41</Pre>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta es la salida que da cfdisk en mi sistema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El programa lilo lo instalo en el primer sector de la PARTICI&Oacute;N DE LINUX no del disco duro con el siguiente lilo.conf:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P>#lilo.conf<br>
+boot=/dev/hda1<br>
+root=/dev/hda1<br>
+compact<br>
+install=/boot/boot.b<br>
+map=/boot/map<br>
+vga=7&#9;#reduce el tama&ntilde;o de la fuente en pantalla, dando<br>
+&#9;&#9;     &#9;# m&aacute;s l&iacute;neas de texto<br>
+image=/vmlinuz<br>
+label=Linux<br>
+read-only<br>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por supuesto este archivo es a modo de ejemplo, puede variar de un sistema a otro, lo importante es que boot y root apunten a la partici&oacute;n de Linux. Tras haber editado el tuyo (se encuentra en /etc/lilo.conf y lo tienes que editar como root) y hacer que root y boot apunten a la partici&oacute;n de Linux, tienes que ejecutar lilo para que grabe los cambios.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para arrancar ahora Linux o W95 utilizo un programa llamado bootmenu.exe que lo puedes encontrar en el mirror de sunsite en <A HREF="ftp://ftp.rediris.es/">ftp.rediris.es</A> , este programa se ejecuta en DOS, no una ventana si no iniciando el sistema en MS-DOS, de la siguiente manera:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">C:\&gt; bootmenu a:</P>
+</FONT><FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En a: tenemos un disco formateado sin errores, el programa crea una imagen en el diskette, arrancamos con el diskette dentro de la disquetera y nos pedir&aacute; si instalarlo, decimos que s&iacute; y aparecer&aacute; un bonito men&uacute; en VGA, desde &eacute;l le decimos las particiones que tenemos (en mi caso Linux en /dev/hda1 y Windows en /dev/hda3), eligi&eacute;ndolas de la lista que nos da, le damos un nombre a las particiones que elijamos para arrancar y ya tenemos configurado el arranque. Para WNT es lo mismo, pero tenemos que elegir la partici&oacute;n de DOS donde est&aacute; el NTDETECT.COM, al elegir el DOS nos saldr&aacute; el men&uacute; de NT para arrancar o en MS-DOS o en NT.</P>
+
+<h4><P ALIGN="JUSTIFY">5. Direcciones de inter&eacute;s sobre Linux.</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como &uacute;ltimo apartado de esta introducci&oacute;n a Linux no pod&iacute;an faltar las referencias a algunos de los infinitos recursos que se pueden encontrar sobre este SO en la red:</P>
+<P ALIGN="JUSTIFY"></P>
+<UL>
+<LI><P ALIGN="JUSTIFY">P&aacute;gina principal de <A HREF="http://slug.ctv.es/" target="_new">slug</A>, con cantidad de enlaces, y completo servidor de ftp, tambi&eacute;n cuenta con un mirror de LinuxFocus.</LI>
+<LI><P ALIGN="JUSTIFY">Proyecto <A HREF="http://www.infor.es/Lucas" target="_new">LuCas</A>, documentaci&oacute;n y Howtos traducidos.</LI>
+<LI><P ALIGN="JUSTIFY">Proyecto <A HREF="http://www.insflug.nova.es/" target="_new">INSFLUG</A>  Impatient &amp; "Novatous" FidoNet Linux Users, con cantidad de documentos traducidos.</LI>
+<LI><P ALIGN="JUSTIFY">P&aacute;gina principal de <A HREF="http://web.jet.es/jillona" target="_new">GLUB</A> (Grupo de Linuxsuarios de Bilbao), con cantidad de links a software ordenado por temas.</LI>
+<LI><P ALIGN="JUSTIFY"><A HREF="news:es.comp.os.linux">Foro de discusi&oacute;n</A> sobre Linux en castellano.</LI>
+<LI><P ALIGN="JUSTIFY">Lista de correo de linux : <A HREF="mailto: majordomo@calvo.teleco.ulpgc.es" target="_new">majordomo@calvo.teleco.ulpgc.es</A>, mandar un mail poniendo subscribe l-linux &lt;tu direcci&oacute;n&gt; en el cuerpo del mensaje.</LI>
+<LI><P ALIGN="JUSTIFY">Revista Linux Actual, actualmente ya va por el n&uacute;mero 2.</LI>
+<LI><P ALIGN="JUSTIFY">Libro C&oacute;mo trabajar con Linux de la editorial Prens@ t&eacute;cnica (la misma que Linux Actual y Programaci&oacute;n Actual)</LI>
+<LI><P ALIGN="JUSTIFY">Para los que os interese la programaci&oacute;n en Linux el proyecto LuCas est&aacute; preparando un documento sobre este tema, adem&aacute;s del libro Programaci&oacute;n Linux 2.0 de la editorial gesti&oacute;n 2000.</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Al acceder a las p&aacute;ginas y grupos anteriormente descritos podr&aacute;s encontrar much&iacute;simas m&aacute;s direcciones, como todo en Linux es cuesti&oacute;n de buscar y de leer la documentaci&oacute;n y Howtos ante las dudas m&aacute;s comunes, ya que hay gente que se dedica a escribirlos para no tener que estar siempre repitiendo las mismas contestaciones.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con esto doy por finalizado este primer art&iacute;culo, espero que os haya servido de ayuda y como no, espero vuestras cr&iacute;ticas, opiniones, alabanzas si las hubiese y dudas o preguntas que intentar&eacute; contestar, para ello pod&eacute;is escribir un mail a <A HREF="mailto:pecapon@alumni.uv.es">pecapon@alumni.uv.es</A>, en principio el pr&oacute;ximo art&iacute;culo tratar&aacute; de la configuraci&oacute;n de las X-Window con algunos de los m&aacute;s populares window managers y sobre la compilaci&oacute;n del n&uacute;cleo a medida de cada uno.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nos vemos en la pr&oacute;xima entrega, un saludo.</P>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaf.htm"><font FACE="ARIAL"><B>[Curso de Introuducción y Uso del Linux]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

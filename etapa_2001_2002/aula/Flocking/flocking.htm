@@ -1,0 +1,826 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=FrontPage.Editor.Document>
+<meta name=Generator content="Microsoft FrontPage 4.0">
+<meta name=Originator content="Microsoft Word 9">
+<base target=TEXTO>
+<link rel=File-List href="flocking_archivos/filelist.xml">
+<link rel=Edit-Time-Data href="flocking_archivos/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Técnicas de Flocking para entornos de Realidad Virtual</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>kokopus</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Santiago Lancha</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>594</o:TotalTime>
+  <o:Created>2001-03-30T12:07:00Z</o:Created>
+  <o:LastSaved>2001-03-30T12:07:00Z</o:LastSaved>
+  <o:Pages>4</o:Pages>
+  <o:Words>1994</o:Words>
+  <o:Characters>11371</o:Characters>
+  <o:Company>citem</o:Company>
+  <o:Lines>94</o:Lines>
+  <o:Paragraphs>22</o:Paragraphs>
+  <o:CharactersWithSpaces>13964</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h3
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 3.0cm 70.85pt 3.0cm;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:212351676;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-603785738 366497864 201981955 201981957 201981953 201981955 201981957 201981953 201981955 201981957;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:18.0pt;
+	mso-level-number-position:left;
+	margin-left:17.0pt;
+	text-indent:-17.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:589898859;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1957148316 -442059254 1362647940 1229196840 1695053182 -550440742 -1580580988 422845872 1597152276 1219025754;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l1:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2
+	{mso-list-id:1034575295;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1979289074 -493329196 -1398648338 -1452758878 18142870 -232766716 1724651808 1665833360 -849157638 -201693778;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l2:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3
+	{mso-list-id:1227107514;
+	mso-list-type:hybrid;
+	mso-list-template-ids:975586352 366497864 201981955 201981957 201981953 201981955 201981957 201981953 201981955 201981957;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:53.4pt;
+	mso-level-number-position:left;
+	margin-left:52.4pt;
+	text-indent:-17.0pt;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level3
+	{mso-level-tab-stop:108.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level4
+	{mso-level-tab-stop:144.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level5
+	{mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level6
+	{mso-level-tab-stop:216.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level7
+	{mso-level-tab-stop:252.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level8
+	{mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level9
+	{mso-level-tab-stop:324.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l4
+	{mso-list-id:1304116453;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1674939604 366497864 201981955 201981957 201981953 201981955 201981957 201981953 201981955 201981957;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:18.0pt;
+	mso-level-number-position:left;
+	margin-left:17.0pt;
+	text-indent:-17.0pt;
+	font-family:Symbol;}
+@list l5
+	{mso-list-id:1976178692;
+	mso-list-type:hybrid;
+	mso-list-template-ids:38327620 201981967 201981977 201981979 201981967 201981977 201981979 201981967 201981977 201981979;}
+@list l5:level1
+	{mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=ES link=blue vlink=blue style='tab-interval:35.4pt'>
+
+<div align="center">
+  <center>
+  <table border="0" cellpadding="0" cellspacing="0" width="720">
+    <tr>
+      <td>
+
+<p align=left style="word-spacing: 0; margin: 0"><font face="Verdana" size="1"><span style='mso-bidi-font-size: 12.0pt; color: black'><b>Autor:
+<a href="mailto:oscarg@salleurl.edu">Oscar García i
+Panyella - &#8220;KOKOPUS&#8221;</a></b></span></font></p>
+
+<p align=left style="word-spacing: 0; margin: 0"><font face="Verdana" size="1"><b><span style="mso-bidi-font-size: 12.0pt; color: black">Fecha:
+13-04-01</span></b></font></p>
+
+        <p align="center"><b><span style='color: black'><font face="Verdana" size="4">Técnicas de &#8220;Flocking&#8221; para
+entornos de Realidad Virtual</font></span></b></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+color:black'>Este artículo pretende retomar uno de los temas que en su día
+introduje en la revista. Ahora la aproximación a la problemática será mucho más
+práctica, intentando plantear soluciones concretas.<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Introducción</span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>¿Cómo podemos
+animar muchos seres virtuales (de ahora en adelante &#8220;<b>avatars</b>&#8221;) sin tener
+que modelarlos uno a uno?. Esta es la cuestión que quisiera plantearos. En
+grandes factorías de producción Multimedia como Disney, producen películas con
+escenas en las que inundan la pantalla de avatars que se comportan
+independientemente uno de otro. Por ejemplo la escena de la plaza en EL
+JOROBADO DE NOTRE DAME o bien la estampida de animales en EL REY LEON además de
+los típicos escuadrones de aviones &#8220;clónicos&#8221; que aparecen en muchas películas
+bélicas.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Al contrario de
+lo que pudiera parecer, los diseñadores no modelan y colorean a cada avatar por
+separado. Existen técnicas que automatizan este proceso. La idea es que el
+ordenador calcule automáticamente los efectos de &#8220;flocking&#8221; (bandadas, rebaños,
+estampidas, etc...) de forma que la responsabilidad del diseñador sólo implique
+la óptima elección del modelo 3D (mallado) o 2D (textura) para cada avatar.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Veamos un
+ejemplo con el que he trabajado recientemente:<o:p></o:p></span></p>
+
+<div align=center>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0cm 3.5pt 0cm 3.5pt'>
+ <tr>
+  <td width=288 valign=top style='width:216.1pt;border:solid windowtext .5pt;
+  padding:0cm 3.5pt 0cm 3.5pt'>
+  <p align=center style='text-align:center'><span style='font-size:10.0pt;
+  font-family:Arial;color:black'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+   coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+   filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:150pt;
+   height:112.5pt'>
+   <v:imagedata src="flocking_archivos/image001.gif" o:title="fig2"/>
+  </v:shape><![endif]--><![if !vml]><img
+  src="flocking_archivos/image001.gif" v:shapes="_x0000_i1025" width="200" height="150"><![endif]><o:p></o:p></span></p>
+  </td>
+  <td width=288 valign=top style='width:216.1pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0cm 3.5pt 0cm 3.5pt'>
+  <p align=center style='text-align:center'><span style='font-size:10.0pt;
+  font-family:Arial;color:black'><!--[if gte vml 1]><v:shape id="_x0000_i1026"
+   type="#_x0000_t75" style='width:150pt;height:113.25pt'>
+   <v:imagedata src="flocking_archivos/image002.gif" o:title="fig3"/>
+  </v:shape><![endif]--><![if !vml]><img width=200 height=151
+  src="flocking_archivos/image002.gif" v:shapes="_x0000_i1026"><![endif]><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=288 valign=top style='width:216.1pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 3.5pt 0cm 3.5pt'>
+  <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+  font-family:Arial;color:black'>Varias especies de animales marinos conviven
+  en un Acuario Virtual.<o:p></o:p></span></b></p>
+  </td>
+  <td width=288 valign=top style='width:216.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0cm 3.5pt 0cm 3.5pt'>
+  <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+  font-family:Arial;color:black'>En rojo se observan las partículas de comida
+  que engullen los animales.<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para crear
+avatars &#8220;inteligentes&#8221; les tendremos que dotar de:<o:p></o:p></span></p>
+
+<p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Visión</span></b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>. La posibilidad de ver todo aquello que les rodea. Técnicamente
+se trata de definir una región de &#8220;sensibilidad&#8221; para cada uno, dentro de la
+cual tienen acceso a la base de datos de geometría.<o:p></o:p></span></p>
+
+<p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Movimiento</span></b><span style='font-size:10.0pt;font-family:
+Arial;color:black'>. Es obvio que un pájaro vuela y un pez nada. Eso lo podemos
+solventar con un &#8220;solver numérico&#8221; de más o menos orden, según la precisión
+buscada. Ejemplos típicos son los algoritmos de Euler, Punto Medio o Runge-Kutta.<o:p></o:p></span></p>
+
+<p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Colisión</span></b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>. El avatar tendrá conciencia del resto de elementos de la escena
+y chocará con ellos, ya sean objetos estáticos u otros avatars. Este punto es
+inseparable del primero, los sensores de visión artificial.<o:p></o:p></span></p>
+
+<p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
+tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Intencionalidad</span></b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>. Un avatar tiene asociado un generador de
+intenciones que básicamente se encarga de las decisiones en cada momento: ¿voy
+a chocar?, ¿me estoy alejando de mi destino?, ¿estoy cerca del resto del
+grupo?, etc...<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Existen aún más
+posibilidades al respecto pero de momento trabajaremos con lo dicho. Para
+centrar el tema hablaré de un ejemplo concreto: <b>la simulación de bandadas de
+pájaros</b>.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Pensad que son
+muchos los juegos que se sustentan en técnicas de este estilo. Algunos ejemplos
+son </span><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Unreal</span></b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'> o <b>Half-life</b>.</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Diagrama General</span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno que mejor
+que un diagrama para tener una visión global del sistema. Vamos a echarle una
+ojeada:<o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+ margin-left:0;margin-top:0;width:424.5pt;height:342pt;z-index:1;
+ mso-position-horizontal:left;mso-position-vertical:top;
+ mso-position-vertical-relative:line' o:allowoverlap="f">
+ <v:imagedata src="flocking_archivos/image003.png" o:title="fig1"/>
+ <w:wrap type="square"/>
+</v:shape><![endif]--><![if !vml]><img width=566 height=456
+src="flocking_archivos/image004.jpg" align=left hspace=12 v:shapes="_x0000_s1027"><![endif]><span
+style='font-size:10.0pt;font-family:Arial;color:black'>Nuestros avatars-pajaros
+&#8220;piensan por sí mismos&#8221; y por tanto tienen que ser capaces de priorizar entre
+diversas acciones. En este caso observamos que sus &#8220;<b>heurísticas</b>&#8221; de
+pensamiento son:<o:p></o:p></span></p>
+
+<p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Tengo que volar hacia un destino predefinido</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'>, como por ejemplo un
+nido, un árbol o un montón de comida.<o:p></o:p></span></p>
+
+<p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Tengo que permanecer cerca de la bandada</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'>. Los pájaros tienden a
+volar juntos en grupo y nunca se alejan demasiado a no ser que la necesidad sea
+imperiosa!.<o:p></o:p></span></p>
+
+<p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Tengo que evitar colisiones</span></b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>. Esta claro que un pájaro no desea chocar
+contra un árbol, contra otro pájaro o bien contra un posible predador.<o:p></o:p></span></p>
+
+<p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Tengo que seguir a mi líder</span></b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>. En el caso de existir puede optarse porque
+nuestros pájaros sigan más o menos fielmente a uno que ejerce de &#8220;jefe de
+grupo&#8221;.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>El hecho de
+decidir qué hacer y qué no hacer o incluso priorizar entre varias opciones
+existentes se relega al llamado &#8220;<b>Generador de Intenciones</b>&#8221;. Este módulo
+es el que realmente modela el cerebro de cada pájaro. Un águila no actúa igual
+que una paloma o que un gorrión, a eso me refiero.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>En la
+simulación intervienen diversos módulos que paso a describir uno por uno a
+continuación:<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Solver Numérico</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Parece
+contradictorio que empiece por el último módulo pero lo necesito para
+justificar el proceso que viene antes.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Un solver
+numérico se encarga de calcular la evolución dinámica del sistema, es decir, la
+posición y velocidad de cada avatar a cada instante de simulación. La idea
+fundamental radica en definir lo que se llama un &#8220;<b>problema de valor inicial</b>&#8221;.
+Se parte de unas condiciones iniciales conocidas, típicamente las posiciones y
+velocidades iniciales de todos los avatars. A partir de éstas y conocido el </span><b><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>D</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'>t</span></b><span style='font-size:10.0pt;
+font-family:Arial;color:black'> (incremento de tiempo) que supondremos que se
+produce a cada iteración, pasamos a &#8220;mover&#8221; toda la geometría. O sea que:<o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>para t = t<sub>0</sub>, conocemos la posición(t<sub>0</sub>)
+= (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) y la velocidad(t<sub>0</sub>) =
+(vx<sub>0</sub>,vy<sub>0</sub>,vz<sub>0</sub>) de cada avatar<o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>No es nada
+raro. De hecho básicamente a todos os tendría que sonar la famosa segunda ley
+de Newton:<o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>Fuerza = Masa * Aceleración<o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Definidas
+cuáles son las fuerzas que actúan sobre un determinado avatar y conocida su masa,
+deducimos su aceleración. A partir de la aceleración y del tiempo deducimos su
+incremento de velocidad instantánea y de ésta su incremento de
+posición...osease:<o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>1) Aceleración = Fuerza / Masa<o:p></o:p></span></b></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>2) Nueva velocidad = Velocidad anterior +
+Aceleración * </span><span
+style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'>t<o:p></o:p></span></b></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>3) Nueva posición = Posición anterior +
+Velocidad anterior * </span><span
+style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'>t<o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>y ya lo
+tenemos! si hacemos esto repetidamente iteración tras iteración renderizando al
+final de cada una, tenemos un sistema de simulación dinámica. A este
+procedimiento tan simple se le conoce como &#8220;<b>método explícito de Euler</b>&#8221;.
+Es muy inestable para </span><b><span
+style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'>t</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'>&#8217;s demasiado grandes
+pero si se controla este parámetro no hay problema. Existen métodos más
+completos para integrar pero suelen emplearse en simulación física, cuando la
+precisión es un factor decisivo. En nuestro caso podemos sacrificarla un poco
+en favor de la velocidad, idealmente &#8220;tiempo real&#8221;.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Por tanto
+siempre tendremos una función dedicada a la resolución del método de Euler en
+nuestro sistema. <b>Conclusión</b>: necesitamos <b>fuerzas</b> como parámetro de
+entrada!<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para más
+información leed mis artículos sobre <b>Simulación física. Métodos numéricos</b>
+y <b>Paso adaptativo</b>.<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Fuerzas</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Podemos
+&#8220;inventar&#8221; tantas fuerzas como consideremos conveniente. De hecho existen
+procedimientos matemáticos complejos para deducir fuerzas a partir de
+condiciones aunque no entraré en ese punto. Se trata de introducir gravedad,
+fricción con el aire, tornados, eléctricas, magnéticas, muelles ... De momento
+pueden sernos de interés las dos primeras:<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial;color:black'>Gravedad </span><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>Þ</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'> Fuerza (Newton&#8217;s) = masa (Kg&#8217;s) * G</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'> (típicamente constante
+de gravitación universal de valor -9.81 m/s<sup>2</sup>)<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial;color:black'>Fricción </span><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>Þ</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'> Fuerza (Newton&#8217;s) = -Kv * velocidad</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'> (Kv es una constante de
+restitución a escoger por parte del programador. Se observa que esta fuerza
+siempre va en contra de la dirección del movimiento y dota al sistema global de
+más estabilidad).<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Obviamente para
+la primera se nos hace imperiosa la necesidad de definir una masa para cada
+avatar.<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Módulo de cálculo de aceleraciones</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno acabamos
+de ver que necesitamos trabajar con fuerzas para poder calcular aceleraciones.
+De hecho también es totalmente lícito añadir aceleraciones precalculadas a las
+obtenidas a partir de las fuerzas. Esto es lo que haremos con el generador de
+intenciones.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>La idea básica
+es que en función de las decisiones del avatar se calcule un vector de
+aceleración que sumado a las aceleraciones provenientes de las fuerzas, se
+utilizará para desplazarlo en la próxima iteración. Una posible aproximación al
+cálculo es el promediado de varios vectores ponderados que es lo que se muestra
+en el diagrama. El avatar-pájaro calcula los siguientes vectores (siempre en
+coordenadas de mundo 3D):<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Arial;color:black'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Vector desde su posición hasta el destino final prefijado</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'>. Este vector lo pondera
+la constante KD.<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Arial;color:black'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Vector desde su posición hasta el centroide de la bandada</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'> (se entiende por
+centroide el promedio de las posiciones de todo el resto de pájaros). Este
+vector lo pondera la constante KB.<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Arial;color:black'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;font-family:Arial;
+color:black'>En el caso de detección inminente de <b>colisión</b>, vector de
+respuesta a ésta. Me refiero al vector que evita la colisión. Este vector lo
+pondera la constante KC.<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+font-family:Arial;color:black'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>Vector desde su posición hasta la del líder de la bandada</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'> (en caso de haberlo).
+Este vector lo pondera la constante KL.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Calculados
+estos vectores con un procedimiento puramente geométrico (hablo de ésto en mi
+curso de Gráficos publicado en esta misma revista) los ponderamos
+(multiplicamos) con las constantes para después promediarlos. Lo fundamental es
+escoger adecuadamente los valores de las constantes de forma que demos más peso
+a las decisiones de más prioridad y menos a las menos importantes (para el
+avatar-pájaro que estemos modelando está claro puesto que <b>cada uno tiene sus
+propias constantes</b>). Esto quedaría así:<o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>Aceleración intenciones = [ KD(xd,yd,zd) +
+KB(xb,yb,zb) + KC(xc,yc,zc) + KL(xl,yl,zl) ] / 4.0<o:p></o:p></span></b></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>Aceleración fuerzas = </span><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>S</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'> (Fuerzas) / masa<o:p></o:p></span></b></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>Aceleración Total = Aceleración intenciones +
+Aceleración fuerzas</span></b><span style='font-size:10.0pt;font-family:Arial;
+color:black'><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>De esta forma
+tenemos en cuenta tanto lo que decide el pájaro como lo que no puede controlar,
+es decir la influencia del resto del entorno sobre él. A partir de esta <b>Aceleración
+Total</b> y empleando el solver numérico deduciremos las nuevas posiciones /
+velocidades.<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Correspondencia de velocidades</span><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>En el caso de
+que sea importante seguir el ritmo del resto de la bandada será de importancia
+este criterio. Si bien ya lo hemos tenido algo en cuenta en el apartado
+anterior con el vector avatar-centroide bandada, no está de más añadir un
+segundo punto de ajuste fino.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Simplemente se
+trata de escalar el módulo de la velocidad recién calculada (nada de tocar su
+dirección y sentido !!!) con la constante KV en el caso de detectar que somos
+demasiado lentos para el resto de la bandada aunque nos estemos dirigiendo
+hacia ella. La corrección pues:<o:p></o:p></span></p>
+
+<p align=center style='text-align:center'><b><span style='font-size:10.0pt;
+font-family:Arial;color:black'>Nueva velocidad final = Nueva velocidad * KV<o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>De esta forma
+podremos acelerar a nuestros avatars si se quedan cortos! Quede claro que la
+metodología que estoy comentando conduce a un efecto realista a nivel de
+visualización y no de precisión. Si deseáramos lo segundo probablemente
+tendríamos que recurrir a algoritmos mucho más complejos. Esto nos irá muy bien
+para una bandada de pájaros o para el acuario virtual que os presentaba antes
+pero no para un sistema de cirugía virtual en tiempo real, por ejemplo.<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Colisiones</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para
+documentaros sobre este tema podéis dirigiros a los artículos que escribí en su
+día sobre <b>Detección de Colisiones entre objetos&nbsp; deformables</b> y <b>Respuesta
+a las colisiones</b>.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Además de lo
+mencionado en esos artículos quisiera comentar otra técnica que os puede ser muy
+útil para evitar obstáculos de forma automática en sistemas como éste, basados
+en cálculos dinámicos. Se trata de la utilización de <b>voxels inicializados
+con campos vectoriales</b>. Vamos a ello.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Un voxel es
+básicamente un &#8220;cubito&#8221; 3D en el espacio . Cada voxel almacena un valor de
+propiedad. Por claridad vamos a imaginarnos lo que se vería desde arriba, algo
+así como una proyección ortográfica superior de un trocito de nuestro mundo 3D:<o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><v:shape id="_x0000_s1028" type="#_x0000_t75" style='position:absolute;
+ margin-left:0;margin-top:0;width:378.75pt;height:319.5pt;z-index:2;
+ mso-position-horizontal:left;mso-position-vertical:top;
+ mso-position-vertical-relative:line' o:allowoverlap="f">
+ <v:imagedata src="flocking_archivos/image005.gif" o:title="fig4"/>
+ <w:wrap type="square"/>
+</v:shape><![endif]--><![if !vml]><img
+src="flocking_archivos/image005.gif" align=left hspace=12 v:shapes="_x0000_s1028" width="505" height="426"><![endif]><span
+style='font-size:10.0pt;font-family:Arial;color:black'>En este caso supongamos
+el caso en que uno de nuestros pájaros tiene que bordear una columna. Podríamos
+optar por un procedimiento puramente geométrico a partir de vectores proyectándola sobre el plano de visión del pájaro y tratando de encontrar cual
+es la dirección que éste debe tomar para no chocar. Esto es complicado y
+tedioso puesto que empiezan a aparecer casos y más casos de esos que hay que
+contemplar aparte (singularidades...buuufff).<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Ya que tenemos
+un sistema basado en fuerzas vamos a utilizarlas para evitar la columna con lo
+cual no tendremos que añadir procesos &#8220;extraños&#8221; al sistema. Sólo
+aprovecharemos lo que ya hay hecho!<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno se trata
+de añadir una nueva fuerza: un campo vectorial gradiente que apunte en
+dirección normal y opuesta al centro de la columna. Es un campo radial, normal
+a la superficie de ésta. Vamos mirad la figura y decidme que entendéis lo que digo!!!<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Cada cajita es
+un voxel, una discretización 3D del espacio. Tiene unas dimensiones fijas
+conocidas y por lo tanto es muy fácil saber si nuestro pájaro esta dentro de
+uno. Montamos una &#8220;grid&#8221; como la de la figura (la resolución de ésta la
+decidimos a priori según nos parezca), asociamos un vector orientado de forma
+radial y hacia afuera en cada voxel y a simular.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>El vector de
+cada voxel puede calcularse fácilmente a partir del centro de éste y el centro
+de la sección circular de la columna.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Si detectamos
+que nuestro pájaro se ha metido dentro de un voxel, o sea que se está acercando
+peligrosamente a la columna, le aplicaremos ,además de todo lo anterior, la
+fuerza que contiene. Podemos incluso escalarla para darle más o menos peso en
+relación al resto. Dejamos al solver numérico que haga su trabajo y tachán!!!
+(mirad la línea naranja de la figura) ... el pajarito no choca!!!<o:p></o:p></span></p>
+
+<p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
+windowtext;mso-pattern:gray-20 auto'>Consideraciones finales</span></b><span
+style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para acabar
+deciros que típicamente se normalizan todos los vectores (ya sabéis, se les
+divide por su módulo para hacerlos unitarios) de forma que inicialmente todos
+los módulos sean iguales. En esta situación digamos que todos &#8220;pesan&#8221; igual y
+es entonces cuando se escalan por sus constantes respectivas. Con estas
+constantes estamos dando más peso a unos y menos a otros, en definitiva,
+estamos modelando el &#8220;cerebro&#8221; del avatar.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Quede claro que
+&#8220;No es oro todo lo que brilla&#8221; y que la implementación de sistemas de este tipo
+siempre pasa por la resolución de distintos problemas. Para empezar no es fácil
+escoger el valor de cada constante que nos da el comportamiento exacto que
+buscamos. Tampoco lo es encontrar el valor adecuado del </span><b><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>D</span><span style='font-size:
+10.0pt;font-family:Arial;color:black'>t</span></b><span style='font-size:10.0pt;
+font-family:Arial;color:black'> (queremos velocidad pero si lo subimos mucho
+tendremos inestabilidad...). Hay que probar y probar pero bueno, ¿algo de
+&#8220;salsa&#8221; tiene que haber no? ¿si no dónde está la aventura?<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Si os interesa
+más el tema podéis leer mis artículos sobre</span><span style='mso-bidi-font-size:
+10.0pt;font-family:Arial;color:black'> </span><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;color:black'>Aprendizaje Artificial
+aplicado a Modelos deformables</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;color:black'>, también aquí en
+Macedonia.<o:p></o:p></span></p>
+
+      </td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+</body>
+
+</html>

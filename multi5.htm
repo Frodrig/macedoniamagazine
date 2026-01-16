@@ -1,0 +1,383 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 5. <br> Programación de tarjetas de vídeo (III).
+</h3>
+<H4>2.1.9.- Efectos de Paleta</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+
+Como antes referenciamos, la tarjeta de v&iacute;deo mantiene un registro
+con 256 celdillas que conforman el <B>DAC</B> de v&iacute;deo. En cada
+una de esas celdas se guarda el valor de un color determinado por la intensidad
+de sus tres componentes primarias: rojo, azul y verde.
+
+<P align="justify">Cada uno de esos valores <B>RGB</B> (Red-Green-Blue) se encuentra en
+un rango de 0 a 63. De esta forma, el color de un rojo brillante podr&aacute;
+ser obtenido estableciendo el valor R a 63, el valor G a 0 y el valor B
+a 0. Esto permite que dos colores puedan ser exactamente el mismo, pero
+almacenados en distintas posiciones.
+
+<P align="justify">Resumanos lo que sabemos hasta ahora sobre la paleta:
+<UL>
+<LI>
+Es un registro con 256 celdas donde se guardan tres valores distintos:
+R, G y B, comprendidos entre 0 y 63.</LI>
+
+<LI VALUE="1">
+Cada valor almacenado en la memoria de v&iacute;deo referencia a una de
+estas celdillas, y la tarjeta de v&iacute;deo se encarga de leer estas
+ternas por color y poner el color adecuado en cada p&iacute;xel de la pantalla.</LI>
+</UL>
+Ahora hay que saber c&oacute;mo se pueden acceder a esas celdas y qu&eacute;
+se puede hacer con la paleta para conseguir alg&uacute;n efecto que merezca
+la pena.
+
+<P align="justify">Para leer un valor de la paleta, el medio que nos ofrece la tarjeta
+de v&iacute;deo es el <B>puerto</B>.
+
+<P align="justify">Si escribimos en el puerto 3C7h el n&uacute;mero (0-255) del color,
+al leer el valor del puerto 3C9h obtendremos el valor de la componente
+R, si volvemos a leer de ese mismo puerto obtendremos el valor de G, y
+por &uacute;ltimo, el de B. La tarjeta de v&iacute;deo se encarga del resto.
+
+<P align="justify">El procedimiento que lo implementa es:
+
+<P align="justify"><B><FONT COLOR="#990000">void Leer1ColorPaleta(BYTE color,BYTE *rojo,BYTE
+*verde, BYTE *azul)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE char rrojo,vverde,aazul;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c7</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov rrojo,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov vverde,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov aazul,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; *rojo=rrojo; *verde=vverde; *azul=aazul;</B>
+<BR><B>}</B>
+
+<P align="justify">Por el contrario, si lo que queremos es establecer los valores de un
+color de la paleta, escribimos en el puerto 3C8h el n&uacute;mero del color,
+y en el puerto 3C9h vamos escribiendo sucesivamente los tres valores de
+R, G y B. De esto se encarga:
+
+<P align="justify"><FONT COLOR="#990000"><B>void Establecer1ColorPaleta(BYTE color,BYTE
+rojo,BYTE verde,</B> <B>BYTE azul)</B></FONT>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,rojo</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,verde</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,azul</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+<BR>&nbsp;
+
+<P align="justify"><B>Apagar la Paleta: Fade Out</B>
+
+<P align="justify">Es un efecto bastante vistoso y elegante que se puede observar continuamente
+en cualquier medio audiovisual, ya sea ordenador o televisi&oacute;n. Consiste
+en hacer ver que <I>"</I>se va la luz<I>"</I> cuando tenemos algo en pantalla.
+Es decir, da la apariencia de que la luz se va apagando poco a poco hasta
+ver solamente una pantalla completamente negra.
+
+<P align="justify">Para este fin est&aacute; el procedimiento:
+
+<P align="justify"><B><FONT COLOR="#990000">void ApagarPaleta(PALETA paleta,BYTE retardo)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor cx,cx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,retardo</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; SIGUE_APAGANDO:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3C8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor al,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3DA</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; ESPERA_FIN_RETR:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and al,0x8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz ESPERA_FIN_RETR</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; ESPERA_INI_RETR:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and al,0x8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jz ESPERA_INI_RETR</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz ESPERA_FIN_RETR</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,retardo</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lds SI,paleta</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; OTRO_DAC:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,[si]</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub al,ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge DEC_ROJO</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor al,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; DEC_ROJO:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,[si+1]</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub al,ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge DEC_VERDE</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor al,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; DEC_VERDE:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,[si+2]</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub al,ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge DEC_AZUL</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor al,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; DEC_AZUL:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add si,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc cl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz OTRO_DAC</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp ch,00111111b</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jl SIGUE_APAGANDO</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Este procedimiento necesita ser comentado por su especial concepci&oacute;n.
+
+<P align="justify">Como se puede ver, dentro del c&oacute;digo aparece la rutina presentada
+anteriormente como <I>EsperarBarrido</I>. El motivo de que el c&oacute;digo
+vuelva a estar aqu&iacute; de nuevo en lugar de lo aconsejable, que es
+hacer una llamada a la funci&oacute;n, es por motivos de velocidad.
+
+<P align="justify">Cuando el <B>C</B> llama a una funci&oacute;n (y cualquier otro lenguaje),
+el compilador realiza un cambio de contexto, es decir, guarda todos los
+valores actuales y luego realiza la llamada al nuevo procedimiento. Cuando
+&eacute;ste termina, se restauran los valores y se contin&uacute;a con
+la ejecuci&oacute;n. Pero esto tiene una desventaja crucial para el objetivo
+que nos marcamos, que es el tiempo perdido en ese cambio de contexto. Por
+lo que si se incluye aqu&iacute; el c&oacute;digo de nuevo, al no ser excesivamente
+largo, conviene hacerlo en lugar de la llamada aconsejable.
+
+<P align="justify">El tener que <I>"sincronizar"</I> este procedimiento con el refresco
+de la pantalla es para evitar la aparici&oacute;n de la <I>"nieve"</I>
+por los desajustes entre actualizaci&oacute;n de memoria y refresco de
+la pantalla anteriormente comentados.
+
+<P align="justify"><I>ApagarPaleta</I> necesita que se le suministren dos valores, una
+estructura que guarde los valores de la paleta y un valor que indique c&oacute;mo
+de lento se va <I>"apagar"</I> esa paleta.
+
+<P align="justify">El valor m&iacute;nimo es 1, con lo que s&oacute;lo se <I>"</I>esperar&aacute;<I>"</I>
+a un barrido de pantalla. El m&aacute;ximo viene dado por el tipo de la
+variable, (64 por ser de tipo <I>char</I>, pero extendido a 255 por incluir
+el especificador <I>unsigned</I>). Un valor aconsejable para transiciones
+r&aacute;pidas es 1, y para las lentas, 3 &oacute; 4. A partir de 5 comienza
+a perder fluidez el efecto.
+
+<P align="justify">El significado de <I>"apagar la paleta"</I> consiste en que vamos decrementando
+los valores RGB de cada celda del DAC mientras no valgan todos 0. Con esto,
+poco a poco (aunque r&aacute;pidamente efectuado), se van oscureciendo
+los colores con lo que la apariencia de que se apaga la imagen se consigue.
+
+<P align="justify"><B>Encender la Paleta: Fade In</B>
+
+<P align="justify">El efecto contrario se consigue con este procedimiento:
+
+<P align="justify"><B>void EncenderPaleta(PALETA ,BYTE);</B>
+
+<P align="justify">Este procedimiento hace lo contrario que <I>ApagarPaleta</I>. En <I>EncendarPaleta</I>
+partimos de la paleta determinada con todos los componentes <B>RGB, </B>de
+todos los colores, a 0. Paulatinamente vamos incrementando los valores
+del <B>DAC</B> hasta hacerlos coincidir con los valores de la paleta que
+le hemos pasado como variable. Tambi&eacute;n se sincroniza con el barrido
+de la pantalla y se dispone de una variable para determinar la velocidad
+con que ejecutar el procedimiento.
+
+<P align="justify">Aparte de estos efectos, se encuentran otros como convertir toda paleta
+(con lo que tambi&eacute;n se convierte la pantalla que se est&eacute;
+viendo en ese momento) a una tonalidad determinada, como por ejemplo tonos
+grises (parecer&aacute; que la imagen est&aacute; en blanco y negro), o
+azules, rojos, verdes...
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

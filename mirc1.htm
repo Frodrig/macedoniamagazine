@@ -1,0 +1,142 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A></b></FONT><br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Introducción al IRC</H3>
+<p align=justify>
+
+¿Qué es el IRC? Estas son las siglas de una de las opciones más entretenidas que Internet te ofrece. 
+<br>
+Significan Internet Relay Chat, lo que al castellano viene a significar, más o menos, "Transmisión de Conversaciones por Internet". 
+<br><br>
+Pero esto no soluciona nada. 
+El IRC es un sistema de conversación escrita y multiusuario, donde la gente se encuentra en canales o habitaciones virtuales en las que se habla sobre los más diversos temas y en el que se puede hablar en grupo o de forma privada. No existe ninguna restricción, en principio, al número de personas que pueden entrar en un canal o en el IRC, ni en el número de canales que pueden existir. Es cierto que existen más formas de chats diferentes al IRC, pero el IRC se lleva la palma con diferencia por su sencillez y posibilidades gracias a los scripts.
+<br><br>
+¿Dónde nació?. Pues es un invento finlandés, que nació en 1988 gracias a Jarkko Oikarinen para crear un sistema de multiconversaciones en tiempo real para las BBS. Quién iba a decir que se iba a convertir en una de las aplicaciones más usadas del mundo. En Españaa unas 700 o 900 personas lo visitan a diario, y si vamos a servidores de IRC mundiales se pueden ver hasta 20.000 personas conectadas a la vez.
+<br><br>
+Una de las grandes ventajas que este tipo de Chats nos ofrecen es el anonimato. Nadie, a no ser que tú se lo digas, sabrá quién eres o dónde estas. Otro punto a su favor es la posibilidad de usar scripts, lo que facilita aún más el uso y añade posibilidades sorprendentes al IRC.
+<br><br>
+Mucha gente que se conecta por primera vez puede sorprenderse viendo como algunas personas mandan mensajes muy llamativos, llenos de colores, dibujos, sonidos... o puede que veas cómo un tío amenaza a otro y lo desconecta de la red al instante. ¿Cómo hacen eso? Pues muy sencillo, usan scripts.
+<br><br>
+¿Qué es un script? Pues es un añadido, un complemento, a un programa de IRC, como el mIRC. Un script es una serie de ficheros que se ejecutan junto al programa y que le aporta nuevos menús, comandos, opciones, cuadros de dialogo, etc. Pero no todos los script tienen la misma finalidad, los hay para el entretenimiento, la protección, para juegos, para la guerra, etc. Algunos alucinareis al ver las palabras "guerra" y "protección", pues así es, algunas veces las conversaciones acaban en discusiones. En el IRC puede haber guerras virtuales, ataques, contraataques y todo lo que podéis imaginar. Por este motivo, y muchos más, es conveniente usar un buen script que cubra todas nuestras necesidades. 
+<br><br>
+El programa más usado es el mIRC, que es uno de los más sencillos y completos, por este motivo, la mayoría de los scripts existentes, son para ‚l. Nos centraremos en la programación de scripts para mIRC 5.0 o superior, viendo las diferentes partes que los componen y los comandos empleados en cada sección. El único límite que existe es la imaginación y paciencia del programador. Espero que al finalizar este cursillo puedas programar tu propio script sin muchos 
+problemas.<br>
+<H4>
+Introducción a la programación de scripts</H4><p align=justify>
+Para crear nuestro propio script, añadir opciones e incluso mejorar el que ya tenemos, debemos conocer las partes que lo componen y dónde debemos programar. 
+<br><br>
+En el mIRC existen tres secciones que debemos tener muy en cuenta. Las encontraremos en el menú TOOLS, sus nombre son "Alias", "Popups" y "Remote". Toda la información que metemos en ellos se graba en los ficheros .ini, que se suelen encontrar en el directorio raíz del mIRC. Podemos tener tantos <i>.ini</i> como queramos. Veamos que‚ es cada cosa:
+<br><br>
+<b>Alias Definitions:</b> Alias para los amigos. En él se programan alias o atajos con lo que haremos que el mIRC ejecute un número X de comandos de una sola vez. Lo veremos más adelante.
+<br><br>
+<b>Popups menus:</b> Aquí es donde se definen los menús que podemos añadir al mIRC y qué debe hacer cada opción del menú. También lo explicaremos.
+<br><br>
+<b>Remote script:</b> Éste es alma de nuestro script. Aquí es donde definiremos los eventos, la ejecución de los comandos, qué hacer ante una petición de cualquier tipo, etc. Es, quizás, la parte más compleja de todas. Se compone a su vez de tres subpartes: Events, CTCPs y Raw. Nos detendremos a analizarlos cuidadosamente.
+<br><br>
+También existen las secciones "Users" y "Variables", que son secciones muy sencillas de comprender cuando tengamos una visión general de cada apartado.
+<br><br>
+Por supuesto, para programar un script es necesario conocer todos los comandos que se usan en el IRC y los específicos del programa que utilizamos. El mIRC es muy versátil, por lo que ésta sección no tiene gran dificultad.
+<br><br>
+Lo que recomendaría a todos los que deseasen empezar con el scripting es que consigan un manual del mIRC (existe en castellano) para que les sirva de referencia a la hora de buscar comandos e instrucciones que les puedan ser de utilidad. Muchas veces se te ocurre una nueva opción para añadir a tu script, por ejemplo, que te identifique el puerto al que te conectas, pasas una hora creando tu maravillosa idea y, al mirar el manual en busca de cualquier chorrada, encuentras que poniendo $port hace justo lo que querías. El manual es fundamental. Si controlas de ingles puedes usar el que trae el mIRC, pero si no te van las lenguas guiris puedes conseguir uno traducido en: 
+<a href="www.arrakis.es/~sucubus/zonadescarga.html" target="_new">www.arrakis.es/~sucubus/zonadescarga.html</A>
+<br><br>
+Doy por supuesto que todos los que van a seguir este curso saben lo que es el mIRC y qué es el IRC, porque usaré terminología de este tipo de entornos como puede ser flood, nuke, servidor, nick, canal, etc. Si tenéis alguna duda, la que sea, decídmela por e-mail a <a href="mailto:garcifer@iies.es">garcifer@iies.es</a>
+<br><br>
+Empecemos ahora que sabemos de lo que hablamos...
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

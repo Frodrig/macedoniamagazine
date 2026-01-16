@@ -1,0 +1,679 @@
+<HTML>
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Marcos para páginas Web</H3>
+<FONT color="#000000" size=2 face="arial" >        
+<P align="JUSTIFY">
+
+Hay mucha gente que tiene una p&aacute;gina web en Internet y le encantar&iacute;a
+poner todo tipo de chorraditas que la hagan m&aacute;s atractivas. El problema
+es que para hacer todas esas cosas se necesita o tener unos conocimientos
+importantes de HTML, Java y otros lenguajes similares, o tener un programa
+de edici&oacute;n de p&aacute;ginas web que cuesta una pasta. Voy a ver
+si puedo ayudar a todos aquellos que no poseen ni dinero ni conocimientos
+para hacer todos esos efectos especiales y voy a empezar explicando la
+forma de dividir su p&aacute;gina en marcos (frames en ingles) sin necesidad
+de comprarse un caro programita o ir a un curso acelerado de HTML.
+
+<P align="justify">Aqu&iacute; podr&aacute;s encontrar el c&oacute;digo HTML que crear&aacute;
+los 8 tipos de marcos que, creo yo, m&aacute;s pueden interesarte. No te
+asustes al o&iacute;r eso de "c&oacute;digo html". Es MUY sencillo el usarlo
+correctamente y hacer tu p&aacute;gina web un poco m&aacute;s flipante.
+Solo vas a necesitar una serie de herramientas que, estoy seguro, ya tendr&aacute;s.
+Necesitas:
+<BR>&nbsp;
+<UL>1.- Un editor HTML sencillito para hacer tus p&aacute;ginas a tu gusto.
+Vale cualquiera como pueden ser el Composer del Netscape o el FrontPage
+Express del Internet Explorer.
+
+<P align="justify">2.- El Bloc de Notas del Windows. O cualquier programa que edite texto,
+como el Edit del MS-DOS.
+
+<P align="justify">3.- Este sencillo manual :-)</UL>
+
+<h4>&iquest;C&oacute;mo se configura el marco?</h4><font size=2 face=arial><p align="justify">
+La divisi&oacute;n de la p&aacute;gina en marcos o frames no es m&aacute;s
+que una p&aacute;gina peque&ntilde;a que lee otras simult&aacute;neamente
+cre&aacute;ndose as&iacute; las divisiones. De &eacute;ste modo tendremos
+dos p&aacute;ginas, o tres, o cuatro, le&iacute;das a la vez, mostr&aacute;ndose
+en diferentes posiciones.
+
+<P align="justify">Al crear la divisi&oacute;n de la pantalla debemos especificar el ancho
+de cada marco y los enlaces de cada uno a qu&eacute; marco afectan. El
+ancho, largo, y grosor de las l&iacute;neas de separaci&oacute;n se especifican
+modificando una serie de valores que SIEMPRE est&aacute;n en el apartado
+<FONT FACE="Courier New"><FONT COLOR="#800080"><FONT SIZE=-1>frameset</FONT></FONT></FONT>.
+En la tabla inferior ver&aacute;s para qu&eacute; sirve cada valor:
+<UL>
+<LI>
+&nbsp;<FONT FACE="Courier New"><FONT SIZE=-1>Indica el "ancho" de un marco
+vertical (columna) &lt;<FONT COLOR="#800080">frameset </FONT><FONT COLOR="#FF0000">cols="</FONT><FONT COLOR="#0000FF">valor,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT FACE="Courier New"><FONT SIZE=-1>Indica el "ancho" de un marco horizontal
+(fila) &lt;<FONT COLOR="#800080">frameset </FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">valor,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT FACE="Courier New"><FONT SIZE=-1>Con <FONT COLOR="#FF0000">framespacing="</FONT><FONT COLOR="#0000FF">X</FONT><FONT COLOR="#FF0000">"
+</FONT>se define el grosor de las barras de separaci&oacute;n de los marcos.
+Ejemplo: &lt;<FONT COLOR="#800080">frameset </FONT><FONT COLOR="#FF0000">framespacing="</FONT><FONT COLOR="#0000FF">2</FONT><FONT COLOR="#FF0000">"
+cols="</FONT><FONT COLOR="#0000FF">valor,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT SIZE=-1><FONT FACE="Courier New">Si al definir un marco ponemos,
+por ejemplo: &lt;<FONT COLOR="#800080">frameset</FONT> <FONT COLOR="#FF0000">framespacing="</FONT><FONT COLOR="#0000FF">0</FONT><FONT COLOR="#FF0000">"</FONT>
+<FONT COLOR="#FF0000">border="</FONT><FONT COLOR="#0000FF">false</FONT><FONT COLOR="#FF0000">"</FONT>
+<FONT COLOR="#FF0000">frameborder="</FONT><FONT COLOR="#0000FF">0</FONT><FONT COLOR="#FF0000">"</FONT>
+<FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">valor,valor</FONT><FONT COLOR="#FF0000">"</FONT>>
+no aparecer&aacute; l&iacute;nea separadora de los marcos. Esto lo indican
+los comandos <FONT COLOR="#FF0000">border="</FONT><FONT COLOR="#0000FF">false</FONT><FONT COLOR="#FF0000">"</FONT>
+y <FONT COLOR="#FF0000">frameborder="</FONT><FONT COLOR="#0000FF">0</FONT><FONT COLOR="#FF0000">"</FONT></FONT><FONT COLOR="#000000">.</FONT></FONT><FONT COLOR="#000000">
+El comando </FONT><FONT FACE="Courier New"><FONT SIZE=-1><FONT COLOR="#FF0000">framespacing="</FONT><FONT COLOR="#0000FF">0</FONT><FONT COLOR="#FF0000">"
+</FONT></FONT></FONT><FONT COLOR="#000000">define la separaci&oacute;n
+entre los marcos. Usalo solo si deseas que existan una serie de pixels
+que separen un marco de otro.</FONT></LI>
+</UL>
+
+<UL><FONT SIZE=-1><FONT FACE="Courier New">Si al definir un marco ponemos,
+por ejemplo: &lt;<FONT COLOR="#800080">frame </FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">izquierda</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">superiord</FONT><FONT COLOR="#FF0000">"</FONT></FONT>
+<FONT FACE="Courier New"><FONT COLOR="#FF0000">src="</FONT><FONT COLOR="#0000FF">fijo.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT>
+La opci&oacute;n <FONT FACE="Courier New"><FONT SIZE=-1><FONT COLOR="#FF0000">scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"</FONT></FONT></FONT>
+indicar&aacute; que no aparezca la barra de desplazamiento vertical. Y
+el comando <FONT FACE="Courier New"><FONT COLOR="#FF0000"><FONT SIZE=-1>noresize
+</FONT></FONT></FONT><FONT COLOR="#000000">que no se pueda modificar el
+ancho prefijado. Puedes usarlos por separado.</FONT></UL><font size=2 face=arial><p align="justify">
+Donde pone "valor" es el ancho/largo de nuestro nuevo marco. Si lo ponemos
+como valor% indicar&aacute; el tama&ntilde;o respecto al 100% de la ventana
+completa. El valor * es comod&iacute;n y le indicar&aacute; al navegador
+que use el resto de la ventana, sea como sea el tama&ntilde;o fijado del
+otro marco. Todos los marcos que aqu&iacute; puedes encontrar tienen unos
+valores por defecto, que t&uacute; puedes modificar para ajustarlos a la
+p&aacute;gina que le asignes.
+<h4>&iquest;C&oacute;mo se crea y edita la p&aacute;gina de los marcos?</h4>
+<font size=2 face=arial><p align="justify">
+La cosa es muy sencilla y nada tiene que fallar si sigues los siguientes
+pasos. Recuerda que SOLO debes modificar de las secuencias de c&oacute;digo
+HTML aquellas partes escritas en <U><FONT COLOR="#3333FF">azul</FONT></U><FONT COLOR="#000000">
+y <U>negro</U></FONT>. Estos son los pasos a seguir:
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Abre el Bloc de Notas del Windows y copia directamente el c&oacute;digo
+HTML que aparece en el tipo de marco que te gusta.</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Modifica el nombre de las p&aacute;ginas que aparecen en cada marco por
+el de las tuyas. Los nombres que aparecen por defecto indican qu&eacute;
+funci&oacute;n tendr&aacute;n en la p&aacute;gina con marcos. De este modo
+"fija.htm" dice que ser&aacute; la p&aacute;gina que har&aacute; la funci&oacute;n
+de men&uacute; y modificar&aacute; el aspecto de la "movil.htm". En Macedonia
+Magazine tenemos un marco fijo, el izquierdo, y uno m&oacute;vil, el derecho.
+Tambi&eacute;n puede que el nombre sea "derecha.htm", "izquierda.htm",
+"superior.htm", etc, seg&uacute;n la posici&oacute;n del marco y su funci&oacute;n.</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Graba esta nueva p&aacute;gina web como "nombre.htm" o "nombre.html". Si
+deseas que la p&aacute;gina se cargue directamente con los frames llama
+al archivo como "index.htm" o "index.html".</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Carga en tu navegador habitual la p&aacute;gina para ver el aspecto que
+tiene.</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Desde el Bloc de Notas ve modificando los anchos, largos, etc. para ajustar
+los marcos a tus p&aacute;ginas tal y como he explicado antes.</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Escribe el c&oacute;digo HTML (como etiqueta HTML o editando la web con
+el bloc de notas) en la p&aacute;gina fija cuando te lo indique. Suele
+ser la p&aacute;gina que debe permanecer fija.</LI>
+</UL>
+
+<UL>
+<LI><font size=2 face=arial><p align="justify">
+Graba el resultado final y disfruta de tus marcos.</LI>
+</UL><font size=2 face=arial><p align="justify">
+Se supone que no debe haber ning&uacute;n problema. De todas formas puedes
+preguntarme cualquier duda que tengas por correo electr&oacute;nico.
+
+<P align="justify">&nbsp;
+<BR>
+<HR WIDTH="90%">
+
+<H3>
+C&oacute;digo HTML de las p&aacute;ginas de marcos</h3>
+<h4>CONTENIDO</h4><font size=2 face=arial><p align="justify">
+<BR><B>El marco izquierdo (fijo) varia al derecho (variable=movil).</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000"><FONT SIZE=+0>HTML de la fija:</FONT>&nbsp;</FONT>&nbsp;
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>&nbsp;
+<BR><FONT SIZE=-1>&nbsp;</FONT></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos1.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<h4>HTML de marco:</h4><font size=2 face=arial><p align="justify">
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>Titulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">framespacing="</FONT><FONT COLOR="#0000FF">2</FONT><FONT COLOR="#FF0000">"
+cols="</FONT><FONT COLOR="#0000FF">150,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">contenido</FONT><FONT COLOR="#FF0000">"
+target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">fija.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+<BR>&nbsp;
+
+<h4>ENCABEZADO:</h4><font size=2 face=arial><p align="justify">
+<BR><B>El marco superior (fijo) varia el inferior (variable=movil).</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000"><FONT SIZE=+0>HTML de la fija:</FONT>&nbsp;</FONT>&nbsp;
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>&nbsp;
+<BR><FONT SIZE=-1>&nbsp;</FONT></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos2.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B>HTML de marco:</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>Titulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">64,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">encabezado</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">fija.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">/html</FONT>></FONT>&nbsp;</FONT>
+
+<h4>PIE DE P&Aacute;GINA:</h4>
+<BR><B>El marco inferior (fijo) varia el superior (variable=movil).</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000"><FONT SIZE=+0>HTML de la fija:</FONT></FONT>&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos3.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<h3>HTML de marco:</h4>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">*,64</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">pie</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">fijo.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+
+<h3>DIVISI&Oacute;N HORIZONTAL EN DOS P&Aacute;GINAS INDEPENDIENTES:</h3>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><B><FONT COLOR="#000000" size=2>SIN NADA EN LAS DOS P&Aacute;GINAS&nbsp;</FONT></B></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos4.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<P align="justify"><B>HTML de marco:</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">*,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">superior</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">superior.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">inferior</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">inferior.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+
+<h4>DIVISI&Oacute;N VERTICAL EN DOS P&Aacute;GINAS INDEPENDIENTES:</h4>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><B><FONT COLOR="#000000" size=2>SIN NADA EN LAS DOS P&Aacute;GINAS&nbsp;</b></FONT></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos5.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<font size=2 face=arial><p align="justify">
+<P align="justify"><B>HTML de marco:</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">cols="</FONT><FONT COLOR="#0000FF">*,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">izquierdo</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">P&aacute;gina_izquierda.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">derecho</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">P&aacute;gina_derecha.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+
+<h4>JERARQU&Iacute;A ANUDADA:</h4>
+<B>A la derecha la fija con contenidos, que var&iacute;a el marco superior
+m&aacute;s espec&iacute;fico, &eacute;ste var&iacute;a la p&aacute;gina
+grande.</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000">HTML del fijo:&nbsp;</FONT>&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">superiord</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT>&nbsp;
+
+<P align="justify"><FONT COLOR="#000000">HTML del superior:&nbsp;</FONT>&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">inferiord</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT></TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos6.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<P align="justify"><B>HTML de marco</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">cols="</FONT><FONT COLOR="#0000FF">150,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">izquierda</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">superiord</FONT><FONT COLOR="#FF0000">"</FONT></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=-1><FONT COLOR="#FF0000">src="</FONT><FONT COLOR="#0000FF">fijo.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">25%,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">superiord</FONT><FONT COLOR="#FF0000">"
+target="</FONT><FONT COLOR="#0000FF">inferiord</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">marco_superior.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">inferiord</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+
+<h4>JERARQU&Iacute;A INFERIOR:</h4>
+<B>El marco superior modifica al intermedio, m&aacute;s espec&iacute;fico,
+que modifica a su vez al grande inferior.</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000">HTML de la superior:</FONT>&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">intermedio</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT>&nbsp;
+
+<P align="justify"><FONT COLOR="#000000">HTML del intermedio:&nbsp;</FONT>&nbsp;
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">inferior</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>&nbsp;</TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos7.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<P align="justify"><B>HTML de marco</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">64,25%,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">superior</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">intermedio</FONT><FONT COLOR="#FF0000">"</FONT></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=-1><FONT COLOR="#FF0000">src="</FONT><FONT COLOR="#0000FF">fijo.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">intermedio</FONT><FONT COLOR="#FF0000">"
+target="</FONT><FONT COLOR="#0000FF">inferior</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">marco_intermedio.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">inferior</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+<BR><B>&nbsp;</B>
+
+<h4>CONTENIDO Y TITULAR:</h4>
+<B>El titulo superior var&iacute;a el marco izquierdo de contenidos,
+que var&iacute;a la p&aacute;gina grande.</B>
+<BR>&nbsp;
+<CENTER><TABLE COLS=2 WIDTH="70%" >
+<TR>
+<TD WIDTH="60%"><FONT COLOR="#000000">HTML del t&iacute;tulo superior:</FONT><FONT COLOR="#FF0000">&nbsp;</FONT>&nbsp;
+
+<P align="justify">&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">contenido</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT>&nbsp;
+
+<P align="justify"><FONT COLOR="#000000">HTML izquierdo:&nbsp;</FONT>&nbsp;
+<BR><FONT SIZE=-1><FONT FACE="Courier New">&lt;<FONT COLOR="#800080">base
+</FONT><FONT COLOR="#FF0000">target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"</FONT>></FONT>&nbsp;</FONT>&nbsp;</TD>
+
+<TD WIDTH="15%">
+<CENTER><IMG SRC="gif/marcos8.gif" HEIGHT=174 WIDTH=121 ALIGN=RIGHT></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+<B></B>
+
+<P align="justify"><B>HTML de marco</B>
+
+<P align="justify"><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">html</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">http-equiv="</FONT><FONT COLOR="#0000FF">Content-Type</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">text/html; charset=ISO-8859-1</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">meta
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">GENERATOR</FONT><FONT COLOR="#FF0000">"
+content="</FONT><FONT COLOR="#0000FF">David Garcia (Macedonia Magazine)</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">title</FONT>>T&iacute;tulo
+de la p&aacute;gina&lt;<FONT COLOR="#800080">/title</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/head</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">rows="</FONT><FONT COLOR="#0000FF">64,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">titular</FONT><FONT COLOR="#FF0000">"
+scrolling="</FONT><FONT COLOR="#0000FF">no</FONT><FONT COLOR="#FF0000">"
+noresize target="</FONT><FONT COLOR="#0000FF">contenido</FONT><FONT COLOR="#FF0000">"</FONT></FONT></FONT>
+<FONT FACE="Courier New"><FONT SIZE=-1><FONT COLOR="#FF0000">src="</FONT><FONT COLOR="#0000FF">t&iacute;tulo_superior.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frameset
+</FONT><FONT COLOR="#FF0000">cols="</FONT><FONT COLOR="#0000FF">150,*</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">contenido</FONT><FONT COLOR="#FF0000">"
+target="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">marco_izquierdo.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">frame
+</FONT><FONT COLOR="#FF0000">name="</FONT><FONT COLOR="#0000FF">principal</FONT><FONT COLOR="#FF0000">"
+src="</FONT><FONT COLOR="#0000FF">movil.htm</FONT><FONT COLOR="#FF0000">"</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">p</FONT>>Esta
+p&aacute;gina usa marcos, pero su explorador no los admite.&lt;<FONT COLOR="#800080">/p</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/body</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/noframes</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/frameset</FONT>></FONT></FONT>
+<BR><FONT FACE="Courier New"><FONT SIZE=-1>&lt;<FONT COLOR="#800080">/html</FONT>></FONT></FONT>
+
+<P align="justify">
+<HR WIDTH="90%">
+<BR>Bueno, creo que ha habido suficientes. Si te fijas un poco podr&aacute;s
+comprender la sencilla mec&aacute;nica para hacer marcos por ti mismo que
+se adapten a todas tus necesidades.
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

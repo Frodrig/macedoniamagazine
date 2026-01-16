@@ -1,0 +1,442 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br><FONT color="#000000" size=2 face="arial">
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 3.<br> Novedades del C++ frente al C.
+</H3>
+
+<p align=justify>
+
+Este cap&iacute;tulo va a estar dedicado a ver alguno de los campos que 
+ampl&iacute;a el lenguaje C++ frente al C. De todos es sabido que, el C++, 
+es una ampliaci&oacute;n al C no s&oacute;lo por la nueva metodolog&iacute;a 
+que incorpora sino por una serie de caracter&iacute;sticas que nos van a permitir 
+programar de un modo mucho m&aacute;s c&oacute;modo y potente. Pese a que en el 
+cap&iacute;tulo actual no vamos a ver todas las caracter&iacute;sticas, s&iacute; que 
+vamos a &quot;abordar&quot; la primera mitad. La otra, se la voy a reservar a todo lo que significa el uso de las clases en C++ c&oacute;mo forma o camino para entrar &quot;de lleno&quot; en la programaci&oacute;n orientada a objetos. Sin m&aacute;s pre&aacute;mbulos, comenzamos a meter &quot;ca&ntilde;a&quot; a la primera de las novedades.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4><P ALIGN="JUSTIFY">Las primeras novedades y ampliaciones.</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como citaba al comienzo, en este cap&iacute;tulo no vamos a 
+hacer el estudio del tipo de datos clase pues, a todas luces, merece un 
+estudio en exclusiva dada su gran importancia en lo que es la POO en C++. De todos 
+modos, lo que s&iacute; vamos a hacer va a ser ver dos especificadores de tipo 
+que vienen del C y han sido ampliados en el C++, esto es, vamos a ver el tipo de 
+datos <I>enum </I>y <I>struct</I>. Despu&eacute;s de que entendamos c&oacute;mo funcionan las novedades en los anteriores especificadores, haremos una parada en el tipo de datos <I>referencia</I> pues, ver&eacute;is, que va a suavizar, en cierto modo, el uso de punteros. Eso s&iacute;, antes pasaremos a comentar la utilidad de dos objetos como son <I>cin</I> y <I>cout</I> y, ya al final, os comentar&eacute; si no lo hab&eacute;is descubierto para entonces, una nueva manera de insertar comentarios en nuestros programas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para empezar, muchos de vosotros os habr&eacute;is empezado a preguntar ¿Pero qu&eacute; demonios son los especificadores de tipo?, bueno, pues todos lo sab&eacute;is ya que no son m&aacute;s que las palabras clave con las que <B>definimos</B> los distintos tipos de datos. As&iacute;, <I>int</I> es un especificador de tipo que define un entero o, <I>char</I>, un especificador que hace lo propio definiendo un tipo de dato car&aacute;cter. Pero hay m&aacute;s como ya sabr&eacute;is, <I>float, double</I>, etc. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez &quot;aclarado&quot; el concepto pasamos a la explicaci&oacute;n  de <I>enum  </I>y <I>struct</I> como ampliaciones a lo que ven&iacute;a con el C, junto con la explicaci&oacute;n dedicada a las variables de tipo referencia.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4><P ALIGN="JUSTIFY">Una leve, pero interesante, mejora en <I>enum</I>.</P>
+</H4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como seguro que muchos de vosotros no hab&eacute;is utilizado mucho este tipo de datos en C, voy a realizar un breve recordatorio de su utilidad. Las constantes enumeradas o definici&oacute;n de un tipo enumerado consiste en la definici&oacute;n de un nuevo tipo de datos cuyo rango de valores se define, a su vez, por medio de una lista de constantes, es decir:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>enum boolean</B>(FALSE, TRUE);
+<B>enum semana </B>(LUNES=1, MARTES, MIERCOLES, JUEVES,
+             VIERNES, SABADO, DOMINGO);
+<B>enum salidaprintf</B>(TABULADOR ='\t', NUEVA_LINEA='\n');
+</FONT></PRE></TD></TABLE></CENTER>
+
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Recodar&eacute;is que, adem&aacute;s, las constantes enumeradas toman como valores por defecto 0,1.... a no ser que nosotros indiquemos lo contrario, como pod&eacute;is ver en el ejemplo con los d&iacute;as de la semana en los cuales adem&aacute;s de hacer que se empiece en 1, el resto de los valores se van a ir asignando de forma autom&aacute;tica.</P>
+<P ALIGN="JUSTIFY">Pues bien, en C++, la palabra clave <I>enum</I> se va a ver incrementada en flexibilidad pues pasa a ser un especificador de tipo real. </P>
+<P ALIGN="JUSTIFY">Ya se que para muchos esto no puede tener gran &quot;significado&quot;, pero ten&eacute;is que tener en cuenta que las constantes enumeradas, o lo que es lo mismo <I>enum</I>, puede considerarse como una seria alternativa a las macros definidas con <I>#define</I> y adem&aacute;s, podemos utilizar en C++ el especificador sabiendo que es de tipo real. Nuestras posibilidades se ven incrementadas notablemente.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4><P ALIGN="JUSTIFY">Ampliaciones importantes en <I>struct</i></P>
+</H4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">De todos es sabido que las estructuras (<I>struct</I>) tienen una importancia vital en la programaci&oacute;n pues nos permiten construir complejas &quot;aglutinaciones&quot; de datos que nos van a permitir, despu&eacute;s, trabajar con &quot;tablas de datos&quot; distintas de un modo f&aacute;cil y directo. </P>
+<P ALIGN="JUSTIFY">Cuando utiliz&aacute;bamos las estructuras en C, no est&aacute;bamos utilizando un tipo de datos completo, es decir, cuando definimos algo as&iacute; en C</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>struct </B>Guerrero {
+<B>&#9;char </B>*nombre;
+<B>&#9;int </B>fuerza;
+<B>&#9;int </B>resistencia;
+<B>&#9;int </B>experiencia;
+<B>int </B>edad;
+<B>};
+</FONT></PRE></TD></TABLE></CENTER>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">y quer&iacute;amos crear alguna variable de tipo Guerrero, ten&iacute;amos dos opciones.  Una de ellas era definir la variable de este modo:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>struct </B>Guerrero jugador1;
+</FONT></PRE></TD></TABLE></CENTER>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">y la otra, la final de la estructura poniendo el nombre de las variables en la misma definición, es decir:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>struct </B>Guerrero {
+<B>&#9;char </B>*nombre;
+<B>&#9;int </B>fuerza;
+<B>&#9;int </B>resistencia;
+<B>&#9;int </B>experiencia;
+<B>int </B>edad;
+<B>} </B>jugador1;
+</FONT></PRE></TD></TABLE></CENTER>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En ambos casos, ten&iacute;amos una variable de tipo Guerrero que era, a su vez, de tipo estructura. La &uacute;nica pega de todo esto es que no vamos a definir un tipo de datos nuevo en el sentido estricto de la palabra, esto es, siempre definimos estructuras no tipos de datos. Con la llegada del C++, las estructuras pasan a ser tipos de datos completos pudi&eacute;ndose definir directamente variables del tipo estructura. Volvamos a poner la definici&oacute;n anterior:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>struct </B>Guerrero {
+<B>&#9;char* </B>nombre;
+<B>&#9;int </B>fuerza;
+<B>&#9;int </B>resistencia;
+<B>&#9;int </B>experiencia;
+<B>int </B>edad;
+<B>}</B></FONT></PRE></TD></TABLE></CENTER>
+
+<FONT FACE="Arial" COLOR ="#000000" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora, para declarar una variable de tipo Guerrero s&oacute;lo tenemos que hacer lo siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>Guerrero </B>jugador1;
+</FONT></PRE></TD></TABLE></CENTER>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como pod&eacute;is comprobar ahora la creaci&oacute;n de variables del tipo estructura anterior es id&eacute;ntica que cuando hacemos lo propio con un especificador entero, car&aacute;cter, etc. Si record&aacute;is lo m&aacute;s parecido en C lo consegu&iacute;amos con la palabra reservada <I>typedef.</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Sin embargo, no s&oacute;lo se ha convertido a <I>struct</I> en un tipo de datos completo sino que, adem&aacute;s y como mayor diferencia, las estructuras <B>en C++ pueden contener funciones junto a los datos</B> de toda la vida. As&iacute;, ya tenemos que empezar a diferenciar el contenido que se puede encontrar en una estructura, por un lado tendremos las variables de miembro que ser&aacute;n todas aquellas variables contenidas en la estructura y, por otro lado, tendremos las funciones miembro que, al encontrarse m&aacute;s relacionadas con las clases las veremos cuando lleguemos a ellas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">De esta manera, recordad que las estructuras en C++ son un tipo de datos completo y nos permiten definir variables de una manera mucho m&aacute;s &oacute;ptima. Sabed tambi&eacute;n que podemos incluir funciones (llamadas funciones de miembro) dentro de las estructuras, esto es, junto a las variables (llamadas variables de miembro) que siempre hemos sabido que debemos definir. De todos modos, como ya dije anteriormente, no estudiaremos por ahora las capacidades derivadas de poder utilizar tales funciones incluidas en las estructuras. Por ahora, basta con conocer, por encima, las novedades.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por si alguno se lo estaba preguntando, el acceso a las estructuras sigue siendo el mismo, esto es, utilizando el punto (<B>.</B>). En el caso de que tengamos punteros a estructuras, podremos utilizar la flecha de toda la vida, (<B>-&gt;</B>).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ya acabando con las estructuras, si os hab&eacute;is fijado en la &uacute;ltima definici&oacute;n que se realiz&oacute; del tipo de datos Guerrero para mostrar el ejemplo de uso en C++, ver&eacute;is que la variable nombre es un puntero y que se define con el <I>*</I> despu&eacute;s del tipo de variable, esto es, despu&eacute;s del <I>char</I>. Esto es as&iacute; porque es la metodolog&iacute;a t&iacute;pica del C++ si bien, los que no quer&aacute;is utilizarla pod&eacute;is seguir definiendo las variables como en C, es decir, con el operador unario * justo antes del nombre de la variable.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4><P ALIGN="JUSTIFY">cout y cin dos novedades muy interesantes.</P>
+</H4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">A la hora de trabajar con C++ la construcci&oacute;n <I>cout &lt;&lt;</I> se suele utilizar para la salida de datos apartando a un lado las funciones de la familia <I>printf</I> del C tradicional. Debemos de tener claro que <I>cout</I> no es m&aacute;s que un objeto al cual le mandamos la informaci&oacute;n num&eacute;rica y de texto mediante el s&iacute;mbolo &lt;&lt;. Esto es as&iacute; porque en la representaci&oacute;n de <I>cout &lt;&lt;</I> el operador &lt;&lt; est&aacute; sobrecargado para actuar de tal modo que se escriban en la salida est&aacute;ndar el contenido de <I>cout</I>. En los sucesivos cap&iacute;tulos del curso de C++ se expondr&aacute;n todos los pormenores de lo que es la sobrecarga de operadores de todos modos y como avance hasta que lleguemos aclarar que gracias a la sobrecarga de operadores nos podemos permitir &quot;personalizar&quot; s&iacute;mbolos de operaciones como son +,-,= y ++ para que se comporten de forma distinta cuando se utilicen con objetos de clases tambi&eacute;n diferentes, sirva esta breve introducción.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Es f&aacute;cilmente imaginable que si podemos enviar datos a la salida mediante <I>cout</I> tambi&eacute;n existir&aacute; en C++ un objeto similar pero para realizar entradas. El objeto en cuesti&oacute;n ser&aacute; <I>cin</I> y su funcionamiento ser&aacute; muy sencillo pues s&oacute;lo deberemos de utilizar el formato explicado m&aacute;s arriba para <I>cout. Es</I> la operaci&oacute;n cl&aacute;sica de un <I>scanf</I>. As&iacute;, si quisi&eacute;semos realizar una petici&oacute;n de una variable entera, por poner un ejemplo, podr&iacute;amos poner este c&oacute;digo (de paso aprovecho y meto un ejemplo con <I>cout</I>):</P>
+</FONT><FONT SIZE=2>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>#include </B>&lt;iostream.h&gt;
+<B>
+</B>// Ejemplo de utilizaci&oacute;n de cin y cout
+<B>
+void main(void)
+{
+&#9;int </B>valor; 
+<B>&#9;
+&#9;cout</B> &lt;&lt; &quot;\nIntroduce un valor entero&quot;;
+
+// equivalente a hacer scanf(&quot;%d&quot;,&amp;valor);
+<B>&#9;cin </B>&gt;&gt; valor; 
+<B>&#9;cout  </B>&lt;&lt; &quot;\nHas introducido 
+                 el valor &quot; &lt;&lt; valor;
+<B>}</B>
+</FONT></PRE></TD></TABLE></CENTER>
+
+
+</B></I></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Como pod&eacute;is observar no hay ning&uacute;n misterio de utilizaci&oacute;n de estas dos novedades del C++.<br>
+Antes de pasar a las referencias, daros cuenta que para trabajar con cin y cout, debemos de utilizar siempre el
+archivo de cabecera "iostream.h". Podéis tomároslo por el equivalente a "stdio.h" del C.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4><P ALIGN="JUSTIFY">Las referencias.</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las referencias son novedades absolutas del C++ (no se encuentran disponibles en C). Una referencia es un nuevo tipo de datos que nos va a permitir utilizar las caracter&iacute;sticas de los punteros pero trat&aacute;ndolos como variables ordinarias. Pod&eacute;is imaginaros una referencia como un &quot;alias&quot; de una variable o, mejor dicho, como <B>la misma variable disponible pero con un nombre distinto</B>. ¿Vaya l&iacute;o no? ;).</P>
+<P ALIGN="JUSTIFY">Pasemos a explicar c&oacute;mo se utilizan las referencias para no armarnos tanto &quot;bollo&quot; en nuestra cabeza &quot;programadora&quot;...</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La inicializaci&oacute;n de una referencia es bien f&aacute;cil ya que s&oacute;lo tendremos que asociar la referencia que deseemos a otra variable que ya est&eacute; creada por nosotros. Una vez que hemos realizado tal inicializaci&oacute;n, la referencia va a estar continuamente asociada con su variable correspondiente. Cabe a&ntilde;adir que, si quisi&eacute;ramos hacer que nuestra referencia fuese el &quot;alias&quot; de otra variable o lo que es lo mismo que referenciase a otra variable no podr&iacute;amos, tendr&iacute;amos un error de compilaci&oacute;n.</P>
+<P ALIGN="JUSTIFY">La declaraci&oacute;n de una referencia es bien sencilla:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+// dato es una variable definida por
+// nosotros y es de tipo entero.
+<B>int </B>dato; 
+
+// referenciaDato es la referencia que hemos creado.
+<B>int&amp; </B>referenciaDato = dato; 
+</FONT></PRE></TD></TABLE></CENTER>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como pod&eacute;is observar para crear una referencia no necesitamos m&aacute;s que la variable a la que queremos referenciar, que en el ejemplo es dato, junto la referencia en s&iacute; que se va a definir con el s&iacute;mbolo &amp;.  De este modo, <I>referenciaDato</I> es la referencia o alias de la variable dato.</P>
+<P ALIGN="JUSTIFY">Una vez hechas las dos operaciones anteriores cualquier cambio que hagamos sobre dato se ver&aacute; reflejado en <I>referenciaDato</I> y viceversa, es decir, si realizamos una modificaci&oacute;n en <I>referenciaDato</I>, esta tambi&eacute;n se va a ver reflejada en la variable dato.</P>
+<P ALIGN="JUSTIFY">¡Pongamos un ejemplo de todo esto!.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>
+#include </B>&lt;iostream.h&gt;
+<B><I>
+</I>void main()
+{
+
+      int </B>dato = 50;
+<B>      int&amp; </B>refDato = dato;
+<B>
+      cout </B>&lt;&lt; ‘\n’;
+
+<B>      cout </B>&lt;&lt;  &quot;La variable dato 
+               vale &quot; &lt;&lt; dato &lt;&lt; ’\n’;<B>&#9;
+
+      cout </B>&lt;&lt;  &quot;La variable refDato 
+	        vale &quot; &lt;&lt; refDato &lt;&lt; ’\n’;
+
+      // multiplicamos la variable 
+      // dato por 2, ahora dato = 100
+<B>     dato *= 2; </B>
+<B>
+      cout </B>&lt;&lt;  &quot;La variable dato 
+	        vale &quot; &lt;&lt; dato &lt;&lt; ’/n’;<B>&#9;
+      cout </B>&lt;&lt;  &quot;La variable refDato 
+	        vale &quot; &lt;&lt; refDato &lt;&lt; ’\n’;
+
+&#9;// incrementamos el valor de la
+&#9;// referenicia, ahora refDato = 101;
+<B>&#9;refDato ++; </B>
+<B>
+      cout </B>&lt;&lt;  &quot;La variable dato 
+	  vale &quot; &lt;&lt; dato &lt;&lt; ’\n’;<B>&#9;
+      cout </B>&lt;&lt;  &quot;La variable 
+	  refDato vale &quot; &lt;&lt; refDato;<B>&#9;
+
+}
+</FONT></PRE></TD></TABLE></CENTER>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si ejecut&aacute;is este programita ver&eacute;is que la salida que se obtiene ser&iacute;a:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<PRE><FONT SIZE=2><I>
+50
+50
+
+100
+100
+
+101
+101
+</I>
+</FONT>
+</PRE>
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con lo que deducimos que los cambios efectuados en dato y <I>refDato</I> se ven involucrados. Deb&eacute;is de saber que tanto dato como <I>refDato </I>comparten la misma direcci&oacute;n de memoria y por eso, cualquier cambio que efectuemos sobre dato afectar&aacute; a <I>refDato</I> del mismo modo que si lo <I>hici&eacute;ramos</I> al rev&eacute;s.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para cercioraros de que tanto la variable como la referencia poseen la misma direcci&oacute;n tan s&oacute;lo ten&eacute;is que ejecutar este listado que os muestro a continuaci&oacute;n y comprobar que la direcci&oacute;n de dato y <I>refDato</I> es la misma.&#9;</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>
+#include </B>&lt;iostream.h&gt;
+<B>
+void </B>main()
+<B>{
+      int </B>dato = 50;
+<B>      int&amp; </B>refDato = dato;
+<B>
+      cout </B>&lt;&lt; ‘\n’ &lt;&lt; &quot;La direcci&oacute;n
+	  de la variable dato es &quot; &lt;&lt; &amp;dato &lt;&lt; ‘/n’<B>;
+
+      cout </B>&lt;&lt; ‘\n’ &lt;&lt; &quot;La direcci&oacute;n de la referencia 
+	  refDato es &quot; &lt;&lt; &amp;refDato &lt;&lt; ‘\n’;
+<B>}
+</FONT></PRE></TD></TABLE></CENTER>
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si lo ejecut&aacute;is ver&eacute;is que salen los mismos valores. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una de las cosas que tenemos que tener bien claro es la utilizaci&oacute;n del operador unario &amp; con una variable y con una referencia. Cuando declaramos una referencia estamos definiendo un tipo de datos que es exclusivo del C++, en este caso, el operador &amp; va junto al tipo de datos que estamos definiendo como referencia as&iacute;, si nosotros queremos crear una referencia que va a referenciar a una variable de tipo entero pondremos algo como <I>int&amp; referencia.</I> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Otro uso bien distinto es cuando lo que queremos obtener es la direcci&oacute;n en memoria de cierta variable o dato. En este caso tanto en C como en C++ el operador unario &amp; se comporta de igual modo d&aacute;ndonos la direcci&oacute;n en memoria de tal variable o dato. Tan s&oacute;lo ten&eacute;is que ejecutar el &uacute;ltimo de los listados expuestos el cual nos mostrar&aacute;, por pantalla, la direcci&oacute;n en memoria de una variable de tipo entero y la de una referencia que tiene con alias precisamente tal variable de tipo entero.</P>
+<h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Referencias y punteros.</h4></p>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Todo lo que hac&iacute;amos con punteros lo podemos realizar con las referencias de un modo mucho m&aacute;s intuitivo. Pese a que nosotros cuando trabajamos con las referencias lo hacemos como si de otra variable m&aacute;s se tratara, el compilador lo que realmente est&aacute; haciendo es utilizar esa referencia como un valor asociado a la direcci&oacute;n en memoria de la variable en cuesti&oacute;n, es decir, nosotros utilizamos las referencias como si de otra variable m&aacute;s se tratar&aacute; mientras que el compilador realmente las utiliza como los tan temidos e importantes punteros del C.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como lo mejor para ver esto es con un ejemplo ahora os muestro c&oacute;mo realizar el cambio del valor de una variable local desde una funci&oacute;n con C, es decir, con punteros y, despu&eacute;s, la versi&oacute;n en C++ utilizando las referencias.</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<FONT FACE="Arial" SIZE=2><B>#include </B>&lt;stdio.h&gt;
+
+/* Prototipo de la funci&oacute;n para cambiar valor */
+
+<B>void </B>CambiaVble (<B>int </B>*punt);
+<B>
+void </B>main(<B>void</B>)
+<B>{
+&#9;int </B>vble = 50; 
+<B>&#9;
+&#9;printf</B>(&quot;/n El valor de vble es %d&quot;,vble);
+&#9;CambiaVble (&amp;vble);
+&#9;<b>printf</b>(&quot;\n El valor de vble es %d&quot;,vble);
+<B>}
+
+void </B>CambiaVble (<B>int </B>*punt)<B> { </B>*punt = 0;<B> }
+</FONT></PRE></TD></TABLE></CENTER>
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta es la forma tradicional de trabajar en C y la salida deber&iacute;a de ser</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><I><FONT SIZE=2><PRE>
+El valor de vble es 100
+El valor de vble es 0</PRE>
+</I></FONT><FONT FACE="Arial" SIZE=2>
+<P>Pasemos ahora a ver c&oacute;mo hacer lo mismo pero utilizando referencias.</P>
+
+</FONT>
+
+<CENTER><TABLE><TD><PRE><FONT SIZE=2>
+<B>#include </B>&lt;iostream.h&gt;
+<B>
+</B>/* Prototipo de la funci&oacute;n para cambiar valor */
+<B>
+void </B>CambiaVble (<B>int&amp; </B>ref);
+<B>
+void </B>main(<B>void</B>)
+<B>{
+&#9;int </B>vble = 50; 
+<B>&#9;
+&#9;cout </B>&lt;&lt; &quot;\n El valor de vble es &quot; &lt;&lt; vble;
+<B>&#9;CambiaVble </B>(vble);
+<B>&#9;cout </B>&lt;&lt; &quot;\n El valor de vble es &quot; &lt;&lt; vble;
+<B>}
+void </B>CambiaVble (<B>int&amp; </B>ref)<B> { </B>ref = 0;<B> }
+</FONT></PRE></TD></TABLE></CENTER>
+
+
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Si os fij&aacute;is bien y llev&aacute;is un tiempo trabajando con punteros en C ver&eacute;is que realmente el utilizar referencias es como utilizar cualquier otro tipo de variable y esto &uacute;ltimo hace que los &quot;escabrosos&quot; punteros se vuelvan mucho m&aacute;s sencillos de utilizar para el programador.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Estos dos listados lo he realizado pensando en mostrar como ejemplo de comparativa entre punteros y referencias con lo que muy pocas ventajas pueden ser sacadas de ellos. Pese a que su uso es muy recomendado, hay que tener cuidado especialmente cuando uno empieza a codificar un programa de cierta envergadura en el cual, r&aacute;pidamente comienzan a crecer variables, constantes y dem&aacute;s par&aacute;metros que pueden &quot;ocultar&quot; a nuestras referencias. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando trabaj&aacute;bamos en C siempre sab&iacute;amos localizar un puntero por el hecho de llevar siempre el operador unario como identificativo frente al resto de variables de nuestra creaci&oacute;n. Con todo esto quiero decir que una referencia no tiene que ser identificada utilizando ninguna clase de s&iacute;mbolo especial y que puede ser confundida como una variable m&aacute;s pasando por alto el gran &quot;poder&quot; contenido en ella.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las referencias, en definitiva, deben de ser utilizadas cuidadosamente procurando en todo lo posible, poner alg&uacute;n comentario explicativo que nos identifique r&aacute;pidamente que eso a lo que vamos a &quot;tocar&quot; no es una variable como otra cualquiera sino la citada referencia. Est&aacute;is avisados, se pueden meter muchas patadas con esto... </P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Los comentarios en C++</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ya para finalizar este cap&iacute;tulo vamos a echar un vistazo a la novedad referida al formato con el que podemos incluir nuestros comentarios. Como ya habr&eacute;is podido observar a lo largo de todos los ejemplos incluidos, los comentarios en C++ se van a poner justo despu&eacute;s de que pongamos las dos barras invertidas //. Esta forma de poder poner los comentarios nos va a permitir trabajar de una forma mucho m&aacute;s c&oacute;moda y r&aacute;pida para poner nuestras anotaciones. L&oacute;gicamente tambi&eacute;n podemos seguir utilizando las cl&aacute;sicas /* */ para dejar nuestros apuntes en el c&oacute;digo.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Y se acab&oacute; el cap&iacute;tulo.</P>
+<P ALIGN="JUSTIFY"></P>
+</h4><P ALIGN="JUSTIFY">Pues s&iacute;, ya hemos concluido este segundo cap&iacute;tulo de POO. Hay alguna que otra cosa que me hubiera gustado comentar como era el caso del uso de cualificadores, esto es, const y todas sus aplicaciones as&iacute; que no os estra&ntilde;&eacute;is si lo meto en un ap&eacute;ndice. </P>
+<P ALIGN="JUSTIFY">Para la siguiente entrega de Macedonia, espero poder volver con m&aacute;s cosas entre las cuales estar&aacute;, sin duda, el cap&iacute;tulo sobre las Clases.</P>
+<P ALIGN="JUSTIFY"></P>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

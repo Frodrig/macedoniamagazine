@@ -1,0 +1,2317 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Código fuente para los capítulos 10,11 y 12.
+</h3>
+
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+<B><FONT SIZE=+1>VOC.H</FONT></B>
+<BR>&nbsp;
+
+<P>///////////////////////
+<BR>// Variables globales //
+<BR>///////////////////////
+
+<P>WORD BPORT=0x210; WORD XPORT=0x216; WORD WPORT=0x21c;
+<BR>WORD RPORT=0x21a; WORD APORT=0x21e; BYTE READY=0xaa;
+<BR>WORD longitud=0;&nbsp; WORD alojado;&nbsp;&nbsp;&nbsp;&nbsp; WORD frecuencia;
+
+<P>// Rutinas de E/S
+
+<P>&nbsp;&nbsp; // puerto,valor
+<BR>void EscribeEnPuerto(WORD,BYTE);
+<BR>&nbsp;&nbsp; // puerto
+<BR>BYTE LeeDePuerto(WORD);
+<BR>&nbsp;&nbsp; // valor
+<BR>void EscribeEnDSP(BYTE);
+<BR>&nbsp;
+
+<P>// Rutinas de la Sound Blaster
+<BR>void ResetearSB(void);
+<BR>BOOL DetectarSB(void);
+<BR>void ErrorSB(void);
+<BR>void SpeakerOn(void);
+<BR>void SpeakerOff(void);
+
+<P>// Rutinas de los ficheros .VOC y .SMP
+<BR>void CargaVoc(char [12]);
+<BR>void CargaSmp(char [12]);
+<BR>// frecuencia
+<BR>void VocOn(WORD);
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>VOC.C</FONT></B>
+
+<P>#include "voc.h"
+
+<P>void EscribeEnPuerto(WORD puerto,BYTE valor)
+<BR>{
+<BR>&nbsp;asm{
+<BR>&nbsp; mov al,valor
+<BR>&nbsp; mov dx,puerto
+<BR>&nbsp; out dx,al
+<BR>&nbsp;}
+<BR>}
+
+<P>BYTE LeeDePuerto(WORD puerto)
+<BR>{
+<BR>&nbsp;BYTE result;
+<BR>&nbsp;asm{
+
+<P>&nbsp; mov dx,puerto
+<BR>&nbsp; in al,dx
+<BR>&nbsp; mov byte ptr result,al
+
+<P>&nbsp;}
+<BR>&nbsp;return result;
+<BR>}
+
+<P>void EscribeEnDSP(BYTE valor)
+<BR>{
+<BR>&nbsp;test1:
+<BR>&nbsp;asm{
+<BR>&nbsp; mov dx,WPORT
+<BR>&nbsp; in al,dx
+<BR>&nbsp; and al,0x80
+<BR>&nbsp; cmp al,0
+<BR>&nbsp; jnz test1
+<BR>&nbsp; mov al,byte ptr valor
+<BR>&nbsp; out dx,al
+<BR>&nbsp;}
+<BR>}
+
+<P>void ResetearSB(void)
+<BR>{
+<BR>&nbsp;EscribeEnPuerto(XPORT,1);
+<BR>&nbsp;delay(5);
+<BR>&nbsp;EscribeEnPuerto(XPORT,0);
+<BR>}
+
+<P>// Si se encuentra la Sound Blaster, devuelve un 1. Un 0 si no se encuentra
+<BR>BOOL DetectarSB(void)
+<BR>{
+<BR>&nbsp;BYTE estado,cont;
+
+<P>&nbsp;estado=0;
+<BR>&nbsp;while ((estado!=READY)&amp;&amp;(BPORT&lt;0x270))
+<BR>&nbsp;{
+<BR>&nbsp; // Reseteo de la Sound Blaster
+<BR>&nbsp; EscribeEnPuerto(XPORT,1);
+<BR>&nbsp; // Como m&iexcl;nimo hay que esperar 3,3 milisegundos.5 para
+asegurarnos
+<BR>&nbsp; delay(5);
+<BR>&nbsp; EscribeEnPuerto(XPORT,0);
+<BR>&nbsp; cont=0;
+<BR>&nbsp; while ((estado!=READY)&amp;&amp;(cont&lt;100))
+<BR>&nbsp; {
+<BR>&nbsp;estado=LeeDePuerto(RPORT);
+<BR>&nbsp;cont++;
+<BR>&nbsp; }
+<BR>&nbsp; // Se buscan los puertos de la Sound Blaster
+<BR>&nbsp; if (estado!=READY)
+<BR>&nbsp; {
+<BR>&nbsp;BPORT+=0x10;
+<BR>&nbsp;XPORT+=0x10;
+<BR>&nbsp;WPORT+=0x10;
+<BR>&nbsp;RPORT+=0x10;
+<BR>&nbsp;APORT+=0x10;
+<BR>&nbsp; }
+<BR>&nbsp;}
+<BR>&nbsp;if (BPORT!=0x270)
+<BR>&nbsp;{
+<BR>&nbsp; while ((LeeDePuerto(WPORT)&amp;128)!=0);
+<BR>&nbsp; EscribeEnPuerto(WPORT,0xd1);
+<BR>&nbsp; // Activa la salida digital mediante el DAC
+<BR>&nbsp; SpeakerOn();
+
+<P>&nbsp; return (1);
+<BR>&nbsp;}
+<BR>&nbsp;return (0);
+<BR>}
+
+<P>void SpeakerOn(void)
+<BR>{
+<BR>&nbsp;EscribeEnDSP(0xd1);
+<BR>}
+
+<P>void SpeakerOff(void)
+<BR>{
+<BR>&nbsp;EscribeEnDSP(0xd3);
+<BR>}
+
+<P>void ErrorSB(void)
+<BR>{
+<BR>&nbsp;printf("\nNo se ha encontrado la Sound Blaster\n");
+<BR>&nbsp;exit (0);
+<BR>}
+
+<P>void CargaVoc(char nombre[12])
+<BR>{
+<BR>&nbsp;FILE *ficherovoc;
+
+<P>&nbsp;ficherovoc=fopen(nombre,"rb");
+<BR>&nbsp;if (!ficherovoc)
+<BR>&nbsp;{
+<BR>&nbsp; printf("\nNo se encuentra el fichero %s",nombre);
+<BR>&nbsp; exit (0);
+<BR>&nbsp;}
+<BR>&nbsp;fseek(ficherovoc,0L,SEEK_END);
+<BR>&nbsp;// 32:20 de cabecera global,12 de cabecera de bloque.100 para
+evitar el
+<BR>&nbsp;// chasquido del final
+<BR>&nbsp;longitud=ftell(ficherovoc)-32-100;
+<BR>&nbsp;fseek(ficherovoc,30,0);
+<BR>&nbsp;frecuencia=getc(ficherovoc);
+<BR>&nbsp;frecuencia=1000000L/(256l-(frecuencia));
+
+<P>&nbsp;fseek(ficherovoc,32L,SEEK_SET);
+<BR>&nbsp;fread(zona5,longitud,1,ficherovoc);
+<BR>&nbsp;fclose(ficherovoc);
+<BR>}
+
+<P>void VocOn(WORD voc)
+<BR>{
+<BR>&nbsp;WORD dmaoffset,pagina,segmento,desplazamiento;
+<BR>&nbsp;BYTE tamanoalta,tamanobaja,canaldma=1;
+<BR>&nbsp;WORD tiempo;
+
+<P>&nbsp;segmento=FP_SEG(zona5);
+<BR>&nbsp;desplazamiento=FP_OFF(zona5);
+<BR>&nbsp;asm{
+<BR>&nbsp; // Transforma la direcci&cent;n
+<BR>&nbsp; mov ax,word ptr segmento
+<BR>&nbsp; mov cl,4
+<BR>&nbsp; shl ax,cl
+<BR>&nbsp; add ax,word ptr desplazamiento
+<BR>&nbsp; mov word ptr dmaoffset,ax
+<BR>&nbsp; mov ax,word ptr desplazamiento
+<BR>&nbsp; mov cl,4
+<BR>&nbsp; shr ax,cl
+<BR>&nbsp; add ax,word ptr segmento
+<BR>&nbsp; mov cl,12
+<BR>&nbsp; shr ax,cl
+<BR>&nbsp; mov word ptr pagina,ax
+<BR>&nbsp; mov dx,0xa
+<BR>&nbsp; // Configura el DMA
+<BR>&nbsp; mov al,5
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov dx,0xc
+<BR>&nbsp; xor al,al
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov dx,0xb
+<BR>&nbsp; mov al,0x49
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov ax,word ptr dmaoffset
+<BR>&nbsp; mov dx,2
+<BR>&nbsp; out dx,al
+<BR>&nbsp; xchg ah,al
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov dx,0x83
+<BR>&nbsp; mov al,byte ptr pagina
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov dx,3
+<BR>&nbsp; mov ax,word ptr longitud
+<BR>&nbsp; // Se indica al DMA cu&nbsp;ntos bytes debe transmitir
+<BR>&nbsp; dec ax
+<BR>&nbsp; out dx,al
+<BR>&nbsp; xchg ah,al
+<BR>&nbsp; out dx,al
+<BR>&nbsp; mov dx,0xa
+<BR>&nbsp; mov al,byte ptr canaldma
+<BR>&nbsp; out dx,al
+<BR>&nbsp; // Habilita el canal de DMA
+<BR>&nbsp; mov bx,word ptr longitud
+<BR>&nbsp; mov byte ptr tamanobaja,bl
+<BR>&nbsp; mov byte ptr tamanoalta,bh
+<BR>&nbsp;}
+<BR>&nbsp;if (voc==0) tiempo=256-(1000000/8000);
+<BR>&nbsp;else tiempo=256-(1000000/voc);
+<BR>&nbsp;// Espera para que la SB se reajuste a lo indicado en Ensamblador,
+arriba
+<BR>&nbsp;delay(100);
+<BR>&nbsp;// Establece la frecuencia del DSP
+<BR>&nbsp;EscribeEnDSP(0x40);
+<BR>&nbsp;EscribeEnDSP(tiempo);
+<BR>&nbsp;EscribeEnDSP(0x14);
+<BR>&nbsp;// Empieza la transferencia
+<BR>&nbsp;EscribeEnDSP(tamanobaja);
+<BR>&nbsp;EscribeEnDSP(tamanoalta);
+<BR>}
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>EJEMPLO DE USO</FONT></B>
+
+<P>void main(void)
+<BR>{
+
+<P>&nbsp;if ((zona5=malloc(65535))==NULL) printf("\nNo hay memoria base
+suficiente");
+
+<P>&nbsp;if (!DetectarSB())
+<BR>&nbsp;{
+<BR>&nbsp; exit (0);
+<BR>&nbsp;}
+<BR>&nbsp;printf("\nSound Blaster detectada e inicializada. Pulse una tecla
+para la reproducci&cent;n");
+<BR>&nbsp;getch();
+
+<P>&nbsp;CargaVoc("1.voc");
+<BR>&nbsp;VocOn(0);
+<BR>&nbsp;getch();
+<BR>&nbsp;CargaVoc("1.smp");
+<BR>&nbsp;VocOn(5000);
+<BR>&nbsp;getch();
+<BR>&nbsp;CargaVoc("jd1.voc");
+<BR>&nbsp;VocOn(0);
+<BR>&nbsp;getch();
+<BR>&nbsp;CargaVoc("jd2.voc");
+<BR>&nbsp;VocOn(0);
+<BR>&nbsp;getch();
+<BR>&nbsp;CargaVoc("jd3.voc");
+<BR>&nbsp;VocOn(0);
+<BR>&nbsp;getch();
+<BR>&nbsp;CargaVoc("jd4.voc");
+<BR>&nbsp;VocOn(0);
+<BR>&nbsp;getch();
+
+<P>&nbsp;free(zona5);
+<BR>}
+<BR>&nbsp;
+<B><FONT SIZE=+1>SBMOD.H</FONT></B>
+<BR>&nbsp;
+
+<P>// Detecta e inicializa la interrupci&oacute;n y el puerto DMA de la
+Sound Blaster.
+<BR>//&nbsp;&nbsp; Si no hay una tarjeta Sound Blaster instalada devuelve
+0 (error), en
+<BR>//&nbsp;&nbsp; caso contrario devuelve -1.
+<BR>extern int far SBMOD_DetectSB(void);
+<BR>// Carga en memoria el m&oacute;dulo &lt;fileName>.
+<BR>//&nbsp;&nbsp; Si no encuentra el fichero o no hay memoria suficiente
+para ubicarlo
+<BR>//&nbsp;&nbsp; devuelve 0 (error), en caso contrario devuelve -1.
+<BR>extern int far SBMOD_LoadModule(char far *fileName);
+<BR>// Descarga de la memoria el m&oacute;dulo actual.
+<BR>extern void far SBMOD_FreeModule(void);
+<BR>// Comienza la ejecuci&oacute;n background (de fondo) del m&oacute;dulo
+actual.
+<BR>extern void far SBMOD_Play(void);
+<BR>// Detiene la ejecuci&oacute;n del m&cent;dulo actual.
+<BR>extern void far SBMOD_Stop(void);
+<BR>&nbsp;
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>CARGAMOD.ASM</FONT></B>
+<BR>&nbsp;
+
+<P>SBMOD_FreeModule&nbsp; EndP
+<BR>&nbsp;
+
+<P>ClearModInfo&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp; Near
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lea&nbsp;&nbsp;&nbsp;&nbsp; di,[ModInfo]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,Size ModInfoRec
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cld
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep&nbsp;&nbsp;&nbsp;&nbsp; stosb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+
+<P>ClearModInfo&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+End
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>SB.ASM</FONT></B>
+
+<P>&nbsp;
+<BR>&nbsp;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DosSeg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Ordenaci&cent;n de segmentos DOS
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jumps&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Para resolver los saltos
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; fuera de rango
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Model&nbsp; large,C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Modelo de memoria Large de C
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .286&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Instrucciones 80286
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Stack&nbsp; 0400h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Pila de 1Kb
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Variables y procedimientos globales
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; SBMOD_DetectSB:Proc
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; SBMOD_Play:Proc, SBMOD_Stop:Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; SbPoll:Proc, StartPlaying:Proc,
+StopPlaying:Proc
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; SbAddr:Word, SbIrq:Word,
+DmaBuffer:Word
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; GetSamples:Proc, MixSpeed:Word
+
+<P>DmaBufSize&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+2048
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Datos
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Data
+
+<P>SbAddr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+220h
+<BR>SbIrq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+7
+
+<P>DmaFlag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>DmaBuffer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>DmaHandler&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>TimerHandler&nbsp;&nbsp;&nbsp; dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?
+
+<P>DoubleBuffer&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2*DmaBufSize
+dup (?)
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+C&cent;digo
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Code
+
+<P>;--------------------------------------------------------------------------
+<BR>; SbOut:&nbsp; Env&iexcl;a un byte a la Sound Blaster
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp; DX -&nbsp; Puerto de escritura de la Sound Blaster
+<BR>;--------------------------------------------------------------------------
+
+<P>SbOut&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Macro&nbsp;&nbsp;
+Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Local&nbsp;&nbsp; Esperar
+<BR>Esperar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Esperar
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndM
+
+<P>;--------------------------------------------------------------------------
+<BR>; SbIrqHandler:&nbsp; Manejador de la interruci&cent;n de la Sound
+Blaster
+<BR>;--------------------------------------------------------------------------
+
+<P>SbIrqHandler&nbsp;&nbsp;&nbsp; Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,@Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Eh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub&nbsp;&nbsp;&nbsp;&nbsp; dx,02h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 14h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0FFh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0FFh
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,20h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 20h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iret
+
+<P>SbIrqHandler&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; SbPoll:&nbsp; Polling de la Sound Blaster
+<BR>;--------------------------------------------------------------------------
+
+<P>SbPoll&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,@Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,03h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cl,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,03h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ch,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[DmaFlag]
+;Hacemos la primera parte del proceso
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; ax,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jne&nbsp;&nbsp;&nbsp;&nbsp; SegundaParte
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize/2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jae&nbsp;&nbsp;&nbsp;&nbsp; Fin
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; si,[DmaBuffer]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize/2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp; GetSamples Pascal,ds,si,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inc&nbsp;&nbsp;&nbsp;&nbsp; [DmaFlag]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; Fin
+
+<P>SegundaParte:&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize/2
+;Ahora la segunda
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fin
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; si,[DmaBuffer]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize/2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; si,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp; GetSamples Pascal,ds,si,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dec&nbsp;&nbsp;&nbsp;&nbsp; [DmaFlag]
+
+<P>Fin:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iret&nbsp;&nbsp;&nbsp;&nbsp; ;&lt;====
+IRET
+
+<P>SbPoll&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; SbInit: Inicializa el Driver de la Sound Blaster
+<BR>;--------------------------------------------------------------------------
+
+<P>SBMOD_Play&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc Far
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,@Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [MixSpeed],18000
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp; StartPlaying
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cli
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,21h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,11111111b
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [DmaFlag],0&nbsp;&nbsp;&nbsp;&nbsp;
+;Establecemos el buffer
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+DoubleBuffer
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [DmaBuffer],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shr&nbsp;&nbsp;&nbsp;&nbsp; dh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; bx,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; ax,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; adc&nbsp;&nbsp;&nbsp;&nbsp; dh,0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neg&nbsp;&nbsp;&nbsp;&nbsp; cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jae&nbsp;&nbsp;&nbsp;&nbsp; PonerDma
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; [DmaBuffer],cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; ax,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; adc&nbsp;&nbsp;&nbsp;&nbsp; dh,0
+
+<P>PonerDma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dec&nbsp;&nbsp;&nbsp;&nbsp; cx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,05h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 0Ah,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 0Ch,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 02h,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 02h,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 83h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,cl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 03h,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 03h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,59h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 0Bh,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,01h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 0Ah,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; di,[DmaBuffer]&nbsp;&nbsp;
+; Se borra el buffer
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,DmaBufSize
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,80h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cld
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rep&nbsp;&nbsp;&nbsp;&nbsp; stosb
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Se establece la IRQ
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[SbIrq]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; bx,08h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; bx,2
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[bx+2]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr
+[DmaHandler],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr
+[DmaHandler+2],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+SbIrqHandler
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,seg SbIrqHandler
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[bx],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[bx+2],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[70h]&nbsp;&nbsp;&nbsp;&nbsp;
+; Ahora se configura el Timer
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[72h]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr
+[TimerHandler],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr
+[TimerHandler+2],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+SbPoll
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,seg SbPoll
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[70h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[72h],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]&nbsp;&nbsp;&nbsp;&nbsp;
+; Reseteamos el DSP
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,06h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,100
+<BR>Esperar:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+dx,[SbAddr]&nbsp;&nbsp;&nbsp;&nbsp; ; Se espera hasta que la SB conteste
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Eh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GetID
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; Esperar
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; Exit
+<BR>GetId:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]&nbsp;&nbsp;
+; Ya sabemos que est&nbsp; la SB
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Ah&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Ahora hay que encontrar el puerto BASE
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; al,0AAh
+<BR>SbOk:&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOk
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; Esperar
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; Exit
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]
+; Ya se ha detectado el hardware
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0D1h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,1000
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mul&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; div&nbsp;&nbsp;&nbsp;&nbsp; [MixSpeed]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neg&nbsp;&nbsp;&nbsp;&nbsp; al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]
+; Convertimos la Frecuencia de Muestreo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Ch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; para que la SB la entienda
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 40h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Aqu&iexcl; se establece
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; ah
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 14h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Se comienza la transferencia y se deja
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0FFh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; al DMA y al DSP que se comuniquen ellos
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sbout&nbsp;&nbsp; 0FFh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; solos sin mediaci&cent;n de la CPU
+
+<P>Exit:&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,[SbIrq]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ah,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; ah,cl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; not&nbsp;&nbsp;&nbsp;&nbsp; ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and&nbsp;&nbsp;&nbsp;&nbsp; al,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sti
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>SBMOD_Play&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; SbDone:&nbsp; Descarga el Driver de la Sound Blaster
+<BR>;--------------------------------------------------------------------------
+
+<P>SBMOD_Stop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc Far
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,@Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cli
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,21h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,11111111b
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[SbIrq]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; bx,08h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; bx,2
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,Word Ptr
+[DmaHandler]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,Word
+ptr [DmaHandler+2]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[bx],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[bx+2],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,Word Ptr
+[TimerHandler]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,Word
+ptr [TimerHandler+2]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[70h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[72h],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0D0h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SbOut&nbsp;&nbsp; 0D3h
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,[SbIrq]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ah,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; ah,cl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sti
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp; StopPlaying
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>SBMOD_Stop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; DetectSB:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para detectar
+la presencia de la SB
+<BR>;--------------------------------------------------------------------------
+
+<P>SBMOD_DetectSB&nbsp; Proc Far
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; Al salir: AX=0 si error, -1 si no error.
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,@Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; DS apunta a mi segmento de datos
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,210h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Scaneo de puerto
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; 210h, 220h, .. 260h
+
+<P>ReseteaDSP:&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,bx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Intento resetear el DSP.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,06h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,08h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,100
+<BR>EsperarIdentif: in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GetID2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; EsperarIdentif
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; SiguientPuerto
+<BR>GetId2:&nbsp;&nbsp;&nbsp; sub&nbsp;&nbsp;&nbsp;&nbsp; dx,04h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; al,0AAh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Encontrado
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,04h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; EsperarIdentif
+
+<P>SiguientPuerto: add&nbsp;&nbsp;&nbsp;&nbsp; bx,10h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Si no hay respuesta,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,260h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; se intenta con el siguiente puerto
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jbe&nbsp;&nbsp;&nbsp;&nbsp; ReseteaDSP
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; Fallo
+
+<P>Encontrado:&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [SbAddr],bx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Se encontr&cent; la SB
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cli&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Ahora se busca la IRQ de la SB
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,21h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Salvamos el IMR.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bl,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,11111111b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Desactivamos todas las IRQ
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Las provamos IRQ:2,3,5,7.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Primero las guardamos para luego
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[28h]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[2Ah]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[2Ch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[2Eh]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[34h]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[36h]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,es:[3Ch]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ7
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,es:[3Eh]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Ahora las cambiamos
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+TrapIrq2&nbsp; ; IRQ2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[28h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Ah],cs
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+TrapIrq3&nbsp; ; IRQ3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Ch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Eh],cs
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+TrapIrq5&nbsp; ; IRQ5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[34h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[36h],cs
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,offset
+TrapIrq7&nbsp; ; IRQ7
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[3Ch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[3Eh],cs
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,bl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Y habilitamos las IRQs 2,3,5,7.
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and&nbsp;&nbsp;&nbsp;&nbsp; al,01010011b
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sti
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [SbIrq],0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Borramos el nivel de la IRQ
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Le decimos a la SB que genere
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Ch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; una IRQ
+<BR>EsperarSb:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+al,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EsperarSb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,0F2h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; dx,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; cx,cx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Esperamos hasta que el nivel IRQ
+<BR>EsperarIRQ:&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; [SbIrq],0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; cambie, o se acabe el tiempo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jne&nbsp;&nbsp;&nbsp;&nbsp; IrqOk
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; EsperarIRQ
+
+<P>IrqOk:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,bl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; La IRQ est&nbsp; bien y restauramos el IMR
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 21h,al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cli&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Se restauran los vectores IRQ
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ7
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[3Ch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[3Eh],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ5
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[34h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[36h],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ3
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Ch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Eh],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; IRQ2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[28h],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; es:[2Ah],dx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cli
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; [SbIrq],0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Se pregunta si el nive de IRQ
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fallo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; ha cambiado, si no, falla
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Ha habido ‚xito, devolveremos -1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; DetectSalir
+
+<P>Fallo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+ax,0
+
+<P>DetectSalir:&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>SBMOD_DetectSB&nbsp; EndP
+
+<P>;---------------------------------------------------------------------------
+<BR>; TrapIrq Para detectar las IRQ
+<BR>;---------------------------------------------------------------------------
+
+<P>TrapIrq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp;
+Far
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; General IRQ "trapper"
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Usado para la autodetecci&cent;n
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; de las IRQ
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,@Data
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ds,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [SbIrq],ax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Salva el nivel IRQ
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[SbAddr]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; dx,0Eh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; al,dx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; SB reconocida
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,20h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out&nbsp;&nbsp;&nbsp;&nbsp; 20h,al&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Hardware reconocido
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iret&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; Fin
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IRP Level,&lt;2,3,5,7>
+<BR>TrapIrq&amp;Level:&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,Level
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jmp&nbsp;&nbsp;&nbsp;&nbsp; TrapIrq
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndM
+
+<P>TrapIrq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P><B><FONT SIZE=+1>PONERMOD.ASM</FONT></B>
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jumps
+<BR>&nbsp; .Model&nbsp; large,C
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .286
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Publico
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global&nbsp; StartPlaying: Proc, StopPlaying:
+Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global GetSamples: Proc
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Global MixSpeed: Word, ModInfo:Byte
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Constantes
+<BR>;--------------------------------------------------------------------------
+
+<P>NumTracks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+4
+<BR>DefTempo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+6
+<BR>DefBpm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+125
+<BR>MidCRate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+8448
+<BR>MixBufSize&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; equ&nbsp;&nbsp;&nbsp;&nbsp;
+4096
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Estructuras
+<BR>;--------------------------------------------------------------------------
+
+<P>TrackInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Struc
+
+<P>Samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Position&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Len&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?
+<BR>Repeat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>RepLen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Volume&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Error&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Period&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Pitch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Effect&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>PortTo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>PortParm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>VibPos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>VibParm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>OldSampOfs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Arp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?,?,?
+<BR>ArpIndex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+
+<P>TrackInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndS
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Datos
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Data
+
+<P>SinTable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0,25,50,74,98,120,142,162,180,197,212,225
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 236,244,250,254,255,254,250,244,236,225
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 212,197,180,162,142,120,98,74,50,25
+
+<P>PeriodTable&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+856,808,762,720,678,640,604,570,538,508,480,453
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 428,404,381,360,339,320,302,285,269,254,240,226
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 214,202,190,180,170,160,151,143,135,127,120,113
+
+<P>MixSpeed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+
+<P>ModInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Label&nbsp;&nbsp;
+Byte
+
+<P>OrderLen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>ReStart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+128 dup (?)
+<BR>Patterns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+
+<P>SampOfs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+<BR>SampSeg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+<BR>SampLen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+<BR>SampRep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+<BR>SampRepLen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+<BR>SampVol&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+31 dup (?)
+
+<P>OrderPos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Tempo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>TempoWait&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Bpm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?
+<BR>Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?
+<BR>BreakRow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>BpmSamples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>BufPtr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>BufLen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>BufRep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+?
+<BR>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ?
+<BR>Tracks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TrackInfo
+NumTracks dup (?)
+
+<P>PitchTable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dw&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+857 dup (?)
+<BR>VolTable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+16640 dup (?)
+<BR>MixBuffer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+MixBufSize dup (?)
+<BR>&nbsp;
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+C&cent;digo.
+<BR>;--------------------------------------------------------------------------
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Code
+
+<P>;--------------------------------------------------------------------------
+<BR>; BeatTrack:&nbsp; Procesa el nuevo "beat" en un track
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp;&nbsp; ds:di -&nbsp; Informaci&cent;n de la direcci&cent;n
+del Track
+<BR>;--------------------------------------------------------------------------
+
+<P>BeatTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp;
+Near
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[di+Effect]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; dx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,00h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Arpeggio
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,01h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PortUp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,02h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PortDown
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,03h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TonePort
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,04h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vibrato
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,05h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PortSlide
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,06h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VibSlide
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,0Ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VolSlide
+<BR>None:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+<BR>&nbsp;
+
+<P>Arpeggio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bx,[di+ArpIndex]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[di+Arp+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,6
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetArpIndex
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>SetArpIndex:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [di+ArpIndex],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>PortUp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[di+Period]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,113
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge&nbsp;&nbsp;&nbsp;&nbsp; NotSmall
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,113
+<BR>NotSmall:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+Period],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>PortDown:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[di+Period]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,856
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jle&nbsp;&nbsp;&nbsp;&nbsp; NotBig
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,856
+<BR>NotBig:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+Period],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>TonePort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[di+PortTo]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[di+Period]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NoPort
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PortToUp
+<BR>PortToDown:&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jle&nbsp;&nbsp;&nbsp;&nbsp; SetPort
+<BR>FixPort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jmp&nbsp;&nbsp;&nbsp;&nbsp; SetPort
+<BR>PortToUp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub&nbsp;&nbsp;&nbsp;&nbsp;
+bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FixPort
+<BR>SetPort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+Period],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>NoPort:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+<BR>&nbsp;
+
+<P>Vibrato:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; dl,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; dh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl&nbsp;&nbsp;&nbsp;&nbsp; dh,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; [di+VibPos],dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dh,[di+VibPos]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; bl,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; bx,1Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,[SinTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mul&nbsp;&nbsp;&nbsp;&nbsp; dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rol&nbsp;&nbsp;&nbsp;&nbsp; ax,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xchg&nbsp;&nbsp;&nbsp; al,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; ah,1
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+test&nbsp;&nbsp;&nbsp; dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jns&nbsp;&nbsp;&nbsp;&nbsp; VibUp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; neg&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>VibUp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp;
+ax,[di+Period]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bx,113
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge&nbsp;&nbsp;&nbsp;&nbsp; NoLoVib
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,113
+<BR>NoLoVib:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp;
+bx,856
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jle&nbsp;&nbsp;&nbsp;&nbsp; NoHiVib
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,856
+<BR>NoHiVib:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp;
+bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>PortSlide:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp; VolSlide
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,[di+PortParm]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jmp&nbsp;&nbsp;&nbsp;&nbsp; TonePort
+<BR>&nbsp;
+
+<P>VibSlide:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; call&nbsp;&nbsp;&nbsp;
+VolSlide
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,[di+VibParm]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jmp&nbsp;&nbsp;&nbsp;&nbsp; Vibrato
+<BR>&nbsp;
+
+<P>VolSlide:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; dl,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; dh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,[di+Volume]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; al,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jge&nbsp;&nbsp;&nbsp;&nbsp; NoLoVol
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>NoLoVol:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp;
+al,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; al,64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jbe&nbsp;&nbsp;&nbsp;&nbsp; NoHiVol
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,64
+<BR>NoHiVol:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+Volume],al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>BeatTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; GetTrack:&nbsp;&nbsp; Coge la siguiente nota del patr&cent;n
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp;&nbsp; ds:di -&nbsp; Direcci&cent;n de la informaci&cent;n
+del track
+<BR>;&nbsp;&nbsp;&nbsp; es:si -&nbsp; Direcci&cent;n de la nota el patr&cent;n
+<BR>; Out:
+<BR>;&nbsp;&nbsp;&nbsp; es:si -&nbsp; La nueve direcci&cent;n de la nota
+del patr&cent;n
+<BR>;--------------------------------------------------------------------------
+
+<P>GetTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp;
+Near
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+seges&nbsp;&nbsp; lodsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xchg&nbsp;&nbsp;&nbsp; al,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; ah,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+seges&nbsp;&nbsp; lodsw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xchg&nbsp;&nbsp;&nbsp; al,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bh,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; ah,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dx,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Effect],dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; bl,0F0h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; bh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bl,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetPeriod
+
+<P>SetSample:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp;
+bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampVol+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Volume],al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampOfs+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr [di+Samples],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampSeg+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr [di+Samples+2],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampLen+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Len],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampRep+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Repeat],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[SampRepLen+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [di+RepLen],ax
+
+<P>SetPeriod:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; cx,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetEffect
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+PortTo],cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,03h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetEffect
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Period],cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Pitch],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Position],0
+
+<P>SetEffect:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; dx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InitNone
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,00h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InitArpeggio
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,03h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InitTonePort
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,04h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InitVibrato
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,09h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SampleOfs
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,0Bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PosJump
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,0Ch
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetVolume
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,0Dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Break
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dh,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetSpeed
+<BR>InitNone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+<BR>&nbsp;
+
+<P>InitTonePort:&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; dl,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; SetPortParm
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,[di+PortParm]
+<BR>SetPortParm:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [di+PortParm],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Effect],dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>InitVibrato:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,[di+VibParm]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; al,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; ah,0F0h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+test&nbsp;&nbsp;&nbsp; dl,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; OkDepth
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dl,al
+<BR>OkDepth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp;
+dl,0F0h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; OkRate
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dl,ah
+<BR>OkRate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+VibParm],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Effect],dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+test&nbsp;&nbsp;&nbsp; cx,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OkPos
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+VibPos],0
+<BR>OkPos:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+<BR>&nbsp;
+
+<P>SampleOfs:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp; dl,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; SetSampleOfs
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,[di+OldSampOfs]
+<BR>SetSampleOfs:&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [di+OldSampOfs],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dh,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; dl,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Position],dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>PosJump:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[OrderPos],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [Row],64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>SetVolume:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp;
+dl,64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jbe&nbsp;&nbsp;&nbsp;&nbsp; OkVol
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,64
+<BR>OkVol:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[di+Volume],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>Break:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+dh,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; dl,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; dh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; dl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shl&nbsp;&nbsp;&nbsp;&nbsp; dh,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; dl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BreakRow],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [Row],64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>&nbsp;
+
+<P>SetSpeed:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test&nbsp;&nbsp;&nbsp;
+dl,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Skip
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dl,31
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetBpm
+<BR>SetTempo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[Tempo],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [TempoWait],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+<BR>SetBpm:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+[Bpm],dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,103
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mul&nbsp;&nbsp;&nbsp;&nbsp; dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[MixSpeed]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; dx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+div&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BpmSamples],ax
+<BR>Skip:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+<BR>&nbsp;
+
+<P>InitArpeggio:&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dh,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and&nbsp;&nbsp;&nbsp;&nbsp; dl,0Fh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr&nbsp;&nbsp;&nbsp;&nbsp; dh,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,36
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[di+Period]
+<BR>ScanPeriod:&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; ax,[PeriodTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jae&nbsp;&nbsp;&nbsp;&nbsp; SetArp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+loop&nbsp;&nbsp;&nbsp; ScanPeriod
+<BR>SetArp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp;
+dx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; dh,bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; dl,bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[PeriodTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Arp],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[PeriodTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Arp+2],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[PeriodTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[PitchTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [di+Arp+4],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [di+ArpIndex],0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>GetTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; UpdateTracks:&nbsp; C&cent;digo principal para procesar el nuevo
+"tick"
+<BR>;--------------------------------------------------------------------------
+
+<P>UpdateTracks&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp; Near
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dec&nbsp;&nbsp;&nbsp;&nbsp; [TempoWait]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GetTracks
+
+<P>BeatTracks:&nbsp;&nbsp;&nbsp;&nbsp; Ofs = offset Tracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Rept NumTracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp; di,Ofs
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+call&nbsp; BeatTrack
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ofs = Ofs + Size TrackInfo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndM
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+
+<P>GetTracks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+al,[Tempo]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [TempoWait],al
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+les&nbsp;&nbsp;&nbsp;&nbsp; si,[Note]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; [Row],64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NoPattWrap
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+les&nbsp;&nbsp;&nbsp;&nbsp; si,[Patterns]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[OrderPos]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bl,[OrderLen]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NoOrderWrap
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[ReStart]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [OrderPos],bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; bl,[OrderLen]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jae&nbsp;&nbsp;&nbsp;&nbsp; NoUpdate
+<BR>NoOrderWrap:&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[Order+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl&nbsp;&nbsp;&nbsp;&nbsp; bx,10
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; si,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[BreakRow]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [Row],bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bh,bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BreakRow],bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl&nbsp;&nbsp;&nbsp;&nbsp; bx,4
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; si,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr [Note],si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr [Note+2],es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc&nbsp;&nbsp;&nbsp;&nbsp; [OrderPos]
+<BR>NoPattWrap:&nbsp;&nbsp;&nbsp;&nbsp; inc&nbsp;&nbsp;&nbsp;&nbsp; [Row]
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cld
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ofs = offset Tracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Rept NumTracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp; di,Ofs
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+call&nbsp; GetTrack
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ofs = Ofs + Size TrackInfo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndM
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; Word Ptr
+[Note],si
+<BR>NoUpdate:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>UpdateTracks&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; MixTrack:&nbsp; Mezcla un track en un buffer limpio
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp; ds:si -&nbsp; Direcci&cent;n de la informaci&cent;n del
+track
+<BR>;&nbsp;&nbsp; ds:di -&nbsp; Direcci&cent;n del buffer
+<BR>;&nbsp;&nbsp;&nbsp; cx&nbsp;&nbsp; -&nbsp; Tama&curren;o del Buffer
+<BR>;--------------------------------------------------------------------------
+
+<P>MixTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc&nbsp;&nbsp;&nbsp;
+Near
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; [si+RepLen],2
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MixLooped
+
+<P>MixNonLooped:&nbsp;&nbsp; les&nbsp;&nbsp;&nbsp;&nbsp; dx,[si+Samples]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[si+Position]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bp,[si+Len]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; add&nbsp;&nbsp;&nbsp;&nbsp; bp,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[si+Pitch]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,[si+Volume]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ah,[si+Error]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; si,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bh,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; dh,dh
+<BR>nlMixSamp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp;
+si,bp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jae&nbsp;&nbsp;&nbsp;&nbsp; nlMixBye
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,es:[si]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[VolTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; [di],bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc&nbsp;&nbsp;&nbsp;&nbsp; di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+adc&nbsp;&nbsp;&nbsp;&nbsp; si,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+loop&nbsp;&nbsp;&nbsp; nlMixSamp
+<BR>nlMixBye:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bx,si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [si+Position],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [si+Error],ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+
+<P>MixLooped:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; les&nbsp;&nbsp;&nbsp;&nbsp;
+dx,[si+Samples]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[si+Position]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bp,[si+RepLen]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BufRep],bp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bp,[si+Repeat]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; bp,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dx,[si+Pitch]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,[si+Volume]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ah,[si+Error]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; si,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bh,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,dl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; dl,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; dh,dh
+<BR>lpMixSamp:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp;
+si,bp
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lpMixNow
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; si,[BufRep]
+<BR>lpMixNow:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bl,es:[si]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bl,[VolTable+bx]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; [di],bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc&nbsp;&nbsp;&nbsp;&nbsp; di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+adc&nbsp;&nbsp;&nbsp;&nbsp; si,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+loop&nbsp;&nbsp;&nbsp; lpMixSamp
+<BR>lpMixBye:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+bx,si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; si
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; bx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [si+Position],bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [si+Error],ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+
+<P>MixTrack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; GetSamples:&nbsp; Devueve el siguiente trozo del sample que se va
+a tocar
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp;&nbsp; Buffer&nbsp; - Direcci&cent;n del Buffer
+<BR>;&nbsp;&nbsp;&nbsp; Count&nbsp;&nbsp; - Tama&curren;o del Buffer
+<BR>;--------------------------------------------------------------------------
+
+<P>GetSamples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc Pascal Buffer:DWord, Count:Word
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cld
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; les&nbsp;&nbsp;&nbsp;&nbsp; di,[Buffer]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,[Count]
+
+<P>NextChunk:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp;
+[BufLen],0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; CopyChunk
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; es
+
+<P>MixChunk:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lea&nbsp;&nbsp;&nbsp;&nbsp;
+di,[MixBuffer]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,[BpmSamples]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BufPtr],di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BufLen],cx
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ax,ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; al,80h
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep&nbsp;&nbsp;&nbsp;&nbsp; stosb
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ofs = offset Tracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Rept NumTracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp; si,Ofs
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp; di,[BufPtr]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp; cx,[BufLen]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+call&nbsp; MixTrack
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ofs = Ofs + Size TrackInfo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EndM
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+call&nbsp;&nbsp;&nbsp; UpdateTracks
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; di
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; bx
+
+<P>CopyChunk:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+cx,[BufLen]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmp&nbsp;&nbsp;&nbsp;&nbsp; cx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jbe&nbsp;&nbsp;&nbsp;&nbsp; MoveChunk
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,bx
+
+<P>MoveChunk:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+si,[BufPtr]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add&nbsp;&nbsp;&nbsp;&nbsp; [BufPtr],cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; [BufLen],cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub&nbsp;&nbsp;&nbsp;&nbsp; bx,cx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep&nbsp;&nbsp;&nbsp;&nbsp; movsb
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+test&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jne&nbsp;&nbsp;&nbsp;&nbsp; NextChunk
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>GetSamples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; StartPlaying: Inicializa el sistema de sonido
+<BR>;&nbsp; In:
+<BR>;&nbsp;&nbsp; Informaci&cent;n del m&cent;dulo
+<BR>;--------------------------------------------------------------------------
+
+<P>StartPlaying&nbsp;&nbsp;&nbsp; Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pusha
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; es
+
+<P>SetModParms:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [OrderPos],0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [Tempo],DefTempo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [TempoWait],DefTempo
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [Bpm],DefBpm
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [Row],64
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [BreakRow],0
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,[MixSpeed]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xor&nbsp;&nbsp;&nbsp;&nbsp; dx,dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,24*DefBpm/60
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; div&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [BpmSamples],ax
+
+<P>ClearTracks:&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; di,offset
+Tracks
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; ax,ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; es,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,NumTracks * (Size TrackInfo)
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; ax,ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cld
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep&nbsp;&nbsp;&nbsp;&nbsp; stosb
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BufPtr],ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; [BufLen],ax
+
+<P>MakePitch:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp;
+ax,MidCRate
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; bx,428
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mul&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; div&nbsp;&nbsp;&nbsp;&nbsp; [MixSpeed]
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; dh,dh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; dl,ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; ah,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; al,al
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; cx,857
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor&nbsp;&nbsp;&nbsp;&nbsp; bx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov&nbsp;&nbsp;&nbsp;&nbsp; di,offset PitchTable
+<BR>PitchLoop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; push&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp&nbsp;&nbsp;&nbsp;&nbsp; dx,bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jae&nbsp;&nbsp;&nbsp;&nbsp; NoDiv
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; div&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>NoDiv:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; stosw
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; dx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ax
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inc&nbsp;&nbsp;&nbsp;&nbsp; bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; PitchLoop
+
+<P>MakeVolume:&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; cx,16640
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; bx,cx
+<BR>VolLoop:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dec&nbsp;&nbsp;&nbsp;&nbsp;
+bx
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; al,bl
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; imul&nbsp;&nbsp;&nbsp; bh
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mov&nbsp;&nbsp;&nbsp;&nbsp; [VolTable+bx],ah
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop&nbsp;&nbsp;&nbsp; VolLoop
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; es
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop&nbsp;&nbsp;&nbsp;&nbsp; ds
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; popa
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret
+
+<P>StartPlaying&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>;--------------------------------------------------------------------------
+<BR>; StopPlaying: Descarga todo
+<BR>;--------------------------------------------------------------------------
+
+<P>StopPlaying&nbsp;&nbsp;&nbsp;&nbsp; Proc
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ret
+
+<P>StopPlaying&nbsp;&nbsp;&nbsp;&nbsp; EndP
+<BR>&nbsp;
+
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End
+<BR>&nbsp;
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

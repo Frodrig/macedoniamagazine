@@ -1,0 +1,391 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 3<br>
+Programación gráfica (parte II).
+
+</H3>
+<P ALIGN=JUSTIFY>
+
+
+Buenas a todos/as de nuevo.....espero que no os resultara demasiado complejo el listado de la &uacute;ltima edici&oacute;n del cursillo. Seguro que con los comentarios que inclu&iacute;a y algo de intuici&oacute;n hab&eacute;is podido controlarlo todo a la perfecci&oacute;n. </P>
+<P ALIGN="JUSTIFY">De todas formas lo comentar&eacute; de principio a fin para vuestra tranquilidad. </P>
+<h4>Vamos a teclear un poco... ( Cont.) </h4>
+<P ALIGN="JUSTIFY">Bueno para aquellos/as que lo hay&aacute;is compilado y ejecutado correctamente el resultado est&aacute; bastante claro.....s&oacute;lo hay que mirar la pantalla. </P>
+<P ALIGN="JUSTIFY">Se genera un cuadrado de lado 200 formado por bastantes colores diferentes que var&iacute;an de v&eacute;rtice a v&eacute;rtice....no existe interacci&oacute;n ni tampoco hay movimiento pero todo llegara pasito a pasito. Primero analicemos la estructura del programa, t&iacute;pica de OpenGL, as&iacute; como de cada una de sus funciones. </P>
+<h4><P ALIGN="JUSTIFY">Funci&oacute;n MAIN </P>
+</h4><P ALIGN="JUSTIFY">Ya sab&eacute;is que cualquier programa en C se caracteriza por su funci&oacute;n MAIN o principal, funci&oacute;n que se llama autom&aacute;ticamente al iniciar la ejecuci&oacute;n del programa. Veamos que hacemos con ella en el caso de OpenGL. </P>
+<P ALIGN="JUSTIFY">Para empezar definimos la "archiconocida" MAIN como siempre se hace.....notad que no la defino como VOID ( no retorna nada), sino como INT ya que en ANSI C, es decir C original y exportable a cualquier arquitectura, se defini&oacute; originalmente que MAIN deb&iacute;a retornar un entero. As&iacute; pues: </P>
+
+<FONT color="#000000" face="Courier" size=2>
+<b>int</b> main (<b>int</b> argc, <b>char</b> **argv) {
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Una vez declarada pasamos a la primera llamada de OpenGL. Fijaros que las llamadas que siguen son a GLUT, que como ya coment&eacute; es una librer&iacute;a que act&uacute;a sobre OpenGL. Esta nos facilita mucho las cosas en el momento de crear una ventana para observar nuestra aplicaci&oacute;n. Lo comentar&eacute; en profundidad en el siguiente punto pero si est&aacute;is impacientes pulsad </FONT><A HREF="http://www.opengl.org/Developers/Documentation/glut.html" target="_new"><FONT FACE="Arial" SIZE=2>aqui</FONT></A>. </P>
+<P ALIGN="JUSTIFY"><FONT FACE="Arial" SIZE=2 color="#000000">Debemos recoger los par&aacute;metros de la l&iacute;nea de comandos, ARGC y ARGV, mediante <B>glutInit(...)</B>. De momento no nos preocuparemos m&aacute;s por esto. Si queremos usar la l&iacute;nea de comandos como entrada de informaci&oacute;n inicial lo haremos de manera normal como en cualquier programa C y simplemente usaremos esta funci&oacute;n para inicializar OpenGL....De hecho aseguramos interacci&oacute;n entre el sistema de ventanas y OpenGL llam&aacute;ndola: </P>
+
+<FONT color="#000000" face="Courier" size=2>
+glutInit (&amp;argc, argv);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Ahora hay que decirle al motor gr&aacute;fico COMO queremos "renderizar", es decir, si hay que refrescar la pantalla o no, que "buffers" hay que activar/desactivar y que modalidad de colores queremos usar. En este caso NO tenemos doble buffer (GLUT_DOUBLE) y por tanto definimos un buffer de render &uacute;nico con la constante GLUT_SINGLE. Por otra parte si record&aacute;is os coment&eacute; que ten&iacute;amos dos posibilidades en el momento de colorear. Pod&iacute;amos usar colores indexados, es decir referirnos a ellos por un identificador y que el sistema los buscara en una tabla, o bien pod&iacute;amos usar convenci&oacute;n RGB. En nuestro caso le decimos al subsistema gr&aacute;fico que cada color a aplicar ser&aacute; definido por tres valores num&eacute;ricos, uno para el rojo (Red), otro para el verde (Green) y otro para el azul (Blue). Recordad la teor&iacute;a aditiva del color.... para esto usamos la constante GLUT_RGB. Sino usar&iacute;amos GLUT_INDEX. </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Con buffer simple contamos tan solo con un &aacute;rea de memoria que se redibuja constantemente. Esto no es factible para aplicaciones donde la velocidad de render es muy alta o el contenido gr&aacute;fico es elevado. En nuestro caso s&oacute;lo definimos un pol&iacute;gono y por lo tanto nos conformaremos con el buffer simple. De todas formas casi siempre utilizaremos el buffer doble, dos zonas de memoria que se alternan de manera que se dibuja primero una y en la siguiente iteraci&oacute;n se dibuja la otra. Ampliar&eacute; esta informaci&oacute;n en el siguiente cap&iacute;tulo como pod&eacute;is observar si mir&aacute;is el &iacute;ndice del curso. </P>
+<P ALIGN="JUSTIFY">Ahora GLUT nos permite definir las medidas de nuestra ventana de visualizaci&oacute;n. Estamos definiendo literalmente el ANCHO y ALTO de nuestra "Window"... en pixels... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glutInitWindowSize (ANCHO, ALTO);
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Tambi&eacute;n hay que "colocar" la ventana en alg&uacute;n punto determinado de la pantalla. Despu&eacute;s podremos moverla con el rat&oacute;n, si no lo impedimos por c&oacute;digo, pero siempre hay que indicar un punto de origen para la primera vez que ejecutamos la aplicaci&oacute;n. Las coordenadas que suplimos a la funci&oacute;n son las correspondientes al pixel que se encuentra en la esquina superior-izquierda de la ventana. </P>
+</FONT>
+
+
+<FONT color="#000000" face="Courier" size=2>
+glutInitWindowPosition (ORIGENX, ORIGENY);
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Una vez ya definido como "renderizar", con que medidas de ventana y en que posici&oacute;n f&iacute;sica de la pantalla......creamos la ventana. Para ello le damos un nombre cualquiera que sera el t&iacute;tulo que aparecer&aacute; en esta. De hecho a la funci&oacute;n se le pasa un array de caracteres, ya sea expl&iacute;cito o sea el nombre entre comillas, o bien impl&iacute;cito, es decir, una variable que contiene el nombre: </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glutCreateWindow ("Cuadrado Multicolor");
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Hasta aqu&iacute; ya tenemos una ventanita flotando en la pantalla, con su titulito y su fondo negro por defecto ya que si os fij&aacute;is no hemos especificado a&uacute;n otro. Ya podemos empezar a "generar" gr&aacute;ficos para colocarlos en ella. Creamos una funci&oacute;n llamada <B>Inicio()</B> que se encargar&aacute; de prepararnos el terreno... </P>
+</FONT><FONT color="#000000" face="Courier" size=2>inicio ();</font>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Para observar lo que hace esta funci&oacute;n, pasaros unos p&aacute;rrafos m&aacute;s abajo por el apartado <B>Inicializaci&oacute;n del sistema</B>. </P>
+<P ALIGN="JUSTIFY">Tras inicializar el sistema le decimos al subsistema gr&aacute;fico CU&Aacute;L es la funci&oacute;n que debe llamarse cada vez que se requiera dibujar de nuevo en pantalla. Esta funci&oacute;n la tendremos que crear nosotros por supuesto y ser&aacute; d&oacute;nde le diremos a OpenGL QU&Eacute; es lo que debe dibujarse en la ventana que hemos creado para tal fin. ¿ Que cuando tendremos que redibujar ?, el "evento" de "render" se produce cada vez que se cambia el tama&ntilde;o de la ventana, o que &eacute;sta se cambia de posici&oacute;n, o bien cuando por programa nosotros le decimos a OpenGL que AHORA queremos que dibuje todo de nuevo. Lo observaremos m&aacute;s adelante en este mismo programa. </P>
+<P ALIGN="JUSTIFY">En resumidas cuentas le estamos diciendo a la librer&iacute;a que cada vez que note que se debe redibujar, llame a una funci&oacute;n que hemos llamado "DIBUJAR"...normalmente y si mir&aacute;is ejemplos de libros o web's, ver&eacute;is que se la llama com&uacute;nmente "DISPLAY". </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glutDisplayFunc (dibujar);
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Bueno.....parece ser que ya sabemos d&oacute;nde dibujar, en la ventana, y qu&eacute; dibujar. S&oacute;lo falta entrar en el bucle infinito que domina cualquier aplicaci&oacute;n OpenGL. Con la funci&oacute;n que sigue, que siempre se pone al final del main, le decimos a la librer&iacute;a que espere eternamente a que se produzcan "eventos", es decir, que hasta que no ocurra algo se mantenga a la expectativa. En nuestro caso el &uacute;nico evento posible es el propio "render" pues a&uacute;n no sabemos interactuar con el rat&oacute;n, ni sabemos controlar que pasa cuando se mueve la pantalla o se redimensiona. Ya llegaremos a eso... </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glutMainLoop ();
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Por ultim&iacute;simo y como ya he comentado al principio de este punto, ANSI C requiere que la funcion main retorne un entero aunque no sirva literalmente para nada. Es una cuesti&oacute;n de consistencia y compatibilidad entre m&aacute;quinas o sea que seamos buenos y respetemos a los creadores de este maravilloso lenguaje, OK??? </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+<b>return</b> 0;<br>
+}
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Retornamos un 0, que obviamente es un entero, como podr&iacute;amos retornar cualquier otro valor num&eacute;rico.</P>
+<h4><P ALIGN="JUSTIFY">Inicializaci&oacute;n del sistema </h4>
+</B><P ALIGN="JUSTIFY">Bueno todo programador que se precie de no hacerlo muy mal sabr&aacute; que hay que ahorrarse el m&aacute;ximo de sentencias en el propio main e incluirlas en una rutina de inicializaci&oacute;n que se llama desde &eacute;ste. Si si.....todo eso de la estructuraci&oacute;n, modularidad, claridad....seguro que os suena.....:-). </P>
+<P ALIGN="JUSTIFY">Analicemos pues nuestra funci&oacute;n de inicializaci&oacute;n <B>Inicio()</B>. Dado que no se le pasa ning&uacute;n par&aacute;metro ni retorna ning&uacute;n valor la declaramos tal como: </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+<b>void</b> inicio (<b>void</b>) {
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Bueno bueno....ya empieza el foll&oacute;n con las matrices...nooooo...por favorrrr....tranquilos/as que no es para tanto !!!!. En primer lugar queremos "parametrizar" nuestra proyecci&oacute;n, es decir, queremos decirle a OpenGL C&Oacute;MO debe proyectar nuestros gr&aacute;ficos en pantalla. Por ello y para empezar le decimos que active la matriz de proyecci&oacute;n que es la que vamos a "retocar".... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glMatrixMode (GL_PROJECTION);
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY"><B>¿Qu&eacute; es lo primero que debe hacerse SIEMPRE con una matriz cuando se va a trabajar con ella?</B>, pues "limpiarla" para que no contenga ning&uacute;n valor que pueda falsear los c&aacute;lculos y por tanto nos haga obtener resultados inexactos.....o m&aacute;s bien que lo que salga en la pantalla no se parezca en nada a lo que esperamos....Para ello cargamos a la matriz activa con la matriz identidad....recordad que: <BR>
+&nbsp; </P></FONT>
+<P ALIGN="CENTER"><CENTER><TABLE CELLSPACING=0 BORDER=1 CELLPADDING=5 WIDTH=454>
+<TR><TD VALIGN="TOP">
+<P ALIGN="CENTER"><FONT FACE="Arial" SIZE=2 color="#000000">Si A es una matriz....</P>
+<P ALIGN="CENTER">y la matriz identidad es I....</P>
+<P ALIGN="CENTER">entonces A * I = A....</P>
+<P ALIGN="CENTER">...es decir que cualquier matriz operada con la identidad de como resultado la misma matriz...no var&iacute;a!!</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Por lo tanto cargamos ( "load" ) la matriz identidad en la de proyecci&oacute;n... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glLoadIdentity ();
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Muy bien, tengo la matriz de proyecci&oacute;n limpia.....pero ahora tengo que decirle a OpenGL de que manera quiero que proyecte mis gr&aacute;ficos en la ventana que he creado. Usaremos la funci&oacute;n que ya comente en el pasado art&iacute;culo, <B>glOrtho(...)</B>. As&iacute; creo el volumen de visualizaci&oacute;n. Todo lo que est&eacute; dentro de este volumen ser&aacute; proyectado de la forma m&aacute;s simple, eliminando su coordenada Z, o de profundidad. Es la llamada proyecci&oacute;n ortogr&aacute;fica y como ya dije no permite que se distinga la distancia de los objetos a la c&aacute;mara pero para empezar no est&aacute; mal !!!. Ya mejoraremos el asunto cuando usemos proyecci&oacute;n perspectiva. </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glOrtho (0, ANCHO, 0, ALTO, -10, 10);
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">que crea el siguiente volumen de visualizaci&oacute;n:</P>
+<center><td><img src="gif/art3fig1.gif"></td></center><p align="justify">
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Ya hemos terminado con la matriz de proyecci&oacute;n. El sistema ya sabe como debe proyectar en pantalla. Ahora pasemos a la matriz de modelado/visionado, o sea, la matriz que rota/escala/traslada....Dado que queremos operar sobre ella la seleccionamos primero.... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glMatrixMode (GL_MODELVIEW);
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">y tambi&eacute;n la reseteamos claro...la "limpiamos" nada mas empezar... con la matriz identidad como acabamos de hacer: </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glLoadIdentity ();
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Originalmente el centro de coordenadas se asume en la esquina inferior-izquierda de la ventana, es decir...</P>
+<center><td><img src="gif/art3fig2.gif"></td></center><p align="justify">
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">pero nosotros lo queremos en el centro de la ventana, o sea...</P>
+<center><td><img src="gif/art3fig3.gif"></td></center><p align="justify">
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">y por lo tanto debemos aplicar una traslaci&oacute;n al origen. ¿C&oacute;mo lo hacemos?, pues nada m&aacute;s "limpiar" la matriz de modelado/visionado, almacenamos la traslaci&oacute;n en ella de manera que todo aquello que requiera ser dibujado ser&aacute; primero multiplicado por esta matriz y consiguientemente trasladado donde lo queremos con relaci&oacute;n a un origen de coordenadas en el centro de la ventana. ¿Lo pill&aacute;is?, simplemente estamos efectuando un cambio de coordenadas a todo lo que se dibuje!!!. Aqu&iacute; ten&eacute;is una figura para aclararos si os hab&eacute;is liado:</P>
+<center><td><img src="gif/art3fig4.gif"></td></center><p align="justify">
+<P ALIGN="JUSTIFY">Para ello utilizamos en el programa la siguiente l&iacute;nea de c&oacute;digo: </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glTranslatef ((GLfloat)ANCHO/2, (GLfloat)ALTO/2, 5.0);
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Si os fij&aacute;is defino tambi&eacute;n que el centro se encuentre en Z=5.0....esto no es importante y ni lo notaremos pues recordad que la proyecci&oacute;n ortogr&aacute;fica elimina la componente Z de todos los puntos a "renderizar"....de todas formas <B>glTranslatef(...)</B> lo requiere y se lo damos... </P>
+<P ALIGN="JUSTIFY">Observad que hago un "<B>casting</B>" de las dos primeras coordenadas. Para los mas ne&oacute;fitos decir que un "casting" permite hacer conversiones directas entre formatos de variables. En este caso aviso al compilador de que las dos primeras coordenadas deben tratarse como GLfloat ( numeros reales ) aunque ese no sea su formato inicial. ¿Por qu&eacute;?, pues porque glTranslatef acaba en "f" porque espera valores GLfloat o float para sus par&aacute;metros de entrada. </P>
+<P ALIGN="JUSTIFY">Supongo que tambi&eacute;n habr&eacute;is observado que utilizo algunas constantes como ANCHO, ALTO, ORIGENX, ORIGENY que yo he definido previamente en mi programa....estas no pertenecen a OpenGL claro...8-). </P>
+<P ALIGN="JUSTIFY">Bueno...para acabar con las inicializaciones le diremos a OpenGL con que color deseamos que se reinicialice el frame buffer cada vez que haya que volver a dibujar....o lo que es lo mismo, que color debe aparecer en todas aquellas &aacute;reas donde yo no ponga nada, vamos el color del fondo !!!. Definimos que queremos un color de fondo para nuestra ventana negro: </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glClearColor (0.0, 0.0, 0.0, 0.0);<br>
+}
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Y se acab&oacute;!!!....vamos a ver c&oacute;mo y qu&eacute; dibujamos!!! </P>
+<h4><P ALIGN="JUSTIFY">"Render" del sistema </h4>
+<P ALIGN="JUSTIFY">Vamos all&aacute; pu&eacute;s !!!....con el render. Sabemos que OpenGL llamara a la funci&oacute;n DIBUJAR cada vez que necesite "renderizar" de nuevo. En nuestro caso hacemos lo siguiente: </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+<b>void</b> dibujar (<b>void</b>) {
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Una vez declarada la funci&oacute;n, que como veis ni espera ni retorna nada, le decimos a OpenGL que restaure el frame buffer. Esto es obligado para un correcto proceso de render. De hecho estamos "reinicializando" la ventana de visualizaci&oacute;n con el color definido anteriormente en <I>glClearColor (0.0, 0.0, 0.0, 0.0);</I>. De hecho nosotros definimos el negro como valor para el fondo pero podr&iacute;amos no haberlo hecho ya que se adopta este color por defecto. </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glClear (GL_COLOR_BUFFER_BIT);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">¿Muy bien....y qu&eacute; queremos que OpenGL dibuje?, podemos dibujar las caras frontales, o las traseras o ambas!!! y adem&aacute;s podemos rellenarlas con color o no. En este segundo caso s&oacute;lo se colorearan los bordes (aristas). Ya dije en su momento que OpenGL supone caras frontales aquellas cuyos v&eacute;rtices se definen en <B>orden contrareloj</B>. Casi siempre s&oacute;lo dibujaremos las frontales porque las traseras "no se ver&aacute;n" y as&iacute; ahorraremos tiempo de c&aacute;lculo optimizando la velocidad de ejecuci&oacute;n. Por tanto, en este caso, decidimos dibujar s&oacute;lo las caras frontales (GL_FRONT) y rellenadas, es decir con color en su interior adem&aacute;s de en los bordes (GL_FILL). Para dibujar s&oacute;lo las caras traseras utilizar&iacute;amos GL_BACK y para dibujar ambas GL_FRONT_AND_BACK. En el caso del color de relleno, si deseamos evitarlo coloreando solo los bordes de cada pol&iacute;gono usaremos la constante GL_LINE. </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glPolygonMode (GL_FRONT, GL_FILL);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">Pues empezamos a definir un nuevo pol&iacute;gono...esto ya lo coment&eacute;.... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glBegin (GL_POLYGON);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">El primer v&eacute;rtice es de color azul y sus componentes en pantalla son los 3 enteros que observ&aacute;is... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glColor3f (0.0, 0.0, 1.0);<br>
+glVertex3i (-100, -100, 5);
+</font>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">el segundo v&eacute;rtice es verde... </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glColor3f (0.0, 1.0, 0.0);<br>
+glVertex3i (-100, 100, 5);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">el tercero es rojo.... </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+glColor3f (1.0, 0.0, 0.0);<br>
+glVertex3i (100, 100, 5);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">y el cuarto es amarillo.... </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glColor3f (1.0, 1.0, 0.0);<br>
+glVertex3i (100, -100, 5);
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">y cerramos la estructura correspondiente al pol&iacute;gono que estabamos dibujando....un simple cuadrado con un color distinto en cada esquina. </P>
+</FONT>
+
+<FONT color="#000000" face="Courier" size=2>
+glEnd ();<br>
+}
+</font>
+
+<FONT FACE="Arial" SIZE=2 color="#000000">
+<P ALIGN="JUSTIFY">¿Muy bonito Oscar....as&iacute; que cada vez que OpenGL redibuje la escena vendr&aacute; aqu&iacute; y volver&aacute; a ejecutar este c&oacute;digo no?, pues s&iacute; eso es. Y entonces si estoy poniendo un color distinto en cada v&eacute;rtice y le he dicho al principio de la funci&oacute;n que me rellene el pol&iacute;gono, ¿con qu&eacute; color lo va a rellenar?.....muy buena pregunta desde luego....lo que la librer&iacute;a hace es mejor verlo para entenderlo. De hecho interpola los colores punto a punto de manera que si un v&eacute;rtice es rojo y el siguiente amarillo pondr&aacute; en medio de ambos toda la escala de colores del rojo al amarillo, autom&aacute;ticamente. Para el interior del pol&iacute;gono tambi&eacute;n interpola punto a punto obteni&eacute;ndose el curioso efecto que pod&eacute;is observar si ejecut&aacute;is este sencillo programa. </P>
+<h4><P ALIGN="JUSTIFY">Sistema de ventanas (GLUT) </P>
+</h4><P ALIGN="JUSTIFY">Gr&aacute;cias a GLUT podremos controlar diversas ventanas a la vez mostrando diferente informaci&oacute;n en cada una de ellas. Tan s&oacute;lo definiremos una funci&oacute;n de "display" diferente para cada ventana as&iacute; como respuestas distintas seg&uacute;n sea la interacci&oacute;n del usuario con ellas. </P>
+<P ALIGN="JUSTIFY">Otro aspecto importante es el de las coordenadas. No son lo mismo las coordenadas de mundo que las de ventana. Por tanto una ventana tiene coordenadas 2D que definimos como hab&eacute;is visto en el programa de ejemplo ( ALTO, ANCHO, ORIGENX, ORIGENY ) y en cambio el mundo virtual que estamos creando suele ser 3D y no tiene porque corresponderse con ella. Entonces se produce un curioso fen&oacute;meno. <B>¿Qu&eacute; ocurre si yo quiero recuperar las coordenadas del rat&oacute;n en el momento en que se produce un "click" en la ventana, para trabajar con ellas?</B>, es decir, imaginad que el usuario debe poder mover una esfera por el mundo simplemente seleccion&aacute;ndola con el rat&oacute;n y arrastr&aacute;ndola. Si resulta que cuando se mueve el rat&oacute;n las coordenadas que el sistema operativo nos retorna son las de la posici&oacute;n de la esfera en la VENTANA y &eacute;stas no se corresponden con las del mundo.....nos volveremos locos para operar con ellas y calcular la nueva posici&oacute;n de la bolita!!!!!. </P>
+<B><P ALIGN="JUSTIFY">Soluci&oacute;n</B>: cambio de coordenadas !!...eso es...cada vez que dese&eacute;is recoger informaci&oacute;n del rat&oacute;n para operar con ella en el mundo tendr&eacute;is que convertir las coordenadas recibidas v&iacute;a S.O. en coordenadas del mundo. </P>
+<P ALIGN="JUSTIFY">Se suele hacer de la siguiente forma:</P>
+</FONT>
+<center><td><img src="jpg/art3fig5.jpg"></td></center><p align="justify">
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">Observad la figura atentamente. Podemos convertir coordenadas de mundo a pantalla o bi&eacute;n de pantalla a mundo. De hecho el proceso es obviamente el mismo pero en una direcci&oacute;n o en la contraria. </P>
+<P ALIGN="JUSTIFY">Imaginemos que queremos saber cu&aacute;l es la coordenada de pantalla de un punto (Xm, Ym, Zm) cualquiera de nuestro mundo virtual. Queremos saber en que lugar de la pantalla ser&aacute; dibujado, en que pixel.... </P>
+<P ALIGN="JUSTIFY">En primer lugar pasamos de un punto 3D en el mundo a un punto situado en una ventana imaginaria de lado unitario de manera que las coordenadas estar&aacute;n acotadas entre 0 y 1. A esto se le llama "mapear coordenadas". Llamemos a las coordenadas 2D del punto en el cuadrado unitario (Xu, Yu). Entonces:</P>
+<P ALIGN="JUSTIFY">Xu = (Xm - X1) / (X2 - X1);</P>
+<P ALIGN="JUSTIFY">Yu = (Ym - Y1) / (Y2 - Y1); </P>
+<P ALIGN="JUSTIFY">donde como ya he dicho (Xm, Ym) son las coordenadas 2D del punto en el mundo y (X1,Y1), (X2, Y2) las observ&aacute;is en la figura como l&iacute;mites de la escena real. </P>
+<P ALIGN="JUSTIFY">Entonces mapeamos de coordenadas unitarias a pantalla. Llamemos a las coordenadas de pantalla (Xp, Yp).....:</P>
+<P ALIGN="JUSTIFY">Xp = W * Xu;</P>
+<P ALIGN="JUSTIFY">Yp = H * (1 - Yu); </P>
+<P ALIGN="JUSTIFY">donde W y H son las medidas de la ventana de visualizaci&oacute;n como tambi&eacute;n pod&eacute;is ver en la figura. Y ya est&aacute;!!!!, ya sabemos en que punto de la pantalla se mapea el punto del mundo al cual nos refer&iacute;amos. Si queremos pasar coordenadas de pantalla a mundo, pu&eacute;s s&oacute;lo tenemos que repetir el proceso pero al rev&eacute;s claro est&aacute; !!!....no es tan dif&iacute;cil no???....8-). </P>
+<B><P ALIGN="JUSTIFY">Resumamos un ejemplo t&iacute;pico de &uacute;so</B> de este concepto. Supongamos lo que dije , es decir, quiero mover una esfera con el rat&oacute;n cada vez que hago "click" sobre ella o bi&eacute;n cuando la arrastro con el bot&oacute;n derecho pulsado. En este caso tendr&eacute; que: </P>
+<OL>
+
+<LI><P ALIGN="JUSTIFY">Tomar las coordenadas de pantalla. Veremos que eso nos lo da GLUT autom&aacute;ticamente.</LI>
+<LI>Convertirlas seg&uacute;n he analizado, en coordenadas de mundo.</LI>
+<LI><P ALIGN="JUSTIFY">Operar con ellas, ya convertidas, en mi programa. En este caso las puedo incrementar/decrementar seg&uacute;n se mueva el rat&oacute;n hacia un lado u otro. Obtengo nuevas coordenadas de posici&oacute;n para la esfera, en el mundo.</LI>
+<LI><P ALIGN="JUSTIFY">Le digo a OpenGL que dibuje la escena de nuevo.....y ya est&aacute;....repetitivamente ver&iacute;amos que nuestra esfera se mueve a la vez que nuestra mano lo hace con el rat&oacute;n. Es decir, se va "redibujando" en posiciones diferentes cada vez, lo que implica sensaci&oacute;n de movimiento para nuestros ojos.</LI>
+</OL>
+
+<P ALIGN="JUSTIFY">Vamos a otro efecto no muy deseable. Primero definir&eacute; lo que se entiende por "<B>aspect ratio</B>". El "aspect ratio" de una ventana es la relaci&oacute;n que existe entre su anchura y su altura. Esta relaci&oacute;n deber&iacute;a conservarse siempre aunque se var&iacute;e el tama&ntilde;o de &eacute;sta pues de lo contrario distorsionaremos el contenido y la visualizaci&oacute;n ser&aacute; bastante ineficiente. Es el caso t&iacute;pico de coger una imagen y alargarla o ensancharla de manera que lo que acaba quedando al final es como muy irrisorio seg&uacute;n el caso. Controlaremos este fen&oacute;meno modificando la ventana para acomodarla al ratio correcto y lo haremos en nuestro programa cuando sea el caso, por ejemplo al producirse un redimensionado de &eacute;sta. </P>
+<P ALIGN="JUSTIFY">Si me varian la altura var&iacute;o la anchura que corresponda o al rev&eacute;s. </P>
+<P ALIGN="JUSTIFY">Si queremos dividir una ventana en varias porciones independientes podemos usar "<B>Viewports</B>". Un viewport es un &aacute;rea rectangular de la ventana de visualizaci&oacute;n. Por defecto es la ventana entera pero podemos variarlo a gusto. Se utiliza la funci&oacute;n: </P>
+</FONT>
+<FONT color="#000000" face="Courier" size=2>
+<b>void</b> glViewport(<b>GLint</b> x, <b>GLint</b> y, <b>GLsizei</b> w, <b>GLsizei</b> h)
+</font>
+
+
+<FONT FACE="Arial" SIZE=2 color="#000000"><P ALIGN="JUSTIFY">d&oacute;nde (X,Y) es la esquina inferior izquierda del rectangulo o viewport. Esta coordenada debe especificarse con relaci&oacute;n a la esquina inferior izquierda de la ventana. Claro est&aacute; que W, H son la anchura y altura de nuestro viewport dentro de la ventana. Todos los valores son enteros. No hay decimales en coordenadas de ventana ya que un pixel no puede partirse a trozos.....;). </P>
+<P ALIGN="JUSTIFY">Tras activarlo o definirlo ser&aacute; dentro de &eacute;ste donde dibujaremos. </P>
+<P ALIGN="JUSTIFY">Bueno no os estrujo m&aacute;s la cabeza con las ventanas...volveremos a ellas en el siguiente cap&iacute;tulo cuando os hable profundamente de los eventos. </P>
+<P ALIGN="JUSTIFY">Para acabar deciros que no incluyo a continuaci&oacute;n el apartado dedicado a la funci&oacute;n MAIN en OpenGL pues creo haberla comentado con creces en el programa de ejemplo. As&iacute; pu&eacute;s concl&uacute;yo este cap&iacute;tulo y os dejo con &eacute;l hasta el pr&oacute;ximo n&uacute;mero de Macedonia!!!!! </P>
+<P ALIGN="JUSTIFY">Un abrazote y suerte compilando !!!! </P></FONT></BODY>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

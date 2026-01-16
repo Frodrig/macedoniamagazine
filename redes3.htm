@@ -1,0 +1,369 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Sobre Redes</B><HR>
+<FONT COLOR="#009933" size=3 face="arial"><B>I</B></font><FONT color="#000000" size=2 face="arial"><B>ntroducción</B>
+</FONT>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:aalmansas.valeoclimati@nexo.es">Andrés Almansa</A>
+</b></FONT>
+<br><br>
+
+</p>
+<FONT face = arial color="#000000"><br><br><br>
+<H3>Introducción a las redes (III).
+</H3>
+<P ALIGN=justify><FONT SIZE=2>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Ya estamos aqu&iacute; de nuevo, tratando de abordar el apasionante mundo de las redes de ordenadores, y en esta ocasi&oacute;n abordando un tema que aunque para muchos parece m&aacute;s bien pesado y muy te&oacute;rico, es imprescindible para el correcto entendimiento de todo el flujo de informaci&oacute;n entre dos ordenadores dentro de una LAN. Efectivamente estamos refiri&eacute;ndonos al <B>modelo OSI en las redes locales.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">En primer lugar las siglas <B>OSI significan Open Systems Interconnection</B> y fue creada como una norma de estandarizaci&oacute;n por la <B>ISO (International Organization for Standarization)</B>. Realmente lo que se define en el modelo OSI, son una serie de niveles para un entorno de sistemas abiertos, donde un proceso ejecut&aacute;ndose en un ordenador, puede establecer una comunicaci&oacute;n con otro ordenador, si estos est&aacute;n utilizando los mismos protocolos de comunicaci&oacute;n OSI.</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=274>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 7 Aplicaci&oacute;n</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 6 Presentaci&oacute;n</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 5 Sesi&oacute;n</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 4 Transporte</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 3 Red</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 2 Enlace de datos</B></FONT></TD>
+</TR>
+<TR><TD VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Nivel 1 F&iacute;sico</B></FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Niveles OSI</P>
+</B><P ALIGN="JUSTIFY">En la figura anterior podemos ver los siete niveles OSI, lo que muchos no saben es que el modelo OSI est&aacute; basado en la pila de protocolos SNA de IBM (Arquitectura que puede ser objeto de varios art&iacute;culos), es de justicia pues indicar este comentario, sobre todo para los muy detractores de IBM.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Entonces, <B>¿ Por qu&eacute; OSI</B> <FONT FACE="Symbol">&#63;</FONT>
+ En principio se cre&oacute; para establecer la <B>interoperabilidad entre sistemas de distintos vendedores y arquitecturas</B>, permitiendo la interconexi&oacute;n de redes. Pero de hecho no nos enga&ntilde;emos, OSI <B>no ha tenido ni mucho menos el &eacute;xito que sus creadores esperaban</B>, en definitiva lo que se usa es su modelo para describir y definir las comunicaciones entre sistemas dispares.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La informaci&oacute;n fluye a trav&eacute;s de los niveles de una manera muy sencilla, cada uno de los niveles, define un conjunto concreto de funciones, la aplicaci&oacute;n a un nivel m&aacute;s alto interactua con el nivel inferior, cuando tiene la necesidad de enviar informaci&oacute;n hacia otro sistema, la informaci&oacute;n se empaqueta en cada nivel, y se pasa al nivel inferior, hasta llegar al nivel f&iacute;sico, realiz&aacute;ndose el proceso inverso cuando llega al sistema destino, desde el nivel f&iacute;sico se asciende a trav&eacute;s de todos los niveles hasta llegar al de la aplicaci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Descripci&oacute;n de los niveles.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nivel f&iacute;sico.</P>
+</B><P ALIGN="JUSTIFY">En este nivel se definen las caracter&iacute;sticas f&iacute;sicas de las interfaces, aspectos el&eacute;ctricos (niveles de tensi&oacute;n que son valores binarios), y todo lo relacionado con el establecimiento y liberaci&oacute;n del enlace f&iacute;sico.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Nivel de enlace de datos.</P>
+</B><P ALIGN="JUSTIFY">Aqu&iacute; se definen las reglas para el envio y recepci&oacute;n de la informaci&oacute;n a trav&eacute;s de una conexi&oacute;n f&iacute;sica. En este nivel estar&iacute;amos hablando de tramas , utilizadas para la transmisi&oacute;n, evidentemente este nivel ofrece tambi&eacute;n la detecci&oacute;n y el control de errores pertinente, este control de errores evita de hecho que los niveles superiores a este tengan que realizarlo, pero tambi&eacute;n hay que decir que el rendimiento mejora cuando los niveles superiores son los que realizan el control de errores (partiendo siempre de la supuesta utilizaci&oacute;n de medios fiables).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En este caso podr&iacute;amos citar algunos de los protocolos y est&aacute;ndares que trabajan en este nivel como por ejemplo: <B>HDLC, SDLC, IEEE 802.3 (Ethernet), IEEE 802.5 (Token-Ring), Frame Relay, ATM, NDIS, ODI. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nivel de red.</P>
+</B><P ALIGN="JUSTIFY">En este nivel se definen los protocolos que <B>crean y mantienen la ruta entre los sistemas, relacion&aacute;ndose con la transmisi&oacute;n y conmutaci&oacute;n de datos,</B> ocultando de alguna manera a los niveles superiores. En este caso estar&iacute;amos hablando de paquetes, a trav&eacute;s de los cuales se determinar&aacute;n los m&eacute;todos de encaminamiento<B>, si los dos sistemas se encuentran en la misma red, el paquete se le env&iacute;a directamente al sistema destino, en caso de dirigirse a una red de otro segmento, el paquete se enviar&iacute;a al router pertinente, y este lo dirigir&aacute; hacia otra red.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">En el nivel de red podemos hablar por ejemplo de <B>IP, X.25, IPX, APPN</B>.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Nivel de transporte.</P>
+</B><P ALIGN="JUSTIFY">Este nivel proporciona un elevado control para mover la informaci&oacute;n entre sistemas, ofreciendo generalmente servicios de calidad, gesti&oacute;n de errores, prioridades, seguridad etc. <B>Los servicios orientados a la conexi&oacute;n (TCP)</B> entre sistemas nos aporta un transporte eficiente y seguro de la informaci&oacute;n, mucho m&aacute;s de lo que lo hacen los servicios <B>no orientados a la conexi&oacute;n (UDP).</P>
+</B><P ALIGN="JUSTIFY">Una de las formas de control en este nivel, se realiza sobre los paquetes, asign&aacute;ndoles a cada uno de ellos un n&uacute;mero, que se controlar&aacute; en el destino, de tal forma que si el paquete se perdiera, el destino le pide al origen que le vuelva a enviar los paquetes perdidos, utilizando las secuencias establecidas, asegurando adem&aacute;s que se reemsamblan los paquetes en el orden adecuado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ejemplos de protocolos de <B>nivel 4 son TCP (Transmission Control Protocol), SPX (Sequenced Packed Exchange) y UDP (User Datagram Protocol)</B> que no es orientado a la conexi&oacute;n, y no realiza los controles mencionados en el p&aacute;rrafo anterior.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Nivel de sesi&oacute;n.</P>
+</B><P ALIGN="JUSTIFY">Se realiza la coordinaci&oacute;n del intercambio de informaci&oacute;n entre sistemas, utilizando b&aacute;sicamente t&eacute;cnicas de conversaci&oacute;n o di&aacute;logos.  Generalmente estas t&eacute;cnicas son utilizadas para saber en un momento determinado donde reiniciar una transmisi&oacute;n o simplemente para saber donde empieza y acaba un bloque de datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Nivel de presentaci&oacute;n.</P>
+</B><P ALIGN="JUSTIFY">Forman parte del sistema operativo y aplicaci&oacute;n, que estemos utilizando en la estaci&oacute;n de trabajo. Por decirlo de alguna manera, se formatea la informaci&oacute;n para visualizarla o imprimirla, interpret&aacute;ndose los c&oacute;digos y atributos que vienen incorporados en los datos. En este nivel se gestiona tambi&eacute;n el cifrado y traducci&oacute;n de conjuntos de caracteres.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Nivel de aplicaci&oacute;n.</P>
+</B><P ALIGN="JUSTIFY">Son las aplicaciones que acceden a los niveles antes mencionados, de m&aacute;s bajo nivel, y aqu&iacute; podemos hablar aplicaciones de transferencia de archivos, correo electr&oacute;nico, etc.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ejemplos de algunos de los protocolos: <B>Terminal virtual (TELNET), Transferencia de archivos (FTP, FTAM, etc), X.400, X.500.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">Bueno, si hab&eacute;is llegado hasta aqu&iacute;, supongo que resistir&eacute;is otro apartado no poco atractivo como son los <B>est&aacute;ndares de transmisi&oacute;n</B>.</P>
+<P ALIGN="JUSTIFY">Existe una organizaci&oacute;n llamada <B>IEEE (Institute of Electrical and Electronic Engineers)</B> que se dedican a redactar y establecer normas sobre los est&aacute;ndares en comunicaciones, y concretamente el <B>proyecto 802</B> en las cuales se definen las pertenecientes a las LAN,s. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Muchas de las normas del IEEE <B>son tambi&eacute;n normas ISO</B>, por ejemplo la 802.3 del IEEE es la 8802.3, esto significa que realmente estamos hablando de una relaci&oacute;n entre las normas de uno y el modelo de referencia del otro.</P>
+<P ALIGN="JUSTIFY">Citar&eacute; las normas que considero m&aacute;s interesantes de cara al lector, ya que podr&iacute;amos escribir cientos de art&iacute;culos sobre todas las existentes. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">IEEE 802.1</P>
+</B><P ALIGN="JUSTIFY">Dentro de esta norma se define la relaci&oacute;n entre las normas <B>802 del IEEE y el modelo de referencia OSI para la interconexi&oacute;n de sistemas.</B> Aqu&iacute; por ejemplo podemos citar que una de las normas m&aacute;s importantes fue el uso de <B>48 bits para la direcci&oacute;n de una estaci&oacute;n LAN</B> para todas las normas 802, teniendo pues, cada adaptador una &uacute;nica direcci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">IEEE 802.2</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En esta norma se <B>define el protocolo de control de enlaces l&oacute;gicos (LLC, Logical Link Control) </B>, asegurando la fiabilidad de las transmisiones a trav&eacute;s del enlace de comunicaciones. Dentro de la pila de protocolos OSI, el nivel de enlace de datos, se divide en dos subniveles, el control de acceso al medio <B>(MAC, Media Access Control) y el (LLC, Logical Link Control).</P>
+</B><P ALIGN="JUSTIFY">Originariamente el protocolo <B>LLC proviene del protocolo HDLC (High-level Datalink Control)</B>, funcionando casi id&eacute;nticamente, por decirlo de alguna manera, <B>el LLC, proporciona los puntos de acceso al servicio (SAP,s, Service Access Points)</B>, mientras que el subnivel MAC, sencillamente nos da la direcci&oacute;n f&iacute;sica de un dispositivo de red.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cabe decir por &uacute;ltimo que en esta norma existen servicios <B>orientados y no orientados a la conexi&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">IEEE 802.3</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">La norma 802.3, nos define el modo de operaci&oacute;n del m&eacute;todo de acceso m&uacute;ltiple con detecci&oacute;n de portadora y detecci&oacute;n de colisiones <B>(CSMA/CD, Carrier Sense Multiple Access with Collision Detection),</B> esta norma, b&aacute;sicamente nos describe la conexi&oacute;n a medios de cable coaxial, par trenzado y fibra &oacute;ptica. En sus or&iacute;genes est&aacute;bamos hablando de <B>10 Mbits/seg., actualmente ya hablamos de 100 Mbits/seg., </B>y efectivamente estamos hablando del est&aacute;ndar de transmisi&oacute;n <B>Ethernet y Fast Ethernet.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Es interesante destacar que inicialmente este est&aacute;ndar fue desarrollado por <B>Xerox, DEC e Intel</B>, y apareci&oacute; por entonces una primera versi&oacute;n, public&aacute;ndose posteriormente otras revisiones.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El medio de comunicaci&oacute;n utilizado es compartido por todos los dispositivos de la LAN y es un elemento <B>de transmisi&oacute;n por broadcast (multidifusi&oacute;n),</B> pero no existe ning&uacute;n centro de control que le comunique a una estaci&oacute;n cuando debe transmitir, se <B>utiliza el canal banda base con codificaci&oacute;n Manchester</B> y en banda ancha por modulaci&oacute;n de frecuencia. Las estaciones generalmente se conectan a los <B>llamados HUB,s o concentradores</B>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las especificaciones del cableado son por ejemplo <B>10Base5 (cable coaxial grueso), 10Base2 (cable coaxial fino), 10BaseT (cable UTP), 100BaseT (cable UTP). </B>En cuanto a la trama de datos el IEEE 802.3 tiene su propio formato, que la hace incompatible con otros (Ethernet II por ejemplo), y contiene los siguientes campos de informaci&oacute;n b&aacute;sicos:</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=576>
+<TR><TD WIDTH="17%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Pre&aacute;mbulo</B></FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">SFD</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Destino</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Origen</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">LEN</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">Datos</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">PAD</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP" HEIGHT=7>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">CRC</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="17%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">7 bytes</FONT></TD>
+<TD WIDTH="8%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">2/6 bytes</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">2/6 bytes</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">2 bytes</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">0-1500 bytes</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Relleno</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">4 bytes</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>Trama Ethernet (IEEE 802.3)</b></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los campos m&aacute;s importantes se comentan a continuaci&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Pre&aacute;mbulo.</B> Identifica el comienzo de la trama.</P>
+<B><P ALIGN="JUSTIFY">SFD (Start Frame Delimiter). </B>Campo a&ntilde;adido que indica comienzo de trama.</P>
+<B><P ALIGN="JUSTIFY">Destino / Origen.</B>  Direcci&oacute;n de destino y origen.</P>
+<B><P ALIGN="JUSTIFY">LEN.</B> Nos indica la longitud del campo de datos.</P>
+<B><P ALIGN="JUSTIFY">CRC (Cyclical Redundancy checksum).</B> Tiene un resultado calculado por el emisor, y el receptor realiza ese mismo c&aacute;lculo para ver si coincide con el campo CRC, si no coincide la trama es incorrecta y deber&aacute; retransmitirse de nuevo.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">M&eacute;todo de acceso al canal.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">Como ya se ha comentado m&aacute;s arriba, el m&eacute;todo de acceso al medio es el llamado CSMA/CD, esto significa que los adaptadores de red realizan la transmisi&oacute;n de las tramas, cuando son los &uacute;nicos que tienen el medio, es decir que en el momento de transmitir, dispondr&aacute;n de todo el acceso al cable.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Partimos, que en un momento determinado, dos estaciones quieren transmitir, e intentan acceder al mismo tiempo al medio, entonces, se produce una colisi&oacute;n, lo cual podr&iacute;a causar una corrupci&oacute;n en los datos transmitidos, as&iacute; en el protocolo CSMA/CD, existe un mecanismo que detecta esa colisi&oacute;n, haciendo que las estaciones esperen cada una de ellas un tiempo aleatorio, y posteriormente vuelvan a intentar la transmisi&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cabe decir que este m&eacute;todo es <B>satisfactorio cuando estamos hablando de pocas estaciones a transmitir,</B> pero se degrada a medida que aumenta el n&uacute;mero de estaciones en red. Hay que decir que se utilizan t&eacute;cnicas de segmentaci&oacute;n y conmutaci&oacute;n que ser&iacute;an objeto de otros art&iacute;culos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">IEEE 802.5</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">La norma IEEE 802.5 nos define el funcionamiento de <B>una red en anillo con testigo, que f&iacute;sicamente se puede configurar con una topolog&iacute;a en estrella.</P>
+</B><P ALIGN="JUSTIFY">A mediados de los ochenta, IBM empez&oacute; a comercializar la llamada Token-Ring, que inicialmente funcionaba <B>a 4 Mbits/seg.,</B>  y a pesar de que la red est&aacute; f&iacute;sicamente en estrella, se configura como un anillo l&oacute;gico,  as&iacute;, internamente las se&ntilde;ales viajan de una estaci&oacute;n a otra por la red. M&aacute;s tarde token-ring pas&oacute; a <B>funcionar a 16 Mbits/seg., utiliz&aacute;ndose igualmente, t&eacute;cnicas de segmentaci&oacute;n y conmutaci&oacute;n.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las estaciones de trabajo se conectan a los concentradores o MAU,s (Multistation Access Unit), generalmente estos concentradores se interconectan entre si para crear redes m&aacute;s grandes. Cada <B>MAU </B>contiene una <B>entrada (Ring-Input) y una salida (Ring-Output),</B> de tal forma que podr&iacute;amos tener la siguiente conexi&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</B><P ALIGN="JUSTIFY">Los t&iacute;pos de cableados son de <B>tipo 1 (apantallado), tipo 2 (apantallado), tipo 3 (no apantallado), tipo 5 (fibra)</B>, etc. El  m&aacute;s utilizado era el de tipo1, pero actualmente se utiliza  siempre el <B>cableado cat 5</B>.</P>
+<P ALIGN="JUSTIFY"></P>
+<CENTER><IMG SRC="gif/fredes6.gif"></center>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>Trama IEEE 802.5</B></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Existen dos tipos de tramas en token-ring, una es para el testigo y la otra para la transferencia de la informaci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=576>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="CENTER">Delimitador de comienzo</B></FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="CENTER">Control de acceso</B></FONT></TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="CENTER">Delimitador de final</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="35%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="CENTER">1 byte</FONT></TD>
+<TD WIDTH="31%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="CENTER">1 byte</FONT></TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="CENTER">1 byte</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="CENTER"></P>
+<B><P ALIGN="JUSTIFY">Trama IEEE 802.5 (testigo)</P>
+</B><P ALIGN="JUSTIFY"></P></FONT>
+<TABLE BORDER CELLSPACING=1 CELLPADDING=4 WIDTH=576>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C1</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C2</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C3</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C4</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C5</B></FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C6</B></FONT></TD>
+<TD WIDTH="10%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C7</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C8</B></FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY">C9</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">2/6 bytes</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">2/6 bytes</FONT></TD>
+<TD WIDTH="13%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">Variable</FONT></TD>
+<TD WIDTH="10%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">4 bytes</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+<TD WIDTH="11%" VALIGN="TOP">
+<FONT FACE="Arial"><P ALIGN="JUSTIFY">1 byte</FONT></TD>
+</TR>
+</TABLE>
+
+<FONT FACE="Arial"><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>C1</B> = Delimitador de comienzo</P>
+<P ALIGN="JUSTIFY"><B>C2</B> = Control de acceso</P>
+<P ALIGN="JUSTIFY"><B>C3</B> = Control de trama</P>
+<P ALIGN="JUSTIFY"><B>C4</B> = Direcci&oacute;n del destino</P>
+<P ALIGN="JUSTIFY"><B>C5</B> = Direcci&oacute;n del origen</P>
+<P ALIGN="JUSTIFY"><B>C6</B> = Datos</P>
+<P ALIGN="JUSTIFY"><B>C7</B> = Secuencia de verificaci&oacute;n de trama</P>
+<P ALIGN="JUSTIFY"><B>C8</B> = Delimitador de final</P>
+<P ALIGN="JUSTIFY"><B>C9</B> = Estado de la trama</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>Trama de anillo con testigo</B></P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><B>C1.</B> Informa del comienzo de los datos.</P>
+<B><P ALIGN="JUSTIFY">C2.</B> Informaci&oacute;n sobre prioridad de la trama.</P>
+<B><P ALIGN="JUSTIFY">C3.</B> Tipo de trama (informaci&oacute;n para destino, informaci&oacute;n para MAC).</P>
+<B><P ALIGN="JUSTIFY">C4.</B> Direcci&oacute;n de la estaci&oacute;n destino.</P>
+<B><P ALIGN="JUSTIFY">C5.</B> Direcci&oacute;n de la estaci&oacute;n que env&iacute;a la trama.</P>
+<B><P ALIGN="JUSTIFY">C6.</B> Datos transmitidos.</P>
+<B><P ALIGN="JUSTIFY">C7.</B> Informaci&oacute;n de control de errores.</P>
+<B><P ALIGN="JUSTIFY">C8.</B> Indica el final de la trama.</P>
+<B><P ALIGN="JUSTIFY">C9.</B> Informaci&oacute;n de reconocimiento de la trama, disponibilidad, etc.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">M&eacute;todo de acceso al canal.</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">En las redes token-ring se utiliza <B>el acceso por turnos</B>, es decir, que una estaci&oacute;n tiene su turno cuando esta en posesi&oacute;n de la trama &quot;token&quot;, (la cual circula siempre por la red) y es entonces cuando tiene todo el control del canal de datos, pudiendo entonces enviar tramas al destino, una vez el destinatario la ha recibido, <B>el emisor deber&aacute; retirar la trama, una vez haya verificado que el destinatario la ha recibido, volviendo finalmente a colocar el &quot;token&quot; en al anillo, para pasarselo a la siguiente estaci&oacute;n.</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En definitiva, es un <B>sistema m&aacute;s justo que CSMA/CD, puesto que el &quot;token&quot;, va pasando en un orden por cada una de las estaciones</B>, transmitiendo tarde o temprano todas ellas, por tanto es muy efectivo cuando existen un gran n&uacute;mero de estaciones, no as&iacute; cuando hay un n&uacute;mero muy reducido, puesto que se pierde algo de tiempo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, con este tercer art&iacute;culo, cierro el &quot;Introducci&oacute;n a las redes&quot;, pero continuar&eacute; con este apasionante mundo del Networking, espero que os hayan servido para saber algo m&aacute;s sobre el tema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Saludos, y os deseo una buena sesi&oacute;n en la red.</P><br><br>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulal.htm"><font FACE="ARIAL"><B>[Artículos Sobre Redes]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

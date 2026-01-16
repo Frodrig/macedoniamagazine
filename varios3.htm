@@ -1,0 +1,243 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:i9792523@petra.euitio.uniovi.es">José Conde "Rewin".</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Fundamentos de los algoritmos compresores
+</H3>
+
+<FONT color="#000000" size=2 face="arial" >        
+<P align="JUSTIFY">
+
+
+<P ALIGN=JUSTIFY>Con este art&iacute;culo vamos a tratar de dar una idea de como
+funcionan  estos peque&ntilde;os programas que utilizamos asiduamente y
+desconocemos su m&eacute;todo de trabajo.
+<br>
+<br>       
+	Primero indicar que la compresi&oacute;n de datos puede ser tanto
+<i>software</i> como <i>hardware</i>. Vamos a ver s&oacute;lo esta primera.      
+<br>
+<br>
+	Los programas compresores de datos utilizan diversos algoritmos
+para llevar a cabo su funci&oacute;n. Se basan todos ellos en la
+b&uacute;squeda de caracteres  repetidos y su frecuencia de aparici&oacute;n
+(aunque alg&uacute;n otro usa alguna t&eacute;cnica m&aacute;s sencilla). 
+<br>
+<br>
+Estos
+algoritmos representan un conjunto de bits en otro de tama&ntilde;o
+menor, pero entre los cuales se establece una relaci&oacute;n &uacute;nica.
+Debemos  se&ntilde;alar que un mal uso de un algoritmo para un conjunto
+de datos puede  llevarnos al efecto contrario al que buscamos
+(la expansi&oacute;n del archivo).  Para eliminar esta posibilidad, los
+programas compresores de datos hacen un estudio de los datos del
+archivo, realizando una lectura previa y analizando  cual es el
+algoritmo que mayor compresi&oacute;n generar&aacute;, para despu&eacute;s aplicarlo.
+<br>
+<br>
+Los m&eacute;todos empleados convierten cada byte (8 bits) en un
+secuencia de bits  de menor tama&ntilde;o.                
+<br>
+<br>
+	Existen varios m&eacute;todos de compresi&oacute;n de datos:                
+<DL>
+<br>
+<br>
+
+<DT>
+<FONT size=2 color="#000000" face="arial"><b>M&eacute;todo de los 7 bits: </b>
+</FONT>
+<BR>
+<BR>
+<DL><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Se puede usar &uacute;nicamente para archivos cuyo  contenido est&eacute; en
+c&oacute;digo ASCII no extendido, es decir, todos sus caracteres est&aacute;n
+representados por valores entre el 0 y el 127 del c&oacute;digo ASCII.
+Cada car&aacute;cter de estos archivos desaprovecha el primer bit, ya
+que su informaci&oacute;n se representa por 7 bits, estando el primero
+siempre a 0. Este algoritmo  elimina este primer bit de cada
+byte, escribiendo los 7 bits de informaci&oacute;n  uno a continuaci&oacute;n
+del otro. Su raz&oacute;n de compresi&oacute;n es siempre constante y  es de
+12,5 por 100 de reducci&oacute;n. Su compresi&oacute;n es r&aacute;pida y simple.
+</DL>
+<BR>
+<BR>
+
+<DT>
+<FONT size=2 color="#000000" face="arial"><b>M&eacute;todo Run Length Encoding (RLE):</b> 
+</FONT>
+<BR>
+<BR>
+<DL><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Se basa en las posibles repeticiones consecutivas de un
+car&aacute;cter. Veamos esto con un ejemplo. Si vamos leyendo un
+archivo y nos encontramos con la siguiente secuencia <I>rrrrr</I>
+podemos  sustituirla en el archivo comprimido por un <I>5r</I>,
+escribiendo primero el n&uacute;mero de veces consecutivas que se
+repite el byte y despu&eacute;s cu&aacute;l es el car&aacute;cter representado.
+Debemos tener en cuenta que cuando aparezca un car&aacute;cter sin
+repetici&oacute;n, ocupar&iacute;a m&aacute;s espacio codificar <I>1r</I> que <I>r</I>.
+Teniendo en  cuenta esta excepci&oacute;n, es f&aacute;cil de realizar el
+algoritmo de compresi&oacute;n y  descompresi&oacute;n.
+</DL>
+<BR>
+<BR>
+
+<DT>
+<FONT size=2 color="#000000" face="arial"><b>	M&eacute;todo de Huffman: </b>
+
+<BR>
+<BR>
+<DL><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Se basa en las diferentes frecuencias de aparici&oacute;n de los
+caracteres en un archivo. Se codifican los caracteres como
+secuencias de bit, los m&aacute;s frecuentes tienen secuencias m&aacute;s
+peque&ntilde;as y los menos  frecuentes, m&aacute;s largas. El objetivo del
+algoritmo es formar un &aacute;rbol binario que represente el c&oacute;digo.
+En los nodos terminales (hojas) de este &aacute;rbol se almacenar&aacute;n los
+caracteres que se desea codificar junto con la probabilidad de
+aparici&oacute;n de cada uno de ellos. Adem&aacute;s, los caracteres que
+tienen  probabilidad m&aacute;s alta, estar n m&aacute;s pr&oacute;ximos a la ra&iacute;z
+que a los de menor  probabilidad. As&iacute;, el camino desde la ra&iacute;z
+del &aacute;rbol a cualquier hoja del  mismo representar&aacute; el c&oacute;digo
+para el car&aacute;cter de esa hoja. 
+<BR><FONT size=2 color="#000000" face="arial">
+El algoritmo de Huffman realiza los siguientes pasos:       
+<BR>
+<OL>
+<LI><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	 Crea tantos &aacute;rboles independientes como caracteres se vayan
+a  codificar. Cada car&aacute;cter ser  la ra&iacute;z de un &aacute;rbol
+independiente, junto con su probabilidad de aparici&oacute;n.        
+<LI><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Busca los dos &aacute;rboles que presenten las menores
+probabilidades de aparici&oacute;n.       
+<LI><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Agrupa los dos &aacute;rboles encontrados en uno s&oacute;lo. En la ra&iacute;z
+de  este nuevo &aacute;rbol no se almacena ning&uacute;n car&aacute;cter. Unicamente
+la probabilidad de aparici&oacute;n de los caracteres agrupados, que se
+obtendr&aacute; sumando las  probabilidades respectivas de cada &aacute;rbol.
+<LI><FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Repite los pasos 2 y 3 hasta que s&oacute;lo quede un &aacute;rbol que
+agrupe a todos los caracteres.
+</DL>
+</OL>
+<BR>
+<BR>
+
+<DT>
+<FONT size=2 color="#000000" face="arial"><b>	M&eacute;todo de Lempel-Ziv:</b>
+
+<BR>
+<BR>
+<DL> <FONT size=2 color="#000000" face="arial"><P align="JUSTIFY">
+	Es una combinaci&oacute;n del m&eacute;todo de Huffman y de la redundancia en
+los bloques de datos. El algoritmo leer&aacute; un bloque de 
+caracteres en el archivo, y verificar&aacute; si se encuentra repetido
+con respecto a lo ya le&iacute;do. Si es as&iacute;, se informar&aacute;n dos
+par&aacute;metros: el primero con la  posici&oacute;n de inicio del bloque y
+el segundo con la longitud del bloque.
+
+</DL>
+</FONT>
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

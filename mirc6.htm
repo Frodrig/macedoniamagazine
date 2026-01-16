@@ -1,0 +1,474 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A></b></FONT><br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Creación de menús en el Script (Popups)</H3>
+<p align=justify>
+
+El mIRC nos permite crear nuestros propios men&uacute;s personalizados
+para facilitar el uso del script. Los men&uacute;s popup son los que todo
+programa usa para poder seleccionar opciones. En tu navegador tienes que
+estar vi&eacute;ndolos ahora con los nombres:
+<BR><U>A</U>rchivo <U>E</U>dici&oacute;n <U>V</U>er <U>I</U>r ...
+<BR>Con estos men&uacute;s podremos ejecutar alias, comandos, definir variables,
+etc, sin tener que hacer nada, solo seleccionar la opci&oacute;n desde
+el men&uacute;. Existen 5 men&uacute;s que podremos crear y moldear a nuestro
+gusto. Para que surja el men&uacute; debemos pulsar con el bot&oacute;n
+derecho del rat&oacute;n sobre cada una de las ventanas que nos muestra
+el mIRC, excepto en <B>MENUBAR</B>. Son:
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<BLOCKQUOTE><B>MENUBAR: </B>Es el cuarto men&uacute; de la barra principal
+de men&uacute;s que se encuentra en la parte superior de la pantalla del
+mIRC.
+
+<P align="justify"><B>CHANNEL:</B> Es el men&uacute; emergente que aparece al pulsar con
+el bot&oacute;n derecho del rat&oacute;n sobre la pantalla del canal.
+
+<P align="justify"><B>NICKNAME LIST: </B>Es el men&uacute; emergente de la lista de nicks
+del canal.
+
+<P align="justify"><B>STATUS: </B>Es el men&uacute; emergente de la ventana de Status del
+programa.</BLOCKQUOTE>
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<BLOCKQUOTE>
+<BLOCKQUOTE>
+<BLOCKQUOTE><B>QUERY/CHAT: </B>Es el men&uacute; emergente de la ventana
+de querys y de DCC chat.
+<BR>&nbsp;</BLOCKQUOTE>
+</BLOCKQUOTE>
+</BLOCKQUOTE>
+En cada uno de ellos pondremos aquellas opciones, comandos, alias, identificadores,
+etc., que m&aacute;s nos interesen seg&uacute;n la ventana que piquemos
+con el rat&oacute;n. El &uacute;nico que sale por defecto es el <B>MENUBAR.</B>
+&Eacute;ste ser&aacute; visible en cualquier momento.
+
+<P align="justify">Para llegar hasta la secci&oacute;n del mIRC que nos permite crearlos
+seguiremos los mismos pasos que para crear alias. Pulsaremos sobre "TOOLS",
+y despu&eacute;s "POPUPS". En la ventana que nos aparece tenemos a su vez
+una barra superior de opciones, si pulsamos "VIEW" podremos elegir de entre
+los 5 men&uacute;s anteriores y as&iacute; editarlos a nuestro gusto.
+
+<P align="justify">Tenemos tambi&eacute;n la posibilidad de hacer una vista previa de c&oacute;mo
+va quedando el men&uacute;. Pulsamos sobre "POPUP" y podremos ver el aspecto
+que tendr&aacute;, pero no es funcional, solo una vista previa.
+
+<P align="justify">Una vez terminadas nuestras modificaciones solo debemos pulsar "OK"
+y todos los cambios quedar&aacute;n guardados y listos para usar. Yo prefiero
+usar antes la opci&oacute;n "FILE" y despu&eacute;s "SAVE" para asegurarme.
+Nunca se sabe.
+
+<P align="justify">La creaci&oacute;n de men&uacute;s es muy sencilla y no precisa de ning&uacute;n
+tipo de trabajo especial. Lo mejor es ver un ejemplo de un men&uacute;
+sencillito. Veamos un t&iacute;pico men&uacute; programado en <B>MENUBAR</B>:
+
+<P align="justify">
+<HR WIDTH="90%">
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>GaTo
+Script</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Conectar</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Conectar
+(Manual):/server $$?="Escribe el servidor y el puerto"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.IRC
+Hispano (Auto)</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Argo:/server
+gaia.irc-hispano.org 8247</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Arrakis:/server
+pleyades.irc-hispano.org 6666</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Catalunya
+Net:/server irc.catalunya.net 6666</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Redes
+TB:/server pulsar.irc-hispano.org 7000</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Desconectar:/quit
+$$?="&iquest;Mensaje de salida?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Elejir
+canal: /join # $+ $$?="&iquest;A qu&eacute; canal quieren entrar?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Cambiar
+nick: /nick $$?="&iquest;Nuevo nick?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Modos
+de Usuario</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Modo
+Invisible</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..On:/mode
+$me +i</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Off:/mode
+$me -i</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Msj
+del Servidor</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..On:/mode
+$me +s</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Off:/mode
+$me -s</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.WallOps</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..On:/mode
+$me +w</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Off:/mode
+$me -w</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+Kills</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..On:/mode
+$me +k</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>..Off:/mode
+$me -k</FONT></FONT></FONT>
+<BR>
+<HR WIDTH="90%">
+<BR>Este, en principio, complicado men&uacute;, aparecer&aacute; de la
+siguiente manera en el mIRC:
+<BR><FONT COLOR="#FFFFFF">.</FONT>
+<CENTER><IMG SRC="gif/popup1.gif" HEIGHT=149 WIDTH=500 ALIGN=CENTER></CENTER>
+<FONT COLOR="#FFFFFF">.</FONT>
+<BR>Se puede ver que la primera l&iacute;nea es " <I>GaTo Script</I> ".
+En el men&uacute; <B>MENUBAR </B>la primera frase que pongamos es la que
+aparecer&aacute; en la barra de comandos del mIRC.
+
+<P align="justify">Como se puede observar cada l&iacute;nea describe en primer lugar el
+nombre de la opci&oacute;n de men&uacute; con la que aparecer&aacute; cuando
+se despliegue este. Como es sabido cada opci&oacute;n de men&uacute; puede
+tener a su vez otras subopciones, y estas a su vez otras tantas, y as&iacute;
+sucesivamente; esto se especifica en el dise&ntilde;o del men&uacute; mediante
+los puntos que preceden a cada una de las l&iacute;neas: las l&iacute;neas
+sin puntos delante son opciones principales que aparecer&aacute;n nada
+m&aacute;s desplegarse el men&uacute;; si, por el contrario, tienen un
+punto delante significar&aacute; que son subopciones de las anteriores,
+y se desplegar&aacute;n al pulsar sobre aquella inmediatamente anterior
+que no tenga punto; si tienen dos puntos ser&aacute;n una subopci&oacute;n
+de la inmediatamente anterior que solo tuviese uno... y as&iacute; sucesivamente.
+
+<P align="justify">Opcionalmente podemos poner tan solo un gui&oacute;n ( - ) en lugar
+del nombre de una opci&oacute;n. Esto lo &uacute;nico que har&aacute; ser&aacute;
+insertar una l&iacute;nea de separaci&oacute;n en la lista de opciones
+del men&uacute;, como las que ves en la imagen del ejemplo. Gracias a esto
+podremos dividir el men&uacute; seg&uacute;n las funciones de cada opci&oacute;n.
+Los guiones se puden poner tanto en el men&uacute; principal como en los
+submen&uacute;s.
+
+<P align="justify"><FONT COLOR="#000000">Veamos paso a paso cada opci&oacute;n del men&uacute;:</FONT>
+<UL>
+<LI>
+<FONT COLOR="#000000">&nbsp;Lo primero que vemos es el nombre que aparecer&aacute;
+en la barra de comandos. Esto solo se usa en el men&uacute; <B>MENUBAR</B>.
+En el resto de popups no se puede usar.</FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT COLOR="#000000">Los siguiente es un men&uacute; para conectar/desconectar
+de un servidor. Si elijes <I>Conectar </I>se despliega un segundo men&uacute;
+donde elegimos entre seleccionar nosotros el servidor o usar 4 servidores
+normales del IRC Hispano ya configurados. Como puedes ver para que se ejecute
+una orden al seleccionar un servidor se deben poner los comandos despu&eacute;s
+de los dos puntos ( : ). Tras ellos se escriben los comandos a ejecutar.
+En este caso es simplemente el comando <I>server</I> del mIRC, que podreis
+ver c&oacute;mo se usa en la secci&oacute;n "Comandos del IRC" que se encuentra
+en este cursillo.</FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT COLOR="#000000">La segunda parte del men&uacute; nos permite definir
+nuestro nick y entrar al canal que deseemos, solo diciendo el nombre del
+mismo.</FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT COLOR="#000000">Por &uacute;ltimo el men&uacute; nos permitir&aacute;
+configurar nuestros modos de usuario y activar/desactivar los que m&aacute;s
+nos interesen en cada momento.</FONT></LI>
+</UL>
+<FONT COLOR="#000000">Como podr&aacute;s ver los popups nos permiten ejecutar
+una serie de complicados comandos con un solo click del rat&oacute;n.</FONT>
+<BR><FONT COLOR="#000000">En este ejemplo he puesto los comandos, pero
+podemos usar alias tambi&eacute;n. Hay que recordar que no es bueno poner
+todos los comandos de nuestro men&uacute; en la secci&oacute;n POPUPS ya
+que todo archivo de un script del mIRC no puede superar los 30000 bytes,
+y un men&uacute; puede llegar a ser enorme. Los alias nos ayudar&aacute;n
+con ello. Veamos un ejemplo:</FONT>
+
+<P align="justify"><FONT COLOR="#000000">Definimos una serie de alias:</FONT>
+
+<P align="justify"><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/op
+/mode $chan +o $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/deop
+/mode $chan -o $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/patada
+/kick $chan $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/expulsar
+/ban $chan $1 9</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/patada_expulsar
+/ban $chan $1 7 | /kick $chan $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp1
+/ctcp $$1 $$?="Pon el mensaje?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp2
+/ctcp $$1 ping</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp3
+/ctcp $$1 finger</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp4
+/ctcp $$1 version</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp5
+/ctcp $$1 time</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp6
+/ctcp $$1 userinfo</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/ctcp7
+/ctcp $$1 clientinfo</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/XDCC1
+/msg $$1 XDCC HELP</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/XDCC2
+/msg $$1 XDCC LIST</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/XDCC3
+/msg $$1 XDCC SEND # $+ $$?="N&uacute;mero de paquete?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/dcc1
+/dcc send $$*</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>/dcc2
+/dcc chat $$*</FONT></FONT></FONT>
+
+<P align="justify"><FONT COLOR="#000000">Ahora creamos nuestro men&uacute; <B>NICKNAME
+LIST</B> usando todos esos alias que hemos hecho antes y unos comandos
+normales al principio para que veas las diferencias:</FONT>
+
+<P align="justify">
+<HR WIDTH="90%">
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Comandos
+al Nick</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.&iquest;Qui&eacute;n
+es?:/uwho $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Invitarle
+a un canal:/invite $$1 $$?="&iquest;D&oacute;nde invitas al nick se&ntilde;alado?"</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ignorarle:
+{</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;
+/ignore $1 3</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;
+/echo 3 GaTo SCript: Ignorando a $1</FONT></FONT></FONT>
+<BR><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT FACE="Courier New,Courier"><FONT COLOR="#000099">}</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Dejar
+de ignorarle: {</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;
+/ignore -r $address($1,3)</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;
+/echo 3 GaTo SCript: Ya no ignoras a $1</FONT></FONT></FONT>
+<BR><FONT SIZE=-1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<FONT FACE="Courier New,Courier"><FONT COLOR="#000099">}</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Dar
+Op:/op $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Quitar
+Op:/deop $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Kick:/patada
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Ban:/expulsar
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Ban
++ Kick:/patada_expulsar $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>CTCP</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Mensaje:/ctcp1
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ping:/ctcp2
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Finger:/ctcp3
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Version:/ctcp4
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Time:/ctcp5
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Userinfo:/ctcp6
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Clientinfo:/ctcp7
+$$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>XDCC</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.XDCC
+Help:/XDCC1 $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.XDCC
+List:/XDCC2 $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.XDCC
+Send:/XDCC3 $$1</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Mandarle
+un Archivo:/dcc1 $$*</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Hacerle
+un Chat privado:/dcc2 $$*</FONT></FONT></FONT>
+<BR>
+<HR WIDTH="90%">
+
+<P align="justify"><FONT COLOR="#000000">El aspecto que tendr&aacute; este men&uacute;
+de la ventana <B>NICKNAME LIST</B> ser&aacute; el siguiente:</FONT>
+<BR><FONT COLOR="#FFFFFF">.</FONT>
+<CENTER><IMG SRC="gif/popup2.gif" HEIGHT=267 WIDTH=282></CENTER>
+
+<CENTER><FONT COLOR="#FFFFFF">.</FONT></CENTER>
+<FONT COLOR="#000000">Solo la opci&oacute;n Comandos al Nick usa comandos
+en el popup. Todas las demas usan los alias que definimos antes. Observa
+que para que el alias sepa a qui&eacute;n, por ejemplo, dar "op" es necesario
+usar el identificador $$1 que ya expliqu&eacute;.</FONT>
+
+<P align="justify"><FONT COLOR="#000000">Tambi&eacute;n ver&aacute;s en <I>Ignorarle</I>
+y <I>Dejar de ignorarle</I> que uso el separador "|". Es igual que en los
+alias. Separa cada operaci&oacute;n que queramos que se ejecute. Podemos
+programar en el men&uacute; exactamente lo mismo que en un alias.</FONT>
+
+<P align="justify"><FONT COLOR="#000000">Tambi&eacute;n podemos usar variables como partes
+del men&uacute;. De este modo en el caso de que cambie, por ejemplo, nuestro
+nick, aparecer&aacute; en el men&uacute; siempre el correcto. Ve&aacute;moslo
+con un ejemplo:</FONT>
+<BR>
+<HR WIDTH="90%">
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>Cambiar
+nick: /nick $$?="&iquest;Nuevo nick? | /set %nuevo-nick $me</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>%nuevo-nick</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu servidor: /echo $server</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu puerto: /echo $port</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu IP: /echo $ip</FONT></FONT></FONT>
+<BR>
+<HR WIDTH="90%">
+<BR>Como ver&aacute;s la primera opci&oacute;n cambia tu nick y define
+una variable con tu nick. En la segunda parte aparecer&aacute; nuestro
+nick, sea cual sea, y podremos ver varios par&aacute;metros de nuestra
+conexi&oacute;n.
+
+<P align="justify">Otra opci&oacute;n que podemos usar al definir un men&uacute; es hacer
+teclas de acceso r&aacute;pido a una opci&oacute;n. Para que lo entiendas
+mejor mira la barra de opciones de tu navegador. La primera opci&oacute;n
+es <U>A</U>rchivo. Como ves la A est&aacute; subrayada. Esa es la tecla
+de acceso r&aacute;pido al men&uacute; popup Archivo de tu navegador. Esto
+se hace poniendo el signo &amp; delante de la opci&oacute;n del men&uacute;
+tal y como se ve a continuaci&oacute;n:
+<BR>
+<HR WIDTH="90%">
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>&amp;Cambiar
+nick: /nick $$?="&iquest;Nuevo nick? | /set %nuevo-nick $me</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>-</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>%nuevo-nick</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu &amp;Servidor: /echo $server</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu &amp;Puerto: /echo $port</FONT></FONT></FONT>
+<BR><FONT FACE="Courier New,Courier"><FONT COLOR="#000099"><FONT SIZE=-1>.Ver
+tu &amp;IP: /echo $ip</FONT></FONT></FONT>
+<BR>
+<HR WIDTH="90%">
+<BR>As&iacute; de sencillo. No los uses con las variables o no funcionar&aacute;n
+bien. Puedes ponerlos en cualquier posici&oacute;n del texto, como se ve
+en el ejemplo, incluso dentro de las palabras. El men&uacute; quedar&aacute;
+as&iacute;:
+<CENTER><FONT COLOR="#FFFFFF">.</FONT></CENTER>
+
+<CENTER><IMG SRC="gif/popup3.gif" HEIGHT=121 WIDTH=244></CENTER>
+<FONT COLOR="#FFFFFF">.</FONT>
+<BR>No creo que haya nada m&aacute;s que explicar ahora. A medida que explique
+m&aacute;s secciones del mIRC como los N&uacute;meros Raw, Eventos, etc.,
+ir&eacute; explicando un poco m&aacute;s c&oacute;mo usarlos con los popups.
+
+<P align="justify">Si tienes cualquier duda ya sabes donde encontrarme. Te recomiendo que
+mires los popups de alguno de los cientos de scripts que existen para que
+veas diferentes ejemplos. Con un poco de pr&aacute;ctica te ser&aacute;
+muy sencillo crear tus propios men&uacute;s en tu script y a&ntilde;adir
+opciones que te sean necesarias..
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

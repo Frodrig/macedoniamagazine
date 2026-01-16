@@ -1,0 +1,236 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<body BGCOLOR="FFFFFF">
+<BR>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>R</B></font><FONT color="#000000" size=7 face="arial"><B>ecuerdos de 8 Bits</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>quellos Maravillosos Bits</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:i9792523@petra.euitio.uniovi.es">José Conde "Rewin".</A>
+</b></FONT>
+<br><br>
+
+<BR><BR><BR><BR><BR>
+
+<H3>
+<FONT color="#000000" face="arial">        
+La memoria del Spectrum 16K
+</FONT>
+</H3>
+
+<P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">
+El spectrum (&uacute;nico y &uacute;ltimo :´-( snif ) manejaba la memoria en lo que de aquellas se llamaban octetos (bytes despues de la explosi&oacute;n del esnobismo). Las direcciones de memoria iban de la 0 a la FFFFh. 
+<BR>En el spectrum 16 K, unicamente exist&iacute;an las posiciones de memoria de la 0 a la 7FFFh. Esta se divid&iacute;a as&iacute;:
+<BR><BR>
+<CENTER><TABLE BORDER=1> 
+<TH><B><CENTER><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">ROM</TH>
+<TH><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">RAM</TH>
+<TR>
+<TD><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">0-3FFFh (16 KB)</TD>
+<TD><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">4000h-7FFFh (16 KB)</TD>
+</TABLE></CENTER>
+<BR><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">
+Para inspeccionar el contenido de una casilla de memoria, empleamos la instrucci&oacute;n <I> Basic </I> <B> PEEK </B>. Este programa, lista los primeros 21 octetos de la ROM (y sus direcciones):
+<BR>
+<DL>
+<DL><B>
+<P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">
+10 PRINT "Direcciones"; TAB 8; "Octeto" <BR>
+20 FOR a=0 TO 20 <BR>
+30 PRINT a; TAB 8; PEEK a <BR>
+40 NEXT a <BR>
+</DL></B>
+<BR><BR>
+<P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">
+Para variar el contenido de una direcci&oacute;n de memoria (s&oacute;lo si es RAM), empleamos la sentencia <B>POKE</B> (introducir), cuya forma es:
+<CENTER>
+<BR>
+<B><P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">POKE</B> direcci&oacute;n, nuevo contenido
+</CENTER>
+<BR> 
+Por ejemplo, si se escribe:
+<br>
+<CENTER>
+<BR>
+<B> POKE 31000,57 </B>
+</CENTER>
+<BR>
+El octeto de la direcci&oacute;n 31000 se le da el nuevo valor 57. Si escribimos:
+<BR>
+<CENTER>
+<B> PRINT PEEK 31000</B>
+</CENTER>
+<BR>
+comprobamos que hemos modificado la direcci&oacute;n. <BR>
+Los nuevos valores introducidos en la memoria han de estar comprendidos entre el -255 y el +255.
+<BR><BR>
+Ahora hecharemos un vistazo m&aacute;s extenso a la memoria RAM:
+<BR><BR>
+La memoria est&aacute; dividida en zonas diferentes para almacenar distintos tipos de informaci&oacute;n. Esta es la distribuci&oacute;n de la memoria:
+<BR><BR>
+<CENTER><TABLE BORDER=1>
+<B>
+<TH><CENTER>Zona</TH>
+<TH><CENTER>Direcciones</TH>
+</B><TR>
+<TD><H5>Fichero de presentaci&oacute;n visual</TD>
+<TD>16384-22528</TD></TR><TR>
+<TD><H5>Atributos</TD>
+<TD>22529-23296</TD></TR><TR>
+<TD><H5>Memoria intermedia de la impresora</TD>
+<TD>23297-23552</TD></TR><TR>
+<TD><H5>Variables del sistema</TD>
+<TD>23553-23724</TD></TR><TR>
+<TD><H5>Mapas de Microdrive</TD>
+<TD>23735-CHANS</TD></TR><TR>
+<TD><H5>Informaci&oacute;n para canales + 80h</TD>
+<TD>CHANS-PROG</TD></TR><TR>
+<TD><H5>Programa en Basic</TD>
+<TD>PROG-VARS</TD></TR><TR>
+<TD><H5>Variables + 80h</TD>
+<TD>VARS-E_LINE</TD></TR><TR>
+<TD><H5>Comando o l&iacute;nea de programa que se est&aacute; corrigiendo + NL + 80h</TD>
+<TD>E_LINE-WORKSP</TD></TR><TR>
+<TD><H5>Entrada de datos + NL + Espacio tareas eventuales</TD>
+<TD>WORKSP-STKBOT</TD></TR><TR>
+<TD><H5>Pila de la calculadora</TD>
+<TD>STKBOT-STKEND</TD></TR><TR>
+<TD><H5>Reserva</TD>
+<TD>STKEND-sp</TD></TR><TR>
+<TD><H5>Pila de M&aacute;quina + Pila de <B>GOSUB</B> + ?</TD>
+<TD>sp-RAM TOP</TD></TR><TR>
+<TD><H5>3Eh</TD>
+<TD>RAM TOP-UDG</TD></TR><TR>
+<TD><H5>Gr&aacute;ficos definidos por el ususario</TD>
+<TD>UDG-P_RAMT</TD></TR>
+</TABLE></CENTER>
+<BR><BR>
+<P ALIGN=justify>
+<FONT color="#000000" size=2 face="arial">
+Estas zonas son lo suficientemente <I>grandes</I> para contener la informaci&oacute;n que contienen realmente, por lo que si se a&ntilde;ade algo m&aacute;s en alg&uacute;n punto determinado, se hace sitio empujando hacia arriba todo lo que queda por encima de este punto. Y al contrario, si se borra informaci&oacute;n, entonces todo se empuja hacia abajo.
+<BR><BR>
+El archivo para la representaci&oacute;n en pantalla almacena una imagen de televisi&oacute;n. Cada car&aacute;cter de la pantalla posee un cuadrado de 8x8 puntos y cada punto puede tomar el valor 0 (papel) o 1 (tinta):as&iacute;, utilizando la notaci&oacute;n binaria se puede almacenar la configuraci&oacute;n como 8 octetos, uno para cada fila. Sin embargo, estos 8 octetos no se almacenan juntos, sino que lo hacen los 32 caracteres de una l&iacute;nea sencilla, como una traza de 32 octetos, ya que esto es lo que necesita el haza electr&oacute;nico de la televisi&oacute;n a medida que barre la pantalla de izquierda a derecha. Como quiera que la imagen completa tiene 24 l&iacute;neas de 8 barridos cada una, podr&iacute;a esperarse que hubiera que hubiera que almacenarse 172 barridos, en total, correlativos, pero no es verdad. Primero vienen las trazas superiores de las l&iacute;neas 0 a 7. A continuaci&oacute;n se repite el mismo proceso para las l&iacute;neas 8 a 15, y tras ello se hace lo mismo para las l&iacute;neas 16 a 23. 
+<BR><BR>
+	Los atributos son los colores, etc., para cada posici&oacute;n de car&aacute;cter, mediante el uso de <B> ATTR </B>. Todo ello se almacena l&iacute;nea tras l&iacute;nea en el orden que se espera.
+<BR><BR>
+	La memoria temporal de la impresora almacena los caracteres destinados a impresi&oacute;n.
+<BR><BR>
+	Las variables del sistema contienen varios elemntos de informaci&oacute;n que indican el ordenador en qu&eacute; estado se halla. Nos conformaremos con citar que existen algunas (llamdas <B> CHANS, PROG, VARS, E_LINE, </B>, etc.) que contienen las direcciones de los l&iacute;mites entre las distintas zonas de la memoria. No son variables de <I>Basic</I>, por lo que sus nombres noi ser&aacute;n identificados por el ordenador.
+<BR><BR>
+	Los mapas de la unidad de Microdrive s&oacute;lo existen cuando se utiliza este dispositivo, por lo que, normalmente, sus posiciones est&aacute;n vac&iacute;as. 
+<BR><BR>
+	La zona para informaci&oacute;n de los canales contiene informaci&oacute;n, pertinenete sobre los dispositivos de entrada y salida, es decir, el teclado(con la mitad inferior de la pantalla), la mitad superior de la pantalla y la impresora.
+<BR><BR>
+	Cada l&iacute;nea del programa <I>Basic</I> tiene la forma:
+<CENTER><TABLE BORDER=1>
+<TH><B><CENTER>Campo</TH>
+<TH><B><CENTER>Longitud</TH>
+<TR><TD>N&uacute;mero de l&iacute;nea
+<TD>2 octetos
+<TR><TD>Longitud del texto+<B>ENTER</B>
+<TD>2 octetos
+<TR><TD>Texto
+<TD>xxxxx
+<TR><TD><B>ENTER</B>
+<TD>1 octeto (00001101)
+</TABLE>
+
+</p>
+</font>
+<br><br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index02.htm"><font FACE="ARIAL"><B>[Recuerdos de 8 Bits]</B></font></a> <BR>
+<HR>
+<A HREF="8bitsa.htm"><font FACE="ARIAL"><B>[Aquellos maravillosos bits]</B></font></a> <BR>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">RECUERDOS DE 8 BITS</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER></HTML>
+
+
+

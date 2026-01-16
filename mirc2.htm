@@ -1,0 +1,599 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A></b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Comandos del mIRC</H3>
+
+<p align=justify>
+
+Esta es una gu&iacute;a de referencia de la mayor&iacute;a de los comandos del mIRC y de su sintaxis tal y como se especifica en la ayuda del programa mIRC. En la sintaxis he utilizado algunos s&iacute;mbolos cuyo significado es el siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las palabras entre los s&iacute;mbolos { y } representan opciones o valores que es necesario introducir para el funcionamiento del comando. Todo lo que se encuentra entre los s&iacute;mbolos [ y ] son valores opcionales.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La barra (/) dentro de la sintaxis del comando (no la que hay al principio de este, que SIEMPRE es necesaria), separa valores  alternativos, es decir, se puede introducir uno u otro, solo uno cada vez.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando vea especificaciones del tipo: -aqf, por ejemplo, se tratar&aacute; de modificadores del comando. Estos son siempre una sola letra precedida de un gui&oacute;n. En el ejemplo anterior deber&aacute; de poner -a, -q, &oacute; -f. Sin embargo, en la mayor&iacute;a de los casos es posible especificar m&aacute;s de uno cada vez a fin de combinar sus efectos, es este caso no es necesario m&aacute;s que un gui&oacute;n, por ejemplo: -af, -fq, -qa,...etc.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">No se preocupe si de momento no entiende algunos comandos, bastantes de ellos realizan acciones avanzadas que ya conocer&aacute; con el tiempo y la pr&aacute;ctica.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Antes de nada quiero advertir que el mIRC es un programa que evoluciona a mucha velocidad, cada pocos mese sale una nueva versi&oacute;n mejorada. Cada nuevo mIRC incorpora nuevo comandos que pueden ser muy &uacute;tiles, por lo que, cada vez que adquiramos uno nuevo, conviene mirar en la ayuda la lista de comando que trae. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Empezamos:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<B><P ALIGN="JUSTIFY">/amsg {mensaje} y /ame </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;an el mensaje o la acci&oacute;n especificada a todos los canales en los que nos encontramos.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/away [away mesaje]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Deja un mensaje explicando que en ese momento no estamos prestando atenci&oacute;n a IRC. Cada vez que un usuario nos env&iacute;e un /msg o realice un /whois con nosotros, &eacute;ste ver&aacute; autom&aacute;ticamente cualquier mensaje que insertemos. Utilizar AWAY sin par&aacute;metros indica que ya no estamos fuera.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/ban [#nombre_canal] {apodo} [tipo] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Censura a un usuario en el canal mediante la utilizaci&oacute;n de su direcci&oacute;n, impidi&eacute;ndole entrar de nuevo. Para hacerlo ejecuta un /whois para conseguir la direcci&oacute;n y despu&eacute;s realiza:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">            /mode # +b {direcci&oacute;n del usuario} </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Existen cuatro tipos de censura. Si nos encontramos en el canal, no ser&aacute; necesaria la especificaci&oacute;n #nombre_canal. </P>
+<P ALIGN="JUSTIFY"></P>
+<P>Los tipos aplicables son los siguientes:</P>
+
+<P>0: *!User ID@host.dominio</P>
+<P>1: *!* User ID@host.dominio</P>
+<P>2: *!*@host.dominio</P>
+<P>3: *!* User ID@*.dominio</P>
+<P>4: *!*@*.dominio</P>
+<P>5: nick! User ID@host.dominio</P>
+<P>6: nick!* User ID@host.dominio</P>
+<P>7: nick!*@host.dominio</P>
+<P>8: nick!* User ID@*.dominio</P>
+<P>9: nick!*@*.dominio</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">       Por defecto: nick!*users@host.domain </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       NOTA: Este comando utiliza La Lista Interna de Direcciones conservada por mIRC. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/beep {numero} {retraso} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Emite pitidos un n&uacute;mero de veces con un retraso. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/channel </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Hace surgir la ventana central del canal (s&oacute;lo funciona en un canal). </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/clear </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Borra toda la memoria intermedia de desplazamiento en la ventana en la que estamos. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/close [-icfgms] [nick1] ... [nickN]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Cierra todas las ventanas del tipo y nick especificados. Si no se especifica nick se cerrar&aacute;n todas las ventanas existentes del tipo o tipos especificados. Los tipos son: </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">c</B> para chat</P>
+<B><P ALIGN="JUSTIFY">f </B>para fserve</P>
+<B><P ALIGN="JUSTIFY">g</B> para get</P>
+<B><P ALIGN="JUSTIFY">i </B>para inactive dcc windows</P>
+<B><P ALIGN="JUSTIFY">m</B> para query</P>
+<B><P ALIGN="JUSTIFY">s</B> para send.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El siguiente ejemplo cierra las ventanas de chat y fserve abiertas con el usuario pepe:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                              /close -cf pepe</P>
+<P ALIGN="JUSTIFY"></P>
+</I><B><P ALIGN="JUSTIFY">/closemsg [nick] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Cierra la ventana de query especificada, &uacute;til en comandos remotos. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/creq [ask|auto| ignore] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es la l&iacute;nea de comandos equivalente a la configuraci&oacute;n de los botones de la radio relativa a la demanda de conversaci&oacute;n DCC y que se encuentra en el di&aacute;logo de opciones DCC (v&eacute;ase /sreq a continuaci&oacute;n). </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/ctcpreply {nick} {tipo_de_ctcp} [mensaje]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Especifica una respuesta para los requerimientos CTCP del tipo expresado. Por ejemplo:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                 /ctcpreply pepe HELP Llama a los bomberos ;-D.</P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/dcc send </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Puede adoptar m&uacute;ltiples nombres de ficheros, el formato es: </P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                              /dcc send {nick} {fichero1} {fichero2} {fichero3}....{ficheroN}</I> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Iniciar&aacute; m&uacute;ltiples sesiones de env&iacute;o al usuario especificado. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/dde [-r] {service} {topic} {item} [data] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite enviar informaci&oacute;n a otras aplicaciones. Est&aacute; explicado mejor en Control DDE. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/disconnect </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Obliga al usuario de forma dura e inmediata a desconectarse del servidor. Este es diferente al comando /quit, el cual env&iacute;a un mensaje de despedida al servidor y espera a que &eacute;ste desconecte al usuario. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/dns &lt;nick/direcci&oacute;n&gt; </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Se utiliza para resolver direcciones. Si mIRC ve un "." en el nombre que hemos especificado, asume que es una direcci&oacute;n e intentar&aacute; resolverla. De lo contrario, asumir&aacute; que es un apodo y realizar&aacute; un /whois para averiguar su direcci&oacute;n y posteriomente resolverla. Si le damos una direcci&oacute;n IP, buscar&aacute; el nombre del residente. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/echo [color] [#canal] {texto} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Imprime el texto especificado la ventana #channel, utilizando el color especificado (del 1 al 7). Observe que s&oacute;lo es impreso, ya que no es enviado al servidor. Probablemente es utilizado como ayuda en el remoto. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/exit </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Obliga a mIRC a desconectar y salir. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/finger &lt;apodo/direcci&oacute;n&gt; </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Realiza un "finger" en un usuario. Si especificamos una direcci&oacute;n, &eacute;sta es se&ntilde;alada inmediatamente y si especificamos un apodo, se busca la direcci&oacute;n del usuario utilizando un /whois y posteriormente es se&ntilde;alada. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/flood [on/of] {n&uacute;mero de l&iacute;neas} {segundos} {tiempo de pausa} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es un duro m&eacute;todo de control de flujo. Esto se traduce en: si mIRC ha enviado a un servidor un determinado n&uacute;mero de l&iacute;neas en un intervalo especifico de segundos, evite que mIRC env&iacute;e las contestaciones que son iniciadas remotamente, es decir, por otro usuario (como es el caso de una contestaci&oacute;n de versi&oacute;n). mIRC no responder&aacute; a las demandas del usuario durante el tiempo especificado. Por ejemplo:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                              /flood 10 5 3 </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Si mIRC ha enviado 10 l&iacute;neas en los &uacute;ltimos cinco segundos, evita cualquier env&iacute;o posterior al servidor durante tres segundos. Podr&aacute; seguir trabajando con mIRC con normalidad, pero cualquier contestaci&oacute;n que sea solicitada por otro usuario no ser&aacute; reconocida. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/font </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Activa la aparici&oacute;n del di&aacute;logo de fuentes en la ventana en la que estamos. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/fsend [on/off] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite conectar o desconectar el DCC fast send. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/fserve </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Inicia una sesi&oacute;n con el servidor de ficheros para otro usuario, utilizando un DCC Chat con el usuario especificado. Debemos insertar un directorio elaborado por nosotros. El usuario estar&aacute; limitado a acceder s&oacute;lo a los ficheros y directorios que se encuentran en dicho directorio.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                        /fserve {nick} {maxgets} {directorio_inicio} {Fichero_de_texto_de_bienvenida} </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Los maxgets son el m&aacute;ximo n&uacute;mero de DCC gets simult&aacute;neos que el usuario puede tener durante una sesi&oacute;n del servidor de ficheros. El fichero de bienvenida es el texto enviado al usuario cuando se conecta por primera vez. Por ejemplo: </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                     /fserve pepe 5 c:/users instrucciones.txt</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Esta l&iacute;nea iniciar&aacute; una sesi&oacute;n del servidor con el usuario pepe, accediendo &eacute;ste al directorio c:/users, y enviar&aacute; a pepe el texto en el fichero instrucciones.txt. El usuario s&oacute;lo puede tener 5 gets simult&aacute;neos, es decir, s&oacute;lo puede recibir 5 textos simult&aacute;neamente. En cada directorio podemos colocar un fichero dirinfo.srv, que describe ese directorio. Cada vez que un usuario realice un CD para cambiar de directorio, mIRC buscar&aacute; este fichero, y si lo encuentra, el texto que hay en su interior ser&aacute; enviado al usuario. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Los comandos principales que est&aacute;n a disposici&oacute;n del usuario, una vez conectado, son: cd (cambio de directorio), ls (listar directorio), get (recibir fichero via DCC). Todos los comandos disponibles han sido enormemente limitados con la esperanza de que puedan evitar una violaci&oacute;n de seguridad.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Si un usuario se ha retrasado demasiado, el servidor cerrar  autom&aacute;ticamente la conexi&oacute;n. Podemos instalar el tiempo de retraso en el di&aacute;logo de Opciones DCC. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/goto {name}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Se usa en definiciones de scripts para producir un salto incondicional a un punto difernete del script.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/help </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos muestra la secci&oacute;n de Comandos b&aacute;sicos de IRC en el fichero help de mIRC. Tambi&eacute;n podemos ejecutar un /help palabra_clave , y si esta palabra coincide con un t&oacute;pico de ayuda podremos acceder a &eacute;l. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">       /identd [on/off] [userid]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Activa o desactiva la opci&oacute;n Ident Server del Setup. Puede especificarse el USER ID deseado.</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/ignore {nick} [type]</B> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite ignorar los mensajes procedentes de un apodo especificado. Si no especificamos un type, s&oacute;lo ser&aacute; ignorado el apodo del usuario, pero si lo hacemos, la direcci&oacute;n ser&aacute; buscada mediante un /whois y todos los mensajes procedentes de esta direcci&oacute;n ser&aacute;n ignorados. El type coincide con las m&aacute;scaras del comando /ban. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/Invite {nick} {#canal}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Invita a otro usuario al canal. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/join {#canal}</P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">       Se une al canal especificado. Ej. <I>/join #irchelp</P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/kick {#canal} {nick}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Expulsa, sin restricciones, a un usuario de un canal especificado (solo para OP). /kick #gb pepe</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/list [#string] [-MIN #] [-MAX #]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Clasifica los canales disponibles . Tambi&eacute;n podemos ordenar a mIRC que nos muestre s&oacute;lo los canal es que tengan un n&uacute;mero m&iacute;nimo y m&aacute;ximo de usuarios. Si especificamos una #string (serie), mIRC s&oacute;lo realizar&aacute; una lista de los canales con esa serie en su t&iacute;tulo . </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Ejemplos<I>: /list</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       /list -min 5 -max 20</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       /list #love</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       /link</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Presenta el la pantalla de status la lista de servidores conectados a la red de IRC en la que nos encontramos:</P>
+
+<B><P>/load &lt;-apuce) {fili.ini} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es la l&iacute;nea de comandos equivalente al bot&oacute;n Load de los di&aacute;logos de alias, men&uacute;s emergentes y remotos:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">a</B>=aliases</P>
+<B><P ALIGN="JUSTIFY">p</B>=popups</P>
+<B><P ALIGN="JUSTIFY">u</B>= usuarios</P>
+<B><P ALIGN="JUSTIFY">c</B>= comandos </P>
+<B><P ALIGN="JUSTIFY">e</B>=eventos. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por ejemplo, si deseamos cargar los alias desde un fichero, har&iacute;amos:</P>
+<P ALIGN="JUSTIFY">       &#9;&#9;&#9;<I>/load -a aliases2.ini </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">NOTA: S&oacute;lo podemos remitirnos a una secci&oacute;n de una vez, no podemos hacer: </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                            /load -uce some.ini. </P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/log {on/off} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite conectar o desconectar la grabacion "log" en una ventana.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/me {mensaje}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Comunica al canal actual o a la ventana de consulta lo que estamos haciendo. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/mode {#canal/nick [[+/-] modo [par&aacute;metros]]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Este es un comando poderoso que nos da gran control sobre los usuarios y el canal. Requiere el estatus de operador. La utilizaci&oacute;n del signo + o - equivale a la aplicaci&oacute;n o retirada de los efectos del modo que se pone a continuaci&oacute;n.</P>
+
+<p align=justify>
+<B><P>Modos para el canal: </P>
+<I>
+<P>b {nick}</B></I> Censura a un usuario, equivale al comando /ban. La censura se extiende tanto al nick como al resto de la direcci&oacute;n del usuario.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">            <I>i</B></I> Hace el canal s&oacute;lo para invitados. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B><I>1 {n&uacute;mero}</B></I> El canal es limitado a un n&uacute;mero m&aacute;ximo de usuarios.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">           <B> m</B></I> El canal es moderado (s&oacute;lo los operadores pueden hablar) </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B><I>n</B></I> Mensajes externos al canal no est&aacute;n permitidos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>o {nick}</B> Convierte al apodo en operador de canal </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>p </B>El canal es privado </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>s</B> El canal es secreto </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>t </B>El t&oacute;pico es limitado, s&oacute;lo los operadores pueden cambiarlo. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">            k {clave}</B> Instala una clave secreta para el canal.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Modos del usuario </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>i</B> Nos hace invisibles ante un usuario que no conozca las letras exactas de nuestro apodo </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>o </B>Es el estatus de operador de IRC, s&oacute;lo puede ser insertado por otros operadores con OPER </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">            <B>s</B> Recibe las noticias del servidor </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">            v</B> Proporciona voz a un usuario en un canal moderado. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/msg {nick} {mensaje}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;a un mensaje privado a este usuario sin abrir una ventana de consultas . </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/nick {nickname}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Cambia nuestro apodo por otro que deseemos . </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/notify [-ar] {nickname} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       A&ntilde;ade o elimina de la lista de notificaci&oacute;n o de usuarios un apodo/nick especificado. Podemos utilizar los conectores [-sh] para representar u ocultar la ventana de notificaci&oacute;n. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/omsg [#canal] {mensaje} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Manda un mensaje a todos los operadores de un canal. Solo lo podr&aacute;n ver los ops.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/onotice {mensaje}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;an el mensaje especificado a todos los operadores de un canal. Es necesario ser un operador para usar estos comandos. Si no se especifica el canal, entonces se utilizar&aacute; el canal activo. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/Part {#canal}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Abandona un canal. Ej. /part #irchelp. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/partall </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Divide todos los canales en los que nos encontramos. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/protect [-ar] nickname </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       A&ntilde;ade o elimina de la lista de protecci&oacute;n el apodo especificado. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/play [-c pq=m=rl=t=] [canal/nick] {nombre del fichero} [delay] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es un comando poderoso que nos permite enviar ficheros de textos, o partes de ellos, a un usuario o a un canal. El [delay] se valora en milisegundos. Si un usuario env&iacute;a los ficheros a un servidor con demasiada rapidez, probablemente ser&aacute; desconectado por flood. La configuraci&oacute;n por defecto es lOOO. Las l&iacute;neas vac&iacute;as que se encuentren en un texto ser&aacute;n consideradas como un retraso. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                        <I>/play c /text/mypoem.txt 1500 </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -c obliga a mIRC a interpretar las l&iacute;neas como verdaderos comandos en lugar de un simple texto. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El comando /play forma una cola con las peticiones de los usuarios. Esto se debe a que si el comando intentara enviar todas las peticiones al mismo tiempo, el usuario podr&iacute;a ser desconectado del servidor por flood. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El interruptor -p indica que esta petici&oacute;n es prioritaria y por tanto deber&iacute;a ser colocada a la cabeza de la cola para su env&iacute;o inmediato. La petici&oacute;n en activo ser&aacute; detenida y reanudada posteriormente una vez que la de prioridad haya finalizado. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El interruptor -q= especifica el n&uacute;mero m&aacute;ximo de demandas que pueden estar en la cola. Si su longitud es mayor o igual  que el n&uacute;mero especificado, la demanda de env&iacute;o ser&aacute; ignorada. /play -q5 c:/text/info.txt 1000 </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El interruptor -m= limita el n&uacute;mero de peticiones que pueden ser insertadas en la cola por un usuario o canal espec&iacute;ficos. Si &eacute;stos se exceden o ya tienen el n&uacute;mero acordado de peticiones, entonces la demanda de env&iacute;o ser  ignorada. </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                           /play -ml info.txt 1000 </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Esta l&iacute;nea limita a cada usuario a un m&aacute;ximo de una petici&oacute;n de una vez e ignora las dem&aacute;s. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">NOTA: Los conectores -q y -m s&oacute;lo se aplican a un /play iniciado a trav&eacute;s de una definici&oacute;n remota, que no es especificada por usted. Para combinar los conectores anteriores, har&iacute;amos: /play -cpq5ml info.txt 1000 </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -r nos obliga a escoger aleatoriamente una l&iacute;nea individual de un fichero para enviarla. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                           <I>/play -r action.txt 1500 </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -I# nos obliga a leer un n&uacute;mero de l&iacute;neas especificado para su env&iacute;o. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                          <I>/play -125 witty.txt 1500 </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Tanto para -r como para - I#, la primera l&iacute;nea del fichero debe ser un solo n&uacute;mero que especifique la cantidad de l&iacute;neas que hay en su interior </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -t obliga a mIRC a buscar en el fichero el t&oacute;pico especificado y a enviar todas las l&iacute;neas bajo ese t&oacute;pico. Por ejemplo: /play - thelp1 c:/help.txt En el fichero help.txt tendr&iacute;amos : [help1] l&iacute;neal l&iacute;nea2 l&iacute;nea3 [help2].... </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       MIRC enviar&aacute;  todo aquello que se encuentre despu&eacute;s de help1 y se detendr&aacute; cuando llegue al siguiente t&oacute;pico o al final del fichero. Tambi&eacute;n podemos utilizar en los comandos los identificadores $nick y $chan para identificar el apodo o canal al que realizamos el env&iacute;o. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/pop &lt;retraso&gt; [#channel] &lt;apodo&gt; </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Ejecuta un Op retrasado en un apodo. El prop&oacute;sito de este comando es el de evitar que la ventana del canal est&eacute;‚ atestada de cambios de modo Op en los casos en que varios usuarios tengan el mismo apodo en su secci&oacute;n auto-op. MIRC se detendr&aacute; en los segundos de retraso antes de ejecutar Op. Si &lt;retraso&gt; es cero, realiza un Op inmediato. Antes de ejecutar Op, verifica si el usuario ya ha sido operado. Si no especificamos el #channel, el canal en activo ser  el que se asuma. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/query nickname message</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Abre una ventana de consulta a este usuario para enviarle un mensaje privado. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/quit [raz&oacute;n]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos desconecta de IRC y env&iacute;a el mensaje opcional como el motivo de nuestra partida. (Este mensaje s&oacute;lo es enviado a las personas que se encuentran en los mismos canales que nosotros). </P>
+<P ALIGN="JUSTIFY">Ejemplo: /quit Hasta luego amigos!!</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/raw [-q] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;a los par&aacute;metros que hemos insertado directamente al servidor. Es imprescindible conocer el formato correcto raw del comando que estamos enviando. Es &uacute;til para mandar comandos que mIRC a&uacute;n no ha ejecutado. El conector -q realiza este trabajo tranquilamente sin imprimir lo que est&aacute; enviando. </P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                    /raw PRIVMSG nickname :Hellooo there!</I> </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/remini {fichero.ini} {seci&oacute;n} [palabra]</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Este comando borrar&aacute; una seccion especificada de un ficheo .INI (una secci&oacute;n es un bloque de l&iacute;neas encabezado por un t&iacute;tulo entre corchetes). Opcionalmente podemos poner una palabra, en este caso solo se borrar&aacute;n todas las ocurrencias de esa palabra.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       PRECAUCION: no use este comando para modificar ficheros .INI que se encuentren en uso.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/remove {fichero}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Se borrar&aacute; el fichero especificado.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/run {fichero_de_programa} [par&aacute;metros] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite ejecutar el programa especificado con par&aacute;metros. Por ejemplo:</P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                   /ftp /run c:/comms/ftp/ftp.exe sunsite.unc.edu</I> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Este ejecuta el programa ftp con los par&aacute;metros sunsite.unc.edu /edit/run notepad .exe $? Este nos pide un par&aacute;metro y ejecuta notepad utilizando el par&aacute;metro como el nombre del fichero. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/savebuf [n] {window} {fichero}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Salva en un fichero las n &uacute;ltimas l&iacute;neas de una ventana especificada, o bien el rango de l&iacute;neas que se marque. Por ejemplo:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                       <I>/savebuf 20 #ayuda_irc copias.sav</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                       /savebuf 10-15 status copias.sav</P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/save {-apuce} {file.ini} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es la l&iacute;nea de comandos equivalente al bot&oacute;n SAVE TO en los di&aacute;logos de alias, men&uacute;s emergentes y remotos, y es utilizado para salvar la secci&oacute;n especificada, en la que:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">a</B>= alias</P>
+<B><P ALIGN="JUSTIFY">p</B>= popups (men&uacute;s emergentes)</P>
+<B><P ALIGN="JUSTIFY">u</B>= usuarios</P>
+<B><P ALIGN="JUSTIFY">c</B>=comandos</P>
+<B><P ALIGN="JUSTIFY">e</B>= eventos.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por ejemplo, si dese&aacute;ramos salvar los alias en un fichero, har&iacute;amos: </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                            /save -a aliases.ini </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P>NOTA: S&oacute;lo podemos referirnos a una secci&oacute;n de una vez, de forma que no podemos ejecutar:</P><DIR>
+<DIR>
+
+<P> <I>/save -uce some.ini. </P>
+</I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<B><P ALIGN="JUSTIFY">/say {mensaje} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite definir un alias que se escribe directamente en un canal como si estuvi&eacute;ramos diciendo algo. As&iacute; que, /say Hello there ser&iacute;a lo mismo que teclear "Hello there ". Es &uacute;til en el caso de un alias cuando queremos hacerle la misma pregunta (o enviar la misma informaci&oacute;n) una y otra vez. /info /say "Por favor tenga en cuenta que el servidor de juegos est&aacute; desconectado en estos momentos y estar&aacute; fuera de l&iacute;nea durante unas horas..."</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">NOTA: Usted no puede utilizar este comando en la secci&oacute;n remota, en su lugar use:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                          /msg {#canal} {mensaje} </P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/server {servidor} [puerto] [palabra clave] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos conecta a un servidor. </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                                    /server irc.arrakis.es 6667 password  (si es que tiene clave)</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Si tecleamos /server sin par&aacute;metros, mIRC conectar&aacute; al &uacute;ltimo servidor que utilizamos. Si usamos el comando mientras estemos conectados, seremos desactivados al recibir el mensaje de abandono y seguidamente seremos conectados al servidor especificado. Tambi&eacute;n podemos utilizar /server N que se conecta al servidor N, situado en la lista de servidores del di&aacute;logo de configuraci&oacute;n. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/set {%variable} {valor}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Se usa en definiciones de scripts para crear y asignar valores a variables. Las variables deber de ir precedidas por el signo %. Este valor se puede eliminar con el comando /unset {variable}</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/speak {texto}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;a el texto especificado al mon&oacute;logo, que es un programa que lee cualquier texto que se le env&iacute;e. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/sound [apodo/canal] {fichero} {mensaje} </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Env&iacute;a una demanda de sonido a otro usuario. V&eacute;ase el di&aacute;logo de Opciones de Sonido del manual para mayor informaci&oacute;n. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/sreq [ask/auto/ignore] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Es la l&iacute;nea de comandos que equivale a la configuraci&oacute;n de los botones de la radio para solicitar un DCC Send y que se encuentra en el di&aacute;logo de opciones DCC (v&eacute;ase /creq arriba) </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/timer </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Activa el temporizador especificado para ejecutar un comando en un intervalo determinado, y opcionalmente en un tiempo especificado. El formato es: </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                          <I>/timer[N] [tiempo] {repeticiones} {intervalo de segundos} {comandos} </P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">       Por ejemplo:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                                        <I> /timer1 0 20/ame is AWAY! </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Timer1 repetir&aacute; una acci&oacute;n en todo el canal, cada 20 segundos, hasta que detengamos el temporizador.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Timer5 repetir&aacute; este mensaje a channel#games cada 60 segundos y se detendr&aacute;  despu&eacute;s de 10 veces: </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">                            /timer9 14:30 1 1 /say it's now 2:30 pm (son las 2:30 de la tarde)</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Esperarar hasta las 2:30 y entonces anunciar&aacute;  la hora una vez y se parar&aacute;. Para ver la lista de los temporizadores activos, teclee /timers off. Para desactivarlos todos, teclee: /timers off. Si estamos activando un nuevo temporizador, no necesitamos especificar el n&uacute;mero del mismo, simplemente hacemos lo siguiente: </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">                          <I>        /timer 10 20 /ame I m not here! (No estoy aqu¡) </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Y mIRC a&ntilde;adir&aacute;  a este comando el primer temporizador libre que encuentre. Una vez que los identificadores han sido usados en un comando /timer, podemos reevaluarlos utilizando el formato $me o $time. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/timestamp [on/off] </P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">       Activa o desactiva la impresi&oacute;n de sucesos. Intenta imprimir la mayor&iacute;a de los eventos que se producen. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/titlebar &lt;texto&gt;</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Presenta el texto especificado en la barra de t&iacute;tulo del mIRC.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/topic {#canal} {new_topic}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Cambia el t&oacute;pico del canal.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/url[-d] [on/off/hide] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Sobreimpresiona la ventana de listas de URL. Si especificamos el par&aacute;metro -d , todas las opciones marcadas con "?" ser&aacute;n eliminadas antes de que aparezca la ventana. Tambi&eacute;n podemos usar [on|off] para activar o desactivar la recepci&oacute;n de URL y [hide] para ocultar la ventana si &eacute;sta ya ha aparecido. V&eacute;ase Opciones de Receptor de URL para otras aplicaciones. </P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/uwho {nick} </P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">       Sobreimpresiona la ventana de un usuario, en la que se muestra informaci&oacute;n sobre &eacute;l. Se trata de la misma informaci&oacute;n que obtendr&iacute;amos si ejecut&aacute;ramos un /whois nickname. Es posible construir una lista de los apodos con su nombre real asociado y su direcci&oacute;n de m&aacute;quina.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/whois {nick}</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Muestra informaci&oacute;n sobre alguien. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/whowas &lt;nickname&gt;</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Muestra informaci&oacute;n de alguien que dej&oacute;, desconect&oacute;, el IRC recientemente.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/write [-cid Y#] {nombre del fichero} [texto] </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Nos permite escribir l&iacute;neas en un fichero. /write store.txt Esta l&iacute;nea ser&aacute;  a&ntilde;adida al fichero "store.txt". El conector -c borra el fichero completamente antes de esribir en &eacute;l; es decir, nos permite hacer borr&oacute;n y cuenta nueva. /write -c c:/info.txt Este fichero ser&aacute; borrado y tendr&aacute; esta l&iacute;nea escrita. El conector -I# especifica el n&uacute;mero de l&iacute;neas en las que se va a escribir el texto. si no lo insertamos, la l&iacute;nea ser&aacute; a&ntilde;adida al final del fichero. /write -I5 c:/info.txt Esta l&iacute;nea sobreescribir&aacute; la l&iacute;nea 5 en el fichero. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -i indica que el texto deber&iacute;a ser insertado en la l&iacute;nea especificada en lugar de sobreescribirla. Si no especificamos ning&uacute;n texto, una l&iacute;nea en blanco ser&aacute; insertada, y si no especificamos el n&uacute;mero de l&iacute;nea, una en blancoser&aacute; a&ntilde;adida al final del fichero. </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">                                            /write -iI5 c:/info.txt </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Esta l&iacute;nea ser&aacute; insertada en la l&iacute;nea 5 del fichero. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       El conector -d elimina una l&iacute;nea del fichero. si no especificamos el n&uacute;mero de la l&iacute;nea, la &uacute;ltima del fichero ser&aacute; eliminada.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/write -dI5 c:/info.txt</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Este comando suprimir&aacute; la l&iacute;nea 5. Si no especificamos ning&uacute;n interruptor, el texto ser  a&ntilde;adido al final del fichero.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">/writeini &lt;nombre del fichero&gt; &lt;section&gt; &lt;item&gt; &lt;valor&gt; </P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">       Escribe informaci&oacute;n en un fichero .ini </P></FONT></BODY>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

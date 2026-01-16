@@ -1,0 +1,802 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 4<br>
+Interacci&oacute;n. Dispositivos de entrada..
+</H3>
+<P ALIGN=JUSTIFY>
+Ya lo s&eacute;...¡¡¡¡ya lo s&eacute;!!!!...ex&aacute;menes y m&aacute;s
+ex&aacute;menes...pero ahora ha llegado el momento de relajarnos totalmente
+y qu&eacute; mejor que.....¡¡¡¡el curso de gr&aacute;ficos!!!!...claro si es
+que lo teni&aacute;is en la punta de la lengua ¿¿¿verdad???...pu&eacute;s
+vamos a ello.
+<P ALIGN=JUSTIFY>En la pasada edici&oacute;n de la revista coment&eacute; ampliamente
+un programa de ejemplo. Esto nos sirvi&oacute; para familiarizarnos con
+la forma de la funci&oacute;n MAIN en OpenGL, as&iacute; como con diversas
+funciones de GLUT. Hablaremos a&uacute;n m&aacute;s de &eacute;ste &uacute;ltimo
+en relaci&oacute;n con lo que se llama "<B>programaci&oacute;n orientada
+al evento</B>" ( &iquest;os suena a los usuarios de Power Builder, Visual
+Basic o Delphi?...¡¡¡si si es que va por ah&iacute;!!! ).
+
+<P ALIGN=JUSTIFY>Si quer&eacute;is ir haciendo "boca" pasaros por el manual de la API
+de GLUT <A HREF="http://reality.sgi.com/opengl/spec3/spec3.html">aqu&iacute;</A>.
+
+<P ALIGN=JUSTIFY>Permitidme por eso un peque&ntilde;o cambio sobre la marcha. Hablar&eacute;
+de lo mismo que en su d&iacute;a propuse en el temario inicial del curso
+pero lo har&eacute; en otro orden. Empezemos pu&eacute;s:
+
+<h4>Programaci&oacute;n guiada por eventos</h4>
+<P ALIGN=JUSTIFY>Dejadme definirla primero y aplicarla despu&eacute;s a nuestro caso,
+OpenGL.
+
+<P ALIGN=JUSTIFY>Un <B>evento</B> es "<I>algo que el usuario puede hacer</I>" como por
+ejemplo maximizar una ventana, redimensionarla, pulsar el bot&oacute;n
+izquierdo del rat&oacute;n, o usar una determinada combinaci&oacute;n de
+teclas. En todos estos casos deberemos "<I>ejecutar algo de c&oacute;digo</I>"
+dentro de nuestro programa, si es que estaba previsto as&iacute;. Para
+los "<I>m&aacute;s inform&aacute;ticos</I>" dir&eacute; que se trata de
+algo as&iacute; como una interrupci&oacute;n que provoca la ejecuci&oacute;n
+de una determinada rutina cuando se la activa.
+
+<P ALIGN=JUSTIFY>En OpenGL, y gracias a GLUT, se le permite al usuario "<I>jugar</I>"
+pulsando botones del rat&oacute;n, movi&eacute;ndolo por la pantalla, apretando
+teclas, cambiando la ventana de la aplicaci&oacute;n. Cada vez que &eacute;ste
+provoque alguno de estos eventos deberemos llamar a una determinada rutina
+o funci&oacute;n para que se haga cargo de la acci&oacute;n a tomar.
+
+<P ALIGN=JUSTIFY>Las m&aacute;s comunes funciones que OpenGL llama autom&aacute;ticamente
+al detectar uno de estos eventos son:
+<UL>
+<LI>
+<B>glutMouseFunc( </B>funci&oacute;n de control eventos con el rat&oacute;n<B>
+);</B></LI>
+
+<LI>
+<B>glutMotionFunc(</B> funci&oacute;n de control eventos de movimiento
+del rat&oacute;n<B> );</B></LI>
+
+<LI>
+<B>glutReshapeFunc( </B>funci&oacute;n de control del cambio de tama&ntilde;o
+de la ventana de visualizaci&oacute;n<B> );</B></LI>
+
+<LI>
+<B>glutKeyboardFunc( </B>funci&oacute;n de control eventos con el teclado<B>
+);</B></LI>
+
+<LI>
+<B>glutDisplayFunc(</B> funci&oacute;n de control del render<B> );</B></LI>
+
+<LI>
+<B>glutIdleFunc( </B>funci&oacute;n que se activa cuando no hacemos NADA<B>
+);</B></LI>
+</UL>
+Son las llamadas "<I>Callbacks</I>" o funciones controladoras de eventos.
+
+<P ALIGN=JUSTIFY>Analizemos algunos casos:
+<h4>El rat&oacute;n</h4><P ALIGN=JUSTIFY>
+Lo m&aacute;s normal es querer controlar lo que debe hacerse cuando
+el usuario pulsa uno de sus botones. Si definimos lo siguiente en la funci&oacute;n
+MAIN de nuestro programa...
+
+<P ALIGN=JUSTIFY><B>glutMouseFunc( ControlRaton );</B>
+
+<P ALIGN=JUSTIFY>OpenGL entiende que cada vez que se pulse uno de los botones del rat&oacute;n
+debe llamar a una rutina llamada <B>ControlRaton</B>, que por supuesto
+tenemos que crear y definir nosotros mismos. Lo haremos de esta forma:
+
+<P ALIGN=JUSTIFY><B>void ControlRaton( int button, int state, int x, int y ){</B>
+
+<P ALIGN=JUSTIFY><B>.....................................................</B>
+<BR><B>.....................................................</B>
+<BR><B>&lt;c&oacute;digo que deseemos se ejecute></B>
+<BR><B>.....................................................</B>
+<BR><B>.....................................................</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>donde los par&aacute;metros que la funci&oacute;n nos da (autom&aacute;ticamente
+y sin tener que hacer nada) son los siguientes:
+<UL>
+<LI><p align="justify">
+<B>button</B>, un entero que puede tomar los valores GLUT_LEFT_BUTTON,
+GLUT_MIDDLE_BUTTON o GLUT_RIGHT_BUTTON seg&uacute;n el usuario haya pulsado
+el bot&oacute;n izquierdo, el del medio o el derecho, respectivamente.
+Estas constantes estan predefinidas y podemos usarlas sin problema en nuestro
+c&oacute;digo pues GLUT las interpretar&aacute; correctamente.</LI>
+
+<LI><p align="justify">
+<B>state</B>, puede tomar los valores GLUT_UP o GLUT_DOWN, seg&uacute;n
+si se ha pulsado/soltado el correspondiente bot&oacute;n.</LI>
+
+<LI><p align="justify">
+<B>X</B> e <B>Y</B>, son las coordenadas referidas a la ventana de visualizaci&oacute;n,
+no al mundo virtual, en las que se puls&oacute;/solt&oacute; el susodicho
+bot&oacute;n.</LI>
+</UL>
+Y entonces hacemos lo que queramos con toda esta informaci&oacute;n !!!!
+
+<P ALIGN=JUSTIFY>Es importante aclarar que GLUT espera que los par&aacute;metros sean
+&eacute;stos en el caso de este callback y no otros !!!
+
+<P ALIGN=JUSTIFY>Veamos un ejemplo:
+
+<P ALIGN=JUSTIFY><B>void ControlRaton( int button, int state, int x, int y ){</B>
+
+<P ALIGN=JUSTIFY><B>&nbsp;&nbsp;&nbsp; if (button==GLUT_LEFT_BUTTON &amp;&amp; state==GLUT_DOWN){</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf( "Cerramos la
+aplicaci&oacute;n.../n");</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(-1);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>En este caso, cuando el usuario pulse el bot&oacute;n izquierdo del
+rat&oacute;n, sacaremos un mensaje diciendo que se cierra la aplicaci&oacute;n
+y entonces la cerraremos. La funci&oacute;n exit(-1) pertenece a ANSI C,
+no a OpenGL, y provoca el fin de la ejecuci&oacute;n.
+<BR>&iquest;Lo v&aacute;is viendo m&aacute;s claro?
+
+<P ALIGN=JUSTIFY>En el caso de la funci&oacute;n:
+
+<P ALIGN=JUSTIFY><B>glutMotionFunc( ControlMovimientoRaton );</B>
+
+<P ALIGN=JUSTIFY>GLUT llamar&aacute; a <B>ControlMovimientoRaton </B>a intervalos discretos,
+es decir de tanto en tanto, mientras el rat&oacute;n se est&eacute; moviendo
+por la pantalla. La definimos as&iacute;:
+
+<P ALIGN=JUSTIFY><B>void ControlMovimientoRaton( GLsizei x, GLsizei y ){</B>
+
+<P ALIGN=JUSTIFY><B>.....................................................</B>
+<BR><B>.....................................................</B>
+<BR><B>&lt;c&oacute;digo que deseemos se ejecute></B>
+<BR><B>.....................................................</B>
+<BR><B>.....................................................</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>teniendo en cuenta que <B>X</B> e <B>Y</B> son las coordenadas de pantalla
+por las que el rat&oacute;n est&aacute; pasando. As&iacute; podr&iacute;amos
+usar esta funci&oacute;n para indicar nuestra situaci&oacute;n en pantalla
+de la siguiente forma:
+
+<P ALIGN=JUSTIFY><B>void ControlMovimientoRaton( GLsizei x, GLsizei y ){</B>
+
+<P ALIGN=JUSTIFY><B>&nbsp;&nbsp;&nbsp; printf( "La posici&oacute;n del rat&oacute;n en
+coordenadas de ventana es:/n");</B>
+<BR><B>&nbsp;&nbsp;&nbsp; printf( " X = %f/n", (GLfloat)GLsizei x);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; printf( " Y = %f/n", (GLfloat)GLsizei y);</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>De manera que mientras movemos el rat&oacute;n se imprimen estas tres
+l&iacute;neas en la ventana desde la que hemos ejecutado el programa, una
+ventana de DOS o UNIX (no en la ventana de visualizaci&oacute;n, esa es
+para los gr&aacute;ficos!!!). Y claro, los valores de X e Y se ir&aacute;n
+actualizando seg&uacute;n nos vayamos moviendo ya que se llamar&aacute;
+a <B>ControlMovimientoRaton </B>sucesivamente.
+
+<P ALIGN=JUSTIFY><I>GLsizei</I> es un tipo de variable num&eacute;rica de OpenGL comparable
+a un real. Fijaros en que hago un casting para convertirla en los <I>printf</I>.
+
+<P ALIGN=JUSTIFY>&iquest;Qu&eacute; os parece?
+
+<h4>El teclado</h4>
+
+<P ALIGN=JUSTIFY>El control del teclado se realiza mediante:
+
+<P ALIGN=JUSTIFY><B>glutKeyboardFunc( ControlTeclado );</B>
+
+<P ALIGN=JUSTIFY>esto lo a&ntilde;adimos a nuestra funci&oacute;n de MAIN y entonces
+definimos a parte la funci&oacute;n de control propiamente dicha:
+
+<P ALIGN=JUSTIFY><B>void ControlTeclado( unsigned char key, int x, int y ){</B>
+
+<P ALIGN=JUSTIFY><B>.....................................................</B>
+<BR><B>.....................................................</B>
+<BR><B>&lt;c&oacute;digo que deseemos se ejecute></B>
+<BR><B>.....................................................</B>
+<BR><B>.....................................................</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>Por ejemplo supongamos que podemos "movernos" por nuestro mundo virtual.
+De una forma un tanto simple y primitiva, y asumiendo que el plano del
+suelo se corresponde con Y=0, tendr&iacute;amos una situaci&oacute;n como
+&eacute;sta:<br><br>
+<CENTER><IMG src="gif/art4fig1.gif" ALT="Eventos en OpenGL, figura 1" BORDER=1 HEIGHT=299 WIDTH=446></CENTER>
+
+<br><br>
+<P ALIGN=JUSTIFY>y queremos movernos seg&uacute;n esta tabla de comportamiento:
+<br><br>
+<CENTER><IMG src="gif/art4fig2.gif" ALT="Eventos en OpenGL, figura 2" BORDER=1 HEIGHT=336 WIDTH=429></CENTER>
+<P ALIGN=JUSTIFY>Para implementar este comportamiento necesitamos definir dos variables,
+XPOS y ZPOS, que contienen nuestra posici&oacute;n (X,Z) en el mundo. Tan
+s&oacute;lo tendremos que incrementar/decrementar estas variables seg&uacute;n
+la tecla que el usuario pulse. Por otra parte ser&aacute; la rutina de
+render ( dibujado ) la que nos dibujar&aacute; en otra posici&oacute;n
+seg&uacute;n nos movamos, cuando detecte que XPOS y ZPOS han cambiado.
+&iquest; L&oacute;gico no?
+<P ALIGN=JUSTIFY>Una primera aproximaci&oacute;n medio codificada podr&iacute;a ser algo
+as&iacute;:
+<BR>&nbsp;
+<pre><font face="arial" size=1>/* Definición e inicialización de variables globales */  
+/* Partimos de la posición X=0 y Z=0 en el mundo */  
+
+<b>GLfloat</b> xpos=0, zpos=0;  
+
+/* Rutinas de Render (Dibujado) */   
+<b>void</b> DibujarMundo( ){  
+
+/*  
+........  
+........  
+esta rutina dibujaría todos los polígonos que componen  
+nuestro mundo virtual !  
+........  
+........  
+*/  
+}  
+
+<b>void</b> Dibujar( ){  
+    /* Dibujo el mundo que me rodea */  
+    DibujarMundo( );  
+
+    /* Representaré a mi personaje con una esfera amarilla */  
+    /* Activo el color amarillo */  
+    glColor3f(1.0, 1.0, 0.0);  
+
+    /* Las funciones referidas a matrices que se observan las comentaré   
+    ampliamente en el siguiente capítulo, no os preocupéis por ellas */  
+    glPushMatrix();  
+
+        /* Me trasladó a la posición concreta en el mundo */  
+        glTranslatef(xpos, 0.0, zpos);  
+
+        /* Dibujo una esfera de radio 2 unidades, y dividida en 16 trozos */  
+        glutSolidSphere(2.0, 16, 16);  
+    glPopMatrix();  
+
+    /* Esta función la explico más adelante en este capítulo */  
+    glutSwapBuffers( );  
+}  
+/* Rutina de control del teclado */   
+<b>void</b> ControlTeclado(<b>unsigned char</b> key,<b>int</b> x,<b>int</b> y ){  
+    /* Según la tecla pulsada incremento una u otra variable de movimiento */  
+    <b>switch</b>(key){  
+        <b>case</b> "o":  
+            xpos++;  
+            <B>break</b>;  
+        <B>case</B> "p":  
+            xpos--;  
+            <B>break</B>;  
+        <B>case</B> "q":  
+            zpos++;  
+            <B>break</B>;  
+        <B>case</B> "a":  
+            zpos--;  
+            <B>break</B>;  
+    }  
+    /* Le digo a OpenGL que dibuje de nuevo cuando pueda */  
+    glutPostRedisplay( );  
+}  
+/* Función MAIN del programa */   
+<B>int</B> main(<B>int</b> argc, <B>char</b>** argv){  
+    int id;  
+    /* Definición típica de la ventana de visualización */   
+  
+    glutInit(&argc, argv);  
+    glutInitDisplayMode(<B>GLUT_DOUBLE</B> | <B>GLUT_RGB</B> | <B>GLUT_DEPTH</B>);  
+    glutInitWindowSize(500, 500);  
+    glutInitWindowPosition(0, 0);  
+    id=glutCreateWindow("Ejemplo de control de movimiento");  
+    /* Definición de los Callbacks que controlaremos */  
+    /* Cuando haya que dibujar llamaré a ... */  
+    glutDisplayFunc(Dibujar);  
+    /* Cuando el usuario pulse una tecla llamaré a ... */  
+    glutKeyboardFunc(ControlTeclado);  
+    /* Cuando no esté haciendo nada también dibujaré ... */  
+    glutIdleFunc(Dibujar);  
+    glutMainLoop( );  
+  
+    <B>return</B> 0;  
+} 
+</font></pre>
+
+
+&nbsp;<P ALIGN=JUSTIFY><FONT color ="#000000" SIZE=2 face="arial">
+<BR>Una cuesti&oacute;n importante. Al iniciar el programa, OpenGL ejecuta
+la funci&oacute;n Dibujar, es decir renderiza por defecto. Cuidado porque
+despu&eacute;s tenemos que forzar nosotros que se dibuje de nuevo. En nuestro
+caso obligamos a OpenGL a dibujar cuando se pulsa una tecla, con <I>glutPostRedisplay(
+);</I>. Tambi&eacute;n le obligamos cuando nada est&eacute; pasando, es
+decir cuando el usuario no pulse nada. En ese caso se llamar&aacute; a
+la funci&oacute;n indicada por <I>glutIdleFunc</I>, que es precisamente
+<I>Dibujar( );</I> !!!!!
+
+<P ALIGN=JUSTIFY>Quisiera que todos/as hicierais el esfuerzo de entender este peque&ntilde;o
+ejemplo a la perfecci&oacute;n. Si ten&eacute;is dudas ya sab&eacute;is,
+mi direcci&oacute;n de Email est&aacute; por ah&iacute; !!!
+
+<h4>La ventana ( Window )</h4>
+
+<P ALIGN=JUSTIFY>El evento m&aacute;s importante que puede darse en nuestra ventana de
+visualizaci&oacute;n es un <B>cambio de tama&ntilde;o</B>, es decir un
+<I>Reshape</I>. Para controlarlo deberemos usar:
+
+<P ALIGN=JUSTIFY><B>glutReshapeFunc( ControlVentana );</B>
+
+<P ALIGN=JUSTIFY>que como siempre a&ntilde;adimos a nuestra funci&oacute;n MAIN. Falta
+definir la funci&oacute;n de control:
+
+<P ALIGN=JUSTIFY><B>void ControlVentana( GLsizei w, GLsizei h ){</B>
+
+<P ALIGN=JUSTIFY><B>.....................................................</B>
+<BR><B>.....................................................</B>
+<BR><B>&lt;c&oacute;digo que deseemos se ejecute></B>
+<BR><B>.....................................................</B>
+<BR><B>.....................................................</B>
+
+<P ALIGN=JUSTIFY><B>}</B>
+
+<P ALIGN=JUSTIFY>Los par&aacute;metros que nos llegan a la funci&oacute;n se refieren
+al nuevo ANCHO ( Width, w) y al nuevo ALTO ( Height, h ) de la ventana
+tras ser redimensionada por el usuario.
+
+<P ALIGN=JUSTIFY>En esta funci&oacute;n deberemos asegurarnos de que la imagen no se
+distorsione, de si cambiamos o no el tama&ntilde;o de lo que contiene seg&uacute;n
+sus nuevas medidas, de si dibujamos todos los pol&iacute;gonos o por contra
+recortamos una parte...
+
+<P ALIGN=JUSTIFY>Todos estos casos ya dependen de la aplicaci&oacute;n en concreto.
+
+<h4>&iquest; Qu&eacute; es MUI ?<IMG src="gif/art4fig3.gif" ALT="libreria MUI" HEIGHT=40 WIDTH=37 ALIGN=ABSCENTER></h4>
+
+<P ALIGN=JUSTIFY>Un trabajador de SGI ( Silicon Graphics ) llamado Tom Davis codific&oacute;
+una peque&ntilde;a librer&iacute;a a partir de GLUT llamada MUI (Micro
+User Interface). Lo hizo para usarla &eacute;l mismo en un proyecto interno
+de empresa pero dada su facilidad y versatilidad de uso la incluy&oacute;
+de forma totalmente gratuita con GLUT.
+
+<P ALIGN=JUSTIFY>Se trata de una serie de funciones que podemos usar f&aacute;cilmente
+para crear ventanas con botones, barras de desplazamiento, casillas de
+selecci&oacute;n y verificaci&oacute;n....todo al estilo Motif/Windows
+que tanto nos gusta y sabemos manejar.
+
+<P ALIGN=JUSTIFY>Esta librer&iacute;a puede obtenerse conjuntamente con GLUT a partir
+de la versi&oacute;n 3.5 de &eacute;ste. Ahora van por la 3.6. Lo pod&eacute;is
+encontrar <A HREF="http://reality.sgi.com/opengl/glut3/glut3.html#windows">aqu&iacute;</A>.
+
+<P ALIGN=JUSTIFY>Es tremendamente sencilla y perfecta para proyectos peque&ntilde;os/medios.
+Para m&aacute;s informaci&oacute;n conectaros <A HREF="http://reality.sgi.com/opengl/tips/mui/mui.html">aqu&iacute;</A>.
+
+<h4>Men&uacute;s</h4>
+
+<P ALIGN=JUSTIFY>GLUT nos permite crear men&uacute;s jer&aacute;rquicos de varios niveles.
+Se activan mediante la presi&oacute;n de uno de los botones del rat&oacute;n,
+el que elijamos (normalmente el derecho), y cuando estemos sobre la ventana
+de visualizaci&oacute;n.
+
+<P ALIGN=JUSTIFY>Si lo que queremos son men&uacute;s que cuelguen de la ventana (t&iacute;picos
+de cualquier aplicaci&oacute;n Windows) deberemos recurrir a algo m&aacute;s
+sofisticado como XWindows, Motif o MUI, que tambi&eacute;n los implementa.
+
+<P ALIGN=JUSTIFY>Vamos a crear un sencillo men&uacute; asociado a la presi&oacute;n del
+bot&oacute;n derecho de nuestro rat&oacute;n. Todo lo haremos desde el
+MAIN del programa:
+
+<P ALIGN=JUSTIFY>Queremos crear este men&uacute;:<br><br>
+<CENTER><IMG src="gif/art4fig4.gif" ALT="Menús en OpenGL" BORDER=1 HEIGHT=164 WIDTH=306></CENTER>
+
+
+<P ALIGN=JUSTIFY>Como v&eacute;is tenemos dos niveles de men&uacute; en la primera opci&oacute;n
+mientras que el resto son opciones de un s&oacute;lo nivel. Esto lo codificar&iacute;amos
+as&iacute;:
+<BR>&nbsp;
+<BR>&nbsp;
+<pre><font size=1 face="arial">/* Funciones de Control del menú seleccionado */  
+/* Se ejecutan cuando el usuario utilize los menús */  
+
+<b>void</b> menu_nivel_2(<b>int</b> identificador){  
+
+    /* Según la opción de 2o nivel activada, ejecutaré una rutina u otra */  
+
+    <b>switch</b>( identificador){  
+        <b>case</b> 0:  
+            ControlVertices( );  
+            <b>break</b>;  
+        <b>case</b> 1:  
+            ControlNormales( );  
+            <b>break</b>;  
+        <b>case</b> 2:  
+            ControlAristas( );  
+            <b>break</b>;  
+    }  
+}  
+
+<b>void</b> menu_nivel_1(<b>int</b> identificador){  
+
+    /* Según la opción de 1er nivel activada, ejecutaré una rutina u otra */  
+
+    switch( identificador){  
+       <b>case</b> 0:  
+            ControlLuces( );  
+            <b>break</b>;  
+       <b>case</b> 1:  
+            ControlColisiones( );  
+            <b>break</b>;  
+       <b>case</b> 2:  
+            ControlSonido( );  
+            <b>break</b>;  
+       <b>case</b> 3:  
+            exit( -1 );  
+    }  
+}  
+
+<b>int</b> main(<b>int</b> argc, <b>char</b>** argv){  
+
+    <b>int</b> submenu, id;  
+
+    /* Definición de la ventana */  
+
+    glutInit(&argc, argv);  
+    glutInitDisplayMode(<b>GLUT_DOUBLE</b>|<b>GLUT_RGB</b>|<b>GLUT_DEPTH</b>);  
+    glutInitWindowSize(500, 500);  
+    glutInitWindowPosition(0, 0);  
+    id=glutCreateWindow("Ventana con menú contextual");  
+
+    /* Creación del menú */  
+    submenu = glutCreateMenu(menu_nivel_2);  
+
+    glutAddMenuEntry("Vértices", 0);  
+    glutAddMenuEntry("Normales", 1);  
+    glutAddMenuEntry("Aristas", 2);  
+    glutCreateMenu(menu_nivel_1);  
+    glutAddSubMenu("Ver", submenu);  
+    glutAddMenuEntry("Luces on/off", 0);  
+    glutAddMenuEntry("Colisiones on/off", 1);  
+    glutAddMenuEntry("Sonido on/off", 2);  
+    glutAddMenuEntry("Salir", 3);  
+    glutAttachMenu(<b>GLUT_RIGHT_BUTTON</b>);  
+    ........  
+    ........  
+    aquí vendrían los callbacks, el Loop, el retorno del entero....lo de siempre!!!  
+    ........  
+    ........  
+}
+</font></pre><FONT color ="#000000" SIZE=2 face="arial">
+<br>
+Las rutinas asociadas a cada opci&oacute;n de men&uacute; no las defino,
+claro. Eso ya depender&iacute;a de la aplicaci&oacute;n. Tan s&oacute;lo
+me interesa la pura creaci&oacute;n del men&uacute; sin importarme las
+acciones que se llevan a cabo si se activa, ok?
+
+<P ALIGN=JUSTIFY>Yo creo que el c&oacute;digo ya se entiende bastante bi&eacute;n de
+por s&iacute; pu&eacute;s es muy l&oacute;gico. Voy a comentarlo un poco.
+
+<P ALIGN=JUSTIFY>Fijaros que con <I>glutCreateMenu</I>, genero un nuevo men&uacute; y
+adem&aacute;s le asocio la rutina que tendr&aacute; que llamarse cuando
+este men&uacute; se active. En el caso del men&uacute; de primer nivel
+se llamar&aacute; a <I>menu_nivel_1</I>, mientras que el men&uacute; de
+segundo nivel llamar&aacute; a <I>menu_nivel_2</I>.
+
+<P ALIGN=JUSTIFY>Al men&uacute; de primer nivel le asociamos 5 posibles opciones a activar
+usando <I>glutAddMenuEntry</I>. La primera, <I>Ver</I>, desplegar&aacute;
+otro men&uacute; mientras que las restantes cuatro deben procesarse en
+<I>menu_nivel_1</I>. Es por eso que a cada opci&oacute;n se le asocia un
+identificador (integer), de manera que en la funci&oacute;n <I>menu_nivel_1</I>
+se hace una cosa u otra dependiendo de este entero. &Eacute;ste nos indica
+que opci&oacute;n se activ&oacute;. Lo controlamos con un Switch de ANSI
+C (analizador de casos posibles).
+
+<P ALIGN=JUSTIFY>Para el men&uacute; de segundo nivel todo es id&eacute;ntico excepto
+que se "engancha" al de primer nivel mediante...
+
+<P ALIGN=JUSTIFY><B>glutAddSubMenu("Ver", submenu);</B>
+
+<P ALIGN=JUSTIFY>que le dice al men&uacute; de primer nivel que la primera de sus opciones
+se llama <I>Ver</I> y debe llamar a un men&uacute; asociado al entero <I>submenu</I>.
+Mirad que este entero lo hemos asociado usando:
+
+<P ALIGN=JUSTIFY><B>submenu = glutCreateMenu(menu_nivel_2);</B>
+
+<P ALIGN=JUSTIFY>y por supuesto este segundo nivel tambi&eacute;n dispone de sus propias
+opciones, creadas de igual manera que antes. Por &uacute;timo le decimos
+a GLUT que este men&uacute; debe asociarse a pulsar el bot&oacute;n derecho
+del rat&oacute;n con:
+
+<P ALIGN=JUSTIFY><B>glutAttachMenu(GLUT_RIGHT_BUTTON);</B>
+
+<P ALIGN=JUSTIFY>Igual que siempre os digo, leedlo detenidamente, pensadlo....si pod&eacute;is
+provadlo...y ya me comentareis que tal !!!......8)
+
+<h4>Arquitectura Cliente-Servidor</h4>
+<P ALIGN=JUSTIFY>En una red contamos con ordenadores <I>servidores</I> (<I>servers</I>)
+que llevan a cabo acciones demandadas por ordenadores <I>clientes</I> (<I>clients</I>).
+Si yo quiero imprimir un documento y la impresora se encuentra f&iacute;sicamente
+ubicada en otro edificio, tendr&eacute; que dialogar usando mi ordenador
+(cliente), con otro ordenador (servidor) para que me permita mandarle mi
+documento y lo imprima por m&iacute;.
+
+<P ALIGN=JUSTIFY>El hecho de contar con diversos servidores y muchos clientes configura
+una <I>red</I> (network) donde todos los esfuerzos se comparten, se <I>distribuyen</I>
+y as&iacute; se consigue un comportamiento &oacute;ptimo, veloz y barato
+!!!
+
+<P ALIGN=JUSTIFY>Una estaci&oacute;n de trabajo que cuente con una pantalla, un teclado,
+un rat&oacute;n ... puede actuar perfectamente como un <I>servidor de gr&aacute;ficos</I>.
+Esta m&aacute;quina nos provee de servicios de salida gr&aacute;fica en
+pantalla, y de entrada gracias al teclado y al rat&oacute;n. Estos servicios
+podr&aacute;n ser requeridos por cualquier cliente que pertenezca a la
+red.
+
+<P ALIGN=JUSTIFY>Nuestras aplicaciones OpenGL son clientes que usan al servidor de gr&aacute;ficos
+para ejecutarse y visualizarse. Pensad que deber&iacute;amos ser siempre
+capaces de ejecutar la misma aplicaci&oacute;n en diferentes servidores
+de la red. Esta es la filosofia interna de trabajo de nuestra querida librer&iacute;a.
+
+<P ALIGN=JUSTIFY>Para la realizaci&oacute;n de grandes producciones cinematogr&aacute;ficas
+plagadas de gr&aacute;ficos (<I>simulaci&oacute;n f&iacute;sica</I>) como
+<I>Titanic</I>, <I>Spawn</I> o <I>Perdidos en el Espacio</I>, se necesitaron
+decenas de ordenadores conectados en paralelo, compartiendo memoria y procesadores,
+y calculando como locos 24 horas al d&iacute;a. Estaciones Silicon, Alpha
+o Sun, sistemas operativos Irix, Motif, Linux... y todo a la vez. Y es
+que la uni&oacute;n hace la fuerza no??
+
+<h4>"Display lists" en OpenGL.</h4>
+
+<P ALIGN=JUSTIFY>Las display lists de OpenGL ilustran muy claramente como podemos utilizar
+la filosofia cliente-servidor para nuestros gr&aacute;ficos.
+
+<P ALIGN=JUSTIFY>Supongamos que tenemos un ordenador dedicado &uacute;nica y exclusivamente
+a dibujar primitivas en el tubo de rayos cat&oacute;dicos (<I>CRT</I>)
+de nuestro monitor. Supongamos que esta m&aacute;quina cuenta con un muy
+limitado juego de instrucciones de programaci&oacute;n que sabe ejecutar.
+Tan s&oacute;lo sabe dibujar lo que le manden. Otro ordenador compila y
+ejecuta el programa, genera unos resultados y le manda las correspondientes
+instrucciones para dibujarlos al <I>Display Processor</I> ( ordenador dedicado
+en exclusiva a renderizar por pantalla ). Estas instrucciones se almacenan
+en una memoria de render (<I>display memory</I>) en forma de fichero/lista
+de primitivas (<I>display file</I> o <I>display list</I>).
+
+<P ALIGN=JUSTIFY>As&iacute; cada vez que le mandemos la display list al display processor,
+&eacute;ste ya se encargar&aacute; de dibujar cuando lo crea conveniente
+y nosotros quedamos libres para dedicarnos a otros quehaceres.
+
+<P ALIGN=JUSTIFY>El display processor mandar&aacute; dibujar la display list a una frecuencia
+lo suficientemente alta como para evitar parpadeo en pantalla, y lo har&aacute;
+solito. As&iacute; nosotros le decimos lo que tiene que dibujar una sola
+vez y &eacute;l ya lo hace repetidamente. &iquest;No os parece que nos
+ahorramos as&iacute; mucho trabajo?
+
+<P ALIGN=JUSTIFY>Fijaros en la figura:<br><br>
+<CENTER><IMG src="gif/art4fig5.gif" ALT="Display Lists en OpenGL" BORDER=1 HEIGHT=345 WIDTH=445></CENTER>
+
+
+<P ALIGN=JUSTIFY>Tal como dec&iacute;a, nosotros asumimos el papel cliente ejecutando
+el programa, generamos una display list con lo que hay que dibujar, se
+lo enviamos a la <I>DPU</I> (<I>Display Processor Unit - Unidad de Proceso
+de Render</I>) y que dibuje!!!
+
+<P ALIGN=JUSTIFY>Hoy por hoy lo que se llamaba DPU se ha sustituido por un ordenador
+servidor de gr&aacute;ficos mientras que lo que en la figura menciono como
+<I>host</I> es nuestro ordenador cliente. Los problemas que nos encontramos
+con esta arquitectura se refieren a la velocidad a la que podemos trabajar,
+ya sabeis que las redes no "corren" a veces a la velocidad que deber&iacute;an.
+Por otra parte y gracias a utilizar hardware espec&iacute;fico gr&aacute;fico,
+conseguimos equilibrar la balanza, al aumentar la velocidad a la que trabajamos.
+
+<P ALIGN=JUSTIFY>Pues bi&eacute;n, usaremos entonces las display lists en OpenGL para
+todo aquello que tengamos que dibujar siempre, de forma cont&iacute;nua,
+y no queramos ir recalculando cada vez. Lo calcularemos al principio, lo
+mandaremos en forma de lista y llamaremos a una funci&oacute;n de tanto
+en tanto para recordarle al servidor que debe dibujar!!!.
+
+<P ALIGN=JUSTIFY>Defino una display list con OpenGL:
+
+<P ALIGN=JUSTIFY><B>glNewList(CUADRADO, GL_COMPILE);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; glBegin(GL_POLYGON);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glColor3f(0.0, 0.0, 1.0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glVertex3f(-10.0, -10.0,
+0.0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glVertex3f(10.0, -10.0,
+0.0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glVertex3f(10.0, 10.0,
+0.0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; glVertex3f(-10.0, 10.0,
+0.0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; glEnd( );</B>
+<BR><B>glEndList( );</B>
+
+<P ALIGN=JUSTIFY>Es un pol&iacute;gono que consiste en un cuadrado de lado 20 y de color
+azul que se encuentra situado sobre el plano Z=0. Inicio la lista con <I>glNewList</I>
+pas&aacute;ndole el nombre que tendr&aacute; esta lista, en nuestro caso
+usamos CUADRADO, y tambi&eacute;n el par&aacute;metro GL_COMPILE. &Eacute;ste
+se encargar&aacute; de que se envie la lista al servidor para que la guarde
+pero que no la dibuje hasta que se lo ordenemos.
+
+<P ALIGN=JUSTIFY>Finalizamos la lista con <I>glEndList</I>, de manera que OpenGL ya sabe
+que el c&oacute;digo que escribamos a continuaci&oacute;n no forma parte
+de la display list.
+
+<P ALIGN=JUSTIFY>Ahora cada vez que deseemos que se dibuje de nuevo nuestro cuadrado,
+s&oacute;lo tendremos que ejecutar esta l&iacute;nea:
+
+<P ALIGN=JUSTIFY><B>glCallList(CUADRADO);</B>
+
+<P ALIGN=JUSTIFY>que avisa al servidor y le obliga a dibujar lo que contenga la lista
+llamada CUADRADO que ya se le envi&oacute; anteriormente. As&iacute; nosotros
+ya no tendremos que dibujar por nosotros mismos, el servidor lo har&aacute;
+cuando se lo mandemos. <B>Resultado</B>: un considerable aumento de la
+velocidad de ejecuci&oacute;n de nuestro programa en tiempo real. Y si
+trabajamos localmente y no contamos con red ni con servidor de gr&aacute;ficos,
+tambi&eacute;n notaremos un gran aumento de velocidad pues la lista queda
+ya almacenada en el pipeline gr&aacute;fico, justo antes de su salida por
+pantalla. No vuelve a pasar por todo el pipeline nunca m&aacute;s, que
+es lo que ocurrir&iacute;a si mandaramos a dibujar el cuadrado nosotros,
+cada vez.
+
+<P ALIGN=JUSTIFY>Uno de los grandes ejemplos de uso de display lists en OpenGL es la
+generaci&oacute;n de un alfabeto, de una fuente (font). Para escribir texto
+en OpenGL, se suelen crear las letras 3D con pol&iacute;gonos, y despu&eacute;s
+se dibujan en pantalla. Lo que puede hacerse es crear cada letra (trabajo
+duro sin duda...), almacenarla en una display list y despu&eacute;s tan
+s&oacute;lo llamarla cuando quieras dibujarla....
+
+<h4>Un ejemplillo</h4>
+
+<P ALIGN=JUSTIFY>En uno de los libros que siempre os he recomendado, <a href="b_koko1.htm"><I>Interactive Computer
+Graphics</I> de <I>Edward Angel</I></a>, hay un ejemplo muy interesante que
+ilustra el uso de callbacks, display lists e interacci&oacute;n con el
+usuario. Es un programa que implementa un peque&ntilde;o editor gr&aacute;fico
+que es capaz de dibujar puntos, l&iacute;neas, cuadrados y triangulos con
+el simple uso del rat&oacute;n.
+
+<P ALIGN=JUSTIFY>Para acceder al c&oacute;digo en C de este ejemplo pulsad <A HREF="ftp://ftp.cs.unm.edu/pub/angel/OPENGL_EXAMPLES/paint.c">aqu&iacute;</A>.
+
+<P ALIGN=JUSTIFY>Que lo disfrut&eacute;is!!!
+
+<h4>Doble buffer</h4>
+
+<P ALIGN=JUSTIFY>&iquest;Qu&eacute; ocurre cuando ejecuto mi programa?, tengo una escena
+rotando y...hay parpadeo!!!...se v&eacute; fatal!!!....&iquest;y esto a
+qu&eacute; se debe?
+
+<P ALIGN=JUSTIFY>El <I>parpadeo</I> o <I>flicker</I> se produce ya que estamos utilizando
+un frame buffer simple para renderizar y no uno doble que nos ahorrar&iacute;a
+este problema. El programa regenera la ventana de visualizaci&oacute;n
+a una determinada frecuencia (entre 50 y 75 Hz) y esto es problem&aacute;tico
+en el sentido de que a veces a&uacute;n no se ha terminado de renderizar
+la ventana y ya empezamos a dibujar la siguiente, con lo cu&aacute;l nuestro
+ojo percibe un molesto parpadeo. Pero no podemos disminuir la frecuencia
+a menos de 50 Hz porque entonces tambi&eacute;n percibimos parpadeo debido
+a que nuestro cerebro nota el cambio sucesivo de una imagen tras otra.
+
+<P ALIGN=JUSTIFY>Para evitarlo utilizaremos el <I>doble buffering</I>, es decir, cada
+vez que deseemos renderizar de nuevo, lo haremos sobre una porci&oacute;n
+del frame buffer que a&uacute;n no est&aacute; activa. La otra porci&oacute;n
+es la que se est&aacute; dibujando. Cuando &eacute;sta ya est&eacute; acabada,
+pasaremos a la porci&oacute;n remanente con la siguiente imagen ya preparada
+para ser dibujada. As&iacute; sucesivamente, vamos intercambiando las dos
+porciones y una siempre se est&aacute; dibujando mientras la otra est&aacute;
+recibiendo lo siguiente que deberemos renderizar.
+
+<P ALIGN=JUSTIFY>De hecho tenemos dos frame buffer's. Se les llama <I>Front</I> y <I>Back</I>
+buffer. Se muestra el front, luego el back, luego el front de nuevo, el
+back.....y as&iacute; sucesivamente. Debemos por tanto activar esta forma
+de trabajo y adem&aacute;s debemos intercambiar los buffers de tanto en
+tanto. Usaremos:
+
+<P ALIGN=JUSTIFY><B>glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);</B>
+
+<P ALIGN=JUSTIFY>en la funci&oacute;n MAIN, en la definici&oacute;n de la ventana. La
+primera constante activa el doble buffering.
+
+<P ALIGN=JUSTIFY>Por otra parte y cada vez que hayamos dibujado de nuevo, llamaremos
+a:
+
+<P ALIGN=JUSTIFY><B>glutSwapBuffers( );</B>
+
+<P ALIGN=JUSTIFY>para intercambiar los buffers y dejarlos listos para la pr&oacute;xima
+vez. OpenGL har&aacute; el resto!!!
+
+<P ALIGN=JUSTIFY>Buuuuf...parec&iacute;a que no iba a acabar nunca, &iquest;verdad?...bueno
+ya termino por esta edici&oacute;n. Nos vemos en dos meses de nuevo!!
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

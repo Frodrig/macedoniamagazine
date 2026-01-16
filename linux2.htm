@@ -1,0 +1,297 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Introducción y Uso del Linux</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:pecapon@alumni.uv.es">Pedro A. Carrasco.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 3.<br> Instalación y compilación del núcleo
+</H3>
+<P ALIGN=justify>
+
+Tras los dos cap&iacute;tulos anteriores empezamos ahora con el nucleo o kernel,
+el n&uacute;cleo es la capa intermedia de software directamente ligada con el hardware
+de nuestra m&aacute;quina, por lo tanto es el que implementa las funciones o llamadas
+para acceder a &eacute;l. Tradicionalmente nos han acostumbrado a n&uacute;cleos ya compilados,
+como el de MS-DOS o W95-NT; pero con <B>Linux</B> y siguiendo con la libre distribuci&oacute;n
+de todo, incluidas las fuentes, tenemos estas &uacute;ltimas disponibles, por lo que podremos
+compilar el n&uacute;cleo a nuestra medida (por si alguien se lo pregunta, una compilaci&oacute;n es el mecanismo
+que se encarga de &quot;traducir&quot; los ficheros fuente, en formato texto, a ficheros binarios que
+entienda el procesador).
+<P ALIGN=JUSTIFY>Antes de asustarnos por eso de la compilaci&oacute;n vamos a ver antes las ventajas que tiene el compilar
+el n&uacute;cleo:
+<UL>
+<LI><P ALIGN=JUSTIFY>Tendremos s&oacute;lo los dispositivos que utilicemos, ni m&aacute;s ni menos.</LI>
+<LI><P ALIGN=JUSTIFY>Podemos utilizar los llamados <EM>modulos</EM>, los cuales se cargan s&oacute;lo cuando se necesitan,
+con el ahorro de memoria que supone.</LI>
+<LI><P ALIGN=JUSTIFY>Si algo no marcha bien y entendemos de C y programaci&oacute;n, podemos intentar arreglarlo.</LI>
+<LI><P ALIGN=JUSTIFY>Al final tendremos un sistema a medida, con los dispositivos que necesitemos, incluso
+con errores de hardware solucionados gracias al n&uacute;cleo de <B>Linux</B>, como el f0-0f bug.</LI>
+<LI><P ALIGN=JUSTIFY>Si a&ntilde;adimos un nuevo dispositivo, nos conectamos a Internet, etc, s&oacute;lo tenemos que recompilar
+el kernel indic&aacute;ndole los nuevos par&aacute;metros.</LI>
+</UL>
+<P ALIGN=JUSTIFY>Existen muchas m&aacute;s razones y podr&iacute;a ser discutido largo y tendido, pero, no es el tema de este curso,
+por el momento veremos los procedimientos generales para realizar la instalaci&oacute;n de las fuentes del n&uacute;cleo:
+<OL>
+<LI><P ALIGN=JUSTIFY>Conseguir las fuentes del n&uacute;cleo, para ello podemos instalar los paquetes necesarios de nuestra distribuci&oacute;n,
+en kernel-sources generalmente, o ir a Internet a buscar la &uacute;ltima versi&oacute;n, en estos momentos la 2.0.34 de las estables
+(si el segundo n&uacute;mero es par es una versi&oacute;n estable, si no es de desarrollo). Podemos buscar en 
+<A HREF="ftp://ftp.rediris.es">ftp.rediris.es</A>.</LI>
+<LI><P ALIGN=JUSTIFY>Una vez tenemos el fichero comprimido de las fuentes (suele llamarse linux-2.0.34.tar.gz por ejemplo), lo copiamos
+a <EM>/usr/src</EM> como usuario root, hacemos una copia de seguridad del directorio de las fuentes anteriores, 
+si lo hubiese, con <EM>mv linux linux.old</EM> y lo descomprimimos con tar <EM>xvzf linux-2.0.34.tar.gz</EM>.</LI>
+<LI><P ALIGN=JUSTIFY>Nos crear&aacute; un &aacute;rbol de directorios bajo el directorio <EM>linux</EM>con todas las fuentes del n&uacute;cleo, ahora no voy a analizarlo ya que ser&iacute;a reinventar la rueda, hay documentos espec&iacute;ficos que hablan de ello. </LI>
+<LI><P ALIGN=JUSTIFY>Entramos dentro del directorio <EM>linux</EM>.</LI>
+</OL>
+<P ALIGN=JUSTIFY>Bien, ya tenemos las fuentes descomprimidas en <EM>/usr/src/linux</EM>, ahora viene el proceso de configuraci&oacute;n y compilaci&oacute;n.
+<H3><A NAME="ss3.1">3.1 Configuraci&oacute;n</A>
+</H3>
+
+<P ALIGN=JUSTIFY>Lo primero es saber qu&eacute; dispositivos tenemos, el disco duro, la tarjeta de sonido con sus par&aacute;metros, discos SCSI 
+(la unidad ZIP de Iomega en puerto paralelo se toma como un disco SCSI), CD-ROM (si es ATAPI o de alguna marca no compatible
+con ATAPI), a fin de cuentas cuanta m&aacute;s informaci&oacute;n tengamos del Harware instalado en nuestro ordenador, mejor. 
+<P ALIGN=JUSTIFY>Para configurar el n&uacute;cleo, estando en <EM>/usr/src/linux</EM> y como usuario root, tecleamos:
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost # make config
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>o si queremos la configuraci&oacute;n con men&uacute;s:
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost # make menuconfig
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>y si estamos dentro del entorno X-Window
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost # make xconfig
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Aqu&iacute; explicar&eacute; la configuraci&oacute;n por men&uacute;s, esta requiere las n-curses instaladas, lo que suele venir por
+defecto en todas las distribuciones.
+Bien, empecemos, una vez que nos aparece el men&uacute; en pantalla podemos ir movi&eacute;ndonos
+con las flechas y con [INTRO] entramos en el men&uacute; seleccionado, dentro del men&uacute;, con <EM>Select</EM>
+seleccionamos la opci&oacute;n resaltada, con la tecla M la seleccionamos como m&oacute;dulo si se puede (en vez de [ ]
+aparece &lt; >), y con las flechas de izquierda derecha nos movemos por <EM>Select</EM>, <EM>Exit</EM> y <EM>Help</EM>, 
+este &uacute;ltimo como siempre es importante si no sabemos qu&eacute; hace una opci&oacute;n determinada.
+<P ALIGN=JUSTIFY>Ya estamos dentro de la pantalla principal y vemos los men&uacute;s, ahora empezar&eacute; explicando uno por uno:
+<DL>
+<DT><B>Code maturity level options:</B><DD><P ALIGN=JUSTIFY>Aqu&iacute; seleccionamos <EM>Prompt for development and/or incomplete 
+code/drivers</EM>, esta opci&oacute;n nos permitir&aacute; seleccionar drivers o elementos que est&aacute;n a&uacute;n 
+en desarrollo, pero que en algunos casos funcionan bien.
+<DT><BR><B>Loadable module support:</B><DD><P ALIGN=JUSTIFY>Dentro de este men&uacute; est&aacute;n las opciones de modulos cargables, seleccionaremos 
+<EM>Enable loadable module support</EM> para activar el soporte de m&oacute;dulos, la opci&oacute;n 
+<EM>Set version information on all symbols for modules</EM> la seleccionaremos si no queremos mezclar m&oacute;dulos de versiones
+anteriores con los de la versi&oacute;n actual, personalmente yo no la selecciono, luego seleccionaremos 
+<EM>Kernel daemon support (e.g. autoload of modules)</EM> para permitir que el n&uacute;cleo cargue los m&oacute;dulos en demanda, o sea,
+s&oacute;lo cuando los necesita.
+<DT><BR><B>General setup:</B><DD><P ALIGN=JUSTIFY>Este apartado define como su nombre indica la configuraci&oacute;n general, consta de:
+<UL>
+<LI><P ALIGN=JUSTIFY>Kernel math emulation : Lo seleccionaremos siempre que nuestro ordenador no tenga coprocesador matem&aacute;tico (486SX o
+inferiores)</LI>
+<LI><P ALIGN=JUSTIFY>Networking support : Soporte de red, lo seleccionaremos aunque no estemos conectados a ninguna red, es necesario para
+aplicaciones como X-Window.</LI>
+<LI><P ALIGN=JUSTIFY>Limit memory to low 16Mb: Esta opci&oacute;n es para placas madres que experimentaban errores con cantidades de memoria
+superiores a 16Mb, raramente ocurre por lo tanto lo normal es no seleccionarla.</LI>
+<LI><P ALIGN=JUSTIFY>PCI bios support: Si tienes bus PCI seleccionala, si no, no la selecciones.</LI>
+<LI><P ALIGN=JUSTIFY>PCI bridge optimization (experimental): Optimizaci&oacute;n del puente PCI, este apartado es experimental, pero parece
+que es bastante estable, si has seleccionado la opci&oacute;n anterior seleccionala, si experimentases errores con el bus
+PCI deseleccionala y recompila el n&uacute;cleo.</LI>
+<LI><P ALIGN=JUSTIFY>System V IPC: Comunicaci&oacute;n entre procesos, seleccionala, ya que si no muchos programas no te funcionar&aacute;n.</LI>
+<LI><P ALIGN=JUSTIFY>Kernel support for a.out binaries</LI>
+<LI><P ALIGN=JUSTIFY>Kernel support for ELF binaries</LI>
+<LI><P ALIGN=JUSTIFY>Kernel support for JAVA binaries : Es el formato de ficheros ejecutables que soportar&aacute; el n&uacute;cleo, 
+las dos primeras hay que seleccionarlas (nunca como m&oacute;dulos), y la de JAVA
+depende de cada uno, yo la tengo como m&oacute;dulo(con la tecla M).</LI>
+<LI><P ALIGN=JUSTIFY>Compile kernel as ELF - if your GCC is ELF-GCC: Si tienes una distribuci&oacute;n muy antigua de Linux, quiz&aacute;s no puedas
+seleccionar esta opci&oacute;n, si tu distribuci&oacute;n tiene como m&aacute;ximo 2 a&ntilde;os seleccionala.</LI>
+<LI><P ALIGN=JUSTIFY>(Pentium) Processor type: Aqu&iacute; seleccionas el tipo de procesador que tienes.</LI>
+</UL>
+<DT><BR><B>Floppy, IDE, and other block devices:</B><DD><P ALIGN=JUSTIFY>En este apartado seleccionamos los dispositivos de almacenamiento, diskettes,
+CD-ROM etc, est&aacute; compuesto por:
+<UL>
+<LI><P ALIGN=JUSTIFY>Normal floppy disk support: Soporte para diskettes normales, puedes seleccionarlo como m&oacute;dulo o no.</LI>
+<LI><P ALIGN=JUSTIFY>Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support: Si tienes dispositivos IDE selecciona esta opci&oacute;n, si tienes
+poca memoria en el ordenador puedes dejarla y seleccionar <EM>Use old disk-only driver on primary interface</EM>.</LI>
+<LI><P ALIGN=JUSTIFY>Include IDE/ATAPI CDROM support</LI>
+<LI><P ALIGN=JUSTIFY>Include IDE/ATAPI TAPE support</LI>
+<LI><P ALIGN=JUSTIFY>Include IDE/ATAPI FLOPPY support (new): Con estas opciones seleccionamos los dispositivos IDE/ATAPI que tengamos,
+tanto el CD-ROM como unidades de cinta y de diskette(incluida la LS-120 y la ATAPI-ZIP).</LI>
+<LI><P ALIGN=JUSTIFY> SCSI emulation support: Normalmente est&aacute; deseleccionada, si tienes unidades no soportadas como ATAPI PC-CD seleccionala.</LI>
+<LI><P ALIGN=JUSTIFY>Support removable IDE interfaces (PCMCIA): Para tarjetas PCMCIA, normalmente en port&aacute;tiles.</LI>
+<LI><P ALIGN=JUSTIFY> CMD640 chipset bugfix/support: En la mayor&iacute;a de placas para 486 y Pentium se utiliza este chipset, seleccionando esta
+opci&oacute;n resolvemos un error de la placa. Normalmente es conveniente seleccionarla.</LI>
+<LI><P ALIGN=JUSTIFY>CMD640 enhanced support: Si tienes este chipset, seleccionala.</LI>
+<LI><P ALIGN=JUSTIFY>RZ1000 chipset bugfix/support: Igual que CMD640.</LI>
+<LI><P ALIGN=JUSTIFY>Intel 82371 PIIX (Triton I/II) DMA support: Si utilizas un disco IDE y tienes la placa Trit&oacute;n I o II selecciona esta opci&oacute;n.</LI>
+<LI><P ALIGN=JUSTIFY>Other IDE chipset support: Si tienes otros chipset IDE selecciona esta opci&oacute;n, tambi&eacute;n es necesaria para acceder al
+tercer y cuarto dispositivo en algunos sistemas. Al seleccionarla saldr&aacute; una lista con los dispositivos soportados.</LI>
+<LI><P ALIGN=JUSTIFY>Loopback device support: Permite montar un fichero como un sistema de ficheros, es &uacute;til para chequear un sistema de 
+archivos ISO9660 (el de CD-ROM), para montar sistemas de archivos encriptados tambi&eacute;n, puedes seleccionarla como m&oacute;dulo.</LI>
+<LI><P ALIGN=JUSTIFY>Multiple devices driver support: Permite combinar varias particiones de disco duro en un dispositivo l&oacute;gico.</LI>
+<LI><P ALIGN=JUSTIFY>RAM disk support: Soporte para disco RAM, normalmente no es necesario a no ser que se monte el sistema de ficheros
+en diskette.</LI>
+<LI><P ALIGN=JUSTIFY>XT harddisk support: Controlador de disco de los antiguos XT si es tu caso seleccionalo.</LI>
+</UL>
+<DT><BR><B>Networking options:</B><DD><P ALIGN=JUSTIFY>Opciones de red, en principio deja las opciones por defecto.
+<DT><BR><B>SCSI support:</B><DD><P ALIGN=JUSTIFY>Soporte para dispositivos SCSI, aqu&iacute; elegimos los dispositivos SCSI si los tenemos, si tenemos
+la unidad IOMEGA ZIP en puerto paralelo seleccionaremos como modulo el soporte de SCSI y el de disco SCSI, luego en 
+SCSI low level drivers elegimos el driver de IOMEGA ZIP, si tenemos disco duro SCSI lo elegimos (no es conveniente
+hacerlo como m&oacute;dulo) y en Low level drivers elegimos el correspondiente a nuestro dispositivo.
+<DT><BR><B>Network device support:</B><DD><P ALIGN=JUSTIFY>
+<A NAME="red"></A>  Dispositivo de red, normalmente dejamos las opciones que hay por defecto, aunque podemos
+elegir el soporte para conectar dos ordenadores por el puerto serie o paralelo, y el soporte para ppp si queremos conectarnos
+a Internet. Tambi&eacute;n tenemos las opciones de soporte para Ethernet, Conexi&oacute;n por radio, Token Ring etc.
+<DT><BR><B>ISDN subsystem: </B><DD><P ALIGN=JUSTIFY>Si te conectas por RDSI tendr&aacute;s que configurar este apartado.
+<DT><BR><B>CD-ROM drivers (not for SCSI or IDE</B><DD><P ALIGN=JUSTIFY>ATAPI drives):/ Drivers de CD-ROM que no son ni SCSI ni IDE/ATAPI, como por ejemplo
+los CD-ROM de Philips.
+<DT><BR><B>Filesystems:</B><DD><P ALIGN=JUSTIFY>Sistemas de ficheros soportados por el n&uacute;cleo, tendremos que elegir como m&iacute;nimo ext2fs, proc y ISO9660 si
+tenemos CD-ROM, este &uacute;ltimo lo podemos seleccionar como m&oacute;dulo, los dos anteriores no, luego podemos elegir FAT y VFAT si 
+tenemos una partici&oacute;n de DOS o W95 (actualmente hay un parche para FAT32), o queremos leer diskettes en formato DOS, NFS si
+queremos montar sistemas de ficheros en red.
+<DT><BR><B>Character devices:</B><DD><P ALIGN=JUSTIFY>Dispositivos de car&aacute;cter, como la impresora, el puerto serie, tarjetas digitalizadoras etc, si 
+tenemos la unidad ZIP en puerto paralelo, la impresora habr&aacute; que configurarla como modulo y la unidad ZIP tambi&eacute;n.
+<DT><BR><B>Sound:</B><DD><P ALIGN=JUSTIFY>Configuramos nuestra tarjeta de sonido si la tenemos, como existen muchas tarjetas y configuraciones
+este apartado no lo profundizo ya que es bastante intuitivo.
+<DT><BR><B>Kernel hacking:</B><DD><P ALIGN=JUSTIFY>Si vamos a desarrollar partes para el kernel podemos activar esta opci&oacute;n, en el caso normal de que
+no lo vallamos a hacer lo dejaremos sin desactivar.
+<DT><BR><B>Load an Alternate Configuration File y Save Configuration to an Alternate File:</B><DD><P ALIGN=JUSTIFY>Sirven para cargar
+o guardar la configuraci&oacute;n del n&uacute;cleo de un fichero alternativo.
+</DL>
+<P ALIGN=JUSTIFY>
+<H4><A NAME="ss3.2">3.2 Compilaci&oacute;n.</A>
+</H4>
+
+<P ALIGN=JUSTIFY>Llegados a este punto ya tendremos configurado el n&uacute;cleo, con el bot&oacute;n <EM>Exit</EM> nos preguntar&aacute; si
+queremos guardar la configuraci&oacute;n, seleccionamos que s&iacute;. Tras esto nos instar&aacute; a que creemos las dependencias
+y limpiemos el &aacute;rbol de directorios. Para ello hacemos:
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost # make dep ; make clean
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Una vez que termina este proceso y si no ha habido errores hacemos 
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost # make zlilo 
+o
+localhost # make zimage
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>En el primer caso nos crear&aacute; la imagen y nos la instalar&aacute; en su sitio, reiniciando
+el lilo para que tenga en cuenta los cambios, en el segundo lo tendremos que hacer
+nosotros a mano.
+<P ALIGN=JUSTIFY>
+<H4><A NAME="ss3.3">3.3 Conclusi&oacute;n.</A>
+</H4>
+
+<P ALIGN=JUSTIFY>En este tercer cap&iacute;tulo se explica la instalaci&oacute;n de un nuevo n&uacute;cleo o la instalaci&oacute;n del
+que disponemos pero adapt&aacute;ndolo a nuestra m&aacute;quina, los apartados de la compilaci&oacute;n los he
+sacado de la versi&oacute;n 2.0.33 del n&uacute;cleo, aunque los cambios a versiones posteriores o anteriores
+son f&aacute;ciles si comprendemos el proceso de configuraci&oacute;n. Tras tener instalado nuestro nuevo
+n&uacute;cleo si ponemos o quitamos alg&uacute;n dispositivo simplemente tenemos que configurarlo correctamente
+en el n&uacute;cleo y recompilar. Si ocurriese alg&uacute;n error puedes leerte el documento Kernel-Howto que est&aacute;
+tambi&eacute;n traducido por el grupo 
+<A HREF="http://www.infor.es/LuCAS">LuCAS</A>. Espero que
+este cap&iacute;tulo haya servido para que comprendas mejor los entresijos del n&uacute;cleo, para todos aquellos
+que quieran profundizar en la estructura y programaci&oacute;n del n&uacute;cleo y de Linux les remito al art&iacute;culo
+aparecido en el n&uacute;mero dos de <EM>Linux Actual</EM> sobre el n&uacute;cleo y al libro <EM>Programaci&oacute;n en Linux 2.0</EM>
+de la editorial <EM>Eyrolles</EM>. Sin m&aacute;s me despido hasta el pr&oacute;ximo art&iacute;culo que tratar&aacute; de la conexi&oacute;n
+a la red de redes Internet por medio de Infov&iacute;a (o infobirria como empieza a llamarse).
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaf.htm"><font FACE="ARIAL"><B>[Curso de Introuducción y Uso del Linux]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

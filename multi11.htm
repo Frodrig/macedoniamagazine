@@ -1,0 +1,990 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 12. <br> Programación de la Sound Blaster (III).
+</h3>
+<H4>3.4.- Ficheros de Sonido</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Ya tenemos lo necesario para mandar la informaci&oacute;n a la tarjeta
+de sonido usando el DMA. Ahora veremos los dos tipos de ficheros que vamos
+a <I>"interpretar"</I> mediante la SB:
+<OL>
+<LI>
+Ficheros <B>VOC</B> o sonidos digitalizados (64Kb como m&aacute;ximo).</LI>
+
+<LI VALUE="1">
+Ficheros <B>MOD</B> o m&uacute;sica compuesta por samples (31 samples como
+m&aacute;ximo).</LI>
+</OL>
+<B><U>3.4.1.- Ficheros VOC</U></B>
+
+<P align="justify">Los ficheros <B>VOC</B> fueron creados por Creative Labs como un medio
+para almacenar los sonidos digitalizados y posteriormente poder interpretarlos
+c&oacute;modamente, independientemente del m&eacute;todo escogido.
+
+<P align="justify">Los VOC los vamos a utilizar aqu&iacute; para interpretar la voz humana
+con una frecuencia de 8khz, que abarca la totalidad de los sonidos que
+podemos transmitir con nuestra voz, y aunque se podr&iacute;an interpretar
+a 20khz, la calidad ser&iacute;a la misma y el tama&ntilde;o necesario
+para almacenarlo crecer&iacute;a demasiado. Veamos esto:
+
+<P align="justify">Supongamos que este es el sonido real de nuestra voz:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="jpg/multi7.jpg" HEIGHT=80 WIDTH=254></CENTER>
+
+
+<P align="justify">Y &eacute;ste el sonido digitalizado:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="jpg/multi8.jpg" HEIGHT=80 WIDTH=257></CENTER>
+
+
+<P align="justify">La calidad de la digitalizaci&oacute;n depender&aacute; del n&uacute;mero
+de muestras por segundo (puntos del gr&aacute;fico) que tomemos. A mayor
+calidad, mayor n&uacute;mero de muestras, por lo tanto mayor n&uacute;mero
+de puntos (valores) y espacio necesario para almacenarlo.
+
+<P align="justify">Los ficheros VOC se hallan divididos en 2 bloques principales: cabecera
+y datos.
+
+<P align="justify">El bloque de cabecera es peque&ntilde;o, y su contenido es b&aacute;sicamente
+informativo.
+
+<P align="justify">El bloque de datos, por el contrario, incluye el sonido digitalizado
+y otros datos de inter&eacute;s. Ve&aacute;moslo con detalle:
+<UL>
+<LI>
+Los primeros 20 bytes del fichero contienen la descripci&oacute;n del tipo
+de archivo; su contenido deber ser la cadena "Creative Voice File", 1Ah.</LI>
+
+<LI>
+Los dos siguientes bytes contienen la posici&oacute;n de comienzo, dentro
+del archivo, del bloque de datos: su valor suele ser 001Ah.</LI>
+
+<LI>
+Dos bytes m&aacute;s nos proporcionan el n&uacute;mero de versi&oacute;n
+del formato VOC, aqu&iacute; se interpretar&aacute;n los de la versi&oacute;n
+010Ah, es decir, versi&oacute;n 1.10.</LI>
+
+<LI>
+Los dos &uacute;ltimos bytes contienen el c&oacute;digo de identificaci&oacute;n
+del fichero, mediante el cual podemos comprobar que efectivamente se trata
+de un fichero VOC; la f&oacute;rmula consiste en hallar el complemento
+del n&uacute;mero de versi&oacute;n del fichero y sumarle 1234h. El resultado
+suele ser 1129h.</LI>
+</UL>
+A partir de aqu&iacute;, tenemos el bloque de datos, que a su vez se divide
+en m&uacute;ltiples subbloques. El primer byte de cada subbloque indica
+el tipo de datos contenido en dicho bloque, y los siguientes tres bytes
+nos informan de la longitud del subbloque actual.
+
+<P align="justify">&iquest;Por qu&eacute; existen varios subbloques? Porque en un mismo
+archivo de voz digitalizada pueden darse varios eventos: por ejemplo, puede
+haber un per&iacute;odo de silencio en la digitalizaci&oacute;n, o un bucle
+de repetici&oacute;n (sobre todo en digitalizaciones de fragmentos musicales).
+Los posibles tipos de subbloques son 8, pero aqu&iacute; los VOC se usar&aacute;n
+exclusivamente para un &uacute;nico sonido digitalizado, sea voz humana
+o sonido musical, el &uacute;nico tipo implementado ser&aacute; el de Tipo
+1.
+
+<P align="justify">Tipos de subbloques:
+<DIR>
+<DIR>
+<DIR>
+<DIR><B>Tipo 0</B>: <I>Terminador</I>. Indica que no existen m&aacute;s
+bloques despu&eacute;s de &eacute;l, y por tanto la reproducci&oacute;n
+del fichero acaba.
+
+<P align="justify"><B>Tipo 1</B>: <I>Datos de voz</I>. Contiene los datos de la digitalizaci&oacute;n
+en s&iacute;, e incorpora una peque&ntilde;a cabecera que informa al driver
+de la frecuencia de muestreo y del m&eacute;todo de compresi&oacute;n usado
+en este bloque (aqu&iacute; se usan los que est&aacute;n sin comprimir).
+
+<P align="justify"><B>Tipo 2</B>: <I>Continuaci&oacute;n de voz</I>. Contin&uacute;a con
+los datos de voz del &uacute;ltimo subbloque.
+
+<P align="justify"><B>Tipo 3</B>: <I>Silencio</I>. Define un per&iacute;odo de silencio
+en la digitalizaci&oacute;n. La longitud del per&iacute;odo se incluye
+en los dos bytes siguientes a la longitud del bloque, y viene dada en unidades
+de ciclos de muestreo.
+
+<P align="justify"><B>Tipo 4</B>: <I>Marca</I>. Se trata de un bloque especial que define
+una marca en el fichero. Dicha marca puede ser usada para informar a nuestro
+programa de eventos especiales en el archivo de voz; los valores 0 y FFFFh
+est&aacute;n reservados para el driver de la SB.
+
+<P align="justify"><B>Tipo 5</B>: <I>Texto ASCII</I>. En este bloque se puede incluir cualquier
+texto que pueda ser de ayuda o informaci&oacute;n, como nombre del creador,
+o comentarios sobre el fichero.
+
+<P align="justify"><B>Tipo 6</B>: <I>Bucle de repetici&oacute;n</I>. Se informa al driver,
+del comienzo de un bucle que repite el sonido contenido entre el siguiente
+bloque de datos y el siguiente bloque de final de bucle.
+
+<P align="justify"><B>Tipo 7</B>: <I>Fin de bucle de repetici&oacute;n</I>. Indica el fin,
+del bucle de repetici&oacute;n, explicado en el tipo anterior.
+
+<P align="justify"><B>Tipo 8</B>: <I>Bloque extendido</I>. Incluye atributos del siguiente
+subbloque de datos, como frecuencia de muestreo, compresi&oacute;n, etc.</DIR>
+</DIR>
+</DIR>
+</DIR>
+A continuaci&oacute;n se presenta el procedimiento que lee un fichero VOC
+(comentado en el propio c&oacute;digo) y lo almacena en memoria usando
+las rutinas que tambi&eacute;n se reflejan en el m&oacute;dulo <I>"VOC.C"</I>,
+adem&aacute;s de varias peque&ntilde;as rutinas que son necesarias para
+el funcionamiento:
+
+<P align="justify"><I>// Carga el fichero VOC en la memoria reservada</I>
+
+<P align="justify"><B><FONT COLOR="#990000">void CargaVoc(char nombre[12])</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; FILE *ficherovoc;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; ficherovoc=fopen(nombre,"rb");</B>
+<BR><B>&nbsp;&nbsp;&nbsp; if (!ficherovoc)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; { printf("\nNo se encuentra el fichero %s",nombre);
+exit (0); }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; fseek(ficherovoc,0L,SEEK_END);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; <I>// 32: 20 de cabecera global+12 de cabecera
+de bloque.</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Suprimo 100 para evitar el chasquido del
+final de bloque de forma que al</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // interpretar otro VOC posteriormente, suene
+limpiamente sin necesidad de</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // resetear de nuevo la SB</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; longitud=ftell(ficherovoc)-32-100; fseek(ficherovoc,30,0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; frecuencia=getc(ficherovoc); frecuencia=1000000L/(256l-(frecuencia));</B>
+<BR><B>&nbsp;&nbsp;&nbsp; fseek(ficherovoc,32L,SEEK_SET); fread(zona5,longitud,1,ficherovoc);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; fclose(ficherovoc);</B>
+<BR><B>}</B>
+
+<P align="justify">Y ahora, por fin, el c&oacute;digo que interpreta un bloque de datos
+digitalizados de hasta 64 Kbytes usando el acceso directo a memoria.
+
+<P align="justify"><B><FONT COLOR="#990000">void VocOn(WORD voc)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; WORD dmaoffset,pagina,segmento,desplazamiento,tiempo;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE tamanoalta,tamanobaja,canaldma=1;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento=FP_SEG(zona5);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; desplazamiento=FP_OFF(zona5);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Transforma la direcci&oacute;n</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,word ptr segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl ax,cl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add ax,word ptr desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov word ptr dmaoffset,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,word ptr desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr ax,cl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add ax,word ptr segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,12</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr ax,cl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov word ptr pagina,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0xa</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Configura el DMA</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0xc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor al,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0xb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x49</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,word ptr dmaoffset</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xchg ah,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x83</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,byte ptr pagina</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,word ptr longitud</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Se indica al DMA cu&aacute;ntos bytes debe transmitir</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xchg ah,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0xa</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,byte ptr canaldma</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Habilita el canal de DMA</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,word ptr longitud</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov byte ptr tamanobaja,bl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov byte ptr tamanoalta,bh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (voc==0) tiempo=256-(1000000/8000);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else tiempo=256-(1000000/voc);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Espera para que
+la SB se reajuste a lo indicado en Ensamblador, arriba</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delay(100);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Establece la frecuencia
+del DSP</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnDSP(0x40);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnDSP(tiempo);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnDSP(0x14);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Empieza la transferencia</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnDSP(tamanobaja);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnDSP(tamanoalta);</B>
+<BR><B>}</B>
+
+<P align="justify">Ya hemos visto qu&eacute; son los ficheros VOC y c&oacute;mo manejarlos.
+Ahora vamos a analizar otro tipo de ficheros de sonido pero decenas de
+veces m&aacute;s complejo.
+<BR>&nbsp;
+
+<P align="justify"><B><U>3.4.2.- Ficheros MOD</U></B>
+
+<P align="justify">Un fichero <B>MOD</B> es un conjunto de informaci&oacute;n que por s&iacute;
+sola y con el auxilio del c&oacute;digo pertinente, puede generar m&uacute;sica.
+
+<P align="justify">Todos sabemos que cualquier producto software que incorpore una m&uacute;sica
+que vaya acorde con el tema que se est&eacute; tratando, no s&oacute;lo
+ameniza la sesi&oacute;n, sino que invita a seguir con ella paliando un
+poco el aburrimiento.
+<BR>Hay muchos tipos de formatos para el concepto de MOD. Esto es debido
+a que es un formato universal que naci&oacute; con los revolucionarios
+ordenadores <B>Commodore Amiga</B> y que se ha trasladado al mundo del
+PC.
+
+<P align="justify">Cada grupo de programaci&oacute;n importante que lo ha manejado, ha
+ido aportando mejoras con respecto al original, de forma que determinar
+un est&aacute;ndar es algo bastante arriesgado. Por esto, se ha decidido
+implementar el tipo de MOD que es el b&aacute;sico en todo tipo de programas
+que soportan este formato y cuyas caracter&iacute;sticas son:
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLPADDING=4 WIDTH="332" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Canales independientes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>4</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Samples Distintos</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>31</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Longitud M&aacute;xima por Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>64 Kb</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Unidad de Informaci&oacute;n</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>8 bits</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Patrones Distintos</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>64</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>M&aacute;ximo de Patrones Iguales o Distintos</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>128</B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="81%">
+<CENTER>Frecuencia M&aacute;xima por Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B>44 Khz</B></CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Este formato MOD es conocido como el de <B>ProTracker</B>, que es una
+utilidad para su interpretaci&oacute;n y cuyos siguientes 12 campos de
+cabecera (dentro de un mismo archivo MOD) pueden observarse en la siguiente
+tabla.
+
+<P align="justify">Los campos 2 al 7 se encuentran presentes en todos los samples, mientras
+que el resto se refiere a todo el archivo MOD y s&oacute;lo aparecen una
+vez.
+
+<P align="justify">Esta es la cabecera de un MOD:
+<BR>&nbsp;
+<BR>&nbsp;
+<TABLE BORDER CELLSPACING=0 CELLPADDING=0 BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER><B><I>Campo</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER><B><I>Tama&ntilde;o</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER><B><I>Tipo</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">
+<CENTER><B><I>Descripci&oacute;n</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>1</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>20 bytes&nbsp;</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Nombre de la canci&oacute;n en formato ASCII,
+rellen&aacute;ndose los bytes no usados con ceros.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>22 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Nombre del Sample en ASCII, rellen&aacute;ndose
+con ceros los bytes no usados.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>3</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Tama&ntilde;o del Sample en Words. Multiplicando
+el n&uacute;mero por 2 se obtiene el tama&ntilde;o. Cuando vale 0 o 1,
+est&aacute; vac&iacute;o.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>1 byte</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Finetune. Nibble (4 bits) con signo (-8 a +7
+en decimal). Cada incremento cambia la nota un octavo de semitono.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>5</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>1 byte</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Valor del volumen de cada Sample (0 a 64 en
+decimal).</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>6</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Offset de repetici&oacute;n. Cuando se quiere
+que un Sample se repita varias veces. Indica a partir de qu&eacute; posici&oacute;n,
+en palabras, comenzar&aacute; el Loop. Si vale 0 es nulo.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>7</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Sample</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Longitud de repetici&oacute;n. Si es mayor que
+1 indica repetici&oacute;n, y debe repetirse desde la posici&oacute;n indicada
+en el campo anterior (Campo 6), un n&ordm; de palabras igual a este valor.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>8</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>1 byte</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">N&uacute;mero de patrones. (1 a 128). Indica
+el n&uacute;mero de patrones distintos que existen en el MOD.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>9</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>1 byte</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Valor constante = 127.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>10</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>128 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Tabla de patrones. Aqu&iacute; se guardan los
+patrones que se van a tocar en cada posici&oacute;n (0 a 63). Rellenando
+con ceros el espacio sobrante.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>11</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>4 bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Letras M.K. En honor al que descubri&oacute;
+la forma de pasar de 15 samples a 31 sin casi ning&uacute;n cambio en los
+MOD.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="12%">
+<CENTER>12</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>1024bytes</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>Global</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="64%">Informaci&oacute;n de los patrones.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P align="justify">Ahora es necesario dar un concepto m&aacute;s entendible de lo que es
+un archivo MOD.
+
+<P align="justify">&Eacute;stos se dividen en patrones (el mismo concepto que el usado
+en el Editor, donde cada uno conten&iacute;a 20 &oacute;rdenes como m&aacute;ximo),
+que son como tablas en las que podemos almacenar hasta 64 notas musicales
+distintas para cada uno de los cuatro canales. As&iacute;, un patr&oacute;n
+se puede ver como la siguiente tabla:
+<BR>&nbsp;
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH="502" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER><B><I>Canal 1</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER><B><I>Valor</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER><B><I>Canal 2</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER><B><I>Valor</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER><B><I>Canal 3</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER><B><I>Valor</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER><B><I>Canal 4</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER><B><I>Valor</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 6</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>31</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 5</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>32</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 9</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>14</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 1</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>45</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>...</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>...</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 6</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>20</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 7</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>3</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="15%">
+<CENTER>sample 1</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>31</CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Cada Canal lleva un n&uacute;mero de sample que se interpretar&aacute;
+por &eacute;l, as&iacute; como el valor de la nota para ese sample. Se
+puede pensar en un sample como en un archivo .VOC que se va interpretando
+a mayor o menor frecuencia (velocidad), tono...
+
+<P align="justify">Como la SB s&oacute;lo es capaz de producir un sonido a la vez por su
+&uacute;nica salida (y queremos 4), es necesario hacer una media aritm&eacute;tica
+entre los sonidos y crear un sonido que sea la combinaci&oacute;n de todos
+ellos con sus caracter&iacute;sticas para cada una de los 64 celdas de
+cada patr&oacute;n.
+
+<P align="justify">Ahora vamos a ver en mayor profundidad c&oacute;mo son estos patrones:
+<UL>
+<LI>
+La informaci&oacute;n que constituye la estructura de cada patr&oacute;n
+se guarda en el Campo 12 en forma de bytes consecutivos.</LI>
+
+<LI>
+Cada patr&oacute;n se divide en 64 divisiones. En cada divisi&oacute;n
+se alberga la informaci&oacute;n de cada canal de sonido. Las divisiones
+se numeran desde el 0 hasta el 63, y cada una de ellas tiene el mismo formato
+para cada canal, es decir, 4 bytes.</LI>
+
+<LI>
+Estos 4 bytes se guardan secuencialmente, uno detr&aacute;s de otro. Los
+canales 1 y 4 est&aacute;n en la izquierda y los canales 2 y 3 en la derecha.
+Cada divisi&oacute;n se particiona a su vez en un n&uacute;mero de <B>ticks</B>
+(2 cent&eacute;simas de segundo).</LI>
+</UL>
+Los cuatro bytes son en realidad grupos de bits, cada uno de los cuales
+tiene su significado dentro del grupo (los cuatro bytes).
+
+<P align="justify">Como vemos, gracias a estos grupos de bits, designamos el sample, su
+periodo y sus efectos asociados.
+
+<P align="justify">Los efectos son cambios sobre el sonido normal del sample. Por ejemplo:
+Tr&eacute;molo, vibrato, glissando, slide, saltos, subidas/bajadas de volumen,
+etc., los cuales tienden a a&ntilde;adir brillantez (y bastante complejidad
+al programarlos) y profesionalidad a las melod&iacute;as que vamos a ser
+capaz de interpretar. Estos efectos son funciones de dominio p&uacute;blico,
+pero no nos equivoquemos, no quiero decir que sean implementados por c&oacute;digos
+creados por otros autores y donados como "dominio p&uacute;blico", sino
+que me refiero al hecho de c&oacute;mo se implementan. Un ejemplo tonto
+para aclararlo:
+
+<P align="justify">Cuando se descubri&oacute; la forma de sumar mediante un ordenador,
+el autor difundi&oacute; la idea de c&oacute;mo hacerlo, es decir, el m&eacute;todo,
+pero no el c&oacute;digo, que depend&iacute;a de la m&aacute;quina. Pues
+igualmente, el que cre&oacute; el efecto "vibrato" en la m&uacute;sica
+cl&aacute;sica, difundi&oacute; la idea de qu&eacute; era y c&oacute;mo
+realizarlo. Por esto, s&oacute;lo hay una forma de crear un "vibrato":
+particionar la onda de sonido en varios valores y solapar las zonas contiguas.
+Con lo que el efecto es: de dominio p&uacute;blico.
+
+<P align="justify">El c&oacute;digo que lo implementa y est&aacute; incluido en el fichero
+<I>"CARGAMOD.ASM"</I>, es:
+
+<P align="justify">Vibrato: mov dh,dl
+<BR>and dl,0Fh
+<BR>shr dh,4
+<BR>shl dh,2
+<BR>add [di+VibPos],dh
+<BR>mov dh,[di+VibPos]
+<BR>mov bl,dh
+<BR>shr bl,2
+<BR>and bx,1Fh
+<BR>mov al,[SinTable+bx]
+<BR>mul dl
+<BR>rol ax,1
+<BR>xchg al,ah
+<BR>and ah,1
+<BR>test dh,dh
+<BR>jns VibUp
+<BR>neg ax
+<BR><B>&nbsp;</B>
+<BR><B>Inserto</B>
+
+<P align="justify">Los c&oacute;digos fuente que se encargan de este tipo de ficheros est&aacute;n
+realizados en Ensamblador puro. Ahora es necesario aclarar el porqu&eacute;
+en el cambio de la filosof&iacute;a de programaci&oacute;n utilizada hasta
+este momento (Ensamblador Inmerso y C puro).
+
+<P align="justify">Casi toda la parte que se encarga de ejecutar las &oacute;rdenes est&aacute;n
+en C o en Ensamblador Inmerso. Originalmente las rutinas para interpretar
+los archivos MOD fueron creadas en C, pero eran demasiado lentas y el resultado
+era decepcionante para el esfuerzo invertido en comprender este tipo de
+archivo tan complejo y extremadamente lioso.
+
+<P align="justify">Posteriormente fue traducido al Ensamblador Inmerso, en busca de la
+velocidad imprescindible, pero aunque los resultados fueron los esperados,
+apareci&oacute; un nuevo problema: algunas instrucciones de Ensamblador
+no estaban implementadas, tales como la creaci&oacute;n de una pila y la
+utilizaci&oacute;n de diversos operandos y direccionamientos de memoria,
+con lo que hubo que suplirlos con t&eacute;cnicas que no eran las m&aacute;s
+adecuadas, pero que constitu&iacute;an la &uacute;nica soluci&oacute;n.
+
+<P align="justify">Esto dio como resultado un c&oacute;digo que verdaderamente interpretaba
+de forma correcta los MOD, pero con el inconveniente insalvable de que
+al conjuntarlo con el resto del c&oacute;digo del Proyecto, no funcionaba
+de ninguna manera. Esto era debido a las caracter&iacute;sticas del extremadamente
+r&iacute;gido modelo de compilaci&oacute;n "Large".
+
+<P align="justify">Concretando, para hacer que el lector de MOD funcionase conjuntamente
+con el resto del c&oacute;digo, deb&iacute;a de compilarse todo en el modo
+Compact, pero de esta forma algunos procedimientos no funcionaban por su
+necesidad de acceder a punteros lejanos forzosamente, y a que la conversi&oacute;n
+directa del C (far *) no funciona correctamente en esta versi&oacute;n
+del compilador (tal y como se refleja en los FAQ <I>"Frecuently Asqued
+Questions"</I> de Borland).
+
+<P align="justify">Tras esto, la &uacute;nica esperanza fue hacer el &uacute;ltimo esfuerzo
+antes de tirar el c&oacute;digo a la basura y olvidarse de esta parte tan
+importante, por lo que finalmente traduje todo a Ensamblador puro y lo
+compil&eacute; con el Turbo Assembler 4.0, creando los OBJ pertinentes
+y <I>"link&aacute;ndolos"</I> con el resto del c&oacute;digo desde el compilador
+Borland C++ 3.1.
+
+<P align="justify">Esto dio como resultado tres m&oacute;dulos distintos: Sb.ASM, CargaMod.ASM
+y TocaMOD.ASM, que por su aislamiento con respecto al resto del c&oacute;digo,
+tienen que incluir rutinas ya implementadas en C y Ensamblador Inmerso
+como las de reserva de memoria mediante la funci&oacute;n 48h, el acceso
+a DMA, la inicializaci&oacute;n y detecci&oacute;n de la SB, etc.
+
+<P align="justify">Pero Borland volvi&oacute; a hacer de las suyas. Ahora indicaba que
+se hab&iacute;a excedido su capacidad de compilaci&oacute;n debido a: <B>Group
+"Dgroup" execeds 64kb.</B>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

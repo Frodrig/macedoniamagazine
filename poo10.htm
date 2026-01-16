@@ -1,0 +1,146 @@
+<HTML>
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 10.<br>Y para concluir, una menci&oacute;n a las MFC.
+</H3>
+
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Con este cap&iacute;tulo se da por finalizado el curso concerniente a la programaci&oacute;n orientada a objetos mediante el uso del C++. Naturalmente, no se ha hablado de todos los temas de la POO pero s&iacute; de los m&aacute;s importantes (los que la mayor&iacute;a de programadores suelen utilizar). Realmente es muy dif&iacute;cil que un desarrollador de C++ utilice todos los mecanismos que la programaci&oacute;n orientada a objetos le brinda ya que, o bien no es necesario para su proyecto o bien... lo desconoce. Es muy complicado tener un conocimiento total de todo lo que nos ofrece el C++.</P>
+<P ALIGN="JUSTIFY">En este &uacute;ltimo cap&iacute;tulo, me gustar&iacute;a hablar un poco de la librer&iacute;a de clases <B>MFC</B> (<I>Microsoft Fundation Classes</I>) que, como sabr&eacute;is, son las utilizadas en la programaci&oacute;n en Visual C++ (siempre y cuando no acudas al <B>API </B>mediante la programaci&oacute;n directa, en C tradicional, o mediante la construcci&oacute;n de tus propias clases).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Las MFC son una gran desconocida para muchos de los programadores de Windows ya que han tardado en &quot;digerirse&quot; m&aacute;s de lo esperado. Principalmente porque lo que siempre ha estado "ah&iacute;" ha sido el API y la totalidad de programadores de Windows que ven&iacute;an de trabajar en la versi&oacute;n de 16 bits lo hac&iacute;an con el API. Si a esto unimos la elevada complejidad (para qu&eacute; nos vamos a enga&ntilde;ar) que entra&ntilde;a enfrentarte por vez primera a esta librer&iacute;a de clases de Microsoft, pues veremos que la criba de programadores preparados para su utilizaci&oacute;n es mucho m&aacute;s escasa que la referente a usuarios del API. De todas formas, los h&aacute;bitos de programaci&oacute;n en Windows (bajo C), est&aacute;n cambiando y ya hay un movimiento destinado al uso de las MFC. Desde los programadores aficionados a la creaci&oacute;n de videojuegos (que siempre han criticado, no sin raz&oacute;n, de la lentitud de estas clases para la programaci&oacute;n de juegos r&aacute;pidos), hasta, c&oacute;mo no, desarrolladores de aplicaciones. Este &uacute;ltimo hecho, tambi&eacute;n ha producido disparidad de opiniones. No hay m&aacute;s que leer los art&iacute;culos de mi colega Jos&eacute; Antonio en el que se ponen de manifiesto "lo poco visual que es el Visual C++". Ciertamente, programar en Visual C++ utilizando las MFC, no es tan directo como hacerlo en Delphi o Visual Basic. En MFC hay que escribir m&aacute;s c&oacute;digo y bajar a la "sala de m&aacute;quinas" de forma reiterada. Este importante sacrificio que entra&ntilde;a el utilizar el Visual C++ como herramienta para desarrollar aplicaciones bajo Windows usando las MFC, tiene un premio que es la infinita potencia que ofrece al programador (al que est&aacute; dispuesto, claro, a utilizar una completa bibliograf&iacute;a).</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">Entrando en materia...</P>
+<P ALIGN="JUSTIFY"></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Todo programador de Windows que utilice el API siempre se sorprende de no encontrar por ning&uacute;n lado la funci&oacute;n <I>WinMain</I> tradicional en los listados que utilizan MFC. La programaci&oacute;n en MFC se caracteriza por encapsular casi todas (no est&aacute;n todas) las llamadas que existen en el API, en una serie de clases que est&aacute;n englobadas seg&uacute;n el tipo de cometido. L&oacute;gicamente, hay much&iacute;simas clases ya que el API de Windows es, desgraciadamente, muy enrevesado. Pero, precisamente por eso, el uso de clases que encapsula toda esa cantidad ingente de llamadas que existen (es como si te las catalogaran), se hace muy de agradecer. Como se ha dejado entrever, no todas las llamadas al API est&aacute;n encapsuladas en la biblioteca de clases que son las MFC. Hay algunas que no se encuentran. Sin embargo, no hay por qu&eacute; preocuparse ya que podemos acceder f&aacute;cilmente a las mismas mediante llamadas directas al API. As&iacute;, todos los programadores tradicionales del API de Windows pueden utilizar llamadas a la misma mezcladas con c&oacute;digo en MFC.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Programar en MFC no es nada sencillo. Si se ha trabajado en C++ se puede leer c&oacute;digo en C sin ning&uacute;n tipo de problema sin embargo, esto ya no sucede a la inversa. Conocerse "al dedillo" el C no significa que uno pueda sentirse c&oacute;modo examinando un listado escrito en C++ y bueno... las MFC son C++ bastante puro y duro (y muy, MUY, enrevesado). La curva de aprendizaje es bastante elevada. yo me atrever&iacute;a a decir que m&aacute;s, mucho m&aacute;s, que la que conlleva aprender a moverse en Windows con el API. De todas formas, a la larga merece la pena. Mientras aprendes MFC puedes ir aprendiendo el API pero mientras aprendes el API no puedes ir aprendiendo MFC.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una de las principales ventajas y, a la vez, inconvenientes del uso de las MFC, es que debemos estar preparados para leer y entender una buena cantidad de c&oacute;digo que no ha sido escrito por nosotros. ¿Eso es malo?. Hombre, al principio s&iacute; porque te encuentras muy perdido entre la ingente cantidad de c&oacute;digo que se te muestra delante de tus narices. Recuerdo que la primera sesi&oacute;n en mi aprendizaje de MFC fue de aut&eacute;ntico terror. Ten&iacute;a unos cuantos archivos .CPP reci&eacute;n creados. Montones de comentarios, clases, m&eacute;todos... ¿C&oacute;mo hacer "algo" sin volverme loco?. El hecho de conocer el API ayuda bastante porque, al menos, te da una cierta seguridad de cara a la investigaci&oacute;n sobre el funcionamiento de todo el c&oacute;digo que se te presenta pero, sinceramente, si nunca se ha programado en C++, el uso de las MFC es un infierno. Es preferible haber visitado otros lenguajes como el Visual Basic o el Delphi porque, de lo contrario, tendr&eacute;is toda la maravillosa complicaci&oacute;n de la programaci&oacute;n en Windows en vuestras manos.</P>
+<P ALIGN="JUSTIFY">De todas formas, y despu&eacute;s de llevar un tiempo trabajando con las MFC, uno agradece todas las dificultades que te presenta. Aprendes a utilizar de verdad la orientaci&oacute;n a objetos ya que, obligatoriamente, has de utilizar c&oacute;digo que no es tuyo. Aprendes tambi&eacute;n unas normas de programaci&oacute;n mucho m&aacute;s refinadas en cuanto a la declaraci&oacute;n de variables, funciones y dem&aacute;s y, c&oacute;mo no, aprendes una cantidad ingente de ingl&eacute;s t&eacute;cnico ;-D, pues la ayuda es algo que has de estar utilizando continuamente.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">¿C&oacute;mo funciona un programa hecho en MFC?</P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Lo primero que tenemos que aceptar es que vamos a tener que utilizar un asistente para la creaci&oacute;n de c&oacute;digo. Dentro del excelente paquete de programaci&oacute;n que es Visual C++ (el compilador de Microsoft de C++ es el mejor que hay pese a quien pese), existen multitud de herramientas que nos ayudan a trabajar en la programaci&oacute;n de Windows. La m&aacute;s valiosa de todas es, quiz&aacute;s, el <B>AppWizard</B><I>. </I>El AppWizard, es un asistente que nos crea todos los archivos y c&oacute;digo necesario para comenzar a trabajar en una determinada aplicaci&oacute;n. Desde el AppWizard, podemos indicar si queremos hacer una aplicaci&oacute;n con soporte para ayuda, impresi&oacute;n, etc. Todo ello a trav&eacute;s de una serie de pasos que desembocar&aacute;n en la creaci&oacute;n de todo el c&oacute;digo anteriormente descrito. Es m&aacute;s, si una vez que hemos acabado con el AppWizard damos a "build" y ejecutamos, veremos que tenemos un programa ya hecho. De todas formas, a medida que uno va conociendo m&aacute;s el "intr&iacute;ngulis" que se esconde en todo el c&oacute;digo que crea el AppWizard, podr&aacute; ir eliminado los archivos que no necesite y adaptando el c&oacute;digo que se nos cree sin mayores complicaciones. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Todo el c&oacute;digo que nos genera el AppWizard es, por as&iacute; decirlo, perfecto. Todas las clases est&aacute;n bien definidas y preparadas para ser utilizadas, modificadas o aumentadas. Como ya se coment&oacute; m&aacute;s arriba, el principal problema que se encuentra un programador tradicional de Windows es el de la "dureza" que supone enfrentarse a todo esa gran cantidad de c&oacute;digo que tiene delante de s&iacute;. No hay por ning&uacute;n lado una funci&oacute;n WinMain o WinProc sobre las que empezar a "entender" lo que estamos viendo. En definitiva, estamos totalmente perdidos. </P>
+<P ALIGN="JUSTIFY">Lo que realmente pasa, es que tanto la funci&oacute;n WinMain como la WinProc, se encuentran en las bibliotecas de c&oacute;digo objeto que se enlazan cuando echamos a andar la compilaci&oacute;n de la aplicaci&oacute;n. En otras palabras, pese a que nunca veamos una funci&oacute;n WinMain o WinProc en nuestro c&oacute;digo generado por el AppWizard, siempre existir&aacute;n y se enlazar&aacute;n. </P>
+<P ALIGN="JUSTIFY">Como veis, si ya para programar en Windows con el API hay que cambiar totalmente la mentalidad, para programar en MFC y Windows, hay que hacer un coste adicional. Vuelvo a repetir, que la programaci&oacute;n en MFC  bajo Windows no es f&aacute;cil. Es mucho m&aacute;s sencillo (como siempre, todo lo sencillo que t&uacute; quieras) utilizar un paquete como Delphi y disfrutar antes de la programaci&oacute;n en Windows. Siendoos sinceros, a no ser que teng&aacute;is un buen motivo para programar en MFC (utilizar toda la potencia de Windows y, claro est&aacute;, saber utilizarla) y est&eacute;is curtidos en la programaci&oacute;n del API bajo C o en el C++, pensarlo dos veces o bien... nunca os desanim&eacute;is pese a los primeros y numerosos "palos". El mejor consejo que se puede dar es como el que se da cuando uno comienza a aprender el API bajo Windows;" no teng&aacute;is un af&aacute;n de conocimiento total". Aprender lo b&aacute;sico y luego, ir haciendo peque&ntilde;os programas que os obliguen a consultar temas de forma puntual. S&oacute;lo de esta forma lograr&eacute;is avanzar. Y ya sab&eacute;is, "a programar se aprende programando" y en Windows es IMPOSIBLE aprenderlo todo. Siempre vas a necesitar ayuda.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">Entonces, ¿MFC &oacute; API?.</P>
+<P ALIGN="JUSTIFY"></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Desde luego, si en el API lo &uacute;nico que hac&iacute;as eran aplicaciones, has de pasar YA a la programaci&oacute;n en MFC. De hecho, no creo que queden excesivos programadores de aplicaciones trabajando con el API directamente ya que es exageradamente tedioso. Si por el contrario, utilizas el API para crear juegos puedes seguir utiliz&aacute;ndola perfectamente. ¡Es m&aacute;s!, las <B>DirectX</B> est&aacute;n construidas en C por lo que su uso es mucho m&aacute;s directo en la programaci&oacute;n tradicional bajo Windows. Sin embargo, y tal como me coment&oacute; una vez Gonzalo Su&aacute;rez (Pyro Studios), una cosa es C++ y otra las MFC. Puedes seguir utilizando el C++ y crearte tus propias clases que encapsulen al API y las funciones de DirectX sin necesidad de acudir a las MFC. En la actualidad para el desarrollo de juegos, eso es lo que se hace pero, as&iacute; mismo os digo, que para la creaci&oacute;n de tools o herramientas, se hace necesario utilizar herramientas m&aacute;s visuales. Ah&iacute; entrar&iacute;an las MFC, el Delphi, el Visual Basic, etc.</P>
+
+</FONT><B><FONT FACE="Arial" SIZE=3>
+<P ALIGN="JUSTIFY">Visual C++; una herramienta excelente</P>
+<P ALIGN="JUSTIFY"></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Si para la generaci&oacute;n de c&oacute;digo, el Visual C++ nos aporta una excelente herramienta que nos evita el tener que crear c&oacute;digo global para todas las aplicaciones, (haciendo que entremos de lleno a trabajar en lo que a nosotros nos interesa) lo que es en s&iacute; el paquete de desarrollo, s&oacute;lo se puede catalogar de estupendo. S&iacute;, y pese a no querer hacer (Dios me libre) ning&uacute;n tipo de publicidad a la casa del se&ntilde;or Gates, hay que decir que es una gozada trabajar con todas la potencia que te ofrece el Visual C++. Desde un potente gestor de clases como es el <B>ClassWizard</B>, a un Debugger impecable. Pasando, c&oacute;mo no, por todas y cada una de las posibles opciones extra que nos brinda el entorno. Como os imaginar&eacute;is, el ver por primera vez todo lo que nos ofrece este sistema de desarrollo asusta bastante pero, una vez m&aacute;s, a base de la pr&aacute;ctica y la dedicaci&oacute;n, os mover&eacute;is "casi" como pez en el agua (siempre hay algo que se deja sin investigar los suficiente ;-).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Uno de los principales problemas de todo lo que entra&ntilde;a la programaci&oacute;n bajo Windows utilizando el Visual C++ es, sin duda, su elevado coste para programadores "de a pie", que lo &uacute;nico que buscan es una forma de ir adquiriendo experiencia de cara al futuro. Adquirir un paquete de Visual C++ supone un gran desembolso de dinero. Sin embargo, t&uacute; no ser&aacute;s un pirata, ¿no? . Lo que voy a hacer, es recomendaros, si sois estudiantes, que os hag&aacute;is con una licencia de Microsoft para estudiantes. Es una buena forma de trabajar teniendo todo en orden sin que haga falta ser millonario. Como lo que no quiero es hacer publicidad de ninguna casa, simplemente os voy a comentar que os inform&eacute;is en el tel&eacute;fono de atenci&oacute;n al cliente de Microsoft sobre el tema. O en cualquier tienda especializada que seguro, os vender&aacute;n una licencia por no m&aacute;s de 15.000 pesetas. Algo, realmente interesante. Al menos, para personas que, como un servidor, no puede gastarse las cifras oficiales del producto ni en sue&ntilde;os pero que aborrece la pirater&iacute;a.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">En definitiva</P>
+<P ALIGN="JUSTIFY"></P>
+</B></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Como pod&eacute;is observar, este art&iacute;culo no aporta ning&uacute;n tipo de conocimiento t&eacute;cnico. Est&aacute; claramente orientado a la gente que ya trabaja en la programaci&oacute;n en Windows (principalmente con el API) o que est&aacute;n preparando el salto a este sistema y no saben qu&eacute; lenguaje escoger, para que se hagan una leve idea de c&oacute;mo es el mundo "MFC". La programaci&oacute;n bajo Windows, al menos en C y C++, no es f&aacute;cil si nunca se ha trabajado en un sistema de desarrollo en dicho Sistema Operativo. </P>
+<P ALIGN="JUSTIFY">Si quieres comenzar a ver avances reales en t&uacute; aprendizaje bajo Windows, puedes utilizar herramientas como el Delphi o el Visual Basic. De la primera decir que es excelente y que para muchas tareas resulta infinitamente m&aacute;s c&oacute;moda que el Visual C++. De la segunda no puedo decir nada porque nunca la he utilizado. Por otro lado, si est&aacute;s dispuesto a pasarte de seis meses a un a&ntilde;o pringando manuales y literatura de Visual C++, pues adelante. Es duro al comienzo pero merece la pena porque luego tienes ante ti un mundo de potencia infinita.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y bueno, esto ya se acaba. Quiz&aacute;s mi compa&ntilde;ero David Isla "Cid", se anime y se ponga manos a la obra con un curso de Visual C++ con MFC. ¿A qu&eacute; esperas David? ;).</P></FONT><br><br>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

@@ -1,0 +1,353 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>B</B></font><FONT color="#000000" size=2 face="arial"><B>reve Introducción al Mundo del Hacking</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:perota082@mx3.redestb.es">Pedro Ferrera "BaDBoY"</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 2.<br> Manejando Linux, entendiendo Unix
+</H3>
+<P ALIGN=justify>
+
+En esta unidad aprender&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+<BR><BR><BR>
+<UL>
+<UL>
+<LI><P ALIGN=JUSTIFY>Qu&eacute; es LINUX </LI>
+<LI><P ALIGN=JUSTIFY>Iniciarse en el entorno LINUX/UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Entender el entorno multiusuario UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Otros ejercicios pr&aacute;cticos para LINUX</LI></UL>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si est&aacute;is aqu&iacute; se supone que sab&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+<UL>
+<UL>
+<LI><P ALIGN=JUSTIFY>Lo que es en realidad el hacking</LI>
+<LI><P ALIGN=JUSTIFY>Para qu&eacute; sirve el hacking</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo se comporta un hacker</LI></UL>
+</UL>
+<P ALIGN="JUSTIFY"> </P>
+<H4>¿ Qu&eacute; es LINUX ?</H4>
+<P ALIGN="JUSTIFY">LINUX es la versi&oacute;n del sistema operativo multiusuario UNIX para PC. Se trata de un SO de dominio p&uacute;blico y totalmente gratuito que se distribuye por Internet y por revistas. Consultad el primer cap&iacute;tulo del curso introductorio al Linux en la revista Macedonia para obtener m&aacute;s informaci&oacute;n acerca de qu&eacute; es Linux y c&oacute;mo conseguirlo. As&iacute; mismo, en la pr&oacute;xima lecci&oacute;n obtendr&aacute;s informaci&oacute;n m&aacute;s t&eacute;cnica sobre Linux as&iacute; como algunos de sus bugs m&aacute;s conocidos.</P>
+<P ALIGN="JUSTIFY">En este cap&iacute;tulo vamos a tratar a partir del Linux los comandos m&aacute;s b&aacute;sicos de los sistemas UNIX en general, el sistema de ficheros y de directorios, el sistema multiusuario de UNIX...</P>
+<P ALIGN="JUSTIFY">Consigue Linux y empieza a leer este cap&iacute;tulo.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Iniciarse en el entorno Linux</H4>
+<P ALIGN="JUSTIFY">Antes que nada, espero que hay&aacute;is pensado en instalarlos el programa LILO a no ser que quer&aacute;is usar vuestro PC exclusivamente con Linux. El programa LILO viene con muchas distribuciones de Linux y sirve para poder elegir, cuando arranca el ordenador, entre Windows y Linux.</P>
+<P ALIGN="JUSTIFY">Despu&eacute;s de teclear la palabra Linux en el prompt del LILO veremos el sistema de arranque de este sistema, c&oacute;mo nos va detectando cada dispositivo, etc...</P>
+<P ALIGN="JUSTIFY">Finalmente aparecer&aacute; el prompt de inicio</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">"</P>
+<P ALIGN="JUSTIFY"> Welcome to Linux 2.0.1</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> Host Login:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">          "</P>
+</I><P ALIGN="JUSTIFY">(Host es el host que hemos asignado a nuestro ordenador)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando instalamos Linux entramos como root, porque por defecto la cuenta de root ya est&aacute; creada. As&iacute; que solo tenemos que entrar como root y ya estamos dentro, no nos pedir&aacute; ning&uacute;n password. Una vez dentro, vamos a establecer un password para que nadie m&aacute;s que nosotros pueda entrar como root. No seais lamers y buscad un password realmente dif&iacute;cil de desencriptar, que no sea una palabra sola sino que sea una serie de letras y n&uacute;meros que no tengan sentido. Un buen root pone siempre un password de este tipo ya que los hackers suelen utilizar programas de desencriptaci&oacute;n asociados a diccionarios (palabras agrupadas seg&uacute;n temas) para desencriptar el password, pero todo esto lo explicar&eacute; m&aacute;s adelante.</P>
+<P ALIGN="JUSTIFY">Solo teneis que teclear:</P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># passwd root</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y a continuaci&oacute;n introducir el password que hay&aacute;is pensado. M&aacute;s adelante vamos a ver c&oacute;mo crear m&aacute;s cuentas y todo lo relacionado con el entorno multiusuario que es Linux.</P>
+<P ALIGN="JUSTIFY">Ahora echad un vistazo a lo que ten&eacute;is delante. S&iacute;, es como un MS-DOS pero con colores (depende de la distribuci&oacute;n).  Las &uacute;ltimas distribuciones incluyen, adem&aacute;s, un entorno gr&aacute;fico muy parecido a Windows 95, llamado X-Windows, que no voy a explicar c&oacute;mo instalar porque no es de vital importancia para hackear.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Sistema de ficheros y directorios</H4>
+<P ALIGN="JUSTIFY">Antes que nada tenemos que entender c&oacute;mo son los ficheros en Linux y en UNIX en general. Pueden tener extensiones m&aacute;s extensas a tres caracteres, que es el m&aacute;ximo en MS-DOS y en Windows. Con un listado detallado (m&aacute;s adelante veremos c&oacute;mo hacerlo) obtenemos una informaci&oacute;n as&iacute;:</P>
+<P ALIGN="JUSTIFY"></P>
+<PRE>                                              *   1        2        3</P>
+ (.)nombre del fichero.(extensi&oacute;n)   bytes   _  _ _ _ | _ _ _ | _ _ _</P>
+</PRE>
+<P ALIGN="JUSTIFY">Si aparece el punto delante del nombre del fichero es que es un fichero oculto.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">* - aqu&iacute; puede haber una D, que nos indicar&iacute;a que se trata de un directorio, no de un fichero</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+<LI><P ALIGN=JUSTIFY>En estas tres casillas aparecen los accesos que tiene el owner sobre este fichero. El owner de un fichero es el que lo ha creado y el que puede cambiar los accesos de &eacute;ste. Los accesos de un fichero son:</LI>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> R - Si aparece una R es que se puede leer</P>
+<P ALIGN="JUSTIFY"> W - Se puede escribir, alterar, modificar</P>
+<P ALIGN="JUSTIFY"> X - Si es ejecutable, se puede ejecutar</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">De este modo, si en las tres casillas del owner hay una R, una W y una X es que el propietario de este fichero tiene todos los accesos sobre &eacute;ste, cosa que es normal.</P>
+<P ALIGN="JUSTIFY"></P>
+<LI><P ALIGN=JUSTIFY>Los accesos que tienen que pertenecen al mismo grupo que el owner. En sistemas UNIX los usuarios pueden clasificarse por grupos por el root.</LI>
+<P ALIGN="JUSTIFY"></P>
+<LI><P ALIGN=JUSTIFY>Los accesos que tiene cualquier usuario del sistema sobre el fichero.</LI></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Es importante que adquir&aacute;is la costumbre de interpretar los accesos de cada fichero que quer&aacute;is examinar. Cuando est&eacute;is hackeando tendr&eacute;is que conocer siempre vuestras posibilidades sobre un fichero determinado. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En cuanto al sistema de directorios, es parecido al de MS-DOS. Los directorios pueden variar de un sistema UNIX a otro, pero todos tiene estos: </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/<B>usr</B>/ - es donde est&aacute;n las cuentas de inicio de cada usuario </P>
+<P ALIGN="JUSTIFY">/<B>adm</B>/ - directorio exclusivo para el admin del sistema</P>
+<P ALIGN="JUSTIFY">/<B>root</B>/ - directorio de inicio para el admin del sistema</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Comandos m&aacute;s utilizados para manejar ficheros</H4>
+<P ALIGN="JUSTIFY">- <B><U>Cp</B></U> - Este comando sirve para hacer copias de un fichero. Y esta es su sintaxis: </P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">cp (fichero a copiar) (fichero destino) </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">As&iacute;, si queremos hacer una copia de un fichero llamado "hacking.13886" a uno que simplemente se llame "138" haremos:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># cp hacking.13886 138</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El fichero a copiar sigue intacto, solamente hemos hecho una copia sin borrar el fichero original.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Rm</B></U> - Este comando sirve para eliminar uno o m&aacute;s ficheros. Esta es su s&iacute;ntaxi:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> rm (fichero a eliminar1) (fichero a eliminar2) (etc)</P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">Tambi&eacute;n podemos elliminar directorios con este comando. Con rm (directorio) eliminamos un directorio suponiendo que est&eacute; vac&iacute;o. Si a&ntilde;adimos la opci&oacute;n -r podemos eliminar directorios llenos, incluso con subdirectorios.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Cat</B></U> - Este comando nos permite ver el contenido de un fichero sin editarlo. En un terminal sencillo (que no sea X-Windows), si el contenido es muy largo solo vamos a ver el final de este fichero. Podemos ver el contenido de varios ficheros a la vez, ya que su sintaxis es:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> cat (fichero a ver1) (fichero a ver2) (etc)</P>
+</I><U><P ALIGN="JUSTIFY"></P>
+</U><P ALIGN="JUSTIFY">- <B><U>Mv</B></U> - Con este comando podemos mover el contenido de un directorio a otro directorio. Podemos hacer lo mismo con dos ficheros, pero el fichero de inicio queda eliminado al mover todo su contenido al fichero de destino.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> mv (directorio/fichero inicio) (directorio/fichero destino)</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Chmod</B></U> - Nos permite cambiar los accesos de un archivo. Su s&iacute;ntaxis es algo complicada:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> chmod (tipo de acceso)+(acceso) (fichero)</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Tipo de acceso: Aqu&iacute; tenemos que escribir una letra, que nos servir&aacute; para especificar si queremos cambiar los accesos para todos los usuarios, para el owner, o para los del grupo:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">(a)ll, accesos para todos</P>
+<P ALIGN="JUSTIFY">(o)wner, accesos para el owner</P>
+<P ALIGN="JUSTIFY">(g)roup, accesos para el grupo</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Acceso: Aqu&iacute; tenemos que especificar cualquiera de estos tres accesos: R, W, X, que como ya sab&eacute;is son de lectura, de escritura y de ejecuci&oacute;n respectivamente.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> Ejemplo: Si queremos cambiar el acceso del fichero host.equiv para que todos los usuarios puedan modificarlo (algo que no deb&eacute;is hacer nunca) har&iacute;amos:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># chmod a+w host.equiv</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Find</B></U> - Es un buen buscador presente en casi todos los sistemas UNIX que nos permite encontrar cualquier fichero. Esta es su sintaxis:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> find . -name (raz&oacute;n de b&uacute;squeda)* -print</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Naturalmente es un programa complejo y se puede usar de muchas maneras pero esta es la manera en que yo lo uso casi siempre. La raz&oacute;n de b&uacute;squeda es simplemente un trozo del nombre de un fichero o el nombre del fichero. Por ejemplo, si sabemos que hay un fichero que se llama lilo pero no sabemos como acaba y tampoco donde est&aacute;, pondremos:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># find . -name lilo* -print</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nos encontrar&aacute; varios ficheros con su ruta completa y decidiremos cu&aacute;l es el que est&aacute;bamos buscando, que en este caso ser&iacute;a lilo.conf</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">/etc/lilo.conf</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>File</B></U> - Este comando, en cualquier sistema UNIX nos permite obtener informaci&oacute;n b&aacute;sica acerca de un fichero, no el contenido del mismo. Podemos ver en pantalla la informaci&oacute;n de varios ficheros a la vez ya que su s&iacute;ntaxis es:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> <I>file (fichero1) (fichero2) (etc)</P>
+</I><P ALIGN="JUSTIFY"></P>
+<H4>Comandos m&aacute;s utilizados para moverse por los directorios</H4>
+
+<P ALIGN="JUSTIFY">- <B><U>Pwd</B></U> - Si escribimos pwd en el prompt, obtenemos la ruta completa del directorio en el que estamos. Si simplemente sale una / es que evidentemente estamos en la ra&iacute;z.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># pwd</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/usr/</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Ls</B></U> - Hace un listado de los ficheros del directorio activo. Si s&oacute;lo escribimos Ls, veremos los ficheros que son visibles. Con ls -a veremos el listado de todos los ficheros. Con ls -l veremos, adem&aacute;s todos los detalles de un fichero (excepto el contenido del mismo).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"> Atenci&oacute;n: En un sistema UNIX, hay ficheros visibles y ficheros ocultos. Los ficheros ocultos llevan delante un punto (.), esto es muy importante y debes aprenderlo. Haz siempre un listado con los par&aacute;metros -la para ver todos los detalles del directorio.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Cd</B></U> - En Linux podemos desplazarnos por los directorios igual que en MS-DOS, con el comando CD. Hay unas ligeras diferencias. Cuando queremos cambiar al directorio anterior en vez de escribir </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># cd..</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Unknow command</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Tenemos que escribir:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># cd ..</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">#</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Eso es, con un espacio entre los dos puntos y el comando CD.</P>
+<P ALIGN="JUSTIFY">En muchos sistemas UNIX, si simplemente tecleamos CD nos movemos al directorio de inicio.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># cd</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># pwd</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">/root</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- <B><U>Mkdir</B></U> - Con este comando podemos crear directorios. Funciona como el comando md de MS-DOS.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Entorno multiusuario UNIX</H4>
+<P ALIGN="JUSTIFY">Cuando decimos que UNIX es un sistema multiusuario nos referimos a que es un sistema dise&ntilde;ado para que pueda ser usado por usuarios distintos. As&iacute;, un sistema UNIX puede ser utilizado para que varios usuarios remotos (Internet) o locales (LAN, Ethernet) puedan conectarse a &eacute;l y puedan estar dentro del sistema simult&aacute;neamente. Esto ya nos supone un problema, pues si nos paramos a pensar, en teor&iacute;a cualquier usuario que pudiese conectar con el sistema podr&iacute;a hacer cualquier tarea, cualquier acci&oacute;n como la har&iacute;a el propietario del sistema; en definitiva este usuario podr&iacute;a manejar a su antojo el ordenador, algo que sin duda el propietario del mismo no est&aacute; dispuesto a permitir. Por eso se crean una serie de accesos, de prioridades, para hacer m&aacute;s f&aacute;cil la convivencia entre los diferentes usuarios de un sistema UNIX (M&aacute;s adelante aprenderemos a cambiar nuestro acceso para hacer lo que precisamente el propietario del sistema no quiere que hagamos, manejarlo como lo har&iacute;a &eacute;l). </P>
+<P ALIGN="JUSTIFY">As&iacute; pues, dentro de un sistema UNIX hay que diferenciar dos clases de usuarios:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">1 - El usuario ordinario</B>. Un usuario ordinario entra en el sistema gracias a una cuenta predefinida por el root, que consta de login y password, en un directorio de inicio. El login es el nombre por el cual los otros usuarios pueden identificarlo. El directorio de inicio es donde puede escribir o borrar ficheros, crear o borrar directorios, ejecutar programas... Este tipo de usuario puede ejecutar programas hechos por &eacute;l ya sea en shell o en C y programas gen&eacute;ricos que cualquiera pueda ejecutar como es el ejemplo de un editor de texto. Generalmente no puede moverse de su directorio de inicio, lo que lo restringe de otras &aacute;reas del sistema. Cada usuario ordinario tiene en su directorio un archivo llamado <I>.profile </I>que es como un AUTOEXEC.BAT de MS-DOS, contiene comandos que, cuando hace un login al sistema, se ejecutan. Esto es importante que lo sepas porque se pueden crear caballos de troya en archivos .profile.</P>
+<P ALIGN="JUSTIFY">El ejemplo de este tipo de usuario puede ser el del t&iacute;pico estudiante universitario que se conecta a un sistema UNIX para escribir documentos relacionados con su carrera, o si es un estudiante de inform&aacute;tica para aprender el entorno UNIX y saber programar dentro de &eacute;l, etc...</P>
+<P ALIGN="JUSTIFY">El directorio de inicio es visible por el root como /usr/login, donde login es el nombre del usuario, es decir, su login.</P>
+<P ALIGN="JUSTIFY">Podemos saber si somos un usuario ordinario si tenemos como prompt el signo:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> $</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P > Es decir, si antes de escribir un comando tenemos este signo.</P>
+<P ALIGN="JUSTIFY"> Al escribir who nos debe salir nuestro login.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> $ who</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">juan178</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY"> $</P>
+</I><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">2 - El usuario root</B> o, en su defecto, el usuario con acceso de root. Tambi&eacute;n llamado <I>superusuario</I>, es el usuario que tiene acceso a todo el sistema sin restricci&oacute;n alguna. En un principio solo el propietario del sistema puede acceder como root a su propio sistema, pero los hackers basan muchas veces sus ataques en intentar conseguir accesos de root a partir de una cuenta ordinaria. Es decir, que en cualquier sistema UNIX se puede llegar a conseguir acceso de root si se es lo suficientemente h&aacute;bil. El principal problema de los sistemas UNIX desde mi punto de vista es que el root, como cualquier usuario tiene su propia cuenta. De esta manera podemos llegar a alterarla o incluso a crear otra cuenta con acceso de root. M&aacute;s adelante veremos todo esto.</P>
+<P ALIGN="JUSTIFY">Sabremos si somos root si  tenemos como prompt este signo:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">#</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P >Y si a&uacute;n no nos lo creemos podemos escribir el comando who.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># who</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">root</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">#</P>
+</I><P ALIGN="JUSTIFY"></P>
+<H4>Las cuentas, el fichero passwd
+</H4><P ALIGN="JUSTIFY">Ahora ya sabes que hay dos tipos de usuarios bien distinguidos en un sistema UNIX. Si un usuario puede entrar en un sistema es porque tiene una cuenta, esto lo entendemos, ahora bien ¿ C&oacute;mo sabe el sistema qu&eacute; usuarios pueden entrar y cu&aacute;les no ? A trav&eacute;s del fichero passwd. Localic&eacute;moslo. El fichero passwd se encuentra, en la mayor&iacute;a de sistemas UNIX en el directorio /etc. Es s&oacute;lo modificable por el root, pero le&iacute;ble por todos los usuarios. Eso es un gran fallo ya que se puede aprovechar muchas veces para desencriptar contrase&ntilde;as, algo que vamos a ver en el cap&iacute;tulo 4.</P>
+<P ALIGN="JUSTIFY">El fichero passwd contiene las cuentas del sistema, es decir, contiene la informaci&oacute;n de todos los usuarios que pueden hacer login al sistema, independientemente de su acceso (ordinario o root). </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Es interesante que empieces a meterte en sistemas que acepten cuentas an&oacute;nimas (por ejemplo, FTP's) para que veas c&oacute;mo es el fichero passwd. La mayor&iacute;a de FTP's dejan acceder como anonymous al sistema, sin ning&uacute;n password. Consulta el final de esta unidad para hacer este ejercicio. </P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">Sabemos, pues, que el fichero password lleva las cuentas de todos los usuarios del sistema. Cada linea del fichero es una cuenta, y en esta linea hay representados estos elementos:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>login del usuario (ya sabemos lo que es)</LI>
+<LI><P ALIGN=JUSTIFY>password del usuario (no os ilusioneis, nunca aparece tal como es)</LI>
+<LI><P ALIGN=JUSTIFY>nombre del usuario (en algunos sistemas) o n&uacute;mero del usuario (en otros sistemas)</LI>
+<LI><P ALIGN=JUSTIFY>grupo al que pertenece el usuario</LI>
+<LI><P ALIGN=JUSTIFY>directorio de inicio del usuario</LI>
+<LI><P ALIGN=JUSTIFY>shell del usuario </LI></UL>
+</UL>
+
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">En otra unidad veremos muchas m&aacute;s cosas sobre el fichero passwd, y aprenderemos a crackearlo y a aprovecharlo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Desde nuestro LINUX podemos crear cuentas, con el comando adduser. Simplemente hay que teclear adduser y ir contestando a las preguntas que va haciendo.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Ejercicios para LINUX</H4>
+<P ALIGN="JUSTIFY">Ahora, conviene que vayas practicando con tu LINUX. Te recomiendo que hagas estos ejercicios:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1 - Crea directorios y ficheros. Por ejemplo, puedes empezar por crear un directorio con tu nombre y empezar a escribir un diario de tus experiencias como hacker.<I> </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para editar o crear ficheros puedes usar el editor "vi". Simplemente tienes que escribir "vi" y el nombre de fichero que quieras crear/editar.  Inicialmente, con la letra A empiezas a escribir. Con ESC activas el modo de no-escribir con el que puede borrar l&iacute;neas apretando dos veces la tecla R,  con ":wq" salvas lo que has escrito y con ":q!" quitas sin salvar.</P>
+<P ALIGN="JUSTIFY">Pero mejor aprende a usar el editor ED, porque el Vi no est&aacute; en todos los sistemas UNIX.</P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">2 - Configura tu Linux para el acceso a Internet. Esto puedes conseguirlo buscando informaci&oacute;n al respeto. Consulta el curso de Linux de Macedonia, o busca por Internet, seguro que encontrar&aacute;s programas o informaci&oacute;n para hacerlo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3 - Haz sesiones en FTP's. Esto lo puedes hacer escribiendo FTP y el host de la m&aacute;quina en la que quieres entrar. Muchos FTP's aceptan usuarios an&oacute;nimos, as&iacute; que no hay problema. Busca y b&aacute;jate el archivo passwd y empieza a mir&aacute;rtelo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">4 - Curiosea sanamente en tu LINUX. Esto quiere decir que no toques algo si no sabes lo que es, simplemente ded&iacute;cate a moverte por los directorios y a observar qu&eacute; hay. Siempre con mucho cuidado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">5 - Crea cuentas, con el comando adduser.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Haz lo que quieras en tu LINUX siempre que vayas con cuidado. El curso de LINUX de la revista Macedonia no debes dejar de consultarlo nunca. Por mi parte, nos vemos en la pr&oacute;xima unidad. La pr&oacute;xima ser&aacute; una unidad te&oacute;rica sobre sistemas UNIX (analizar&eacute; cada tipo y explicar&eacute; sus fallos de seguridad). Pod&eacute;is enviarme e-mails si ten&eacute;is dudas sobre esta lecci&oacute;n.</P>
+<P ALIGN="JUSTIFY">¡ Nos vemos !</P>
+
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulag.htm"><font FACE="ARIAL"><B>[Breve Introducción al Mundo del Hacking]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

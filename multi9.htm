@@ -1,0 +1,296 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 10. <br> Programación de la Sound Blaster (I).
+</h3>
+<H4>3.- Introducci&oacute;n a la tarjeta de sonido Sound Blaster</H4>
+<B><FONT FACE="Arial">3.1.- Especificaciones T&eacute;cnicas</FONT></B>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Creada por la compa&ntilde;&iacute;a Creative Labs, esta tarjeta de
+sonido ofrece las siguientes posibilidades a los programadores, sin atender
+a consideraciones sobre las distintas versiones (1.0, 1.5, 2.0, Pro, ASP,
+32...):
+<UL>
+<LI>
+Sonido sintetizado FM (modulaci&oacute;n por frecuencia)</LI>
+
+<LI>
+Sonido digital</LI>
+
+<LI>
+Entrada de audio (para grabaci&oacute;n de samples)</LI>
+
+<LI>
+Gameport (puerto de entrada de Joystick)</LI>
+
+<LI>
+Puerto MIDI</LI>
+
+<LI>
+Amplificador de sonido</LI>
+</UL><p align=justify>
+Esta tarjeta de audio tiene una serie de chips electr&oacute;nicos que
+se encargan de traducir los n&uacute;meros en ondas sonoras audibles por
+el hombre. Para ello, cuenta con dos tipos de chips, principalmente:
+<UL>
+<LI>
+Los chips <B>FM</B></LI>
+
+<LI>
+El <B>DSP</B></LI>
+</UL>
+
+<DIR>
+<DIR><p align=justify>Los chips FM se encargan de traducir la informaci&oacute;n num&eacute;rica
+que le suministra el software en ondas sonoras que llegan a la salida de
+audio de la tarjeta. Estos sonidos son de <I>"nueva"</I> creaci&oacute;n,
+es decir, no tienen que estar grabados previamente, como ocurre con los
+<B>samples</B> (sonidos digitalizados), sino que son generados por la propia
+tarjeta. La s&iacute;ntesis de sonido surge como una necesidad de crear
+estos de forma barata, es decir, sin tener que gastar mucho dinero en el
+hardware que se necesita para la memoria RAM, la cual es imprescindible
+en el caso del sonido digital.
+
+<P align="justify">La parte de estos chips, de la compa&ntilde;&iacute;a Yamaha, que m&aacute;s
+nos interesan son los diferentes componentes que est&aacute;n envueltos
+en la creaci&oacute;n del sonido. Estos componentes o registros de los
+chips FM pueden ser programados por software, de forma que cambiando su
+contenido (num&eacute;rico, por supuesto), podemos hacer que el sonido
+<I>"suene"</I> de diferente forma cada vez. Con ellos logramos diferentes
+instrumentos o efectos sonoros con lo cual la puerta est&aacute; abierta
+para hacer los cambios que queramos, rompiendo esta flexibilidad con la
+rigidez de algunos instrumentos que tienen grabados los sonidos en ROM
+y que por tanto no pueden cambiarse.
+
+<P align="justify">Los diferentes registros pueden guardarse en archivos instrumentales
+que son de peque&ntilde;o tama&ntilde;o y que gracias a los cuales podremos
+tener trompetas, tambores, laudes, saxos, flautas, etc.
+
+<P align="justify">La segunda forma de hacer m&uacute;sica y sonidos es la digital mediante
+el <B>DSP</B>. Esta es precisamente en la que se basa gran parte de este
+Proyecto. Esta forma es much&iacute;simo m&aacute;s complicada, pero presenta
+la ventaja de ofrecer una calidad mayor, aunque esta estar&aacute; siempre
+en consonancia con la <B>Frecuencia de Muestreo</B>, un par&aacute;metro
+que mide la cantidad de informaci&oacute;n que vamos a tomar del sonido
+<I>"externo" </I>(medido en hertzios) y que por lo tanto har&aacute; que
+var&iacute;e el tama&ntilde;o en bits de nuestro sample. Un minuto de informaci&oacute;n
+sonora, por ejemplo nuestra voz, necesita m&aacute;s de 10 Megabytes de
+disco duro si la grabamos en est&eacute;reo con una frecuencia de muestreo
+de 44Khz.</DIR>
+</DIR>
+
+<CENTER><IMG SRC="jpg/multi6.jpg" HEIGHT=81 WIDTH=254></CENTER>
+
+
+<P align="justify">Como se ve en el gr&aacute;fico, los segundos equivalen a la frecuencia
+en hertzios, por lo que a mayor frecuencia de digitalizaci&oacute;n por
+el mismo espacio de tiempo, ser&aacute; necesario mayor espacio de almacenamiento
+para reflejar los cambios en las ondas.
+
+<P align="justify"><B>&nbsp;</B>
+
+<P align="justify"><B><FONT FACE="Arial">3.2.- Los Puertos de la Sound Blaster</FONT></B>
+
+<P align="justify">Lo primero que hay que tener en cuenta cuando un programa va a ejecutarse
+y necesita la existencia de una <B>Sound Blaster</B> (SB), es intentar
+detectar si est&aacute; instalada, anulando la salida si no lo est&aacute;
+o, por el contrario, activar las rutinas pertinentes si se encuentra presente
+en el equipo.
+
+<P align="justify">La <B>SB</B> est&aacute; conectada al PC mediante uno de los slots de
+expansi&oacute;n, los cuales a su vez se conectan con el microprocesador
+central por medio de unas v&iacute;as o pistas electr&oacute;nicas especiales
+llamadas <B>BUS</B>. El procesador (CPU) est&aacute;, pues, conectado directamente
+con la tarjeta SB. Cuando un elemento nuevo se conecta al puerto ,al cuerpo
+del PC, necesita disponer de un canal de comunicaciones especial y espec&iacute;fico
+con el procesador. Es como si fuese un canal de televisi&oacute;n, pero
+que en este caso se llama <B>puerto</B> (port).
+
+<P align="justify">El puerto de comunicaciones sirve como si se tratase de un muelle de
+carga. En &eacute;l se dejan datos y se recogen datos. La CPU deja informaci&oacute;n
+y los chips de la SB toman y dejan informaci&oacute;n nueva para que la
+CPU sepa en qu&eacute; estado de funcionamiento se encuentra. Funcionan
+exactamente igual que una celdilla RAM, es decir, tiene 8 bits donde se
+pueden guardar ceros y unos.
+
+<P align="justify">Los puertos de que puede disponer un ordenador PC son bastantes, concretamente
+65536 diferentes. Potencialmente este n&uacute;mero significa que se pueden
+conectar 65536 perif&eacute;ricos al PC, pero en la realidad no, ya que
+algunos perif&eacute;ricos, entre ellos la SB, utilizan varios puertos
+a la vez.
+
+<P align="justify">La tarjeta SB tiene adjudicados, o mejor dicho escogidos por la compa&ntilde;&iacute;a
+creadora, un rango de puertos sobre los que puede funcionar, teniendo en
+cuenta no interaccionar con otros elementos. Estos se pueden escoger por
+el usuario cambiando la posici&oacute;n de un <B>jumper</B> (peque&ntilde;o
+conector de color negro normalmente, que sirve para puentear las patillas
+met&aacute;licas o pins de ciertos elementos hardware). La posici&oacute;n
+de conexi&oacute;n de dicho jumper podr&aacute;, posteriormente, detectarse
+desde nuestros programas. La raz&oacute;n de este cambio se basa en la
+posible colisi&oacute;n entre dos perif&eacute;ricos, ya que como se indic&oacute;
+antes, el canal de acceso a la CPU debe ser exclusivo.
+
+<P align="justify">De todos los puertos de la SB, el m&aacute;s importante y el primero
+que debemos conocer es el puerto <B>BASE</B>. Este es el que sirve como
+referencia a los dem&aacute;s y el que se puede configurar mediante el
+jumper. As&iacute; tenemos el siguiente rango de posibles puertos a elegir:
+210h, 220h, 234h, 240h, 250h, y 260h.
+
+<P align="justify">Desde este puerto parten los otros puertos de entrada y salida de la
+tarjeta, los cuales est&aacute;n siempre a la misma distancia num&eacute;rica
+del puerto base. Con ello, y s&oacute;lo cambiando el BASE, cambian los
+dem&aacute;s.
+
+<P align="justify">Por ejemplo, los puertos del <B>DSP</B> (Digital Sound Procesor) o verdadero
+coraz&oacute;n de la SB est&aacute;n siempre a la misma distancia del puerto
+base de entrada y salida (I/O port, base address).
+
+<P align="justify">En la siguiente tabla de puertos del DSP podemos ver esto &uacute;ltimo:
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLPADDING=4 WIDTH="395" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="15%"><B>02x6h</B></TD>
+
+<TD VALIGN=TOP WIDTH="59%">DSP Reset Port</TD>
+
+<TD VALIGN=TOP WIDTH="26%">S&oacute;lo escritura</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%"><B>02xAh</B></TD>
+
+<TD VALIGN=TOP WIDTH="59%">DSP Read Data Port</TD>
+
+<TD VALIGN=TOP WIDTH="26%">S&oacute;lo lectura</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%"><B>02xCh</B></TD>
+
+<TD VALIGN=TOP WIDTH="59%">DSP Write Data, Command</TD>
+
+<TD VALIGN=TOP WIDTH="26%">Escritura</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%"><B>02xCh</B></TD>
+
+<TD VALIGN=TOP WIDTH="59%">DSP Write Buffer Status (bit 7)</TD>
+
+<TD VALIGN=TOP WIDTH="26%">Lectura</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%"><B>02xEh</B></TD>
+
+<TD VALIGN=TOP WIDTH="59%">DSP Data Available Status (bit 7)</TD>
+
+<TD VALIGN=TOP WIDTH="26%">S&oacute;lo lectura</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">La <I>"x"</I> central deber&aacute; sustituirse por los n&uacute;meros
+1,2,3,4,5 y 6, que son las posibles opciones. Por ejemplo, si el puerto
+base est&aacute; en la direcci&oacute;n 220h, el puerto DSP Read Data Port
+estar&aacute; en el 22Ah.
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

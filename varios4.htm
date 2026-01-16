@@ -1,0 +1,596 @@
+<HTML>
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:i9792523@petra.euitio.uniovi.es">José Conde "Rewin".</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Sistema de ficheros del MS-DOS </H3>
+<H4>Organizaci&oacute;n f&iacute;sica del disco.</H4>
+<FONT color="#000000" size=2 face="arial" >        
+<P align="JUSTIFY">
+Un disco est&aacute; dividido en pistas concentr&iacute;cas, numer&aacute;ndose estas desde el 0 (pista central) hacia fuera. Estas pistas est&aacute;n divididas a su vez en sectores: el disco est&aacute; dividido por radios, la superficie del disco comprendida entre dos de estos radios consecutivos y dos pistas tambi&eacute;n consecutivas es lo que se llama sector. Los sectores tienen todos la misma capacidad de almacenamiento, que es de 512 bytes. El disco m&aacute;s frecuentemente usado (doble cara, alta densidad) est&aacute; compuesto de 80 pistas por cara y 18 sectores por pista. Haciendo un c&aacute;lculo r&aacute;pido podemos calcular la capacidad de estos discos (1440 KB.) <BR>
+</P>
+</FONT><FONT FACE="Arial" SIZE=1><H5>capacidad= caras x disco x pistas x sectores x capacidad sectores <BR>
+capacidad FD=2 x 1 x 80 x 18 x 512 = 1474560B. <BR>
+<BR>
+1474560 Bytes / 1024 = 1440 KB.</H5>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Los sectores se numeran en sentido antihorario empezando por el <I>agujero &iacute;ndice</I> (sector 1). <BR>
+<BR>
+Un determinado sector queda localizado mediante un sistema de coordenadas tridimensional: cara, pista, sector. Esta notaci&oacute;n es la utilizada por la ROM-BIOS para identificar un sector. Sin embargo el DOS utiliza un &uacute;nico n&uacute;mero para cada sector, imaginando como si los sectores estuvieran unos a continuaci&oacute;n de los otros (sector 0=sector 1 de la pista 0 de la cara 0, se contin&uacute;a con los sectores de la pista. Cuando se acaba la pista, se cambia de cara y despu&eacute;s de pista volviendo a la cara 0... hasta el final del disco). </P>
+</FONT><FONT FACE="Arial"><H4>Distribuci&oacute;n del espacio del diskette</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">Despu&eacute;s de un formateo del disco, hay ciertas regiones del disco que quedan reservadas para guardar una informaci&oacute;n necesaria para la gesti&oacute;n del disco. <BR>
+</DT>
+</DL>
+</FONT><FONT FACE="Arial"><H4>Podemos dividir el diskette en cuatro partes:</H4>
+<OL>
+
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY"><LI>Registro de arranque. </LI></DT>
+<DT ALIGN="JUSTIFY"><LI>Tabla de asignaci&oacute;n de ficheros (FAT). </LI></DT>
+<DT ALIGN="JUSTIFY"><LI>Area del directorio ra&iacute;z. </LI></DT>
+<DT ALIGN="JUSTIFY"><LI>Area de datos </LI></DT>
+</DL></OL>
+
+</FONT><FONT FACE="Arial"><H4>1. Registro de Arranque.</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">Ocupa siempre el sector 0. Todos los discos tienen registro de arranque (boot-record), a&uacute;n cuando carezca de sistema operativo. Si lo tiene ser&aacute; el responsable de cargar el sistema operativo y si no de dar el mensaje: <BR>
+</DT>
+<I><DT ALIGN="CENTER">Disco sin sistema o error en disco <BR>
+C&aacute;mbielo y pulse una tecla </DT>
+</I><DT><BR>
+<BR>
+La estructura de &eacute;ste registro de arranque es la siguiente: <BR>
+</DT>
+</DL></FONT>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=390>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P>Contenido</B></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P>Direcci&oacute;n</B></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P>Longitud (B)</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Instrucci&oacute;n JMP</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>0</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>3</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Identificador de sistema y versi&oacute;n</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>3</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>8</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Bytes por sector</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>11</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Sectores por cluster</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>13</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>1</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de sectores reservados</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>14</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de copias de la FAT</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>16</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>1</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de elementos del directorio ra&iacute;z</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>17</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>9</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de sectores del disco</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>19</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Descriptor del soporte</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>21</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>1</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Sectores por FAT</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>22</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Sectores por pista</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>24</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de caras</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>26</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de sectores ocultos especiales</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>28</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>4</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero total de sectores</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>32</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>4</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de unidad f&iacute;sica</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>36</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>2</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Identificaci&oacute;n del registro arranque</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>38</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>1</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>N&uacute;mero de serie del volumen</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>39</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>4</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Etiqueta del volumen</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>43</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>11</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Identificaci&oacute;n sistema de archivos</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>54</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>8</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="54%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>Programa de arranque</H5></FONT></TD>
+<TD WIDTH="25%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>62</H5></FONT></TD>
+<TD WIDTH="21%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5>450</H5></FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">&nbsp;</DT>
+<DT ALIGN="JUSTIFY">Esta tabla contiene la informaci&oacute;n de los discos formateados con versiones posteriores a la 4.00 del DOS. Las versiones anteriores ofrec&iacute;an una tabla con menos campos. </DT>
+</DL>
+</FONT><FONT FACE="Arial"><H4>2. Tabla de asignaci&oacute;n de ficheros (FAT).</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">Esta tabla es usada para conocer la ubicaci&oacute;n de los archivos en el disco. Contiene un n&uacute;mero para cada cluster del disco. </DT>
+<DT ALIGN="JUSTIFY">Un cluster es la unidad m&iacute;nima de asignaci&oacute;n del DOS y est&aacute; constitu&iacute;da por un n&uacute;mero determinado de sectores consecutivos. </DT>
+<DT ALIGN="JUSTIFY">Cada entrada de la FAT ocupa 12 bits en los floppies y 16 bits en los discos duros (a mayor n&uacute;mero de bits de la FAT, podremos referenciar discos de mayor tama&ntilde;o). </DT>
+<DT ALIGN="JUSTIFY"><BR>
+Los valores que puede tomar una entrada de la FAT son las siguientes (en 12 bits): </DT>
+</FONT><DD></DD>
+</DL>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=363>
+<TR><TD WIDTH="48%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>000 (0000 para 16 bits)</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>cluster libre.</FONT></TD>
+</TR>
+<TR><TD WIDTH="48%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FF0 y FF6</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>cluster reservado.</FONT></TD>
+</TR>
+<TR><TD WIDTH="48%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FF7</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>cluster inutilizado.</FONT></TD>
+</TR>
+<TR><TD WIDTH="48%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FF8 y FFF</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>cluster final de fichero.</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<DL>
+<DT ALIGN="JUSTIFY"><BR>
+<FONT FACE="Arial" SIZE=2>Cualquier otro valor indica la direcci&oacute;n del siguiente cluster del fichero. Estos valores est&aacute;n en formato hexadecimal. Veamos un ejemplo: </DT>
+</FONT><DD></DD>
+<DD>&nbsp;</DD>
+</DL>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=220>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">FAT</B></FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Cluster</B></FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Contiene</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>000</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>0</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>libre</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>004</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>1</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>hola.txt (1)</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FF7</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>2</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>roto</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>006</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>3</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>adios.txt (1)</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>005</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>4</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>hola.txt (2)</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FFF</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>5</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>hola.txt (3)</FONT></TD>
+</TR>
+<TR><TD WIDTH="18%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FFF</FONT></TD>
+<TD WIDTH="30%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>6</FONT></TD>
+<TD WIDTH="52%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>adios.txt (2)</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">&nbsp;</DT>
+<DT ALIGN="JUSTIFY">Estos valores son err&oacute;neos, ya que nunca podr&aacute;&nbsp; empezar el primer cluster de datos en la posici&oacute;n inicio del disco. Es un simple ejemplo. </DT>
+<DT ALIGN="JUSTIFY"><BR>
+La FAT ocupa una extensi&oacute;n de 9 sectores (en un floppie) teniendo una copia por motivos de seguridad (1-9;9-18). </DT>
+<DT ALIGN="JUSTIFY"><BR>
+Por lo tanto, por ahora tenemos: </DT>
+</FONT><DD></DD>
+</DL>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=390>
+<TR><TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>sector</FONT></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>0</FONT></TD>
+<TD WIDTH="59%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Registro de arranque</FONT></TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>sectores</FONT></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>1-9</FONT></TD>
+<TD WIDTH="59%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FAT</FONT></TD>
+</TR>
+<TR><TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>sectores</FONT></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>9-18</FONT></TD>
+<TD WIDTH="59%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>FAT (copia de seguridad)</FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial"><H4>&nbsp;</H4>
+<H4>3. Directorio ra&iacute;z:</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">El directorio ra&iacute;z contiene informaci&oacute;n sobre los ficheros contenidos en &eacute;l. Por cada fichero o subdirectorio del directorio ra&iacute;z, existe una entrada en el directorio ra&iacute;z de 32 bytes. Estos bytes contienen la siguiente informaci&oacute;n: </DT>
+</FONT><DD></DD>
+</DL>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=475>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Contenido del campo</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Byte inicial</B></FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<B><FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">Longitud</B></FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Nombre del fichero</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">0</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">8 Bytes</FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Extensi&oacute;n</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">8</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">3 Bytes </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Atributo</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">11</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">1 Byte </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Campo no utilizado</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">12</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">10 Bytes </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Hora de creaci&oacute;n</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">22</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">2 Bytes </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Fecha de creaci&oacute;n</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">24</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">2 Bytes </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Entrada en la FAT</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">26</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">2 Bytes </FONT></TD>
+</TR>
+<TR><TD WIDTH="45%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>Tama&ntilde;o del fichero</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">28</FONT></TD>
+<TD WIDTH="27%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P ALIGN="CENTER">4 Bytes </FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">En el caso de un floppie disk, el directorio ra&iacute;z puede contener 224 ficheros (32 B * 224 = 7168 B / 512 B = 14 sectores ocupa el directorio ra&iacute;z) </DT>
+<DT ALIGN="JUSTIFY"><BR>
+El campo atributo (1 Byte de longitud) contiene informaci&oacute;n acerca de las caracter&iacute;sticas del fichero. Esta informaci&oacute;n se detalla as&iacute;: </DT>
+</FONT><DD></DD>
+</DL>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1 WIDTH=512>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 0</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Fichero s&oacute;lo lectura</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 1</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Fichero oculto</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 2</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Fichero del sistema</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 3</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Etiqueta del volumen (si este bit est&aacute;&nbsp;activo, significa que el <BR>
+nombre (8 caracteres) y la extensi&oacute;n (3 caracteres) de este <BR>
+fichero conforman la etiqueta (11 caracteres) del disco. Este <BR>
+bit s&oacute;lo tiene sentido en el directorio ra&iacute;z).</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 4</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Fichero directorio (si es un subdirectorio)</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 5</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">Archivado (a 0 si el archivo no ha cambiado desde la <BR>
+&uacute;ltima copia de seguridad)</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 6</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">No se utiliza</H5></FONT></TD>
+</TR>
+<TR><TD WIDTH="11%" VALIGN="MIDDLE">
+<FONT FACE="Arial" SIZE=2><P>bit 7</FONT></TD>
+<TD WIDTH="89%" VALIGN="MIDDLE">
+<FONT FACE="Arial"><H5 ALIGN="JUSTIFY">No se utiliza</H5></FONT></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">&nbsp;</DT>
+<DT ALIGN="JUSTIFY">La hora de creaci&oacute;n o de &uacute;ltima modificaci&oacute;n se codifica en 2 bytes, con el byte menos significativo en primer lugar. La codificaci&oacute;n se hace seg&uacute;n la f&oacute;rmula: </DT>
+</FONT><DD>&nbsp;</DD>
+</DL>
+<I><FONT FACE="Arial"><H5 ALIGN="CENTER">Hora_codificada=hora*2048+minuto*32+segundo/2 </H5>
+</I></FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT>Para decodificar la hora se hace: <BR>
+</DT>
+</DL>
+</FONT><I><FONT FACE="Arial"><H5 ALIGN="CENTER">Hora=hora_codificada div 2048 Minutos=(hora_codificada mod 2048) div 2 Segundos=((hora_codificada mod 2048) mod 32) * 2 </H5>
+</I></FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">La codificaci&oacute;n de la fecha es la siguiente: </DT>
+</FONT><DD>&nbsp;</DD>
+</DL>
+<I><FONT FACE="Arial"><H5 ALIGN="CENTER">Fecha=(a&ntilde;o - 1980)*512 + mes*32 + d&iacute;a </H5>
+</I></FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">El campo de entrada en la FAT indica el n&uacute;mero del cluster donde comienza el fichero. El tama&ntilde;o del fichero se indica en esos 4 bytes sin ning&uacute;n tipo de codificaci&oacute;n. </DT>
+</DL>
+</FONT><FONT FACE="Arial"><H4>4. Area de datos.</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">Es el resto del espacio del disco, destinado a guardar los datos de los ficheros. Ocupar&aacute; en un floppie 2880-33 (1+18+14) = 2847 sectores. Esta es la raz&oacute;n de que el espacio dedicado a datos en un diskette sea 1.423,5 Kb y no los 1.440 que es la capacidad absoluta del floppie. </DT>
+</DL>
+</FONT><FONT FACE="Arial"><H4>Caracter&iacute;sticas especiales en los discos duros.</H4>
+</FONT><FONT FACE="Arial" SIZE=2><DL>
+<DT ALIGN="JUSTIFY">Cada partici&oacute;n de disco duro que albergue al sistema operativo DOS se comportar&aacute;&nbsp;y est&aacute; constitu&iacute;da igual que un disquete, con sus 4 partes diferenciadas, si bien el tama&ntilde;o de cada una ir&aacute; en funci&oacute;n del tama&ntilde;o de la partici&oacute;n en s&iacute;. </DT>
+<DT ALIGN="JUSTIFY">La forma de gestionar las particiones es sencilla. El primer sector de todo disco duro contiene el registro de arranque principal, donde definir&aacute;&nbsp;cada una de las particiones del disco. Se pueden definir hasta 4 particiones, y por cada una de ellas se tiene la siguiente informaci&oacute;n: <BR>
+</DT>
+
+<UL>
+<B><DT ALIGN="JUSTIFY"><LI>Indicador de arranque:</B> Indica si esa partici&oacute;n es arrancable o no. Si es arrancable le sigue inmediatamente la direcci&oacute;n del registro de arranque de esa partici&oacute;n, con el conocido sistema de coordenadas tridimensionales (cilindro, sector, cabeza). </LI></DT>
+<B><DT ALIGN="JUSTIFY"><LI>Indicador del sistema:</B> Indica el sistema operativo que contienen la partici&oacute;n. </LI></DT>
+<B><DT ALIGN="JUSTIFY"><LI>N&uacute;mero de sectores relativo:</B> Es el n&uacute;mero de sectores que preceden a esa partici&oacute;n. </LI></DT>
+<B><DT ALIGN="JUSTIFY"><LI>N&uacute;mero de sectores:</B> los que componen la partici&oacute;n. </LI></DT></UL>
+
+<DT ALIGN="JUSTIFY"><BR>
+<BR>
+Por &uacute;ltimo, los dos &uacute;ltimos bytes del registro de arranque principal son lo que se denomina la firma, cuyo valor habitual es 55AA h. </DT>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

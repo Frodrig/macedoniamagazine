@@ -1,0 +1,973 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 5<br>
+Objetos geom&eacute;tricos y sus transformaciones.
+</H3>
+
+<P ALIGN=JUSTIFY>
+¿Qué tal ha ido el mes de Agosto?...a los ordenadores ya sab&eacute;is
+que fatal porque eso de 40 grados a la sombra les sienta como un ladrillo
+al estomago!!!
+
+<P ALIGN="JUSTIFY">Bueno pues aqu&iacute; ando de nuevo para seguiros llenando la cabeza
+de "3Dmanias" m&iacute;as...8). Si record&aacute;is, en el anterior cap&iacute;tulo
+habl&aacute;bamos de interacci&oacute;n y programaci&oacute;n orientada
+al evento. Gracias a eso ya debi&eacute;ramos ser medianamente capaces
+de crear una ventana para "graficar" sobre ella. Adem&aacute;s hablamos
+de control del rat&oacute;n, del teclado, de men&uacute;s... Finalic&eacute;
+el capitulo puntualizando la necesidad de utilizar el "<B>frame buffer</B>"
+para as&iacute; evitar el "<B>flicker</B>" o molesto parpadeo en pantalla.
+
+<P ALIGN="JUSTIFY">&iquest;Intent&aacute;steis compilar el programa de la pasada edici&oacute;n?,
+espero que funcionara correctamente y os aclarara much&iacute;simas dudas.
+
+<P ALIGN="JUSTIFY">Hoy inauguramos un nuevo cap&iacute;tulo que considero el m&aacute;s
+importante de todos. Antes de poder crear un escenario tendremos que modelar
+y posicionar toda la geometr&iacute;a en su sitio. Esto solo ser&aacute;
+posible mediante la correcta aplicaci&oacute;n de diferentes conceptos
+algebraicos que hoy mismo empezar&eacute; a relataros.
+
+<P ALIGN="JUSTIFY">S&eacute; que puede parecer algo pesado hablar un poco de <B>Algebra</B>
+pero creedme si os digo que es totalmente IMPRESCINDIBLE si quer&eacute;is
+generar im&aacute;genes realistas 3D. Si n&oacute;, &iquest;c&oacute;mo
+sabr&iacute;ais la trayectoria que sigue un proyectil en un juego?, o &iquest;c&oacute;mo
+deducir&iacute;ais lo que el personaje debe ver si gira el cuello a la
+derecha un &aacute;ngulo de 20 grados?, o &iquest;c&oacute;mo generar&iacute;ais
+correctamente proyecciones del mundo 3D a la pantalla 2D?
+
+<P ALIGN="JUSTIFY">Vamos a ello que me parece que ya os tengo medio convencidos/as...
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Algebra af&iacute;n.</FONT></B>
+
+<P ALIGN="JUSTIFY">En gr&aacute;ficos trabajamos con conjuntos de objetos geom&eacute;tricos
+como puntos, l&iacute;neas, pol&iacute;gonos...pero en definitiva podemos
+generar cualquier objeto por complejo que sea a partir de tres entidades
+m&iacute;nimas, siempre necesarias:
+<UL>
+<LI>
+<B>Escalares</B>, normalmente n&uacute;meros reales a lo largo de toda
+la recta real.</LI>
+
+<LI>
+<B>Puntos</B>, definidos usualmente como coordenadas XYZ respecto a un
+sistema de referencia.</LI>
+
+<LI>
+<B>Vectores</B>, con una direcci&oacute;n definida por dos puntos (inicio
+y fin) y un sentido.</LI>
+</UL>
+Paralelamente necesitamos definir conjuntos de entidades que cumplan unos
+ciertos requisitos. Me refiero a los "temidos" espacios que suelen mencionarse
+en toda clase de Algebra lineal y matricial que se precie. Comentar&eacute;
+3 de ellos:
+<UL>
+<LI>
+<B>Espacios vectoriales</B>.</LI>
+
+<LI>
+<B>Espacios afines</B>.</LI>
+
+<LI>
+<B>Espacios euclidianos</B>.</LI>
+</UL>
+Suenan rar&iacute;simos pero ya ver&eacute;is que la parte mas dif&iacute;cil
+es precisamente esa, el nombre!!
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Espacios vectoriales</FONT></B>
+
+<P ALIGN="JUSTIFY">Un espacio vectorial es un conjunto, &iquest;de?, venga hombre &iquest;de?...pues
+de <B>vectores</B> claro...por eso se llama vectorial, &iquest;no?. Adem&aacute;s
+de vectores existen dos operaciones definidas en el espacio. Suelen ser:
+<UL>
+<LI>
+La <B>suma</B> de vectores (+).</LI>
+
+<LI>
+El <B>producto</B> de un vector por un escalar (&middot;).</LI>
+</UL>
+Con los vectores y con estas operaciones asociadas podremos hacer "maravillas"
+que en pantalla deleitar&aacute;n a nuestros ojos por medio de animaciones,
+transformaciones y efectos especiales.
+
+<P ALIGN="JUSTIFY">En un espacio vectorial siempre existe un elemento distinguido y especial.
+Es lo que suele llamarse <B>origen</B> o <B>vector nulo 0</B>. Respecto
+a este se cumplen algunas propiedades casi siempre obvias como que:
+<CENTER></CENTER>
+
+<CENTER><B>u</B> + 0 = <B>u</B></CENTER>
+
+<CENTER></CENTER>
+
+<CENTER><B>u</B> + (-<B>u</B>) = 0</CENTER>
+
+<CENTER></CENTER>
+
+<CENTER>donde <B>u</B> es un vector cualquiera de nuestro espacio vectorial.</CENTER>
+
+
+<P ALIGN="JUSTIFY">Operando entre dos vectores (o sea sum&aacute;ndolos) se cumplir&aacute;:
+<UL>
+<LI>
+Propiedad <B>conmutativa</B>, <B>u</B> + <B>v</B> = <B>v</B> + <B>u</B>;</LI>
+
+<LI>
+Propiedad <B>asociativa</B>, <B>u</B> + (<B>v</B> + <B>w</B>) = (<B>u</B>
++ <B>v</B>) + <B>w</B>, para todo vector <B>u</B>,<B>v</B> y <B>w</B> que
+pertenezca al espacio.</LI>
+</UL>
+En cuanto a operar un escalar (numero real) con un vector, se cumplir&aacute;n
+siempre las llamadas propiedades <B>distributivas</B>...
+<UL>
+<LI>
+a &middot; (<B>u</B> + <B>v</B>) = a&middot;<B>u</B> + a&middot;<B>v</B>;</LI>
+
+<LI>
+(a + b) &middot; <B>u</B> = a&middot;<B>u</B> + b&middot;<B>u</B>, para
+cualesquier escalar a, b y vector <B>u</B> y <B>v</B>.</LI>
+</UL>
+Bueno y, &iquest;c&oacute;mo sumamos dos vectores? o &iquest;c&oacute;mo
+multiplico a un vector por un escalar?. Mirad la siguiente figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig1.gif" HEIGHT=163 WIDTH=362></CENTER>
+
+<CENTER><B><I>Figura 1: Operaciones entre vectores.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">Hombre creo que las im&aacute;genes ya hablan por s&iacute; solas. Adem&aacute;s
+probablemente ya te hayan explicado esto en alguno de tus cursos. De todas
+formas lo comentar&eacute; por si acaso....que pa esssooo soy el profeeeee!!!!
+
+<P ALIGN="JUSTIFY">La multiplicaci&oacute;n de un vector por un escalar cambia su <B>longitud</B>
+pero jamas su <B>direcci&oacute;n</B> (recordad que la direcci&oacute;n
+es la l&iacute;nea imaginaria sobre la que el vector se apoya...). Tambi&eacute;n
+podr&iacute;amos cambiar el <B>sentido</B> de un vector si lo multiplic&aacute;ramos
+por un escalar negativo.
+
+<P ALIGN="JUSTIFY">En cuanto a la suma de vectores, se define por el "<B>axioma cabeza-cola</B>"
+como dicen los americanos. Creamos el vector
+
+<P ALIGN="JUSTIFY"><B>w</B> = <B>u</B> + <B>v</B>
+
+<P ALIGN="JUSTIFY">a partir de unir la cabeza de <B>u</B> a la cola de <B>v</B>, como ten&eacute;is
+reflejado en la figura anterior.
+
+<P ALIGN="JUSTIFY">En temas gr&aacute;ficos hablaremos sobre todo de un espacio vectorial,
+<B>R<SUP>n</SUP></B> llamado <B>producto cartesiano de n valores reales</B>.
+&iquest;A qu&eacute; me refiero?, hombre suena fatal pero es muy sencillo:
+
+<P ALIGN="JUSTIFY">Se cogen n n&uacute;meros reales u1, u2, u3, ... , uN...
+
+<P ALIGN="JUSTIFY">y se escriben como un vector de los de toda la vida (u1, u2, u3, ...
+, uN) y ya tenemos un nuevo miembro de R<SUP>n</SUP>.
+
+<P ALIGN="JUSTIFY">Por tanto usaremos <B>vectores geom&eacute;tricos</B> que escritos sobre
+el papel ser&aacute;n <B>miembros de R<SUP>n</SUP></B>.
+
+<P ALIGN="JUSTIFY">Hablemos de <B>combinaciones lineales</B>.....&iquest;por favor nooooo?,
+&iquest;que hemos hecho para merecer estoooo?...no fastidi&eacute;is que
+no es para tanto!.....ehemmm. Se define una combinaci&oacute;n lineal "a
+pelo" como algo as&iacute;:
+
+<P ALIGN="JUSTIFY">Dados v1, v2, ... , vN vectores y a1, a2, ... , escalares reales....pues
+su combinaci&oacute;n lineal ser&aacute; un nuevo vector <B>w</B> tal que:
+<CENTER></CENTER>
+
+<CENTER><B>w</B> = a1&middot;v1 + a2&middot;v2 + ... + aN&middot;vN;</CENTER>
+
+
+<P ALIGN="JUSTIFY">Infinidad de objetos complejos pueden representarse internamente, antes
+de dibujarlos, como combinaciones lineales de otros. Mirad c&oacute;mo
+podemos generar una l&iacute;nea recta o un plano a partir de combinaciones
+lineales:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig2.gif" HEIGHT=252 WIDTH=556></CENTER>
+
+<CENTER><B><I>Figura 2: Combinaciones lineales.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">Se dice que un vector <B>u</B> es <B>linealmente dependiente</B> de
+un conjunto de vectores S cuando puede obtenerse el citado vector <B>u</B>
+como una combinaci&oacute;n lineal de los vectores de S. En caso contrario
+se dice que <B>u</B> es <B>linealmente independiente</B> de S.
+
+<P ALIGN="JUSTIFY">En el primer caso hablamos de crear un objeto a partir de otros ya existentes.
+En el segundo caso es imposible crear el susodicho objeto a partir de los
+que ya tenemos. Veremos ejemplos en breve, no desesper&eacute;is.
+
+<P ALIGN="JUSTIFY">Todo espacio vectorial puede generarse siempre a partir de unos pocos
+vectores. Es decir que todo vector que forme parte de un espacio vectorial
+podr&eacute; generarlo siempre como una combinaci&oacute;n lineal de otros
+vectores....siempre y cuando los escoja adecuadamente.O sea...
+<UL>
+<LI>
+Al conjunto de vectores que son capaces de generar a cualquiera de los
+miembros de un espacio vectorial se le llama <B>base</B>.</LI>
+
+<LI>
+Los vectores de una base siempre son linealmente independientes entre ellos.</LI>
+
+<LI>
+Al n&uacute;mero de vectores que integran la base se le llama la <B>dimensi&oacute;n</B>
+del citado espacio.</LI>
+</UL>
+Por <B>ejemplo</B>:
+
+<P ALIGN="JUSTIFY">El vector (1,2,5) de R<SUP>3</SUP> puede obtenerse como 1&middot;(1,0,0)
++ 2&middot;(0,1,0) + 5&middot;(0,0,1). Es decir que el vector se obtiene
+como una combinaci&oacute;n lineal de los vectores (1,0,0), (0,1,0) y (0,0,1)
+que son base de R<SUP>3</SUP> y por tanto este es un espacio de dimensi&oacute;n
+igual a 3.
+
+<P ALIGN="JUSTIFY">A los n&uacute;meros 1,2 y 5 se les llama las <B>componentes o coordenadas</B>
+del vector (1,2,5) en funci&oacute;n de la base (1,0,0), (0,1,0), (0,0,1).
+Esta es la base mas t&iacute;pica de todas y se la conoce como base <B>can&oacute;nica</B>.
+
+<P ALIGN="JUSTIFY">Un mismo espacio puede tener <B>muchas bases</B>. Puede darse el caso
+de que deseemos "<B>pasar de una base a otra</B>". Un vector expresado
+en funci&oacute;n de una base tendremos que expresarlo en funci&oacute;n
+de otra distinta, &iquest;como?...pues utilizando una <B>matriz de cambio
+de base</B>.
+
+<P ALIGN="JUSTIFY">En gr&aacute;ficos nos daremos de bruces con este problema continuamente.
+Mirad la figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig3.gif" HEIGHT=265 WIDTH=504></CENTER>
+
+<CENTER><B><I>Figura 3: Sistemas de referencia.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY"><B><U>NOTA</U></B>: con <B>"sqr"</B> me refiero al valor de la raiz
+cuadrada.
+
+<P ALIGN="JUSTIFY">El mismo vector tiene unas componentes a1, a2 y a3 respecto a un eje
+y otras componentes b1, b2 y b3 respecto del segundo. Pensad que las componentes
+en cada direcci&oacute;n coinciden con el valor de las proyecciones del
+vector en cada eje.
+
+<P ALIGN="JUSTIFY">Son dos <B>sistemas de referencia</B> o <B>ejes </B>(SR) distintos respecto
+a los cuales podemos referenciar a nuestro vector. Para pasar de un eje
+al otro aplicaremos una <B>matriz de transformaci&oacute;n</B>, tal y como
+veremos mas adelante en profundidad.
+
+<P ALIGN="JUSTIFY">Bueno bueno...&iquest;os vais situando al menos un poquit&iacute;n?...ya
+se que es duro y deber&eacute;is practicarlo ante todo para acabar teni&eacute;ndolo
+claro.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Espacios afines</FONT></B>
+
+<P ALIGN="JUSTIFY">Un espacio af&iacute;n es b&aacute;sicamente un espacio vectorial al
+cual le a&ntilde;adimos una <B>tercera entidad</B>: <B>puntos</B>. Por
+tanto en un espacio af&iacute;n contamos con:
+<UL>
+<LI>
+<B>Escalares</B>.</LI>
+
+<LI>
+<B>Vectores</B>.</LI>
+
+<LI>
+<B>Puntos</B>.</LI>
+</UL>
+En un espacio af&iacute;n prima la geometr&iacute;a por encima de la matem&aacute;tica.
+Todo se hace conceptualmente y es mas f&aacute;cil de imaginar. Veamos
+algunos ejemplillos esclarecedores.
+
+<P ALIGN="JUSTIFY">Si <B>P</B>, <B>Q</B> son dos puntos y <B>v</B>, <B>w</B> son vectores...
+
+<P ALIGN="JUSTIFY"><B>P</B> + <B>v</B> = <B>Q</B>, o sea que si a un punto le a&ntilde;adimos
+un vector...tenemos un nuevo punto!!! y por tanto <B>Q</B> - <B>P</B> =
+<B>v</B>, una resta entre dos puntos es un vector.
+
+<P ALIGN="JUSTIFY">Mas claro....mirad la figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig4.gif" HEIGHT=214 WIDTH=482></CENTER>
+
+<CENTER><B><I>Figura 4: Combinaciones afines.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">Observad que es super-intuitivo y claro... f&aacute;cil de imaginar
+en definitiva.
+
+<P ALIGN="JUSTIFY">Solemos hablar en estos espacios de <B>combinaciones afines</B> entre
+puntos. Dados <B>P</B>, <B>Q</B> puntos y t escalar real...entonces:
+<CENTER></CENTER>
+
+<CENTER><B>H</B> = <B>P</B> + t&middot;(<B>Q</B> - <B>P</B>) es la combinaci&oacute;n
+af&iacute;n de <B>P</B> y <B>Q</B> usando el escalar t.</CENTER>
+
+
+<P ALIGN="JUSTIFY">De hecho estamos haciendo justo lo que coment&aacute;bamos. <B>Q</B>
+- <B>P</B> es un vector, a este le aplicamos un factor de escala (o sea
+cambiamos su longitud) al multiplicarlo por el escalar t. Obtenemos un
+nuevo vector que a&ntilde;adimos a un punto, o sea a <B>P</B>, y por tanto
+al final hemos generado un nuevo punto llamado <B>H</B>.
+
+<P ALIGN="JUSTIFY">Observad que la &uacute;nica multiplicaci&oacute;n existente es t&middot;(<B>Q</B>
+- <B>P</B>), que es un escalar por un vector y por tanto la hemos definido.
+Si yo retoco la expresi&oacute;n anterior y la dejo as&iacute;:
+<CENTER></CENTER>
+
+<CENTER><B>H</B> = (1 - t)&middot;<B>P</B> + t&middot;<B>Q</B></CENTER>
+
+
+<P ALIGN="JUSTIFY">entonces nos quedan dos productos ( (1 - t)&middot;<B>P</B> y t&middot;<B>Q</B>
+) de un escalar por un punto y eso ni lo hemos definido ni lo imaginamos
+geom&eacute;tricamente. &iquest;Que es un punto al cual se le multiplica
+por un escalar?. No os preocup&eacute;is por esto, son jugadas matem&aacute;ticas
+que pueden apartarnos de nuestro camino. No le daremos mas importancia
+pero lo usaremos si se nos antoja pues MATEMATICAMENTE es correcto.
+
+<P ALIGN="JUSTIFY">Se dice que la combinaci&oacute;n af&iacute;n es <B>convexa</B> si el
+par&aacute;metro escalar t tiene un valor comprendido entre 0 y 1.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Ecuaci&oacute;n de una l&iacute;nea</FONT></B>
+
+<P ALIGN="JUSTIFY">Pues ya lo hemos hecho. Si a un punto inicial le sumo un vector...puedo
+obtener cualquier otro punto que pertenece a la l&iacute;nea que los contiene
+a ambos (punto y vector). Mirad la figura 4 para tenerlo m&aacute;s claro.
+
+<P ALIGN="JUSTIFY">Nuestra l&iacute;nea tiene la ecuaci&oacute;n:
+<CENTER></CENTER>
+
+<CENTER><B>P</B> + t&middot;(<B>Q</B> - <B>P</B>)</CENTER>
+
+
+<P ALIGN="JUSTIFY">donde <B>P</B> es un punto, la resta <B>Q</B>-<B>P</B> nos da un vector
+y lo alargamos m&aacute;s o menos con el escalar t...
+
+<P ALIGN="JUSTIFY">o en <B>forma param&eacute;trica</B> (el <B>par&aacute;metro</B> es
+t):
+<CENTER></CENTER>
+
+<CENTER>(1 - t)&middot;<B>P</B> + t&middot;<B>Q</B></CENTER>
+
+
+<P ALIGN="JUSTIFY">recordando siempre que t es un n&uacute;mero real.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Ecuaci&oacute;n de un plano</FONT></B>
+
+<P ALIGN="JUSTIFY">Similar a la de una l&iacute;nea pero algo mas compleja. Supongamos
+que tenemos tres puntos <B>P</B>, <B>Q</B> y <B>R</B> que no son <B>colineales</B>
+(no pertenecen a la misma l&iacute;nea). El plano en el que los tres se
+encuentran se define como:
+<CENTER></CENTER>
+
+<CENTER>(1 - s)&middot;[ (1 - t)&middot;<B>P</B> + t&middot;<B>Q</B>] +
+s&middot;<B>R</B>, en forma <B>param&eacute;trica</B> (son par&aacute;metros
+los reales s y t).</CENTER>
+
+
+<P ALIGN="JUSTIFY">&iquest;y eso de que manga te lo has sacado Oscar?. Se trata de obtener
+una expresi&oacute;n que nos permita obtener a su vez cualquier punto del
+plano al cual nos referimos (o sea el plano que contiene a <B>P</B>, <B>Q</B>
+y <B>R</B>). En ese caso podemos generar todo el plano ya que podemos encontrar
+todos sus puntos.
+<CENTER></CENTER>
+
+<CENTER><B>H</B> = (1 - t)&middot;<B>P</B> + t&middot;<B>Q</B></CENTER>
+
+
+<P ALIGN="JUSTIFY">es una combinaci&oacute;n af&iacute;n de <B>P</B> y <B>Q</B> seg&uacute;n
+t que me genera un nuevo punto <B>H</B>. Pues solo tengo que combinar ahora
+el nuevo punto <B>H</B> con otro que ya poseo, <B>R</B>:
+<CENTER></CENTER>
+
+<CENTER><B>K</B> = (1 - s)&middot;<B>H</B> + s&middot;<B>R</B></CENTER>
+
+
+<P ALIGN="JUSTIFY">y obtengo el punto final <B>K</B> que pertenece al plano. Si substituyo
+<B>H</B> por su valor obtengo la ecuaci&oacute;n que os mostr&eacute; 5
+l&iacute;neas arriba!!!
+
+<P ALIGN="JUSTIFY">Mirad la figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig5.gif" HEIGHT=267 WIDTH=453></CENTER>
+
+<CENTER><B><I>Figura 5: Ecuaci&oacute;n de un plano.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Sistemas de referencia</FONT></B>
+
+<P ALIGN="JUSTIFY">Todo...ya sean puntos o vectores, puede referenciarse a un <B>SR</B>
+(<B>sistema de referencia</B>). Para definir un SR necesito:
+<UL>
+<LI>
+Un punto que llamar&eacute; Po y que har&aacute; las veces de <B>origen</B>.</LI>
+
+<LI>
+Un conjunto de vectores v1, v2, ... , vN, <B>base</B> de nuestro espacio.</LI>
+</UL>
+En este caso:
+<UL>
+<LI>
+Todo vector <B>u</B> puede crearse como <B>u</B> = a1&middot;v1 + a2&middot;v2
++ ... + aN&middot;vN, una combinaci&oacute;n lineal de los vectores de
+la base.</LI>
+
+<LI>
+Todo punto <B>P</B> puede crearse como <B>P</B> = Po + b1&middot;v1 + b2&middot;v2
++ ... + bN&middot;vN, es decir un punto (origen) mas un vector (combinaci&oacute;n
+lineal de los vectores de la base).</LI>
+</UL>
+Evidentemente a1, a2, ... , aN y b1, b2, ... , bN son escalares.
+
+<P ALIGN="JUSTIFY">Dificilmente trabajaremos en gr&aacute;ficos con un &uacute;nico sistema
+de referencia. <B>Como m&iacute;nimo usaremos tres: el del mundo 3D, el
+de la c&aacute;mara y el de pantalla</B>. Si record&aacute;is el "<B>pipeline</B>"
+gr&aacute;fico de los primeros cap&iacute;tulos, ya coment&eacute; que
+toda la geometr&iacute;a se crea en funci&oacute;n del SR del mundo, es
+decir con coordenadas referidas al SR del mundo. Despu&eacute;s debemos
+hacer un cambio de coordenadas del SR mundo al SR de la c&aacute;mara,
+que es "la que ve" la escena. Despu&eacute;s de esto hacemos un tercer
+cambio de coordenadas de 3D a 2D (frame buffer/pantalla).
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Espacios euclidianos</FONT></B>
+
+<P ALIGN="JUSTIFY">Hemos hablado de escalares, de vectores, de puntos y de operaciones
+entre ellos. &iquest;Nos dejamos algo?, yo creo que s&iacute;. A&uacute;n
+no hemos hablado de <B>distancias</B> como la <B>distancia entre dos puntos</B>
+o el <B>valor de la longitud</B> que tiene un vector.
+
+<P ALIGN="JUSTIFY">Se&ntilde;ores/as, si queremos <B>detectar colisiones</B> entre objetos
+o <B>reaccionar con un impacto</B> a estas nos ser&aacute; imprescindible
+el conocimiento de lo que ahora os detallo.
+
+<P ALIGN="JUSTIFY">En un espacio euclidiano tienen especial importancia los <B>escalares</B>
+y los <B>vectores</B>. A&ntilde;adiremos una nueva operaci&oacute;n que
+llamaremos <B>producto escalar</B> (en ingl&eacute;s "<B>dot product</B>")
+y que genera un n&uacute;mero real a partir de dos vectores. Esta operaci&oacute;n
+se define as&iacute;:
+<CENTER></CENTER>
+
+<CENTER>Si <B>u</B>, <B>v</B> vectores y <B>u</B> = (x1, x2, ... , xN),
+<B>v</B> = (y1, y2, ... , yN) entonces su producto escalar es...</CENTER>
+
+<CENTER></CENTER>
+
+<CENTER><B>u</B> &middot; <B>v</B> = x1&middot;y1 + x2&middot;y2 + ...
++ xN&middot;yN, que es un valor real.</CENTER>
+
+
+<P ALIGN="JUSTIFY">El producto escalar cumple lo siguiente:
+<UL>
+<LI>
+<B>Sim&eacute;trico</B>: <B>u</B>&middot;<B>v</B> = <B>v</B>&middot;<B>u</B></LI>
+
+<LI>
+<B>No degenerado</B>: si <B>v</B>&middot;<B>v</B> = 0 implica que <B>v</B>
+= 0. Obviamente 0 &middot; 0 = 0</LI>
+
+<LI>
+<B>Bilineal</B>: <B>v</B>&middot;(<B>u</B> + a&middot;<B>w</B>) = <B>v</B>&middot;<B>u</B>
++ a&middot;(<B>v</B>&middot;<B>w</B>) y (a&middot;<B>u</B> + b&middot;<B>v</B>)&middot;<B>w</B>
+= a&middot;<B>u</B>&middot;<B>w</B> + b&middot;<B>v</B>&middot;<B>w</B>,
+siendo <B>u</B>, <B>v</B> y <B>w</B> vectores y a escalar.</LI>
+</UL>
+Adem&aacute;s...
+<UL>
+<LI>
+Si <B>u</B>&middot;<B>v</B> = 0 implica que <B>u</B> y <B>v</B> son <B>ortogonales</B>
+(perpendiculares, entre ellos hay 90&ordm;).</LI>
+
+<LI>
+La <B>magnitud o modulo</B> de un vector (longitud de este) se define como
+|| <B>v</B> || = sqr(<B>v</B> &middot; <B>v</B>), donde sqr es la ra&iacute;z
+cuadrada.</LI>
+
+<LI>
+La <B>distancia</B> entre dos puntos <B>P</B> y <B>Q</B> es igual al modulo
+del vector que forman (vector <B>Q</B> - <B>P</B>).</LI>
+
+<LI>
+<B>Normalizar</B> un vector es hacerlo de modulo igual a la unidad. Si
+<B>v</B> es un vector cualquiera, <B>v’</B> ser&aacute; <B>v</B> normalizado
+ya que:</LI>
+</UL>
+
+<CENTER><B>v’</B> = <B>v</B> / || <B>v</B> ||.</CENTER>
+
+
+<P ALIGN="JUSTIFY">Es muy interesante tambi&eacute;n asociar el tema de <B>proyecciones</B>
+al producto escalar. Much&iacute;simas veces nos interesa qu&eacute; cantidad
+de un vector se encuentra en la direcci&oacute;n de otro. &iquest;Por que?,
+imaginemos un sencillo ejemplo. Un cubo esta a punto de rebotar en el suelo
+con un cierto &aacute;ngulo, &iquest;como responderemos a eso?. Posiblemente
+miraremos el vector correspondiente a la velocidad del cubo, lo descompondremos
+en dos componentes: una <B>normal</B> (perpendicular) al plano de colisi&oacute;n
+y otra <B>tangencial</B> (paralela) a este. La componente normal al plano
+la negaremos y la multiplicaremos por un escalar que elimine parte de la
+velocidad en esa direcci&oacute;n (simulando la perdida energ&eacute;tica
+que se produce en cualquier choque). Por ultimo sumaremos la componente
+tangencial con la normal "retocada" y dejaremos al sistema que siga simulando.
+Se&ntilde;ores y se&ntilde;oras...acabamos de reaccionar a una colisi&oacute;n!!!
+
+<P ALIGN="JUSTIFY">Ha sido necesario conocer que parte de la velocidad de nuestro cubo
+estaba orientada perpendicular y tangencialmente al plano de colisi&oacute;n.
+Y esa informaci&oacute;n la hemos obtenido porque sab&iacute;amos lo que
+ahora mismito os comento.
+
+<P ALIGN="JUSTIFY">Mirad esta figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig6.gif" HEIGHT=182 WIDTH=236></CENTER>
+
+<CENTER><B><I>Figura 6: Concepto de proyecci&oacute;n.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">La cantidad del vector <B>w</B> en la direcci&oacute;n del vector <B>v</B>
+es lo que observ&aacute;is como vector <B>u</B>. Por tanto, <B>u</B> es
+la proyecci&oacute;n de <B>w</B> sobre <B>v</B>!!! y sabiendo <B>u</B>
+sabemos qu&eacute; cantidad de nuestro vector <B>w</B> esta orientado en
+la direcci&oacute;n del otro vector <B>v</B>.
+
+<P ALIGN="JUSTIFY">Observad que tambi&eacute;n podemos deducir el <B>&aacute;ngulo</B>
+entre <B>w</B> y <B>v</B> tal y como expongo en la figura.
+
+<P ALIGN="JUSTIFY">Veamos algunas aplicaciones de todo lo comentado hasta ahorita mismo.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Convexidad.</FONT></B>
+
+<P ALIGN="JUSTIFY">Se dice que un objeto es convexo cuando toda l&iacute;nea entre dos
+puntos que pertenecen al objeto est&aacute; tambi&eacute;n incluida dentro
+de este. Os lo mostr&eacute; en la segunda figura del cap&iacute;tulo 2.
+
+<P ALIGN="JUSTIFY">La noci&oacute;n de convexidad es sumamente importante en el <B>dise&ntilde;o
+de curvas y superficies</B> as&iacute; como en la <B>detecci&oacute;n de
+colisiones</B> entre objetos complejos.
+
+<P ALIGN="JUSTIFY">Muchas veces es necesario encontrar lo que en USA llaman el "<B>convex
+hull</B>" o <B>m&iacute;nimo envolvente convexo</B> de un conjunto de puntos
+salteados. Se trata de la m&iacute;nima superficie que los incluye a todos
+y se usa continuamente en detecci&oacute;n de colisiones. Lo ten&eacute;is
+en la siguiente figura:
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig7.gif" HEIGHT=203 WIDTH=155></CENTER>
+
+<CENTER><B><I>Figura 7: M&iacute;nimo envolvente convexo.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Circulo</FONT></B>
+
+<P ALIGN="JUSTIFY">La <B>ecuaci&oacute;n del circulo</B> de la figura 8, apartado 1...
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig8.gif" HEIGHT=226 WIDTH=462></CENTER>
+
+<CENTER><B><I>Figura 8: 4 casos diferentes.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">puede obtenerse como:
+<CENTER></CENTER>
+
+<CENTER>|| <B>Q</B> - <B>P</B> || = r</CENTER>
+
+
+<P ALIGN="JUSTIFY">o sea que...
+<CENTER></CENTER>
+
+<CENTER>sqr[(<B>Q</B> - <B>P</B>)&middot;(<B>Q</B>- <B>P</B>)] = r --->
+(<B>Q</B> - <B>P</B>)&middot;(<B>Q</B> - <B>P</B>) = r<SUP>2</SUP>.</CENTER>
+
+
+<P ALIGN="JUSTIFY">La deducci&oacute;n os la dejo a vosotros y a estas alturas, si me est&aacute;is
+siguiendo, no deber&iacute;a seros muy dif&iacute;cil...
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Plano</FONT></B>
+
+<P ALIGN="JUSTIFY">El plano de la figura 8, apartado 2 lo definimos as&iacute;:
+
+<P ALIGN="JUSTIFY">(<B>Q</B> - <B>P</B>)&middot;<B>v</B> = 0, porque (<B>Q</B> - <B>P</B>)
+es un vector, <B>v</B> es otro, son perpendiculares y por tanto su producto
+escalar tiene que ser forzosamente igual a 0.
+
+<P ALIGN="JUSTIFY">Al vector <B>v</B> se le llama la "<B>normal</B>" al plano y es sumamente
+&uacute;til en cuanto a la <B>iluminaci&oacute;n</B> de superficies, cosa
+que ya veremos en su momento.
+
+<P ALIGN="JUSTIFY">Solo para documentaros algo mas, la ecuaci&oacute;n del plano con vector
+normal de componentes (A,B,C,0) y que pasa por el punto (Xo,Yo,Zo,1) es:
+<CENTER></CENTER>
+
+<CENTER>A&middot;(x - Xo) + B&middot;(y - Yo) + C&middot;(z - Zo) = 0.</CENTER>
+
+
+<P ALIGN="JUSTIFY">El por qu&eacute; el vector y el punto tienen 4 coordenadas lo veremos
+mas adelante cuando hablemos de <B>coordenadas homog&eacute;neas</B>, tema
+obligado en gr&aacute;ficos.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Distancia punto-plano</FONT></B>
+
+<P ALIGN="JUSTIFY">Miremos la figura 8, apartado 3, y pensemos que deseamos saber la m&iacute;nima
+distancia entre...
+<CENTER></CENTER>
+
+<CENTER>el punto <B>R</B> y el plano (<B>Q</B> - <B>P</B>)&middot;<B>v</B>
+= 0:</CENTER>
+
+
+<P ALIGN="JUSTIFY">Esta distancia es la <B>proyecci&oacute;n</B> del vector <B>R</B> -
+<B>P</B> sobre el vector normal al plano <B>v</B>. Por tanto necesito calcular
+el producto escalar de <B>R</B> - <B>P</B> y <B>v</B>, para despu&eacute;s
+dividirlo por || <B>v</B> ||.
+
+<P ALIGN="JUSTIFY">Entonces si las coordenadas del punto <B>R</B> son (r,s,t), la distancia
+es:
+<CENTER></CENTER>
+
+<CENTER>distancia d = (A&middot;r + B&middot;s + C&middot;t + D) / sqr(A<SUP>2</SUP>
++ B<SUP>2</SUP> + C<SUP>2</SUP>);</CENTER>
+
+
+<P ALIGN="JUSTIFY">Tened en cuenta que en la expresi&oacute;n tomamos la ecuaci&oacute;n
+del plano A&middot;x + B&middot;y + C&middot;z + D = 0, ecuaci&oacute;n
+que pod&eacute;is obtener directamente operando sobre A&middot;(x - Xo)
++ B&middot;(y - Yo) + C&middot;(z - Zo) = 0.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Distancia punto-linea</FONT></B>
+
+<P ALIGN="JUSTIFY">Queremos saber cual es la distancia del punto <B>R</B> a la l&iacute;nea
+definida como <B>P</B>(t) en la figura 8, apartado 4.
+
+<P ALIGN="JUSTIFY">La <B>distancia m&iacute;nima</B> ser&aacute; la <B>perpendicular</B>
+de <B>R</B> a <B>P</B>(t). Por tanto deber&aacute; cumplirse que:
+<CENTER></CENTER>
+
+<CENTER>(<B>R</B> - <B>P</B>(t))&middot;<B>v</B> = 0 ---> (<B>R</B> - Po
+- t&middot;<B>v</B>)&middot;<B>v</B> = 0 ---> (<B>R</B> - Po)&middot;<B>v</B>
+= t&middot;<B>v</B>&middot;<B>v</B> ---> t = (<B>R</B> - Po)&middot;<B>v</B>
+/ <B>v</B>&middot;<B>v</B></CENTER>
+
+
+<P ALIGN="JUSTIFY">es el valor del par&aacute;metro t para tener la distancia m&iacute;nima
+d.
+
+<P ALIGN="JUSTIFY"><B><U>NOTA</U></B>: ni se os ocurra simplificar en la divisi&oacute;n
+el <B>v</B> del numerador con uno de los <B>v</B>'s del t&eacute;rmino
+<B>v&middot;v</B> del denominador. Son vectores y no se simplifican!!!
+
+<P ALIGN="JUSTIFY">Si introducimos este valor de t en la expresi&oacute;n de <B>P</B>(t):
+
+<P ALIGN="JUSTIFY"><B>P</B>' = Po + [(<B>R</B> - Po)&middot;<B>v</B> / <B>v</B>&middot;<B>v</B>
+]&middot;<B>v</B>, que es el punto de la l&iacute;nea <B>P</B>(t) mas pr&oacute;ximo
+a <B>R</B>. Ahora solo nos falta obtener el vector entre <B>R</B> y <B>P</B>',
+cosa que ya sabemos hacer, y calcular su m&oacute;dulo. Esa es la distancia
+m&iacute;nima d que busc&aacute;bamos.
+
+<P ALIGN="JUSTIFY"><B><U>NOTA</U></B>: si <B>v</B> = 0 "la cosa falla". Claro que si pero
+es que si <B>v</B> = 0 entonces <B>P</B>(t) tampoco es realmente una l&iacute;nea,
+&iquest;no os parece?.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Intersecci&oacute;n plano-l&iacute;nea</FONT></B>
+
+<P ALIGN="JUSTIFY">Suponed que os interesa saber cual es la intersecci&oacute;n entre la
+l&iacute;nea y el plano, es decir el punto <B>P</B>':
+<CENTER></CENTER>
+
+<CENTER><IMG SRC="gif/a5fig9.gif" HEIGHT=213 WIDTH=225></CENTER>
+
+<CENTER><B><I>Figura 9: Intersecci&oacute;n plano-linea.</I></B></CENTER>
+
+
+<P ALIGN="JUSTIFY">Analogamente al caso anterior, calcularemos el valor del par&aacute;metro
+t necesario para despu&eacute;s introducirlo en la ecuaci&oacute;n de nuestra
+l&iacute;nea obteniendo el punto de intersecci&oacute;n <B>P</B>'.
+
+<P ALIGN="JUSTIFY">Nuestro plano es (X - <B>P</B>)&middot;<B>v</B> = 0 y nuestra l&iacute;nea
+es <B>Q</B>(t) = <B>Q</B> + t&middot;<B>w</B>. Debemos resolver:
+
+<P ALIGN="JUSTIFY">(<B>Q</B>(t) - <B>P</B>)&middot;<B>v</B> = 0 ---> (<B>Q</B> + t&middot;<B>w</B>
+-<B>P</B>)&middot;<B>v</B> = 0 de donde t = (<B>P</B> - <B>Q</B>)&middot;<B>v</B>
+/ <B>w</B>&middot;<B>v</B>. Por tanto el punto de intersecci&oacute;n <B>P’</B>
+es:
+<CENTER></CENTER>
+
+<CENTER><B>P’</B> = <B>Q</B> + [(<B>P</B> - <B>Q</B>)&middot;<B>v</B> /
+<B>w</B>&middot;<B>v</B>]&middot;<B>w</B>;</CENTER>
+
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Producto vectorial</FONT></B>
+
+<P ALIGN="JUSTIFY">Podemos utilizar dos vectores <B>u</B> y <B>v</B> que no sean paralelos
+para generar un tercero <B>w</B> que sea ortogonal a ambos.
+
+<P ALIGN="JUSTIFY">Este tercer vector <B>w</B> viene dado por el <B>producto vectorial</B>
+de los dos anteriores. Dentro de un SR determinado, si las coordenadas
+de <B>u</B> vienen definidas por a1, a2, a3 y las de <B>v</B> por b1, b2,
+b3...entonces el producto vectorial de ambos se define como:
+<CENTER></CENTER>
+
+<CENTER><B>vector w</B> = (a2&middot;b3 - a3&middot;b2,a3&middot;b1 - a1&middot;b3,a1&middot;b2
+- a2&middot;b1).</CENTER>
+
+
+<P ALIGN="JUSTIFY">Por otra parte podemos conocer el &aacute;ngulo <B>ANG</B> entre <B>u</B>
+y <B>v</B> como:
+<CENTER></CENTER>
+
+<CENTER>sin( <B>ANG</B> ) = || <B>u</B> x <B>v</B> || / ||<B>u</B>||&middot;||<B>v</B>||</CENTER>
+
+
+<P ALIGN="JUSTIFY">donde || <B>u</B> x <B>v</B> || es el producto vectorial entre <B>u</B>
+y <B>v</B>.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Modelado de primitivas</FONT></B>
+
+<P ALIGN="JUSTIFY">En nuestro mundo 3D podemos tener una cantidad ingente de objetos geom&eacute;tricos
+mayor a la que tendr&iacute;amos en una representaci&oacute;n 2D. Su representaci&oacute;n
+matem&aacute;tica puede complicarse mucho y esto no nos interesa si deseamos
+crear un <B>aplicativo eficiente a nivel computacional</B>. No queremos
+perder demasiado tiempo "calculando valores" para situar nuestra geometr&iacute;a
+en pantalla.
+
+<P ALIGN="JUSTIFY">Existen <B>complicadas representaciones</B> basadas en curvas y superficies.
+Al fin y al cabo todo se acaba reduciendo a un objeto cuyas fronteras son
+planas y por tanto descriptibles usando:
+<UL>
+<LI>
+<B>Puntos</B>, entidades m&iacute;nimas, at&oacute;micas, de dimensi&oacute;n
+0.</LI>
+
+<LI>
+<B>Lados</B>, o uniones entre dos puntos, de dimensi&oacute;n 1.</LI>
+
+<LI>
+<B>Caras</B>, o uniones sucesivas de segmentos, de dimensi&oacute;n 2.</LI>
+</UL>
+Por tanto "<B>modelar</B>", o sea crear modelos geom&eacute;tricos de aquellos
+objetos que deseamos simular, se reduce a crearles v&eacute;rtices, lados
+y caras.
+
+<P ALIGN="JUSTIFY">A un sistema gr&aacute;fico le es enormemente <B>c&oacute;modo trabajar
+con tri&aacute;ngulos</B>. Si todas las caras de nuestros objetos est&aacute;n
+definidas por uniones de tri&aacute;ngulos conseguiremos rendimientos fenomenales.
+Solo ten&eacute;is que mirar prestaciones de cualquier tarjeta aceleradora
+3D del mercado para observar como "se las dan" generando millones de tri&aacute;ngulos
+por segundo en pantalla.
+
+<P ALIGN="JUSTIFY">&iquest;A qu&eacute; se debe esto?. Tres v&eacute;rtices que definan
+un tri&aacute;ngulo estar&aacute;n siempre en un mismo plano...seguro!!!...son
+lo que se dice <B>coplanares</B>. En cambio 4 v&eacute;rtices generando
+un rect&aacute;ngulo no tienen porque serlo...pensad un poco, agudizad
+vuestra capacidad de abstracci&oacute;n 3D y lo ir&eacute;is viendo claro.
+
+<P ALIGN="JUSTIFY">Generando tri&aacute;ngulos estamos seguros de tener siempre v&eacute;rtices
+coplanares y os aseguro que la descarga de trabajo computacional que eso
+le supone a la CPU es impresionante.
+
+<P ALIGN="JUSTIFY">En caso de tener una figura modelada con otro tipo de pol&iacute;gonos
+que no sean tri&aacute;ngulos, siempre podemos arreglarlocon lo que los
+anglosajones llaman un proceso de "<B>tesselation</B>", o sea <B>descomposici&oacute;n
+en tri&aacute;ngulos</B>. Cualquier pol&iacute;gono puede "partirse" literalmente
+en tri&aacute;ngulos. Eso nunca es un problema. Mirad la figura 2 del segundo
+cap&iacute;tulo para recordar esto graficamente.
+
+<P ALIGN="JUSTIFY">Existen algunas excepciones a este proceso de modelizaci&oacute;n como
+la <B>geometr&iacute;a s&oacute;lida constructiva</B> (<B>Constructive
+Solid Geometry - CSG</B> en ingl&eacute;s). En esta aproximaci&oacute;n
+se crean objetos complejos a partir de operar mediante <B>uniones</B> e
+<B>intersecciones</B> de objetos volum&eacute;tricos m&aacute;s simples.
+Los resultados suelen ser buenos pero es una t&eacute;cnica muy complicada
+y costosa, y por eso muchas veces desechada.
+
+<P ALIGN="JUSTIFY"><B><FONT SIZE=+1>Cambio entre sistemas de coordenadas</FONT></B>
+
+<P ALIGN="JUSTIFY">Un vector expresado en funci&oacute;n de un SR determinado puede expresarse
+en funci&oacute;n de otro SR. Nada m&aacute;s tendremos que aplicarle a
+las componentes del vector en funci&oacute;n del primer SR una <B>matriz
+de transformaci&oacute;n</B> que nos genere las componentes del mismo vector
+en funci&oacute;n del segundo SR.
+
+<P ALIGN="JUSTIFY">Es importante que entend&aacute;is que el vector en s&iacute; no cambia,
+sigue estando en el mismo sitio!!, lo que pasa es que lo referenciamos
+a otra parte.
+
+<P ALIGN="JUSTIFY">Si no os ha quedado claro aqu&iacute; va un <B>ejemplo simple</B> pero
+muy educativo. Si tenemos el coche aparcado en la calle y un amigo viene
+a casa y nos lo pide tendremos que explicarle d&oacute;nde est&aacute;
+&iquest;no?. Bien para facilitarle esa informaci&oacute;n podr&iacute;amos
+decirle:
+<CENTER></CENTER>
+
+<CENTER>"El coche est&aacute; delante de la panader&iacute;a..."</CENTER>
+
+<CENTER></CENTER>
+
+<CENTER>o</CENTER>
+
+<CENTER></CENTER>
+
+<CENTER>"El coche est&aacute; entre el quiosco y la farola verde..."</CENTER>
+
+
+<P ALIGN="JUSTIFY">y en ambos casos el coche est&aacute; en el mismo sitio pero lo "referenciamos"
+a dos SR’s diferentes...&iquest;lo pill&aacute;is?. Espero que este ejemplillo
+os haga empezar a vislumbrar la luz!!.....8)
+
+<P ALIGN="JUSTIFY">Matem&aacute;ticamente hablando y cuando nos sea necesario implementarlo,
+usaremos la matriz de cambio de esta forma:
+
+<P ALIGN="JUSTIFY">Asumamos que la base origen es S={v1,v2,v3}, o sea 3 vectores, y que
+la base final a la que deseamos "convertirnos" es S’={u1,u2,u3}. Todos
+los vectores de una base seguro que pueden ponerse como combinaci&oacute;n
+lineal de los de la otra (ya que todos pertenecen al mismo espacio vectorial).
+Algo as&iacute;:
+
+<P ALIGN="JUSTIFY">u1 = a11&middot;v1 + a12&middot;v2 + a13&middot;v3
+
+<P ALIGN="JUSTIFY">u2 = a21&middot;v1 + a22&middot;v2 + a23&middot;v3
+
+<P ALIGN="JUSTIFY">u3 = a31&middot;v1 + a32&middot;v2 + a33&middot;v3
+
+<P ALIGN="JUSTIFY">entonces la matriz 3 x 3 (3 filas y 3 columnas):
+
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | a11 a12 a13 |
+
+<P ALIGN="JUSTIFY">M = | a21 a22 a23 |
+
+<P ALIGN="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | a31 a32 a33 |
+
+<P ALIGN="JUSTIFY">nos da el cambio de base de S a S’. An&aacute;logamente la matriz inversa
+M<SUP>-1</SUP> nos da el cambio de S’ a S.
+
+<P ALIGN="JUSTIFY">En este caso si tenemos un vector <B>w</B> = (c1,c2,c3) componentes
+seg&uacute;n la base S, entonces:
+
+<P ALIGN="JUSTIFY"><B>w’</B> = M&middot;<B>w</B>
+
+<P ALIGN="JUSTIFY">es el mismo vector pero expresado con componentes referidas a la base
+S’. Algo como:
+
+<P ALIGN="JUSTIFY"><B>w’</B> = (c1’,c2’,c3’), y que os quede claro que... <B>w</B> = (c1,c2,c3)
+= <B>w’</B> = (c1’,c2’,c3’)...ya que es el mismo vector.
+
+<P ALIGN="JUSTIFY">S&eacute; sobradamente que muchos de los conceptos que os estoy presentando
+son dif&iacute;ciles de asimilar pero es algo por lo que forzosamente tendr&eacute;is
+que pasar si quer&eacute;is realizar aplicaciones 3D dignas.
+
+<P ALIGN="JUSTIFY">Si cont&aacute;is con alg&uacute;n manual o libro sobre <B>&Aacute;lgebra
+lineal y matricial</B> os aconsejo que le ech&eacute;is una mirada, al
+menos a lo que yo os he presentado.
+
+<P ALIGN="JUSTIFY">Creo que ser&iacute;a muy interesante que tratarais de echar mano a
+papel y a l&aacute;piz para inventar m&aacute;s ejemplos de lo explicado.
+Luego deber&iacute;ais codificarlos, por ejemplo en C, y probarlos en vuestra
+m&aacute;quina observando los resultados num&eacute;ricos que obten&eacute;is
+y verific&aacute;ndolos con los obtenidos a pu&ntilde;o y letra.
+
+<P ALIGN="JUSTIFY">Para los m&aacute;s interesados ah&iacute; va una direcci&oacute;n interesant&iacute;sima
+referida a la programaci&oacute;n de algoritmos usando nuestro querido
+lenguaje C. La ten&eacute;is <A HREF="http://www.ulib.org/Books/Numerical_Recipes/bookc.html">aqu&iacute;</A>.
+
+<P ALIGN="JUSTIFY">Bueno ya os dejo por esta edici&oacute;n. Continuaremos en el pr&oacute;ximo
+n&uacute;mero en este mismo cap&iacute;tulo y bien metidos en faena con
+coordenadas homog&eacute;neas y transformaciones (traslaciones, rotaciones...)
+que ya podremos poner en pr&aacute;ctica programando pues dispondremos
+de los conocimientos requeridos para ello.
+
+<P ALIGN="JUSTIFY">Un abrazote y hasta ahora mismo!!!
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

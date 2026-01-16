@@ -1,0 +1,552 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>B</B></font><FONT color="#000000" size=2 face="arial"><B>reve Introducción al Mundo del Hacking</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:perota082@mx3.redestb.es">Pedro Ferrera "BaDBoY"</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 5<br> Ocultarse en un sistema. Seguir hackeando en otros sistemas.
+</H3>
+<P ALIGN=justify>
+
+En esta unidad aprender&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+<br><br><br>
+<UL>
+
+<UL>
+<LI><P >El complejo sistema de logs de UNIX</LI>
+<LI><P >Qu&eacute; es y c&oacute;mo funciona el Syslog</LI>
+<LI><P >Qu&eacute; es el Internet Daemon, c&oacute;mo usarlo para hacer backdoors y para qu&eacute; sirve el TCP-WRAPPER</LI>
+<LI><P >Introducci&oacute;n a los sniffers</LI></UL>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P >Si est&aacute;is aqu&iacute; se supone que sab&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+<UL>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>Lo que es en realidad el hacking</LI>
+<LI><P ALIGN=JUSTIFY>Para qu&eacute; sirve el hacking</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo se comporta un hacker</LI>
+<LI><P ALIGN=JUSTIFY>Qu&eacute; es LINUX </LI>
+<LI><P ALIGN=JUSTIFY>Iniciarse en el entorno LINUX/UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Entender el entorno multiusuario UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Otros ejercicios pr&aacute;cticos para LINUX</LI>
+<LI><P ALIGN=JUSTIFY>Mucho sobre sistemas UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Clasificaci&oacute;n de sistemas UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Caracter&iacute;sticas de los diferentes sistemas UNIX</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo recoger informaci&oacute;n del sistema al que queremos entrar</LI>
+<LI><P ALIGN=JUSTIFY>T&eacute;cnicas para entrar sin tener una cuenta en el sistema</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo conseguir root dentro del sistema</LI>
+<LI><P ALIGN=JUSTIFY>Qu&eacute; hacer una vez se es root en el sistema</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo asegurar el futuro acceso al sistema una vez se es root</LI>
+<LI><P ALIGN=JUSTIFY>&iexcl; Eh ! &iexcl; Ya sab&eacute;is muchas cosas ! ;)</LI>
+</UL>
+</UL>
+<p align="justify"><font size=2 face=arial>
+<font face=arial size=2><h4>El sistema de logs de UNIX</h4><p align=justify>
+Antes que nada, &iquest; Qu&eacute;
+es un log ? Un log es un fichero encargado de registrar cualquier tipo
+de actividad inform&aacute;tica. Existen logs para todo tipo de actividad:
+logs que registran conversaciones en IRC, logs que registran las acciones
+de un jugador en un juego... Y por supuesto, logs que registran las actividades
+de cualquier usuario en un sistema. Antes he comentado que cuando entramos
+en un sistema UNIX, todo lo que hacemos queda registrado en logs. Eso tiene
+su parte de verdad, aunque muchas veces no es siempre as&iacute;, y eso
+lo veremos m&aacute;s adelante.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Un hacker tiene que aprender a modificar
+adecuadamente cada log para asegurarse que no va a ser descubierto por
+el admin del sistema. Existen muchos tipos de logs diferentes que pueden
+estar o no activados en un sistema UNIX. Ciertos logs est&aacute;n vinculados
+a daemons (procesos que se ejecutan constantemente).</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Los logs m&aacute;s importantes son:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial"><FONT SIZE=-1>Log/s Daemon o Proceso asociado</FONT></FONT></U>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>ACCT ACCT (ACCOUNTING) No es un daemon</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>SYSLOG SYSLOGD (SYSLOG DAEMON)</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>TCP-WRAPPER INETD (INTERNET DAEMON)</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>UTMP, WTMP y LASTLOG</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>1- ACCT</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Acct proviene de la palabra Accounting.
+El log Acct solo funciona si el proceso de Accounting est&aacute; activado.
+Este proceso se puede ejecutar mediante el comando Accton. El fichero puede
+encontrarse generalmente en el directorio /var/adm/.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Lo que hace el Accounting es registrar
+todos los comandos que ejecuta cualquier usuario dentro del sistema, sin
+exclusi&oacute;n alguna. Esto genera unos logs muy grandes especialmente
+si el sistema recibe muchas conexiones diarias, por eso este proceso no
+est&aacute; siempre activado. Generalmente, lo que hacen los admins es
+activar otros logs para vigilar lo que hacen los usuarios con ciertos programas
+como SU, CU, etc.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Si el proceso de Accounting est&aacute;
+activado, es muy dificil no dejar ninguna huella en el sistema, por estos
+motivos:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Podemos parar el proceso de Accounting
+en el momento en el que entamos al sistema, pero el fichero Acct registrar&iacute;a
+el comando que para dicho proceso. Es una alternativa bastante tonta.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Podemos borrar el fichero Acct. Una
+alternativa muy est&uacute;pida ya que el admin no tardar&iacute;a en darse
+cuenta al querer echarle una ojeada a dicho fichero y el sistema generar&iacute;a
+muy probablemente mensajes cr&iacute;ticos que alertar&iacute;an al admin.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Podemos dejar el fichero a 0 bytes.
+Esto supone muchos problemas:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>1 - El admin tendr&iacute;a que tragarse
+que nadie ha entrado en el sistema desde que activ&oacute; el Accounting,
+por supuesto esto es muy sospechoso.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>2 - Si queremos que el admin se crea
+esto, tenemos que modificar todos los logs relativos a las incursiones
+en el sistema de forma que todo coincida.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>3 - Algunos sistemas parar&iacute;an
+el proceso de accounting, con lo que tendr&iacute;amos que volver a activarlo.
+Sin embargo, el comando accton quedar&iacute;a registrado en el fichero.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Podemos hacer una copia del fichero
+Acct en el momento en el que entramos a un fichero temporal, y antes de
+salir sobreescribir el fichero Acct con ese fichero temporal, de manera
+que todo lo que hemos hecho en ese intervalo no queda registrado. Lo que
+s&iacute; queda registrado es la copia del fichero.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- La mejor soluci&oacute;n es buscar
+un programa que borre todos los datos nuestros en el fichero Acct sin alterar
+el resto. Como este fichero no es editable, hay que tener un programa especial
+para poder hacer esto. Sin embargo, la ejecuci&oacute;n del programa quedar&iacute;a
+registrada.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial"><FONT SIZE=-1>Algunas notas finales sobre ACCT</FONT></FONT></U>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- En algunos sistemas ACCT puede llamarse
+PACCT</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Podemos sacar la informaci&oacute;n
+de ACCT en pantalla con el comando LASTCOMM (ACCTCOM en sistemas SYSTEM
+V)</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- En algunos sistemas puedes encontrar
+un fichero llamado LOGINLOG que registra todos los logins que se hacen
+al sistema. Este fichero puede encontrarse en estos directorios:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>/usr/adm/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>/usr/adm/acct/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>&nbsp;</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>2 - SYSLOG</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>El Syslog es algo m&aacute;s complejo.
+Se trata de una aplicaci&oacute;n que viene en muchos sistemas UNIX y que
+funciona gracias a syslogd (Syslog Daemon). El admin puede decidir qu&eacute;
+es lo que le interesa vigilar en su sistema. Syslog hace que ciertos programas,
+aplicaciones, daemons, procesos... generen ciertos mensajes si se dan unas
+determinadas condiciones. Estos programas, procesos, etc, pueden generar
+mensajes relativos a:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- el kernel (n&uacute;cleo del sistema)</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- procesos ejecutados por usuarios
+ordinarios</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- procesos de autentificaci&oacute;n
+(login/password)</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- procesos relativos al sistema de
+mail</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Entre otros...</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>A la vez, los mensajes que generen
+estos procesos pueden ser, seg&uacute;n el tipo de informaci&oacute;n que
+transmitan, de:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Notice: No ha sucedido ning&uacute;n
+error pero el admin tiene que prestar cierta atenci&oacute;n a este evento.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Err: Errores ordinarios.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Crit: Errores cr&iacute;ticos.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Alert: Esto ya es un problema m&aacute;s
+serio, debe solucionarse con urgencia.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Emerg: Emergencias graves.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Hay, por supuesto, m&aacute;s tipos,
+pero estos son los m&aacute;s importantes en cuanto a seguridad.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Los mensajes generados van a parar
+a ciertos ficheros, que no son predeterminados y que cada admin puede decidir
+a d&oacute;nde direccionarlos seg&uacute;n el tipo de mensaje (los hay
+que los direccionan todos a un solo fichero). Generalmente los mensajes
+de errores son destinados a un fichero llamado ERRLOG.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Los ficheros a donde van los mensajes
+est&aacute;n en Syslog.conf, situado generalmente en el directorio /etc/.
+Este fichero contiene toda la informaci&oacute;n de Syslog: qu&eacute;
+procesos, daemons, aplicaciones... generan mensajes, si el mensaje es de
+X tipo a qu&eacute; fichero se env&iacute;a...</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Y as&iacute; es b&aacute;sicamente
+c&oacute;mo funciona el Syslog. As&iacute; que lo que se debe hacer es
+saber en todo momento qu&eacute; ficheros en esa m&aacute;quina guardan
+mensajes Syslog, modificarlos (son editables), volver a poner la fecha
+con el comando touch, y listo.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Puede ser que algunos mensajes (generalmente,
+los de emergencia/alerta) vayan directamente a la consola del admin, es
+decir, que aparecen directamente en la pantalla del admin del sistema.
+Esto lo sabemos si en Syslog.conf se hace referencia a /dev/console. En
+este caso podemos hacer muchas artima&ntilde;as pero como con el fichero
+ACCT es casi imposible evitar que lleguen esos mensajes.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Es mejor no romperse el coco e intentar
+no generar mensajes muy cr&iacute;ticos.</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>3 - TCP-WRAPPER</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>El TCP-WRAPPER es una herramienta parecida
+al Syslog, pero vinculada a servicios exclusivos del internet daemon (ftp,
+telnet, mail...). Adem&aacute;s de registrar toda actividad referente a
+la autentificaci&oacute;n de cualquiera de estos servicios es capaz de
+filtrarlos, restringi&eacute;ndolos de manera que s&oacute;lo ciertos usuarios
+puedan conectarse, por ejemplo a trav&eacute;s de un firewall.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Para borrar nuestras huellas del TCP-WRAPPER
+tenemos que seguir el mismo proceso que con el Syslog (buscar el fichero
+de configuraci&oacute;n, modificar los ficheros vinculados...).</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><U><FONT FACE="Arial"><FONT SIZE=-1>M&aacute;s acerca del Internet Daemon</FONT></FONT></U>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Inetd (Internet Daemon) tiene su fichero
+de configuraci&oacute;n generalmente en el directorio /etc/, y el fichero
+en cuesti&oacute;n se llama inetd.conf.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Dentro de este fichero podemos observar
+unas l&iacute;neas de este tipo:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>1 2 3 4 5 6 7</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT SIZE=-1>ftp stream tcp nowait root /usr/etc/ftpd ftpd</FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Como podemos ver, cada linea tiene
+siete campos:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>1 - El primer campo es el nombre del
+daemon de cada servicio asociado al Internet Daemon, y estos servicios
+se suelen encontrar en /etc/services</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>2 - El segundo campo es el tipo de
+conexi&oacute;n que utiliza cada servicio. Para protocolos TCP, el tipo
+es stream, y para protocolos UDP, el tipo es dgram (Datagram).</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>3 - El tercer campo es el tipo de protocolo
+del servicio, TCP o UDP.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>4 - El cuarto campo indica c&oacute;mo
+actuar&aacute; este servicio al recibir una conexi&oacute;n. Si en este
+campo aparece "wait", la conexi&oacute;n ser&aacute; reiterativa, y si
+es "no wait", la conexi&oacute;n ser&aacute; concurrente.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>5 - El quinto campo indica el nivel
+con el que se ejecuta el daemon, en este caso nivel de superusuario.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>6 - El sexto campo indica la ruta completa
+del programa que se ejecuta cada vez que se recibe una conexi&oacute;n.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>7 - El &uacute;ltimo campo es el nombre
+de dicho programa.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Algunos campos se pueden omitir.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>El fichero /etc/services tiene una
+s&iacute;ntaxis m&aacute;s simple:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>1 2 3 4</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT SIZE=-1>smtp 25/tcp mail</FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>S&oacute;lo aparecen cuatro campos:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>1 - El primero es el servicio, en este
+caso SMTP</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>2 - El segundo campo es el puerto</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>3 - El tercer campo es el tipo de protocolo
+que utiliza</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>4 - El cuarto es el nombre m&aacute;s
+asociado a este servicio</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Sabiendo esto podemos crear un backdoor
+muy potente. Creamos un servicio que coincida en los dos archivos (inetd.conf
+y services) de manera que podamos entrar directamente como root siempre
+que nos d&eacute; la gana.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Editamos inetd.conf y a&ntilde;adimos:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT SIZE=-1>badboy stream tcp nowait /bin/sh sh -i</FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Editamos services y a&ntilde;adimos:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT SIZE=-1>badboy 22/tcp badboy</FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Ahora s&oacute;lo tenemos que reiniciar
+el Internet Daemon para que vuelva a leer el archivo de configuraciones.
+Una manera de hacerlo es "mat&aacute;ndolo". La manera de hacer esto var&iacute;a
+en cada sistema, pero generalmente es "kill -9 &lt;ruta>", aunque tambi&eacute;n
+puede ser "kill -HUP &lt;ruta>", y la ruta es donde est&aacute; situado
+el fichero PID que en este caso ser&iacute;a inetd.pid</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Este backdoor funcionar&aacute; hasta
+que el admin edite estos archivos. Pero sabed que estos archivos no son
+los que m&aacute;s suelen mirar los admins.</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>4 - UTMP, WTMP Y LASTLOG</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Por &uacute;ltimo, estos tres ficheros.
+Los tres guardan registros referentes a los usuarios que entran y salen
+del sistema, con la IP, el login, la fecha y la hora... El UTMP permite
+que cualquier usuario sepa que estamos dentro del sistema con el comando
+who. Eso quiere decir que s&oacute;lo registra nuestra informaci&oacute;n
+mientras estamos dentro del sistema.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Es muy peligroso dejarse la IP en un
+sistema en el que hayamos hackeado ya que si hemos hecho algo ilegal pueden
+encontrarnos y nos puede caer un buen puro.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Simplemente tenemos que localizar estos
+ficheros y editarlos con un zapper o un programa similar (ya que no se
+pueden ver con un editor de texto). Borrarlos puede generar mensajes cr&iacute;ticos
+en el syslog y dejarlos a 0 bytes puede ser muy sospechoso. Por &uacute;ltimo,
+los directorios donde se suelen encontrar (aunque yo recomiendo hacer un
+find para encontrarlos) son:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>UTMP:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>/var/adm/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>/etc/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>WTMP:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>/var/adm/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>etc/</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>LASTLOG:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>var/adm/</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>Por &uacute;ltimo...</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Como el tema de los logs es algo muy
+importante, aseguraros de que haceis las cosas bien y coherentemente. Me
+refiero a que el orden en que modificais los logs es tambi&eacute;n muy
+importante. Por ejemplo:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Modifico el ACCT</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Edito UTMP, WTMP y LASTLOG</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Echo un vistazo a SYSLOG y a TCP-WRAPPER</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Salgo tan tranquilo</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Todo lo que se ha hecho en este caso
+ha resultado in&uacute;til porque ha quedado todo registrado otra vez en
+ACCT. Si el Accounting est&aacute; activado, lo &uacute;ltimo que debemos
+hacer siempre es algo para borrar nuestras huellas de ACCT (aunque ya hemos
+discutido que es muy dif&iacute;cil hacerlo). Un orden coherente ser&iacute;a:</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Echo un vistazo a UTMP, WTMP y LASTLOG</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Voy a por SYSLOG y TCP-WRAPPER</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Hago algo con ACCT</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>- Y salgo</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Y lo m&aacute;s importante: Todos los
+ficheros que modifiqueis tienen que volver a tener la misma fecha que ten&iacute;an
+antes de editarlos (comando touch), y en esto he insistido mucho porque
+considero que es importante.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Otra cosa: si no habeis encontrado
+cierto fichero de log, no digais: "Bueno, no debe estar activo". Intentad
+encontrarlo por todos los medios, por ejemplo con el comando find. A veces
+est&aacute;n muy escondidos.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Y a&uacute;n m&aacute;s importante:
+una vez hayais localizado todos los logs de este sistema, haced un shellscript
+que haga todo el trabajo solo, de manera que cuando entreis y tengais que
+salir solo teneis que darle al programa y ya estar&aacute;n todos los logs
+modificados.</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>Seguir hackeando en otros sistemas</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Una vez estamos como root en un sistema
+ser&iacute;a interesante poner lo que se denomina sniffer.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>A modo de resumen, un sniffer lo que
+hace es capturar los paquetes que se transmiten a trav&eacute;s de la subred
+en la que est&aacute; el sistema que hackeamos, aunque dichos paquetes
+no vayan destinados a este sistema. Esto se consigue gracias a que cualquier
+m&aacute;quina de una subred puede ponerse en modo promiscuo para poder
+capturar todos los paquetes que circulan (si no est&aacute; en modo promiscuo
+el sistema solo acepta los paquetes que van destinados a &eacute;l). As&iacute;,
+un sniffer hace llegar los paquetes que al hacker le interesa, que son
+generalmente los referentes a autentificaci&oacute;n, generando un log
+con los logins y passwords que consigue "esnifar".</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Bueno, un sniffer es algo ilegal. As&iacute;
+que si nos ven el sniffer y nos pillan ya nos podemos preparar.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Hay que tener cuidado ya que si hay
+una gran actividad en la subred en la que estamos hackeando el log ir&aacute;
+creciendo y creciendo hasta que el admin se de cuenta de que sucede algo
+extra&ntilde;o. Por lo tanto, hay que ir entrando peri&oacute;dicamente
+para salvar la informaci&oacute;n que nos interese y dejar a 0 bytes el
+log. Esto supone muchos peligros, y hay que ser muy r&aacute;pidos en nuestras
+incursiones si no queremos que el admin se de cuenta. Aqu&iacute; es cuando
+es importante la organizaci&oacute;n de nuestras herramientas, el tener
+un shellscript que nos modifique todos los logs en cuesti&oacute;n de segundos...</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>No voy a extenderme mucho en este tema
+porque el correcto manejo de sniffers es ya algo m&aacute;s avanzado que
+requiere muchas m&aacute;s explicaciones.</FONT></FONT>
+<CENTER></CENTER>
+
+<font face=arial size=2><h4>&iquest; Ya est&aacute; ?</h4>
+
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>Podr&iacute;amos decir que pr&aacute;cticamente
+ya os he ense&ntilde;ado todo lo b&aacute;sico que un hacker novicio tiene
+que aprender para empezar a hacer sus pinillos. Pero si alguien ha llegado
+hasta aqu&iacute; y tiene ganas de aprender m&aacute;s, voy a dedicar la
+sexta unidad (la &uacute;ltima) para explicar m&aacute;s t&eacute;cnicas
+y un poco de todo.</FONT></FONT>
+
+<P ALIGN="JUSTIFY"><FONT FACE="Arial"><FONT SIZE=-1>&iexcl; Nos vemos !</FONT></FONT>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulag.htm"><font FACE="ARIAL"><B>[Breve Introducción al Mundo del Hacking]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

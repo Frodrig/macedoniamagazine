@@ -1,0 +1,495 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 3. <br> Programación de tarjetas de vídeo (I).
+</h3>
+<H4>2.- Introducci&oacute;n a la Tarjeta de V&iacute;deo VGA-SVGA</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+
+Ahora llega el turno a la tarjeta de v&iacute;deo, soporte de
+los gr&aacute;ficos del ordenador. Vamos a conocer los tres modos de v&iacute;deo
+(modos de operaci&oacute;n de la tarjeta) siguientes:
+<UL>
+<LI>
+<B>VGA</B> Est&aacute;ndar. 320x200x256c (MCGA)</LI>
+
+<LI>
+VGA 4 Planos. 320X200x4x256c (MCGA Unchained)</LI>
+
+<LI>
+<B>SVGA</B> Est&aacute;ndar. El modo 640x480x256c</LI>
+</UL>
+<B>2.1.- VGA Est&aacute;ndar. 320x200x256c</B>
+
+<P align="justify">Desde que hizo aparici&oacute;n en las placas base de los IBM PS/2 50,
+60, y 80, all&aacute; por 1987, la <B>VGA</B> (V&iacute;deo Graphics Array),
+se ha convertido en un est&aacute;ndar para todos los ordenadores IBM y
+sus cl&oacute;nicos compatibles.
+
+<P align="justify">La abreviatura VGA era para mucha gente sin&oacute;nimo de resoluci&oacute;n
+aceptable (hasta 640x480 p&iacute;xels) y de un ramillete de colores incre&iacute;ble
+hasta entonces (256 de una paleta de 262144 posibles), al menos cuando
+se la comparaba con las antiguas CGA y EGA.
+
+<P align="justify">Desgraciadamente, para usar estos 256 colores, el <B>BIOS</B> de la
+VGA limita a los usuarios a una resoluci&oacute;n de s&oacute;lo 320x200
+p&iacute;xels, es decir, el conocido modo 13h est&aacute;ndar en el que
+est&aacute;n programados casi todos los v&iacute;deojuegos que han aparecido.
+
+<P align="justify"><B><U>2.1.1.- Programaci&oacute;n de la Tarjeta de V&iacute;deo</U></B>
+
+<P align="justify">El procedimiento para establecer el modo de v&iacute;deo es:
+<BR>&nbsp;
+<BR><B><FONT COLOR="#990000">void ModoMcga(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Modo 13h</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x13</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Limpia la memoria de v&iacute;deo</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ax,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep stosw</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B><B></B>
+
+<P align="justify">Al ser este modo de v&iacute;deo de 320 p&iacute;xels horizontales por
+200 verticales, da un total de 64000 p&iacute;xels por pantalla.
+<CENTER><IMG SRC="jpg/multi1.jpg" HEIGHT=107 WIDTH=158></CENTER>
+<I>&nbsp;</I>
+
+<P align="justify"><B><U>2.1.2.- Ventaja del Modo 13h</U></B>
+
+<P align="justify">Este modo tiene una ventaja y un inconveniente. La ventaja es que cada
+uno de los 64000 p&iacute;xels que componen la imagen gr&aacute;fica en
+el modo 13h es f&aacute;cilmente direccionable en el segmento de la memoria
+de v&iacute;deo que comienza en 0A000h. Por ejemplo, utilizando la siguiente
+f&oacute;rmula:
+
+<P align="justify"><B>Desplazamiento= (Y * 320) + X</B>
+
+<P align="justify">se puede calcular el desplazamiento del p&iacute;xel dentro de la memoria
+de v&iacute;deo, mediante su coordenada X y su coordenada Y. Tras ello,
+y si se introduce un byte en la posici&oacute;n A000:desplazamiento, aparecer&aacute;
+el color inmediatamente.
+
+<P align="justify">Por ejemplo: si queremos poner el color 23h en el p&iacute;xel (100,10),
+usando la f&oacute;rmula anterior ser&iacute;a:
+
+<P align="justify"><B>10 * 320 + 100 = 3300</B>
+
+<P align="justify">que en hexadecimal es 0EC4h. Si hacemos el siguiente c&oacute;digo en
+ensamblador, veremos aparecer un p&iacute;xel en esa direcci&oacute;n:
+
+<P align="justify"><B>mov ax,0A000h</B>
+<BR><B>mov ds,ax</B>
+<BR><B>mov (0EC4h),23h</B>
+
+<P align="justify">El procedimiento que hace esto y pone un p&iacute;xel en pantalla es:
+<BR>&nbsp;
+<BR><B><FONT COLOR="#990000">void PonerPixelMcga(int x,int y,char color)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,x</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,y</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,6</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Este procedimiento puede parecer que es mucho m&aacute;s complejo que
+el siguiente, que es el primero que se le ocurre a un programador.
+<BR>&nbsp;
+<BR><B><FONT COLOR="#990000">void PonerPixelMcga(int x,int y,char color)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,x</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,y</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mul dx,320</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,color</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.1.3.- Velocidad de las Instrucciones</U></B>
+
+<P align="justify">Vistos estos dos procedimientos, puede parecer que el &uacute;ltimo
+tendr&aacute; que ir m&aacute;s r&aacute;pido puesto que el n&uacute;mero
+de instrucciones es menor. Pero no es as&iacute;. Si miramos el documento
+suministrado por <B>INTEL</B> sobre sus conjuntos de instrucciones de Ensamblador,
+podemos ir sumando el n&uacute;mero de ciclos de reloj que tarda cada instrucci&oacute;n
+de cada procedimiento considerando los valores para un 486.
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH="143" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER><B><I>Instrucci&oacute;n</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER><B><I>Ciclos</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER>mov</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER>1</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER>shl</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER>2</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER>add</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER>1</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER>stosb</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER>5</CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="61%">
+<CENTER>mul</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="39%">
+<CENTER>18</CENTER>
+</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Hay que especificar que estos valores son medios, ya que no es lo mismo
+realizar la instrucci&oacute;n <I>"mov"</I> entre dos registros que entre
+una posici&oacute;n de memoria y un valor inmediato (la primera tarda la
+mitad).
+
+<P align="justify">El primer procedimiento tarda aproximadamente 18 ciclos de reloj, mientras
+que el segundo tarda 30 (s&oacute;lo la instrucci&oacute;n <I>"mul</I>"
+tarda 18 ciclos). Y si en lugar de considerar los valores para un 486,
+lo hacemos para un 386, la diferencia entre el primero y el segundo se
+disparan, dando 40 y 91 respectivamente.
+
+<P align="justify">Por esto, y a partir de ahora, todos los procedimientos en Ensamblador
+parecer&aacute;n que no son los m&aacute;s claros, pero son los m&aacute;s
+r&aacute;pidos que ha sido posible implementar con la informaci&oacute;n
+disponible, as&iacute;, en vez de usar la instrucci&oacute;n <I>"mov bl,0"</I>,
+pondr&eacute; <I>"xor bl,bl"</I>, porque aunque las dos tarden lo mismo
+en los 486, en un 386 el segundo tarda 2 ticks del reloj y el primero 4.
+
+<P align="justify">Tras estas aclaraciones, continuemos con el tema de la tarjeta de v&iacute;deo
+con la resoluci&oacute;n <B>MCGA</B> (VGA 320x200x256c).
+
+<P align="justify">Leer un p&iacute;xel ser&iacute;a igual de simple que escribirlo, tan
+s&oacute;lo habr&iacute;a que mirar el contenido del byte correspondiente
+en lugar de escribir otro encima de &eacute;l.
+
+<P align="justify">Esta facilidad es el cielo comparado con los problemas que dan los planos
+y los registros de m&aacute;scara que se necesitan en los modos de 16 colores.
+Con el modo 13h, la distancia que exist&iacute;a entre un algoritmo gr&aacute;fico
+en papel y una rutina gr&aacute;fica, se redujo dr&aacute;sticamente a
+tan s&oacute;lo una fracci&oacute;n. Y lo que es m&aacute;s importante,
+son incomparablemente m&aacute;s r&aacute;pidos (sobre todo si se esfuerzan
+un poco los programadores e intentan aprovecharse de la informaci&oacute;n
+sobre las instrucciones del Ensamblador y sus distintos retardos).
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.1.4.- Desventaja del Modo 13h</U></B>
+
+<P align="justify">Pasemos ahora a la desventaja que antes mencionamos. El modo 13h est&aacute;
+limitado a una sola p&aacute;gina, es decir, la VGA tan s&oacute;lo puede
+mostrar una pantalla a la vez, mientras que los modos de 16 colores permiten
+varias, permitiendo esto mostrar al usuario cualquiera de ellas en cada
+momento determinado y dibujar o cambiar el contenido de las que est&aacute;n
+ocultas. Este procedimiento conocido como <I>"page flipping"</I> o cambio
+de p&aacute;ginas es muy importante a la hora de realizar animaciones sin
+parpadeo.
+
+<P align="justify">Por otro lado, en el modo 13h es casi imposible conseguir un scroll
+suave de pantalla utilizando la tarjeta tal cual. Pero como siempre hay
+puertas ocultas en el mundo de la inform&aacute;tica, podemos aprovecharnos
+de los puertos programables de la VGA para hacer un curioso efecto visual,
+con el que conseguiremos que la suavidad en los scrolls grandes sea bastante
+aceptable, y elimine casi en todos los casos el molesto efecto de <B>"nieve"</B>
+que se suele ver en numerosas aplicaciones gr&aacute;ficas y v&iacute;deojuegos.
+
+<P align="justify">El procedimiento que consigue esto es el siguiente:
+<BR>&nbsp;
+<BR><B><FONT COLOR="#990000">void EsperarBarrido(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3da</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; l1:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and al,0x08</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz l1</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; l2:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and al,0x08</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jz l2</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Al concepto en que se basa este procedimiento se le llama <B>Barrido
+Vertical</B>. Se basa <I>"</I>simplemente<I>"</I> en uno de los muchos
+registros de la VGA, pero que se convierte en uno de los m&aacute;s &uacute;tiles
+para la animaci&oacute;n y los efectos de paleta.
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.1.5.- Teor&iacute;a del Barrido Vertical</U></B>
+
+<P align="justify">Hay un ca&ntilde;&oacute;n de electrones en la parte posterior del monitor
+que mantiene los p&iacute;xels <I>"refrescados"</I> con sus correctos valores
+cada 1/60 segundos o 1/70 segundos dependiendo de la frecuencia del monitor.
+Ese ca&ntilde;&oacute;n dispara un haz de electrones a cada p&iacute;xel,
+fila a fila. El retraso vertical es el tiempo que tarda el haz de electrones
+en retornar desde la esquina inferior derecha, en su orientaci&oacute;n
+hacia la esquina superior izquierda, donde comienza de nuevo el barrido
+de la pantalla. Durante ese tiempo no se emiten electrones.
+
+<P align="justify">Este es un per&iacute;odo extremadamente corto en el que apenas parece
+que d&eacute; tiempo a nada, pero no es as&iacute;. Durante este tiempo
+se puede cambiar cualquier parte de la memoria de v&iacute;deo sin que
+la circuiter&iacute;a de v&iacute;deo se entere, por lo tanto no se actualizar&aacute;n
+los cambios en pantalla. De esta forma, los gr&aacute;ficos actualizados
+no se ver&aacute;n afectados por esos efectos que todos hemos visto y que
+suelen ser los siguientes:
+<UL>
+<LI><p align="justify">
+Cuando la pantalla completa o un sprite muy grande se desplaza desde la
+izquierda hasta la derecha, suele aparecer como cortada, es decir, una
+parte superior est&aacute; m&aacute;s desplazada hacia una direcci&oacute;n
+que la parte inferior. Esto ocurre porque el barrido vertical pilla a la
+actualizaci&oacute;n de la memoria de v&iacute;deo antes de que termine,
+por lo que aparecer&aacute; la parte actualizada superior y la todav&iacute;a
+no actualizada inferior, y as&iacute; vamos propagando los retrasos.</LI>
+</UL>
+
+<UL>
+<LI VALUE="1"><p align="justify">
+Otro efecto es el de la nieve o <I>"fuzz"</I> (como llaman los angloparlantes).
+Se produce cuando hay alg&uacute;n efecto de paleta, como por ejemplo un
+fundido en negro donde se va oscureciendo paulatinamente la imagen. Entonces
+aparecen unas l&iacute;neas a veces, otras veces son numerosos puntos blancos,
+e incluso otras, la imagen se distorsiona. Esto ocurre porque para realizar
+los efectos de paleta, el decremento hasta el color negro en este ejemplo,
+se hace de forma continua y el barrido vertical <I>"</I>pilla<I>"</I> continuamente
+a la actualizaci&oacute;n de los valores del DAC de v&iacute;deo de donde
+toma la intensidad que le tiene que asignar al electr&oacute;n que tiene
+que lanzar en ese momento.</LI>
+</UL>
+
+<UL>
+<DIV VALUE="1">
+<LI><p align="justify">
+El &uacute;ltimo efecto y muy importante sobre todo para los v&iacute;deojuegos,
+es que cuandono se utiliza esta t&eacute;cnica y hemos creado por ejemplo,
+una animaci&oacute;n donde se desplazan a la vez decenas de peque&ntilde;os
+sprites, dependiendo del ordenador en que se est&eacute; ejecutando ir&aacute;
+m&aacute;s r&aacute;pido o m&aacute;s lento, algo no deseable en estos
+casos. Imaginemos que estamos jugando a la en&eacute;sima versi&oacute;n
+del conocido Tetris y no implementa esta t&eacute;cnica. Si el que lo program&oacute;
+lo hizo en un 386, lo ver&aacute; <I>"</I>bien<I>"</I> en su ordenador,
+y todos los que tengan este modelo, tambi&eacute;n. Pero supongamos que
+lo ejecutamos sobre un 8086. Ir&aacute; terriblemente lento y casi injugable,
+puesto que como el programador lo ve&iacute;a bien en su ordenador, no
+se esforz&oacute; mucho en optimizar las rutinas. Sin embargo, si ese mismo
+programa se ejecuta en un Pentium Pro a 200Mhz, el jugador se desesperar&aacute;
+igualmente, pero no porque sea lent&iacute;simo, sino porque apenas le
+dar&aacute; tiempo a ver las piezas y terminar&aacute; la partida casi
+antes de empezar. Por el contrario, si se piensa en la t&eacute;cnica del
+barrido vertical, se podr&aacute; aprovechar un detalle: no importa la
+velocidad del ordenador, casi todos los monitores tienen la misma frecuencia
+de barrido, con lo que si se usa el procedimiento anterior, se ver&aacute;
+ese programa a la misma velocidad en cualquier ordenador, puesto que lo
+&uacute;nico que hace el procedimiento es esperar y retener al procesador
+mientras el barrido est&eacute; activo, y liberarlo cuando el haz de electrones
+retorne a su posici&oacute;n inicial. De esta forma se controla la velocidad
+de una forma c&oacute;moda. Y a&ntilde;adi&eacute;ndole que soluciona los
+anteriores problemas de la nieve y los scrolles cortados, parece que puede
+ser bastante interesante su uso.</LI>
+</DIV>
+</UL>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

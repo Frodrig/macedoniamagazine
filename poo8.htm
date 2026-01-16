@@ -1,0 +1,327 @@
+<HTML>
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+<H3>
+Cap&iacute;tulo 8.<br>Variables y funciones de miembro estáticas. 
+</H3>
+
+<p align=justify>
+<FONT SIZE=2>
+En este cap&iacute;tulo abordaremos el estudio de las variables y funciones de miembro est&aacute;ticas. Veremos c&oacute;mo podemos aprovechar su potencia para ir olvid&aacute;ndonos, poco a poco, de todo lo concerniente al uso de variables globales. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Este tipo de variables se caracterizan, pues, por ofrecernos una serie de servicios comunes a los que las variables globales nos han brindado siempre en el C tradicional pero aportando una mayor seguridad. Con las funciones de miembro est&aacute;ticas veremos c&oacute;mo acceder a ese tipo de variables de forma exclusiva.</P>
+<P ALIGN="JUSTIFY"></P>
+
+<H4>Variables de miembro est&aacute;ticas.</H4>
+
+<P ALIGN="JUSTIFY">De todos es conocido los numerosos problemas que traen las variables globales en el momento en que acometemos un proyecto de dimensiones moderadamente serias. Enseguida empezamos a tener dudas si la variable que estamos tratando es global o no, empezamos a cambiar los valores inadvertidamente desde las funciones y, en consecuencia, empiezan a producirse fallos totalmente inesperados que terminan por hacer que reescribamos un buen mont&oacute;n de c&oacute;digo que realmente no hac&iacute;a falta revisar. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En la programaci&oacute;n en C tradicional, seguro que alguna vez hab&eacute;is tenido que utilizar variables globales para poder saber en cualquier momento o en cualquier funci&oacute;n, la situaci&oacute;n del programa. Pues bien, en el C++ las variables de miembro est&aacute;ticas suponen una alternativa seria y eficaz al uso de las variables globales. Cuando declaramos una variable de miembro est&aacute;tica en una clase, todos los objetos que sean instancia de esa clase, usar&aacute;n la misma variable de  miembro est&aacute;tica. </P>
+<P ALIGN="JUSTIFY">Por tanto, una variable de miembro est&aacute;tica declarada en una clase, utilizar&aacute; siempre una misma posici&oacute;n de memoria independientemente del n&uacute;mero de instancias que creemos a esa clase, es decir, si la clase que contiene la variable de miembro est&aacute;tica tiene cien instancias, los cambios que efectuemos en la variable de miembro est&aacute;tica desde la instancia n&uacute;mero 45, har&aacute; que el resto de instancias tambi&eacute;n contengan ese valor.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Uno de los usos m&aacute;s comunes de las variables de miembro est&aacute;ticas son los derivados de contabilizar el n&uacute;mero de instancias que tiene una clase. Si declaramos una variable de miembro est&aacute;tica en una clase con el nombre <I>m_numInstancias </I>y desde el constructor hacemos <I>m_numinstancias++;</I> y desde el destructor hacemos <I>m_numInstnacias--;</I> nos ser&aacute; posible conocer el n&uacute;mero de instancias existentes desde cualquier objeto creado. Este es un buen ejemplo de comprender todo lo que se ha dicho anteriormente y lo mostraré al final de la sección correspondiente a variables estáticas.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>C&oacute;mo crear una variable de miembro est&aacute;tica</H4>
+
+<P ALIGN="JUSTIFY">Para declarar una variable de miembro est&aacute;tica lo &uacute;nico que debemos de hacer es anteponer la palabra clave <B>static </B>a la definici&oacute;n de tipo, es decir, si queremos declarar una variable de miembro est&aacute;tica de tipo entero con el nombre <I>m_staticValor</I>, har&iacute;amos lo siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+<B>static int</B> m_staticValor;</PRE>
+</FONT>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="Arial" SIZE=2 COLOR="#000000">
+<P ALIGN="JUSTIFY">Con esta simple declaraci&oacute;n hemos creado una variable de miembro est&aacute;tica. A partir de este momento, <I>m_staticValor</I> s&oacute;lo ocupar&aacute; una posici&oacute;n de memoria. Independientemente del n&uacute;mero de instancias que se creen de la clase que la define. S&oacute;lo existir&aacute; una posici&oacute;n de memoria de tal forma que realizar un cambio en el valor de m_staticValor se ver&aacute; reflejado en todas las instancias de la clase que defina a m_staticValor. En este sentido, podemos observar que una variable de tipo est&aacute;tico tiene las mismas prestaciones que una variable de tipo global.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">A la hora de acceder a una variable de miembro est&aacute;tica, primero debemos de tener en cuenta c&oacute;mo se ha declarado la variable, es decir, si es p&uacute;blica, protegida o privada. Una variable de miembro est&aacute;tica pues, se puede acceder perfectamente desde dentro de las funciones de la clase que la definen. Tambi&eacute;n se puede acceder utilizando el operador <B>"."</B> o <B>"-&gt;"</B> en caso de que la instancia que se haya creado sea un puntero. Asíe, si la clase con el nombre CEjemplo contiene una definici&oacute;n de la variable est&aacute;tica m_staticValor, podr&iacute;amos hacer (siempre y cuando, la variable m_staticValor fuera p&uacute;blica, claro), lo siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+CEjemplo prueba; // Instancia a CEjemplo.
+
+// Accedemos a m_staticValor porque es p&uacute;blica
+prueba.m_staticValor = 20;
+</PRE>
+</FONT>
+<FONT FACE="Arial" SIZE=2 COLOR="#000000"> <P ALIGN="JUSTIFY">
+<P ALIGN="JUSTIFY">Un caso a parte lo constituyen las funciones que no pertenecen a la clase que define la variable de miembro est&aacute;tica. En estos caso, hemos de acceder al valor est&aacute;tico utilizando el operador de resoluci&oacute;n de &aacute;mbito <B>"::"</B>. Es decir, si quisieramos acceder a m<I>_staticValor</I> desde la funci&oacute;n <I>main</I> del programa, deber&iacute;amos de hacer <I>CEjemplo::m_staticValor = 20 </I>De nuevo, para que esto funcione, la variable est&aacute;tica <I>m_staticValor</I> ha de ser declarada como p&uacute;blica.
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En l&iacute;neas generales, y sin despreciar estos ejemplos anteriormente mostrados, lo ideal es crearnos variables est&aacute;ticas de tipo privado y, mediante el uso de funciones est&aacute;ticas de tipo p&uacute;blico, hacer las manipulaciones pertinentes a estas poderosas variables. Las funciones est&aacute;ticas, que veremos m&aacute;s adelante, se caracterizan, entre otras cosas, por trabajar &uacute;nicamente con variables est&aacute;ticas.
+<P ALIGN="JUSTIFY"></P>
+<H4>Un ejemplo con declaraci&oacute;n y definici&oacute;n de variables est&aacute;ticas</H4>
+<P ALIGN="JUSTIFY">
+Vamos a poner ahora un ejemplo de todo las formas de acceso que hemos comentado m&aacute;s arriba. Vamos a ver c&oacute;mo acceder a una variable de miembro est&aacute;tica p&uacute;blica mediante el operador de resoluci&oacute;n de &aacute;mbito, mediante el operador ".", y, c&oacute;mo no, mediante la utilizaci&oacute;n de una funci&oacute;n. Crearemos dos objetos de tal forma que se compruebe c&oacute;mo el cambio de valor en la variable en uno de los objetos se ve reflejado tambi&eacute;n en el otro. El ejemplo es muy sencillo.
+<BR>
+
+<PRE>
+<FONT FACE="Arial" SIZE=1 COLOR="#000000">#<B>include</B> &lt;iostream.h&gt;
+
+// Ejemplo de c&oacute;mo utilizar variables de miembro 
+// est&aacute;ticas.
+
+<B>class</B> CEjemplo{
+// Variables p&uacute;blicas
+<B>public</B>:
+// Declaraci&oacute;n de la variable est&aacute;tica
+<B>static int</B> m_staticValor; 
+// Funciones p&uacute;blicas
+<B>public</B>: 
+CEjemplo(){} // Constructor
+~CEjemplo() {} // Destructor
+<B>void</B> PonValor(<B>int</B> valor) { m_staticValor = valor; }
+<B>int</B> MuestraValor() { <B>return</B> m_staticValor; }
+};
+
+<B>// </B>Definici&oacute;n de la variable est&aacute;tica
+<B>int</B> CEjemplo<B>::</B>m_staticValor;
+
+<B>void</B> main(<B>void</B>)
+{
+&#9;CEjemplo objeto1;  // Instancia 1
+&#9;CEjemplo<B>*</B> objeto2 = <B>new</B> CEjemplo; // Instancia 2 
+
+&#9;objeto1.m_staticValor = 10;
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\n el valor es: " <B>&lt;&lt;</B> objeto1.m_staticValor;
+
+&#9;objeto2<B>-&gt;</B>PonValor(20);
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\n el valor es: " <B>&lt;&lt;</B> objeto1.MuestraValor();
+
+&#9;CEjemplo<B>::</B>m_staticValor = 30;
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\n el valor es: " <B>&lt;&lt;</B> objeto1.MuestraValor() <B>&lt;&lt;
+</B>&#9;&#9;" y es igual a: " <B>&lt;&lt;</B>&#9;objeto2<B>-&gt;</B>m_staticValor &lt;&lt; "\n\n\n";
+&#9;<B>cin</B>;
+}</PRE>
+
+
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Lo primero que hacemos es declarar la variable de miembro est&aacute;tica tal y como hab&iacute;amos visto al principio de este cap&iacute;tulo, dentro de la clase, esto es:</P>
+<P ALIGN="JUSTIFY"></P></FONT>
+<PRE><FONT FACE="Arial" SIZE=1 color="#000000">
+// Variables p&uacute;blicas
+<B>public</B>:
+// Declaraci&oacute;n de la variable est&aacute;tica
+<B>static int</B> m_staticValor;</PRE>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Despu&eacute;s definimos los constructores, destructores y funciones de miembro p&uacute;blicas para trabajar con esa variable:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE>
+<FONT FACE="Arial" SIZE=1>// Funciones p&uacute;blicas
+<B>public</B>: 
+CEjemplo(){} // Constructor
+~CEjemplo() {} // Destructor
+<B>void</B> PonValor(<B>int</B> valor) { m_staticValor = valor; }
+<B>int</B> MuestraValor() { <B>return</B> m_staticValor; }
+</PRE>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">A continuaci&oacute;n, viene una parte <B>muy importante</B>, pues hemos de definir la variable de miembro est&aacute;tica que hemos declarado dentro de la clase. Esto es as&iacute; por el tema de que una variable de miembro est&aacute;tica es compartida por m&uacute;ltiples funciones. Por tanto, recordad que <B>una variable de miembro est&aacute;tica debe de declararse dentro de la definici&oacute;n de una clase y despu&eacute;s, debe de definirse fuera de la definici&oacute;n de la clase. </B>En caso de no hacer esto, el compilador os mostrar&aacute; errores. Aqu&iacute; ten&eacute;is la definici&oacute;n fuera de la clase:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE>
+<FONT FACE="Arial" SIZE=1>// Definici&oacute;n de la variable est&aacute;tica
+<B>int</B> CEjemplo<B>::</B>m_staticValor;
+</PRE>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Ahora todo es mucho m&aacute;s f&aacute;cil, nos limitamos a "jugar" con los posibles accesos que podemos hacer a la variable y, despu&eacute;s, mostramos el valor por pantalla. Este es el resultado:</P>
+<P ALIGN="JUSTIFY"></P>
+<center><img border=1 src="gif/poo8_1.gif"></center>
+<P ALIGN="JUSTIFY"></P>
+
+<H4>Ultimos apuntes sobre las variables est&aacute;ticas</H4>
+
+<P ALIGN="JUSTIFY">Antes de dejar el estudio de las variables est&aacute;ticas, recordar que si estamos trabajando con variables est&aacute;ticas privadas no podemos acceder "al libre albedrio" tal y como hemos hecho antes. Al declarar una variable est&aacute;tica privada, s&oacute;lo podremos acceder mediante funciones, nunca directamente, es decir, aplicamos todos nuestros conocimientos ya adquiridos de acceso p&uacute;blico, protegido y privado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Recodar tambi&eacute;n que es absolutamente necesario seguir la regla de declarar dentro de la definici&oacute;n de la clase y definir fuera de la definici&oacute;n de la clase, la variable de miembro est&aacute;tica. Valga este &uacute;ltimo ejemplo, para mostrar una forma de contabilizar el n&uacute;mero de instancias a una misma clase.</P>
+<PRE>
+<FONT FACE="Arial" SIZE=1 COLOR="#000000">
+#<B>include</B> &lt;iostream.h&gt;
+
+// Este ejemplo muestra c&oacute;mo poder llevar
+// la cuenta del n&uacute;mero de instancias a una
+// clase
+
+<B>class</B> CEjemplo2{
+// Variables
+<B>private</B>:
+&#9;// Declaramos la variable est&aacute;tica
+&#9;<B>static unsigned int</B> m_contInstancias;
+
+// Funciones
+<B>public</B>:
+&#9;CEjemplo2() { m_contInstancias++; }
+&#9;~CEjemplo2() { m_contInstancias--; }
+&#9;<B>unsigned int</B> NumInstancias() { <B>return</B> m_contInstancias; }
+};
+
+// Definimos la variable est&aacute;tica
+// y aprovechamos para inicializarla
+<B>unsigned int</B> CEjemplo2::m_contInstancias = 0;
+
+<B>void</B> main (<B>void</B>)
+{
+&#9;CEjemplo2 objeto1, objeto2;
+&#9;CEjemplo2* objeto3 = <B>new</B> CEjemplo2;
+
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\nExisten " <B>&lt;&lt;</B>&#9;objeto1.NumInstancias() <B>&lt;&lt;
+</B>&#9;&#9;" instancias a la clase CEjemplo2";
+&#9;
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\n";
+
+&#9;<B>delete</B> objeto3;
+&#9;
+&#9;<B>cout</B> <B>&lt;&lt;</B> "\nBorramos una instancia y ahora existen " <B>&lt;&lt;
+</B>&#9;&#9;objeto2.NumInstancias() <B>&lt;&lt;</B> 
+&#9;&#9;" instancias a la clase CEjemplo2 \n\n\n";
+&#9;<B>cin</B>;
+}</PRE>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">La salida de este ejemplo es:</P>
+<P ALIGN="JUSTIFY"></P>
+<center><img border=1 src="gif/poo8_2.gif"></center>
+<P ALIGN="JUSTIFY"></P>
+<H4>Funciones de miembro est&aacute;ticas</H4>
+<P ALIGN="JUSTIFY">Las funciones de miembro est&aacute;ticas se caracterizan porque s&oacute;lo trabajan con funciones de miembro est&aacute;ticas. Al contrario que una funci&oacute;n de miembro "convencional" (esto es, una funci&oacute;n de miembro como las que hemos visto hasta ahora), una funci&oacute;n de tipo est&aacute;tica s&oacute;lo podr&aacute; trabajar, como ya he dicho, con las variables anteriormente explicadas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para declarar una funci&oacute;n de miembro est&aacute;tica es necesario anteponer la palabra clave <B>static </B>antes de definir qu&eacute; es lo que devuelve la funci&oacute;n de miembro. As&iacute;, si quisi&eacute;ramos declarar como funci&oacute;n de miembro est&aacute;tica la funci&oacute;n de miembro NumInstancias del &uacute;ltimo ejemplo (cosa, por otra parte, totalmente recomendable), la definici&oacute;n de la clase deber&iacute;a de tener el aspecto siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE>
+<FONT FACE="Arial" SIZE=1><B>class</B> CEjemplo2{
+// Variables
+<B>private</B>:
+&#9;// Declaramos la variable est&aacute;tica
+&#9;<B>static unsigned int</B> m_contInstancias;
+
+// Funciones
+<B>public</B>:
+&#9;CEjemplo2() { m_contInstancias++; }
+&#9;~CEjemplo2() { m_contInstancias--; }
+
+&#9;// Ahora la funci&oacute;n NumInstancias es est&aacute;tica.
+&#9;<B>static</B> <B>unsigned int</B> NumInstancias() { <B>return</B> m_contInstancias; }
+};
+</PRE>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Fijaros en la funci&oacute;n <I>NumInstancias</I> que ahora lleva la palabra clave static:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+
+<PRE>
+<FONT FACE="Arial" SIZE=1>// Ahora la funci&oacute;n NumInstancias es est&aacute;tica.
+&#9;<B>static</B> <B>unsigned int</B> NumInstancias() { <B>return</B> m_contInstancias; }
+</PRE>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<H4>Lo que puede y no puede hacer una funci&oacute;n est&aacute;tica</H4>
+
+<P ALIGN="JUSTIFY">Una funci&oacute;n de miembro est&aacute;tica <B>no puede acceder a variables que no son est&aacute;ticas</B>, es decir, si tuvi&eacute;ramos definido en la clase CEjemplo2 una variable del tipo:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><PRE><FONT FACE="Arial" SIZE=1><B>int</B> m_x;</PRE>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">La funci&oacute;n est&aacute;tica NumInstancias <B>NO</B> podr&iacute;a acceder a la variable m_x. Cuidado con esto porque si no lo sab&eacute;is pod&eacute;is morir de la manera m&aacute;s tonta dando cabezazos a vuestro monitor ;).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como recordar&eacute;is, el puntero <B><I>this</B></I> es un par&aacute;metro que se pasa "en secreto" a todas las funciones que pertenecen a una clase. Con el puntero <I>this</I> podemos acceder a todos y cada uno de los miembro de esa clase. Pues bien, en las funciones de miembro est&aacute;ticas no se pasa el puntero <I>this</I> as&iacute; que no podr&eacute;is utilizar este valioso puntero para acceder a otros miembros desde la funci&oacute;n del ejemplo <I>NumInstancias</I>.</P>
+
+<H4>Pr&oacute;ximo cap&iacute;tulo</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En el pr&oacute;ximo cap&iacute;tulo, abordaremos las clases y funciones amigas "<I>friends</I>", que permitir&aacute; establecer lazos de uni&oacute;n o, mejor dicho, 
+comunicaci&oacute;n a distintos niveles entre distintas clases y distintas funciones.</P>
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

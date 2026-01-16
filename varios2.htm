@@ -1,0 +1,195 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez "Kapit".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<P ALIGN=JUSTIFY>Uno de los elementos m&aacute;s valiosos con los que puede contar cualquier programador bajo
+el entorno DOS son, sin duda, las Interrupciones, gracias a ellas podemos dotar a nuestros
+programas de funcionales totalmente imprescindibles si queremos hacer programas lo
+suficientemente legibles como para llamar la atenci&oacute;n del usuario al que va dirigido, es m&aacute;s,
+las interrupciones se convierten en un &quot;arma&quot; fundamental si lo que queremos es acceder
+a niveles bajos para poder apoderarnos del coraz&oacute;n de nuestra CPU y sacar la m&aacute;xima 
+eficiencia de &eacute;sta.
+<br>
+<br>
+En este art&iacute;culo, os voy a presentar los conceptos generales de los que son las interrupciones,
+comentaros algunas ideas y hacer que, al menos, os suenen cuando lea&iacute;s alg&uacute;n art&iacute;culo (como el
+de la programaci&oacute;n del rat&oacute;n) en d&oacute;nde se hablan de ellas.
+<br>
+</p>
+<H4>
+Definici&oacute;n y Tipos de Interrupciones.
+</H4>
+<P align="justify">
+La primera cosa de todas, ¿qu&eacute; son las interrupciones?, bien, las interrupciones son un
+&quot;mecan&iacute;smo&quot; por medio del cual hacemos que la CPU deje la tarea en la que estaba para
+que se vaya a ocupar de otra cosa distinta, es decir, es una forma de llamar la atenci&oacute;n
+de la CPU de tal forma que cada dispositivo cuando necesita ser atendido por la CPU,
+emite una interrupci&oacute;n o se&ntilde;al haciendo que la CPU vaya a atenderla de inmediato. Esto es
+important&iacute;simo ya que de no existir interrupciones, la CPU deber&iacute;a de ir preguntando, cada 
+cierto tiempo, a los dispositivos para ver si necesitan de su intervenci&oacute;n y como podeis
+suponer, eso significar&iacute;a lentitud, mucha lentitud.
+<br>
+Por tanto, quedaros con que las interrupciones sirven para controlar el hardware, ya
+que son las que llaman a la CPU cuando este, el hardware, necesita la intervenci&oacute;n de
+la misma.
+<br>
+<br>
+Las interrupciones se pueden dividir en 2 grupos:
+<br><BR>
+<B><U>1. Interrupciones de Software.</u></b>  Tambi&eacute;n son conocidas como &quot;falsas interrupciones&quot;
+ya que se producen como consecuencia de la ejecuci&oacute;n de otra instrucci&oacute;n al no ser
+el hardware las que las produce. Otra forma de entender estas interrupciones, es verlas
+desde el punto de vista de llamadas a subrutinas, l&oacute;gicamente, la gracia est&aacute; en que
+esas subrutinas no son nuestras, sino que son las propias de cada sistema operativo,
+driver o similar tiene. Quedaros pues, con que somos nostros los que hacemos invocamos a la
+interrupci&oacute;n. <br>
+Este tipo de interrupci&oacute;n es el m&aacute;s habitual en la programaci&oacute;n.
+<br>
+<br>
+<b><u>2. Interrupciones de Hardware.</u></b> Este tipo de interrupci&oacute;n es invocado 
+directamente por los dispositivos hardware de nuestro ordenador, por lo que &quot;son bastante
+m&aacute;s aut&eacute;nticas&quot; que las anteriores. Al producir alg&uacute;n dispositivo hardware la interrupci&oacute;n el
+controlador de interrupciones o PIC se encarga de gestionarla determinando, en el caso
+de producirse m&aacute;s de una interrupci&oacute;n a la vez, cual de ellas tiene m&aacute;s prioridad y
+debe de ser gestionada por la CPU. El funcionamiento de este tipo de interrupciones es
+bastante similar y se suele utilizar mucho para la programaci&oacute;n de sistemas de comunicaciones.
+<br>
+</p>
+<H4>
+La Tabla de Vectores de Interrupciones.
+</H4>
+<P align="justify">
+
+Seguro que alguno se ha preguntado, &quot;si cuando llamamos a una interrupci&oacute;n se ejecuta
+una determinada rutina...¿d&oacute;nde narices se encuentra esta rutina?, es m&aacute;s, ¿c&oacute;mo sabe
+nuestra CPU d&oacute;nde encontrarla?.&quot;<br>
+Bien, la respuesta a estas dos preguntas (y muchas m&aacute;s) se encuentra en la tabla de
+vectores de interrupci&oacute;n. Dicha tabla es una estructura que se crea durante la inicializaci&oacute;n
+del ordenador y se coloca, en el principio de nuestra memoria (segmento 0 y desplazamiento 0).
+Dicha estrucutura ocupa y de forma justa 1Kb, ya que dispone de 256 entradas de 4 bytes cada una.
+Lo importante de todo esto es que, dicha estructura, almacena la direcci&oacute;n, en memoria, de las
+distintas rutinas que van ligadas a las distintas interrupciones, de tal modo que cuando invocamos,
+mediante interrupci&oacute;n software, o se invoca, mediante hardware, una interrupci&oacute;n, lo que
+se hace es utilizar un &iacute;ndice que va ligado a la interrupci&oacute;n, de tal manera que, con dicho &iacute;ndice,
+se acude a la tabla de vectores de interrupci&oacute;n para que el sistema encuentre la direcci&oacute;n de la rutina
+en d&oacute;nde se encuentra el verdadero tratamiento a la interrupci&oacute;n, es decir, si se produce la interrupci&oacute;n x, lo
+que se hace es acudir a la tabla con el &iacute;ndice x para encontrar la entrada (recordar que eran 256 entradas con 4 bytes
+cada una) que contiene la direcci&oacute;n en memoria de la rutina que sirve para tratar a la interrupci&oacute;n de &iacute;ndice
+x.<br>
+Como cada entrada es de 4 bytes, es f&aacute;cil adivinar que dichos 4 bytes forman la direcci&oacute;n, ya que 2 de esos
+bytes se utilizan como segmento y los otros 2 como desplazamiento, total, que ya tenemos la
+direcci&oacute;n de memoria con la rutina que hay que utilizar.
+<br><br>Ahora pensar por un momento que somos nostros los que, conociendo la direcci&oacute;n de memoria
+de una de esas rutinas, cambiamos dicha rutina por una nuestra para que al producirse
+una determinada interrupci&oacute;n ocurra lo que a nosotros nos interese...Como pod&eacute;is observar,
+las posibilidades son muy interesantes, tan s&oacute;lo ten&eacute;is que mirar el efecto de luz del Visualizator v:2.0 (ir
+a sencci&oacute;n de <A HREF="index07.htm">B&aacute;jate algo interesante</a>), dicho efecto se consigui&oacute; poniendo en la
+rutina que se encargaba de controlar la interrupci&oacute;n de reloj del sistema, el c&oacute;digo necesario
+para el efecto de luz, con lo que al producirse la interrupci&oacute;n de reloj se ejecutaba tambi&eacute;n el
+c&oacute;digo del efecto y como la interrupci&oacute;n de reloj se produce cont&iacute;nuamente, los efectos
+son muy buenos, vamos, que si quer&eacute;is hacer ese efecto acudiendo a un bucle <i>While</i> lo llevais
+claro :-(.
+<br><br>
+Espero haber despertado, con este art&iacute;culo, el inter&eacute;s por saber dominar las interrupciones. Si quer&eacute;is
+saber m&aacute;s, tan s&oacute;lo teneis que buscar informaci&oacute;n en libros sobre programaci&oacute;n de dispositivos tales
+como rat&oacute;n, VGA, etc, en los que se acude siempre a ellas. Ahora mismo estoy pensando
+el hacer un art&iacute;culo sobre como controlar el rat&oacute;n as&iacute; que puede que aparezca en esta
+actualizaci&oacute;n de la revista, adem&aacute;s, es la mejor forma de entender las interrupciones ¿o no?. ;).
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

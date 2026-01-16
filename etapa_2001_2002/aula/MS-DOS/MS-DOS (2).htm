@@ -1,0 +1,778 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Redireccionamiento de salida</title>
+<meta name="Microsoft Border" content="none">
+</head>
+
+<body style="word-spacing: 0; margin: 0">
+
+<div align="center">
+  <center>
+
+<table border="0" cellpadding="0" cellspacing="0" width="677">
+  <tr>
+    <td width="769">
+      <h4 style="word-spacing: 0; line-height: 100%; margin-left: 0cm; margin-top: 0; margin-bottom: 0" align="center"><span lang="ES-TRAD"><b><a name="Redireccionamiento de salida"><font face="Verdana" size="4">Redireccionamiento
+      de salida</font></a></b></span></h4>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 18.0pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Mediante
+      el empleo de los caracteres “|” y “&gt;” podemos redirigir la
+      salida de datos de un comando que, por defecto, es la pantalla de nuestro
+      ordenador. Si encadenamos la secuencia “&gt; lpr” a la línea de
+      ejecución de cualquier comando no obtendremos nada por pantalla ya que
+      habremos redirigido esa información a nuestra impresora. Así mismo también
+      podemos encadenar “&gt; [nombre fichero]” de tal manera que en el
+      fichero que nosotros especifiquemos se recoja la salida de datos. Si por
+      el contrario queremos enviar la salida de un comando a otro comando
+      deberemos emplear “|” pero siempre teniendo en cuenta que no tendrá
+      sentido si el comando receptor no está preparado para recibir información
+      mediante este cauce (en sistemas UNIX a estos redireccionamiento de
+      comandos se les denomina “tuberías”, del inglés <i style="mso-bidi-font-style:normal">pipes</i>).</span></font></td>
+  </tr>
+  <tr>
+    <td width="769">
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Ejemplos:</span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><img border="0" src="Images/MS-DOS1.gif" align="left" hspace="5" vspace="5" width="455" height="189"></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">A
+      la izquierda podemos comprobar como redireccionamos la salida de <i style="mso-bidi-font-style:normal">dir</i>
+      al fichero <i style="mso-bidi-font-style:normal">log.txt</i> y después
+      comprobamos el contenido del mismo.</span></font></p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="769">
+      <p align="center" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><img border="0" src="Images/MS-DOS3.gif" align="center" hspace="5" vspace="5" width="602" height="172"></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">&nbsp;&nbsp;&nbsp;
+      <v:imagedata src="file:///C:/WINDOWS/TEMP/msoclip1/01/clip_image002.png"
+  o:title=""/>
+      <span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">En
+      esta segunda captura podemos comprobar como hemos encadenado</span></font><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><font face="Verdana" size="1">
+      una búsqueda de caracteres con la ordenación que nos ofrece el comando <i style="mso-bidi-font-style:normal">sort</i>,
+      también podríamos haber añadido, por ejemplo, un redirección a un
+      hipotético fichero de texto “<i style="mso-bidi-font-style:normal">alicante.txt</i>”
+      donde guardar, ordenados, los resultados de la búsqueda.<o:p>
+      </o:p>
+      </font></span> </p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><font face="Verdana" size="1">&nbsp;&nbsp;&nbsp;
+      Especialmente útil puede resultarnos el encadenar con el comando “more”,
+      ya que de esta manera podemos controlar incluso la salida demasiado grande
+      como para ser vista de una vez cuando el comando que la causó no incluye
+      una opción tipo /P. Por ejemplo: “type fichero.txt | more”.<o:p>
+      </o:p>
+      </font></span></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><font size="1"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></font></span></font><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><font size="1" face="Verdana"><o:p>
+      </o:p>
+      </font></span></p>
+      <h5 style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0" align="center"><span lang="ES-TRAD"><font face="Verdana" size="4"><a name="Otras utilidades de DOS">Otras
+      utilidades de DOS</a></font></span></h5>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">EDIT<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>EDIT es un sencillo editor de texto ASCII que nos permite, en sus
+      últimas versiones, trabajar con varios ficheros simultáneamente,
+      imprimirlos e incluso incorpora la posibilidad de cortar / copiar zonas de
+      texto para su posterior pegado.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">DOSKEY<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>Doskey es lo que se denomina un “programa residente en memoria”,
+      es decir: ejecutarlo supone cargarlo en memoria. Una vez hecho esto nos
+      encontramos con un poderoso aliado que recordará todas las órdenes que
+      demos bajo DOS pudiendo reescribirlas en el <i style="mso-bidi-font-style:normal">prompt</i>
+      del sistema con tan solo emplear las teclas de cursor ARRIBA y ABAJO. Este
+      comando a su vez nos permite teclear las primeras letras de una sentencia
+      y mediante la pulsación de F8 auto – completar con comandos
+      anteriormente ejecutados que coincidan con lo tecleado hasta el momento.
+      Resulta muy útil ya que acelera enormemente el trabajo con MS-DOS.<o:p>
+      </o:p>
+      </span></font></p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><b style="mso-bidi-font-weight:normal"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: ES-TRAD; mso-fareast-language: ES; mso-bidi-language: AR-SA"><br clear="all" style="page-break-before:always">
+      </span></font></b></td>
+  </tr>
+  <tr>
+    <td width="769">
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><span lang="ES-TRAD"><font face="Verdana" size="1">Creación
+      de un disco de arranque</font></span></p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="ES-TRAD" style="font-size: 11.0pt; mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD; mso-tab-count: 1">&nbsp;</span><span style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD" lang="ES-TRAD"><font face="Verdana" size="1"><span style="mso-tab-count: 1; mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>Antes de comenzar a explicar los por menores de un disco de
+      arranque debemos completar lo que ya se avanzó hace unas páginas en cuánta
+      a gestión de memoria bajo DOS se refiere. En MS-DOS debemos distinguir
+      dos regiones de memoria esenciales: el primer megabyte y los demás. La
+      arquitectura IBM PC / DOS tiene una estructuración muy concisa de ese
+      primer mega:</font></span></p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><img border="0" src="Images/captura5.gif" width="677" height="264"></span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>Comentaremos los 2 puntos de los que aún no se ha comentado nada
+      en toda la memoria: EMS y HMA.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <ul style="margin-top:0cm" type="disc">
+        <li class="MsoNormal" style="text-align:justify;line-height:150%;mso-list:l3 level1 lfo2;
+     tab-stops:list 36.0pt">
+          <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Memoria
+          EMS o expandida: actualmente el gestor de memoria EMM386, que es quien
+          facilita el acceso a memoria en este modo, se suele invocar con la
+          opción NOEMS que como su nombre anuncia “no crea memoria extendida
+          alguna”. La memoria extendida fue un recurso que creó el consorcio
+          LIM (integrado por Lotus, Intel y Microsoft) y que permitía a
+          ordenadores que ya habían visto colmadas sus posibilidades de expansión
+          de memoria seguir añadiéndoles más RAM de tipo extendida, lo que
+          requería de ciertos “parches” tanto físicos como lógicos. Dado
+          que estos PCs ya tenían ocupada toda la memoria, en principio,
+          direccionable, el programa gestor EMS se cargaba en la memoria
+          superior ocupando 128 KB que empleaba como “ventana” de acceso a
+          esa memoria que en principio el ordenador no era capaz de “ver”.
+          Así el gestor iba mostrándole fragmentos de 128KB de esa memoria
+          creando una especie de “direccionamiento virtual”. Este método
+          resulta lento y actualmente innecesario ya que prácticamente no
+          existen aplicaciones diseñadas para funcionar con este sistema, por
+          lo que suele emplearse el parámetro NOEMS dejando así toda la RAM
+          como XMS (memoria extendida).<o:p>
+          </o:p>
+          </span></font></li>
+        <li class="MsoNormal" style="text-align:justify;line-height:150%;mso-list:l3 level1 lfo2;
+     tab-stops:list 36.0pt">
+          <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">HMA
+          o <i style="mso-bidi-font-style:normal">Memoria de Acceso Superior</i>:
+          esta memoria esta compuesta por los primeros 64KB después del primer
+          mega. A esta zona será a donde podremos desplazar programas que
+          integran el núcleo del sistema y que habitualmente se cargan en la
+          memoria convencional.<o:p>
+          </o:p>
+          </span></font></li>
+      </ul>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Pasos
+      en la carga de un sistema DOS: lo primero que hace el PC después de haber
+      completado su secuencia de arranque, con éxito, contenida en la BIOS es
+      buscar un sistema que arrancar. Si el sistema encontrado es MS-DOS la
+      secuencia de arranque procederá de la siguiente manera:<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.25pt; word-spacing: 0; margin-left: 53.25pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">1.<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>IO.SYS: este fichero es el núcleo de DOS, regula las operaciones
+      de entrada y salida así como las líneas o <i style="mso-bidi-font-style:normal">threads</i>
+      de ejecución.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.25pt; word-spacing: 0; margin-left: 53.25pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">2.<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>MSDOS.SYS: actualmente este fichero no es excesivamente importante
+      dadas las escasas funciones a las que se ha visto relegado, pese a todo
+      borrarlo supondrá que nuestro sistema no arranque... así que vital sí
+      que es, aunque poco Para demostrarlo aquí podemos ver su contenido:</span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.25pt; word-spacing: 0; margin-left: 53.25pt; margin-top: 0; margin-bottom: 0">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="769">
+      <div align="left">
+        <table border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0cm 3.5pt 0cm 3.5pt; border-style: solid; border-width: 2" bordercolor="#000000" align="left" width="287">
+          <tr>
+            <td width="285" valign="top" style="border: .5pt solid windowtext; padding-left: 3.5pt; padding-right: 3.5pt; padding-top: 0cm; padding-bottom: 0cm">
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">[Paths]<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">WinDir=C:\WINDOWS<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">WinBootDir=C:\WINDOWS<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">HostWinBootDrv=C<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana">&nbsp;<span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:12.0pt;color:blue;
+  mso-ansi-language:EN-GB"><o:p>
+              </o:p>
+              </span></font></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">[Options]<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">BootMulti=1<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">BootGUI=1<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">DoubleBuffer=1<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">AutoScan=1<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">WinVer=4.10.2222<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;The following
+              lines are required for compatibility with other programs.<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;Do not remove
+              them (MSDOS.SYS needs to be &gt;1024 bytes).<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxa<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxb<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxc<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxd<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxe<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxf<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxg<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxh<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxi<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxj<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxk<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxl<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxm<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxn<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxo<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxp<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxq<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxr<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxs<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">BootDelay=0<o:p>
+              </o:p>
+              </font></span></p>
+              <p class="MsoNormal" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><span lang="EN-GB" style="font-size:7.0pt;mso-bidi-font-size:
+  12.0pt;color:blue;mso-ansi-language:EN-GB"><font face="Verdana">Logo=1<o:p>
+              </o:p>
+              </font></span></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Modificando
+      las primeras líneas podemos alterar la posición del dispositivo desde el
+      que vamos a arrancar Windows. ¿Qué tendrá que ver Windows en un
+      MSDOS.SYS? Se preguntarán todos aquellos que pensaban que Windows sustituía
+      a DOS. En realidad este parámetro es mejor no modificarlo ya que si en
+      algo ha demostrado Windows ser inflexible es en el tener que arrancar
+      desde C. Valores como <i style="mso-bidi-font-style:normal">BootGUI=1</i>
+      pueden ser puestos a cero (<i style="mso-bidi-font-style:normal">BooGUI=0</i>)
+      para lograr arrancar por defecto en modo texto (GUI viene del inglés <i style="mso-bidi-font-style:
+normal">Graphic User Interface</i>), o<span style="mso-spacerun: yes">&nbsp; </span>bien
+      cambiar <i style="mso-bidi-font-style:normal">AutoScan=1</i> para evitar
+      el testeo de disco duro y del registro de sistema cuando éste no se cerró
+      convenientemente (opción que no se recomienda modificar). También
+      tenemos <i style="mso-bidi-font-style:normal">BootDelay</i> que nos
+      permite escoger el tiempo, en segundos, de espera para el mensaje en
+      pantalla de “<i style="mso-bidi-font-style:normal">Iniciando Windows
+      9x...</i>” durante el cual podemos pulsar F8 para modificar la secuencia
+      habitual de arranque, la última línea (<i style="mso-bidi-font-style:normal">Logo=1</i>)
+      podemos ponerla también a cero logrando así que no aparezca el típico
+      logotipo de “<i style="mso-bidi-font-style:normal">Iniciando Windows9x</i>”.
+      En cuanto al resto del fichero la explicación que el mismo nos da disipa
+      toda duda sobre la importancia de este fichero: las demás líneas
+      repletas de equis están de relleno ya que el fichero no puede ocupar
+      menos de 1024 bytes.</span></font></td>
+  </tr>
+  <tr>
+    <td width="769">
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.4pt; word-spacing: 0; margin-left: 53.4pt; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.4pt; word-spacing: 0; margin-left: 53.4pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">3.<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>CONFIG.SYS: este el siguiente fichero que busca el MS-DOS, podríamos
+      pensar que primero se carga el COMMAND.COM pero en realidad primero busca
+      el CONFIG. El matiz de todo esto es que el usuario puede escoger otro intérprete
+      de comandos mediante la inclusión de la línea SHELL=[RUTA][INTERPRETE
+      ALTERNATIVO] en el fichero CONFIG.SYS. En cualquier caso CONFIG.SYS ya no
+      es un fichero vital ya que su ausencia no impide que el sistema arranque,
+      en cualquier caso existen gestores de memoria y controladores de
+      dispositivos que solo pueden cargarse desde el CONFIG.SYS.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.4pt; word-spacing: 0; margin-left: 53.4pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">4.<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>COMMAND.COM: si el CONFIG.SYS no existe o si existe no se ha
+      especificado otro intérprete este será el siguiente fichero en cargarse
+      quedando residente en memoria y proporcionando, entre otras cosas, los
+      comandos internos del sistema.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l7 level1 lfo4; tab-stops: list 53.4pt; word-spacing: 0; margin-left: 53.4pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">5.<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>AUTOEXEC.BAT: se trata de un fichero de procesamiento por lotes,
+      esto quiere decir que cada una de sus líneas simboliza la ejecución de
+      un comando en el prompt de DOS. Muy útil para automatizar la carga<span style="mso-spacerun: yes">&nbsp;
+      </span>habitual de diversos controladores así como la ejecución de
+      diversos comandos de sistema empleados para su configuración.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Ahora
+      que ya tenemos los conocimientos básicos podemos ver cómo crear un disco
+      de arranque... ¿y qué es un disco de arranque? Muy sencillo, es un
+      disquete al que vamos, nosotros, a dotar de la capacidad necesaria para
+      arrancar, el solito, nuestro querido PC. Esto es de gran utilidad cuando,
+      por alguna desgracia, nuestro sistema no es capaz de arrancar o no lo hace
+      de forma adecuada; en estos casos un <i style="mso-bidi-font-style:
+normal">disco de arranque</i> también puede <i style="mso-bidi-font-style:normal">disco
+      de rescate</i>, ya que equipándolo con ciertos comandos básicos puede
+      permitirnos recuperar la operatividad de nuestro sistema y/o averiguar qué
+      es lo que no anda como debiera.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD" lang="ES-TRAD">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span><u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Primer
+      paso, escoger un disquete:</span></u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">
+      lo ideal es que se trate de un disquete nuevo y de calidad, así nos
+      aseguraremos que tendrá una larga vida y que nos dejará en la estacada
+      de forma inesperada. A ser posible este disquete deberá permanecer a buen
+      recaudo, por ejemplo: en una funda individual, económica y segura solución.</span></span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Segunda
+      paso, formateo y trasferencia del sistema:</span></u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">
+      mediante FORMAT A: /S formatearemos el disquete eliminando cualquier
+      información que pudiera contener y transferiremos el sistema al mismo.
+      Esta operación reducirá el espacio disponible a poco más de 1MB.</span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Tercer
+      paso, copia de los comandos básicos:</span></u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">
+      podemos crear un directorio DOS en el disquete donde copiar los comandos típicos
+      en este tipo de disquetes, una sugerencia en cuanto a cuáles elegir:
+      ATTRIB.EXE, CHKDSK.EXE, CHOICE.COM, COUNTRY.SYS, DELTREE.EXE, DOSKEY.COM,
+      EDIT.COM, FDISK.EXE, FORMAT.COM, KEYB.COM, KEYBOARD.SYS, LABEL.EXE,
+      MEM.EXE, MOUSE.COM, MOVE.EXE, SCANDISK.EXE, SYS.COM y XCOPY.EXE. A excepción
+      de <i style="mso-bidi-font-style:
+normal">scandisk</i>, <i style="mso-bidi-font-style:normal">keyb</i> (junto con
+      su dependiente <i style="mso-bidi-font-style:normal">keyboard.sys</i>), <i style="mso-bidi-font-style:normal">label</i>
+      y <i style="mso-bidi-font-style:
+normal">fdisk</i> los demás comandos ya han sido comentados. Podemos resumir
+      que: <i style="mso-bidi-font-style:normal">scandisk</i> es una aplicación
+      que nos permite comprobar la integridad de una unidad de disco tanto física
+      como lógicamente (así como subsanar algunos pequeños defectos), <i style="mso-bidi-font-style:
+normal">keyb</i> es el controlador de teclado para idiomas alternativos al inglés
+      (<i style="mso-bidi-font-style:normal">keyboard.sys</i> es el fichero
+      donde se almacenan los mapas de teclado de diversas lenguas), <i style="mso-bidi-font-style:normal">label</i>
+      es el comando que empleamos bajo DOS para modificar la etiqueta de una
+      unidad (LABEL [UNIDAD]) y, por último, <i style="mso-bidi-font-style:normal">fdisk</i>,
+      programa que nos permite gestionar las particiones FAT16 y FAT32 de un
+      disco duro, puesto que no ha sido explicado este trimestre no entraremos
+      en detalles sobre su funcionamiento pero sí adelantamos que es de
+      obligada presencia en todo disquete de arranque que se precie. Todos estos
+      comandos pueden encontrarse en C:\DOS o C:\WINDOWS\COMMAND.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 17.4pt; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Por
+      otro lado no debemos omitir la copia de los ficheros HIMEM.SYS y EMM386.EXE
+      (ubicados en una de las dos rutas especificadas para el resto de
+      ficheros).</span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 17.4pt; line-height: 100%; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">-
+      <span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">Cuarto
+      paso, creación de los ficheros de arranque CONFIG.SYS y AUTOEXEC.BAT:</span></u><span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD">
+      la mejor forma de entender como funcionan estos ficheros es viendo un
+      ejemplo terminado y explicado:<o:p>
+      </o:p>
+      </span></font>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><v:shape id="_x0000_s1052"
+ type="#_x0000_t202" style='position:absolute;left:0;text-align:left;
+ margin-left:138.15pt;margin-top:85.8pt;width:79.2pt;height:21.6pt;z-index:27'
+ o:allowincell="f" filled="f" stroked="f">
+      </font></v:textbox>
+      </v:shape>
+      <v:shape id="_x0000_s1053" type="#_x0000_t202" style='position:absolute;
+ left:0;text-align:left;margin-left:346.95pt;margin-top:85.8pt;width:86.4pt;
+ height:21.6pt;z-index:28' o:allowincell="f" filled="f" stroked="f">
+      <v:textbox>
+      <div align="center">
+        <center>
+        <table cellpadding="0" cellspacing="0" width="595" border="0">
+          <tr>
+            <td width="290">
+              <p class="MsoNormal" style="line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0" align="center"><img border="0" src="Images/MS-DOS4.gif" width="278" height="105"></td>
+            <td width="230" rowspan="2">
+              <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"></td>
+            <td width="313">
+              <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img border="0" src="Images/MS-DOS5.gif" width="278" height="106"></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="290">
+              <p align="right" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="2"><i>CONFIG.SYS</i></font></td>
+            <td width="395">
+              <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="2"><i>AUTOEXEC.BAT</i></font></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="915" colspan="3">
+              <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">En
+              <span style="color:red">rojo</span> las líneas <u>esenciales</u>,
+              en <span style="color:blue">azul</span> las <u>sugerencias</u> y
+              en <b style="mso-bidi-font-weight:normal">negro</b> aquellas que
+              son más prescindibles.</span></font></p>
+            </td>
+          </tr>
+        </table>
+        </center>
+      </div>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><b style="mso-bidi-font-weight:normal"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">CONFIG.SYS:<o:p>
+      </o:p>
+      </span></font></b></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">DEVICE=A:\HIMEM.SYS</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      Esta línea carga el gestor HIMEM que nos permitirá desplazar el núcleo
+      DOS (IO.SYS, MSDOS.SYS y COMMAND.COM) mediante la orden DOS=HIGH,UMB
+      escrita dos líneas más abajo. La secuencia DEVICE=[RUTA][NOMBRE DEL
+      CONTROLADOR] es habitual si queremos cargar cualquier controlador de
+      dispositivos desde el CONFIG.SYS.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">DEVICE=A:\EMM386.EXE
+      NOEMS</span></u><span style="mso-bidi-font-size: 12.0pt">: carga del
+      gestor de memoria EMS con la orden EMS, la utilidad de este comando /
+      gestor de memoria ha sido tratada al comienzo de esta sección.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">DOS=HIGH,UMB</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      como ya hemos dicho una vez cargado HIMEM.SYS es necesario incluir esta líneas
+      para que DOS pase a la memoria alta (HMA).<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">FILES=100</span></u><span style="mso-bidi-font-size: 12.0pt">
+      y <u>BUFFERS=50</u>: la primera obliga al sistema a reservar memoria
+      suficiente para mantener abiertos siultáneamente hasta 100 ficheros, la
+      segunda reserva memoria para las valores de entorno. El valor por defecto
+      para FILES es 60 y para BUFFERS 20 (valores que adoptan cuando no se
+      especifica nada en el CONFIG.SYS.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">DEVICEHIGH=A:\CDROM\ACERCD.SYS
+      /D:oem001</span></u><span style="mso-bidi-font-size: 12.0pt">: carga del
+      controlador de la unidad CD-ROM. La modificación de DEVICE a DEVIHIGH se
+      debe a que una vez cargado HIMEM podemos emplear esta variante para cargar
+      el controlador en la memoria superior. El fichero SYS especificado debe
+      haber sido copiado al disquete en la ruta que después especifiquemos. El
+      parámetro /D:[NOMBRE DE DISPOSITIVO] especifica el nombre por el que el
+      sistema reconocerá a esta unidad, bien podría haber sido “CD01” o
+      cualquier otra cosa que se nos ocurra.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">SET DIRCMD=/OGN</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      SET se emplea para definir variables de entorno, en este caso estamos
+      definiendo la variable DIRCMD y dándole el valor /OGN. La variable DIRCMD
+      es una variable que el propio sistema reconoce, siempre que ejecutemos el
+      comando DIR buscará el valor de DIRCMD esperando encontrar una serie de
+      parámetros (/OGN) que de existir añadirá a la ejecución sin necesidad
+      de que nosotros los tecleemos cada vez. En este caso siempre que
+      ejecutemos DIR nos mostrará primero los directorios (G) y todo estará
+      ordenado por nombre (N). Otros comandos como COPY también tienen su
+      variable estándar para parámetros habituales (COPYCMD).<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><b style="mso-bidi-font-weight:normal"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">AUTOEXEC.BAT:<o:p>
+      </o:p>
+      </span></font></b></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">@ECHO OFF</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      desactiva la salida por pantalla de la ejecución de cada uno de los
+      comandos que listemos en AUTOEXEC.BAT.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">PATH=A:\DOS;A:\PERSONAL</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      definimos el valor de la variable PATH (también podemos hacerlo en
+      CONFIG.SYS mediante SET PATH=[RUTA1] ; [RUTA2] ; ...). Cuando ejecutamos
+      un comando en la línea del PROMPT el sistema busca el fichero ejecutable
+      invocado en el directorio en que nos encontramos y después, de ono
+      haberlo encontrado, en las rutas especificadas en la variable PATH
+      (separadas unas de otras por punto y coma).<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">LH KEYB SP,,A:\DOS\KEYBOARD.SYS</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      LH es el acrónimo de <i style="mso-bidi-font-style:
+normal">Load High</i> y que, como ya se adivina, carga en memoria alta aquello
+      que le indiquems a continuación. En este caso invocamos el controlador de
+      teclado KEYB especificando tras la separación de un espacio que queremos
+      el teclado en español (SP) y que, siguiendo la gramática de este
+      controlador, el fichero con los mapas de teclado (keyboard.sys) se
+      encuentra en A:\DOS. El motivo de que no indiquemos la ruta para invocar
+      KEYB (también ubicado en A:\DOS) se debe a que ya hemos definido con PATH
+      las rutas de búsqueda alternativas, sin embargo para <i style="mso-bidi-font-style:normal">keyboard.sys</i>
+      sí especificamos la ruta, el motivo es sencillo: <i style="mso-bidi-font-style:
+normal">keyboard.sys</i> no es un fichero ejecutable, ni siquiera se invoca
+      desde el prompt sino como “parámetro” de un comando y este
+      procedimiento no “entiende” de rutas alternativas vía PATH.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">LH MOUSE /2</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      carga el controlador de ratón <i style="mso-bidi-font-style:normal">mouse.com</i>
+      en la memoria superior, el parámetro /2 se emplea, en el caso del
+      empleado en el ejemplo, para especificar la resolución de movimiento.
+      Esta característica, insisto, es particular de este controlador y aunque
+      otros programas similares también la incluyen no tiene porque ser el
+      mimos parámetro. Otra diferencia es que este controlador de ratón no
+      ocupa más de 10KB cargado, una cifra singularmente pequeña para este
+      tipo de controladores.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">LH DOSKEY</span></u><span style="mso-bidi-font-size: 12.0pt">:
+      carga el <i style="mso-bidi-font-style:normal">doskey </i>en memoria alta,
+      su función ya ha sido descrita.<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: -18.0pt; line-height: 100%; mso-list: l6 level1 lfo1; tab-stops: list 18.0pt; word-spacing: 0; margin-left: 18.0pt; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">-<span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span></span><u><span style="mso-bidi-font-size: 12.0pt">LH A:\CDROM\MSCDEX.EXE
+      /D:oem001</span></u><span style="mso-bidi-font-size: 12.0pt">: MSCDEX es
+      el acrónimo <i style="mso-bidi-font-style:
+normal">de Microsoft CD Extensión</i>, este programa permite que el dispositivo
+      (CDROM) controlado por ACERCD.SYS al que llamamos “<i style="mso-bidi-font-style:
+normal">oem001</i>” sea accesible desde DOS. Esta dedicación exclusiva de un
+      controlador de sistema para un lector de CD se debe a que dichos lectores
+      se popularizaron en los tiempos de las últimas versiones de MS-DOS (o
+      antes de que se llamara Windows 9x, según se mire) y el problema era que
+      DOS no estaba preparado para soportar las particiones ISO 9660 / Joliet de
+      los CDs, es por ello que Microsoft desarrolló este “parche” que ha
+      perdurado hasta nuestros días (pese a la aparente distancia de mis
+      palabras a penas son cinco los años que han transcurrido desde
+      “aquellos días”)<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoBodyTextIndent3" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">El
+      resultado de arrancar con un disco de arranque, valga la redundancia, con
+      estos ficheros de arranque (y estos controladores en concreto) es la
+      disponibilidad de 624KB libres de memoria convencional. Una cifra
+      excelente quenos garantizará que cualquier programa que deseemos ejecutar
+      no dejará de hacerlo, al menos, por problemas de memoria.</font></p>
+      <p class="MsoBodyTextIndent3" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">&nbsp;<o:p>
+      </o:p>
+      </font></p>
+      <p class="MsoBodyTextIndent3" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Resta
+      señalar que los ficheros CONFIG.SYS y AUTOEXEC.BAT deben ser creados con
+      un editor de texto ASCII estándar (sin adiciones extrañas de símbolos u
+      otros formatos). Para ello podemos servirnos del EDIT (de ahí que lo
+      incluyamos en nuestro disquete de arranque.</font></p>
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><b style="mso-bidi-font-weight:normal"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: ES; mso-fareast-language: ES; mso-bidi-language: AR-SA"><br clear="all" style="page-break-before:always">
+      </span></font></b>
+      <h3 style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0" align="center"><span style="mso-bidi-font-size: 10.0pt"><a name="Ficheros de procesamiento por lotes"><font face="Verdana" size="4">Ficheros
+      de procesamiento por lotes<o:p>
+      </font></a><font face="Verdana" size="1">
+      </o:p>
+      </font>
+      </span></h3>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">&nbsp;<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">El
+      colofón de este trimestre lo ponen los ficheros de procesamiento por
+      lotes, estos son,<span style="mso-spacerun: yes">&nbsp; </span>sin duda,
+      una de las más poderosas herramientos que DOS pone a nuestra disposición
+      en cuanto a optimización de recursos se refiere (sobre todo tiempo). <o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">Los
+      ficheros de procesamiento por lotes poseen extensión BAT, algo que ya
+      hemos ido adelantando. Se trata de ficheros de texto ASCII estándar en
+      los que cada línea, repetimos, supone una línea de ejecución en el
+      PROMPT. De esta manera podemos automatizar combinaciones o secuencias
+      habituales de comandos. Guardándolas línea a línea en un fichero BAT
+      podremos invocarlo para realizar la “macro” (nombre genérico para una
+      secuencia de instrucciones predefenida).<o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">No
+      obstante un fichero BAT nos proporciona una aproximación superficial a lo
+      que es un lenguaje de programación ya que pese a no contar con
+      operaciones entre variables, ser un lenguaje interpretado (no compilado) y
+      mil y una limitaciones más. Sí posee etiquetas y toma de decisiones. ¿Qué
+      es una etiqueta? Una etiqueta es un punto de referencia al que nosotros
+      podemos “saltar”, esto combinado con la toma de decisiones nos ofrece
+      múltiples posibilidades. <o:p>
+      </o:p>
+      </span></font></p>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><span style="mso-bidi-font-size: 12.0pt">Veamos
+      un ejemplo:</span><v:line
+ id="_x0000_s1069" style='position:absolute;left:0;text-align:left;flip:x;
+ z-index:44;mso-position-horizontal-relative:text;
+ mso-position-vertical-relative:text' from="58.95pt,143.2pt" to="210.15pt,258.4pt"
+ o:allowincell="f">
+      </font>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0">&nbsp;
+      <div align="center">
+        <center>
+        <table border="0" cellpadding="0" cellspacing="0" width="556">
+          <tr>
+            <td width="580">
+      <p class="MsoNormal" style="line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0" align="center"><img border="0" src="Images/captura6.jpg" width="580" height="435"></td>
+          </tr>
+          <tr>
+            <td width="580"><p class="MsoNormal" style="line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0" align="right"><font face="Verdana" size="1">Fichero:
+              <i>prueba.bat</i></font></p>
+            </td>
+          </tr>
+        </table>
+        </center>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td width="769">
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;
+      <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"></v:textbox>
+      </v:shape>
+      <span lang="ES-TRAD" style="mso-bidi-font-size: 12.0pt; mso-ansi-language: ES-TRAD"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>La principal novedad la constituye CHOICE pero como podemos ver su
+      uso es muy sencillo, basta con especificar en el parámetro /C: las
+      posibles teclas a pulsar y después, siguiendo el patrón del ejemplo,
+      poner las líneas en las que se decide a dónde saltar. Señalar que las líneas
+      “ERRORLEVEL” deben ir en orden inverso por motivos del tipo de
+      comparación que realiza MS-DOS para discernir entre una opción y otro
+      (comparación del tipo “<i style="mso-bidi-font-style:
+normal">si es igual o mayor que</i>”).<o:p>
+      </o:p>
+      </span></font>
+      <p class="MsoNormal" style="text-align: justify; line-height: 100%; word-spacing: 0; margin-top: 0; margin-bottom: 0">&nbsp;
+    </td>
+  </tr>
+</table>
+
+  </center>
+</div>
+
+<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
+
+</body>
+
+</html>

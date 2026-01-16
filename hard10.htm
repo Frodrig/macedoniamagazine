@@ -1,0 +1,229 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+
+
+<!-- INICIO DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+<CENTER>
+<TABLE BORDER=0 ALIGN="CENTER" WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" ALIGN="CENTER" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT COLOR="#009933" SIZE=7 FACE="ARIAL"><B>Z</B></font><FONT COLOR="#000000" SIZE=7 FACE="ARIAL"><B>ona Hardware</B></FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+</CENTER>
+
+<BR>
+<HR>		  
+<!-- FINAL DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+
+<!-- INICIO DE LAS SECCION 3 DEL DOCUMENTO -->
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<FONT COLOR="#009933" SIZE=3 FACE="ARIAL"><B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rquitecturas</B></FONT></A>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+<!-- FINAL DE LAS SECCION 3 DEL DOCUMENTO -->
+
+<BR><BR>
+
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:sargue@ctv.es">Sergio Baila "Sargue"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+<br><br>
+
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+
+<H3>
+
+Evolución de la memoria
+
+</H3>
+
+<p align=justify>
+
+<P align="justify"><font face=arial size=2>Hace unos a&ntilde;os pr&aacute;cticamente nadie se planteaba que tipo de memoria comprar, si la iban a cambiar en los pr&oacute;ximos meses, si seria compatible con las siguientes placas o cuando quedar&iacute;a obsoleta. Solo conoc&iacute;amos la memoria DRAM y, algunos afortunados, pose&iacute;an tarjetas de v&iacute;deo muy avanzadas (para la &eacute;poca) que ven&iacute;an con VRAM.</P>
+
+<P align="justify"><font face=arial size=2>Hoy, el mercado de las memorias es tan variable como el de los microprocesadores. De hecho, estamos cambiando casi tanto de tipo de memoria como de arquitectura de procesador, intentando acompasar unos con otros. Hemos dejado atr&aacute;s las velocidades de 100 ns, 80 ns e incluso los famosos 70 ns, el tipo de memoria m&aacute;s r&aacute;pido que pod&iacute;amos comprar con nuestros primeros 486.</P>
+
+<P align="justify"><font face=arial size=2>Para entender como y porque ha evolucionado toda la tecnolog&iacute;a referente a la memoria, entraremos un poco antes en como funciona, o funcionaba, la cl&aacute;sica memoria DRAM. Los siguientes tres p&aacute;rrafos son bastante t&eacute;cnicos, pero no realmente necesarios para seguir el resto del articulo, aunque si muy importantes para entender realmente los cambios producidos entre los diferentes tipos de memoria.</P>
+
+<P align="justify"><font face=arial size=2>Puede imaginarse un modulo DRAM de memoria como una matriz o tabla. Cada una de las posiciones de la tabla estar&iacute;a formada por condensadores, que son los encargados de almacenar la informaci&oacute;n, y por tanto cada una de estas posiciones podr&iacute;a almacenar uno o m&aacute;s bits, dependiendo de la configuraci&oacute;n concreta. Cuando el microprocesador pide a la memoria el contenido de una cierta posici&oacute;n de memoria, unos decodificadores en el chip de memoria traducen esta direcci&oacute;n de memoria f&iacute;sica a un numero de fila y un numero de columna, seleccionando de esta manera una casilla concreta de la tabla. Estos decodificadores funcionan de manera s&iacute;ncrona, con un reloj propio, no el del sistema. De esta manera, tenemos un reloj para el RAS (filas) y otro para el CAS (columnas).</P>
+
+<P align="justify"><font face=arial size=2>Los condensadores tienden a perder su carga con el tiempo, y para evitar perder la informaci&oacute;n guardada en estos, el chip de memoria debe "refrescar" el contenido de los condensadores, o sea, cargar en ellos el mismo valor que ten&iacute;an originalmente. El problema de esto es que se pierden algunos de los ciclos en refrescar los condensadores, momento en el cual no pueden ejecutarse operaciones de lectura o escritura en esos condensadores.</P>
+
+<P align="justify"><font face=arial size=2>Para aclarar un poco estos dos &uacute;ltimos p&aacute;rrafos, veamos un peque&ntilde;o ejemplo ilustrativo de los pasos llevados a cabo en un acceso t&iacute;pico a memoria. Lo primero es la generaci&oacute;n de la petici&oacute;n de acceso por parte del microprocesador. La direcci&oacute;n de memoria correspondiente llega a los pines de direcci&oacute;n del chip de memoria. En este momento, a esta direcci&oacute;n no se le hace ning&uacute;n caso, puesto que, por razones tecnol&oacute;gicas, todo circuito as&iacute;ncrono de este tipo requiere de unos buffers a la entrada para evitar que cualquier se&ntilde;al que circule por el bus de direcciones se tome como un acceso o modifique un acceso en curso. Cierto tiempo despu&eacute;s de que el micro haya hecho ya la petici&oacute;n, la se&ntilde;al de reloj del RAS (el de la fila) se activara, copiando el contenido en ese momento del bus de direcciones (la direcci&oacute;n que llega del microprocesador al chip de memoria) a un buffer que ser&aacute; el que realmente se utilice para direccionar la tabla. Una vez hecho esto, ya tenemos localizada la fila de la tabla donde tenemos la posici&oacute;n de memoria a la cual se quiere acceder. Toda esta fila se copia en los que se conocen como 'sense amps', un conjunto de transistores que act&uacute;an como buffers de la fila. Lo siguiente que ocurre es que se produce la se&ntilde;al de reloj del CAS, con lo cual se selecciona la columna pertinente de la fila que ya tenemos seleccionada, y entonces se copia ya el valor deseado desde el 'sense amp' correspondiente en un buffer de salida, que va directamente al bus de datos donde puede acceder el microprocesador.</P>
+
+<P align="justify"><font face=arial size=2>Como hemos visto, la memoria DRAM es as&iacute;ncrona, puesto que depende de unos relojes internos que nada tienen que ver con el reloj del sistema, que sincroniza el microprocesador y los buses con el resto de elementos. Todo sistema as&iacute;ncrono tiene asignado unos tiempos m&iacute;nimos para cada una de las operaciones internas, por lo que podemos tener en accesos diferentes, tiempos diferentes de respuesta del sistema. Esta es otra de las desventajas de estos sistemas, pues aunque acaben en medio de un ciclo su operaci&oacute;n, hasta el siguiente ciclo no pueden empezar otra operaci&oacute;n, dada que han de resincronizarse con el resto de componentes.</P>
+
+<P align="justify"><font face=arial size=2>Durante largo tiempo, la gran preocupaci&oacute;n de los fabricantes de DRAM fue incrementar su velocidad de alguna manera: sea incrementando el numero de bits que pueden tratar por acceso, paralelizando varias operaciones para minimizar el tiempo medio o eliminar algunas de las operaciones para determinados accesos. El m&eacute;todo que parece m&aacute;s sencillo es el de aumentar el tama&ntilde;o de la palabra (numero de bits) con el que se trabaja, pero esto requiere puertos de entrada/salida mayores, lo que se traduce en mas pines en la pastilla y aumenta por tanto el tama&ntilde;o del encapsulado (cosa nada deseable). Otro problema es que a mayor numero de puertos de entrada/salida, mas corriente el&eacute;ctrica circula de dentro a fuera de la pastilla, creando mas interferencias electromagn&eacute;ticas con el resto de componentes, con lo que el acceso es mas lento, pues hay que esperar a que las se&ntilde;ales se estabilicen.</P>
+
+<P align="justify"><font face=arial size=2>Ahora que ya entendemos como funciona la DRAM, veamos que se inventaron los ingenieros para ir mejorando este dise&ntilde;o.</P>
+
+<font face=arial><h4>Page Mode Access</h4>
+
+<P align="justify"><font face=arial size=2>Uno de las primeras mejoras fue el Modo de Acceso por Paginas. Como su nombre indica, este modo pretende incrementar la eficiencia del acceso a paginas completas de memoria. Se consigue manteniendo fijo el valor del RAS, con lo que solo cargamos los 'sense amps' una vez, y variando posteriormente el CAS, con lo que podemos ir accediendo a todas las posiciones dentro de una misma fila mucho mas r&aacute;pidamente, puesto que no hay que recargar los 'sense amps' cada vez.</P>
+
+<font face=arial><h4>Fast Page Mode (FPM)</h4>
+
+<P align="justify"><font face=arial size=2>La clave del funcionamiento de la memoria FPM es la eliminaci&oacute;n del tiempo de preparaci&oacute;n de la se&ntilde;al de la columna durante el ciclo de pagina. Esto se consigue teniendo en cuenta, como hemos visto en el Modo de Acceso por Paginas, de que mantenemos activa la se&ntilde;al RAS. As&iacute;, utilizamos esta se&ntilde;al para decodificar continuamente la se&ntilde;al CAS durante el acceso a la pagina. De esta manera, cuando nos viene una se&ntilde;al del reloj CAS, los datos pasan directos al buffer, y no hay que esperar a que se estabilice la se&ntilde;al, pues ya se ha estabilizado antes.</P>
+
+<P align="justify"><font face=arial size=2>La memoria FPM se convirti&oacute; r&aacute;pidamente en el est&aacute;ndar, y es, de hecho, la memoria que asociamos directamente con nuestras maquinas antiguas y sigue utiliz&aacute;ndose aun. Hoy, esta memoria es la peor de todas las memorias DRAM existentes. Ning&uacute;n sistema nuevo se montar&iacute;a con esta memoria, a no ser que no soporte ninguna de las mas nuevas. Se sigue fabricando, pero la demanda se limita a ampliaciones de maquinas existentes, y por tanto, dada la baja demanda, el precio es muy superior a las memorias actuales mucho m&aacute;s r&aacute;pidas.</P>
+
+<P align="justify"><font face=arial size=2>Los tiempos t&iacute;picos de esta memoria son 6-3-3-3, o sea, 3 ciclos de latencia iniciales (el RAS) y luego 3 ciclos para cada acceso.</P>
+
+<font face=arial><h4>HyperPage Mode (EDO)</h4>
+
+<P align="justify"><font face=arial size=2>La memoria EDO (Extended DataOut) represento el ultimo avance significativo en el campo de la memoria DRAM as&iacute;ncrona. Su funcionamiento se basa en no desconectar los buffers de salida antes de cargar la siguiente columna. De esta forma, puede lanzarse la siguiente columna en el mismo instante que se lee el resultado de la anterior, solapando al tiempo de lectura de los datos, el de cargar de la se&ntilde;al CAS. El resultado es un nada despreciable aumento del 40% del tiempo de acceso. Todo esto, simplemente cambiando la l&oacute;gica del circuito anterior, sin a&ntilde;adir nada f&iacute;sicamente, por lo que tenemos un chip del mismo tama&ntilde;o y coste de fabricaci&oacute;n que el anterior. La memoria EDO, aunque dise&ntilde;ada para trabajar a 66 MHz, puede funcionar a 83 MHz sin muchos problemas. Adem&aacute;s, ofrece un rendimiento muy similar a la memoria SDRAM. Sin embargo, si nos vamos a los 100 MHz de bus la cosa cambia, ya que la EDO no puede mantener el ritmo.</P>
+
+<font face=arial><h4>Burst EDO (BEDO)</h4>
+
+<P align="justify"><font face=arial size=2>La memoria BEDO esconde tras de s&iacute; verdaderas intrigas pol&iacute;ticas y econ&oacute;micas. Se trata de una versi&oacute;n mejorada de la memoria EDO, de tal forma que al recibir una posici&oacute;n, inmediatamente despu&eacute;s de dar los datos de una fila y columna, internamente la memoria BEDO recoge los datos de las tres siguientes columnas, reduciendo de esta forma el tiempo necesario para acceder a datos secuencialmente (algo muy utilizado, dado que las memorias cache de segundo nivel, que son las que realmente acceden a la memoria, cuando acceden lo hacen a trozos) puesto que se evita leer cada vez el CAS nuevo. Este dise&ntilde;o hubiera (de haber sido construido finalmente) dado unos tiempos de 4-1-1-1 a 66 MHz.</P>
+
+<P align="justify"><font face=arial size=2>La raz&oacute;n por la que esta memoria no sali&oacute; de los planos de los ingenieros es que Intel no la soporto en sus chipsets, en contra de la memoria SDRAM. Parece ser que las grandes casas fabricantes de memoria llevaban muchos a&ntilde;os investigando en la l&iacute;nea de la SDRAM y no quer&iacute;an ver como la mejora de una memoria anterior acababa con sus dise&ntilde;os. Tambi&eacute;n es cierto que la memoria BEDO no fue dise&ntilde;ada para el bus a 100 MHz, pero aun as&iacute; representar&iacute;a una soluciona mejor y m&aacute;s estable a la memoria SDRAM.</P>
+
+<font face=arial><h4>Memorias s&iacute;ncronas</h4>
+
+<P align="justify"><font face=arial size=2>BEDO (o EDO de hecho) fueron las ultimas memorias as&iacute;ncronas. A partir de ahora se trabajo solo sobre dise&ntilde;os de memorias s&iacute;ncronas. De hecho, SDRAM viene de Syncronous DRAM. La necesidad de este tipo de memorias vino de la mano de los buses de mas de 66 MHz. Con la memoria s&iacute;ncrona se consigui&oacute; que el procesador no tuviera que esperar a que la memoria le diera permiso para lanzarle una petici&oacute;n, sino que simplemente la puede lanzar en un ciclo en el que la memoria este libre, y esta, al estar sincronizada al reloj del sistema, recoge y se guarda esta informaci&oacute;n (direcci&oacute;n de la posici&oacute;n de memoria a acceder, operaci&oacute;n a realizar, datos...), procesa el acceso y tras un numero especifico de ciclos en los que el procesador puede realizar otras tareas, los datos est&aacute;n disponibles.</P>
+
+<P align="justify"><font face=arial size=2>Otra ventaja de la memoria s&iacute;ncrona es la eliminaci&oacute;n de relojes internos, como los del RAS y el CAS, disminuyendo as&iacute; la complejidad de la circuiter&iacute;a.</P>
+
+<font face=arial><h4>JEDEC SDRAM (PC66 SDRAM)</h4>
+
+<P align="justify"><font face=arial size=2>La mayor&iacute;a de las memorias s&iacute;ncronas se las conoce como SDRAM, sin diferenciar el tipo concreto. Este tipo de memoria es bastante mas avanzado que las anteriores que hemos ido viendo. Para empezar, no funciona siempre de la misma manera, sino que tiene varios modos de funcionamiento que pueden irse cambiando durante la ejecuci&oacute;n. Estos modos de funcionamiento determinan algunos par&aacute;metros que ahora veremos. Uno de los puntos m&aacute;s importantes de esta memoria es la posibilidad de trabajar a r&aacute;fagas (burst) de alta velocidad. Este resultado es algo similar a lo que se espera encontrar con la memoria BEDO, en la que la primera posici&oacute;n tenia la latencia del RAS, pero la siguientes posiciones se iban transmitiendo secuencialmente. Esto es mucho m&aacute;s importante de lo que puede parecer en un primer momento. Muchos pensareis que es dif&iacute;cil que el procesador necesite mas de dos o tres posiciones de memoria consecutivas en ciclos de reloj consecutivos, y es cierto en buena medida. Pero hay algo de lo que no he hablado, pero que ahora se hace necesario: las memorias cache (se pronuncia 'kach'). No voy a entrar en el funcionamiento de estas memorias, lo dejo para otro posible reportaje en el futuro, pero comentar solamente que las memorias cache son las que realmente se comunican con la memoria central, y el procesador solo se entiende con la cache. Por la manera en la que funcionan las cache, cuando se pide una posici&oacute;n de memoria casi siempre se pide toda la pagina, con lo que este modo acelera sobremanera los accesos. Si os fij&aacute;is, ya desde la memoria EDO se viene mejorando este punto, el del acceso secuencial. Pues esta es la raz&oacute;n.</P>
+
+<P align="justify"><font face=arial size=2>Comercialmente, las memorias SDRAM se miden tanto en MHz (megahertzs) como en ns (nanosegundos). Para pasar de MHz a ns deb&eacute;is dividir 1 entre los MHz. El resultado lo multiplic&aacute;is por mil. Eso os dar&aacute;, por ejemplo, que un modulo SDRAM de 66 MHz corresponde a 15 ns. El mismo m&eacute;todo funciona a la inversa, para pasar los ns a MHz. En este punto quer&iacute;a comentar que nos os alarm&eacute;is los aun poseedores de memorias as&iacute;ncronas, de 70 u 80 ns. Los ns de cada tipo de memoria no miden lo mismo. Un modulo de SDRAM de 100 MHz, que corresponde a 10 ns, puede corresponder a uno EDO de 50/60 ns.</P>
+
+<P align="justify"><font face=arial size=2>Cuando se trata de memorias de tipo Jedec (el 99% de las actuales SDRAM) existe un limite te&oacute;rico de unos 133 MHz, por lo que actualmente compiten varios est&aacute;ndares para lo que ser&aacute; la pr&oacute;xima generaci&oacute;n de memorias.</P>
+
+<font face=arial><h4>DDR SDRAM</h4>
+
+<P align="justify"><font face=arial size=2>La DDR SDRAM (Double Data Rate SDRAM) es una mejora de la SDRAM tipo Jedec convencional. En vez de limitarse a utilizar solo los flancos ascendentes del reloj, utiliza ambos. Con esta medida, tan simple al parecer, consigue duplicar la velocidad de operaci&oacute;n hasta los 200 MHz. Sin embargo las dificultades tecnol&oacute;gicas inherentes a este hecho no son, desde luego, triviales.</P>
+
+<P align="justify"><font face=arial size=2>Existen actualmente placas Socket 7 con soporte para este tipo de memoria, pese a que aun no se fabrica esta memoria en masa.</P>
+
+<font face=arial><h4>Enhanced SDRAM</h4>
+
+<P align="justify"><font face=arial size=2>Este tipo de memoria es tambi&eacute;n, como su nombre indica, una mejora sobre la SDRAM convencional. La idea es integrar una peque&ntilde;a cache de memoria SRAM en el propio chip. Puede parecer redundante dado que para tal tarea ya esta la cache de segundo nivel del microprocesador, pero no lo parece tanto cuando nos damos cuenta que el hecho de residir en el propio chip elimina la limitaci&oacute;n de trabajar con un bus de tama&ntilde;o reducido, como 32 o 64 bits, pudiendo elevar este numero hasta los 256 o m&aacute;s bits.</P>
+
+<P align="justify"><font face=arial size=2>Memorias basadas en protocolo</P>
+
+<P align="justify"><font face=arial size=2>Hasta ahora, todas las memorias que hemos ido viendo ten&iacute;an l&iacute;neas separadas para los datos, las direcciones y el control. Esto introduce una limitaci&oacute;n t&eacute;cnica que solo puede eliminarse de una forma: combinando toda la informaci&oacute;n por un solo bus, con lo que aparece la necesidad de definir un protocolo para interpretar correctamente la informaci&oacute;n en ambos extremos. De esta idea nacen dos propuestas: SLDRAM (SyncLink DRAM) y DRDRAM (Direct Rambus DRAM).</P>
+
+<font face=arial><h4>Direct Rambus DRAM</h4>
+
+<P align="justify"><font face=arial size=2>Lo primero que hay que se&ntilde;alar es que Intel ha puesto su dinero en esta memoria, por lo que lo m&aacute;s probable es que, como siempre, tengamos que trag&aacute;rnosla aunque no sea (ni es) la mejor soluci&oacute;n.</P>
+
+<P align="justify"><font face=arial size=2>A primera vista la cosa promete. La memoria DRDRAM puede llegar a 800 MHz. Sin embargo, el siguiente dato es desalentador. El tama&ntilde;o del bus es de solo 16 bits, frente a los actuales 64, con lo que el aumento real queda limitado al doble de velocidad. Adem&aacute;s, la latencia efectiva de esta memoria puede llegar a ser mayor (lo cual es peor) que las memorias SDRAM actuales m&aacute;s r&aacute;pidas. Este dato es muy negativo, aunque para entenderlo es necesario un articulo completo, que estamos preparando.</P>
+
+<P align="justify"><font face=arial size=2>Y por si todo esto no fuera poco, esta tecnolog&iacute;a es propietaria, por lo que cualquiera que desee producir memoria de este tipo deber&aacute; pagar unos royalties a RamBus e Intel.</P>
+
+<font face=arial><h4>SLDRAM</h4>
+
+<P align="justify"><font face=arial size=2>Para combatir al est&aacute;ndar RDRAM de Intel/Rambus, los principales fabricantes de memoria se han unido y el fruto se llama SLDRAM, un est&aacute;ndar de industria abierto, por lo que nadie tiene que pagar royalties.</P>
+
+<P align="justify"><font face=arial size=2>El hecho de ser una memoria basada en protocolo, empaquetando en un mismo bus las se&ntilde;ales de control, datos y direcciones, esta memoria puede funcionar sobre buses de hasta 200 MHz. Adem&aacute;s, y al igual que la DDR SDRAM, puede funcionar al doble de reloj utilizando los dos flancos del reloj. Algunos ingenieros son del parecer que podr&aacute;n alcanzarse en poco tiempo los 800 MHz.</P>
+
+<P align="justify"><font face=arial size=2>Comparada con la memoria DRDRAM parece una soluci&oacute;n mejor en todos los aspectos. Menor velocidad de reloj para conseguir la misma velocidad (menos interferencias), latencia menor y coste de fabricaci&oacute;n menor, al no haber de pagar royalties. Incluso el ancho de banda, el principal argumento de la DRDRAM cae ante la SLDRAM: 3'2 GB/s frente a 1'6 GB/s.</P></FONT><br><br>
+
+
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR>
+
+<hr>
+
+
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+<A HREF="zhw.htm">
+<FONT FACE="ARIAL"><B>[Zona Hardware]</B></FONT>
+</A>
+<HR>
+<A HREF="zhwarq.htm">
+<FONT FACE="ARIAL"><B>[Arquitecturas]</B></FONT>
+</A> 
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>
+ZONA HARDWARE
+</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>

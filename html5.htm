@@ -1,0 +1,222 @@
+<HTML>
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso Acelerado de HTML</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 5.<br> Usando los recursos de Internet.
+</H3>
+<p align=justify>
+
+Bueno, detrás de este  título se esconde la explicación para poder
+hacer que desde nuestras páginas seamos capaces de "saltar" a todos los recursos que nos ofrece, por un lado el hipertexto y por otro internet.<br><br>
+Bien, Hasta ahora, hemos visto lo suficiente como para poder hacer una página que 
+nos muestre el téxto de una forma elegante, con distintos colores e incluso que
+sea capaz de ordenar nuestra información con imponentes listas. Sin embargo, ¿cómo
+puedo tener mi información en distintos archivos HTM para cargarlos al pinchar en
+un determinado sitio?, ¿Cómo puedo hacer que la gente me envíe un mail con sólo
+pulsar sobre el texto indicativo?, ¿Cómo, cuando tenga mi página, podré ofrecer
+un Link a...Macedonia ;) ?. Esa y otras respuestas aquí y ahora...
+<br><br>
+<H4>Los enlaces hipertexto</H4>
+<p align=justify>
+Hombre, está clarísimo que, si algún día construimos nuestra página WEB, deberíamos
+de, no sólo sacar texto interesante (para algunas personas) por pantalla, también
+deberíamos de aprovecharnos de todo lo que es Internet, en definitiva, de todo lo
+que nos ofrece el HTM que, a modo de culturilla general te diré que son las siglas
+de HyperText Markup Language, hablando en cristiano el lenguage de Hipertexto.<br>
+Como tal, el hipertexto nos ofrece una serie de mecanismos que son, precisamente, los
+encargados de dotar a la WWW de la versatilidad y dinamismo que tiene. <br>
+Gracias al hipertexto, podemos desde saltar por distintos documentos a realizar todas
+las operaciones que nos permite la ya citada World Wide Web, esto es, FTP, Telnet,
+Gopher, cargar gráficos, música, etc, etc.<br><br>
+Nosotros, en este capítulo, vamos a aprender como acceder a servidores mediante FTP's,
+crear enlaces con otras páginas, cargar otros archivos HTML tanto dentro como fuera
+de nuestro servidor e incluso de pasada (ya que se hablará de ellos en el Capítulo 6), cómo
+cargar un gráfico que se encuentra en otro servidor distinto al que está nuestra
+página. 
+<br><br>
+<H4>¡Dios mío, si todo se hace con una directiva!.</H4>
+<p align=justify>
+Pues sí, con la directiva &lt;A&gt; y su correspondiente &lt;/A&gt; se pueden
+hacer maravillas, tan sólo hay que variar sus parámetros. Así, mediante esta
+directiva, podremos realizar los ya citados enlaces a imágenes para
+insertarlas en nuestros documentos (se verá en el siguiente capítulo). Pero volvamos
+a lo que estamos, a nosotros ahora nos interesa para poder crear enlaces en
+nuestros documentos. <br><br>
+Para empezar, vamos a partir de lo básico, esto es, cómo cargar otros archivos HTM
+desde nuestro servidor, o lo que es lo mismo, cómo hacer que cuando se pulse sobre
+una determinada palabra o frase se cargue otra página distinta a la actual.<br>Bien,
+para hacer lo citado en el párrafo de arriba, deberemos de utilizar, junto a la
+directiva &lt;A&gt; el parámetro "HREF" lugar en dónde irá el nombre y ubicación
+(si está en el mismo que el que lo llama no hace falta) del archivo HTM.<br>Como
+siempre, un ejemplo. A continuación, os pongo un código que haría que en la
+pantalla apareciera "Pulsa aquí" de tal forma que si se pulsara sobre la palabra
+aquí, se cargara el archivo HTM con nombre hola.htm.<br><br>
+<i>Pulsa &lt;A HREF="hola.htm">aqu&iacute;&gt;&lt;/A&gt;</i>
+<br><br>
+No hace falta ser "Jimy the programator" para saber que lo que metamos entre &lt;A&gt;y &lt;/A&gt;
+(llevando el parámetro HREF adecuadamente) será interactivo y nos permitirá pulsar sobre
+él, haciendo que se cargue el archivo indicado en HREF al pulsar sobre dicho texto.
+Fijaros, que el archivo que se carga se indica mediante HREF="nombrearchivo.htm" y que,
+si habeis probado ya el ejemplo, en pantalla vereis la palabra aquí en azul y subrayada.
+Vaya, al igual que veis los menús en Macedonia.
+<br><br>
+<H4>Ya se cargar archivos .HTM desde mi página, ahora... quiero ¡más!.</H4>
+<p align=justify>
+Bien, para poder realizar Links, el sistema es idéntico, lo único que cambiará será
+que en lugar de poner el nombre de un archivo, pondremos, si no lo has adivinado ya,
+la dirección del Link. De esta manerá, será muy fácil hacer que cuando tus lectores
+visiten tú página y quieras ofrecer más información sobre un tema que se encuentra
+en un Link que tú sabes, pueda, pulsando únicamente sobre la palabra que tú quieras,
+acceder a dicho Link. El ejemplo más claro, lo tienes en Macedonia, ¿Cómo te crees
+que hacemos nosotros para que, en la sección de Links, los lectores que así lo 
+deseen puedan saltar a otro Link pulsando sobre la dirección?. <BR>Ahí va el código
+de un ejemplo que hace que al pulsar sobre la palabra Macedonia tu navegador te lleve
+¡hasta aquí mismo!, lógicamente si estás ejecutándolo a la vez que te encuentras
+conectado a la Red.<br><br>
+<i>
+<p align=left>
+Para ir a la revista más frutera, sólo tienes que pulsar a...
+&lt;A href="http://www.geocities.com/SiliconValley/Park/9221"&gt;Macedonia&lt;/A&gt;
+</i>
+</p>
+<BR><BR><p align=justify>
+Del mismo modo que podemos ofrecer de esa forma tan fácil Links desde nuestras páginas,
+también podemos hacer que la gente pueda hacer "download's" ("bajarse" cosas a su ordenador) desde
+la misma mediante la creación de enlaces FTP. Así, poniendo el código que sigue a 
+continuación, accederíamos al servidor de la Universidad de Oviedo para urgar entre
+los archivos que nos puede ofrecer y traernoslos para nuestro sufrido disco duro.
+<br><br>
+<i>
+
+Pulse &lt;A HREF="ftp.petra.uniovi.es"&gt;aquí&lt;/A&gt; para acceder al servidor de la Facultad de Informática de Oviedo
+
+</i>
+<br><br>
+De esta forma, si se pulsara sobre la palabra "aquí", accederías al servidor de la
+Facultad de Informática de Oviedo, el cual, por cierto, seguro que andará jodidillo como
+es habitual ;).
+<br><br>
+Como os cité al comienzo del artículo, también te gustará que la gente pueda mandarte
+un e-mail con sólo pulsar sobre una palabrita que ponga eso, e-mail.<br> Tampoco debemos
+ir muy lejos, la directiva &lt;A&gt; de toda la vida te resolverá el problema, así, te
+voy a poner el código que hace falta para hacer que al pulsar sobre Kapit, puedas mandarme
+un mail ;)
+<br><br>
+<i>
+&lt;A HREF="mailto:i9808685@petra.euitio.uniovi.es"&gt;Kapit&lt;/A&gt;
+</i>
+<br><br>
+<H4>Algunos truquillos y avisos a la hora de utilizar el FTP.</H4>
+<p align=justify>
+Por experiencia, si quieres hacer que, desde tú página, la gente pueda bajarse
+tus archivos .ZIP, en lugar de poner un enlace de tipo FTP, prueba a poner
+en el parámetro HREF simplemente el nombre del archivo .ZIP. Por ejemplo, HREF="datos.zip".<br>
+Te evitarás problemas.
+<br><br>
+Por otro lado, hay veces que, poner enlaces a otras páginas que poseen este o aquel
+gráfico o simplemente un archivo .HTM, que te ocuparía mucho espacio en tú página,
+podrán relentizar todo un poquito y ya sabes que cuando se trabaja en Internet, a no
+ser que tengas un servidor muy rápido, es una chuminada andar haciendo experimentos
+con miles de gráficos y gif animados, pero, eso es otra historia que será contada
+en el capítulo 6. Hasta entonces ya podeís ir haciendo, al menos, páginas
+curiosas.
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulap.htm"><font FACE="ARIAL"><B>[Curso Acelerado de HTML]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

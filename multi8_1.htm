@@ -1,0 +1,614 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 9. <br> Programación de tarjetas de vídeo (VII).
+</h3>
+<H4>2.3.- SVGA Est&aacute;ndar. El modo 640x480x256c</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Como ya se coment&oacute; anteriormente, las bajas capacidades gr&aacute;ficas
+del ordenador PC han sido progresivamente aumentadas y mejoradas a lo largo
+de los a&ntilde;os. De las tarjetas monocromas iniciales hemos ido pasando
+por una serie de siglas que a todos se nos antojan de los m&aacute;s familiares.
+De MDA a CGA, de &eacute;stas a la EGA, de la EGA a VGA y finalmente a
+las superpoderosas SVGA. Cada una de ellas iba a&ntilde;adiendo colorido
+y resoluci&oacute;n a nuestros pobres gr&aacute;ficos.
+
+<P align="justify">Las tarjetas SVGA han llegado para romper con todo eso. Ahora, es posible
+tener 640x480 p&iacute;xels con 16 millones de colores simult&aacute;neos.
+Pero en detrimento de esto, las SVGA son lentas, <B>muy lentas</B>, <B><U>&iexcl;exageradamente
+lentas!</U></B> como para que se pueda programar algo con mediana acci&oacute;n
+y rapidez visual. Aunque a&uacute;n as&iacute;, ganamos mucho en calidad
+visual.
+
+<P align="justify"><B><U>2.3.1.- El Est&aacute;ndar VESA</U></B>
+
+<P align="justify">El principal problema de la SVGA aparte de su lentitud, viene cuando
+se la intenta programar. Esto es as&iacute; porque las SVGA son muy graciosas,
+es decir: son incompatibles entre ellas. Cada una requiere una programaci&oacute;n
+diferente y acomodada a cada caso, dando lugar a un verdadero caos inform&aacute;tico.
+Nombres como TRIDENT, Cirrus, Ahead, ATI, Wonder, Number Nine, etc., se
+han sumado a la larga lista de pseudoest&aacute;ndares del grafismo en
+alta resoluci&oacute;n.
+
+<P align="justify">Para solucionar esto, se invent&oacute; el est&aacute;ndar VESA, el
+cual viene a dictar unas normas comunes que se han de seguir en todas las
+tarjetas. Ha costado su tiempo, pero la gran mayor&iacute;a de las tarjetas
+ya traen el driver VESA en su V&Iacute;DEO ROM BIOS, es decir, grabada
+en el firmware de la propia tarjeta. La que no tenga esta capacidad ha
+de valerse de un driver software para que se acople al est&aacute;ndar.
+Aqu&iacute; se incluye un programa freeware para hacer que nuestra SVGA
+cumpla el est&aacute;ndar VESA.
+
+<P align="justify">La incompatibilidad viene dada en tres aspectos fundamentales: la organizaci&oacute;n
+de la VRAM (RAM de V&iacute;deo), la numeraci&oacute;n de los modos de
+v&iacute;deo y el direccionamiento a la memoria de v&iacute;deo. El resultado
+de esto es que un programa para una tarjeta no funcionar&aacute; nunca
+en otra.
+
+<P align="justify">El driver VESA es accesible como si de una subfunci&oacute;n de la interrupci&oacute;n
+10h se tratase. Es la subfunci&oacute;n 4Fh y permite a su vez 6 posibles
+tareas:
+<OL>
+<LI>
+<B>00h</B> = Averiguar las posibilidades de la tarjeta SVGA.</LI>
+
+<LI VALUE="1">
+<B>01h</B> = Averiguar la informaci&oacute;n completa sobre un modo de
+v&iacute;deo.</LI>
+
+<LI VALUE="1">
+<B>02h</B> = Pasar a un modo en concreto.</LI>
+
+<LI VALUE="1">
+<B>03h</B> = Obtener el modo de v&iacute;deo presente o actual.</LI>
+
+<LI VALUE="1">
+<B>04h</B> = Set/Reset de la SVGA.</LI>
+
+<LI VALUE="1">
+<B>05h</B> = Obtener/Situar la ventana de la SVGA.</LI>
+</OL>
+Los modos VESA estandarizados son 9:
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLPADDING=4 WIDTH="540" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="18%"><B>Numeraci&oacute;n</B></TD>
+
+<TD VALIGN=TOP WIDTH="9%">100h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">101h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">102h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">103h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">104h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">105h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">106h</TD>
+
+<TD VALIGN=TOP WIDTH="9%">107h</TD>
+
+<TD VALIGN=TOP WIDTH="8%">6Ah</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="18%"><B>Resoluci&oacute;n&nbsp;</B>&nbsp;
+
+<P align="justify"><B>X / Y</B></TD>
+
+<TD VALIGN=TOP WIDTH="9%">640&nbsp;
+
+<P align="justify">400</TD>
+
+<TD VALIGN=TOP WIDTH="9%">640&nbsp;
+
+<P align="justify">480</TD>
+
+<TD VALIGN=TOP WIDTH="9%">800&nbsp;
+
+<P align="justify">600</TD>
+
+<TD VALIGN=TOP WIDTH="9%">800&nbsp;
+
+<P align="justify">600</TD>
+
+<TD VALIGN=TOP WIDTH="9%">1024&nbsp;
+
+<P align="justify">768</TD>
+
+<TD VALIGN=TOP WIDTH="9%">1024&nbsp;
+
+<P align="justify">768</TD>
+
+<TD VALIGN=TOP WIDTH="9%">1280&nbsp;
+
+<P align="justify">1024</TD>
+
+<TD VALIGN=TOP WIDTH="9%">1280&nbsp;
+
+<P align="justify">1024</TD>
+
+<TD VALIGN=TOP WIDTH="8%">800&nbsp;
+
+<P align="justify">600</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="18%"><B>Colores</B></TD>
+
+<TD VALIGN=TOP WIDTH="9%">256</TD>
+
+<TD VALIGN=TOP WIDTH="9%">256</TD>
+
+<TD VALIGN=TOP WIDTH="9%">16</TD>
+
+<TD VALIGN=TOP WIDTH="9%">256</TD>
+
+<TD VALIGN=TOP WIDTH="9%">16</TD>
+
+<TD VALIGN=TOP WIDTH="9%">256</TD>
+
+<TD VALIGN=TOP WIDTH="9%">16</TD>
+
+<TD VALIGN=TOP WIDTH="9%">256</TD>
+
+<TD VALIGN=TOP WIDTH="8%">16</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Y el procedimiento que se ocupa de la selecci&oacute;n del modo de v&iacute;deo
+VESA 640x480 con 256 colores dado aqu&iacute;, es el siguiente:
+
+<P align="justify"><B><FONT COLOR="#990000">void ModoVESA64x48(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x2</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>mov bx,0x101</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <B>int
+0x10</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Simpl&iacute;simo. &iexcl;Gracias, VESA!
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.3.2.- La Memoria de V&iacute;deo de la SVGA</U></B>
+
+<P align="justify">Hasta ahora, hemos visto c&oacute;mo sobrepasar el l&iacute;mite de
+los 64Kb de la VGA para llegar a los 256, pero todos sabemos que las tarjetas
+actuales disponen como m&iacute;nimo de 1 Mb de VRAM. Las SVGA y sus modos
+extendidos necesitan m&aacute;s de 256Kb de memoria, pero se encuentran
+con el problema del acceso est&aacute;ndar del espacio de direcciones,
+por razones de compatibilidad.
+
+<P align="justify">Las ventanas de v&iacute;deo proveen una forma de acceder a la memoria
+"extra" de la tarjeta SVGA que de otra forma ser&iacute;a imposible alcanzar
+dentro de las direcciones de memoria de la CPU.
+
+<P align="justify">La primera consideraci&oacute;n que hay que tener cuando se implementa
+este modo es permitir el acceso a la memoria de v&iacute;deo a los procedimientos.
+
+<P align="justify">El espacio de direcciones de la VGA para el modo 13h comentado anteriormente,
+comienza en el segmento A000h (de la RAM del ordenador) y tiene una longitud
+de 64Kb. Esto permite acceder a los 256Kb de la RAM de la tarjeta, esto
+es, 64Kb por plano. Para acceder a la completitud de los 1024Kb de la SVGA
+se mapean porciones de memoria de v&iacute;deo a partir de A000h.
+
+<P align="justify">Vamos a intentar aclarar esto.
+
+<P align="justify">Una pantalla en el modo 640x480x256c ocupa 307200 bytes. La zona de
+memoria en que escribimos los bytes para que la circuiter&iacute;a de v&iacute;deo
+lea de ah&iacute; y los sit&uacute;e en su propia memoria comienza en A000h,
+tal y como se explic&oacute; anteriormente. Cuando est&aacute;bamos en
+el modo 320x200x256c necesit&aacute;bamos 64000 bytes para una pantalla,
+que cab&iacute;an perfectamente en el segmento que comienza a partir de
+A000h. Pero ahora ese rango de 64Kb disponible se nos queda corto para
+almacenar los 307200 bytes que hay que pasarle a la tarjeta de v&iacute;deo
+para que &eacute;sta los ponga en su memoria y posteriormente se vea en
+la pantalla.
+
+<P align="justify">La forma de conseguir esto es mediante el mapeado de memoria, o lo que
+es lo mismo, la divisi&oacute;n del bloque de 307200 bytes en 4 bloques
+de 64Kbytes y un bloque m&aacute;s de 45060 bytes. De esta forma vamos
+poniendo los bloques en A000h y la tarjeta los va leyendo secuencialmente.
+Pero a&uacute;n nos falta algo, ya que si fu&eacute;ramos d&aacute;ndole
+los 65536 bytes primeros, luego los segundos, los terceros y los cuartos,
+y finalmente los 45060 finales, la tarjeta los ir&iacute;a poniendo siempre
+a partir de la direcci&oacute;n 0 de su propia memoria, pis&aacute;ndose
+unos a otros. Para decirle que cuando le hayamos dado los primeros 64Kb
+los ponga en el principio (Banco 0), los siguientes 64Kb a continuaci&oacute;n
+del &uacute;ltimo (Banco 1), y as&iacute; hasta llegar al Banco 4 donde
+almacenar&aacute; los 45060 bytes finales, hace falta usar el servicio
+5h de la subfunci&oacute;n 4Fh de VESA.
+
+<P align="justify">El procedimiento que har&aacute; esto es:
+
+<P align="justify"><B><FONT COLOR="#990000">void CambiaBancoVESA(BYTE banco)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,banco</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">As&iacute;, vamos poniendo las porciones de la pantalla en la memoria
+de v&iacute;deo. Es mucho m&aacute;s costoso y tedioso que el "simple"
+modo 13h est&aacute;ndar, pero la calidad de las im&aacute;genes es muy
+superior.
+
+<P align="justify">Como es l&oacute;gico, aqu&iacute; implementamos el procedimiento para
+leer una pantalla gr&aacute;fica que almacene los 307200 bytes que la conforman.
+El formato tambi&eacute;n es el PCX utilizado para las pantallas en MCGA,
+pero con la salvedad de que para paliar en parte la lentitud de la enorme
+cantidad de bytes que ahora hay que descomprimir, se usan cinco zonas de
+memoria que almacenar&aacute;n los cinco bloques que luego se volcar&aacute;n
+a partir de A000h como se ha expuesto antes.
+
+<P align="justify">El procedimiento que lo hace es:
+
+<P align="justify"><B>void LeePcx64x48(char [12],BYTE *,BYTE *,BYTE *,BYTE *,BYTE *);</B>
+
+<P align="justify">Y usa el mismo m&eacute;todo de descompresi&oacute;n PCX pero ahora
+tendr&aacute; que descomprimir m&aacute;s bytes y almacenarlos en distintas
+zonas de memoria.
+
+<P align="justify">Ahora bien, una vez que tenemos la pantalla en memoria RAM y la queremos
+pasar a memoria VRAM, usamos el procedimiento siguiente:
+
+<P align="justify"><B><FONT COLOR="#990000">void VuelcaPantalla64x48(BYTE *banco0,BYTE
+*banco1,BYTE *banco2, BYTE banco3,BYTE banco4)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register int segmento0,segmento1,segmento2,segmento3,segmento4;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register int desplaza0,desplaza1,desplaza2,desplaza3,desplaza4;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento0=FP_SEG(banco0); desplaza0=FP_OFF(banco0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento1=FP_SEG(banco1); desplaza1=FP_OFF(banco1);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento2=FP_SEG(banco2); desplaza2=FP_OFF(banco2);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento3=FP_SEG(banco3); desplaza3=FP_OFF(banco3);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento4=FP_SEG(banco4); desplaza4=FP_OFF(banco4);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplaza0</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambio de banco=0</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Destino: la memoria buffer a la que accede la tarjeta:A000h</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 65534 veces [ds:si]->[es:di]. 65534 bytes = 32767 words</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32767</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// El byte que falta de los 1&ordm;s 65535. 1 vez [ds:si]->[es:di]</I></B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>movsb</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+/<B>/ Primer byte de la segunda zona de memoria y que completan</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// los 65536 bytes -> 64 kbytes asignables al primer banco de la Svga</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplaza1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambio al banco 1</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Destino, buffer de v&iacute;deo</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Forzar posici&oacute;n par en memoria</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 65532 veces lo mismo que antes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32766</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Ahora el desfase es de 2 bytes y se va a ir&nbsp; incrementando en 1</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplaza2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsw</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambio al banco 2</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,2</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Y vuelta a empezar con la siguiente zona de memoria</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 65532 veces lo mismo que antes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32766</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Byte que falta: 32766 words + 1 byte = 65533</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Desfase= 3 bytes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplaza3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambio al banco 3</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Siguiente zona de memoria</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Forzar posici&oacute;n par en memoria</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 65530 veces lo mismo que antes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32765</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsb</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Desfase= 4 bytes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplaza4</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+movsw</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambio al banco 4</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ah,0x4f</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,0x5</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor bx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor dh,dh</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dl,4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x10</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Siguiente zona de memoria y &uacute;ltima</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 45056 veces lo mismo que antes: 22528*2</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,22528</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">&nbsp;
+
+<P align="justify">&iquest;D&oacute;nde estaba aqu&eacute;l simple <I>VuelcaPantallaMcga</I>?
+
+<P align="justify">Como se ve, es infinitamente m&aacute;s complejo que el procedimiento
+de volcado de pantalla en MCGA (muuuucho m&aacute;s complejo). Esto es
+debido a la necesidad de los cambios de bancos, los desfases existentes
+entre cada asignaci&oacute;n de porciones de memoria, la cantidad de informaci&oacute;n...
+Tambi&eacute;n se puede apreciar la inclusi&oacute;n del procedimiento
+<I>CambiaBancoVESA </I>que en lugar de llamarse, se incluye varias veces.
+Esto como comentamos ya, ha sido realizado as&iacute; para evitar la p&eacute;rdida
+de tiempo en las llamadas a procedimientos por los cambios de contexto.
+Esta p&eacute;rdida de velocidad es bastante notable si en lugar de hacerlo
+as&iacute;, se hace con las respectivas llamadas al procedimiento del cambio
+de banco.
+
+<P align="justify">Aparte de esto, los procedimientos de paleta pueden aplicarse tal cuales
+sobre este modo, ya que todos los utilizados aqu&iacute; son de 256 colores,
+con lo que son compatibles con los tres modos gr&aacute;ficos analizados.
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

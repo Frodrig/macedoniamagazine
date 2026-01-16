@@ -1,0 +1,181 @@
+<HTML>
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 9.<br>Gestión de memoria; los operadores new y delete.
+</H3>
+
+<p align=justify>
+
+En este pen&uacute;ltimo cap&iacute;tulo del curso vamos a hablar de los operadores destinados a la gesti&oacute;n de memoria. Todos recordamos, como programadores de C, que en este lenguaje ten&iacute;amos instrucciones como <B><I>malloc</B> o</I> <B><I>free</B></I>, entre otras, para reservar espacio a datos en tiempo de ejecuci&oacute;n. El gran problema de estas instrucciones, adem&aacute;s de su moderada complejidad, consist&iacute;a en que eran funciones, es decir, era necesario incluir el consabido archivo de cabecera, que hac&iacute;a aumentar, de forma considerable, el tama&ntilde;o final del ejecutable.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con el C++ tenemos dos excelentes operadores para la gesti&oacute;n de memoria: <B><I>new</B></I> y <B><I>delete</B></I>. Gracias a la incorporaci&oacute;n de estos operadores, en C++, no va a ser necesario definir ning&uacute;n archivo de cabecera extra, es decir, <I>new</I> y <I>delete</I> son operadores no funciones con lo que van incluidos en el propio lenguaje C++. Adem&aacute;s de esta innegable ventaja, <I>new</I> y <I>delete</I> no son tan "estrictos" como <I>malloc</I> y <I>free</I> pues permiten usarse sin tener que recurrir a una ahormado de tipos, es decir, no tenemos que convertir un puntero de tipo <I>void</I> (que era el puntero devuelto por <I>malloc</I>) al puntero que nos interesa. El operador <I>new</I> devuelve un puntero que es el que exactamente est&aacute;bamos persiguiendo.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Un poco de teor&iacute;a sobre memoria</h4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Durante los ejemplos de los &uacute;ltimos cap&iacute;tulos del curso hemos estado utilizando, de vez en cuando, estos operadores para crear punteros a objetos (aunque tambi&eacute;n podr&iacute;amos haberlos utilizado para crear cualquier otro tipo de variables). Las variables de tipo din&aacute;mico creadas por el operador <I>new</I> y eliminadas con el operador <I>delete</I>, se almacenan en una porci&oacute;n de memoria llamada <B>heap </B>(o mont&oacute;n). Las variables locales a una funci&oacute;n, es decir, las que se definen en tiempo de compilaci&oacute;n, junto a los argumentos que ésta recibe se almacenan en una porci&oacute;n de memoria llamada <B>pila </B>(o <I>stack</I>). </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La memoria <I>heap</I> es capaz de dar "cobijo" a estructuras de datos muy grandes ya que su espacio depende de la cantidad de memoria virtual que tengamos en el sistema propio. Es por esto que se utilicen siempre para alojar grandes estructuras como arrays u instancias a clases de gran tama&ntilde;o. El principal problema en este tipo de memoria es que nosotros, como programadores, debemos de hacernos cargo de "limpiar" la memoria al abandonar el programa ya que de lo contrario, nuestras variables din&aacute;micas seguir&aacute;n estando ah&iacute; y podr&aacute;n producir serios fallos en el sistema al intentar arrancar otros programas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La memoria de <I>pila</I>, por el contrario, es de mucho menor tama&ntilde;o. Esta memoria es reservada en tiempo de compilaci&oacute;n y no es capaz de variar; siempre tiene el mismo tama&ntilde;o. En esta memoria se alojan las variables locales a una funci&oacute;n y los propios argumentos que esta recibe. Las variables declaradas localmente a una funci&oacute;n se caracterizan por no tener que necesitar un seguimiento tan "exhaustivo" como las de tipo din&aacute;mico. Esto hace que su utilizaci&oacute;n sea muy sencilla pues el compilador se encarga de borrarlas y de gestionar la memoria por nosotros en el momento en que nuestro programa en ejecuci&oacute;n, abandona la funci&oacute;n en cuesti&oacute;n. Suele ser com&uacute;n que cuando no se tiene cuidado a la hora de declarar las variables en la pila se produzcan "<I>stack's overflows</I>" (pila desbordada) en tiempo de ejecuci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La principal diferencia, pues, entre el <I>heap</I> y la <I>pila</I> es que la pila es una porci&oacute;n de memoria de tipo est&aacute;tico, es decir, hay un l&iacute;mite que no se puede sobrepasar, mientras que la memoria <I>heap</I> es din&aacute;mica, es decir, var&iacute;a en funci&oacute;n de la que necesitemos en cada momento y con los compiladores de 32 bits, esta memoria tiene una capacidad enorme que es directamente proporcional a la memoria virtual libre en el equipo del usuario. Por memoria virtual se entiende toda la memoria del sistema, tanto la ram libre como la del disco duro (que tambi&eacute;n se puede utilizar como memoria para "alocatear" los programas o procesos).</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>El operador <I>new</I></h4>
+<P ALIGN="JUSTIFY">El operador new viene a hacer las veces de la funci&oacute;n malloc del C tradicional. Con la funci&oacute;n malloc, nosotros pod&iacute;amos reservar memoria en tiempo de ejecuci&oacute;n. El principal problema es que siempre deb&iacute;amos de especificar el tipo de puntero que quer&iacute;amos que se nos devolviera pues esta funci&oacute;n retornaba el puntero gen&eacute;rico void, esto es, era una funci&oacute;n algo m&aacute;s compleja de lo habitual. He aqu&iacute; un ejemplo con la vieja malloc:
+</FONT>
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+// Ejemplo que reserva memoria para 1000 enteros, es decir,
+// se reservan 1000x2bytes de un int = 2000 bytes.
+
+<B>int</B> *m_buffEnteros;
+m_buffEnteros = (<B>int</B> *) <B>malloc</B>(1000);
+</PRE>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como se comentaba m&aacute;s atr&aacute;s, el uso de operador new es mucho m&aacute;s sencillo. Para reservar toda esa buffer, s&oacute;lo deber&iacute;amos de hacer esto:</P>
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+<B>int</B>* m_buffEnteros;
+m_buffEnteros = <B>new</B> <B>int</B>[1000];
+</PRE></FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">o de forma m&aacute;s clara y usual
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+<B>int</B>* m_buffEnteros = <B>new int</B>[1000];</PRE></FONT>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">En estos dos ejemplos de uso de malloc y new hemos declarado un puntero llamado m_buffEnteros que apunta a una zona de memoria reservada para 1000 enteros y que tiene un tama&ntilde;o de 2000 bytes. En el caso de que no existiera memoria disponible en el sistema, el operador new devolver&iacute;a un valor igual a 0. Por otro lado, como el operador <I>new</I> hace una comprobaci&oacute;n de tipos, si el puntero no es del tipo correcto se lanza un mensaje de error. As&iacute;, si quer&eacute;is ser previsores se recomendar&iacute;a hacer algo as&iacute;:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+<B>int</B>* m_buffEnteros = <B>new int</B>[1000] ;
+
+<B>if</B> (m_buffEnteros)
+<B>     cout</B> <B>&lt;&lt;</B> "\n¡Se ha reservado memoria!";
+<B>else 
+</B>     <B>cout</B> <B>&lt;&lt;</B> "\n¡Error: No se ha reservado memoria!";
+</PRE></FONT>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">De todos modos, es muy raro que no exista memoria disponible (pero s&iacute; posible), sobretodo si est&aacute;is trabajando con un compilador de 32 bits como puede ser el Visual C++, &uacute;ltimas versiones, con lo que esa comprobaci&oacute;n quiz&aacute;s resulte excesivamente preventiva. </P>
+<P ALIGN="JUSTIFY"></P>
+<H4>El operador <I>delete</I></H4>
+<P ALIGN="JUSTIFY">El operador <I>delete</I> sirve para liberar la memoria que hayamos reservado con el operador <I>new</I>. Es realmente similar al <I>free</I>. El &uacute;nico inconveniente que podr&iacute;a ocasionar el uso del operador <I>delete</I> ser&iacute;a el utilizarlo en aquellos casos en el que el puntero a borrar realmente no ha sido reservado correctamente con la llamada a <I>new </I>y tiene un valor no nulo. En los dem&aacute;s casos, esto es, cuando el puntero valga NULL o realmente apunte a una zona de memoria que s&iacute; ha sido correctamente reservada.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La forma de utilizar el operador <I>delete</I> es muy sencilla, basta con poner <I>delete</I> y seguidamente el puntero:</P>
+</FONT><FONT FACE="Arial" SIZE=1><P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">delete</B> m_buffEnteros;</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">De la misma forma que se escribi&oacute; la forma de ser precavidos con el uso de <I>new</I>, pongo a continuaci&oacute;n una forma elegante para utilizar <I>delete</I>:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT>
+<PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">
+<B>if</B> (m_buffEnteros)
+{
+     <B>delete</B> m_buffEnteros
+     m_buffEnteros = NULL;
+}</PRE></FONT>
+<P ALIGN="JUSTIFY"></P>
+<FONT SIZE=2 FACE=ARIAL>
+<H4>Para terminar</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><FONT SIZE=2 FACE=ARIAL>Utilizad <I>new</I> y <I>delete</I> pues facilitan un mont&oacute;n el trabajo con memoria y realmente todo son ventajas. Ni que decir tiene que el trabajo de los punteros que se han reservado con estos operadores es el de siempre, es decir, si est&aacute;is trabajando con variables hay que utilizar el operador uniario "<B>*</B>" para acceder al valor. Si trabaj&aacute;is con estructuras o instancias, esto es, objetos, deber&eacute;is de utilizar el operador "<B>-&gt;</B>" para acceder a los miembros. Si revis&aacute;is ejemplos de cap&iacute;tulos anteriores ver&eacute;is casos de estos. De todas formas, cuidado con la memoria ;).</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>¿Y ahora qu&eacute;?</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Realmente ya se han redactado todos los cap&iacute;tulos del curso de programaci&oacute;n orientada a objetos con C++ que si record&aacute;is fue establecido en el cap&iacute;tulo 1. De todas formas, se har&aacute; un cap&iacute;tulo m&aacute;s en el que se abordar&aacute; un caso muy pr&aacute;ctico y de vigente actualidad: "Las MFC y el Visual C++". Por tanto, ¡hasta el pr&oacute;ximo y &uacute;ltimo!.</P>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

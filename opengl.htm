@@ -1,0 +1,411 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 1.<br> Presentación del curso de OpenGL
+</H3>
+
+<P ALIGN=justify>
+Bueno para empezar supongo que debería presentarme.<br> Me
+llamo Oscar García y soy ingeniero superior electrónico y técnico en telecomunicaciones. <br>Estoy integrado 
+en el <B>Citem</B> de La Salle Bonanova en Barcelona. En
+este centro tratamos de investigar al máximo las posibilidades de la <B>Multimedia</B>
+y, cómo no, de la <B>Realidad Virtual</B>. Para ello tratamos de explotar
+al máximo diversos frentes y entre ellos esta mi preferido: ¡los <B>gráficos</B>!
+<br>
+Ahora que ya teneis una idea más clara de quién soy vamos
+al grano con lo que nos ocupa, es decir, con el curso de <B>OpenGL</B>.
+<br><br>
+OpenGL es una libreria gráfica escrita originalmente en
+C que permite la manipulación de gráficos 3D a todos los niveles. Esta
+librería se concibió para programar en máquinas nativas Silicon Graphics
+bajo el nombre de GL (<B>Graphics Library</B>). Posteriormente se consideró
+la posibilidad de extenderla a cualquier tipo de plataforma y asegurar
+así su portabilidad y extensibilidad de uso con lo que se llegó al término
+<B>Open Graphics Library</B>, es decir, OpenGL.
+<br><br>
+La libreria se ejecuta a la par con nuestro programa independientemente
+de la capacidad gráfica de la máquina que usamos. Esto significa que la
+ejecución se dará por software a no ser que contemos con hardware gráfico
+específico en nuestra máquina. Si contamos con tarjetas aceleradoras de
+vídeo, tecnología MMX, aceleradoras 3D, pipelines gráficos implementados
+en placa, etc ... por supuesto gozaremos de una ejecución muchísimo más
+rápida en tiempo real.
+<br><br>
+Desgraciadamente esto ya queda relevado a tus capacidades
+ecónomicas en el momento de escoger qué ordenador compras y con qué le
+dotas.
+<br><br>
+Así esta librería puede usarse bajo todo tipo de sistemas
+operativos e incluso usando una gran variedad de lenguajes de programación.
+Podemos encontrar variantes de OpenGL para Windows 95/NT, Unix, Linux,
+Iris, Solaris, Java e incluso Visual Basic segun se anuncia ultimamente.<br>
+Por supuesto su uso mas extenso suele ser el de la pura y dura programación
+en C que tanto nos gusta a los integrantes de este mundillo.
+<br><br>
+Si habéis intentado programar gráficos 3D en alguna ocasión,
+os daréis cuenta rápidamente de lo poderosa que llega a ser esta herramienta.
+Nos facilitara mucho la interpretación de toda la geometría y óptica asociada
+a este mundo pero no os preocupéis que es algo serio y por tanto también
+tendremos que "comernos el coco" en mas de una ocasión.
+<br><br>
+Por supuesto no podemos desligar el mundo de los gráficos
+de OpenGL y por tanto intentare que este sea un <B>curso de "gráficos usando
+OpenGL"</B>, mas que una larga mención de funciones y constantes integradas
+en esta librería.
+<br><br>
+Trabajaremos con <B>C</B> y por tanto me referiré siempre
+a ejemplos codificados según este lenguaje. Simplemente necesitareis las
+librerías que os iré comentando y un compilador cualquiera de Ansi C, es
+decir, el estándar de este lenguaje desde sus orígenes allá por la época
+de 2001:Odisea Espacial...
+<br><br>
+Por cierto los términos en ingles son prácticamente inevitables
+así que espero que tengáis una ligera idea del idioma. Prácticamente toda
+la documentación relativa a esta librería esta escrita en "anglosajón"
+y por tanto no podemos dejarlo de lado. No obstante tranquilos/as porque
+todo lo que mencione lo explicare y detallare para que os sea muy fácil
+entender todos los conceptos.
+<br><br>
+Algo de álgebra lineal también nos hará falta para entender
+QUE es lo que ocurre internamente y como podemos operar con nuestra geometría
+para lograr los efectos deseados.....me ocupare de proporcionaros las herramientas
+necesarias en este sentido sin que el curso este excesivamente repleto
+de matemáticas.
+<br><br>
+Bueno aquí tenéis los contenidos del curso para que os
+hagáis un poco a la idea...os aseguro que es realmente muy completo y os
+permitirá crear "casi" infinitamente...:
+<BR>&nbsp;
+<BR>&nbsp;
+<center><TABLE >
+<TR>
+<TD ALIGN=LEFT VALIGN=TOP >
+<UL>
+<LI>
+<FONT size=2 face="arial">Conceptos prévios.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Sistemas gráficos. Dispositivos y elementos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">El modelo "cámara sintética".</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Arquitecturas gráficas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Primeros comandos.</FONT></LI>
+</UL>
+</UL>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Programación gráfica.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Uso de funciones gráficas en OpenGL.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">La interficie OpenGL.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Primitivas y atributos. Polígonos. Texto. Color.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Visionado de gráficos. Matrices.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Sistema de ventanas (GLUT).</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Función MAIN en un programa OpenGL.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Interacción. Dispositivos de entrada.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Arquitectura Cliente-Servidor.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">"Display lists" en OpenGL.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Programación guiada por eventos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Menús.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Doble buffer.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Objetos geométricos y sus Transformaciones.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Algebra afín.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Vectores y escalares.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Líneas. Planos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Convexidad.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Operaciones entre primitivas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Sistemas de coordenadas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Coordenadas homogeneas.</FONT></LI>
+</UL>
+
+<LI>
+<FONT size=2 face="arial">Estructuras de datos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Transformaciones geométricas.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Traslación.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Rotación.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Escalado.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Deformación.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Concatenación de transformaciones.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Implementación.</FONT></LI>
+</UL>
+</UL>
+</UL>
+
+
+<UL>
+
+<LI>
+<FONT size=2 face="arial">Visionado.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Proyecciones.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">La cámara en OpenGL.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Eliminación de superficies ocultas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Matrices de proyección en OpenGL.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Sombreado.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Fuentes de luz.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Reflexiones.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Sombreado de polígonos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Materiales.</FONT></LI>
+</UL>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">"Antialiasing".Modelos.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Modelos geométricos.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Modelos jerárquicos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Arboles.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Métodos recursivos.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Fractales.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Sistemas de particulas.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Curvas y superficies.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Representación.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Curvas paramétricas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Curvas de "Hermite".</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Curvas de "Bezier".</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">"B-Splines".</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Superficies algebráicas.</FONT></LI>
+</UL>
+&nbsp;
+<LI>
+<FONT size=2 face="arial">Mapeado de texturas.</FONT></LI>
+
+<UL>
+<LI>
+<FONT size=2 face="arial">Texturas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Mapas.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Operaciones a nivel de bit/pixel.</FONT></LI>
+
+<LI>
+<FONT size=2 face="arial">Composición de imagen.</FONT></LI>
+</UL>
+</UL>
+
+</TR>
+</TABLE></CENTER>
+<BR><BR>
+<P ALIGN =JUSTIFY>
+Bueno...¿qué os parece?...tampoco os pongáis a temblar
+ahora que aunque parece que "ladra" mucho no "muerde"....lo iremos viendo
+poco a poco y además intentaré que tengáis el máximo número posible de
+ejemplos a mano para compilar y probar.
+<br><BR>
+¡Nos vemos en el primer capitulo!
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

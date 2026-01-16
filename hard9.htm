@@ -1,0 +1,587 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+
+
+<!-- INICIO DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+<CENTER>
+<TABLE BORDER=0 ALIGN="CENTER" WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" ALIGN="CENTER" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT COLOR="#009933" SIZE=7 FACE="ARIAL"><B>Z</B></font><FONT COLOR="#000000" SIZE=7 FACE="ARIAL"><B>ona Hardware</B></FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+</CENTER>
+
+<BR>
+<HR>		  
+<!-- FINAL DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+
+<!-- INICIO DE LAS SECCION 3 DEL DOCUMENTO -->
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<FONT COLOR="#009933" SIZE=3 FACE="ARIAL"><B>M</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>icroprocesadores</B></FONT></A>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+<!-- FINAL DE LAS SECCION 3 DEL DOCUMENTO -->
+
+<BR><BR>
+
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:sargue@email.com">Sergio Baila "Sargue"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+
+<H3>
+
+Procesadores Intel del siglo XXI
+
+</H3>
+
+<p align=justify>
+
+<p align = "justify"><font face=arial size=2>Este art&iacute;culo no pretende detallar a modo informativo
+
+qu&eacute; va a sacar Intel en el pr&oacute;ximo siglo, sino que vamos
+
+a intentar dar un paseo por las tecnolog&iacute;as y procesadores que Intel
+
+planea sacar en los pr&oacute;ximo a&ntilde;os, sin entrar en demasiados
+
+detalles. Vamos a hablar de cosas como Merced, McKinley, Madison, Deerfield,
+
+EPIC, IA64, Predication...</font>
+
+<p align = "justify"><font face=arial size=2>Hablar del futuro de Intel es hablar en 64 bits. Y hablar
+
+de 64 bits en Intel es hablar de su arquitectura IA64 (Intel Architecture
+
+64). Actualmente los procesadores de Intel se engloban en la IA32.</font>
+
+<p align = "justify"><b><font face=arial size=2>Paralelismo expl&iacute;cito</font></b>
+
+<p align = "justify"><font face=arial size=2>La estrella de la arquitectura IA64 es EPIC (Explicit
+
+Paralellism Instruction Code, o algo as&iacute;). Antes de entrar en otros
+
+detalles, veamos un poco en que consiste EPIC. La idea b&aacute;sica, de
+
+ah&iacute; el nombre, es el paralelismo. Pero no cualquier paralelismo,
+
+sino <b>paralelismo expl&iacute;cito</b>. Desde hace mucho tiempo, los
+
+microprocesadores ya disponen de t&eacute;cnicas de paralelismo, lo que
+
+en ingl&eacute;s se conoce por <i>pipelining</i>. El paralelismo consiste
+
+en ejecutar m&aacute;s instrucciones en menos tiempo, aunque las instrucciones
+
+sigan tardando lo mismo en ejecutarse, mediante un simple truco, aunque
+
+algo dif&iacute;cil de explicar en detalle. Intent&eacute;moslo.</font>
+
+<p align = "justify"><font face=arial size=2>Un microprocesador ejecuta instrucciones de c&oacute;digo
+
+m&aacute;quina. Estas instrucciones le dicen como tiene que ir modificando
+
+diferentes posiciones de memoria, y como debe ir modificando el flujo de
+
+ejecuci&oacute;n. Se tiende a pensar, err&oacute;neamente, que un procesador
+
+con un reloj a 200 MHz (200 millones de ciclos por segundo) ejecuta 200
+
+millones de estas operaciones por segundo. Esto no es as&iacute;, por una
+
+sencilla raz&oacute;n. Una instrucci&oacute;n no se ejecuta en un solo
+
+ciclo de reloj, salvo alguna rara excepci&oacute;n. De hecho, algunas instrucciones
+
+tardan bastantes m&aacute;s ciclos, llegando algunas a necesitar 50 o m&aacute;s
+
+ciclos para completarse. En cambio, las m&aacute;s r&aacute;pidas se ejecutan
+
+en tan s&oacute;lo 3 o 4 ciclos de reloj. Aqu&iacute; es donde entra el
+
+paralelismo para solucionar este problema. Se puede dividir cualquier instrucci&oacute;n
+
+en fases m&aacute;s o menos comunes a todas: fetch (carga de la instrucci&oacute;n
+
+desde la memoria al procesador), decodificaci&oacute;n (identificaci&oacute;n
+
+de qu&eacute; instrucci&oacute;n nos hemos encontrado), carga de operandos,
+
+operaci&oacute;n en s&iacute; y escritura de resultados. Este esquema,
+
+expresamente simplificado, nos da una idea de las fases que todo microprocesador
+
+tiene. Vamos a suponer un microprocesador ideal donde todas las operaciones
+
+que se pueden ejecutar en &eacute;l tardan 15 ciclos, correspondientes
+
+a tres ciclos por cada una de las 5 fases que hemos descrito. Si ejecut&aacute;ramos
+
+tres de estas operaciones sin ning&uacute;n tipo de paralelismo, tardar&iacute;amos
+
+45 ciclos, seg&uacute;n el siguiente esquema:</font>
+
+<p><font face="Courier New"><font >instr. 1: 111222333444555</font></font>
+<br><font face="Courier New"><font >instr. 2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+111222333444555</font></font>
+<br><font face="Courier New"><font >instr. 3:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+111222333444555</font></font>
+<p align = "justify"><font face=arial size=2>Ahora supongamos que somos capaces de dividir el microprocesador
+
+en circuitos separados capaces cada uno de trabajar independientemente
+
+y ejecutar cada una de las 5 fases anteriores. Si logramos que sean independientes,
+
+cuando la instrucci&oacute;n uno ha acabado ya la fase de fetch y pasa
+
+a la decodificaci&oacute;n, deja libre el m&oacute;dulo que se encarga
+
+del fetch, donde puede ir ya ejecut&aacute;ndose la segunda instrucci&oacute;n.
+
+De esta forma, logramos paralelizar las instrucciones.</font>
+
+<p><font face="Courier New"><font >instr. 1: 111222333444555</font></font>
+<br><font face="Courier New"><font >instr. 2:&nbsp;&nbsp;&nbsp;
+111222333444555</font></font>
+<br><font face="Courier New"><font >instr. 3:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+111222333444555</font></font>
+<p align = "justify"><font face=arial size=2>Resultado: las tres instrucciones, por separado, siguen
+
+ejecut&aacute;ndose en el mismo tiempo, pero en conjunto ya no tardan 45
+
+ciclos, sino solo 21 ciclos. M&aacute;s de un 45% de incremento en el rendimiento.
+
+De esta forma es como algunos procesadores muy paralelizados logran ejecutar,
+
+en media, m&aacute;s de una instrucci&oacute;n por ciclo de reloj, aunque
+
+estas instrucciones tarden, por s&iacute; mismas, m&aacute;s de un ciclo
+
+en ejecutarse.</font>
+
+<p align = "justify"><font face=arial size=2>En la realidad, como siempre, no todo es tan f&aacute;cil
+
+y hay muchos problemas al dise&ntilde;ar un procesador con paralelismo.
+
+Por citar algunos de los problemas m&aacute;s comunes, hay veces que una
+
+instrucci&oacute;n no se puede ejecutar ya que requiere un dato que quiz&aacute;s
+
+calculaba la operaci&oacute;n anterior (cosa muy habitual). Claro, si ante
+
+este problema detuvi&eacute;ramos la anterior instrucci&oacute;n, bloquear&iacute;a
+
+el procesador y se acabar&iacute;a el paralelismo hasta que acabara la
+
+primera instrucci&oacute;n y con ella se pudiera reanudar la segunda. Para
+
+evitar estos problemas se recurre a cortocircuitos, o lo que es lo mismo,
+
+se comunican diferentes fases del microprocesador internamente para pasarse
+
+antes los datos. Esto, sin embargo, tambi&eacute;n nos da otros problemas,
+
+ya mucho m&aacute;s complicados, como el encontrarnos con que hay que decidir
+
+que datos son los correctos en cada momento. En estos problemas ya no entraremos,
+
+y se podr&iacute;an resumir en que el procesador ha de decidir como paralelizar
+
+las instrucciones.</font>
+
+<p align = "justify"><font face=arial size=2>Bien, todo lo que hemos visto sobre el paralelismo involucra
+
+&uacute;nica y exclusivamente al microprocesador en s&iacute;, y m&aacute;s
+
+bien a su dise&ntilde;o. El software que se ejecuta sobre &eacute;l ignora
+
+totalmente si hay paralelismo o no. Esto es el paralelismo impl&iacute;cito.</font>
+
+<p align = "justify"><font face=arial size=2>Por el contrario, Intel implementa una soluci&oacute;n
+
+que de hecho ya deriva de ideas de principios de los a&ntilde;os 80. En
+
+el paralelismo expl&iacute;cito, el procesador ya no es el que decide c&oacute;mo
+
+paralelizar las instrucciones, sino que es el compilador del software el
+
+que ha empaquetado las instrucciones para que el microprocesador pueda
+
+ejecutarlas paralelamente sin tantos problemas. De hecho, esta manera es
+
+mucho m&aacute;s eficiente, porque el compilador tiene todo el tiempo del
+
+mundo para decidir c&oacute;mo paralelizar y por supuesto, la l&oacute;gica
+
+que puede aplicar es infinitamente m&aacute;s potente que la que podemos
+
+encontrar implementada en cualquier microprocesador. Esto tambi&eacute;n
+
+redunda en una simplificaci&oacute;n de la circuiter&iacute;a de control
+
+del microprocesador, lo que permite acelerar a&uacute;n m&aacute;s las
+
+instrucciones. Adem&aacute;s, queda libre m&aacute;s espacio para incluir
+
+a&uacute;n m&aacute;s registros y hacer los buses internos m&aacute;s anchos,
+
+lo que permite ejecutar a&uacute;n m&aacute;s instrucciones en paralelo.</font>
+
+<p align = "justify"><b><font face=arial size=2>Predication</font></b>
+
+<p align = "justify"><font face=arial size=2>El otro gran problema del paralelismo que antes no hemos
+
+comentado es la predicci&oacute;n de saltos. Las instrucciones que m&aacute;s
+
+"molestan" a un procesador paralelizado son los saltos, instrucciones que
+
+hacen saltar de un lugar a otro del c&oacute;digo el flujo de ejecuci&oacute;n
+
+del programa. Hasta ahora los procesadores deb&iacute;an "apostar" sobre
+
+unas bases decisionales para elegir que operaciones poner despu&eacute;s
+
+del salto, porque hasta un determinado momento no se puede saber si hay
+
+que saltar o no. Ahora, con el paralelismo expl&iacute;cito, el compilador
+
+es el que dice cual es la soluci&oacute;n m&aacute;s probable, basado en
+
+datos mucho m&aacute;s fiables dado el mayor margen de visi&oacute;n que
+
+tiene el compilador sobre el c&oacute;digo.</font>
+
+<p align = "justify"><font face=arial size=2>Sin embargo, y pese a la ayuda del compilador, hay que
+
+seguir intentando hacer predicciones de las ramas sobre las que no se sabe
+
+con seguridad hacia donde ir&aacute; el flujo de ejecuci&oacute;n. Ah&iacute;
+
+es donde entra Predication, la t&eacute;cnica de predicci&oacute;n de EPIC.
+
+Se base de funcionamiento es realmente simple: si no sabes que rama coger...
+
+coge las dos. As&iacute;, ante un salto, Predication utiliza dos <i>pipelines.</i>
+
+Una <i>pipeline</i> es una serie de aquellos m&oacute;dulos que antes coment&aacute;bamos
+
+que eran capaces de ejecutar fases de instrucciones, si un procesador tiene
+
+dos pipelines puede ejecutar dos instrucciones en una sola fase en un momento
+
+dado, duplicando (otra vez en teor&iacute;a) el rendimiento. En cada una
+
+de estas pipelines, Predication lanza cada uno de los dos flujos resultados
+
+de efectuar o no el salto. Al cabo de un momento, cuando ya se sabe el
+
+resultado, se anula el pipeline err&oacute;neo y el otro contin&uacute;a
+
+como si nada.</font>
+
+<p align = "justify"><b><font face=arial size=2>Speculation</font></b>
+
+<p align = "justify"><font face=arial size=2>Otro de los grandes problemas de los microprocesadores
+
+modernos es el tiempo de latencia de la memoria RAM. Los procesadores son
+
+mucho m&aacute;s r&aacute;pidos que la memoria, y cuando necesitan alg&uacute;n
+
+dato deben esperar a que la memoria se los entregue durante un buen n&uacute;mero
+
+de ciclos. Para paliar esto existen, por supuesto, las memorias cache,
+
+que ofrecen un buen aumento del rendimiento. A&uacute;n as&iacute;, el
+
+problema sigue siendo grave. EPIC ofrece una buena soluci&oacute;n a este
+
+problema: puede anticiparse a los datos que van a pedirle antes de que
+
+se los pidan, "especulando" qu&eacute; le van a pedir, de ah&iacute; el
+
+nombre. Por supuesto, esto tambi&eacute;n nos da algunos problemas laterales
+
+sobre validez de datos, pero una vez tenidos en cuenta el aumento del rendimiento
+
+es realmente notable.</font>
+
+<p align = "justify"><b><font face=arial size=2>Registros</font></b>
+
+<p align = "justify"><font face=arial size=2>Los registros de un microprocesador son peque&ntilde;os
+
+almacenes de datos, en los que cabe s&oacute;lo un n&uacute;mero. La mayor&iacute;a
+
+de microprocesadores actuales no incluyen m&aacute;s de 32 registros en
+
+total. Pueden parecer algo sin mucha importancia, pero de hecho todas las
+
+operaciones suelen hacerse sobre registros, por lo que a mayor n&uacute;mero
+
+de registros m&aacute;s datos tenemos en el microprocesador y menos hemos
+
+de recurrir a la memoria externa. Dado el alto grado de paralelizaci&oacute;n
+
+que ofrece EPIC, se hace necesario incluir un gran n&uacute;mero de registros,
+
+as&iacute; que se ha optado por 128 registros de prop&oacute;sito general,
+
+128 de coma flotante y 64 registros de 1 bit de "predicaci&oacute;n" (utilizados
+
+por el sistema Predication). Los 256 registros generales y de coma flotante
+
+son de 64 bits, ya que EPIC es exclusivo de la arquitectura IA64.</font>
+
+<p align = "justify"><b><font face=arial size=2>Compatibilidad</font></b>
+
+<p align = "justify"><font face=arial size=2>Merced, el primer microprocesador IA64 de Intel, ser&aacute;
+
+el primero de su historia que no utilizar&aacute; las instrucciones x86
+
+que venimos arrastrando desde los a&ntilde;os 70. Sin embargo, no se puede
+
+abandonar la compatibilidad, as&iacute; que Intel ha incluido en el dise&ntilde;o
+
+del Merced un traductor de instrucciones IA32 a IA64, de tal forma que
+
+el Merced funcionar&aacute; perfectamente con software antiguo, aunque
+
+para mostrar su verdadera potencia necesitar&aacute; de los sistemas compilados
+
+ex profeso para IA64, como los futuros sistemas de 64 bits destinados a
+
+esta plataforma.</font>
+
+<p align = "justify"><b><font face=arial size=2>Compiladores</font></b>
+
+<p align = "justify"><font face=arial size=2>La propia naturaleza de EPIC pone en manos de los compiladores
+
+gran parte de la optimizaci&oacute;n del c&oacute;digo, lo que va ha crear
+
+grandes diferencias, realmente notables, de rendimiento entre el mismo
+
+c&oacute;digo compilado bajo diferentes compiladores. Es de esperar que
+
+durante los primeros momentos de existencia de la tecnolog&iacute;a EPIC,
+
+los compiladores a&uacute;n no est&eacute;n perfectamente optimizados,
+
+y el hecho de cambiarse de un compilador a una versi&oacute;n superior
+
+puede que sea bastante decisivo en el futuro.</font>
+
+<p align = "justify"><font face=arial size=2>Esto mismo afecta tambi&eacute;n a los depuradores. Con
+
+t&eacute;cnicas como Speculation y Predication, los debuggers deber&aacute;n
+
+estar muy bien implementados para permitir a los programadores depurar
+
+y optimizar su c&oacute;digo.</font>
+
+<p align = "justify"><b><font face=arial size=2>Futuros microprocesadores</font></b>
+
+<p align = "justify"><font face=arial size=2>Para acabar, vamos a echar un vistazo a Merced y sus sucesores,
+
+todos basados en EPIC, IA64 y todo lo anteriormente comentado:</font>
+
+<p align = "justify"><b><font face=arial size=2>Merced</font></b>
+
+<ul>
+
+<li>
+
+<font face=arial size=2>desde 600 MHz</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>tecnolog&iacute;a de 0.18 micras</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>ser&aacute; el primer procesador EPIC</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>salida a mediados del 2000</font></li>
+
+</ul>
+
+<b><font face=arial size=2>McKinley</font></b>
+
+<ul>
+
+<li>
+
+<font face=arial size=2>desde 1 GHz (1000 MHz)</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>dos veces m&aacute;s r&aacute;pido que el Merced</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>tecnolog&iacute;a de cobre, 0.13 micras</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>finales del 2001</font></li>
+
+</ul>
+
+<b><font face=arial size=2>Madison</font></b>
+
+<ul>
+
+<li>
+
+<font face=arial size=2>mejora del n&uacute;cleo del McKinley</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>desde 1 GHz</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>sobre el 2002</font></li>
+
+</ul>
+
+<b><font face=arial size=2>Deerfield</font></b>
+
+<ul>
+
+<li>
+
+<font face=arial size=2>IA64 para ordenadores dom&eacute;sticos</font></li>
+
+
+
+<li>
+
+<font face=arial size=2>a&ntilde;o 2003</font></li>
+
+</ul>
+
+<font face=arial size=2>Hemos llegado muy lejos en nuestro paseo. Realmente aventurarse
+
+a hablar de microprocesadores con cuatro a&ntilde;os de antelaci&oacute;n
+
+es c&oacute;mo lanzarse al vac&iacute;o, m&aacute;s vale estar atento porque
+
+todo ocurre muy r&aacute;pido.</font><br><br>
+
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>FEBRERO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR>
+
+<hr>
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+<A HREF="zhw.htm">
+<FONT FACE="ARIAL"><B>[Zona Hardware]</B></FONT>
+</A>
+<HR>
+<A HREF="zhwmic.htm">
+<FONT FACE="ARIAL"><B>[Microprocesadores]</B></FONT>
+</A> 
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>
+ZONA HARDWARE
+</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>

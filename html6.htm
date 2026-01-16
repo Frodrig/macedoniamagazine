@@ -1,0 +1,388 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso Acelerado de HTML</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 6.<br> Hagamos todo más profesional con las tablas.
+</H3>
+<p align=justify>
+
+Aprender a utilizar las tablas para 
+la confección de una página de calidad es algo esencial ya que, como vamos a ver
+dentro de unos momentos, las tablas nos van a permitir no sólo realizar una
+maquetación más profesional de nuestra página WEB sino que, además, se van a 
+convetir en un estupendo aliado para el trabajo con gráficos. Sin más, comenzamos
+el "avistamiento" a las tablas.
+<br>
+<h4>Lo que tenemos que tener claro</h4><p align=justify>
+Antes de empezar a ver cómo podemos contruirnos nuestras propias tablas, tenemos
+que tener claro qué es una tabla para poder ver mejor sus ventajas a la hora de
+utilizarlas para maquetar nuestra página WEB.<br>
+Una tabla no es más que filas y columnas en donde, el cruce de cada fila y columna
+produce un hueco o espacio denominado celda. En dichas celdas, podremos meter información
+ya sea en forma de texto o gráfica constituyendo, así la unidad mínima de que se
+compone cualquier tabla, es decir, esto que teneís a continuación es una tabla.
+<br>
+<br>
+<CENTER><TABLE border="2">
+<TD>Fila 1 Columna 1</TD>
+<TD>Fila 1 Columna 2</TD>
+<TR>
+<TD>Fila 2 Columna 1</TD>
+<TD>Fila 2 Columna 2</TD>
+<TR>
+<TD>Fila 3 Columna 1</TD>
+<TD>Fila 3 Columna 2</TD>
+</TABLE></CENTER>
+<p align=justify>
+<br>
+Lo que estaís viendo, es el ejemplo más "brusco" de tabla que se puede construir ya
+que, ni siquiera están definidos los atributos del texto que se encuentran dentro
+de nuestra tabla sin embargo, los más imaginativos de vosotros, habreís observado,
+que las posibilidades que nos brinda una tabla son enormes ya que podremos presentar
+nuestra información ordenada como queramos, situándola en las celdas que estimemos
+oportunas dependiendo de en que fila o columna queremos mostrar la información.
+<br><br>
+Como veremos a continuación, podremos construirnos una tabla con la sencilla directiva
+&lt;TABLE&gt;, la cual, se podrá combinar con todas las directivas ya vistas para
+poder ofrecer todas las posibilidades que hemos aprendido pero dentro de una tabla
+perfectamente ordenada y sincronizada con la información que queremos representar.
+<br>
+<h4>Aprendiendo a utilizar la directiva &lt;TABLE&gt;</h4><p align=justify>
+Ya se ha indicado en el párrafo de más arriba que, para poder construir una tabla
+tan sólo hay que utilizar la directiva &lt;TABLE&gt;, la cual, lógicamente, deberá
+de llevar su correspondiente &lt;/TABLE&gt; para indicar al navegador dónde acaba
+la tabla que estamos definiendo. A su vez, dentro de la directiva &lt;TABLE&gt;, deberemos
+de saber utilizar dos directivas más, una de ellas se encargará de definir las 
+columnas de una fila y la otra hara lo propio con las filas creando una nueva cuando
+sea invocada, así, si utilizamos la directiva &lt;TD&gt; con su correspondiente 
+&lt;/TD&gt;, poniendo información dentro, ya tendremos definida una celda o columna
+de la fila correspondiente de nuestra tabla mientras que, si ponemos la directiva
+&lt;TR&gt; ordenaremos al intérprete de nuestro navegador, que cree una nueva fila. Decir,
+que para la directiva &lt;TR&gt; no hay que añadir, como cabría esperar, &lt;/TR&gt; ya que
+no hace falta, se pone si más y se crea la nueva fila.<br><br>
+Cómo lo mejor es un ejemplo, he decidido poneros el código necesario para crear la
+tabla que os ofrecí más arriba, ahí va:
+<br><br>
+<FONT size=0>
+<i>
+&lt;CENTER>&lt;TABLE border="2"&gt;<br>
+&lt;TD&gt;Fila 1 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 1 Columna 2&lt;/TD&gt;<br>
+&lt;TR&gt;<br>
+&lt;TD&gt;Fila 2 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 2 Columna 2&lt;/TD&gt;<br>
+&lt;TR&gt;<br>
+&lt;TD&gt;Fila 3 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 3 Columna 2&lt;/TD&gt;<br>
+&lt;/TABLE&gt;/CENTER&gt;<br>
+</i></FONT>
+<br>
+Todo lo que podeís ver está explicado, utilizamos la directiva &lt;CENTER&gt; para centrar
+la tabla en pantalla, aprovechándonos, de que podemos combinar sin ningún tipo de problema
+las directivas que vamos conociendo. 
+<BR><BR>
+Si os fijaís un poco en el ejemplo, vereis que la directiva &lt;TABLE&gt; va acompañada
+de un atributo llamado border, es decir, lo que tenemos es &lt;TABLE border="2"&gt;. Bien,
+nos encontramos con un claro ejemplo de atributos añadidos a directivas (como era el
+caso del atributo align que añadíamos a la directiva &lt;P&gt; por poner un ejemplo).
+Con el atributo border="número", conseguimos que nuestras tablas sean capaces de mostrar
+un borde para que, el lector, pueda diferenciar las filas y columnas de nuestra tabla
+perfectamente. Habrá ocasiones en las que deseemos mantener invisibles los bordes
+de nuestras tablas (un caso sería el de la maquetación de un texto en columnas), para
+ello sólo tendremos que eliminar el atributo border de la directiva &lt;TABLE&gt; y las
+líneas divisorias desaparecerán.
+<br>El atributo border, podrá estar igualado al valor de grosor que nosotros queramos
+dar a nuestra tabla, cuanto más valor, más grosor tendrá. En el caso de poner border sin 
+nada más, la tabla se creará con un borde simple.<br><br> A continuación, os voy a poner
+la tabla que estamos utilizando pero sin la directiva border para que veais el efecto
+que produce ver una tabla sin bordes.<br><br>
+<CENTER><TABLE>
+<TD>Fila 1 Columna 1</TD>
+<TD>Fila 1 Columna 2</TD>
+<TR>
+<TD>Fila 2 Columna 1</TD>
+<TD>Fila 2 Columna 2</TD>
+<TR>
+<TD>Fila 3 Columna 1</TD>
+<TD>Fila 3 Columna 2</TD>
+</TABLE></CENTER>
+<p align=justify>
+<br>
+<h4>Las directivas &lt;CAPTION&gt; y &lt;TH&gt;</h4><p align=justify>
+Pese a que no requieran excesivos esfuerzos para su implementación, he decidido
+ponéroslas a parte, para que así, no veaís todo "tan de golpe". Con este par de
+directivas, podremos poner títulos a la tabla y a las columnas.<br>
+<br>
+El título a la tabla que estemos creando, se insertará con la directiva &lt;CAPTION&gt; y
+su correspondiente &lt;/CAPTION&gt; justo después de haber comenzado a definir la
+tabla, esto es, justo después de haber definido la directiva &lt;TABLE&gt;.<br> Lógicamente,
+entre la directiva &lt;CAPTION&gt; tendrá que ir la información que nosotros queramos
+que sea el título de nuestra tabla.
+<br><br>
+Por otro lado, podremos dar título a cada columna de nuestra tabla para ello, deberemos
+de poner el título correspondiente a cada una de las columnas con la directiva &lt;TH&gt; y
+su correspondiente &lt;/TH&gt;, es decir, habrá que poner tantas directivas &lt;TH&gt; y &lt;/TH&gt;,
+como columnas existan en nuestra tabla y el título, deberá de ir, lógicamente, entre dichas
+directivas, también, es importante añadir que, despues de poner todas las directivas
+&lt;TH&gt;, deberemos de poner una &lt;TR&gt; para empezar a trabajar, en serio, con 
+nuestra tabla.<br><br>Así, para crear una tabla como esta:
+<br><br>
+<CENTER><TABLE border>
+<CAPTION>Colabora con Macedonia Magazine</CAPTION>
+<TH>Datos de la columna 1</TH>
+<TH>Datos de la columna 2</TH>
+<TR>
+<TD>Fila 1 Columna 1</TD>
+<TD>Fila 1 Columna 2</TD>
+<TR>
+<TD>Fila 2 Columna 1</TD>
+<TD>Fila 2 Columna 2</TD>
+<TR>
+<TD>Fila 3 Columna 1</TD>
+<TD>Fila 3 Columna 2</TD>
+</TABLE></CENTER>
+<p align=justify>
+<br>
+Habría que poner el código siguiente:
+<br><br>
+<FONT size=0>
+<i>
+&lt;CENTER>&lt;TABLE border&gt;<br>
+&lt;CAPTION&gt;Colabora con Macedonia Magazine&lt;/CAPTION&gt;<br>
+&lt;TH&gt;Datos de la columna 1&lt;/TH&gt;<br>
+&lt;TH&gt;Datos de la columna 2&lt;/TH&gt;<br>
+&lt;TD&gt;Fila 1 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 1 Columna 2&lt;/TD&gt;<br>
+&lt;TR&gt;<br>
+&lt;TD&gt;Fila 2 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 2 Columna 2&lt;/TD&gt;<br>
+&lt;TR&gt;<br>
+&lt;TD&gt;Fila 3 Columna 1&lt;/TD&gt;<br>
+&lt;TD&gt;Fila 3 Columna 2&lt;/TD&gt;<br>
+&lt;/TABLE&gt;/CENTER&gt;<br>
+</i></FONT>
+<br>
+<h4>Pero... ¿Cómo controlo la información?</h4><p align=justify>
+Seguro que os habreís preguntado cómo poder hacer para que vuestra información,
+salga de un color determinado en la tabla o tenga un tamaño determinado, etc. La
+respuesta es bien fácil ¡Cómo siempre!. Sí, tan sólo tenemos que aplicar todo lo 
+que sabemos para formatear nuestro texto correctamente, pero dentro de una celda,
+ya sea la de definición del título de la tabla, de las columnas o de las propias
+celdas. Es bien fácil, pero más trabajoso e indispensable.<BR><BR>
+De esta forma, si quisiesemos que la tabla del ejemplo anterior saliese mucho más
+"profesional" y acorde con el tamaño de letra que estamos utilizando, esto es, así:
+<br><br>
+<CENTER><TABLE border>
+
+<CAPTION>
+<FONT color="#FF0000" size=3 face="arial" >
+Colabora con Macedonia Magazine
+</FONT>
+</CAPTION>
+<TH>
+<FONT color="#0000FF" size=2 face="arial" >
+Datos de la columna 1
+</FONT>
+</TH>
+<TH>
+<FONT color="#0000FF" size=2 face="arial" >
+Datos de la columna 2
+</FONT>
+</TH>
+<TR>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 1 Columna 1
+</FONT>
+</TD>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 1 Columna 2
+</FONT>
+</TD>
+<TR>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 2 Columna 1
+</FONT>
+</TD>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 2 Columna 2
+</FONT>
+</TD>
+<TR>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 3 Columna 1
+</FONT>
+</TD>
+<TD>
+<FONT color="#000000" size=2 face="arial" >
+Fila 3 Columna 2
+</FONT>
+</TD>
+</TABLE></CENTER>
+<p align=justify>
+<br>
+Tan sólo tendríamos que poner el código siguiente:
+<br><br>
+<FONT size=0>
+<i>
+&lt;CENTER>&lt;TABLE border&gt;<br>
+&lt;CAPTION&gt;<br>
+&lt;FONT color="#FF0000" size="3" face="arial"&gt;<br>
+Colabora con Macedonia Magazine
+&lt;/FONT&gt;<br>&lt;/CAPTION&gt;<br><br>
+&lt;TH&gt;<br>
+&lt;FONT color="#00FFFF" size="2" face="arial"&gt;<br>
+Datos de la columna 1&lt;/FONT&gt;<br>&lt;/TH&gt;<br>
+&lt;TH&gt;<br>
+&lt;FONT color="#00FFFF" size="2" face="arial"&gt;<br>
+Datos de la columna 2&lt;/FONT&gt;<br>&lt;/TH&gt;<br><br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 1 Columna 1<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 1 Columna 2<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br><br>
+&lt;TR&gt;<br><br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 2 Columna 1<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 2 Columna 2<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br><br>
+&lt;TR&gt;<br><br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 3 Columna 1<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br>
+&lt;TD&gt;<BR>
+&lt;FONT color="#000000" size="2" face="arial"&gt;<br>
+Fila 3 Columna 2<br>&lt;/FONT&gt;<br>&lt;/TD&gt;<br><br>
+&lt;/TABLE&gt;/CENTER&gt;<br>
+</i></FONT>
+<br>
+Como podeís observar, no es nada del otro mundo, es sólo combinar todo lo que
+hemos aprendido para realizar una salida de textos "digna" pero poniéndolo
+dentro de la tabla. ¡Por cierto!, acordaos de cerrar la directiva &lt;P&gt; justo
+al comenzar la contrucción de una tabla y de volver a abrirla cuando acabeís de
+definirla sino quereís que, el texto que venga después de definir a nuestra tabla,
+se vaya a cazar champiñones ;-).
+<br>
+<h4>Consideraciones finales</h4><p align=justify>
+La construcción de una tabla, es mucho más deseada según avanzamos en el diseño de
+nuestra página WEB. Para ello, disponemos de muchos más secretos y atributos que
+añadir a la directiva &lt;TABLE&gt; que nosotros hemos puesto aquí pero eso, os
+tocara a vostros investigar por la multitud de tutoriales que existen en la red. Lo
+básico ya lo habeís aprendido y con la práctica, aprendereís a dominar la localización
+de vuestras tablas.
+<br><br>
+Hay multitud de utilidades que dar a las tablas, podemos añadir enlaces dentro
+de sus celdas ofreciéndolos de un modo ordenado (tan sólo teneís que aplicar
+lo que vimos en el <A HREF="html5.htm">capítulo 5</A> a las celdas de vuestras
+tablas), colocar gráficos perfectamente maquetados, como veremos en el <A HREF="html6.htm">capítulo
+siguiente</A>, realizar presentaciones de nuestros texto en forma de columnas, como
+si se tratase de un periódico, ofrecer catálogos, etc, etc. Tan sólo teneís que poner
+a prueba vuestra imaginación de diseñador y utilizar las tablas, y probar los atributos
+que ya hemos estudiado junto a la directiva &lt;TABLE&gt;... ¿qué pasaría si pusiera
+&lt;TABLE align="left"&gt;?. ¡Probadlo!
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulap.htm"><font FACE="ARIAL"><B>[Curso Acelerado de HTML]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

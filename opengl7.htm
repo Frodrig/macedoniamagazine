@@ -1,0 +1,409 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 7<br>
+Proyecciones. La cámara
+</H3>
+
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Tras las transformaciones
+homog&eacute;neas para nuestra geometr&iacute;a ya somos capaces de modelar
+y situar objetos a lo largo y ancho de nuestro mundillo virtual. &iquest;Pero
+c&oacute;mo hacer que aparezcan en nuestra magn&iacute;fica ventana 800
+x 600 del S.O. ?...esa ventana es 2D y en cambio me est&aacute; ense&ntilde;ando
+mi geometr&iacute;a 3D d&aacute;ndome la sensaci&oacute;n de que hay profundidad.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Tenemos que proyectar
+la geometr&iacute;a en un <b>plano de proyecci&oacute;n</b>. Como plano
+es obviamente 2D y suele situarse por convenci&oacute;n en <b>Z = 0 (plano
+XY)</b>. La idea es proyectar primero para "discretizar" despu&eacute;s.
+Por discretizar entendemos pasar del mundo real (float o double) al entero
+(integer) que es el de los pixeles de nuestro monitor. Un pixel lo iluminas
+o no lo iluminas, es binario...o cero o uno pero nada de medias tintas.
+Nada de decimales.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=+1>Tipos de proyecci&oacute;n</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>No os comentar&eacute;
+todas las existentes pues no lo considero necesario. Nos centraremos en
+las <b>proyecciones planares</b>. En &eacute;stas se define una <b>direcci&oacute;n
+de visi&oacute;n</b> (<b>viewing</b>) que va desde el observador hasta
+el objeto en cuesti&oacute;n. Esta direcci&oacute;n se establece por medio
+de <b>proyectores</b> (l&iacute;neas) que cortan el plano de proyecci&oacute;n
+generando as&iacute; la imagen 2D que finalmente aparecer&aacute; en pantalla.&nbsp;
+Como primera gran clasificaci&oacute;n de las proyecciones planares podemos
+hablar de:</font></font></font>
+<ul>
+<li>
+<b><font face="Arial"><font color="#000000">Proyecciones planares</font></font></b></li>
+
+<ul>
+<li>
+<b><font face="Arial"><font color="#000000"><font size=-1>Paralelas</font></font></font></b></li>
+
+<ul>
+<li>
+<font face="Arial"><font color="#000000"><font size=-1>Oblicua</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1>Ortogr&aacute;fica</font></font></font></li>
+</ul>
+
+<li>
+<b><font face="Arial"><font color="#000000"><font size=-1>Perspectiva</font></font></font></b></li>
+
+<ul>
+<li>
+<font face="Arial"><font color="#000000"><font size=-1>1 punto</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1>2 puntos</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1>3 puntos</font></font></font></li>
+</ul>
+</ul>
+</ul>
+<font face="Arial"><font color="#000000"><font size=-1>Nosotros nos centraremos
+en dos de estas proyecciones. La ortogr&aacute;fica y la perspectiva de
+un s&oacute;lo punto.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=+1>Proyecci&oacute;n
+ortogr&aacute;fica</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Como proyecci&oacute;n
+paralela que es, cuenta con proyectores paralelos entre ellos. El <b>centro
+de proyecci&oacute;n</b> (<b>COP</b>) se encuentra en el infinito. En el
+caso de la ortogr&aacute;fica, los proyectores son perpendiculares al plano
+de proyecci&oacute;n. Lo observamos mejor en la figura:</font></font></font>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p align="justify"><img SRC="jpg/fig1g7.jpg" height=337 width=561></center>
+
+<p align="justify"><br>
+<br>
+<br>
+<br>
+<br>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Este tipo de
+proyecci&oacute;n <b>no preserva las dimensiones reales</b> de los objetos
+seg&uacute;n la distancia hasta ellos. Con eso quiero decir que a&uacute;n
+acerc&aacute;ndote / alej&aacute;ndote de ellos no se producen cambios
+de tama&ntilde;o con lo cual el realismo no es total. Se utiliza tradicionalmente
+en proyectos de ingenier&iacute;a del tipo de programas CAD/CAM. Qui&eacute;n
+no ha visto una herramienta de modelaci&oacute;n 3D (AutoCAD, 3DSMax, Maya...)
+sin las 3 correspondientes vistas ortogr&aacute;ficas desde ambos laterales
+y desde arriba. La cuarta vista suele ser una perspectiva que comentar&eacute;
+a continuaci&oacute;n.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Los par&aacute;metros
+a especificar son las dimensiones de la caja (Xmin, Xmax, Ymin, Ymax, Zmin,
+Zmax). A los valores MAX y MIN tambi&eacute;n se les denomina FAR o BACK
+y NEAR o FRONT.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>En OpenGL la
+podemos definir de la siguiente forma (ya lo habiamos medio visto en algunos
+ejemplos de art&iacute;culos anteriores):</font></font></font>
+<blockquote><font face="Courier New,Courier"><font color="#000000">glMatrixMode(GL_PROJECTION);</font></font>
+<br><font face="Courier New,Courier"><font color="#000000">glLoadIdentity();</font></font>
+<br><font face="Courier New,Courier"><font color="#000000">glOrtho(x_min,
+x_max, y_min, y_max, z_min, z_max);</font></font></blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>la &uacute;ltima
+funci&oacute;n puede reemplazarse por:</font></font></font>
+<blockquote><font face="Courier New,Courier"><font color="#000000">gluOrtho2D(x_min,
+x_max, y_min, y_max);</font></font></blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>si se aceptan los
+valores por defecto de Zmin = -1.0 y Zmax = 1.0.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=+1>Proyecci&oacute;n
+perspectiva</font></font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Esta es la que definitivamente
+utilizaremos para dotar del mayor realismo a nuestras aplicaciones. Las
+proyecciones perspectiva preservan las dimensiones reales de los objetos
+si nos acercamos / alejamos de ellos. Por tanto el efecto visual es justo
+el que necesitamos en casos de apariencia real. La ten&eacute;is en la
+figura:</font></font>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p align="justify"><img SRC="jpg/fig2g7.jpg" height=448 width=600></center>
+
+<p align="justify"><br>
+<br>
+<br>
+<br>
+<br>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>En la figura tenemos una
+proyecci&oacute;n perspectiva con un s&oacute;lo COP o <b>punto de fuga</b>.
+Todos los proyectores emanan de &eacute;l y se dirigen hasta el objeto
+intersectando el plano de proyecci&oacute;n. Como pod&eacute;is observar
+los proyectores no son paralelos entre ellos tal y c&oacute;mo ya os coment&eacute;
+anteriormente.</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>En OpenGL la podemos definir
+as&iacute;:</font></font>
+<blockquote><font face="Courier New,Courier">glMatrixMode(GL_PROJECTION);</font>
+<br><font face="Courier New,Courier">glLoadIdentity();</font>
+<br><font face="Courier New,Courier">gluPerspective( FOV en grados, Relaci&oacute;n
+de Aspecto, z_near, z_far);</font></blockquote>
+<font face="Arial,Helvetica"><font size=-1>Los par&aacute;metros que tenemos
+que especificar son:</font></font>
+<blockquote>
+<li>
+<font face="Arial,Helvetica"><font size=-1><b>FOV</b> en grados. Es el
+"<b>field of view</b>" o campo visual. Se refiere al &aacute;ngulo de abertura
+vertical.</font></font></li>
+
+<li>
+<font face="Arial,Helvetica"><font size=-1><b>Relaci&oacute;n de Aspecto</b>
+o "<b>aspect ratio</b>". Es el cociente entre la anchura (width) y la altura
+(height) del plano de proyecci&oacute;n deseado.</font></font></li>
+
+<li>
+<font face="Arial,Helvetica"><font size=-1>Los valores NEAR y FAR del vol&uacute;men
+de visualizaci&oacute;n perspectiva. Idem que en ortogr&aacute;fica.</font></font></li>
+</blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>Podemos definir
+tambi&eacute;n una proyecci&oacute;n perspectiva usando la funci&oacute;n:</font></font></font>
+<blockquote><font face="Courier New,Courier"><font color="#000000">glFrustrum(x_min,
+x_max, y_min, y_max, z_min, z_max);</font></font></blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>En este caso OpenGL
+calcular&aacute; el "<b>frustrum piramidal</b>", es decir, el vol&uacute;men
+de visualizaci&oacute;n perspectiva m&aacute;s id&oacute;neo. Son simplemente
+dos maneras distintas de acabar creando lo mismo. A cada uno con su elecci&oacute;n,
+la que os parezca m&aacute;s intuitiva y c&oacute;moda.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Las distancias
+NEAR y FAR son siempre positivas y medidas desde el COP hasta esos planos,
+que ser&aacute;n obviamente paralelos al plano Z = 0. Dado que la c&aacute;mara
+apunta por defecto en la direcci&oacute;n negativa de Z, el plano de front
+(near) estar&aacute; realmente situado en z = -zmin mientras que el de
+back (far) estar&aacute; en z = -zmax.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Lo he dado m&aacute;s
+o menos por asumido pero lo voy a recordar. Pensad que no hay que proyectar
+toda la geometr&iacute;a existente sin&oacute; tan s&oacute;lo la que v&eacute;
+la c&aacute;mara desde su posici&oacute;n y orientaci&oacute;n. Tenemos
+que acotar en este sentido y es por eso que adem&aacute;s de definir un
+plano de proyecci&oacute;n y una forma de proyectar, creamos un vol&uacute;men
+de visualizaci&oacute;n finito con unas fronteras bi&eacute;n marcadas.
+Todo aquello que no se encuentre dentro del vol&uacute;men ser&aacute;
+rechazado y no proyectado dado que no debe verse. Para tenerlo m&aacute;s
+claro pensad en vuestros ojos. &iquest;Lo v&eacute;is todo a vuestro alrededor?...no...ten&eacute;is
+una cierta apertura visual, de unos 60&ordm; a 80&ordm; y m&aacute;s all&aacute;
+de eso nada de nada.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>No somos como
+las palomas con los ojos en los laterales de la cabeza o como una lente
+gran angular de una c&aacute;mara. De hecho tan s&oacute;lo variando la
+apertura visual (FOV) observaremos como es m&aacute;s o menos la cantidad
+de escena que entra en pantalla.</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=+1>La C&aacute;mara</font></font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>La c&aacute;mara
+son nuestros ojos virtuales. Todo lo que ella vea ser&aacute; proyectado,
+discretizado y finalmente mostrado en nuestra ventanita del sistema operativo.
+Podemos imaginar que de la c&aacute;mara emana el vol&uacute;men de visualizaci&oacute;n
+de forma que se traslada con ella. Los par&aacute;metros a definir en cuanto
+a la c&aacute;mara son:</font></font></font>
+<ul>
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Posici&oacute;n
+XYZ</b> en el mundo 3D. Al igual que un objeto cualquiera, la c&aacute;mara
+debe posicionarse. En un juego arcade 3D t&iacute;pico la c&aacute;mara
+nos da la visi&oacute;n frontal del mundo y se va moviendo a nuestro antojo
+con las teclas o el rat&oacute;n. Cada vez que modificamos la posici&oacute;n
+var&iacute;an las coordenadas XYZ de c&aacute;mara.</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Orientaci&oacute;n</b>.
+Una vez situada debe orientarse. Yo puedo estar quieto pero girar la cabeza
+y mirar hac&iacute;a donde me venga en gana.</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Direcci&oacute;n
+de "AT"</b>. Define hacia d&oacute;nde estoy mirando, a qu&eacute; punto
+concretamente.</font></font></font></li>
+</ul>
+<font face="Arial"><font color="#000000"><font size=-1>En OpenGL lo tenemos
+f&aacute;cil con:</font></font></font>
+<blockquote><font face="Courier New,Courier"><font color="#000000">gluLookAt(eyeX,
+eyeY, eyeZ, atX, atY, atZ, upX, upY, upZ);</font></font></blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>Esta es la funci&oacute;n
+que determina d&oacute;nde y c&oacute;mo est&aacute; dispuesta la c&aacute;mara.
+Cuidado que la posici&oacute;n de la c&aacute;mara no tiene nada que ver
+con el tipo de proyecci&oacute;n que hayamos definido. La proyecci&oacute;n
+se define s&oacute;lo una vez, t&iacute;picamente al principio del programa
+en una funci&oacute;n inicializadora, mientras que la c&aacute;mara se
+mueve continuamente seg&uacute;n nos interese y m&aacute;s en un arcade
+3D !!!. A&ntilde;adir a esto que la matriz que se modifica al llamar a
+esta funci&oacute;n no tiene que ser </font></font></font><font face="Courier New,Courier">GL_PROJECTION
+</font><font face="Arial,Helvetica"><font size=-1>sin&oacute;</font></font><font face="Courier New,Courier">
+GL_MODELVIEW</font><font face="Arial,Helvetica"><font size=-1>. OpenGL
+calcular&aacute; todas las transformaciones que aplicar&aacute; al mundo
+3D para que manteniendo la c&aacute;mara en el origen de coordenadas y
+enfocada en la direcci&oacute;n negativa de las Z's nos d&eacute; la sensaci&oacute;n
+de que lo estamos viendo todo desde un cierto lugar. Para ello recordad
+siempre activar esta matriz antes de llamar a </font></font><font face="Courier New,Courier"><font color="#000000">gluLookAt</font></font><font face="Arial,Helvetica"><font size=-1>
+de esta forma:</font></font>
+<blockquote><font face="Courier New,Courier">glMatrixMode(GL_MODELVIEW);</font></blockquote>
+<font face="Arial"><font color="#000000"><font size=-1>En cuanto a los
+par&aacute;metros que demanda la funci&oacute;n son los siguientes:</font></font></font>
+<ul>
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Coordenadas del
+"eye"</b>. Es literalmente la posici&oacute;n XYZ d&oacute;nde colocar
+la c&aacute;mara dentro del mundo.</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Coordenadas del
+"at"</b>. Es el valor XYZ del punto al que queremos que mire la c&aacute;mara.
+Un punto del mundo obviamente.</font></font></font></li>
+
+<li>
+<font face="Arial"><font color="#000000"><font size=-1><b>Coordenadas del
+vector "up"</b>. Si, es un vector y no un punto. Con &eacute;l regularemos
+la orientaci&oacute;n de la c&aacute;mara. Este ha de ser el vector que
+"mira hacia arriba" si entendemos que el vector que mira hacia adelante
+es el que va del "eye" hasta el "at". Variando el "up" variamos la orientaci&oacute;n
+y sin&oacute; mirad:</font></font></font></li>
+</ul>
+
+<center><img SRC="jpg/fig3g7.jpg" height=425 width=530></center>
+
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>Espero haber
+acertado con la figura. Aqu&iacute; v&eacute;is una c&aacute;mara con tr&iacute;pode
+y todo...;)...y los tres par&aacute;metros a los que me vengo refiriendo.
+Notad el hecho de que moviendo el vector de UP cambiariamos la orientaci&oacute;n
+de la c&aacute;mara aunque esta siguiera mirando hacia el mismo punto y
+situada en id&eacute;ntica posici&oacute;n.</font></font></font>
+<p align="justify"><font color="#000000"><font face="Arial"><font size=-1>Pensad en lo
+siguiente y esto ya os lo dejo a vuestra propia iniciativa en cuanto a
+experimentaci&oacute;n. Si </font></font><font face="Courier New,Courier">gluLookAt
+</font><font face="Arial"><font size=-1>altera
+la matriz </font></font></font><font face="Courier New,Courier">GL_MODELVIEW
+</font><font face="Arial,Helvetica"><font size=-1>y
+esta es la que guarda el estado de todo nuestro sistema en cuanto a transformaciones
+(recordad el art&iacute;culo anterior), mejor controlar la situaci&oacute;n
+con los
+</font></font><font face="Courier New,Courier">gl_push</font><font face="Arial,Helvetica"><font size=-1>
+y </font></font><font face="Courier New,Courier">gl_pop</font><font face="Arial,Helvetica"><font size=-1>
+que ya conoceis para no desmontarlo todo....y quiz&aacute;s tengais que
+limpiar la matriz antes de tocar la c&aacute;mara usando para ello una
+identidad.....pensad en ello un poco...8)</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Si partimos de que por defecto
+la c&aacute;mara se encuentra en el or&iacute;gen, mirando hacia las Z's
+negativas y con el vector de UP definido como el eje Y, podr&iacute;amos
+dejar de utilizar esta funci&oacute;n y acumular transformaciones con las
+funciones del cap&iacute;tulo anterior para que todo se posicionara de
+tal manera que nos diera la sensaci&oacute;n de estarlo viendo desde otro
+punto de vista!!!....&iquest;lo v&eacute;is?</font></font>
+<p align="justify"><font face="Arial,Helvetica"><font size=-1>Creo que ya hemos llegado
+a un nivel lo suficientemente digno de conocimientos como para que se&aacute;is
+capaces de crear algo m&aacute;s que simples figuras. Por ahora el "render"
+ser&aacute; simple pues a&uacute;n no conocemos la iluminaci&oacute;n,
+ni las texturas ni las curbas y superf&iacute;cies. A&uacute;n siendo simple
+podemos jugar adecuadamente con los colores creando bonitos escenarios
+virtuales. Os invito a programar algo de ese estilo. Un laberinto 3D con
+muros que seamos capaces de recorrer a voluntad usando las teclas y el
+raton. Pintad las caras de los muros (cubos escalados) con diferentes tonalidades
+del mismo color para emular sombras. Programad dos vistas del mismo escenario:
+una frontal perspectiva para el personaje que mov&eacute;is y otra ortogr&aacute;fica
+y superior de todo el escenario. Necesitareis definir dos c&aacute;maras,
+una para cada ventana de GLUT. Vamos a ello que ten&eacute;is los conocimientos
+y la imaginaci&oacute;n para hacerlo!!!</font></font>
+<p align="justify"><font face="Arial"><font color="#000000"><font size=-1>En la pr&oacute;xima
+edici&oacute;n inaugurar&eacute; un tema muy nuevo: la <b>iluminaci&oacute;n</b>.
+Dotaremos a nuestras composiciones del mayor realismo posible gracias a
+la luz...y a las sombras...</font></font></font>
+
+
+<br>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>JULIO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT><BR><hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

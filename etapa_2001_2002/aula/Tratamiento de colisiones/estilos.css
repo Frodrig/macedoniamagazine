@@ -1,0 +1,13 @@
+h1 {  mso-bidi-font-size: 12.0pt; mso-bidi-font-family: Times New Roman; mso-ansi-language: ES-TRAD; font-weight: bold; text-align: center}
+h2 {  mso-bidi-font-size: 12.0pt; mso-bidi-font-family: Times New Roman; mso-ansi-language: ES-TRAD; font-weight: bold;}
+p {  mso-bidi-font-family: Times New Roman; mso-ansi-language: ES-TRAD; word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0}
+ol {  mso-bidi-font-family: Times New Roman; mso-ansi-language: ES-TRAD; word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0}
+ul {  mso-bidi-font-family: Times New Roman; mso-ansi-language: ES-TRAD; word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0}
+.autor {  font-weight: bold}
+.articulo { font-style: italic }
+.fecha { font-style: italic }
+.ingles { font-style: italic }
+.figura {  font-family: Arial, Helvetica, sans-serif; font-style: italic; text-align: right}
+.variable {  font-style: italic}
+.subindice {  font-size: smaller; vertical-align: sub}
+a:hover {  text-decoration: none}

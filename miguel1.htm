@@ -1,0 +1,228 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<body bgcolor ="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="80%" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=6 face="arial"><B>A</B></font><FONT color="#000000" size=6 face="arial"><B>rtículos de Opinión<FONT COLOR="#cc0000" size=6 face="arial"> &</FONT> <FONT COLOR="#009933" size=6 face="arial">R</FONT>eportajes</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>P</B></font><FONT color="#000000" size=2 face="arial"><B>rogramación y Desarrollo</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:saezma@iglobal.es">Miguel Angel Sáenz.</A>
+</b></FONT>
+<br><br>
+
+<BR><BR><BR><BR><BR>
+
+<H3>
+<FONT color="#000000" face="arial">        
+C vs PASCAL
+</FONT>
+</H3>
+
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Creo que a estas alturas de mi carrera y con la experiencia que tengo, 
+me veo más o menos capacitado para hacer unas cuantas reflexiones acerca 
+de este eterno enfrentamiento. No me considero, ni mucho menos, 
+una persona experta en ninguno de los dos lenguajes; para ser sincero, 
+de C se mas o menos lo que en la EUI-UPV se me ha enseñado y algunas cosas mas, 
+pero las conversaciones con otros compañeros y amigos han llegado 
+a puntos limite y es hora de que alguien se moje.<br>
+Desde un primer momento lo que voy a dejar claro es que yo me decanto por 
+el uso del Pascal, y es a partir de aquí donde explico el por que.<br>
+Solamente me voy a basar en mis experiencias con ambos lenguajes de programación.<br><br>
+Comencé a aprender Pascal antes de entrar en la EUI, justamente el verano anterior
+a mi primer curso. Me compre un libro muy básico y a partir de ahí y con mi viejo
+AMSTRAD CPC 6128, me hice con el TURBO PASCAL 3.0 bajo CP/M. 
+Entonces mis ideas de C eran que iba entre la B y la D. Así que no había 
+discusión posible entre ninguno de los lenguajes.<br><br>
+En las practicas de las asignaturas de programación, 
+se hacían las practicas en Pascal con aquellos "magníficos" 
+MACINTOSH; y he de admitir que hasta llegaba a disfrutar aprendiendo aquel lenguaje. Pero ......<br><br>
+Otros amigos míos que también habían comenzado sus carreras 
+técnicas, me contaban que ellos hacían las practicas de asignaturas de 
+informática básica, típicas de el resto de carreras de la UPV, en C++. 
+Claro, me hablaban de potencia mucho mas elevada, que si mucha mas 
+optimización, etc. Y efectivamente yo me lo creía, y es mas, casi 
+que todavía me lo creo. Bueno, pues por entonces bastantes alumnos 
+nos quejábamos a los departamentos de la inexistencia de practicas en C, 
+puesto que todos habíamos oído hablar de esas "maravillosas" prestaciones. 
+Finalmente, a lo largo de todo el curso no se dio ni una sola practica en la que 
+se necesitara el C.<br><br>
+A pesar de que prácticamente nadie de primer curso, que no fuera repetidor claro!,
+ no sabia C, ya había piques con los alumnos de esas carreras porque, 
+ ¡¿ como se iba a permitir que "esos" de otras carreras nos vacilaran a nosotros, 
+ alumnos de la EUI ?!<br>
+Pues bien con esta situación se llega a segundo (¡Con algunas de primero!) y en el
+segundo cuatrimestre, Metodología y Técnicas de Programación. La primera de las asignaturas cuyas practicas se hacen en C, aunque sea el ANSI C. 
+Pues a partir de aquí expreso únicamente mis opiniones.<br><br>
+Tras las primeras aproximaciones a lo que había sido ese lenguaje tan misterioso 
+para la mayoría de nosotros, comienzan las practicas y con ellas la fiesta de los 
+errores de Core.<br>
+Después de las primeras practicas no veo esas "grandes diferencias", esa 
+"potencia y optimización", ... En fin, que el susodicho lenguaje resulta ser 
+un tanto decepcionante. Pero tampoco había que exagerar, todavía no había probado 
+el BORLAND C++ v.3.1 para DOS, y quizá este seria mas amigable que el de UNIX.<br>
+Puesto que las practicas de MTP exigían "horas extras", mi compañero de practicas 
+y yo decidimos implementarlas bajo esta versión para DOS y luego llevárnoslas 
+a la máquina UNIX del laboratorio. De esta manera aprovechábamos la estupenda 
+portabilidad del C.<br>
+Es aquí donde comenzaba la autentica odisea. En primer lugar a la hora de 
+tracear la ejecución del programa, el debugger hacia unas cosas rarísimas, 
+tales como saltarse líneas de ejecución por toda la jeta. Es decir, que sin bucles,
+ saltos, ni nada de nada; únicamente intentando ejecutar tres líneas del programa 
+ que en un principio deberían ser totalmente secuenciales, el debugger pasaba de 
+ la primera a la tercera, dejándose la segunda por fea. Supongo que en esto tendría
+  que ver la elección del modelo de memoria elegido a la hora de compilar el 
+  programa, pero es que probamos todos los modos, y con unos saltaba de la primera 
+  a la tercera, con otros de la segunda a la cuarta, e incluso había uno, no 
+  recuerdo cual, que hacia retroceder la ejecución del programa. 
+  La solución fue incluir líneas basura que no hicieran nada, para poder 
+  ejecutar con un cierto orden el programa.<br><bR>
+Pero esto no fue lo mas fuerte. Los que hicieran aquellas practicas, las de la 
+primera vez que se impartió MTP, recordaran que había que hacer una especie de 
+albearán con unos datos de entrada. Bien, nosotros teníamos un conjunto de 
+datos de entrada fijo, para la comprobación de errores. El problema surgió cuando 
+los datos de salida no eran correctos, repasamos los listados hacia delante y 
+hacia detrás unas n veces (cuando n tiende a infinito), y no encontramos ningún 
+error. Hasta que un día se nos ocurrió cambiar el conjunto de datos de entrada, 
+y ¿que paso? .... ¡¡¡FUNCIONABA!!! Volvimos a probar otro conjunto distinto y 
+seguía funcionando, así probamos unos cuantos mas y con todos, el programa 
+funcionaba correctamente. Claro, se nos ocurrió volver a probar el conjunto 
+inicial de datos de entrada y nuestra sorpresa fue que el programa se volvía a 
+colgar. El resumen seria que encontramos unos datos extrañísimos que hacían que 
+nuestro programa se olvidara de la lógica y funcionara a su libre albedrío. 
+Todavía no hemos encontrado una explicación para esto que os he contado y supongo 
+que no la encontrare nunca.<br><br>
+Desde que me compre un PC, me he dedicado a aprender mas Pascal, concretamente el 
+BORLAND PASCAL 7.0, y desde luego no me he encontrado con saltos de línea 
+misteriosos ni programas con vida propia. Cabe resaltar que estos errores que yo 
+encontré, los halle en un compilador de la misma empresa que nos vende el Pascal 
+mas utilizado, así que no me explico como pueden existir estas diferencias de 
+"amigabilidad" entre uno y otro compilador.<br><br>
+Vamos a pasar ahora a lo que seria un análisis mas técnico, puesto que hasta ahora 
+solo os he contado experiencias con los dos lenguajes de programación.<br><br>
+
+Ya he oído de mas de un profesor, entre los que se encuentra Xavier Lluch, el cual 
+imparte clase de Informática Gráfica 2D, que C es mucho mas potente que Pascal. 
+Yo le invito a que remita una respuesta y explique el por que. Puesto que yo no 
+le encuentro razones de autentico peso.<br><br>
+Es cierto que si comparamos los antiguos compiladores de C y Pascal, encontramos 
+grandes diferencias entre ambos. Pero ahora mismo, y después de examinar las 
+librerías que ofrecen B. C++ v.3.1 y B. PASCAL 7.0, no observo esas diferencias 
+"abismales" de uno a otro. He de admitir que C es mucho mas flexible que Pascal 
+a la hora de manejar ficheros, pero para lo que yo he necesitado no he encontrado 
+nada en C que Pascal no me haya ofrecido, y a mi juicio creo que he hecho bastantes
+ cosas además de las practicas de la EUI.<br><br>
+Puedo decir de la misma manera que en el apartado de potencia me ha pasado 
+exactamente lo mismo. No he observado diferencias en la velocidad de ejecución de 
+programas escritos en C o en Pascal, o al menos hasta ahora eso no me ha ocurrido.<br>
+Una de las razones que se me han expuesto para defender el lenguaje C ha sido la 
+simple excusa de que la mayoría de sistemas operativos (UNIX,LINUX,WINDOWS 3.1,...)
+ están escritos en C porque es mucho mas potente que cualquier otro lenguaje de 
+ alto-medio nivel y además es portable; por lo tanto como conclusión se obtiene la 
+ misma cabezoneria de siempre "el C es mucho mejor que Pascal, en caso contrario 
+ se habrían escrito estos SS.OO. en Pascal". Pues me parecería perfecto que esto 
+ me lo dijera alguien que hubiera formado parte de uno de los equipos que 
+ realizaron alguno de estos SS.OO., ya he comentado antes que el C es mucho mas 
+ flexible en cuanto a ficheros que Pascal. Pero tengo una pregunta: 
+ ¿Cuantos de los que esgrimen esta razón han programado un sistema operativo o 
+ piensan hacerlo?<br><br>
+Tanto a mi como a muchas personas mas, nos parece bastante mas legible un listado 
+en Pascal que en C, esto conlleva que la implementación sea por tanto mas clara 
+y sencilla; y si a esto le aportamos el aumento de calidad en la ultima versión 
+del compilador de Borland,  obtenemos un lenguaje de programación potente y apto 
+tanto para el aprendizaje como para el uso profesional. Otra cosa es que por la 
+costumbre que ya esta arraigada en la mayor parte de las empresas dedicadas a la 
+programación se exija C, y de esta manera a todos nos toque practicarlo nos guste 
+o no.<br><br>
+Podría exponer mas ejemplos comparativos entre ambos lenguajes pero eso será en 
+otra entrega. Lo único que pido seria un cambio de mentalidad y darle al Pascal 
+la oportunidad que hasta ahora no ha tenido dentro del campo profesional.
+
+<br><br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index01.htm"><font FACE="ARIAL"><B>[Opinión y Reportajes]</B></font></a> <HR>
+<A HREF="opinionb.htm"><font FACE="ARIAL"><B>[Opinión Programación / Desarrollol]</B></font></a> 
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">OPINION Y REPORTAJES</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+</HTML>
+

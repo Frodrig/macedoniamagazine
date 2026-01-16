@@ -1,0 +1,398 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capitulo 2.<br>
+Programación gráfica (parte I).
+
+</H3>
+<P ALIGN=JUSTIFY>
+
+<FONT color="#000000" size=2 face="arial">
+
+<P ALIGN="JUSTIFY">En al anterior articulo describ&iacute; cuales son los principales m&oacute;dulos a destacar en un sistema gr&aacute;fico completo. Asimismo comente el modelo c&aacute;mara sint&eacute;tica en el cual se fundamenta OpenGL en el momento de proyectar nuestro mundo 3D en la pantalla 2D. Por ultimo repasamos un poco todo lo referido al pipeline gr&aacute;fico y mencione algunas llamadas b&aacute;sicas a OpenGL. </P>
+<P ALIGN="JUSTIFY">En este segundo capitulo aprenderemos a interactuar con OpenGL con mas profundidad, concentr&aacute;ndonos en el uso de las primitivas de las que disponemos para ser capaces de empezar a dibujar algo serio. Vamos a ello pues !!! </P>
+
+<P ALIGN="JUSTIFY"><h4>Uso de funciones gr&aacute;ficas en OpenGL.</h4> </P>
+
+<P ALIGN="JUSTIFY">Nuestro sistema gr&aacute;fico es una <B>caja negra</B>. Con esto quiero decir que existen unas especificaciones de <B>entrada</B> y otras de <B>salida</B>, de manera que no nos importa para nada, cuando programamos, como se implementan a nivel interno las operaciones que demandamos. Evidentemente mas adelante, con mas experiencia, empezaremos a preguntarnos que es lo que esta ocurriendo "ah&iacute; dentro". B&aacute;sicamente contamos con entradas tales como llamadas a funciones, uso de dispositivos tales como el teclado o el rat&oacute;n e incluso mensajes que nos llegan desde el mism&iacute;simo sistema operativo ( <B>Programaci&oacute;n orientada a eventos </B>). Lo iremos analizando. </P>
+<P ALIGN="JUSTIFY">OpenGL es una <B>API</B> ( Applications Programming Interface ), o sea una <B>librer&iacute;a</B>. Llamando sucesivamente a sus funciones conseguiremos el comportamiento adecuado sin importarnos en un primer momento que es lo que esta "API" esta haciendo en realidad. Contamos pues con diversos tipos de funciones: </P>
+
+<UL>
+<B><P ALIGN="JUSTIFY"><LI>Funciones primitivas</B> que definen todos los objetos a bajo nivel como pueden ser puntos, l&iacute;neas o pol&iacute;gonos mas o menos complejos. </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>Funciones atributivas</B> que nos permitir&aacute;n definir las caracter&iacute;sticas de todo aquello que dibujemos, por ejemplo "glColor" del anterior capitulo. </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>Funciones de visualizaci&oacute;n</B> para posicionar la c&aacute;mara, proyectar la geometr&iacute;a a la pantalla o eliminar ( Clipping ) aquellos objetos fuera de nuestro &aacute;ngulo de visi&oacute;n. </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>Funciones de transformaci&oacute;n </B>para girar, rotar, trasladar, escalar ... la geometr&iacute;a. </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>Funciones de entrada</B> para poder generar aplicaciones interactivas en las que el usuario participe. Com&uacute;nmente relativas al uso del teclado y del rat&oacute;n. </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>Funciones de control</B> que nos permitan interactuar en red, en aplicaciones cliente-servidor, o bien manejar un sistema operativo multitarea. </LI></P></UL>
+
+<P ALIGN="JUSTIFY">Todas las funciones que ir&eacute; mencionando se encuentran catalogadas en una de estas categor&iacute;as. En su conjunto conforman los dos centenares de funciones que construyen a nuestra API, OpenGL. </P>
+<h4><P ALIGN="JUSTIFY">La interficie OpenGL.</h4> </P>
+<P ALIGN="JUSTIFY">Todas las llamadas a OpenGL empiezan siempre con las letras "<B>gl</B>", como ya observasteis en el anterior capitulo. Pero no solo contamos con estas funciones. Observemos el siguiente diagrama: </P>
+<P ALIGN="JUSTIFY"><center><IMG SRC="jpg/art2fig1.jpg"></P></center>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Adem&aacute;s de <B>GL</B> ( Graphics Library ), que contiene la mayor&iacute;a de las llamadas que usaremos, existen otras dos librer&iacute;as inseparables de la primera. </P>
+
+<UL>
+<B><P ALIGN="JUSTIFY"><LI>GLU</B> ( Graphics Utility Library ) contiene funciones para objetos comunes a dibujar como esferas o toros ( un toro es algo as&iacute; como un "donut" ) as&iacute; como funciones de control de la c&aacute;mara, entre otras. Estas funciones empiezan con las letras "glu". </LI></P>
+<B><P ALIGN="JUSTIFY"><LI>GLUT</B> ( GL Utility Toolkit ) contiene todas aquellas funciones que permitir&aacute;n a nuestro programa ser interactivo, es decir, manejable desde el rat&oacute;n y el teclado. Tambi&eacute;n permite crear objetos complejos al igual que GLU. Estas funciones empiezan con las letras "glut". </LI></P></UL>
+
+<P ALIGN="JUSTIFY">Las tres librer&iacute;as deber&aacute;n incluirse ( #include ,en C ) en nuestro programa de manera que seamos capaces de aprovechar al m&aacute;ximo todo lo que nos brindan. </P>
+<P ALIGN="JUSTIFY">Nuestro programa "llamara" a estas funciones, que se encuentran en las librer&iacute;as, y estas actuaran sobre el frame buffer ( recordad que el frame buffer es la zona de memoria que hace de pantalla virtual "guardando" todo aquello que deber&aacute; mostrarse por nuestro monitor ). </P>
+<P ALIGN="JUSTIFY">A todos los familiarizados con C no creo que les suene demasiado raro todo esto y a los dem&aacute;s, algo nuevo que sab&eacute;is no??. </P>
+<P ALIGN="JUSTIFY">Muy bien o sea que cojo un compilador de C, incluyo las librer&iacute;as y las uso.....hasta ah&iacute; perfecto Oscar pero....<B>de donde saco las librer&iacute;as???.</B>....Bien bien la verdad es que navegando un poquito son bastante f&aacute;ciles de encontrar pero yo os aconsejo algunos "sites" interesantes referidos a OpenGL: </P>
+
+<UL>
+<LI>MESA, librer&iacute;a gratuita muy similar a OpenGL en </FONT><A HREF="http://www.ssec.wisc.edu/~brianp/Mesa.html" target="_new"><FONT FACE="Arial" SIZE=2>http://www.ssec.wisc.edu/~brianp/Mesa.html</FONT></A><FONT FACE="Arial" SIZE=2> </LI>
+<LI>Silicon Graphics en </FONT><A HREF="http://www.sgi.com/Technology/openGL/" target="_new"><FONT FACE="Arial" SIZE=2>http://www.sgi.com/Technology/openGL/</FONT></A><FONT FACE="Arial" SIZE=2> </LI>
+<LI>El principal site de la organizaci&oacute;n en </FONT><A HREF="http://www.opengl.org/" target="_new"><FONT FACE="Arial" SIZE=2>http://www.opengl.org/</FONT></A><FONT FACE="Arial" SIZE=2> </LI>
+<LI>Digital tambi&eacute;n pone su granito de arena en </FONT><A HREF="http://www.digital.com/pub/doc/opengl/" target="_new"><FONT FACE="Arial" SIZE=2>http://www.digital.com/pub/doc/opengl/</FONT></A><FONT FACE="Arial" SIZE=2> </LI></UL>
+
+<P ALIGN="JUSTIFY">Por cierto, una vez encontr&eacute;is donde "bajaros" las librer&iacute;as, verificad que son las referidas a vuestro sistema operativo en concreto!!!. </P>
+<P ALIGN="JUSTIFY">Adem&aacute;s de las librer&iacute;as encontrareis un mont&oacute;n de ejemplos, especificaciones, manuales y noticias !!!. </P>
+<br>
+<h4>Primitivas y atributos. Pol&iacute;gonos. Texto. Color.</h4> 
+<P ALIGN="JUSTIFY">Entendemos por <B>primitivas</B> aquellas entes m&iacute;nimas que pueden ser especificadas directamente mediante funciones de OpenGL. Como ya observamos en el anterior articulo la estructura en C ser&aacute; de la forma: </P>
+</FONT><B><p><FONT FACE="Arial" SIZE=2>glBegin( TIPO );</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex*(...);</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; .......</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; .......</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex*(...);</B> <BR>
+<B>glEnd();</B> </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Cada v&eacute;rtice especifica un punto y todos ellos especificaran un objeto de una u otra forma seg&uacute;n el <B>TIPO</B>.</P>
+<P>Veamos la figura: <BR>
+&nbsp; </P>
+</FONT><P ALIGN="JUSTIFY"><center><IMG SRC="jpg/art2fig2.jpg"></center></P>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">En la figura se observa como usando diferentes tipos ( GL_POINTS, GL_LINES, etc ... ) conseguimos diferentes objetos en pantalla dados unos v&eacute;rtices creados seg&uacute;n el orden que veis en la figura ( primero p0, luego p1, etc ... ) para los 6 rect&aacute;ngulos de la primera fila. Es decir: </P>
+</FONT><B><FONT FACE="Arial" SIZE=2 ><P>glBegin( TIPO );</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex3f( p0x, p0y, p0z );</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex3f( p1x, p1y, p1z );</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex3f( p2x, p2y, p2z );</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; .....</B> <BR>
+<B>&nbsp;&nbsp;&nbsp; glVertex3f( p7x, p7y, p7z );</B> <BR>
+<B>glEnd();</B> </P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Lo que OpenGL dibujara seg&uacute;n el caso es lo que se encuentra en color negro en la figura, no el trazado gris que solo lo he puesto como referencia. </P>
+<P ALIGN="JUSTIFY">En la segunda fila de la figura vemos como crear sucesivos "pol&iacute;gonos de cuatro lados" ( no tienen porque ser cuadrados o rect&aacute;ngulos, eso depende de en que posiciones situemos los v&eacute;rtices ) con un lado en com&uacute;n de dos a dos. Hay mas variantes que podr&eacute;is encontrar en las especificaciones de OpenGL aunque no suelen usarse mas que para aplicaciones muy concretas. </P>
+<P ALIGN="JUSTIFY">Los pol&iacute;gonos especificados por una serie de puntos deben ser <B>convexos</B> para su correcto trazado, y coloreado, por parte de OpenGL. Que quiere decir esto?, pues bien se define a un pol&iacute;gono como convexo si cogiendo dos puntos cualesquiera de su interior y trazando la l&iacute;nea que los une, todos los puntos que pertenecen a la l&iacute;nea se encuentran dentro del pol&iacute;gono. En la anterior figura ten&eacute;is un ejemplo de esto. </P>
+<P ALIGN="JUSTIFY">Por tanto asegurada siempre que defin&iacute;s pol&iacute;gonos convexos, de lo contrario los resultados son simplemente impredecibles y pocas veces acertados. Entonces, como dibujo pol&iacute;gonos que no sean convexos?, lo que normalmente se hace es dibujar un pol&iacute;gono complejo, convexo o no, a base de muchos tri&aacute;ngulos. Es lo que se denomina "<B>Tesselation</B>". Todo pol&iacute;gono puede descomponerse en tri&aacute;ngulos y por tanto a partir de estos somos capaces de dibujar cualquier cosa.&nbsp; Tambi&eacute;n lo ten&eacute;is en la figura explicitado gr&aacute;ficamente. </P>
+<P ALIGN="JUSTIFY">Usando GLU o GLUT podemos crear con una sola llamada objetos mas complejos como es el caso de una esfera : </P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Usando GLU con <B>void gluSphere( GLUquadricObj *qobj, GLdouble radius, GLint slices, GLint stacks );</B> </LI></P>
+<P ALIGN="JUSTIFY"><LI>Usando GLUT con <B>void glutSolidSphere(GLdouble radius, GLint slices, GLint stacks);</B> </LI></P></UL>
+
+<P ALIGN="JUSTIFY">En cuanto programemos lo ver&eacute;is mas claro pero de hecho no dejan de ser funciones en C de las de siempre. Con <B>radius</B> definimos el radio que queremos para la esfera, con <B>slices</B> y <B>stacks</B> la "partimos" en porciones como si de un globo terr&aacute;queo se tratara ( paralelos y meridianos ) de manera que a mas particiones, mas calidad tendr&aacute; ya que OpenGL la aproximara por mas pol&iacute;gonos. En cuanto a <B>*qobj</B> en la primera funci&oacute;n, se trata de definir primero un objeto de tipo quadric con otra funci&oacute;n de GLU ( gluNewQuadric ) para despues asociar la esfera al susodicho objeto. No os preocup&eacute;is porque no usaremos demasiado esta filosof&iacute;a. De momento quedaros con la idea que es lo que me interesa. </P>
+<P ALIGN="JUSTIFY">A alguien se le ocurrir&aacute; probablemente pensar que en estas funciones no se define la posici&oacute;n de la esfera en el mundo. Es cierto y por lo tanto previamente a crearla, y por tanto dibujarla, deberemos especificar <B>donde</B> queremos que OpenGL la dibuje. Lo podemos especificar con: </P>
+<B><P ALIGN="JUSTIFY">glTranslatef( posX, posY, posZ );</B>, funci&oacute;n que nos traslada posX unidades en el eje X, posY en el eje Y ... y si tras esto llamamos a glutSolidSphere, ya tendremos a nuestra esfera dibujada en el punto que deseamos. </P>
+<P ALIGN="JUSTIFY">Bueno hablemos un poco de los <B>atributos</B>. Una cosa es el tipo de la primitiva a dibujar y otra es <B>como</B> se dibuja, es decir, con que color de borde, con que color de relleno, con que ancho de borde, con que ancho por punto, etc ..... Estos son algunos de los atributos que pueden especificarse. Algo importante, en OpenGL los atributos no se pueden definir expl&iacute;citamente para cada objeto sino que lo usual es definir unos ciertos atributos generales de manera que todo lo que se dibuje a partir de ese momento seguir&aacute; esas especificaciones. Si deseamos cambiar los atributos deberemos hacerlo en otra parte del programa de manera que la forma de dibujar ser&aacute; diferente a partir de esa l&iacute;nea, ok??. Veamos algunas funciones de ejemplo referidas a atributos: <BR>
+&nbsp; </P>
+
+<UL>
+<LI><B><P ALIGN="JUSTIFY">glClearColor( 0.0, 0.0, 0.0, 0.0 );</B>, esta es algo gen&eacute;rica y se refiere al color con el cual debe de "resetearse" el frame buffer cada vez que redibujemos toda la escena de nuevo. En este caso el "<B>fondo</B>" de nuestra ventana ser&aacute; como el fijado por esta funci&oacute;n en el frame buffer, de color negro. El cuarto par&aacute;metro de la funci&oacute;n se refiere al valor de "<B>alpha</B>" en cuanto al color. Veremos mas adelante que el valor de alpha permite variar el <B>grado de transparencia</B> de un objeto. </LI></P>
+<LI><B><P ALIGN="JUSTIFY">glColor3f( 1.0, 0.0, 0.0 );</B>, esta ya os "sonara" del articulo anterior. En este caso definimos que todo lo que se dibuje desde este momento ser&aacute; de color rojo. Recordad que el orden de par&aacute;metros es Red, Green, Blue ( RGB ). </LI></P>
+<LI><B><P ALIGN="JUSTIFY">glPointSize( 2.0 );</B>, con esta llamada definimos que cada uno de nuestros puntos deber&aacute; tener un grosor de dos pixels en el momento de ser trasladado a pantalla. </LI></P>
+<LI><B><P ALIGN="JUSTIFY">glNormal3f( 1.0, 0.0, 0.0 );</B>, cuando operemos con <B>luces</B> veremos que para cada cara de un pol&iacute;gono hay que asociar un vector o <B>normal</B>. Esta funci&oacute;n define como normal a partir de este momento a un vector definido desde el origen con direcci&oacute;n positiva de las X. El orden de los par&aacute;metros es X, Y, Z. </LI></P>
+<LI><B><P ALIGN="JUSTIFY">glMaterialfv(GL_FRONT, GL_DIFFUSE,&nbsp;&nbsp; blanco);</B>, por ultimo y tambi&eacute;n referido al tema de las <B>luces</B>. Cada objeto ser&aacute; de un material diferente de manera que los reflejos que en el se produzcan debidos a las luces de nuestra escena variaran seg&uacute;n su rugosidad, transparencia, capacidad de reflexi&oacute;n ... en este caso definimos que todas las caras principales ( FRONT, son las caras "que se ven" del pol&iacute;gono ) de los objetos dibujados a partir de ahora tendr&aacute;n una componente difusa de color blanco ( asumiendo que el par&aacute;metro "blanco" es un vector de reales que define este color ). La componente difusa de un material define que color tiene la luz que este propaga en todas las direcciones cuando sobre el incide un rayo luminoso. En este caso se ver&iacute;a luz blanca emanando del objeto/s dibujados a partir de ahora. Por supuesto antes hay que definir luces en nuestra escena y activarlas. Lo veremos mas adelante en el apartado de iluminaci&oacute;n. </LI></P></UL>
+
+<P ALIGN="JUSTIFY">En cuanto a los <B>colores</B>. Trabajaremos con la convenci&oacute;n RGBA, es decir, grado de rojo, verde, azul y transparencia. Los valores para cada componente se encontraran siempre dentro del intervalo [ 0, 1 ]. Si nos pasamos o nos quedamos cortos num&eacute;ricamente hablando, OpenGL adoptara como valor 1 o 0 seg&uacute;n sea el caso. Es decir, que redondea autom&aacute;ticamente aunque hay que evitarle c&aacute;lculos innecesarios y prever valores correctos. </P>
+<P ALIGN="JUSTIFY">En el caso del valor para alpha, 0 significa transparencia total y de aqu&iacute; podemos usar cualquier valor hasta 1, objeto totalmente opaco. Y esto para que servir&aacute;?, pues para poder "ver" a trav&eacute;s del objeto lo que hay detraes!!!. </P>
+<P ALIGN="JUSTIFY">Que decir del <B>texto</B>.....no nos es de mucho inter&eacute;s ahora mismo que lo que estamos deseando es empezar a dibujar pol&iacute;gonos 3D como locos pero comentare un par de cosas. OpenGL permite dos modos de texto: <B>Stroke Text</B> y <B>Raster Text</B>. </P>
+<P ALIGN="JUSTIFY">En el primer caso cada letra del alfabeto es una nuevo pol&iacute;gono literalmente construido a partir de primitivas de manera que puede tratarse tal y como si de un objeto cualquiera se tratara. Es pesado pues tenemos que dibujar literalmente cada letra a base de primitivas pero interesante en cuanto a posibilidades pues podremos escalar, rotar, trasladar.....en fin todo lo que nos es posible aplicar a un pol&iacute;gono. </P>
+<P ALIGN="JUSTIFY">En cuanto al segundo caso tenemos un ejemplo de simplicidad y rapidez. Es el t&iacute;pico alfabeto creado a partir de bloques de bits ( <B>BitMaps</B> ), de manera que tendremos una rejilla sobre la que un 1 significara lleno y un 0 vac&iacute;o. De esta forma : </P>
+</FONT><FONT FACE="Arial" SIZE=2 ><P ALIGN="JUSTIFY">1 0 0 0 1</P>
+<P ALIGN="JUSTIFY">1 0 0 0 1</P>
+<P ALIGN="JUSTIFY">1 1 1 1 1</P>
+<P ALIGN="JUSTIFY">1 0 0 0 1</P>
+<P ALIGN="JUSTIFY">1 0 0 0 1</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">se corresponde con la letra H !!!</P>
+<P ALIGN="JUSTIFY">As&iacute; podremos crearnos f&aacute;cilmente un alfabeto y posicionar directamente en el frame buffer sendas letras. Para ello es necesario conocer como acceder directamente, a nivel de bit, al frame buffer y esto aun nos tomara algo de tiempo!!! </P>
+<P ALIGN="JUSTIFY">De momento dejemos de lado el tema del texto y centr&eacute;monos pues en los gr&aacute;ficos puros y duros !!! </P>
+<h4><P ALIGN="JUSTIFY">Visionado de gr&aacute;ficos. Matrices.</h4> </P>
+<P ALIGN="JUSTIFY">Record&aacute;is el diagrama referido a la proyecci&oacute;n de nuestro mundo 3D en un plano 2D ???, lo ten&eacute;is en el anterior capitulo por si las moscas... </P>
+<P ALIGN="JUSTIFY">Bien, vamos a trabajar un poco el tema de proyecci&oacute;n. Posteriormente iniciaremos el tema de las matrices que act&uacute;an sobre nuestra geometr&iacute;a y de esta forma podremos empezar a dibujar. </P>
+<P ALIGN="JUSTIFY">Para empezar analizaremos la mas sencilla de las proyecciones que OpenGL nos ofrece. Fijaros bien en el diagrama: </P>
+</FONT><P ALIGN="JUSTIFY"><center><IMG SRC="jpg/art2fig3.jpg"></center></P>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Esta es la llamada <B>proyecci&oacute;n ortografica</B>. Su funcionamiento es bastante simple puesto que se trata de coger todos los puntos ( x, y, z ) que se encuentren dentro del <B>volumen de visualizaci&oacute;n </B>( 1. ) y eliminar su componente Z. As&iacute; todos los puntos pasan a ser del tipo ( x, y, 0 ) y por tanto lo que hemos hecho ha sido "proyectarlos", trasladarlos al <B>plano de proyecci&oacute;n</B> que pod&eacute;is ver para Z = 0 en el diagrama ( 2. y 3. ). Literalmente "chafamos" toda la geometr&iacute;a en el plano Z=0 y es esto lo que se traslada a pantalla !!! </P>
+<P ALIGN="JUSTIFY">Lo veis mas o menos claro???...echadle algo de imaginaci&oacute;n y seguro que lo entend&eacute;is. </P>
+<P ALIGN="JUSTIFY">Necesitamos especificar el volumen de visualizaci&oacute;n puesto que la visi&oacute;n del mundo por parte de la c&aacute;mara, o sea nuestros ojos, es limitada y por tanto solo una reducida parte de este puede verse a cada momento en pantalla. Todo lo que se encuentre dentro del volumen ser&aacute; lo que veremos. Debido a su simplicidad, esta proyecci&oacute;n no se usa demasiado en aplicaciones 3D serias ya que se pierde la noci&oacute;n de tama&ntilde;o al alejarte/acercarte de los objetos en el mundo. Por que?, pues porque siempre se proyecta todo en Z = 0 este donde este la c&aacute;mara y por tanto eso es lo que se ve en pantalla, la proyecci&oacute;n, que siempre ser&aacute; la misma. Mas adelante consideraremos casos mas realistas como la <B>proyecci&oacute;n en perspectiva</B> que nos permitir&aacute; conseguir efectos 3D reales como en el caso de Doom, Heretic, Quake o cualquiera de los juegos de este tipo. </P>
+<P ALIGN="JUSTIFY">En OpenGL usaremos: </P>
+<B><P ALIGN="JUSTIFY">void glOrtho( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble near, GLdouble far );</B> </P>
+<P ALIGN="JUSTIFY">o bien </P>
+<B><P ALIGN="JUSTIFY">void gluOrtho2D( GLdouble left, GLdouble right, GLdouble bottom, GLdouble top );</B> </P>
+<P ALIGN="JUSTIFY">Ambas nos permiten especificar las distancias que ten&eacute;is comentadas en la figura anterior ( 4. ). En el caso de la segunda funci&oacute;n observareis que no podemos especificar las distancias "near" y "far". Esto es porque se asumen de valores -1.0 y 1.0 respectivamente en esta funci&oacute;n. </P>
+<P ALIGN="JUSTIFY">Por tanto estamos "dimensionando" literalmente nuestro volumen de visualizaci&oacute;n d&aacute;ndole una altura, una anchura y una longitud. </P>
+<P ALIGN="JUSTIFY">Por cierto que en la figura ( 4. ) he asumido que el plano de proyecci&oacute;n "descansa" sobre los ejes X e Y. Esto no tiene porque ser as&iacute;. De hecho podemos generar cualquier plano de proyecci&oacute;n ( anchura y altura ) que se nos ocurra. Eso si, siempre estar&aacute; situado autom&aacute;ticamente en Z=0. </P>
+<P ALIGN="JUSTIFY">Como conclusi&oacute;n cabe relacionar claramente esto con el "clipping". Toda la geometr&iacute;a situada dentro del volumen se dibujara, es decir, saldar en pantalla. El resto se eliminara y por tanto no aparecer&aacute; en imagen. Esto no quiere decir que por no dibujarse no se haya calculado previamente. Precisamente para discernir que se encuentra dentro/fuera del volumen hay que calcular previamente las posiciones de todos los objetos en el mundo. Este es un gran coste que interesar&iacute;a minimizar para poder optimizar el rendimiento a tiempo real. Mas adelante comentare como evitar calcular colores, iluminaci&oacute;n, etc... de todo aquello que no debe ser dibujado gracias a estructuras de datos llamadas "<B>quadtrees</B>" y "<B>octrees</B>". </P>
+<P ALIGN="JUSTIFY">Hablemos ahora de <B>matrices</B>. Como visteis en el anterior capitulo, toda la geometr&iacute;a generada pasa a trav&eacute;s del pipeline de gr&aacute;fico sufriendo sucesivas transformaciones hasta su disposici&oacute;n final en pantalla. Estas transformaciones son literalmente matrices que multiplican a nuestros vectores ( v&eacute;rtices ) modificando sus caracter&iacute;sticas. </P>
+<P ALIGN="JUSTIFY">En OpenGL contamos con dos matrices principales que multiplicaran siempre a toda la geometr&iacute;a. Son las llamadas <B>GL_PROJECTION</B> (<B>matriz de proyecci&oacute;n</B>) y <B>GL_MODELVIEW</B> (<B>matriz de modelado/visionado</B>). </P>
+<P ALIGN="JUSTIFY">En el momento en que definimos que tipo de proyecci&oacute;n deseamos estamos actualizando los valores de la matriz de proyecci&oacute;n. A partir de ese momento todo quedara proyectado tal como hemos especificado pues todo se multiplicara por esta matriz. Por otra parte cada vez que rotemos, traslademos, escalemos o bien cambiemos la posici&oacute;n de la c&aacute;mara estaremos actuando sobre la matriz de modelado/visionado. As&iacute;, toda la geometr&iacute;a generada a partir de ese momento quedara trasladada, rotada, ... seg&uacute;n hayamos definido. </P>
+<P ALIGN="JUSTIFY">Lo primero que debe hacerse en cualquier aplicaci&oacute;n OpenGL es inicializar ambas matrices. Esto se consigue asoci&aacute;ndoles la <B>matriz identidad</B>. Cualquier vector multiplicado por una matriz identidad resulta en el mismo, es decir no varia. Ese es el valor inicial que nuestras matrices deber&aacute;n tener. Mas adelante en el programa y seg&uacute;n nos interese las iremos modificando. Como ejemplo aqu&iacute; ten&eacute;is la que es la matriz identidad de 3 filas por 3 columnas ( 3 x 3 ): </P>
+</FONT><FONT FACE="Arial" SIZE=2 ><P ALIGN="JUSTIFY">1 0 0</P>
+<P ALIGN="JUSTIFY">0 1 0</P>
+<P ALIGN="JUSTIFY">0 0 1</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">de manera que cualquier vector, que puede ser un v&eacute;rtice XYZ, multiplicado por ella no varia ...</P>
+<h4><P ALIGN="JUSTIFY">Vamos a teclear un poco...</h4> </P>
+<P ALIGN="JUSTIFY">Bueno supongo que los que hab&eacute;is tenido la paciencia de leer hasta este punto os merec&eacute;is ya algo de "carnaza", vamos un regalito !!!....bueno, de acuerdo, vamos a ver un programa de ejemplo aunque aun queda muuuuuuucccccchhhhhooooo de que hablar. </P>
+<P ALIGN="JUSTIFY">Aqu&iacute; ten&eacute;is un listado comentado de un sencillo programa en C est&aacute;ndar ( ANSI ) que usa OpenGL : <BR>
+&nbsp; <BR>
+</P></FONT>
+
+
+<font size=2 face="arial"><pre>
+/* Copyright (c) Oscar Garcia Panyella 1998,
+ * todos los derechos reservados.
+ * Curso de OpenGL para Macedonia Magazine.
+ * Primer ejemplo.*/
+
+/* Incluimos las librerias */
+<B>#include</B> &lt;GL/glut.h&gt;
+
+/* Ancho de la ventana de visualizacion */
+<B>#define</B> ANCHO 400
+
+/* Alto de la ventana de visualizacion */
+<B>#define</B> ALTO 400 
+
+/* Coordenada X del origen de la ventana,
+ * esquina superior izquierda */
+<B>#define</B> ORIGENX 100 
+
+/* Coordenada Y del origen de la ventana,
+ * esquina superior izquierda */ 
+<B>#define</B> ORIGENY 100 
+
+/*Parametros iniciales del programa.*/
+
+
+<B>void</B> inicio(<B>void</B>) 
+{
+/* Activamos la matriz de proyeccion. */
+	<B>glMatrixMode</B>(GL_PROJECTION);
+
+/* "Reseteamos" esta con la matriz identidad. */ 
+	<B>glLoadIdentity</B>();
+
+/* Plano de proyeccion igual a la ventana
+ * de visualizacion.
+ * Volumen de visualizacion
+ * desde z=-10 hasta z=10.*/ 
+
+	<B>glOrtho</B>(0, ANCHO, 0, ALTO, -10, 10);
+
+/* Activamos la matriz de modelado/visionado. */
+	<B>glMatrixMode</B>(GL_MODELVIEW);
+
+/* La "reseteamos". */
+	<B>glLoadIdentity</B>();
+
+/* Nos trasladamos al centro de nuestra
+ * ventana donde siempre dibujaremos el
+ * poligono.
+ * Nos mantenemos en el plano z=5 que se encuentra
+ * dentro del volumen de visualizacion.*/
+
+	<B>glTranslatef</B>((GLfloat)ANCHO/2, (GLfloat)ALTO/2, 5.0);
+
+/* Color de fondo para la ventana 
+ * de visualizacion, negro. */
+	<B>glClearColor</B>(0.0, 0.0, 0.0, 0.0);
+
+ }
+
+/* OpenGL llamara a esta rutina cada vez
+ * que tenga que dibujar de nuevo.
+ * 
+ * Dado que rellenara el poligono de
+ * color y cada vertice es de
+ * un color diferente, OpenGL rellenara el
+ * interior con una interpolacion
+ * de los colores de los 4 vertices. 
+ * Lo hace automaticamente.
+ */ 
+
+	<B>void </B>dibujar(<B>void</B>)
+{ 
+/* "Limpiamos" el frame buffer con
+ * el color de "Clear", 
+ * en este caso negro. */ 
+	<B>glClear</B>(GL_COLOR_BUFFER_BIT);
+
+/* Queremos que se dibujen las caras
+ * frontales de los poligonos
+ * y con relleno de color. */
+	<B>glPolygonMode</B>(GL_FRONT, GL_FILL); 
+	<B>glBegin</B>(GL_POLYGON); 
+
+		/* Color azul para el primer vertice */
+		<B>glColor3f(</B>0.0, 0.0, 1.0);
+		<B>glVertex3i</B>(-100, -100, 5);
+
+		/* Color verde para el segundo vertice */
+		<B>glColor3f</B>(0.0, 1.0, 0.0);
+		<B>glVertex3i</B>(-100, 100, 5);
+
+		/* Color rojo para el tercer vertice */
+		<B>glColor3f</B>(1.0, 0.0, 0.0);
+		<B>glVertex3i</B>(100, 100, 5);
+
+		/* Color amarillo para el cuarto vertice */
+		<B>glColor3f</B>(1.0, 1.0, 0.0);
+		<B>glVertex3i</B>(100, -100, 5);
+
+	<B>glEnd</B>();
+} 
+
+/* Main del programa.*/
+
+<B>int</B> main(<B>int</B> argc, <B>char</B> **argv)
+{ 
+/* Primera llamada siempre en OpenGL,
+ * por si usaremos
+ * la linea de comandos */
+	<B>glutInit</B>(&amp;argc, argv);
+
+/* Activamos buffer simple y 
+ * colores del tipo RGB */ 
+	<B>glutInitDisplayMode</B> (GLUT_SINGLE | GLUT_RGB);
+
+/* Definimos una ventana de medidas ANCHO x ALTO
+ * como ventana de visualizacion */
+	<B>glutInitWindowSize</B> (ANCHO, ALTO);
+
+/* Posicionamos la esquina superior izquierda de
+ * la ventana en el punto definido */ 
+	<B>glutInitWindowPosition</B> (ORIGENX, ORIGENY);
+
+/* Creamos literalmente la ventana y
+ * le adjudicamos el nombre que se
+ * observara en su barra de titulo */
+	<B>glutCreateWindow</B>("Cuadrado Multicolor");
+
+/* Inicializamos el sistema */
+	<B>inicio</B>();
+
+/* Hacemos saber a OpenGL que cada vez
+ * que sea necesario dibujar de nuevo,
+ * por ejemplo la primera vez, o al redimensionar
+ * la ventana con el raton o
+ * en caso de provocar un "redibujado" por programa,
+ * debe llamar a la funcion "dibujar".*/ 
+
+	<B>glutDisplayFunc</B>(dibujar);
+
+/* Aqui espera el programa mientras
+ * nada ocurra, es un Loop
+ * infinito que se vera turbado por las
+ * sucesivas veces que
+ * sea necesario redibujar.*/ 
+	<B>glutMainLoop</B>();
+
+/* ANSI C requiere que main retorne un entero. */ 
+	<B>return</B> 0;
+}
+</pre></font>
+
+<center><B><FONT FACE="Arial" SIZE=1>Cuadrado Multicolor. Programa C basico. Primer ejemplo del curso.</B></FONT></center>
+<br>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;&nbsp; <BR>
+Este programa crea una nueva ventana en nuestro sistema operativo de ventanas. La utilizara como ventana de visualizaci&oacute;n. En ella dibuja un pol&iacute;gono, en este caso un cuadrado de lado 200, formado por decenas de colores diferentes creados a partir de la interpolaci&oacute;n de los colores de los 4 v&eacute;rtices. </P>
+<P ALIGN="JUSTIFY">Me interesa mucho que los realmente interesados analic&eacute;is el programa, lo compil&eacute;is, lo ejecut&eacute;is y sobretodo que intent&eacute;is entender todo lo que hace. Hay diversas cosas que aun no he explicado en este programa pero creo que si le prest&aacute;is atenci&oacute;n y le&eacute;is mis comentarios, no tendr&eacute;is problema alguno en dominarlas. </P>
+<P ALIGN="JUSTIFY">Con esto os dejo hasta la pr&oacute;xima edici&oacute;n de la revista en la que continuaremos en este capitulo segundo que como pod&eacute;is observar, realmente da y para mucho. </P>
+<P ALIGN="JUSTIFY">¡Divertiros y escribidme si ten&eacute;is dudas!.<br>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulab.htm"><font FACE="ARIAL"><B>[Curso de OpenGL]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

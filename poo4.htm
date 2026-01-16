@@ -1,0 +1,445 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br><FONT color="#000000" size=2 face="arial">
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 4.<br> La piedra angular del C++: las clases.
+</H3>
+
+<p align=justify>
+
+Con este tercer cap&iacute;tulo del curso sobre C++, empezaremos a ver las <B>clases</B>, aut&eacute;nticas piedras angulares para la programaci&oacute;n en C++. Mediante las clases, como veremos m&aacute;s adelante, podremos valernos de una de las propiedades m&aacute;s importantes y fundamental de toda programaci&oacute;n orientada a objetos, esto es, la <B>encapsulaci&oacute;n</B>. Recordemos que la encapsulaci&oacute;n hac&iacute;a referencia a la capacidad de mezclar datos (variables, constantes, etc) junto a funciones (a partir de ahora, llamaremos a estas funciones m&eacute;todos), de tal forma que los m&eacute;todos trabajen con los datos.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Introducci&oacute;n: creando una clase</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una clase la podemos entender como una estructura en la que, adem&aacute;s de poder incorporar variables, tambi&eacute;n se puede hacer lo propio con funciones. Supongamos la siguiente estructura que utiliza el mecanismo de la encapsulaci&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<B>struct</B> Guerrero {
+&#9;<B>char</B> *m_nombre;
+&#9;<B>int</B> m_fuerza;
+&#9;<B>int</B> m_resistencia;
+&#9;<B>int</B> m_experiencia;
+&#9;<B>void</B> AsignaNombre (<B>char</B> *nombre);
+&#9;<B>void</B> IncrementaExperiencia (<B>int</B> tipo_atributo);
+&#9;<B>void</B> MuestraDatosPersonaje (<B>void</B>);
+};
+
+</FONT></PRE>
+
+<P ALIGN=JUSTIFY>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como pod&eacute;is observar, la estructura guerrero sigue las normas b&aacute;sicas de toda estructura que conocemos del C tradicional salvo, claro est&aacute;, esas tres funciones. Sin embargo, pese a que es posible definir estructuras de este modo en C++ y comenzar a trabajar con objetos, en la pr&aacute;ctica no se utiliza <B>struct</B> de este modo, es decir, para definir estructuras como las de arriba en las que se mezclan variables con funciones de miembro se utilizan las clases. Para definir una clase no tenemos que ir muy lejos, basta con cambiar la palabra struct por <B>class</B> y ya lo habremos logrado, mirad:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<B>class</B> Guerrero {
+&#9;<B>char</B> *m_nombre;
+&#9;<B>int</B> m_fuerza;
+&#9;<B>int</B> m_resistencia;
+&#9;<B>int</B> m_experiencia;
+&#9;<B>void</B> AsignaNombre (<B>char</B> *nombre);
+&#9;<B>void</B> IncrementaExperiencia (<B>int</B> tipo_atributo);
+&#9;<B>void</B> MuestraDatosPersonaje (<B>void</B>);
+};
+</FONT></PRE>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El uso de clases frente a estructuras radica en que con las primeras podemos utilizar mecanismos tan vitales y fundamentales como la herencia y otras importantes propiedades de la orientaci&oacute;n a objetos. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pasando a analizar m&aacute;s de cerca la clase guerrero definida m&aacute;s arriba, veremos enseguida que hay un total de cuatro variables de miembro. Dichas variables de miembro llevan todas una &quot;m&quot; seguida de un subrayado esto es as&iacute; porque se suele utilizar este convenio para distinguir variables que son de miembro, como es el caso, de variables que no pertenecen a una clase (por ejemplo una variable cualquiera definida en el main). Puede que todos estos detalles os sean molestos. Pod&eacute;is prescindir perfectamente de ellos pero yo os recomiendo que se&aacute;is siempre ordenados. Pensad que si no est&aacute;is a&uacute;n metidos en la programaci&oacute;n en Windows, la colaboraci&oacute;n para realizar programas en equipo no la habéis vivido muy de cerca pero, tarde o temprano, os tocar&aacute; tener que trabajar con un equipo estable de personas o c&oacute;digo que no es vuestro, por eso, es muy importante aprender a construir c&oacute;digo que no s&oacute;lo funcione (y adem&aacute;s lo haga bien) sino que sea entendible por otros.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Volviendo al an&aacute;lisis de la clase guerrero, ve&iacute;amos como defin&iacute;amos cuatro variables pero, adem&aacute;s, tambi&eacute;n insert&aacute;bamos la definici&oacute;n de tres m&eacute;todos que eran: </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY"><B>void</B> AsignaNombre (<B>char</B> *nombre);</LI>
+<LI><P ALIGN="JUSTIFY"><B>void</B> IncrementaExperiencia (<B>int</B> tipo_atributo);</LI>
+<LI><P ALIGN="JUSTIFY"><B>void</B> MuestraDatosPersonaje (<B>void</B>);</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como veremos m&aacute;s adelante ser&aacute; con estos m&eacute;todos con los que realizaremos el trabajo de nuestras variables anteriormente creadas. Se acab&oacute; eso de tratar las variables por separado, ahora, para una simple inserci&oacute;n deberemos de utilizar una funci&oacute;n que lo haga.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando declaramos una clase no se reservar&aacute; memoria hasta que creemos un <B>objeto de la clase,</B> la creaci&oacute;n de un objeto de una clase se llamar&aacute; <B>instanciar un objeto</B> y, a su vez, un objeto creado de una clase se denomina <B>instancia de esa clase</B>.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Releer si no hab&eacute;is captado todo porque ser&aacute; importante tener las cosas m&aacute;s o menos claras a partir de ahora.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Protegiendo el acceso a la clase</P>
+</h4>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Un aspecto muy importante de la programaci&oacute;n orientada a objetos es el tema de la seguridad y el <B>control</B> <B>de</B> <B>acceso</B> a los miembros de datos de la clase. Para poder definir en qu&eacute; medida las variables y funciones miembro pueden ser accedidas, vamos a poder establecer unas prioridades de acceso. Con este aspecto vamos a erradicar, entre otras cosas, los problemas que nos sol&iacute;an ocasionar las variables globales del C tradicional, esto es, efectos laterales, cambios inadvertidos de valor, etc.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Existen tres especificadores de acceso posibles que son <B>public, protected y private. </B>Antes de ver un ejemplo de cada uno de ellos, citaremos que cuando se declara <I>p&uacute;blico (public) </I>un miembro de una clase, tanto si es funci&oacute;n como si es variable, este se podr&aacute; acceder desde dentro de la propia clase como desde fuera de ella. Cuando declaramos miembros <I>protegidos (protected)</I> nos aseguramos que s&oacute;lo ser&aacute;n accesibles desde las funciones de miembro de la clase siendo imposible el acceso tanto desde otras clases como desde cualquier otra parte del programa. Finalmente, un especificador <I>privado (private), </I>no permite que las clases sean accedidas ni desde otras clases, ni desde otras partes del programa ni desde clases derivadas (que ya las veremos m&aacute;s adelante).</P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Funciones de miembro intercaladas o en l&iacute;nea.</P>
+</h4></FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Antes de pasar al primer &quot;gran&quot; ejemplo de este cap&iacute;tulo, veremos qu&eacute; son las funciones de miembro <B>intercaladas</B> o en l&iacute;nea. Las funciones intercaladas, no son m&aacute;s que las funciones de miembro definidas en la clase y que, adem&aacute;s, tambi&eacute;n contienen su c&oacute;digo en la misma clase. Estas funciones se caracterizan porque ocupan muy pocas l&iacute;neas de c&oacute;digo de tal manera que, para evitar la sobrecarga computacional que puede ser la llamada a una funci&oacute;n cuando realmente el c&oacute;digo a ejecutar es m&iacute;nimo, caso de estas funciones, se permite que dichas funciones o m&eacute;todos se &quot;inserten&quot; en todos aquellos lugares en los que son necesitadas, cre&aacute;ndose una copia de ellas mismas dentro del c&oacute;digo en las zonas en las que se necesitan. Con esto ganamos en rapidez pero tambi&eacute;n tama&ntilde;o en nuestros programas ejecutables ya que vamos a tener repetidas copias en el ejecutable de la funci&oacute;n en cuesti&oacute;n. De todos modos, merece la pena hacer el ejecutable final un poco m&aacute;s grande si con ello ganamos en rapidez, por ello, es aceptable utilizar las funciones intercaladas.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Un t&iacute;pico ejemplo de funci&oacute;n intercalada podr&iacute;a ser aquella que en una clase se dedica a dar valor a una variable de miembro, es decir, aquella que se limita a realizar una asignaci&oacute;n. Recordando el ejemplo de la clase guerrero podr&iacute;amos definir la funci&oacute;n <I>AsignaNombre </I>de forma intercalada. Para llevar esto a cabo existen dos m&eacute;todos. El primero consiste en realizar la definici&oacute;n y cuerpo de la funci&oacute;n en la misma l&iacute;nea, dentro de la definici&oacute;n de la clase. La otra ser&iacute;a la utilizaci&oacute;n de la palabra reservada <B>inline</B> que no veremos hasta m&aacute;s adelante del curso. Por ahora nos bastar&aacute; ver un breve ejemplo de c&oacute;mo podr&iacute;a quedara nuestra clase guerrero si defini&eacute;ramos como intercalada la funci&oacute;n encargada de asignar un valor a la variable nombre:</P>
+<P ALIGN="JUSTIFY"></P>
+
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<B>class</B> Guerrero {
+   <B>char</B> *m_nombre;
+   <B>int</B> m_fuerza;
+   <B>int</B> m_resistencia;
+   <B>int</B> m_experiencia;
+   <B>void</B> AsignaNombre (<B>char</B> *nombre) {m_nombre = nombre;}
+   <B>void</B> IncrementaExperiencia (<B>int</B> tipo_atributo);
+   <B>void</B> MuestraDatosPersonaje (<B>void</B>);
+};
+</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Como pod&eacute;is observar la funci&oacute;n intercalada sigue todas las normas de definici&oacute;n de las funciones tradicionales, esto es, cabecera de la funci&oacute;n y, a continuaci&oacute;n, cuerpo de la misma encerrada entre llaves.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">De este modo, ya vemos y confirmamos una serie de cosas muy importantes:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN="JUSTIFY">Las clases nos permiten encapsular datos (variables de miembro) y funciones para trabajar con esos datos (m&eacute;todos).</LI></P>
+<LI><P ALIGN="JUSTIFY">Podemos definir m&eacute;todos intercalados cuando el trabajo de los mismos es m&iacute;nimo. Una forma de hacerlo consiste en escribir la cabecera y el cuerpo en la misma l&iacute;nea y dentro de la clase.</LI></P>
+<LI><P ALIGN="JUSTIFY">Debemos de trabajar con las variables de miembro mediante los m&eacute;todos que creemos en la clase, es decir, <B>hay que evitar hacer</B> Nombre_Objeto.m_nombre = nombre, es decir, a menos que no estemos &quot;ensayando&quot; el acceso directo a las variables de una clase deber&aacute;n de realizarse mediante los m&eacute;todos adecuados para ello. Lo correcto, como digo, es definirnos una funci&oacute;n de miembro que se encargue de esa tarea. En nuestro ejemplo de clase el m&eacute;todo AsignaNombre trabaja con la variable de miembro m_nombre asign&aacute;ndole un valor.</LI></P></UL>
+
+<h4>
+<P ALIGN="JUSTIFY">Vamos a repasar todo con un ejemplo.</P>
+</h4></FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Antes de continuar escribiendo, vamos a realizar un ejemplo de implementaci&oacute;n de una clase, creaci&oacute;n de una instancia a dicha clase (creaci&oacute;n de un objeto) y, por &uacute;ltimo, utilizaci&oacute;n de la clase a trav&eacute;s del objeto creado.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El ejemplo ser&aacute; bien sencillo. Construiremos una clase guerrero en la que, como si se tratar&aacute; de un juego de Rol (infinitamente primitivo...), seremos capaces de ir asignando valores a datos como la edad, la fuerza, la destreza, la energ&iacute;a o el nombre. Por supuesto, podremos ser capaces de volcar dicha informaci&oacute;n a pantalla. Despu&eacute;s, podremos crear tantas instancias u objetos como queramos de ese tipo, tantos como guerreros queramos manejar... ¡All&aacute; vamos!.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+#<B>include </B>&lt;<B>iostream.h</B>&gt;
+
+<B>class </B>Guerrero {
+<B>private:</B>
+ <B>char</B> *m_nombre;
+ <B>int</B> m_edad;
+ <B>int</B> m_fuerza;
+ <B>int</B> m_destreza;
+ <B>int</B> m_energ&iacute;a;
+
+<B>public</B>:
+ <B>void</B> MuestraDatos(<B>void</B>);
+ <B>void</B> PonerNombre (<B>char</B> *nombre) {m_nombre = nombre;} 
+ <B>void</B> PonerEdad (<B>int</B> edad) {m_edad = edad;} 
+ <B>void</B> PonerFuerza (<B>int</B> fuerza) {m_fuerza = fuerza;} 
+ <B>void</B> PonerDestreza(<B>int</B> destreza){m_destreza=destreza;} 
+ <B>void</B> PonerEnergia (<B>int</B> energia) {m_energia = energia;} 
+ <B>char</B> * DevuelveNombre (<B>void</B>) {<B>return</B> m_nombre;} 
+ <B>int</B> DevuelveEdad (<B>void</B>) {<B>return</B> m_edad;} 
+ <B>int</B> DevuelveFuerza(<B>void</B>) {<B>return</B> m_fuerza;} 
+ <B>int</B> DevuelveDestreza(<B>void</B>) {<B>return</B> m_destreza;} 
+ <B>int</B> DevuelveEnergia (<B>void</B>) {m_energia = energia;} 
+ }; 
+  
+<B> void</B> Guerrero<B>::</B>MuestraDatos(<B>void</B>) 
+ { 
+  <B>cout</B> &lt;&lt; &quot;Nombre del personaje: &quot; &lt;&lt; m_nombre &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;Edad: &quot; &lt;&lt; m_edad &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;Fuerza: &quot; &lt;&lt; m_fuerza &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;Destreza: &quot; &lt;&lt; m_nombre &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;Energ&iacute;a: &quot; &lt;&lt; m_energia &lt;&lt; ‘\n’; 
+ } 
+  
+<B> void</B> main (<B>void</B>) 
+ { 
+   // Creamos un objeto o instancia llamado Conan  
+   Guerrero Conan; 
+  
+   // Ahora le vamos dando valores al personaje 
+  
+   Conan<B>.</B>PonerNombre (&quot;Conan&quot;); 
+   Conan<B>.</B>PonerEdad (23); 
+   Conan<B>.</B>PonerFuerza (40); 
+   Conan<B>.</B>PonerDestreza (20); 
+   Conan<B>.</B>PonerEnergia(150); 
+  
+   // Y ahora vemos por pantalla el resultado 
+  
+   Conan<B>.</B>MostrarDatos(); 
+ } 
+ </FONT></PRE>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En este corto ejemplo podemos ver ya el funcionamiento de la programaci&oacute;n orientada a objetos desde su nivel m&aacute;s b&aacute;sico. En un primer lugar podemos distinguir la creaci&oacute;n de la clase Guerrero. Apreciamos una parte privada en donde definimos las variables que s&oacute;lo podr&aacute;n ser accesibles por las funciones de la clase y una parte p&uacute;blica a la que s&iacute; se podr&aacute; acceder desde fuera (desde el main en este caso). As&iacute;, para poder asignar un valor no se nos permitir&aacute; hacer libremente algo como:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&#9;Conan<B>.</B>m_nombre = &quot;Conan&quot;;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si hacemos esto el compilador mostrar&aacute; un error y no dejar&aacute; que se acabe la compilaci&oacute;n del ejemplo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para hacer tales cosas, disponemos de funciones definidas como intercaladas o en l&iacute;nea dentro de la propia clase. Esto es as&iacute; porque como vimos en una secci&oacute;n m&aacute;s arriba, las funciones de asignaci&oacute;n de datos a las variables, en este caso, son de una sencillez tal que merece la pena utilizar funciones en l&iacute;nea. Por otro lado, est&aacute;n declaradas como p&uacute;blicas con lo que, al llamarlas desde el main, no producen error alguno en tiempo de compilaci&oacute;n. Otras funciones que tambi&eacute;n se definen pero no se utilizan son las referentes a la devoluci&oacute;n de los datos de las variables de miembro. Realmente las he puesto para recalcar, a&uacute;n m&aacute;s, que TODAS las operaciones con variables hay que realizarlas a trav&eacute;s de funciones de miembro y que si, por ejemplo, s&oacute;lo quisiera mostrar por pantalla la edad del guerrero creado pues deber&iacute;a de obtenerla utilizando la funci&oacute;n creada a tal efecto (en este caso en concreto ser&iacute;a Conan<B>.</B>DevuelveEdad(); ).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En lo referente a la funci&oacute;n <B>void</B> MostrarDatos(<B>void</B>); pues nos encontramos con el caso m&aacute;s usual, la declaraci&oacute;n de funciones FUERA de la clase. Estas funciones ser&aacute;n las que m&aacute;s implementemos. Para su utilizaci&oacute;n debemos de seguir unos pasos muy sencillos. S&oacute;lo debemos de poner el nombre de la clase a la que pertenecen (en el ejemplo es la clase Guerrero) seguido y sin espacios de dos puntos <B>:: .</B> Esta pareja de dos puntos recibe el nombre de <B>operador de resoluci&oacute;n de &aacute;mbito </B>y es la manera m&aacute;s usual para definir funciones de miembro fuera de la clase. Con ellos, el compilador sabe a qu&eacute; clase corresponde la funci&oacute;n que vamos a definir. Y ya para finalizar, despu&eacute;s del operador de resoluci&oacute;n de &aacute;mbito, pondremos el nombre de la funci&oacute;n de miembro. Ten&eacute;is que tener en cuenta que, pese a que la funci&oacute;n se implementa fuera de la clase, &eacute;sta ya ha sido definida dentro de ella (tal y como har&iacute;amos en C tradicional para definir funciones que no son la main. Recordemos que primero se definen encima del main, para implementarse despu&eacute;s, a continuaci&oacute;n de la funci&oacute;n main).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez que ya tenemos definida la clase, s&oacute;lo hay que pasar a la funci&oacute;n main y comenzar a trabajar con ella. Lo primero es crearnos un objeto o instancia de esa clase. Dicho objeto puede tener cualquier nombre y se crea como si la clase anteriormente definida fuera un tipo de dato, es decir, ponemos el nombre de la clase y despu&eacute;s el nombre del objeto que queremos crear de ese tipo de clase. En nuestro caso al objeto en cuesti&oacute;n le hemos llamado Conan (original s&iacute; se&ntilde;or...).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez creado el objeto Conan procedemos a trabajar con &eacute;l. C&oacute;mo es l&oacute;gico, tendremos que inicializar sus valores. Para ello bastar&aacute; con ir utilizando los m&eacute;todos de los que dispone. As&iacute;, utilizamos PonerNombre, PonerEdad, etc hasta haber completado todos y cada uno de los atributos que debemos de inicializar. El resto es bien f&aacute;cil pues s&oacute;lo tendremos que llamar al m&eacute;todo para mostrar los datos y as&iacute; verlos en pantalla.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cabe destacar que, para poder acceder a los m&eacute;todos del objeto, deberemos de utilizar un punto entre el nombre del objeto y el m&eacute;todo en cuesti&oacute;n, es decir, como si Conan fuera una estructura de C. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta ser&iacute;a la descripci&oacute;n de un modo exhaustivo del ejemplo. Espero que se os hayan aclarado bastantes cosas sobre lo que hemos venido explicando con anterioridad. Por supuesto, a&uacute;n no hemos puesto sobre la mesa todo lo que hemos visto. Por ejemplo, a&uacute;n no hemos hecho un ejemplo real que implemente herencia.</P>
+<P ALIGN="JUSTIFY"> </P>
+<h4><P ALIGN="JUSTIFY">Constructores y destructores</P>
+</h4><P ALIGN="JUSTIFY">Los constructores y destructores son una forma efectiva de inicializar y dar por concluida, respectivamente, la utilizaci&oacute;n de una instancia u objeto que hemos estado utilizando hasta ahora. Un constructor se puede tomar como un m&eacute;todo que se llama nada m&aacute;s que creamos un objeto o instancia y que se encarga de &quot;preparar&quot;, por as&iacute; decirlo, la utilizaci&oacute;n del mismo ya sea inicializando valores b&aacute;sicos, asignando memoria para trabajar, etc. En cuanto a los destructores, pues podemos entenderlos como los m&eacute;todos que se llaman autom&aacute;ticamente cuando deseamos eliminar un objeto creado con anterioridad (por ejemplo, al acabar un programa todos los objetos que hemos creado al comienzo del mismo se eliminar&aacute;n) encarg&aacute;ndose de liberar todos los posibles recursos asignados al mismo como puede ser memoria.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Los Constructores siempre se llaman nada m&aacute;s realizar una instancia y cumplen la propiedad de llevar el mismo nombre de la clase a la que pertenecen, es decir, un constructor de la clase <I>casa </I>tendr&iacute;a el mismo nombre, esto es, se llamar&iacute;a <I>casa </I>tambi&eacute;n. Esto podr&iacute;a ser algo as&iacute;:</P>
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<B>class</B> Casa { 
+<B> public</B>: 
+  Casa(); // Constructor 
+ ........ 
+  }  
+</FONT></PRE>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si cre&aacute;ramos un objeto chalet de tipo Casa en nuestro programa:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Casa chalet;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El m&eacute;todo constructor se llamar&iacute;a autom&aacute;ticamente si necesidad de que nosotros hici&eacute;ramos chalet.Casa(); . Hay que a&ntilde;adir, finalmente, que dentro de una clase s&oacute;lo puede existir un constructor.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El tema de los destructores es id&eacute;ntico en funcionamiento s&oacute;lo que, en lugar de ser llamados autom&aacute;ticamente al crear el objeto, son llamados cuando &eacute;ste se destruye. Un objeto se puede destruir si es din&aacute;mico o, de forma m&aacute;s f&aacute;cil, si llegamos al final del main dentro del programa en el que lo hab&iacute;amos utilizando. Los destructores se definen con el mismo nombre de la clase, al igual que los constructores, pero con la notable diferencia de llevar delante del nombre el s&iacute;mbolo <B>~ </B>(ALT - 126), ser&iacute;a algo as&iacute; (continuamos con el mismo ejemplo de clase):</P>
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+<B> class</B> Casa { 
+<B> public</B>: 
+  Casa(); // Constructor 
+  <B>~</B>Casa(); // Destructor 
+ ........ 
+ } 
+ 
+</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Las caracter&iacute;sticas que s&iacute; distinguen a un destructor de un constructor son dos: <B>un destructor nunca devuelve nada y tampoco puede recibir par&aacute;metro alguno.</P></B>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La implementaci&oacute;n tanto de constructores como de destructores sigue las normas ya vistas m&aacute;s arriba para definir una funci&oacute;n de miembro de una clase. Podemos optar por realizar implementaciones intercaladas o in line<I> </I>o bien, podemos definirlas fuera del cuerpo de la clase utilizando para ello el operador de resoluci&oacute;n de &aacute;mbito (<B>::</B>). </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por ejemplo, el esquema de la implementaci&oacute;n del constructor de la clase anterior utilizando el operador de resoluci&oacute;n de &aacute;mbito ser&iacute;a:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+ Casa<B>::</B>Casa()  
+ { 
+  // Aqu&iacute; pondr&iacute;amos el 
+  // cuerpo de la funci&oacute;n constructor 
+ } 
+</FONT></PRE>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y en el caso del destructor:</P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+ Casa<B>::~</B>Casa()  
+ { 
+  // Aqu&iacute; pondr&iacute;amos el 
+  // cuerpo de la funci&oacute;n destructor 
+ } 
+
+</FONT></PRE>
+
+<P ALIGN="JUSTIFY">Los constructores y destructores siempre se encuentran dentro de una clase aunque nosotros no los hayamos definido, es decir, en nuestro ejemplo de m&aacute;s arriba, en el que implementamos una clase llamada guerrero, no definimos ning&uacute;n constructor ni tampoco ning&uacute;n destructor sin embargo, s&iacute; que exist&iacute;an. Cuando nosotros creamos una instancia a un objeto, el compilador siempre llama a un constructor. En el caso de que no exista, como pasa en el ejemplo de arriba, el compilador crea un sencillo constructor con el que instanciar nuestro objeto. Por tanto, al crear siempre el compilador un constructor por defecto en caso de no encontrar el nuestro, nosotros podemos &quot;pasar ol&iacute;mpicamente&quot; de molestarnos en crearnos uno, como vimos m&aacute;s arriba. Esto mismo es aplicable a los destructores, es decir, cuando el objeto deja de &quot;existir&quot; y se elimina, bien por la finalizaci&oacute;n del programa o bien porque se trataba de un objeto din&aacute;mico y hemos decidido eliminarlo en el transcurso de ejecuci&oacute;n de nuestro programa, el compilador &quot;ir&aacute;&quot; en la b&uacute;squeda del destructor que hayamos definido en la clase. Si no lo encuentra, no tendr&aacute; m&aacute;s remedio que utilizar el que cre&oacute; autom&aacute;ticamente cuando instanciamos el objeto por primera vez (el compilador cuando creamos el objeto se encarga siempre de comprobar la existencia de un destructor por eso, realmente cuando eliminamos un objeto ya sabe si lo que tiene que hacer es llamar al destructor que hemos creado o bien utilizar el que &eacute;l mismo ha producido porque nosotros no ten&iacute;amos ninguno listo).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Puede parecer que la utilizaci&oacute;n de constructores y destructores es un &quot;rollo&quot; para el programador pero eso no es en absoluto cierto, es m&aacute;s, llegan a ser en casi todas las ocasiones imprescindibles ya que nos posibilitan entre otras cosas, tareas tan importantes y vitales como la inicializaci&oacute;n de las variables del objeto nada m&aacute;s instanciarlo. Recordemos que cuando creamos una clase y las variables a&uacute;n no han sido inicializadas (por ejemplo una variable entera no ha sido puesta a su valor inicial para que el objeto trabaje bien con ella) siempre contendr&aacute; &quot;valores basura&quot;. No me extender&eacute; m&aacute;s aqu&iacute; porque es algo que ya supongo que conocer&eacute;is de sobra. El caso es que, volviendo sobre el tema, los constructores, en particular, pueden ser muy &uacute;tiles para estos casos de inicializaci&oacute;n de valores. Tambi&eacute;n hay otras razones m&aacute;s &quot;persuasivas&quot;. Un buen programador deber&aacute; siempre suponerse lo peor (y m&aacute;s acertado) y eso significa no confiar en que los compiladores nos generen... buenos constructores. </P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Argumentos por defecto en funciones</P>
+</h4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta posibilidad resulta extremadamente &uacute;til para aplicarla en la realizaci&oacute;n de constructores para nuestras clases. La creaci&oacute;n de funciones que incluyan argumentos por defecto nos permiten el poder invocar a una funci&oacute;n sin necesidad de pasarle todos los par&aacute;metros que esta incluye ya que, en su defecto o ausencia, la funci&oacute;n es capaz de asignar un valor ya definido a esa variable.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nos podemos imaginar que tenemos una funci&oacute;n que dibuja c&iacute;rculos y que, en la casi totalidad de las ocasiones, dichos c&iacute;rculos comienzan en la posici&oacute;n (10,10). Resulta muy &uacute;til el poder llamar a la funci&oacute;n y que, dependiendo de si &eacute;sta detecta que recibe argumentos o no, sea capaz de asignar el valor que le pasamos a las coordenadas x e y o bien, darlas los valores (x=10,y=10).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora imagin&eacute;monos que esto se aplica al constructor de una clase. Vamos a suponer que la clase se llama c&iacute;rculo, para seguir con el mismo ejemplo. Cuando creemos un objeto o instancia de dicha clase, puede que nos interese que comience dibujando el c&iacute;rculo en una posici&oacute;n distinta a (10,10) pero sabemos de antemano que en la pr&aacute;ctica totalidad de las ocasiones, nada m&aacute;s que creamos la instancia, queremos que, internamente, los valores de x e y queden inicializados a dichos valores.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para poder definir funciones que toman valores por defecto tan s&oacute;lo tenemos que hacer y poniendo el ejemplo del c&iacute;rculo:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">void</B> SituaCirculo (<B>int</B> x = 10, <B>int</B> y = 10);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En el caso de que no pasemos el par&aacute;metro en la zona de las x, por ejemplo, la funci&oacute;n asignar&aacute; a esta variable el valor 10.  A&uacute;n m&aacute;s, si no pasamos ning&uacute;n argumento, las variables x e y quedar&aacute;n inicializadas a x=10 e y=10.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Veamos ahora un sencillo ejemplo en el que definimos una clase llamada <I>Circulo</I> (totalmente incompleta) que contiene una funci&oacute;n de miembro para decirnos en qu&eacute; coordenadas hemos situado el c&iacute;rculo utilizando las variables x e y. El constructor de dicha clase se encarga de dar valores por defecto a x e y en caso de no recibir ninguno cuando creemos la instancia:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+ #<B>include</B> &lt;iostream.h&gt; 
+  
+<B> class</B> Circulo { 
+  
+<B> private</B>: 
+  <B>int</B> m_x, m_y; 
+  
+<B> public</B>: 
+  // Constructor 
+ Circulo (<B>int</B> xtemp = 10, <B>int</B> ytemp = 10) 
+  { m_x = xtemp; m_y = ytemp; } 
+ <B>~</B>Circulo (){} // Destructor 
+ <B>int</B> DevuelvePosx (<B>void</B>) { <B>return</B> m_x; } 
+ <B>int</B> DevuelvePosy (<B>void</B>) { <B>return</B> m_y; } 
+ } 
+  
+<B> void</B> main (<B>void</B>) 
+ { 
+  // Aqu&iacute; creamos un objeto con paso de par&aacute;metros 
+  Circulo circulo1(12,30); 
+  // Aqu&iacute; acabamos de crear la instancia 
+  Circulo circulo2;    
+
+  <B>cout</B> &lt;&lt; &quot;La coordenada X de circulo 1 es &quot; 
+  &lt;&lt; circulo1<B>.</B>DevuelvePosx &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;La coordenada Y de circulo 1 es &quot; 
+  &lt;&lt; circulo1<B>.</B>DevuelvePosy &lt;&lt; ‘\n’; 
+  
+  <B>cout</B> &lt;&lt; ‘/n’ ; 
+  
+  <B>cout</B> &lt;&lt; &quot;La coordenada X de circulo 2 es &quot; 
+  &lt;&lt; circulo2.DevuelvePosx &lt;&lt; ‘\n’; 
+  <B>cout</B> &lt;&lt; &quot;La coordenada Y de circulo 2 es &quot; 
+  &lt;&lt; circulo2<B>.</B>DevuelvePosy &lt;&lt; ‘\n’; 
+  } 
+ </FONT></PRE>
+
+<P ALIGN="JUSTIFY">Si ejecutamos el programa, este mostrar&iacute;a por pantalla:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">La coordenada X del circulo 1 es 12<BR>
+La coordenada Y del circulo 1 es 30</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La coordenada X del circulo 2 es 10<BR>
+La coordenada Y del circulo 2 es 10</P>
+</I>
+<P ALIGN="JUSTIFY">Para entender todo mejor he creado dos objetos. La instancia circulo1 se caracteriza por pasar al constructor unos valores alternativos mientras que circulo2 lo que hace es utilizar los valores por defecto. En fin, creo que no tiene mayor problema ¿no?. Pues a lo siguiente</P>
+
+<h4><P ALIGN="JUSTIFY">¿Qu&eacute; es el puntero this?</P>
+</h4><P ALIGN="JUSTIFY">El puntero <B>this </B>es una de las m&uacute;ltiples prestaciones que incorpora el C++ y que, adem&aacute;s, es ampliamente utilizada. Todo objeto que nosotros creamos en C++ posee un puntero llamado puntero this que tiene la particularidad de apuntar al objeto al que va ligado. As&iacute; el objeto se va a encontrar &quot;apuntado as&iacute; mismo&quot; mediante el puntero this. Adem&aacute;s, siempre que dentro del programa llamamos a una funci&oacute;n de miembro, el puntero this se pasa en la llamada a la funci&oacute;n. Con esto la funci&oacute;n puede utilizar el puntero this para acceder a otros miembros (funciones o variables) de su misma clase.<B> </P>
+<P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">Como las funciones de miembro suelen utilizar el puntero this como un argumento al llamar a otras funciones, la funci&oacute;n llamada puede, a su vez, utilizar el puntero this para acceder al conjunto de miembros del objeto de la funci&oacute;n que la ha llamado.... ¡qu&eacute; l&iacute;o!...</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Quiz&aacute;s lo mejor para poder entender el puntero this es ir &quot;solt&aacute;ndolo&quot; a medida que avancemos en el curso mediante la inclusi&oacute;n del mismo en ejemplos. De todos modos, baste el listado que voy a poner a continuaci&oacute;n para que os hag&aacute;is una idea de lo que es el puntero this:</P>
+
+<P ALIGN=JUSTIFY><PRE><FONT SIZE="+0">
+ #<B>include</B> &lt;iostream.h&gt; 
+  
+<B> class</B> Puntero_this{ 
+<B> public</B>: 
+  // Constructor 
+  Puntero_this(<B>void</B>) {} 
+  // Destructor 
+  <B>~</B>Puntero_this() {} 
+  // Devuelve el puntero this 
+  <B>void</B>* Devuelve_this(<B>void</B>) {<B>return</B> this;} 
+ }; 
+
+<B> void</B> main (<B>void</B>) 
+ { 
+  // Puntero sin tipo 
+  <B>void</B> *puntero; 
+  // Creamos una instancia u objeto 
+  Puntero_this obj_this; 
+
+  // En puntero est&aacute; el puntero this 
+  puntero = obj_this.Devuelve_this(); 
+    
+  <B>cout</B> &lt;&lt; &quot;El valor de puntero es el del puntero 
+  this y vale &quot; &lt;&lt; puntero &lt;&lt; ‘\n’; 
+ } 
+  </FONT></PRE>
+
+<P ALIGN="JUSTIFY">El ejemplo es muy sencillo e ilustra c&oacute;mo todas las clases que creamos tienen su propio puntero this. As&iacute;, la clase Puntero_this tiene su propio puntero this que es devuelto mediante el m&eacute;todo intercalado llamado <B>void</B>* Devuelve_this (<B>void</B>); Como vemos en el ejemplo, nos creamos un puntero void llamado &quot;puntero&quot; para contener el valor que nos devuelve la funci&oacute;n anteriormente citada para despu&eacute;s mostrarlo en pantalla mediante un sencillo cout.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4><P ALIGN="JUSTIFY">Y en el pr&oacute;ximo n&uacute;mero....</P>
+</h4>
+<P ALIGN="JUSTIFY">Pues en el pr&oacute;ximo n&uacute;mero y al disponer de m&aacute;s tiempo espero poder darle un gran empuj&oacute;n a este curso realizando dos cap&iacute;tulos m&aacute;s. Creo que lo m&aacute;s importante es ofrecer la informaci&oacute;n lo m&aacute;s extensamente posible y, aunque para un fanzine como Macedonia, le viene bien ir poco a poco para mantener contenidos siempre, no lo haremos... ¡As&iacute; que en el pr&oacute;ximo n&uacute;mero mucho m&aacute;s!</P>
+<P ALIGN="JUSTIFY"></P>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

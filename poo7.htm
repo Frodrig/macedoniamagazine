@@ -1,0 +1,210 @@
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br><FONT color="#000000" size=2 face="arial">
+<BR><BR>
+<H3>
+Cap&iacute;tulo 7.<br> Sobrecargando funciones y operadores.
+</H3>
+
+<p align=justify>
+
+La sobrecarga es uno de los mecanismos m&aacute;s utilizados del C++ pues reporta una gran cantidad de beneficios a la hora de dise&ntilde;ar las prestaciones de nuestras funciones de miembro. Existen dos tipos fundamentales de sobrecarga: la sobrecarga de funciones y la sobrecarga de operadores.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Sobrecarga de funciones</h4>
+<P ALIGN="JUSTIFY">La sobrecarga de funciones consiste, b&aacute;sicamente, en crear funciones con el mismo nombre dentro de una clase pero con distinto tipo de argumentos de tal forma que, al llamar a la funci&oacute;n el compilador se encargar&aacute; de escoger la adecuada mediante la comparaci&oacute;n de la lista de argumentos pasados en la invocaci&oacute;n. Un sencillo ejemplo ser&iacute;a pensar en dos funciones llamadas <I>ImprimirMensaje </I>Podemos definirlas as&iacute;:</P>
+<P ALIGN="JUSTIFY"></P>
+<pre>
+<B>void</B> ImprimirMensaje(<B>void</B>);
+<B>void</B> ImprimirMensaje (<B>char</B> *texto);
+</pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como pod&eacute;is observar, se llaman igual pero tienen argumentos distintos. Mientras que la primera no est&aacute; preparada para recibir ning&uacute;n tipo de datos, la segunda s&iacute; que lo est&aacute; y esperar&aacute; recibir una cadena de caracteres. Si ahora implementamos las funciones de esta forma:</P>
+<P ALIGN="JUSTIFY"></P>
+<pre>
+<B>void</B> NombreClase<B>::</B>ImprimirMensaje(<B>void</B>)
+<B>{
+</B>&#9;<B>cout</B> &lt;&lt; &quot;\n Esta es la funci&oacute;n sin argumentos&quot;;
+<B>}
+</B>
+<B>void</B> NombreClase<B>::</B>ImprimeMensaje(<B>char</B> *texto)
+<B>{
+</B>&#9;<B>cout</B> &lt;&lt; &quot;\ n Esta es la funci&oacute;n con argumentos
+                          y ha recibido el mensaje &quot; &lt;&lt; texto;
+<B>}
+</B></pre>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si cre&aacute;ramos una instancia a la clase que contiene a esas dos funciones y llam&aacute;ramos a la funci&oacute;n <br>
+<pre><I>ImprimeMensaje</I>();</pre> 
+Obtendr&iacute;amos por pantalla:<br>
+<pre>Esta es la funci&oacute;n sin argumentos</Pre>
+<P ALIGN="JUSTIFY">Si, con esa misma instancia, llam&aacute;ramos a la funci&oacute;n <br>
+<pre><I>ImprimeMensaje</I>(&quot;Macedonia Magazine&quot;);</pre> 
+Lo que obtendr&iacute;amos ser&iacute;a:</P>
+<Pre>Esta es la funci&oacute;n con argumentos y ha recibido el 
+mensaje Macedonia Magazine</Pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Como pod&eacute;is observar, es muy sencillo sobrecargar funciones (m&aacute;s que sobrecargar operadores) y pueden ofrecer, sin un coste computacional demasiado elevado, prestaciones excelentes para trabajar dada la gran flexibilidad que proporcionan al programador. He aqu&iacute; el ejemplo codificado formalmente:</P>
+<P ALIGN="JUSTIFY"></P>
+<pre>#<B>include</B> &lt;iostream.h&gt;
+
+<B>class</B> SobrecargaFunciones
+<B>{
+public</B>:
+<B>void</B> ImprimeMensaje(<B>void</B>);
+<B>void</B> Imprime Mensaje(<B>char</B>* texto);
+<B>};
+</B>
+<B>void</B> SobrecargaFunciones<B>::</B>ImprimirMensaje(<B>void</B>)
+<B>{
+</B>&#9;<B>cout</B> &lt;&lt; &quot;\n Esta es la funci&oacute;n sin argumentos&quot;;
+<B>}
+</B>
+<B>void</B> SobrecargaFunciones<B>::</B>ImprimeMensaje(<B>char</B> *texto)
+<B>{
+</B>&#9;<B>cout</B> &lt;&lt; &quot;\n Esta es la funci&oacute;n con argumentos
+                          y ha recibido el mensaje &quot; &lt;&lt; texto;
+<B>}
+</B>
+<B>int</B> main(<B>void</B>)
+<B>{
+</B>SobrecargaFunciones sobrecarga;
+
+sobrecarga.ImprimeMensaje();
+sobrecargaImprimeMensaje(&quot;Macedonia Magazine&quot;);
+<B>}
+</B></pre><P ALIGN="JUSTIFY"></P>
+<h4>Sobrecarga y constructores</h4>
+<FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">La sobrecarga de constructores se presenta como una de las aplicaciones m&aacute;s directas y comunes de aplicaci&oacute;n de este mecanismo del C++, es m&aacute;s, la sobrecarga de constructores es algo que est&aacute; &quot;a la orden del d&iacute;a&quot; para cualquier programador de C++ pues permite inicializar las instancias de muy distintas formas y dotar al objeto de unos valores iniciales acordes a la finalidad a la que vamos a llevar dicho objeto. Es muy com&uacute;n, pues, ver clases con muchos constructores. Por ejemplo:</P>
+<P ALIGN="JUSTIFY"></P>
+<Pre><B>class</B> Personaje
+<B>{
+public:
+</B>&#9;Personaje(<B>char</B> *nombre);
+&#9;Personaje();
+<B>}
+</B></pre><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Aqu&iacute;, podr&iacute;amos decidir inicializar a la instancia con un nombre que el usuario ha introducido por teclado o bien, crear nosotros la instancia Personaje con un nombre por defecto llamando al constructor sin ning&uacute;n tipo de argumentos.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Sobrecarga de operadores</h4>
+<P ALIGN="JUSTIFY">La sobrecarga de operadores no es un mecanismo que los programadores de C++ reci&eacute;n iniciados se aventuren a utilizar ya que tardan un tiempo en &quot;pillarle el truco&quot; pero es masivamente utilizado en cualquier biblioteca de C++ como la <B>MFC</B> de Microsoft.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pero, ¿en qu&eacute; consiste una sobrecarga de operadores?. Sobrecargar operadores sirve para que las operaciones tales como la suma (+), resta (-), multiplicaci&oacute;n (*), asignaci&oacute;n (=), incremento (--), etc se comporten de forma diferente al trabajar con nuestros objetos, m&aacute;s exactamente, con los objetos preparados para soportar la sobrecarga de operadores. Imaginar que tenemos dos objetos de tipo <I>Cadena</I>. La clase <I>Cadena</I> est&aacute; preparada para manejar una cadena de caracteres y darla funcionalidad a trav&eacute;s de diversos m&eacute;todos. Si nosotros quisi&eacute;ramos sumar dos objetos de tipo <I>Cadena</I>, bastar&iacute;a con tener sobrecargado el operador suma (+) para los objetos de dicha clase con lo que la siguiente sentencia ser&iacute;a v&aacute;lida:</P>
+<P ALIGN="JUSTIFY"></P>
+<Pre>Cadena cadena1, cadena2, cadenaResult;
+cadenaResult = cadena1 + cadena2;</Pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con esto podr&iacute;amos conseguir, por ejemplo, que el objeto <I>cadenaResult</I> almacenara la concatenaci&oacute;n de las cadenas de caracteres que soportan los objetos <I>cadena1</I> y <I>cadena2</I> respectivamente.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>C&oacute;mo implementar la sobrecarga de operadores</h4>
+Para sobrecargar un operador, debemos de definir una funci&oacute;n de sobrecarga de operador en la clase que nos interese (aunque tambi&eacute;n la podemos hacer de car&aacute;cter global... y eso podr&iacute;a traer alg&uacute;n que otro &quot;galimat&iacute;as&quot; si no ten&eacute;is cuidado). Un operador que se sobrecarga se define siempre con el nombre de la clase seguido de la palabra clave <I>operator</I> y del operador. Despu&eacute;s del operador pondremos, entre par&eacute;ntesis, los tipos de datos con los que queremos que funcione nuestro operador. Por ejemplo, si quisi&eacute;ramos sobrecargar el operador suma de la clase Cadena, deber&iacute;amos de incluir, en la definici&oacute;n de la clase, la siguiente definici&oacute;n:</P>
+<P ALIGN="JUSTIFY"></P>
+<Pre>Cadena <B>operator</B>+(Cadena);</Pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con esto estar&iacute;amos declarando que estamos sobrecargando el operador suma (+) para que sea capaz de trabajar con argumentos (sumandos) que sean instancias a la clase cadena. Obviamente, para que esto funcione en la parte izquierda del operador asignaci&oacute;n debe de haber otro objeto de tipo de Cadena, es decir, no podemos hacer esto:</P>
+<P ALIGN="JUSTIFY"></P><pre>
+<B>int</B> valor;
+valor = cadena1 + cadena2;</pre>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Recordemos que estamos sobrecargando el operador suma para que trabaje con objetos que sean instancias de la clase Cadena.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Pr&oacute;ximo cap&iacute;tulo</h4>
+<P ALIGN="JUSTIFY">Los dos &uacute;ltimos cap&iacute;tulos que hemos visto sobre polimorfismo y sobrecarga nos ponen en condiciones de comenzar la recta final de este curso. El siguiente cap&iacute;tulo estar&aacute; dedicado a las variables de miembro y funciones de miembro est&aacute;ticas as&iacute; como a las clases y funciones amigas por lo que volver&aacute;n los largos cap&iacute;tulos y dejaremos casi acabado el curso. Hasta entonces ¡feliz programaci&oacute;n!.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></FONT>
+</p>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

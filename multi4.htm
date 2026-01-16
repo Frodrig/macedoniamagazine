@@ -1,0 +1,484 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 4. <br> Programación de tarjetas de vídeo (II).
+</h3>
+<H4>2.1.6.- La Memoria de V&iacute;deo</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+
+Hay que dejar una cosa clara antes de continuar. Esto es, la forma en
+que hacemos que la tarjeta ponga en pantalla la informaci&oacute;n que
+queremos. Nosotros no escribimos directamente en la pantalla, sino que
+lo hacemos a la memoria de v&iacute;deo, que comienza en la direcci&oacute;n
+0A000h (la CPU la pasa a la memoria de v&iacute;deo VRAM de la tarjeta).
+Para nosotros es como otra zona de memoria (aunque mucho m&aacute;s lenta).
+
+<P align="justify">Es la tarjeta la que se encarga de leer de la VRAM y pasarlo a la pantalla.
+Con lo que lo <I>"</I>&uacute;nico<I>"</I> que tenemos que hacer nosotros
+es escribir valores en esta memoria.
+
+<P align="justify">Tras estas consideraciones sobre el modo 13h, pasemos a ver los siguientes
+efectos:
+<UL>
+<LI>
+Rutinas de Sprites</LI>
+
+<LI VALUE="1">
+Rutinas de Volcados</LI>
+
+<LI VALUE="1">
+Efectos de Paleta</LI>
+
+<LI VALUE="1">
+Lectura de Ficheros <B>PCX</B></LI>
+
+<LI VALUE="1">
+Lectura de Ficheros <B>FLI</B></LI>
+</UL>
+<B><U>2.1.7.- Rutinas de Sprites</U></B>
+
+<P align="justify">Los sprites son simplemente un bloque de memoria donde se contiene la
+informaci&oacute;n sobre un <I>"dibujo"</I> almacenado en forma de bytes.
+Hay dos tipos de sprites, los bloques (llamados bloques) y los transparentes
+(llamados sprites).
+<DIR>
+<DIR>Los sprites de tipo bloque son totalmente rectangulares, es decir,
+al ponerlos en la pantalla conforman un bloque rectangular que oculta totalmente
+lo que hay debajo de ellos.
+
+<P align="justify">Los sprites de tipo transparentes no es que sean transparentes, sino
+que aunque originalmente tambi&eacute;n son bloques, tienen un color determinado
+(normalmente el negro total almacenado en el 0 del DAC de v&iacute;deo),
+que a la hora de volcar sobre la pantalla no se considera, volc&aacute;ndose
+realmente un objeto con contorno no lineal; es decir, si queremos poner
+en pantalla una pelota amarilla, el bloque a dibujar ser&aacute; esa pelota
+rodeada del primer color de la paleta. Cuando se vuelque en pantalla, s&oacute;lo
+lo que no sea ese primer color de la paleta se ver&aacute;.</DIR>
+</DIR>
+La filosof&iacute;a de expuesta aqu&iacute; es la t&iacute;pica en las
+aplicaciones gr&aacute;ficas.
+
+<P align="justify">Consiste en mantener en memoria RAM una pantalla gr&aacute;fica (64000
+bytes) de la que tomamos parte de ella para conformar los sprites. Si queremos
+pasar un trozo de esa pantalla a la memoria de v&iacute;deo, usamos las
+funciones siguientes:
+
+<P align="justify">Para los sprites de tipo bloque:
+
+<P align="justify"><FONT COLOR="#990000"><B>void BloqueMcga(int xi,int yi,int xf,int yf,int
+ancho,int alto,</B> <B>BYTE *pantalla)</B></FONT>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int segmento,desplazamiento;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento=FP_SEG(pantalla);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; desplazamiento=FP_OFF(pantalla);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,yf</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,xf</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,6</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx <I>// Hasta ahora hemos calculado 320*Y+X destino</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,yi</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add si,xi</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,6</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add si,dx <I>// Ahora se tiene 320*Y+X de la pantalla de or&iacute;gen</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,ancho</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,320</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub dx,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shr ax,1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,alto</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; salto: <I>// Se volcar&aacute;n "alto" veces,
+peque&ntilde;as l&iacute;neas de tama&ntilde;o "ancho"</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{ <I>// desde el valor del or&iacute;gen hasta
+el del destino, calculados antes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add si,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz salto</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">&nbsp;
+
+<P align="justify">Y para los sprites de tipo transparente es casi el mismo procedimiento,
+con la excepci&oacute;n de que si el valor que vamos a escribir en la memoria
+de v&iacute;deo es 0, no lo escribimos y pasamos al siguiente.
+
+<P align="justify"><B>void SpriteMcga(int,int,int,int,int,int,BYTE *);</B>
+
+<P align="justify">Estos dos procedimientos de bloque consisten en tomar un rect&aacute;ngulo
+cuya esquina superior izquierda est&aacute; dado por las dos primeras variables,
+con el ancho y el alto dado por las variables quinta y sexta, y se volcar&aacute;n
+a partir de las coordenadas tercera y cuarta.
+
+<P align="justify">Ambos leen de una zona de memoria RAM de 64000 bytes y escriben directamente
+a la memoria de v&iacute;deo RAM. (Para nosotros, cuando se hable de memoria
+de v&iacute;deo nos referiremos al segmento RAM que comienza en 0A000,
+a no ser que se indique que se refiere a la memoria de v&iacute;deo de
+la tarjeta o VRAM)
+
+<P align="justify">Aparte de estos procedimientos, se pueden hacer otros pr&aacute;cticamente
+iguales, pero que escriban los sprites en memoria RAM. Son &uacute;tiles
+para otras funciones internas.
+<BR>&nbsp;
+
+<P align="justify"><B><U>2.1.8.- Rutinas de Volcados</U></B>
+
+<P align="justify">Un volcado consiste en pasar la informaci&oacute;n contenida en un bloque
+de 64000 de memoria RAM en la memoria de v&iacute;deo a partir de la posici&oacute;n
+0A000h.
+
+<P align="justify">Esto es relativamente sencillo, y el procedimiento que lo implementa
+es:
+
+<P align="justify"><B><FONT COLOR="#990000">void VuelcaPantallaMcga(unsigned char *pantalla)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int segmento,desplazamiento;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento=FP_SEG(pantalla); desplazamiento=FP_OFF(pantalla);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">En este procedimiento se realiza la transferencia de palabras (words)
+desde la memoria RAM a la de v&iacute;deo un total de 32000 veces. Mediante
+la instrucci&oacute;n <I>movsw</I>, la circuiter&iacute;a del PC internamente
+incrementa los registros <I>di</I> y <I>si</I> para que apunten a la siguiente
+palabra.
+
+<P align="justify">Veamos un resumen de c&oacute;mo funciona este procedimiento y c&oacute;mo
+la teor&iacute;a de la memoria de v&iacute;deo toma realidad, de forma
+gr&aacute;fica:<br><br>
+<CENTER><IMG SRC="jpg/multi2.jpg" HEIGHT=320 WIDTH=459></CENTER>
+
+
+<P align="justify">Adem&aacute;s del procedimiento para volcar una pantalla, se puede definir
+otro que se encargue de hacer <I>"casi"</I> lo mismo que el procedimiento
+anterior, con la &uacute;nica diferencia de que en vez de copiar a memoria
+de v&iacute;deo, copie a RAM para tener dos versiones de la misma pantalla
+y poder manipular una de ellas sabiendo que en cualquier momento podemos
+restaurarla al disponer de una segunda copia (para aplicarlo con la misma
+idea presentada cuando se comentaba el funcionamiento del cursor del rat&oacute;n
+y su necesidad de ocultarlo al realizar los cambios en pantalla).
+
+<P align="justify">Otro procedimiento m&aacute;s, que es muy sencillo de hacer, es el <B>CLS</B>
+del Sistema Operativo, pero con la particularidad de que se hace en modo
+gr&aacute;fico y adem&aacute;s podemos elegir el color del borrado de pantalla.
+Su definici&oacute;n podr&iacute;a ser la siguiente:
+
+<P align="justify"><B>void VolcarPantallaColor(BYTE);</B>
+
+<P align="justify">La &uacute;nica variaci&oacute;n entre este procedimiento y <I>VuelcaPantallaMcga</I>
+es que en el que ahora tratamos, siempre sabemos cu&aacute;l es el valor
+a escribir en memoria de v&iacute;deo, no es necesario leerlo de memoria
+RAM (con lo que es casi el doble de r&aacute;pido).
+
+<P align="justify">El &uacute;ltimo procedimiento y m&aacute;s vistoso de todos es el siguiente:
+
+<P align="justify"><B><FONT COLOR="#990000">void VuelcaEfecto(BYTE *pantalla,BYTE *efecto,BYTE
+numcol)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int segmento,desplazamiento,valor=0x0A000;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register int x,y;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE *puntero,gris;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; segmento=FP_SEG(pantalla); desplazamiento=FP_OFF(pantalla);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; for (gris=0;gris&lt;numcol;gris++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; puntero=efecto;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (y=0;y&lt;200;y++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (x=0;x&lt;320;x++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if ((*puntero==gris))</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,x</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>mov di,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,y</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl dx,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,6</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add dx,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add di,desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,es:[di]</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,valor</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+sub di,desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+puntero++;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">&nbsp;
+<BR>Antes de explicar el procedimiento, es necesario introducir el concepto
+de m&aacute;scara.
+<DIR>
+<DIR>Una m&aacute;scara para nosotros es una pantalla o bloque de la pantalla
+que tiene un dibujo principal y un color el cual deseamos que cuando se
+vuelque en la memoria de v&iacute;deo, no se vea. De esta forma podemos
+tener un dibujo de, por ejemplo, una letra en tres dimensiones, la cual
+se dibujar&aacute; sobre un fondo que ya estaba en la pantalla. Lo que
+queremos es que no se dibuje el bloque entero que contiene a la letra,
+sino s&oacute;lo la letra.</DIR>
+</DIR>
+Es el mismo concepto que los sprites transparentes que antes vimos, pero
+ahora hay que pensar en una pantalla completa y no en un trozo de ella
+con forma de rect&aacute;ngulo.
+
+<P align="justify">Ahora ya podemos afrontar la explicaci&oacute;n de lo que hace este
+vistoso procedimiento el cual puede usarse de infinitas formas. Me explico:
+
+<P align="justify">Hasta ahora, cuando volcamos una pantalla completa para que se vea mediante
+la rutina <I>VuelcaPantallaMcga</I>, se vuelca de una sola vez, machacando
+lo que antes hab&iacute;a. Muy r&aacute;pido y efectivo, pero demasiado
+simple para las ansias espectaculares de cualquier aplicaci&oacute;n gr&aacute;fica.
+
+<P align="justify">El objetivo de <I>VuelcaEfecto</I> es volcar una pantalla, igual que
+<I>VuelcaPantallaMcga</I>, pero no de una sola vez, sino paulatinamente,
+mediante un orden arbitrario que se le puede determinar de la forma en
+que queramos. Esto quiere decir que si quiero volcar una pantalla con este
+procedimiento, necesito darle otra pantalla que va a determinar la <I>"forma"</I>
+en que se va a volcar la primera.
+
+<P align="justify">La forma de hacer esto es jugando con la paleta de colores, m&aacute;s
+concretamente con sus posiciones que con sus valores.
+
+<P align="justify">Aunque posteriormente veremos lo que es el <B>DAC</B> de v&iacute;deo,
+ahora hace falta una peque&ntilde;a referencia a &eacute;l.
+
+<P align="justify">El DAC de v&iacute;deo tiene 256 posiciones distintas [0-255], donde
+se almacenan los valores de los colores que se van a visualizar.
+
+<P align="justify">VuelcaEfecto volcar&aacute; una pantalla en un n&uacute;mero determinado
+de iteraciones. Supongamos que queremos que se haga en 32 pasos. Esto quiere
+decir que vamos a utilizar las primeras 32 posiciones del DAC de v&iacute;deo.
+
+<P align="justify">En la primera iteraci&oacute;n vamos a volcar todos los p&iacute;xels
+que referencien a la primera celda del DAC, esto es: el 0.
+
+<P align="justify">M&aacute;s detalladamente es lo siguiente:
+<UL>
+<LI>
+Tengo dos pantallas guardadas en memoria y referenciadas por <I>"pantalla"</I>
+y <I>"m&aacute;scara"</I>, ambas de un tama&ntilde;o de 64000 bytes.</LI>
+
+<LI>
+En <I>"pantalla"</I> est&aacute; la verdadera pantalla que quiero volcar.</LI>
+
+<LI>
+En <I>"m&aacute;scara"</I> hay otra pantalla usando tan s&oacute;lo 32
+colores distintos. Da igual los colores que sean, lo &uacute;nico importante
+es que deben ser los 32 primeros colores de la paleta.</LI>
+</UL>
+Primera iteraci&oacute;n:
+<UL>
+<LI>
+Busco el primer p&iacute;xel que valga 0 en <I>"m&aacute;scara"</I>. Lo
+encuentro y s&eacute; sus coordenadas (vX1,vY1).</LI>
+
+<LI VALUE="1">
+Entonces cojo el p&iacute;xel (vX1,vY1) de <I>"pantalla"</I>, leo su valor
+y lo pongo en la memoria de v&iacute;deo.</LI>
+
+<LI VALUE="1">
+As&iacute; con todos los p&iacute;xels con valor 0 de <I>"m&aacute;scara"</I>.</LI>
+</UL>
+Segunda iteraci&oacute;n:
+<UL>
+<LI>
+Exactamente igual que la anterior pero esta vez busco los p&iacute;xels
+con valor 1 del DAC de v&iacute;deo.</LI>
+</UL>
+Y as&iacute; hasta 32 veces.
+
+<P align="justify">Con este m&eacute;todo, podemos volcar una pantalla dando la apariencia
+de que aparece como si fuese un tel&oacute;n de un teatro, o que aparezca
+en forma circular o cuadrada, o cualquier otra forma geom&eacute;trica,
+o con forma de escalera, de cisne, de caballo, de enchufe...
+
+<P align="justify">El &uacute;nico l&iacute;mite es que como m&iacute;nimo tiene que haber
+1 iteraci&oacute;n y como m&aacute;ximo 256 (la longitud del DAC).
+
+<P align="justify">Ya s&oacute;lo queda aclarar qu&eacute; es la pantalla <I>"mascara"</I>.
+Es otra pantalla cualquiera pero con la caracter&iacute;stica de que usar&aacute;
+los colores consecutivos de la paleta, desde el 0 al X, siendo X+1 el n&uacute;mero
+de iteraciones en que se volcar&aacute; la pantalla que queramos.
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

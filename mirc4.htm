@@ -1,0 +1,413 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David García "Gato".</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Variables del mIRC 5.02</H3>
+<p align=justify>
+Las variables son areas de almacenamiento 
+temporal a las cuales se les puede
+asignar un valor, el cual puede ser usado más tarde en los scripts. Por ejemplo,
+puede que el nombre de un Bot (como Scytale) varíe cada semana. Para no tener que
+variar todo un script, podemos asignarle una variable tal y como se enseña más
+adelante, y el script se configurará solo.
+<br><br>
+Si usted hace uso de una variable que no existe, esta devuelve el valor $null. El
+valor $null ser puede ser usado en comparaciones del tipo if-then-else para
+controlar las bifurcaciones, etc.
+<br><br>
+Para entender bien este documento hay que saber antes qué es un alias, los
+comandos de los alias, y todo lo relacionado en general con los alias
+<br><br>
+<H4>
+Definición de Variables.
+</H4>
+<p align=justify>
+
+Los siguientes comandos le permiten crear y situar los valores de las variables.
+<BR><BR>
+<ol>
+
+<li><b>Definir una variable:</b> /set &lt;%var&gt; [valor]
+<br><br>
+<font size=1>
+<i>Ejemplo:</i><br>
+<b>/set %nombrebot Scytale</b>  ó  <b>/set %nombrebot $$?="¿Nombre del bot?"</b>
+</font>
+<br><br>
+<p align=justify>
+En el primer ejemplo de definición de variables el nombre del bot es fijo, y solo
+hay que modificarlo en las variables del mIRC para que todo el script sepa que el
+bot se llama Scytale.<br> En el segundo ejemplo solo hay que ejecutar la orden para
+variar el nombre del bot automáticamente.
+</li>
+
+<br>
+
+<li><b>Quitar o eliminar una variable:</b> /unset &lt;%var&gt;
+<br><br>
+<font size=1>
+<i>Ejemplo:</i><br>
+<b>/unset %nombrebot</b>
+</font>
+<p align=justify>
+Si usted especifica una variable con caracteres comodines (*) entonces todas las
+variables que coincidan serán eliminadas.
+</li>
+
+<br>
+<li><b>Otras operaciones:</b>
+<br><br>
+<p align=justify>
+<b>/unset %test*</b>. Esto quita todas las variables que comiencen con la palabra %test.
+<br>
+<b>/unsetall</b>. Esto es igual que el /unset pero éste elimina TODAS las variables
+definidas.
+<br>
+<b>/inc &lt;%var&gt;[valor]</b>. Esto aumenta el valor de %var por el "valor".
+<br>
+<b>/dec &lt;%var&gt; [valor]</b>. Esto disminuye el valor de %var por el "valor"
+</li>
+</ol>
+<br>
+También se puede usar el signo igual (=) para asignar valores a una variable.
+<br>
+
+%nombrebot = Scytale %i = 5 %count = $1
+
+<br><br>
+Y usted puede ejecutar las siguientes operaciones en las variables usando el signo
+igual (=):
+<br><br>
+%x=5+1.<br> Valor de x igual a 5 más 1<br><br>
+%x=5-%y.<br> Valor de x es igual a 5 menos valor de y.<br><br>
+%x=%x*2.<br> Valor de x igual a valor de x por 2.<br><br>
+%x=%z/$2.<br> Valor de x igual a valor de z entre la definición 2 (ver popups del mIRC).<br><br>
+%x=$1%3.<br>
+%x=2^%w.<br>
+etc.<br><br>
+Por ahora, usted solo puede ejecutar operaciones simples en cada cometido. Ahora
+entramos en operaciones complejas.
+<br>
+<h4>If-then-else Statements (Declaraciones if-then-else)</h4>
+<p align=justify>
+Las declaraciones if-then-else le permiten comparar valores y ejecutar diferentes
+partes de un script basándose en la comparación. Ahora explicamos esto un poco
+mejor.
+<br><br>
+El formato básico con que nos podemos encontrar es el siguiente:
+<br><bR>
+<font size=1>
+If  (v1 operador v2) { comandos }<br>
+Elseif (v1 operador v2) { comandos}<br>
+Else (v1 operador v2) {comandos }<br>
+</font>
+<br>
+El paréntesis () encierra las comparaciones, y las llaves {} encierran los
+comandos que usted desea que se ejecuten en el caso de que la comparación sea
+cierta. Debe tener mucho cuidado con el número de paréntesis y llaves que pone
+para, de este modo, asegurarse de que las comparaciones sean hechas correctamente
+y que los comandos ejecutados son los correctos.
+<br><br>
+Usando llaves {} aumentará la velocidad de proceso. Si un alias usa unas pocas
+llaves {} la declaración podria ser ambigua y el alias podr¡a tardar mucho en
+realizar la comparación, hacerla mal o incluso no hacerla completa.
+<br><br>
+Se pueden realizar tantas declaraciones if-then-else como se quiera.
+<br>
+<h4>Los operadores que podemos utilizar.</h4>
+<p align=justify>
+<ol>
+<li><b>==</b>.Igual a</li>
+<li><b>!=</b>. No igual a</li>
+<li><b><</b>. Menor que</li>
+<li><b>></b>. Mayor que</li>
+<li><b>>=</b>. Mayor o igual que</li>
+<li><b><=</b>. Menor o igual que</li>
+<li><b>//</b>. Es un múltiplo de</li>
+<li><b>//</b>. No es un múltiplo de</li>
+<li><b>isin</b>. El valor v1 está incluido en el valor v2</li>
+<li><b>iswm</b>. Los comodines del valor v1 coinciden con los de v2</li>
+<li><b>isnum</b>. El número v1 es un número situado en el rango v2 que está el la forma n1-n2 (v2 optativo)</li>
+<li><b>ison</b>. El nick v1 está en el canal v2</li>
+<li><b>isop</b>. El nick v1 es un op del canal v2</li>
+<li><b>isvo</b>. El nick v1 tiene voz en el canal v2</li>
+<li><b>ischan</b>. Si v1 es un canal en el que está usted</li>
+<li><b>isauto</b>. Si v1 es un usuario que está en su lista de auto-op del canal v2 (v2 optativo)</li>
+<li><b>isignore</b>. Si v1 es un usuario que está en su lista de ignorados con la opción de</li>
+<li><b>ignorar</b>. v2 (v2 optativo)</li>
+<li><b>isprotect</b>. Si v1 es un usuario que está en su lista de protección del canal v2 (v2 optativo)</li>
+<li><b>isnotify</b>. Si v1 es un usuario que está en su lista de notificación.</li>
+</ol>
+Para negar un operador usted puede anteponerle un signo de exclamación (!).
+<br>
+</p>
+<h4>Combinar comparaciones.</h4><p align=justify>
+Usted puede combinar comparaciones usando los caracteres && para AND y | | para
+OR.
+<br><br>
+Ejemplos de comparaciones:
+<br><br>
+<pre>
+number {
+ if (($1 > 0) && ($1< 10)) {
+   if ($1 < 5) echo El número es menor de cinco
+   else echo El número es más grande que cinco
+ }
+ else echo El número está fuera de los l¡mites
+}</pre>
+
+<br>
+Este alias comprueba si un número especificado ($1), cuando se escribe " /number
+<$1> ", se encuentra entre 0 y 10. Este alias se leería así línea a línea:<br>
+<br><font size=1>
+Si el número que yo digo ($1) está entre 0 y 10 entonces<br>
+  Si es menor de 5 escribe en la pantalla " El número es menor de cinco "<br>
+  Para el resto de valores, que entran en el rango 0-10,<br> escribe " El número es
+más grande de cinco "<br>
+ Para todos los valores que no estén entre 0-10<br> escribe " El número está fuera de
+los límites "
+</font>
+<br><br>
+Otros ejemplos:
+<br>
+<ul>
+<li>
+<b>En los alias.</b>
+<pre>
+Listops {
+ Echo 4 * Listando los Ops en el canal # *
+ Set %i 1
+ :siguiente
+ set %nick $nick (%i, #)
+ if (%nick == $null) goto hecho
+ if (%nick isop #) { echo 3 %nick es un Op }
+ inc %i
+ goto siguiente
+ :hecho
+ echo 4 * Fin de la lista de Ops en el canal # *
+}</pre>
+
+<p align=justify>
+Este alias lista los ops del canal en el que te encuentras actualmente. Este es un
+método "bruto" ya que podríamos haber usado el identificador  $opnick(), pero para
+ver la estructura general de un alias con variables nos vale.
+</li>
+<br>
+<li>
+<b>En los Popups.</b>
+
+<pre>
+GiveOps {
+  %i = 0
+  %nick = ""
+  :nextnick
+  inc %i
+  if ($snick (%i,#) == $null) { 
+             if ($len (%nick) > 0) mode # +oooo %nicks | halt 
+			                  }
+
+  %nicks = %nicks $snick (%i,#)
+  if ( 4 // %i) { mode +oooo %nicks | % nicks = "" }
+  goto nextnick
+}</pre>
+<p align = justify>
+Esto es una definición para popups que da op a los nicks que hemos seleccionado en
+la lista de nicks del canal actual.
+</li>
+<br>
+<li>
+<b>En los Remotes, ctcp´s.</b>
+
+<pre>
+on 1:ctcpreplay:PING* {
+  If ($2 == $null) halt
+  Else {
+    %pt = $ctime - $2
+    if (%pt < 0) set %pt 0
+    if (%pt > 5) { 
+	echo 4 [PING Replay] 
+	$nick está muy cerca. Buf! Debería usar desodorante
+	             }
+    elseif (%pt < 20) { 
+	echo 4 [PING Replay] 
+	$nick está a unos cuantos pasos de distancia 
+	                  }
+    else 
+	echo 4 [PING Replay] 
+	Tierra llamando a $nick, tierra llamando a $nick.
+	"Dónde se ha metido este?
+  }
+ hatl
+}
+</pre>
+
+<p align=justify>
+Esto interpreta una respuesta PING e imprime un mensaje tonto según lo que tarde
+en llegarte la respuesta de la otra persona a tu PING.
+</li>
+<br>
+<li>
+<b>En los Remotes, events.</b>
+
+<pre>
+on 1:START: {
+  if ( $group(#comb) == $null ) 
+  { echo 4 -s No se cargó CTCPs.ini }
+  
+  if ( $group(#voicelist) == $null ) 
+  { echo 4 -s No se cargó EVENTS.ini }
+  
+  if ( $group(#canal) == $null ) 
+  { echo 4 -s No se cargó RAW.ini }
+  
+  if ( $exists($mircdirutil/neko95.exe) ==$true ) 
+  { run $mircdirutil/neko95.exe }
+  
+  else  
+  echo 1 Parece ser que no tienes a mi mascota Neko..Pobre Neko}
+  
+  if ( $exists($mircdirutil/nknab.exe) == $false) 
+  { echo  ­No tienes instaladas las utilidades! }
+}
+</pre>
+<p align=justify>
+Esto hace que cuando el mIRC se inicie compruebe que se han cargado todos los
+archivos del script correctamente.
+</li>
+</ul>
+<br>
+<p align=justify>
+Otro ejemplo en los alias de la utilización de las variables es:
+<br>
+<pre>
+/ascii {
+  set %i 1
+  :otro
+  if (%i == 260) goto hecho
+  echo 3 El carácter número %i del mIRC es $chr(%i)
+  inc %i
+  goto otro
+  :hecho
+  echo Fin del código ASCII del mIRC
+}</pre>
+<br>
+<p align=justify>
+Aquí definimos la variable %i como 1. Creamos un apartado llamado "otro".  La
+primera línea del apartado "otro" nos dice que si %i es igual a 260, entonces debe
+ir al apartado "hecho". Esta orden hace que el alias que hemos definido tenga un
+fin. Se debe tener siempre mucho cuidado de no hacer ordenes "sin fin". En la
+siguiente línea decimos que nos escriba en  la pantalla este mensaje "El carácter
+número (lo que sea %i) del mIRC es (mostrar el carácter que coincide con el valor
+de %i). Después sumamos 1 a %i. Seguido a esto le ordenamos que vuelva al
+principio del apartado "otro". Se repite entonces todas las ordenes. Cuando %i sea
+igual a 260 se inicia el apartado "hecho" y se muestra el mensaje "Fin del código
+ASCII del mIRC". Aquí termina el alias.
+<br><br>
+Eso es todo lo que hay sobre variables en el mIRC 5.02, ahora todo depende de la
+imaginación de cada uno para usarlos. Espero haberle ayudado a entender un poco
+mejor el mIRC.
+<br><br>
+<font size=1>
+<center>
+<b>Nota del autor</b><br>
+Todos los comandos han sidos sacados del manual de Ramírez sobre el mIRC.
+</center>
+</font>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

@@ -1,0 +1,1028 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Introducción y Uso del Linux</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:pecapon@alumni.uv.es">Pedro A. Carrasco.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 4.<br> Conexión a Internet.
+</H3>
+<H4><A>4.1 Introducci&oacute;n.</A></h4>
+
+<P ALIGN=justify>
+
+
+Una vez que ya sabemos configurar el n&uacute;cleo y el entorno X-Window, estamos
+en disposici&oacute;n de ver la verdadera potencia de <B>Linux</B> para conectarnos a
+Internet. <B>Linux</B> en sus inicios al igual que UNIX se hizo para orientarse
+a redes, por ello dentro del n&uacute;cleo se incluyen los protocolos de conexi&oacute;n
+m&aacute;s comunes, y algunos no tanto. Al usar y configurar <B>Linux</B> ya tratamos
+con diferentes usuarios, tipos de accesos, programas cliente-servidor como
+el entorno X y el gestor de ventanas, y un largo etc, lo que nos ser&aacute; muy util
+para comprender el funcionamiento de las distintas redes.
+<P ALIGN="JUSTIFY">En este cap&iacute;tulo veremos como conectarnos a Internet con <B>Linux</B>, para ello
+vermos primero qu&eacute; necesitamos en el n&uacute;cleo y la configuraci&oacute;n del protocolo
+<EM>ppp</EM> que es el que utilizaremos en Internet. Tras ver que todo lo tenemos en orden
+veremos como configurar el pppd para la conexi&oacute;n, as&iacute; como el kppp si utilizamos el kde.
+Al final se incluyen notas de seguridad para la conexi&oacute;n a Internet.
+<H4><A NAME="ss4.2">4.2 ¿Qu&eacute; necesitamos?.</A> </H4>
+<P ALIGN="JUSTIFY">En principio necesitamos tener un proveedor de Internet, y el protocolo ppp
+soportado en el n&uacute;cleo, ya sea como m&oacute;dulo o internamente, para ello, cuando
+configuramos el n&uacute;cleo debimos especificar en la secci&oacute;n 
+<A HREF="linux3.html#red">Network device support</A> el protocolo ppp, bien como m&oacute;dulo con la tecla
+M o directamente con la tecla X.
+Para saber si lo tenemos activado podemos ejecutar como root:
+<BLOCKQUOTE><CODE>
+<PRE>
+ localhost # modprobe ppp
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">Si no da ning&uacute;n error es que tenemos el ppp como m&oacute;dulo, si lo tenemos directamente
+veremos en el arranque las l&iacute;neas de ppp, si no lo pudimos ver al iniciar
+el ordenador lo podemos saber con:
+<BLOCKQUOTE><CODE>
+<PRE>
+ localhost # cat /var/log/dmesg | grep ppp
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">Si no sale nada es que no tenemos compilado ppp en el n&uacute;cleo.
+<P ALIGN="JUSTIFY">Si no tenemos ppp tendremos que compilar el n&uacute;cleo con soporte para ppp como
+se ha dicho anteriormente.
+<P ALIGN="JUSTIFY">Una vez tenemos el soporte ppp en el n&uacute;cleo o como m&oacute;dulo, necesitamos tener
+instalado el <B>pppd</B> y <B>chat</B> para poder conectarnos a Internet, el primero
+es el encargado de registrar la l&iacute;nea de conexi&oacute;n y el segundo el que manda
+las cadenas de marcado y autorizaci&oacute;n al modem. Para saber si los tenemos
+podemos hacer:
+<P ALIGN="JUSTIFY">
+<BLOCKQUOTE><CODE>
+<PRE>
+ localhost # type pppd
+
+ y
+
+ localhost # type chat
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">Si ambos est&aacute;n el el PATH saldr&aacute; su localizaci&oacute;n, si no saldr&aacute; <EM>not found</EM>
+lo que quiere decir que no lo ha encontrado, no que no est&eacute;. Para asegurarnos
+podemos mirar en <EM>/usr/sbin</EM> que es donde suelen estar, o si estamos
+seguros de que est&aacute;n pero no sabemos donde podemos hacer:
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost # find / -name pppd -print
+
+ y
+
+ localhost # find / -name chat -print
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Esto nos dar&aacute; la localizaci&oacute;n de ambos programas si existiesen.
+Si no estuviesen tendremos que instalar lo paquetes correspondientes, <EM>ppp</EM> y <EM>chat</EM>.
+<P ALIGN="JUSTIFY">Si cumplimos todos los requisitos anteriores podemos pasar a la configuraci&oacute;n
+de ambos programas para conectarnos.
+<P ALIGN="JUSTIFY">
+
+<H4><A NAME="ss4.3">4.3 Configuraci&oacute;n de pppd y chat para la conexi&oacute;n.</A>
+ </H4>
+<P ALIGN="JUSTIFY">Una vez que tenemos pppd y chat instalados as&iacute; como el soporte ppp en el n&uacute;cleo, pasamos
+a configurar el pppd para que llame a chat e inicie la conexi&oacute;n. Existen muchas formas para conectarnos
+a Internet, utilizando distintos ficheros de configuraci&oacute;n, llamando desde scripts a pppd, pero todas se
+resumen en pasarle una serie de par&aacute;metros a pppd y a chat, estos par&aacute;metros son:
+<P ALIGN="JUSTIFY">
+<H4>Opciones de pppd. </H4>
+<P ALIGN="JUSTIFY">El demonio de la l&iacute;nea ppp, el programa <B>pppd</B>, es el encargado de establecer la l&iacute;nea de conexi&oacute;n y
+registrala en el sistema para usarla en el acceso a Internet, las opciones que utilizaremos ser&aacute;n: 
+<P ALIGN="JUSTIFY">
+<DL>
+<DT><B>defaultroute:</B><DD><P ALIGN="JUSTIFY">A&ntilde;ade la ruta por defecto a las tablas de enrutamiento del sistema, usando el proveedor como 
+puerta de enlace.</DD></DT><BR>
+<DT><B>noipdefault:</B><DD><P ALIGN="JUSTIFY">Utiliza la direcci&oacute;n IP que nos da el proveedor. Se utiliza en conexiones con IP variable,
+que es la mayor&iacute;a de los casos, si tienes una IP fija tendr&aacute;s que especificarla poniendola en el archivo de 
+opciones.</DD></DT><BR>
+<DT><B>ipcp-accept-local:</B><DD><P ALIGN="JUSTIFY">Hace que pppd utilice la direcci&oacute;n IP que nos d&eacute; el proveedor, aunque hallamos puesto
+una nosotros.</DD></DT><BR>
+<DT><B>ipcp-accept-remote:</B><DD><P ALIGN="JUSTIFY">Utiliza la direcci&oacute;n remota del proveedor, aunque hallamos especificado nosotros otra.</DD></DT><BR>
+<DT><B>lock:</B><DD><P ALIGN="JUSTIFY">Crea un fichero de bloqueo que asegura a pppd de ser el &uacute;nico en utilizar el modem durante la conexi&oacute;n.</DD></DT><BR>
+<DT><B>modem:</B><DD><P ALIGN="JUSTIFY">Usa la l&iacute;neas de control del modem, esta opci&oacute;n es la que toma pppd por defecto.</DD></DT><BR>
+<DT><B>crtscts:</B><DD><P ALIGN="JUSTIFY">Usa el control de flujo por hardware del puerto serie.</DD></DT><BR>
+<DT><B>/dev/modem:</B><DD><P ALIGN="JUSTIFY">Usa el dispositivo al que apunta modem, que normalmente es /dev/ttyS1 o /dev/cua1 para COM2, el uso de
+ttyS? o cua? est&aacute; ampliamente discutido, en resumen ttyS? permite compartir el puerto por varios procesos, y cua?
+s&oacute;lo permite acceso exclusivo al puerto serie, al tener la opci&oacute;n lock el acceso exclusivo est&aacute; garantizado, por esto
+<B>personalmente</B> uso ttyS1. Por supuesto el n&uacute;mero puede ser 0 para COM1, 1 para COM2 etc.</DD></DT><BR>
+<DT><B>mtu 1500:</B><DD><P ALIGN="JUSTIFY">Pone la Unidad M&aacute;xima de Transferencia a 1500bytes. Esto implica que pppd pida que el codigo de red del
+kernel no mande paquetes de m&aacute;s de 1500bytes, a no ser que el proveedor tenga una 
+unidad de transferencia menor.</DD></DT><BR>
+<DT><B>115200:</B><DD><P ALIGN="JUSTIFY">Velocidad de transferencia entre el ordenador y el modem, 115200 es para modems de 33200 baudios, para menos 
+se pueden utilizar velocidades de  57600, 38400, 19200, 9600 y 2400. Para modems m&aacute;s r&aacute;pidos (56K) se pueden probar
+velocidades de 230400 y 460800, siempre que el puerto serie las soporte.</DD></DT><BR>
+<DT><B>connect programa:</B><DD><P ALIGN="JUSTIFY">Utiliza el ejecutable o shell script <EM>programa</EM> para activar la l&iacute;nea serie, normalmente es un
+script que llama a <B>chat</B>.</DD></DT><BR>
+<DT><B>+pap:</B><DD><P ALIGN="JUSTIFY">Hace por defecto que el m&eacute;todo de autorizaci&oacute;n sea PAP, en caso de ser CHAP habr&iacute;a que sustituirlo por
++chap.</DD></DT><BR>
+<DT><B>user nombre:</B><DD><P ALIGN="JUSTIFY">Utiliza la clave del usuario <EM>nombre</EM> para autentificarse al proveedor, contando que usamos
+PAP como m&eacute;todo de autentificaci&oacute;n, que es el que utiliza Infov&iacute;a de momento. La clave de los distintos usuarios se
+encontrar&aacute; en el fichero <EM>/etc/ppp/pap-secrets</EM> que se describir&aacute; m&aacute;s adelante.</DD></DT><BR>
+</DL>
+<P ALIGN="JUSTIFY">Por supuesto existen m&aacute;s opciones, el lector interesado puede leer el documento pppd-HOWTO o la p&aacute;gina del 
+manual de pppd.
+<P ALIGN="JUSTIFY">
+<H4>Opciones de chat. </H4>
+<P ALIGN="JUSTIFY">Chat es como su nombre indica un programa de conversaci&oacute;n con el modem. En este programa, la secuencia
+puede ser variable pero en general es:
+<UL>
+<LI>Esperar y enviar una se&ntilde;al de reconocimiento al modem.</LI>
+<LI>Cuando nos llega la se&ntilde;al del modem indicando que est&aacute; bien, enviar la se&ntilde;al de marcado.</LI>
+<LI>Cuando nos llega la se&ntilde;al de que est&aacute; conectado, dejar la l&iacute;nea para que la utilice <B>pppd</B>.</LI>
+</UL>
+<P ALIGN="JUSTIFY">
+Con las instrucciones anteriores, la secuencia para que la entienda chat ser&iacute;a:
+ATZ OK ATDP055 CONNECT ""
+Donde:
+<UL>
+<LI>ATZ OK : Es la se&ntilde;al de reconocimiento que le mandamos, esperando el OK del modem.</LI>
+<LI>ATDP055: Marcamos el n&uacute;mero 055 por pulsos 
+(aunque puedes poner el n&uacute;mero de tu proveedor), cambiando
+la P por T marcar&iacute;amos por tonos.</LI>
+<LI>CONNECT: Es la se&ntilde;al de reconocimento del modem cuando ha conectado, tras esto termina chat
+dejando a <B>pppd</B> el control de la l&iacute;nea.</LI>
+</UL>
+<P ALIGN="JUSTIFY">Esta cadena puede variar, podemos poner m&aacute;s comandos de inicializaci&oacute;n del modem, condiciones de finalizaci&oacute;n
+de la conexi&oacute;n etc. Remito al lector a la p&aacute;gina del manual de chat para m&aacute;s informaci&oacute;n.
+<P ALIGN="JUSTIFY">
+<H4><A NAME="ss4.4">4.4 Ficheros de conexi&oacute;n.</A>
+ </H4>
+<P ALIGN="JUSTIFY">Ya hemos visto las opciones m&aacute;s comunes de los programas que utilizaremos para realizar la conexi&oacute;n, ahora veamos
+como poner dichas opciones en ficheros para automatizar el proceso:
+<P ALIGN="JUSTIFY">
+<H4>Fichero de opciones de pppd. </H4>
+
+
+<P ALIGN="JUSTIFY">Este fichero ser&aacute; el que lea <B>pppd</B> cuando se ejecute para inciar la conexi&oacute;n a Internet, tomando las opciones
+
+que hemos visto anteriormente quedar&iacute;a:
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ #Opciones de pppd
+ connect (script de chat)
+ /dev/modem 
+ 115200
+ modem
+ crtscts
+ mtu 1500
+ defaultroute
+ noipdefault
+ ipcp-accept-local
+ ipcp-accept-remote
+ lock
+ user (nombre de usuario)
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">El orden no es importante, el dispositivo /dev/modem como he dicho antes se hace como enlace a /dev/ttyS? donde ? es el 
+
+n&uacute;mero de puerto serie (0 para el 1 y as&iacute; sucesivamente), el modo de hacer el enlace es:
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ localhost # ln -s /dev/ttyS? /dev/modem
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">
+
+<H4>Fichero de chat. </H4>
+<P ALIGN="JUSTIFY">En la secci&oacute;n anterior ve&iacute;amos que para conectar el pppd llamaba a un script o ejecutable mediante la
+
+directiva <EM>connect fichero</EM>, el fichero de chat es el siguiente:
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ #!/bin/bash
+ /usr/sbin/chat &quot;&quot; ATZ OK ATDT055 CONNECT &quot;&quot;
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Como vemos inicializa el modem con ATZ y espera OK, marca 055 por pulsos (cambiar P por T para tonos)
+
+y espera CONNECT, las dobles comillas hacen que espere nada, en algunas versiones de chat las dobles comillas
+
+se cambian por la comilla simple. Este fichero debe tener permisos de ejecuci&oacute;n (chmod 755 fichero).
+
+<P ALIGN="JUSTIFY">
+
+<H4>Fichero de claves. </H4>
+<P ALIGN="JUSTIFY">El fichero de claves en este caso es <EM>/etc/ppp/pap.secrets</EM>, ya que utilizamos el m&eacute;todo de autentificaci&oacute;n
+PAP, en caso de usar CHAP el fichero ser&iacute;a <EM>/etc/ppp/chap.secrets</EM>. Este fichero recoge un usuario por l&iacute;nea
+con el siguiente formato de cada l&iacute;nea:
+<P ALIGN="JUSTIFY">
+<BLOCKQUOTE><CODE>
+<PRE>
+                 Usuario   |    Servidor  |       Clave
+</PRE>
+</CODE></BLOCKQUOTE>
+
+
+<P ALIGN="JUSTIFY">Donde <EM>Usuario</EM> es el nombre de usuario que nos ha asignado el proveedor, <EM>Servidor</EM> es el nombre de 
+
+nuestro proveedor (normalmente el dominio) y <EM>Clave</EM> es la clave que nos ha asignado nuestro proveedor. Podemos
+
+tener tantas l&iacute;neas como queramos, por ejemplo si tenemos m&aacute;s de una conexi&oacute;n a Internet, en el campo <EM>Servidor</EM>
+
+podemos poner un aster&iacute;sco * si s&oacute;lo tenemos una l&iacute;nea para ese usuario, que es lo normal. Un ejemplo ser&iacute;a:
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ # Secrets for authentication using PAP
+
+ # client       server  secret                  IP addresses
+
+ pacp@jet       *       clave1
+
+ pacp@jet       ppp0    clave2
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">Como vemos hay dos l&iacute;neas, una para cualquier servidor con nombre de usuario pacp@jet y otro para el servidor ppp0 con
+
+el usuario pacp@jet.
+
+El fichero tiene que tener permisos de lectura y escritura s&oacute;lo para el usuario root, para ello:
+<BLOCKQUOTE><CODE>
+<PRE>
+ localhost # chmod 600 pap-secrets
+</PRE>
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">
+
+<H4>Fichero resolv.conf. </H4>
+<P ALIGN="JUSTIFY">Este fichero se encuentra en el directorio /etc y es donde ponemos nuestro
+servidor de nombres (DNS). El formato es el siguiente:
+<BLOCKQUOTE><CODE>
+<PRE>
+ search jet.es
+ nameserver 194.179.100.6
+ nameserver 194.179.100.16   
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">En la primera l&iacute;nea ponemos el nombre de dominio de nuestro servidor y en las
+
+otras las direcciones IP de los servidores de nombres que utilicemos.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Otros ficheros importantes. </H4>
+<P ALIGN="JUSTIFY">A continuaci&oacute;n se detallan dos ficheros m&aacute;s que tambi&eacute;n son importantes. Estos son ip-up e ip-down. Ambos se
+
+encuentran en <EM>/etc/ppp/</EM>. Estos ficheros deben tener permisos de ejecuci&oacute;n (755) y se ejecutan cuando
+
+se establece y cuando se cierra la conexi&oacute;n respectivamente. En ellos podemos poner distintas cosas como la 
+
+ejecuci&oacute;n de <EM>sendmail</EM> para que mande los mensajes que halla en la cola, etc. Hay que tener en cuenta
+
+que se ejecutan con el ID como root, por lo tanto no hay que hacer nada que afecte a la seguridad del sistema.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Ejecuci&oacute;n de pppd. </H4>
+
+
+
+<P ALIGN="JUSTIFY">Cuando ya tenemos todos los ficheros de configuraci&oacute;n creados, s&oacute;lo nos queda ejecutar <B>pppd</B> y ver qu&eacute;
+
+nos hace. Para ejecutar <B>pppd</B> tenemos que entrar en el sistema como usuario root, ya que de otra
+
+forma no tendremos permisos para hacerlo, y ejecutarlo directamente de la forma:
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost # pppd
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Si queremos ver la salida de pppd deberemos mirar en los archivos de <EM>logs</EM> del sistema el fichero de mensajes
+
+de la siguiente forma:
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost # tail -f /var/log/messages
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">La salida de tail nos ir&aacute; informando de lo que hace <B>pppd</B> y podremos abortarla con CTRL-C en el momento en que
+
+establezca la conexi&oacute;n.
+
+<P ALIGN="JUSTIFY">Si no queremos tener que estar entrando en el sistema como root cada vez que queramos iniciar la conexi&oacute;n, podemos
+
+hacer el siguiente script:
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ #!/bin/bash
+ su -c &quot;pppd;modprobe bsd_comp;tail -v /var/log/messages&quot;
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">
+Y cuando tengamos establecida la conexi&oacute;n salir de tail con CTRL-C. 
+
+Poniendonos manos a la obra con nuestra conexi&oacute;n, ya sea navegando, 
+
+mandando correo etc. La parte de <B>modprobe bsd_comp</B> intentar&aacute; probar
+
+el m&oacute;dulo <B>bsd_comp</B> que no se inserta autom&aacute;ticamente, si lo hemos compilado
+
+ganaremos algo de velocidad el nuestra conexi&oacute;n.
+
+<P ALIGN="JUSTIFY">
+
+<H4><A NAME="ss4.5">4.5 Configuraci&oacute;n de kppp.</A>
+ </H4>
+
+
+
+<P ALIGN="JUSTIFY"><B>kppp</B> es el programa que viene con la distribuci&oacute;n de 
+
+<A HREF="http://www.kde.org" target="_new">kde</A> para realizar la 
+
+conexi&oacute;n a Internet mediante modem, las ventajas de la utilizaci&oacute;n de kppp es que cualquier usuario, no s&oacute;lo root, pueden
+
+configurarlo y utilizarlo, aunque esto puede traer problemas de seguridad, sobre todo en entornos donde existe un ordenador
+
+que se conecta a Internet y da servicio a una red local. Si tenemos un s&oacute;lo ordenador con el que nos conectamos a Internet, como
+
+suele ser el caso de la mayor&iacute;a, el uso de kppp es m&aacute;s sencillo y c&oacute;modo, aunque eso s&iacute;, se ejecuta bajo el entorno X-Window.
+
+Tambien tiene la posibilidad de llevar un control del gasto que llevamos en Internet, as&iacute; como la posibilidad de ejecutar un
+
+programa o script al iniciar la conexi&oacute;n o al terminarla. La configuraci&oacute;n que aqu&iacute; se explica es para el caso de Infov&iacute;a,
+
+para otros casos en los cuales las conexiones no vayan a trav&eacute;s de Telef&oacute;nica pueden variar algunas cosas.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Preliminares. </H4>
+
+<P ALIGN="JUSTIFY">Antes de empezar a configurar el programa tenemos que asegurarnos que los ficheros <EM>/etc/ppp/options</EM> y el 
+
+fichero <EM>.pppdrc</EM> si existe est&aacute;n vac&iacute;os, si no lo est&aacute;n tendremos que crearlos vac&iacute;os, para ello, como root podemos
+
+hacer lo siguiente:
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost /etc/ppp/ # mv options options.old
+ localhost /etc/ppp/ # touch options
+
+ Si existiese el fichero .pppdrc lo renombraremos:
+
+ localhost ~ # mv .pppdrc .pppdrc.old
+</PRE>
+
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">
+Con esto ya habremos creado vac&iacute;o el fichero <EM>options</EM> de pppd.
+
+Normalmente el programa kppp se crea con usuario y grupo root y el bit de Setuid activado (lo que hace
+
+que cuando se ejecute, aunque lo ejecutes como un usuario normal tome la identidad de root), para comprobarlo
+
+vamos al directorio donde se encuentre kppp (type kppp) y comprobamos:
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost /opt/kde/bin # ls -l kppp
+
+ -rwsr-xr-x 1 root root   262148 kppp
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Como vemos tiene el bit setuid activado (rws), en caso de no ser as&iacute; haremos (como root): 
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost /opt/kde/bin # chmod +s kppp
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Una vez tenemos esto hecho, podemos empezar con la configuraci&oacute;n de kppp.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Configurando kppp. </H4>
+
+
+
+<P ALIGN="JUSTIFY">Ejecutamos kppp y pulsamos el bot&oacute;n de <EM>Configuraci&oacute;n</EM>, en la ventana de configuraci&oacute;n elegimos
+
+<EM>Nueva</EM> para crear una nueva conexi&oacute;n, tendremos que configurar los siguientes par&aacute;metros en las
+
+distintas pesta&ntilde;as:
+
+<P ALIGN="JUSTIFY">
+
+<UL>
+
+<LI><B>Marcado:</B>
+
+<UL>
+
+<LI><B>Nombre de la conexi&oacute;n:</B> Elegimos un nombre para referirnos a la conexi&oacute;n.</LI>
+
+<LI><B>N&uacute;mero de tel&eacute;fono:</B> Ponemos 055 si llamamos por Infov&iacute;a, o el n&uacute;mero que marquemos para
+
+conectarnos en caso de no hacerlo por Infov&iacute;a.</LI>
+
+<LI><B>Autentificaci&oacute;n:</B> Elegimos <EM>Mediante PAP</EM>, ya que es el caso normal (de Infov&iacute;a).</LI>
+
+<LI><B>Almacenar Contrase&ntilde;a:</B> La activaremos en caso de que seamos los &uacute;nicos que utilizamos la cuenta
+
+para conectarnos a <B>Internet</B>.</LI>
+
+<LI><B>Ejecutar programa al establecer/terminar la conexi&oacute;n:</B> Pondremos el script o programa que
+
+queramos que se ejecute cuando se establezca/termine la conexi&oacute;n.</LI>
+
+<LI><B>Editar opciones de pppd:</B> Pulsamos el bot&oacute;n opciones y ponemos las siguientes opciones:
+
+<UL>
+
+<LI>defaultroute</LI>
+
+<LI>noipdefault</LI>
+
+</UL>
+
+</LI>
+
+</UL>
+
+</LI>
+
+<LI><B>Direcci&oacute;n IP:</B> En esta secci&oacute;n elegiremos <EM>Direcci&oacute;n IP asignada por
+
+el Servidor</EM> a no ser que tengamos una direcci&oacute;n IP fija. <EM>Autoconfigurar
+
+el nombre del Host desde esta direcci&oacute;n IP</EM> lo dejamos desactivado.</LI>
+
+<LI><B>Servidor de Nombres:</B>
+
+<UL>
+
+<LI><B>Nombre de dominio:</B> Ponemos el nombre de dominio de nuestro proveedor.</LI>
+
+<LI><B>Direcciones IP de los servidores de nombres:</B> Vamos poniendo las direcciones
+
+IP de los servidores de nombres, pulsando <EM>A&ntilde;adir</EM> cada vez que a&ntilde;adamos
+
+una.</LI>
+
+<LI><B>Deshabilitar los servidores de nombres durante la conexi&oacute;n:</B> Podemos
+
+activarla si tenemos otros servidores de nombres configurados.</LI>
+
+</UL>
+
+</LI>
+
+<LI><B>Puerta de Enlace:</B> Elegimos la <EM>Puerta de enlace por defecto</EM> normalmente
+
+y activamos el bot&oacute;n <EM>Asignar la Ruta por Defecto hacia esa Puerta de Enlace</EM>.</LI>
+
+<LI><B>Script de conexi&oacute;n:</B> Activamos usar Script gen&eacute;rico.</LI>
+
+<LI><B>Coste:</B> Activaremos el seguimiento de Coste y en el caso de Espa&ntilde;a, elegiremos
+
+Spain/Infov&iacute;a si conectamos por Infov&iacute;a, o las distintas opciones si nuestra conexi&oacute;n
+
+va por telefon&iacute;a Local, Nacional o Provincial. En <EM>Volume accounting</EM> lo dejamos
+
+desactivado si no nos cobran por vol&uacute;men de bytes.</LI>
+
+</UL>
+
+<P ALIGN="JUSTIFY">Una vez terminado pulsamos OK y pasamos a configurar el <EM>Dispositivo Serie</EM>,
+
+en esta pesta&ntilde;a elegiremos el puerto al que se encuentre conectado nuestro modem,
+
+el control de flujo CRTSCTS, la terminaci&oacute;n de l&iacute;nea con CR y la velocidad de conexi&oacute;n
+
+de 115200 si nuestro modem es de 33600 baudios, lo dem&aacute;s lo dejamos como est&aacute;.
+
+<P ALIGN="JUSTIFY">En la pesta&ntilde;a <EM>Modem</EM> elegimos el tiempo que debe esperar si encuentra la l&iacute;nea
+
+ocupada. Tras esto pulsamos <EM>Consultar el Modem</EM> para ver las cadenas del modem,
+
+si este no cumpliese con el est&aacute;ndar Hayes, en cuyo caso habria que cambiar alguna
+
+cadena en el bot&oacute;n <EM>Cadenas del Modem</EM>. La opci&oacute;n de <EM>El modem sostiene la l&iacute;nea de CD</EM>
+
+la dejamos desactivada. El bot&oacute;n <EM>Terminal</EM> es una peque&ntilde;a terminal que puede
+
+ser &uacute;til para probar cadenas del Modem.
+
+<P ALIGN="JUSTIFY">En <EM>Opciones varias</EM> le decimos la localizaci&oacute;n del ejecutable <EM>pppd</EM>, el tiempo
+
+que debe esperar entre marcados fallidos (timeout), el visor de logs. Las dem&aacute;s
+
+opciones las configuramos a nuestro gusto.
+
+<P ALIGN="JUSTIFY">Tras darle a OK nos aparecer&aacute; la ventana del kppp, en <EM>Usuario</EM> ponemos el nombre
+
+de usuario que nos ha asignado nuestro proveedor de <B>Internet</B> y en contrase&ntilde;a nuestra
+
+contrase&ntilde;a, tras esto podemos probar a conectar. Al pulsar <EM>Conectar</EM> podemos ver lo que
+
+est&aacute; pasando pulsando en el bot&oacute;n <EM>Log/Hist&oacute;rico</EM>.
+
+<P ALIGN="JUSTIFY">
+
+<H3>Notas. </H3>
+
+<P ALIGN="JUSTIFY">La configuraci&oacute;n que he explicado se basa en mi propia experiencia y en la lectura
+
+de distintos documentos, por experiencia propia he experimentado &quot;muertes&quot;
+
+del pppd por problemas con los permisos, si es tu caso revisa los permisos con
+
+los que pongo al principio de esta secci&oacute;n. La configuraci&oacute;n que aqu&iacute; se explica
+
+es de la versi&oacute;n 1.1.1 del kppp con la configuraci&oacute;n del idioma espa&ntilde;ol.
+
+<P ALIGN="JUSTIFY">
+
+<H4><A NAME="ss4.6">4.6 Utilidades de Internet.</A>
+
+ </H4>
+<P ALIGN="JUSTIFY">En esta secci&oacute;n veremos algunas de las utilidades m&aacute;s comunes y algo de su
+
+configuraci&oacute;n. Por motivos de tama&ntilde;o no se explicar&aacute;n con todo detalle, lo que
+
+queda fuera de este art&iacute;culo, para m&aacute;s detalles se puede leer 
+
+la documentaci&oacute;n de cada aplicaci&oacute;n.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Correo electr&oacute;nico. </H4>
+<P ALIGN="JUSTIFY">Para empezar necesitaremos correo electr&oacute;nico, ¿c&oacute;mo no?, el env&iacute;o del mismo se
+
+puede realizar mediante clientes como el Netscape o mediante el famoso <B>sendmail</B>
+
+incluido en todas las distribuciones. 
+
+En Netscape es tan f&aacute;cil de configurar como poner los datos que nos habr&aacute; dado
+
+nuestro proveedor de <EM>Internet</EM>. 
+
+En cambio el <B>sendmail</B> puede llegar a resultar complicado, 
+
+sobre todo para usuarios inexpertos, pero con el paquete 
+
+<B>m4</B> que tambien viene con todas las distribuciones y el paquete 
+
+<B>sendmail-config</B>, la configuraci&oacute;n resultar&aacute; tambi&eacute;n bastante sencilla.
+
+Una vez que tenemos estos paquetes instalados podemos comenzar con la 
+
+configuraci&oacute;n, para ello, tenemos que entrar al sistema
+
+como root y en el directorio <EM>/usr/lib/sendmail.cf/cf</EM> tendremos que
+
+crear un fichero que podemos llamar <EM>miconf.mc</EM>, en &eacute;l incluiremos
+
+lo siguiente:
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+
+
+<PRE>
+ include(`../m4/cf.m4')
+
+ VERSIONID(`linux for smtp-only setup')dnl
+
+ OSTYPE(debian)dnl
+
+ FEATURE(nouucp)dnl
+
+ FEATURE(always_add_domain)dnl
+
+ FEATURE(nodns)
+
+ define('confCON_EXPENSIVE', 'True')
+
+ define(SMTP_MAILER_FLAGS, e)
+
+ define(`SMART_HOST', smtp:servidor de correo)
+
+ MAILER(local)dnl
+
+ MAILER(smtp)dnl
+</PRE>
+
+
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Como podemos ver el OSTYPE es debian, que es el sistema que yo
+
+utilizo, pero puede ponerse linux. El anterior fichero lo he sacado de
+
+un documento de Juan Ignacio Llona, lo he probado y funciona, adem&aacute;s
+
+de ser de los m&aacute;s sencillos que he visto, hay varias
+
+opciones m&aacute;s, para saber m&aacute;s se puede mirar la p&aacute;gina del
+
+manual de sendmail y varios documentos existentes, como el
+
+Sendmail+UUCP en los mini-HOWTOS.
+
+<P ALIGN="JUSTIFY">Si ya tenemos bien configurado el env&iacute;o de correo electr&oacute;nico, nos queda
+
+configurar la recogida del mismo, para tal fin recomiendo utilizar fetchmail y
+
+procmail como filtro de correo. Empezaremos por fechmail, este programa viene
+
+con todas las distribuciones actuales de <EM>Linux</EM> y es muy sencillo de 
+
+configurar y muy util para nuestro fin.
+
+Para configurarlo s&iacute;mplemente crearemos un fichero en nuestro directorio como
+
+usuario normal (no necesariamente tiene que ser root), el fichero lo llamaremos
+
+.fetchmailrc y lo podemos editar del siguiente modo:
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost $ joe ~/.fetchmailrc
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+<P ALIGN="JUSTIFY">Con esto editamos el fichero de configuraci&oacute;n, el fichero contendr&aacute; las 
+
+siguientes l&iacute;neas:
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ defaults                
+
+         fetchall
+
+         flush
+
+ poll &lt;dominio del servidor&gt;
+
+ proto pop3
+
+ user &lt;usuario de correo&gt;
+
+ pass &lt;tu clave&gt;
+</PRE>
+
+
+
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">
+Las tres primeras l&iacute;neas son las opciones por defecto, tras esto viene 
+
+poll donde decimos el nombre de dominio de nuestro servidor de correo, 
+
+normalmente lo que viene tras @ (pecapon@postal.uv.es seria postal.uv.es).
+
+En proto especificamos el protocolo, aunque fetchmail es capaz de reconocerlo
+
+y en user y pass decimos nuestro nombre de usuario (que suele ser lo que viene
+
+antes de @, en mi caso pecapon) y en pass la clave que nos asigna el proveedor.
+
+Una vez escrito esto en .fetchmailrc tenemos que grabar (Ctrl-KX en joe) y 
+
+asignarle permisos s&oacute;lo de lectura para usuario (chmod 600 &nbsp/.fetchmail).
+
+Para probarlo ejecutaremos:
+
+<BLOCKQUOTE><CODE>
+
+<PRE>
+ localhost $ fetchmail -v
+</PRE>
+
+</CODE></BLOCKQUOTE>
+
+
+
+Con esto veremos lo que hace fetchmail y nos bajar&aacute; los mensajes.
+
+<P ALIGN="JUSTIFY">Pero un problema con el que nos solemos encontrar es con el filtrado de los
+
+mensajes, para este fin recomiendo la utilizaci&oacute;n de procmail que es un potente
+
+filtro de correo, para ello nos crearemos el fichero .forward con el siguiente
+
+contenido:
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+<PRE>
+ &quot;|IFS=' ' && p=/usr/bin/procmail && test -f $p && exec $p -Yf- || 
+
+ exit 75 #tu login&quot;
+</PRE>
+</CODE></BLOCKQUOTE>
+
+
+
+Todo debe ir en una l&iacute;nea, una vez hecho esto nos creamos el fichero .procmailrc, el formato del fichero es el siguiente:
+
+<P ALIGN="JUSTIFY">
+
+<BLOCKQUOTE><CODE>
+<PRE>
+
+ MAILDIR=$HOME/Mail
+
+ DEFAULT=$MAILDIR/Inbox
+
+ VERBOSE=yes
+
+ LOGFILE=$HOME/log/procmail.log
+
+
+ :0:
+
+ * ^To: *linux-emp
+
+ Linux-Emp
+
+
+ :0:
+
+ * ^To: *insflug
+
+ Insflug
+
+
+ :0:
+
+ * ^Subject: *LE
+
+ Linux-Emp
+
+
+ :0:
+
+ * ^X-Mailing-List: macedonia@makelist.com
+
+ Macedonia
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN="JUSTIFY">
+Como podemos ver al principio contiene el nombre de unas variables, estas son:
+
+<P ALIGN="JUSTIFY">
+
+<DL>
+
+<DT><B>MAILDIR: </B><DD><P ALIGN="JUSTIFY">Indica el directorio donde se guardar&aacute;n los contenedores de 
+correo, en mi caso Mail, que es el que lee mi lector de correo.</dd></dt><br>
+<DT><B>DEFAULT: </B><DD><P ALIGN="JUSTIFY">Indica el contenedor de correo por defecto.</dd></dt><br>
+<DT><B>VERBOSE: </B><DD><P ALIGN="JUSTIFY">Diagnosticos extendidos, procmail generar&aacute; m&aacute;s mensajes en caso
+de error.</dd></dt><br>
+<DT><B>LOGFILE: </B><DD><P ALIGN="JUSTIFY">Fichero donde se guardar&aacute;n los mensages que genere procmail.</dd></dt>
+
+</DL>
+
+<P ALIGN="JUSTIFY">Tras esto vienen los filtros de correo, procmail analiza el mensaje en busca
+
+de los que le ponemos en los filtros por ejemplo, el filtro:
+
+<P ALIGN="JUSTIFY">:0:
+
+<P ALIGN="JUSTIFY">* ^To: *linux-emp
+
+Linux-emp
+
+<P ALIGN="JUSTIFY">Hace que todos los mensajes que en el destinatario (campo To del mensaje) 
+
+tengan linux-emp sean enviados a la carpeta Linux-emp en el directorio 
+
+definido en MAILDIR. El :0 es el incio del filtro y tras el cero se pueden 
+
+poner opciones, los : indican que bloquear&aacute; la carpeta para que otros 
+
+procesos no escriban en ella mientras lo hace procmail. Para m&aacute;s informaci&oacute;n
+
+recomiendo leer la documentaci&oacute;n traducida por el grupo LuCAS y el art&iacute;culo
+
+<EM>Gesti&oacute;n de correo con Procmail</EM> de Carlos Garc&iacute;a incluido en el n&uacute;mero
+
+tres de <EM>Linux Actual</EM>.
+
+<P ALIGN="JUSTIFY">Ahora ya tenemos configurado el correo electr&oacute;nico. Ya podemos mandar y recibir
+
+mensajes, nos queda pu&eacute;s navegar.
+
+<P ALIGN="JUSTIFY">
+
+<H4>Navegando por la red.</H4>
+
+
+
+<P ALIGN="JUSTIFY">Para navegar podemos utilizar el conocido Netscape Navigator o Mozilla, y si
+
+queremos hacerlo en tipo texto podemos utilizar el lynx (man lynx para m&aacute;s 
+
+informaci&oacute;n). La configuraci&oacute;n de estos programas lo dejo como ejercicio para
+
+el lector ya que es extremadamente intuitiva en el caso de Netscape y Mozilla,
+
+en el caso de lynx la configuraci&oacute;n se hace como en pr&aacute;cticamente todas las
+
+aplicaciones de <EM>Linux</EM>, con el editor y el fichero de texto.
+
+<P ALIGN="JUSTIFY">Para los que tengan espacio en disco duro y memoria (unos 16Mb y en disco unos
+
+60Mb libres) recomiendo el uso de 
+
+<A HREF="http://www.gedanken.demon.co.uk/wwwoffle/index.html">wwwoffle</A> este programa actua como proxy, es sencillo de configurar y
+
+permite leer p&aacute;ginas cuando no estamos conectados, ya que mantiene una cach&eacute;
+
+de disco, las que no se encuentren en la cach&eacute; las bajar&aacute; cuando tengamos 
+
+conexi&oacute;n a Internet. 
+
+<P ALIGN="JUSTIFY">
+
+<H4>Seguridad.</H4>
+
+
+
+<P ALIGN="JUSTIFY">Un peque&ntilde;o apunte referente a seguridad, en el directorio /etc encontramos
+
+el fichero inetd.conf, este fichero contiene la configuraci&oacute;n de los servicios
+
+de red que tenemos, editandolo como root podemos ver que est&aacute;n los est&aacute;ndar
+
+como ftp, telnet, login, exec etc., dependiendo del uso del ordenador (si es
+
+servidor de red, etc.) deberemos comentarlos con # o dejar que se ejecuten,
+
+podemos saber m&aacute;s de este fichero con man inetd.conf.
+
+<P ALIGN="JUSTIFY">
+
+<H4><A NAME="ss4.7">4.7 Conclusi&oacute;n.</A>
+
+</H4>
+
+
+
+<P ALIGN="JUSTIFY">Tras este largo art&iacute;culo se quedan varias cosas en el tintero, como son las 
+
+news y el irc, para las primeras existen lectores tipo texto como slrn y
+
+gr&aacute;ficos como krn de kde y el incluido en Netscape Comunicator, para irc
+
+existe el ircII, el bitchx en modo texto y otros en modo gr&aacute;fico como el
+
+kirc de kde. En cuanto al tema de la seguridad, es importante estar al d&iacute;a
+
+sobre todo si el ordenador es un servidor de una Intranet, un Cortafuegos,
+
+etc. Para ello podemos leer varios documentos, pero el m&aacute;s amplio es la
+
+<EM>Gu&iacute;a de Administraci&oacute;n de Redes en Linux</EM> que podemos encontrar traducido
+
+en LuCAS. 
+
+En el pr&oacute;ximo art&iacute;culo trataremos el uso de <EM>Linux</EM> para aplicaciones 
+
+como procesamiento de texto, im&aacute;genes etc, con las aplicaciones existentes,
+
+tras el cu&aacute;l se iniciar&aacute; una serie de art&iacute;culos dedicados a la programaci&oacute;n
+
+en <EM>Linux</EM>, desde el shell-script hasta perl.
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaf.htm"><font FACE="ARIAL"><B>[Curso de Introuducción y Uso del Linux]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

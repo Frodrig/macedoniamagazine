@@ -1,0 +1,407 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso Acelerado de HTML</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Capítulo 8. Aprende el uso y abuso de los frames
+</H3>
+<p align=justify>
+
+Creo que después de este
+artículo dedicado a los frames ya podréis hacer algo exactamente igual a lo
+que es ahora mismo MACEDONIA. Después de este capítulo se realizará uno más
+dedicado a ver por encima todo lo que no hemos incluido en este curso acelerado
+(de ahí lo de acelerado) pero que debes de tener bien presente que existe y está
+esperando que lo exprimas al máximo.<br>
+Sin más, comenzamos este penúltimo capítulo del curso de HTML.
+<br>
+<h4>¿Qué es eso de los frames?</h4>
+<p align=justify>
+Los frames constituyen una interesantísima forma de "modelar" nuestras páginas
+WEB ya que nos permiten dividir en distintas zonas nuestra página. El ejemplo
+más claro de uso lo tenéis a la hora de diseñar vuestras páginas con un menú
+en donde poner las opciones de la misma y, en otro sitio aparte, la información a
+ofrecer (como en MACEDONIA). La característica principal de todo esto radica en poder
+utilizar cada una de dichas zonas que "hemos creado" como si fuesen páginas WEB autónomas
+pues cada una irá cargando toda su información (graficos y archivos HTML) en su propia
+parcela dejando el resto de las zonas de pantalla intactas.
+<br>
+Un ejemplo de esto lo tenéis delante de vuestros ojos. Cuando en MACEDONIA elegís
+una opción del menú la única zona de la pantalla que se actualiza es la que está
+a la derecha de vuestra pantalla dejando la del menú sin tocar. Como podéis apreciar,
+el uso de los frames es extremadamente útil.
+<br><br>
+Las distintas zonas de la pantalla en las que podemos dividir nuestra página
+se denominan paneles y, en cada panel creado, tendremos que trabajar con código
+HTML independiente. De aquí es fácil deducir que en una página con n paneles habrá
+n documentos HTML cargados simultaneamente. Ahora mismo MACEDONIA tiene cargado un total
+de dos documentos HTML uno para el menú y el otro para el panel destinado a la información,
+en el que estáis leyendo vaya.
+<br>
+<h4>¡Manos a la obra!</h4>
+<p align=justify>
+Para empezar a utilizar frames es necesario definir un archivo HTML en el que se
+definan, valga la redundacia, aquellos ficheros HTML que deberán de aparecer en los
+frames que nosotros creemos. Este fichero suele recibir el nombre del tipo index.htm y
+lo único que contendrá, como ya he citado, es la información relativa a los frames que vamos
+a utilizar y cuales van a ser los archivos HTML que carguemos en dichos frames.
+<br>
+Para llevar todo esto a la práctica vamos a necesitar de muy pocas directivas como vamos
+a ver a continuación.<br><br>
+Con la directiva <i>&lt;FRAMESET></i> tendremos la oportunidad de dividir la pantalla
+de nuestro navegador favorito en las zonas que estimemos nos sean necesarias. Lógicamente
+podremos realizar divisiones tanto verticales como horizontales.
+<br>
+Junto a la directiva <i>&lt;FRAMESET></i> deberemos de utilizar un par de parámetros más
+que son ROWS y COLS. <br><br>
+Con el parámetro ROWS podremos dividir la pantalla en zonas horizontales. A su vez,
+también podremos determinar el tamaño de cada una de ellas medido siempre en tanto porcien (también
+podremos utilizar valores decimales de tanto porcien para ello bastará con poner la coma ',' separando
+ambas partes, por ejemplo <i>22,35%</i>)
+haciendo incluso más fácil y cómoda su utilización. Un ejemplo de cómo poder dividir la pantalla
+del navegador a la mitad sería la siguiente:
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;FRAMESET ROWS="50%,50%"><BR>
+.......<br>
+&lt;/FRAMESET>
+</b>
+</i></FONT>
+<br><br>
+Como podéis comprobar es muy fácil realizar una división de pantalla. Además, también
+tenemos la oportunidad de dejar al navegador que calcule por si mismo las dimensiones
+de las zonas (en cuanto a porcentaje a cubrir) de las parcelas que creemos. Para ello sólo
+tendremos que poner un asterísco y el resto se realizará automáticamente. Ahí va un
+ejemplo y, después, su explicación para ver todo más claro.
+<br><br>
+
+<b><FONT SIZE=0 COLOR="30001F"><i>
+&lt;FRAMESET ROWS="20%,40%,*"><BR>
+.......<br>
+&lt;/FRAMESET>
+</b>
+</i></font>
+<br><br>
+Esa sencilla instrucción <I>&lt;FRAMESET></I> se va a encargar de dividir la pantalla
+en tres zonas horizontales diferentes. Una de ellas, la primera, ocupará un 20% del total
+de pantalla, la otra un 40% y, por último, la tercera zona ¿qué ocupará?. Muy sencillo, ocupará
+simplemente el resto que será de 40%.
+<br>
+En el caso de que queramos dividir la pantalla de forma vertical deberemos de utilizar
+el parámetro COLS que funciona exactamente igual que lo visto para la ROWS, es decir,
+el ejemplo siguiente divide la pantalla en dos zonas verticales.
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;FRAMESET COLS="50%,50%"><BR>
+.......<br>
+&lt;/FRAMESET>
+</b>
+</i></FONT>
+<br>
+<h4>Cómo indicarle al navegador la división</h4>
+<p align=justify>
+Una vez que hemos aprendido cómo dividir nuestra página para mostrar la información
+en diferentes zonas, deberemos de saber cómo indicarle al navegador que queremos
+utilizar la división que tenemos en mente. <br>
+Para ello utilizaremos un archivo .HTM que contendrá todas las divisiones que deseamos
+realizar en nuestra página así como los archivos HTML que se cargarán nada más que
+sean inicializadas. En dicho archivo meteremos, por tanto, las órdenes relacionadas
+con la división de la pantalla (descrita anteriormente) junto a las relacionadas con la
+carga de los archivos .HTM que se llevarán a cabo con la directiva <i>&lt;FRAME></i> y los
+parámetros <i>SRC</i>, <i>NAME</i>, <i>SCROLLING</i> y <i>NORESIZE</i>. Todas ellos son
+opcionales salvo SRC que deberá de estar presente obligatoriamente. Pero vayamos por partes:
+<UL>
+<LI><FONT size=2><p align=justify><b>SRC</b>. Esta directiva nos va a servir para indicar
+el nombre del archivo que se cargará en el primero de los planos que creemos. De esta forma
+si ponemos el parámetro así:
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;FRAME SRC="hola.htm">
+</b>
+</i></FONT>
+<br><br>
+El primero de los planos de que dispongamos se verá cargado con el archivo hola.htm.
+</p></FONT></LI>
+<LI><FONT size=2><p align=justify><b>NAME</b>. Con NAME podremos dar un nombre
+a el plano que creemos. La forma de dar el nombre será una cadena de caracteres
+entrecomillada, es decir:
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;FRAME SRC="hola.htm" NAME="plano1">
+</b>
+</i></FONT>
+<br><br>
+Como veremos más adelante, la asignación de nombres a los planos será muy importante
+pues nos permitirá poder volcar la información que seleccionemos en un plano o frame
+determinado a otro distinto. Esto, sin ir más lejos, es lo que ocurre en nuestro menú.
+</p></FONT></LI>
+<LI><FONT size=2><p align=justify><b>NORESIZE</b>. Este parámetro opcional nos asegura
+que el usuario no podrá redimensionar el frame, es decir, "protege" al frame de posibles
+manipulaciones por parte del usuario para hacer que se comporte como una especie
+de ventana cambiante, eso sí, cambiante en cuanto al tipo de división que tenga (podremos
+hacer que el plano sea más ancho o alto dependiendo de cómo esté realizada la división).</p></FONT></LI>
+<LI><FONT size=2><p align=justify><b>SCROLLING</b>. Dicho parámetro podrá tener tres
+valores distintos que serán <i>yes</i>, <i>no</i> y <i>auto</i>. Han de ir entrecomillados
+y sirven para indicar si se deben de poner o no las barras de desplazamiento. La opción <i>yes</i> nos
+las habilitará, la opción <i>no</i> nos las quitará y, por último, con <i>auto</i> dejaremos
+en manos del navegador la decisión, es decir, si hay más texto del que se puede ver
+en pantalla se pondrán y viceversa. <br>
+La forma de poner el parámetro SCROLLING y, el anteriormente explicado, NORESIZE podría ser:
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;FRAME SRC="hola.htm" NAME="plano1" NORESIZE SCROLLING="auto">
+</b>
+</i></FONT>
+<br><br>
+Esta instrucción nos cargaría en un plano el archivo hola.htm. Además de no permitir
+al usuario modificar el tamaño del mismo, crear barras de desplazamiento, si la información
+no entrara y etiquetar el plano con el nombre plano1.
+</p></FONT></LI>
+</UL>
+<br><p align="justify">
+Una vez analizadas todas las opciones para poder dividir a nuestras anchas la pantalla
+os pongo lo que podría ser el archivo destinado a cargarlas el cual, os vuelvo a 
+repetir, deberá de ser el que se llame al entrar a vuestra página. En nuestro
+caso os diré que el primer archivo que es llamado es uno con el nombre de
+index.htm que contiene las definiciones necesarias para realizar la división en
+pantalla de nuestra página. 
+<br>
+Os pongo a continuación nuestro archivo index.htm que utiliza todo lo visto hasta
+ahora.
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+&lt;HTML><br><br>
+&lt;HEAD><br>
+&lt;TITLE> MACEDONIA Magazine &lt;/TITLE><br>
+&lt;/HEAD><br>
+<br>
+&lt;FRAMESET COLS="23%,*"><br>
+&lt;FRAME SRC="index0.htm" NAME = "MENU" SCROLLING ="auto" NORESIZE><br>
+&lt;FRAME SRC="hola.htm" NAME = "TEXTO" SCROLLING ="auto" NORESIZE><br>
+&lt;/FRAMESET><br><br>
+
+&lt;BODY><br>
+&lt;/BODY><br>
+<br>
+&lt;/HTML>
+</b>
+</i></FONT>
+<br><br>
+Como podéis comprobar no tiene ningún misterio...
+<br>
+<h4>La etiqueta &lt;BASE></H4>
+<p align=justify>
+Ya para finalizar, vamos a ver cómo poder hacer que desde un frame o plano podamos
+cargar la información en otro diferente.<br><br>
+Antes de continuar, debemos de tener bien claro que hasta ahora, al realizar el
+enlace desde una página o frame concreto a un archivo HTML (independientemente
+de su localización, esto es, de si es de nuestra propia página o de otra distinta),
+se realizaba "machacando" la información de la parcela o frame
+en el que estábamos, o lo que es lo mismos, desde el que realizábamos tal petición de carga.
+<br>
+Pues bien, ahora vamos a aprender cómo podemos beneficiarnos de los frames para poder
+realizar cargas de información en los distintos frames de que dispongamos, es decir,
+veremos cómo poder construirnos una página que tenga un menú a la izquierda y muestre
+la información a la derecha.. Uhmmm ¿en qué página he visto yo eso? ;-).
+<br><br>
+Si volvéis a repasar los atributos que se pueden poner a un frame que creemos,
+encontraréis que, de entre ellos, había uno destinado a poner el nombre del mismo.
+Recordémoslo:
+<br><br><FONT size=0 color="000000"><B><i>
+&lt;FRAME SRC="index0.htm" <font color="AA00BB">NAME = "MENU"</font> SCROLLING ="auto" NORESIZE><br>
+<br></font></I></B>
+<br>
+Si os fijáis, en la directiva <i>FRAME</i>, el atributo <i>NAME = "MENU"</i> lo que hacía era dar
+un nombre al frame que vamos a definir, pues bien, si nosotros al comienzo de dicho
+frame, el cual cargará en el ejemplo el archivo index0.htm, ponemos <I>&lt;BASE TARGET="MENU"></I>,
+haremos que la información siempre se cargue en la parcela o frame al que habíamos
+llamado MENU y que, en este caso, va a ser el mismísimo lugar en dónde se ha cargado
+el archivo "index0.htm", es decir, no hemos conseguido nada nuevo... Sin embargo, ¿qué
+pasaría si en lugar de poner el nombre que habíamos dado al frame en el que se carga
+el archivo <i>index0.htm</i> ponemos el de otro frame?. Pues muy sencillo, que habremos
+conseguido volcar el "link" o archivo .htm justo en el lugar que a nosotrosotros más
+nos interesa en estos momentos, en otro frame distinto al actual.
+<br>
+<h4>Un ejemplo antes de marchar</H4>
+<p align=justify>
+Con esto, ya habremos logrado "configurar" una ventana con las mismas "facilidades" que
+puede ofrecer tanto Macedonia como cualquier otra página de las que circulan por
+Internet. Los frames son un estupendo aliado a la hora de separar y ofrecer la
+información de la forma más ordenada posible, si bien, todo en abuso es malo y tal y
+como reza el título de este capítulo, el abuso puede producir que nuestra página sea
+un cúmulo de frames molestos que sólo dejen vislumbrar la información en porciones
+muy reducidas de nuestro navegador.<br> Os lo digo ahora y no me cansaré de avisaros,
+ojo con el uso que dáis a los frames pues pueden mandar "al carajo" vuestra página. Recordad,
+no es bueno utilizar ni muchos frames ni muchos gif animados, estáis avisados.
+<br><br>
+Bien, como creo que ya toca ofrecer un ejemplo más claro de todo lo explicado os
+mostraré un ejemplo con la cabecerá de la definición de frame y, después, el código
+de los dos archivos que utiliza. Pensad que en el caso de Macedonia realmente es así,
+utilizamos un archivo .htm (que es el que se lanza cuando entráis en el servidor) que
+crea dos frames y, en cada uno de ellos, carga su archivo .htm correspondiente (index0.htm y
+hola.htm). En fín, utilizando el esquema de Macedonia, ahí va:
+<br><br>
+<FONT size=0 color="000000">
+<i><b>
+<font color="AA00BB">Código del fichero index.htm</font><br>
+&lt;HTML><br><br>
+&lt;HEAD><br>
+&lt;TITLE>Creador de frames. index.htm &lt;/TITLE><br>
+&lt;/HEAD><br>
+<br>
+&lt;FRAMESET COLS="25%,75%"><br>
+&lt;FRAME SRC="index0.htm" NAME = "MENU" SCROLLING ="auto" NORESIZE><br>
+&lt;FRAME SRC="hola.htm" NAME = "TEXTO" SCROLLING ="auto" NORESIZE><br>
+&lt;/FRAMESET><br><br>
+&lt;BODY><br>
+&lt;/BODY><br>
+<br>
+&lt;/HTML>
+<br><br>
+<font color="AA00BB">Código del fichero index0.htm</font>
+<br>
+&lt;HTML><br><br>
+&lt;HEAD><br>
+&lt;TITLE>Frame lado izquierdo. index0.htm&lt;/TITLE><br>
+&lt;/HEAD><br>
+<br>
+&lt;BODY>&lt;h2>Texto de la frame izquierda &lt;/h2> <br>
+&lt;/BODY><br>
+<br>
+&lt;/HTML>
+<br><br>
+<font color="AA00BB">Código del fichero index1.htm</font>
+<br>
+&lt;HTML><br><br>
+&lt;HEAD><br>
+&lt;TITLE>Frame lado derecho. index1.htm&lt;/TITLE><br>
+&lt;/HEAD><br>
+<br>
+&lt;BODY>&lt;h2>Texto de la frame derecha &lt;/h2> <br>
+&lt;/BODY><br>
+<br>
+&lt;/HTML>
+</b>
+</i></FONT>
+<br><br>
+Al interpretarse el archivo index.htm se crearán dos frames en pantalla, uno a la
+izquierda y otro a la derecha. El del lado izquierdo ocupará sólo un 25% del total
+de la pantalla mientras que el del lado derecho estará "apoderado" de un 75% 
+utilizable.
+<br>
+<h4>Y llegamos, nuevamente, al final</H4>
+<p align=justify>
+Pues sí amigos, nuevamente acabamos otro capítulo más de este mini cursillo de html,
+y también, todo los grandes temas que quería tratar. Para el siguiente número del
+fanzine daré por concluido el curso introductorio hablando de todas esas cosas que
+quedan en el tintero por tratar y que, por causa de tiempo y conocimientos no puedo
+llevar a cabo (y ahora mismo estoy pensando en Java). Por eso, voy a lanzar ya
+la petición de continuidad de este curso. Si hay alguien de los que está leyendo
+esto que sea capaz de llevar una continuación del mismo ofreciendo temas más
+avanzados y profundizando mucho más en todos los aspectos tratados pues tiene mi
+invitación.<BR>
+Lo dicho, en el próximo número concluimos el primer curso de Macedonia.
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulap.htm"><font FACE="ARIAL"><B>[Curso Acelerado de HTML]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

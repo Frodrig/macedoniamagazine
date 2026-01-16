@@ -1,0 +1,377 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 11. <br> Programación de la Sound Blaster (II).
+</h3>
+<H4>3.3.- Programaci&oacute;n de la Sound Blaster</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+Ya conocemos el hardware, ahora hay que reconocer sus posibles configuraciones
+y atenerse a ellas.
+
+<P align="justify"><B><U>3.3.1.- Detecci&oacute;n de la Sound Blaster</U></B>
+
+<P align="justify">Ahora podemos analizar la parte del c&oacute;digo que se encarga de
+la detecci&oacute;n de la SB y de sus caracter&iacute;sticas, en el siguiente
+procedimiento que se encuentra en el m&oacute;dulo <I>"VOC.C"</I>, pero
+antes hay que conocer ciertas constantes y variables incluidas en el m&oacute;dulo
+<I>"VOC.H".</I>
+
+<P align="justify"><B>WORD</B> longitud=0; <B>WORD</B> frecuencia=0; <B>WORD</B> alojado;
+
+<P align="justify"><B>WORD BPORT</B>=0x210; <B>WORD XPORT</B>=0x216; <B>WORD WPORT</B>=0x21c;
+
+<P align="justify"><B>WORD RPORT</B>=0x21a; <B>WORD APORT</B>=0x21e; <B>BYTE READY</B>=0xaa;
+
+<P align="justify">Y el procedimiento para la detecci&oacute;n de la SB, que incluye la
+explicaci&oacute;n de lo que hace, en el propio c&oacute;digo, es:
+
+<P align="justify">// Si se encuentra la Sound Blaster, devuelve un 1. Un 0 si no se encuentra
+
+<P align="justify"><B><FONT COLOR="#990000">BOOL DetectarSB(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE estado=0,cont;</B>
+<BR><B><I>&nbsp;</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Intentamos encontrar el puerto de conexi&oacute;n</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; while ((estado!=READY)&amp;&amp;(BPORT&lt;0x270))</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnPuerto(XPORT,1);
+<I>// Reseteo de la Sound Blaster</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Como m&iacute;nimo
+hay que esperar 3,3 milisegundos.5 para asegurarnos</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delay(5);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnPuerto(XPORT,0);
+cont=0;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while ((estado!=READY)&amp;&amp;(cont&lt;100))</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { estado=LeeDePuerto(RPORT);
+cont++; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Se buscan los puertos
+de la Sound Blaster</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (estado!=READY)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+BPORT+=0x10; XPORT+=0x10; WPORT+=0x10;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PORT+=0x10; APORT+=0x10;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; if (BPORT!=0x270)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while ((LeeDePuerto(WPORT)&amp;128)!=0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EscribeEnPuerto(WPORT,0xd1);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Activa la salida
+digital mediante el DAC</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SpeakerOn();</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return (1);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; return (0);</B>
+<BR><B>}</B>
+
+<P align="justify">Hasta ahora se ha presentado una visi&oacute;n introductoria de la SB,
+ya que en s&iacute; misma es secundaria. Pero lo que nos importa de verdad
+es lo que puede hacer por nosotros. Ya hemos detectado su presencia y reconocidos
+los valores de los puertos BASE y del DSP. Pasemos a lo que realmente es
+el motivo de su uso, aunque primero es imprescindible especificar el modo
+de funcionamiento que podemos darle a la SB. Se basan en:
+<OL>
+<LI>
+Temporizador del PC (<B>Timer</B>)</LI>
+
+<LI VALUE="1">
+Acceso directo a memoria (<B>DMA</B>)</LI>
+</OL>
+<B><U>3.3.2.- Generaci&oacute;n de Sonido por el Temporizador</U></B>
+<BR>&nbsp;
+<BR>Todo ordenador dispone de un temporizador (timer), el cual est&aacute;
+ubicado en una interrupci&oacute;n de usuario. Esta interrupci&oacute;n
+es llamada por el ordenador 18,2 veces por segundo y sirve para mantener
+la fecha, la hora del sistema y otros servicios internos.
+
+<P align="justify">Un aspecto importante de esta interrupci&oacute;n es que en todos los
+procesadores, ya sea un 8086 o un 80486, esta interrupci&oacute;n es llamada
+con la misma frecuencia, permitiendo as&iacute; que la fecha o la hora
+del sistema, por ejemplo, se actualicen a la misma velocidad en todo tipo
+de procesadores. Si no fuese as&iacute;, el tiempo <I>"pasar&iacute;a"</I>
+m&aacute;s deprisa en un ordenador m&aacute;s potente que en un ordenador
+un poco m&aacute;s lento.
+
+<P align="justify">Las interrupciones, como se sabe, realizan diversas funciones. Para
+entenderlo claramente podemos decir que una interrupci&oacute;n es un servicio
+que nos permite simplificar una tarea determinada, tal como cambiar el
+modo gr&aacute;fico (int 10h), o gestionar el rat&oacute;n (int 33h).
+
+<P align="justify">Mediante el <B>Ensamblador Inmerso</B> usado conjuntamente con el <B>C</B>,
+el vector que apunta a una interrupci&oacute;n determinada puede ser cambiado,
+y hacer que apunte a una rutina de usuario.
+
+<P align="justify">Me explico: si conseguimos <I>"colgar"</I> una rutina de usuario en
+el vector de interrupci&oacute;n del teclado (9h), podremos hacer que nuestra
+rutina se ejecute cada vez que nosotros pulsamos una tecla... &iquest;por
+qu&eacute;?. porque cada vez que se pulsa una tecla, el ordenador llama
+a la interrupci&oacute;n 9h para gestionar el evento ocurrido, a partir
+de esta llamada se llena el b&uacute;fer del teclado, se realizan una serie
+de procesos y aparece el car&aacute;cter deseado en pantalla (normalmente).
+
+<P align="justify">Pero si cambiamos esa interrupci&oacute;n y hacemos que en vez de apuntar
+a una posici&oacute;n de memoria determinada, apunte hacia nuestra rutina,
+conseguiremos que el ordenador llame a otra direcci&oacute;n de memoria,
+lo que provocar&aacute; que se realice otro proceso distinto al original.
+
+<P align="justify">De la misma manera que podemos interceptar la interrupci&oacute;n 9h,
+tambi&eacute;n podemos interceptar el vector de interrupci&oacute;n del
+temporizador (8h). De esta manera nuestra rutina se ejecutar&iacute;a 18.2
+veces por segundo porque el ordenador llama &eacute;l solito a la interrupci&oacute;n
+8h 18.2 veces por segundo.
+
+<P align="justify">En definitiva, la generaci&oacute;n de sonido v&iacute;a temporizador
+se basa en los siguientes pasos:
+<OL>
+<LI>
+Crear una rutina que env&iacute;e un byte de un puntero al puerto de escritura
+de la SB, de esta manera cada vez que se llame al timer (18,2 veces por
+segundo) se enviar&aacute; s&oacute;lo un byte del puntero que contiene
+el sonido digitalizado (un n&uacute;mero de 8 bits).</LI>
+
+<LI VALUE="1">
+Reprogramar el temporizador para que se ejecute m&aacute;s de 18,2 veces...
+22000 veces, por ejemplo (algo totalmente posible). Este valor tomado como
+ejemplo, representa en definitiva el n&uacute;mero de bytes que queremos
+mandar en un segundo. A este valor lo llamamos <B>frecuencia de muestreo</B>,
+concepto presentado anteriormente, expresado en Hertzios. Por lo tanto,
+si mandamos bytes a una frecuencia de 22000 bytes por segundo, nuestro
+sonido sonar&aacute; a 22000Hz (22 Khz).</LI>
+
+<LI VALUE="1">
+<I>"Colgar"</I> nuestra rutina en la interrupci&oacute;n 8h, de esta manera
+se ejecutar&aacute; la rutina 22000 veces.</LI>
+</OL>
+Todo esto es muy bonito y en realidad funciona tal y como se pretende.
+Ser&iacute;a la forma m&aacute;s c&oacute;moda y f&aacute;cil de generar
+el sonido digitalizado. Pero a pesar de esto, tiene mucho que desear.
+
+<P align="justify">Si colgamos una rutina del temporizador, cada tantas veces por segundo,
+el temporizador interrumpe a la CPU para realizar una operaci&oacute;n
+extremadamente lenta como es enviar un byte al puerto de la SB.
+
+<P align="justify">Este proyecto intenta ser lo m&aacute;s r&aacute;pido posible para conseguir
+hacer algo que realmente pueda calificarse como <I>"multimedia"</I>, es
+decir, utilizar los recursos del ordenador de forma conjunta para un determinado
+objetivo. As&iacute;, si estamos interpretando un fichero de animaci&oacute;n
+como los <B>FLI</B> (utilizables gracias a este curso), que requieren un
+gran n&uacute;mero de operaciones y deseamos a la vez reproducir un sample
+utilizando la t&eacute;cnica anteriormente expuesta, dependiendo del ordenador,
+la animaci&oacute;n se ralentizar&aacute; demasiado (intolerable en este
+curso), ya que el proceso de c&aacute;lculo se ver&aacute; interrumpido
+numerosas veces por segundo, con lo que si queremos una buena frecuencia
+de muestreo, 18000 por ejemplo, la animaci&oacute;n se mover&aacute; a
+duras penas, dando tirones y l&aacute;stima.
+
+<P align="justify"><B><U>3.3.3.- Generaci&oacute;n de Sonido a trav&eacute;s del DMA</U></B>
+
+<P align="justify">Como se ha visto, la t&eacute;cnica anterior es v&aacute;lida si, por
+ejemplo, tenemos una pantalla fija y queremos que a la vez suene un sample.
+Pero en el momento en que se quieran hacer dos cosas que necesiten al procesador
+al mismo tiempo, la t&eacute;cnica del timer no vale, sencillamente porque
+no es &oacute;ptima y no se puede combinar con la lectura de ficheros FLI,
+uno de los objetivos de este Proyecto.
+
+<P align="justify">Sencillamente por esto, necesitamos un sistema por el cual pudi&eacute;ramos
+liberar a la CPU de todo el trabajo, permitiendo una generaci&oacute;n
+de sonido totalmente independiente del ordenador. Pero estando en el mundo
+del PC, pensar en que el ordenador en su conjunto haga algo sin la interacci&oacute;n
+de la CPU, motor de todo, es casi impensable.
+
+<P align="justify">A su vez, pensando en c&oacute;mo hacer algo independiente de la CPU,
+teniendo en cuenta que la SB incorpora un chip DSP que trabaja por s&iacute;
+solo... una transmisi&oacute;n de datos sin que medie la CPU... una transmisi&oacute;n
+directa desde la memoria a la SB que tiene sus propios registros (o sea,
+memoria)... una transmisi&oacute;n directa de memoria a memoria... &iexcl;pero
+si para eso est&aacute; el <B>DMA</B>!
+
+<P align="justify">Las transferencias por <B>DMA</B> (Direct Memory Access) permiten liberar
+a la CPU de todo el trabajo, evitando as&iacute; los problemas antes mencionados.
+Pero toda transferencia por DMA requiere unos protocolos, unas leyes, unas
+normas a seguir, y que se deben seguir estrictamente si no queremos bloquear
+nuestro ordenador, o queremos obtener una calidad de reproducci&oacute;n
+&oacute;ptima a la vez que el fichero FLI se interpreta por parte de la
+CPU.
+
+<P align="justify">Analicemos c&oacute;mo usar el DMA.
+
+<P align="justify">Lo primero que hay que tener en cuenta es el nuevo modelo de representaci&oacute;n
+de posiciones de memoria que se usa, ya que estamos hasta ahora acostumbrados
+al t&iacute;pico esquema de:
+
+<P align="justify"><B>Segmento:Desplazamiento</B>
+
+<P align="justify">Pues bien, si queremos transmitir un bloque de memoria de una direcci&oacute;n
+a otra mediante DMA, no debemos usar este tipo de expresi&oacute;n: debemos
+decirle al DMA la <I>"p&aacute;gina"</I> de memoria y el <I>"desplazamiento"</I>
+de memoria donde se encuentra el bloque a mover. Ahora,
+
+<P align="justify"><B>Segmento:DesplazamientoS</B>
+
+<P align="justify">apunta al bloque en cuesti&oacute;n. El proceso de transformaci&oacute;n
+de la direcci&oacute;n normal a la nueva es el siguiente.
+
+<P align="justify"><B>DesplazamientoS = Segmento shl 4 + Desplazamiento</B>
+
+<P align="justify"><B>P&aacute;gina = (Segmento + Desplazamiento shr 4) shr 12</B>
+
+<P align="justify">A partir de aqu&iacute;, deberemos decir al DMA que env&iacute;e bytes
+de la posici&oacute;n <I>P&aacute;gina:DesplazamientoS</I> a la SB, y deberemos
+configurar el DSP para que simplemente vaya leyendo los bytes que le llegan
+por DMA y los vaya interpretando por su <B>DAC</B>. De esta manera oiremos
+el sonido.
+
+<P align="justify">Pero antes de hacer esto, deberemos decirle al DSP la frecuencia de
+muestreo a la que debe reproducir el sonido. Aqu&iacute; hay que tener
+cuidado; no basta con decirle la frecuencia en Hertzios, sino que debemos
+d&aacute;rsela de forma que &eacute;l lo entienda (al igual que la conversi&oacute;n
+a P&aacute;gina:Desplazamiento). El proceso para convertir de Hertzios
+a la frecuencia del DSP es la siguiente:
+
+<P align="justify"><B>FrecuenciaDSP = 256- (1000000-FrecuenciaHertzios)</B>
+
+<P align="justify">Luego, deberemos enviarle este valor resultante al DSP... pero &iquest;como
+escribimos valores en el DSP? Es muy sencillo (claro, una vez que has estado
+dos d&iacute;as intentando comprender por qu&eacute; se bloquea el ordenador
+y de repente piensas: &iquest;y si pongo <I>"mov al, byte ptr valor"</I>
+en lugar de <I>"mov ax, word prt valor"</I>?)
+
+<P align="justify">Para escribir cualquier tipo de valor en el DSP deberemos usar los puertos
+de la SB antes mencionados. El siguiente procedimiento que tambi&eacute;n
+se encuentra en el m&oacute;dulo <I>"VOC.C"</I> se encarga de esto, y en
+&eacute;l podr&aacute; apreciarse (<U>de nuevo</U>) el uso del Ensamblador
+Inmerso.
+
+<P align="justify"><B><FONT COLOR="#990000">void EscribeEnDSP(BYTE valor)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; test1:</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,WPORT</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+in al,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and al,0x80</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cmp al,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz test1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,byte ptr valor</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">Seg&uacute;n los valores que escribamos en el DSP, la tarjeta de sonido
+realizar&aacute; diversas funciones, tales como activar el DAC mediante
+la funci&oacute;n:
+
+<P align="justify"><B>void SpeakerOn(void);</B>
+
+<P align="justify">O desactivarlo mediante
+
+<P align="justify"><B>void SpeakerOff(void);</B>
+
+<P align="justify">Y otras m&aacute;s que posteriormente veremos.
+ 
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

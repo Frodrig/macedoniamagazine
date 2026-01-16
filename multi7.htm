@@ -1,0 +1,188 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 7. <br> Programación de tarjetas de vídeo (V).
+</h3>
+<H4>2.1.12.- Registros de la VGA</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+A continuaci&oacute;n se expondr&aacute;n todos los conjuntos de registros
+que est&aacute;n disponibles en la tarjeta de v&iacute;deo. El siguiente
+gr&aacute;fico expone todos los registros de la VGA ordenados por su funci&oacute;n:
+<BR>&nbsp;
+<CENTER><IMG SRC="jpg/multi3.jpg" HEIGHT=141 WIDTH=370></CENTER>
+
+
+<P align="justify"><B>Registros Generales</B>
+<DIR><p align=justify>Son aquellos que no han sido englobados en ninguna de las otras categor&iacute;as
+debido al car&aacute;cter general de su uso, ya que nos proporcionan informaci&oacute;n
+sobre el estado global de la tarjeta de v&iacute;deo.</DIR>
+
+<CENTER><IMG SRC="jpg/multi4.jpg" HEIGHT=130 WIDTH=380></CENTER>
+
+
+<P align="justify"><B>Registros del DAC</B>
+<DIR><p align=justify>El Digital to Analog Converter (DAC), es el encargado de traducir
+los d&iacute;gitos (0 y 1) en se&ntilde;ales de v&iacute;deo anal&oacute;gicas
+que se pueden ver en la pantalla del monitor.
+
+<P align="justify">Tambi&eacute;n permite que se vean los 256 colores de la VGA de entre
+una paleta total de 262144 colores posibles.
+
+<P align="justify">Los registros del DAC son los encargados de controlar el funcionamiento
+y la selecci&oacute;n de colores.</DIR>
+
+<CENTER><IMG SRC="jpg/multi5.jpg" HEIGHT=156 WIDTH=255></CENTER>
+
+
+<P align="justify"><B>Registros del Secuenciador</B>
+<DIR><p align=justify><p align=justify>El secuenciador es el encargado de controlar y coordinar la memoria
+de v&iacute;deo del PC y la informaci&oacute;n que &eacute;sta guarda.
+Una de las operaciones m&aacute;s "quisquillosas" que realiza es controlar
+el trabajo de la CPU y sus accesos a la memoria de v&iacute;deo a la par
+que la circuiter&iacute;a del hardware de la VGA est&aacute; tomando informaci&oacute;n
+para el refresco de la pantalla. Una incorrecci&oacute;n en este mecanismo
+provocar&iacute;a que la pantalla de v&iacute;deo se colapsase o corrompiese
+(algo muy frecuente durante la elaboraci&oacute;n de este Proyecto).
+
+<P align="justify">Para acceder al secuenciador y sus registros existen dos puertos separados.
+Uno es el registro &iacute;ndice o de direcciones, donde debemos indicar
+a qu&eacute; registro queremos acceder de los 5 disponibles en el secuenciador.
+
+<P align="justify">El segundo puerto es el de datos, por donde introducimos o sacamos la
+informaci&oacute;n.
+<BR>&nbsp;</DIR>
+<B>Registros del Controlador de Rayos Cat&oacute;dicos</B>
+<DIR><p align=justify>Se encarga de manejar la pantalla y las se&ntilde;ales de barrido
+de la misma para producir el n&uacute;mero correcto de l&iacute;neas y
+p&iacute;xels que han de visualizarse en la pantalla en cada momento.
+
+<P align="justify">Por esta raz&oacute;n, los registros de este controlador se encargan,
+principalmente, de las se&ntilde;ales de temporizaci&oacute;n del haz de
+electrones en su incansable viaje de barrido de la pantalla. Estos procesos
+son conocidos como "Retrace" de la pantalla, el cual se realiza a una frecuencia
+que variar&aacute; dependiendo de cada tarjeta y monitor. Por regla general,
+a mayor n&uacute;mero de veces que se barra la pantalla, redibuj&aacute;ndose
+el contenido de &eacute;sta, mejor y m&aacute;s est&aacute;tica ser&aacute;
+la imagen.
+
+<P align="justify">Para acceder a los registros tambi&eacute;n se usar&aacute; un registro
+de direcciones y otro de datos.
+
+<P align="justify">&nbsp;</DIR>
+<B>Registros del Controlador de Gr&aacute;ficos</B>
+<DIR><p align=justify>Estos son los registros m&aacute;s dif&iacute;ciles de programar y
+entender. Su funci&oacute;n se engloba en todos los procesos de control
+de los accesos de la CPU a la memoria de v&iacute;deo y de la sincronizaci&oacute;n
+de &eacute;stos, durante los ciclos de refresco de la pantalla. Programando
+el controlador gr&aacute;fico se puede cambiar el comportamiento de la
+CPU de cara a la memoria de v&iacute;deo y por lo tanto cambiar resoluciones,
+tama&ntilde;os de pantalla, etc. El esquema de registro de direcciones
+y de datos se mantiene.</DIR>
+<B>Registros del Controlador de Atributos</B>
+<DIR><p align=justify>Su funci&oacute;n es encargarse de la generaci&oacute;n de las se&ntilde;ales
+de color. Toma las se&ntilde;ales digitales y las convierte en se&ntilde;ales
+anal&oacute;gicas RGB que se materializan en luces de colores cuando llegan
+a nuestro monitor.
+<center><img src="jpg/multi9.jpg"></center>
+<P align="justify">Tambi&eacute;n se usa un registro de direcciones y otro de datos.</DIR>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

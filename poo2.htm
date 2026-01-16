@@ -1,0 +1,252 @@
+<HTML>
+<HTML>
+
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 2.<br> Fundamentos de la POO
+</H3>
+
+<h4> ¿Por qué la POO?</h4>
+<p align=justify>
+Seguro que muchos de vosotros os habreis preguntado unas cuantas veces qué es
+eso de la programación orientada a objetos, por qué todo el mundo no hace más que
+hablar de ella como la salvación de la ingeniería del software moderno, etc.
+Bien, la POO supone, bajo mi punto de vista, el único camino posible a seguir para
+la realización de programas en la actualidad. Para poder llegar a tal conclusión
+tan sólo debeís de fijaros en los requisitos que exije la realización de un proyecto
+de software en la actualidad.<br> Por un lado están las ingentes cantidades de información
+a tratar en todos ellos, por otro lado, el equipo de personas que intervienen es bastante
+numeroso y todos deben de poder utilizar el código que, el resto de miembros del
+equipo, han realizado sin tener que complicarse la vida. En tercer lugar, los 
+programas actuales ocupan miles de líneas, con lo que no se puede programar a la
+ligera, hay que seguir unas reglas muy estrictas, que nos permitan construir programas
+robustos en cuanto al uso de sus estructuras de datos. Otro de los aspectos que hay
+que tener en cuenta es el de reutilización, cualquier programa ha de estar lo
+suficientemente bien diseñado para que las partes básicas del mismo puedan servir
+en la realización y construcción de otros, ya que no nos podemos permitir el "lujo"
+de estar perdiendo tiempo construyendo una y otra vez las mismas cosas. Hay que aprovecharse
+de código que ya está hecho.
+<BR><BR>
+Hasta aquí os he citado algunas de las características
+que exijen los proyectos de software de la actualidad. Negar alguna de ellas no es más
+que engañarse. Atrás quedaron los felices días en los que un programador podía abarcar
+un proyecto de software. El ejemplo más claro lo teneís en el campo de la programación
+de juegos. Antes bastaba con un programador, un grafista y ocasionalmente un
+músico para producir un sensacional juego, sin embargo, ahora para realizar un juego
+son necesario varios programadores que han de estar colaborando contínuamente,
+amén del resto de artistas que han de participar en la creación de la obra. Es por ello
+que no se puede acudir a la programación tradicional para la construcción de programas
+en la actualidad, ya que esta, no se diseño para dar soporte a grandes desarrollos
+de software con continuas actualizaciones y con multitud de equipos de desarrollo destinados
+a un campo específico del proyecto.
+<br><br>
+<h4> Y...¿por dónde van los tiros? </h4>
+<p align=justify>
+Vereis, la POO se basa en utilizar estructuras de datos en las que, tanto las
+variables como las funciones que manipulan dichas variables se encuentran unidas.
+Tan sólo teneis que imaginaros la definción de una estructura en C (<i>struct</i>).
+Todos sabéis que en las estructuras sólo es posible meter distintos campos que no
+son más que variables. Así podéis construir una estructura que tenga un campo de
+tipo entero (<i>int</i>) otro que sea de tipo caracter (<i>char</i>), arrays de
+un determinado tipo de dato, etc. Por otro lado, están las funciones que
+tratan a dichas estructuras de datos. En todo momento son "externas", esto es, cualquier
+funcion PUEDE (si cumple unas características obvias) acceder a un campo de una
+estructura y trabajar con él. <br>Pues bien, ahora imaginaros que teneis una estructura
+en la que están metidos no sólo los campos de variables de toda la vida, sino que,
+además, están metidas, también, las funciones para manipularlas, de tal modo que,
+sólo esas funciones que se encuentran metidas en la estructura, pueden manipular esas
+variables que, también, se encuentran en la estructura. ¿Ya os lo habeís imaginado?,
+si habeis podido pillar la idea, sabed que para poder crear una variable de dichas
+estructuras debereis de crear un OBJETO a dicha estructura, ¡sí!, los objetos no son
+más que variables o, mejor dicho, INSTANCIAS, a las estructuras, que a partir de ahora llamaremos CLASES, 
+que poseen tanto variables como funciones para manipular dichas variables.
+<br><br>
+Bueno, si habeis logrado quedaros con que son los OBJETOS, INSTANCIAS y CLASES, teneis
+premio, ya que habeis logrado entender lo suficiente como para poder seguir con éxito. Si
+no has logrado pillar la idea de todo lo puesto más arriba, no te preocupes, se te irán
+aclarando a lo largo de los capítulos, pero te recomiendo que te vuelvas a leer lo de antes.
+<br><br>
+<h4>Los pilares de la POO</h4>
+<p align=justify>
+Después de presentaros una idea general de lo que supone la POO frente a la programación
+estructurada de toda la vida, os voy a comentar los pilares en los que descansa, esto es,
+las características que la hacen tan potente. Como vereís al acabar de leer este capítulo,
+la POO posee una serie de características estupendas para poder trabajar en equipo
+un proyecto de software, además de permitirnos construir programas envidiablemente
+robustos.<br><br>
+<h4>Encapsulación de datos.</h4>
+<p align=justify>
+La encapsulación de datos, no es más que la idea que expuesta más arriba, esto es,
+la idea de mezclar las variables y las fuciones que sirven para manipular dichas
+variables, en una misma estructura de datos. <BR>Por ahora y hasta que no veamos las
+clases, quedaros con que todo esto se podría lograr, metiendo en una <i>struct</i> tradicional
+de C un campo destinado a las variables y otro a las funciones. Lógicamente, la posiblidad
+de meter funciones en la <i>struct</i> se la debemos al C++.<br>
+La encapsulación de datos, es fundamental en la POO, ya que nos permite construir 
+objetos que, como ya se citó más arriba, no son más que instancias (o variables hablando
+mal) a
+dichas <i>struct</i>. Las ventajas que reporta la encapsulación de datos son estupendas,
+ya que nos permiten crear variables totalmente protegidas de posibles efectos no deseados,
+como cambio de valor por descuido o efectos laterales gracias a tener unas fuciones
+que se encargan de realizar todas las operaciones sobre ellas, es decir, no penseis que
+si os construis un objeto con sus propias variables vais a dar vosotros el valor a la
+variable directamente como se ha hecho toda la vida (que también se puede hacer). Lo que hareis será llamar a una función que lo único que
+que haréis será realizar dicha asignación.<br>
+Seguro que ahora mismo estais pensando que hacer eso es una estupidez, ¿para qué construir
+una función que haga, por ejemplo, a=b cuando yo mismo lo puedo hacer directamente?, la
+respuesta es bien sencilla, porque, precisamente en eso consiste la POO; al hacer eso
+estás ocultando información y evitando que tus variables puedan tomar valores no 
+deseados, limando, en gran medida, fallos de paso de valores a las variables, tan comunes en la programación
+tradicional.<br>
+Pese a que todo esto es lo ideal, no os "asusteis". Como ya veremos, también podemos acceder
+a las variables que tengamos directamente, sin tener que llamar a una función que se
+encarge de ello, pero, como ya he intentado recalcar, esto se debe de evitar siempre.
+<br><br>
+<h4> Herencia </h4><p align=justify>
+La herencia es otro de los pilares sobre los que descansa la POO. Gracias a la herencia,
+podemos hacer que todas las clases que tengamos, o las que nos interesen,
+puedan estar conectadas entre sí, aprovechando, unas de otras, diversas características
+básicas.<br>
+La idea de la herencia parte de poder tener un diseño en el que todo se vaya descomponiendo
+en módulos o problemas que van de lo más general a lo más específico y que a su vez,
+estén conectados entre sí. Quizás, este concepto va a quedar mejor explicado si se
+utiliza un ejemplo, así que vamos alla.<br><br>
+Imaginaros que se quiere construir una aplicación sobre las clases <i>coche_turismo</i> y 
+<i>coche_formula1</i>. Para hacer esto mediante POO, tenemos 2 opciones,
+no utilizar la herencia o utilizarla. En caso de no utilizarla, bastaría con construir los objetos que de cada uno
+de los vehículos terrestres <i>coche_turismo</i> y <i>coche_formula1</i>, sin embargo, pese a que esta solución es válida,
+es bastante mala a la hora de utilizar las posiblidades que nos ofrece la POO, ya que
+se da pie a utilizar la herencia y no la utilizamos.
+<br>
+Fijémonos que tanto el <i>coche_turismo</i> como la <i>coche_formula1</i> son vehículos terrestres y como tales tienen
+unas cosas en comunes y otras que no lo son. ¿Por qué no construir una clase que contenga
+aquellas variables o atributos comunes para que sean heredados por las clases coche_turismo y
+coche_fórmula1?. Esta es la solución más lógica, ya que, además de permitir un ahorro de memoria,
+clarifica todo de una forma bastante aguda. <br>
+
+Por todo esto, lo más lógico sería consturir una clase general que tuviera los atributos
+o variables acerca del tipo de ruedas, velocidad y tipo de motor. Esta claro que
+cualquier coche ya sea un turismo o de carreras disfruta de esos datos. Por otro lado, también habrá datos que
+serán específicos de la clase <i>coche_turismo</i> y de la clase <i>coche_formula1</i>, es decir, que habrá datos que
+pueda tener uno y no los tenga el otro. El caso más claro es el de pasajeros. Mientras un turismo puede llevar pasajeros, un coche de fórmula 1 no puede llevar pasajeros (a parte del
+conductor, claro), es por esto,
+que podríamos meter, y así hemos hecho, una variable de ese tipo en la clase coche_turismo.
+<br>
+Como todo esto de la herencia queda mejor con un gráfico ahí va lo que
+os quiero decir mediante el ejemplo descrito:
+<br>
+<br>
+<center><img src="gif/poofig1.gif" border=2></center>
+<br><br>
+<p align=justify>
+En el ejemplo de arriba sólo he tratado para un par de clases pero, como veremos
+en sucesivos capítulos, la herencia nos permitírá construir perfectas jerarquías de
+clases que nos ayudarán a partir de una idea general y llegar a algo concreto y de
+fácil tratamiento.<br><br>
+<p align=justify>
+Pese a que la POO descansa sobre otros importantes pilares, quizás será demasiado
+prematuro hablaros de ellos ahora, lo importante es que se vaya cogiendo una idea
+general con lo visto en este capítulo. Saber que es un objeto y que una clase, así
+como las características y ventajas que aporta una encapsulación de datos y funciones
+junto a la posiblidad de desglosar nuestros problemas a modo de jerarquías mediante
+herencias, son cosas suficientes como para ir haciendose una idea de los mecanismos
+de la POO.<BR>
+En los sucesivos capítulos, ya nos meteremos "más a fondo" y pondremos listados y
+ejemplos en código C++.
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulad.htm"><font FACE="ARIAL"><B>[Curso de POO en C++]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

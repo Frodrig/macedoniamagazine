@@ -1,0 +1,1513 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 6. <br> Programación de tarjetas de vídeo (IV).
+</h3>
+<H4>2.1.10.- Lectura de Ficheros PCX</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+
+El formato gr&aacute;fico PCX es aquel que utiliza la compresi&oacute;n
+creada por Zsoft. Este tipo de fichero no alcanza las compresiones realizadas
+por otros ficheros gr&aacute;ficos como los <B>GIF</B> o los <B>JPG</B>,
+pero el tiempo que se tarda en descomprimir estos &uacute;ltimos es demasiado
+elevado. EL motivo por el que el <B>PCX</B> ha sido escogido es porque
+su compresi&oacute;n es bastante aceptable, acompa&ntilde;ado de una elevada
+velocidad de descompresi&oacute;n. Si quisi&eacute;ramos usar por ejemplo
+un JPG de la misma forma en que en se usan los PCX, el retardo ser&iacute;a
+inaceptable.
+
+<P align="justify">El formato PCX se encuentra en casi todos los programas gr&aacute;ficos
+que existen. En concreto, los usados para este proyecto: <B>DPaint Enhanced,</B>
+<B>Autodesk 3D Studio y Paint Shop Pro, Photoshop. </B>Otros programas
+como <B>Corel Draw</B>, <B>Photo Paint</B> o el mismo <B>AutoCad</B> y
+otros m&aacute;s, soportan este formato, incluido el <B>Paintbrush</B>
+de <B>Windows</B>, que lo incorpora como est&aacute;ndar junto al <B>BMP</B>.
+
+<P align="justify">Un fichero PCX comienza con una cabecera de 128 bytes. En general, esta
+cabecera no se usa, puesto que el control de los distintos formatos gr&aacute;ficos
+lo realiza el propio programa, y no el usuario (que podr&iacute;a equivocarse).
+Esto tiene un motivo: de nuevo la velocidad. Se perder&iacute;a mucho tiempo
+si tuvi&eacute;semos que chequear los valores de la cabecera para comprobar
+que en efecto es un fichero con la resoluci&oacute;n adecuada, el n&uacute;mero
+de bytes correcto...
+
+<P align="justify">Tras los 128 bytes de cabecera siguen los bytes de la imagen gr&aacute;fica.
+El m&eacute;todo usado es la t&eacute;cnica <B>Run-Length-Enconding</B>
+(RLE) orientada a byte.
+
+<P align="justify">La siguiente tabla presenta el contenido de la cabeza de un fichero
+PCX.
+<BR>&nbsp;
+<TABLE BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="7%"><B><I>Byte</I></B></TD>
+
+<TD VALIGN=TOP WIDTH="18%"><B><I>&Iacute;tem</I></B></TD>
+
+<TD VALIGN=TOP WIDTH="11%"><B><I>Tama&ntilde;o</I></B></TD>
+
+<TD VALIGN=TOP WIDTH="63%"><B><I>Descripci&oacute;n</I></B></TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">0</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Creador</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Constante, 10 = ZSoft .pcx&nbsp;</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">1</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Versi&oacute;n</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Informaci&oacute;n de Versi&oacute;n:&nbsp;&nbsp;
+<BR>0 = Versi&oacute;n 2.5 de PC Paintbrush.&nbsp;&nbsp;
+<BR>2 = Versi&oacute;n 2.8 w/palette: informaci&oacute;n.&nbsp;&nbsp;
+<BR>3 = Versi&oacute;n 2.8 w/o palette: informaci&oacute;n.&nbsp;&nbsp;
+<BR>4 = PC Paintbrush para Windows (adem&aacute;s Windows usa la versi&oacute;n
+5).&nbsp;&nbsp;
+<BR>5 = Versi&oacute;n 3.0 y > de PC Paintbrush y PC Paintbrush +, incluye
+Publisher&acute;s Paintbrush y ficheros PCX de 24 bits.&nbsp;</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">2&nbsp;</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Codificaci&oacute;n</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">1 = .PCX run length encoding.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">3</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Bits por P&iacute;xel</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">N&uacute;mero de bits para representar un p&iacute;xel
+(por plano) - 1, 2, 4, o 8.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">4</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Ventana</TD>
+
+<TD VALIGN=TOP WIDTH="11%">8</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Dimensiones de la imagen: Xmin,Ymin,Xmax,Ymax.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">12</TD>
+
+<TD VALIGN=TOP WIDTH="18%">HDpi</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Resoluci&oacute;n horizontal de la imagen en
+DPI .</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">14</TD>
+
+<TD VALIGN=TOP WIDTH="18%">VDpi</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Resoluci&oacute;n vertical de la imagen en DPI.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">16</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Mapa de color</TD>
+
+<TD VALIGN=TOP WIDTH="11%">48</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Paleta de colores.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">64</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Reservado</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Constante = 0</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">65</TD>
+
+<TD VALIGN=TOP WIDTH="18%">N&ordm; Planos</TD>
+
+<TD VALIGN=TOP WIDTH="11%">1</TD>
+
+<TD VALIGN=TOP WIDTH="63%">N&uacute;mero de planos de color.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">66</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Bytes por l&iacute;nea</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">N&uacute;mero de bytes necesarios para guardar
+una plano de l&iacute;nea. Tiene que ser un n&uacute;mero impar.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">68</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Paleta</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Indica c&oacute;mo interpretar la paleta.&nbsp;&nbsp;
+<BR>1 = Color/BW&nbsp;&nbsp;
+<BR>2 = Escala de grises</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">70</TD>
+
+<TD VALIGN=TOP WIDTH="18%">HScreenSize</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Tama&ntilde;o horizontal de la pantalla en p&iacute;xels.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">72</TD>
+
+<TD VALIGN=TOP WIDTH="18%">VScreenSize</TD>
+
+<TD VALIGN=TOP WIDTH="11%">2</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Tama&ntilde;o vertical de la pantalla en p&iacute;xels.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="7%">74</TD>
+
+<TD VALIGN=TOP WIDTH="18%">Relleno</TD>
+
+<TD VALIGN=TOP WIDTH="11%">54</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Bytes con valor 0 hasta rellenar los 128 de
+la cabecera.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P align="justify">Para decodificar un fichero PCX se realiza continuamente un proceso
+determinado:
+<DIR>
+<DIR>Leemos un byte y miramos si sus bits 7 y 8 est&aacute;n a 1. Si es
+as&iacute;, los restantes seis bits indican cu&aacute;ntas veces se repite
+el pr&oacute;ximo byte del fichero PCX. Si los bits 7 y 8 no est&aacute;n
+ambos a 1, el byte se representa a s&iacute; mismo una sola vez, y leemos
+el siguiente para repetir el mismo proceso. Hay que tener en cuenta que
+la codificaci&oacute;n es por l&iacute;neas, es decir, si estamos en una
+resoluci&oacute;n de 320 columnas (y mediante la decodificaci&oacute;n
+hemos obtenido 317 bytes), si el 318 tiene sus bits 7 y 8 a 1, nunca podr&aacute;
+indicar m&aacute;s de 2 repeticiones, aunque el mismo color siga repiti&eacute;ndose
+en la siguiente l&iacute;nea. Se puede decir que en el caso de los PCX
+la codificaci&oacute;n est&aacute; <B>orientada a l&iacute;nea</B>.</DIR>
+</DIR>
+Un caso aparte es d&oacute;nde se encuentra ubicada la informaci&oacute;n
+de la paleta cuando se trata de un fichero de 256 colores. Si es de 16
+o menos, se guarda en la cabecera a partir de la posici&oacute;n 16, en
+el campo <I>Mapa de Color</I>. Pero cuando tenemos 256 colores, &eacute;sta
+se encuentra tras la codificaci&oacute;n de la pantalla.
+
+<P align="justify">Tras el &uacute;ltimo byte de la codificaci&oacute;n, se encuentra un
+byte de separaci&oacute;n con el valor 12 en decimal y tras &eacute;l,
+768 bytes indican ternas consecutivas de valores <B>RGB</B>.
+
+<P align="justify">Pero estos valores no se pueden tomar directamente, ya que son bytes
+(0-255) y los valores RGB van de 0 a 63, por lo que tendremos que dividir
+el valor le&iacute;do por 4.
+
+<P align="justify">El siguiente procedimiento se encarga de leer un fichero y guardarlo
+en una zona de memoria de 64000 bytes, asignando finalmente la paleta al<B>
+DAC</B> de v&iacute;deo
+
+<P align="justify"><B><FONT COLOR="#990000">void LeePcxMcga(char nombre[12],BYTE *pantalla)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register WORD cont,cont2;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE *direscrt,byte,r,g,b,filas;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; FILE *fichero;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; fichero=fopen(nombre,"rb"); fseek(fichero,128,0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; direscrt=pantalla; cont=64000;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; while (cont>0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; byte=getc(fichero);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (byte&lt;=192)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{ *direscrt++=byte; cont--; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cont2=byte&amp;63; byte=getc(fichero);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for(;cont2>0;cont2--)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{ *direscrt++=byte; cont--; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; getc(fichero);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; for (cont2=0;cont2&lt;256;cont2++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; r=getc(fichero)>>2; g=getc(fichero)>>2;
+b=getc(fichero)>>2;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Establecer1ColorPaleta(cont2,r,g,b);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; fclose(fichero);</B>
+<BR><B>}</B>
+
+<P align="justify">Aparte de este procedimiento se puede hacer el siguiente:
+
+<P align="justify"><B>void LeePcxMcgaR(char [12],unsigned char *,PALETA);</B>
+
+<P align="justify">Es el mismo que el anterior con la salvedad de que no asigna la paleta
+al <B>DAC</B> de v&iacute;deo, sino que la almacena en la variable de tipo
+<I>PALETA</I> para su posterior uso. Esto es &uacute;til para los volcados
+entre pantallas que no tienen la misma paleta, puesto que si se usase el
+anterior procedimiento, la primera pantalla ver&iacute;a su paleta trastocada
+y el efecto ser&iacute;a desastroso al cambiar los colores a otros que
+puede que no tengan nada que ver.
+
+<P align="justify"><I>&nbsp;</I>
+
+<P align="justify"><B><U>2.1.11.- Lectura de Ficheros FLI</U></B>
+
+<P align="justify">Un fichero <B>FLI</B> es un tipo de archivo en el que se guarda la informaci&oacute;n
+referente a una animaci&oacute;n, estructurada de forma &oacute;ptima para
+su posterior reproducci&oacute;n.
+
+<P align="justify">Este tipo de ficheros es soportado por programas como <B>Autodesk Animator
+Pro</B> y <B>Autodesk 3D Studio 4.0</B>. Es el m&aacute;s conocido de los
+ficheros de animaci&oacute;n (junto a su hermano mayor, el <B>FLC</B>).
+
+<P align="justify">Los detalles de un fichero <B>FLI</B> son moderadamente complejos, pero
+la idea en la que se basa es simple: no hay que preocuparse en guardar
+las partes de un <B>frame</B> (pantalla hablando en t&eacute;rminos de
+animaci&oacute;n) que son las mismas que las del anterior frame. No solamente
+esto ahorra espacio, sino que es mucho m&aacute;s r&aacute;pido dejar un
+p&iacute;xel que escribirlo de nuevo.
+
+<P align="justify">Un fichero FLI, como todos los ficheros que almacenan alg&uacute;n tipo
+de formato que se va a usar posteriormente, tiene una cabecera. Su tama&ntilde;o
+es de 128 bytes. Tras esta cabecera est&aacute;n almacenados un conjunto
+de frames. Utilizando la idea anterior, los siguientes frames son almacenados
+como la diferencia con el anterior frame. Imprescindiblemente, el primer
+frame almacenado debe ser guardado completamente, ya que no hay uno anterior
+con el que calcular la diferencia. Para comprobaciones y chequeos (no lo
+usamos por el motivo de la velocidad a cambio de una peque&ntilde;a p&eacute;rdida
+de posible seguridad) hay un &uacute;ltimo frame que contiene la diferencia
+entre el &uacute;ltimo frame anterior a &eacute;ste, y el primero.
+
+<P align="justify">La cabecera de un fichero FLI es la siguiente:
+<BR>&nbsp;
+<CENTER><TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER><B><I>Byte</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER><B><I>Tama&ntilde;o</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER><B><I>Nombre</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">
+<CENTER><B><I>Significado</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>0</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Tama&ntilde;o</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Longitud del fichero.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Magia</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Constante = AF11</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>6</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Frames</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">N&uacute;mero de Frames. M&aacute;ximo 4000
+frames.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>8</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Anchura</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Anchura de la resoluci&oacute;n de pantalla.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>10</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Altura</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Altura de la resoluci&oacute;n de pantalla.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>12</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Profundidad</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Profundidad de un p&iacute;xel. Normalmente
+8.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>14</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Flag</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Constante = 0</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>16</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Velocidad</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">N&uacute;mero de ticks entre cada frame.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>18</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Siguiente</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Constante = 0</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>22</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Frit</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Constante = 0</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="9%">
+<CENTER>26</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>102</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Expandido</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="60%">Relleno de ceros hasta completar los 128 bytes.</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Como se indic&oacute; antes, tras la cabecera vienen los frames.
+<BR>&Eacute;stos a su vez tienen cada uno su propia cabecera de 16 bytes:
+<BR>&nbsp;
+<CENTER><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER><B><I>Byte</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="14%">
+<CENTER><B><I>Tama&ntilde;o</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER><B><I>Nombre</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="59%">
+<CENTER><B><I>Significado</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>0</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="14%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Tama&ntilde;o</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="59%">Bytes en el frame. Como m&aacute;ximo 64 Kbytes.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="14%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Magia</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="59%">Constante = F1FA</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>6</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="14%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Chunk</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="59%">N&uacute;mero de Chunks en el frame.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="10%">
+<CENTER>8</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="14%">
+<CENTER>8</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="18%">
+<CENTER>Expandido</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="59%">Relleno de ceros hasta completar los 16 bytes.</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Despu&eacute;s de la cabecera del frame, vienen los <B>chunks</B> que
+componen el frame.
+
+<P align="justify">Primero viene un <B>chunk de color</B> si la paleta de colores ha cambiado
+desde el anterior frame, luego viene un <B>chunk de p&iacute;xel</B> si
+los p&iacute;xel han cambiado con respecto al anterior frame. Aclaremos
+ahora en qu&eacute; consiste un chunk.
+
+<P align="justify">Un chunk es como una estructura determinada que contiene un tipo de
+informaci&oacute;n. De nuevo, cada chunk tiene una cabecera de 6 bytes:
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH="442" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER><B><I>Byte</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER><B><I>Tama&ntilde;o&nbsp;</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="17%">
+<CENTER><B><I>Nombre</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="53%">
+<CENTER><B><I>Significado</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>0</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="17%">
+<CENTER>Tama&ntilde;o</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="53%">N&uacute;mero de bytes en el chunk.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="11%">
+<CENTER>4</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="19%">
+<CENTER>2</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="17%">
+<CENTER>Tipo</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="53%">Tipo del chunk.</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Hay cinco tipos de chunk:
+<BR>&nbsp;
+<CENTER><TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH="476" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER><B><I>Valor</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER><B><I>Nombre</I></B></CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">
+<CENTER><B><I>Significado</I></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>11</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER>FLI_COLOR</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Paleta comprimida.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>12</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER>FLI_LC</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">L&iacute;nea comprimida.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>13</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER>FLI_BLACK</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Establece toda la pantalla al color 0.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>15</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER>FLI_BRUN</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">Compresi&oacute;n del primer frame con RLE.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="13%">
+<CENTER>16</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="24%">
+<CENTER>FLI_COPY</CENTER>
+</TD>
+
+<TD VALIGN=TOP WIDTH="63%">64000 bytes sin comprimir.</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P align="justify">Analicemos ahora en detalle lo que significa cada tipo de chunk, sabiendo
+que el primero es el chunk de color que antes apuntamos, y los cuatro restantes
+son chunks de p&iacute;xel.
+
+<P align="justify">Adem&aacute;s hay que decir que los esquemas de compresi&oacute;n son
+todos orientados a byte como en los PCX. Para permitir <B>DMA</B> (no es
+el caso nuestro), el FLI observa que si los datos comprimidos terminan
+con una longitud par, un byte de relleno es insertado para que el chunk
+FLI_COPY comience siempre en una direcci&oacute;n impar.
+
+<P align="justify">An&aacute;lisis de los chunks:
+
+<P align="justify"><B>FLI_COLOR</B>
+<DIR>Los primeros 2 bytes son el n&uacute;mero de paquetes en este <B>chunk</B>.
+A continuaci&oacute;n vienen los propios <B>paquetes</B> (trozos de informaci&oacute;n
+comprimida). El primer byte de cada paquete indica cu&aacute;ntos colores
+hay que saltarse. El siguiente byte dice cu&aacute;ntos colores hay que
+cambiar. Si este byte es 0 se interpreta como 256 (siempre tendr&aacute;
+este valor el primer frame del fichero FLI). Luego est&aacute;n las ternas
+<B>RGB</B> de cada color que se va a cambiar.</DIR>
+<B>FLI_LC</B>
+<DIR>Este es el m&aacute;s com&uacute;n y a la vez el m&aacute;s complejo
+de los chunks. Los primeros 2 bytes son el n&uacute;mero de l&iacute;neas
+de la parte superior de la pantalla que son iguales al frame anterior.
+La siguiente palabra (2 bytes) indica el n&uacute;mero de l&iacute;neas
+que hay que cambiar. A continuaci&oacute;n est&aacute;n los datos para
+los cambios. Cada l&iacute;nea se comprime individualmente (concepto similar
+al de la compresi&oacute;n orientada a l&iacute;nea de los <B>PCX</B>).
+Analicemos m&aacute;s profundamente esta t&eacute;cnica:
+
+<P align="justify">El primer byte de una l&iacute;nea comprimida indica el n&uacute;mero
+de paquetes en esa l&iacute;nea. Si la l&iacute;nea no cambia con respecto
+al anterior frame, este valor es 0. El formato individual de cada paquete
+es el siguiente:</DIR>
+
+<UL>
+<UL>
+<LI>
+<I>Skip_count</I></LI>
+
+<LI VALUE="1">
+<I>Size_count</I></LI>
+
+<LI VALUE="1">
+<I>Datos</I></LI>
+</UL>
+</UL>
+
+<DIR><I>Skip_count</I> es un simple byte. Si m&aacute;s de 255 p&iacute;xels
+se van a saltar, debe ser indicado mediante 2 paquetes. <I>Size_count</I>
+es otro byte. Si es positivo, esa cantidad de bytes siguen a continuaci&oacute;n
+y deben ser copiados tal cual a la pantalla. Si es negativo, le sigue un
+simple byte que se repite <I>-Skip_count</I> veces.
+
+<P align="justify">En el peor de los casos un frame comprimido mediante chunks FLI_LC,
+puede llegar a ocupar 70 Kbytes. Para prevenir esto, si en la compresi&oacute;n
+se detecta que se ha pasado de los 60000 bytes o m&aacute;s, no se contin&uacute;a
+con la compresi&oacute;n, se deshecha y se utiliza FLI_COPY</DIR>
+<B>FLI_COPY</B>
+
+<P align="justify">Consiste en un conjunto de 64000 bytes de datos sin comprimir.
+
+<P align="justify"><B>FLI_BLACK</B>
+<DIR>Es el m&aacute;s simple junto al anterior. S&oacute;lo se usa en el
+primer frame del FLI y consiste en poner la paleta en negro total.</DIR>
+<B>FLI_BRUN</B>
+<DIR>Es como el FLI_LC, pero sin los saltos (<I>Skip_count</I>). Comienza
+inmediatamente con los datos para la primera l&iacute;nea y contin&uacute;a
+l&iacute;nea a l&iacute;nea. EL primer byte contiene el n&uacute;mero de
+paquetes en la l&iacute;nea. El formato para estos paquetes es:</DIR>
+
+<OL>
+<LI>
+<I>Size_count</I></LI>
+
+<LI VALUE="1">
+<I>Datos</I></LI>
+</OL>
+
+<DIR>Si <I>Size_count</I> es positivo, el dato consiste en un byte que
+se repite <I>Size_count</I> veces. Si es negativo, hay <I>-Size_count</I>
+bytes de datos que se copian a la pantalla. Igual que FLI_LC, si se detecta
+que en la compresi&oacute;n se llevan almacenados m&aacute;s de 60000 bytes,
+se aborta el proceso y se utiliza FLI_COPY.</DIR>
+Y por fin el procedimiento que se encarga de este pesado de entender y
+codificar, pero resultoso efecto:
+
+<P align="justify"><B><FONT COLOR="#990000">void VerFLIMcga(char fichero[12],int retardo,BYTE
+*pant)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; register WORD pixel,vc;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int segmento,desplazamiento;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; FILE *fli;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; CABECERA_FLI hdr;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; CABECERA_FRAME frm;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; unsigned long size;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; WORD type,pakets,cnt,lines,change,i,c,f,cont,cont2;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; BYTE skip,v,*aux,rojo,verde,azul;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; signed char s;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; clock_t tiks;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; PALETA paleta;</B>
+
+<P align="justify"><B><I><FONT COLOR="#000000">&nbsp;&nbsp;&nbsp; // Apertura del fichero</FONT></I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; fli=fopen(fichero,"rb");</B>
+<BR><B>&nbsp;&nbsp;&nbsp; if (!fli)</B>
+<BR><B>&nbsp;&nbsp;&nbsp; {</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ModoTexto();</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\nNo se encuentra
+el fichero %s",fichero);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit (0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // M&aacute;ximo buffer para dar velocidad
+en la carga del fichero</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; setvbuf(fli,VBuf,_IOFBF,BUFSIZE);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Lectura de la cabeza</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; fread(&amp;hdr,sizeof(CABECERA_FLI),1,fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Para cada frame...</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; for (f=0;f&lt;hdr.frames;f++)</B>
+<BR>&nbsp;&nbsp;&nbsp; <B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tiks=clock();</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Lee una cabecera
+de frame</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fread(&amp;frm,sizeof(CABECERA_FRAME),1,fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (frm.size!=0L)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i=0;i&lt;frm.chunks;i++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cabecera del chunk</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+fread(&amp;size,sizeof(long),1,fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+type=getw(fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Dependiendo del tipo del frame</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+switch (type)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B><I>// L&iacute;nea comprimida</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case FLI_LC:</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// N&uacute;mero de l&iacute;neas que son iguales al frame anterior</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lines=getw(fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// N&uacute;mero de l&iacute;neas que han cambiado</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+change=getw(fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Pasado a ensamblador: cont=(256*lines+64*lines) == 320*lines</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov vc,4</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,lines</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl ax,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+shl bx,6</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add ax,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cont,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cont2=cont;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for(c=0;c&lt;change;c++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pakets=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while (pakets>0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+skip=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec pakets</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,skip</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add cont,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+s=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (s>0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add vc,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+salto:</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rojo=getc(fli);</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,rojo</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz salto</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+else</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+s=-s;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+v=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ch,ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,v</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add cont,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add cont2,320</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cont=cont2;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Si ha habido un n&uacute;mero impar de bytes, se lee el de relleno</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (vc&amp;1) getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case FLI_BRUN:</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Para contar el n&uacute;mero de bytes descomprimidos</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov vc,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cont,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Compresi&oacute;n l&iacute;nea por l&iacute;nea</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for (skip=0;skip&lt;200;skip++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// N&uacute;mero de paquetes en la linea</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pakets=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while (pakets>0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// N&uacute;mero de veces que se repite un byte</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+s=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec pakets</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Si s es negativo, el n&uacute;mero de bytes es -s y est n en</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// los siguientes s bytes: no est&aacute; comprimido</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (s&lt;0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+s=-s;</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add vc,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+salto1:</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rojo=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,rojo</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dec s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+jnz salto1</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Si es positivo, se repite el siguiente byte s veces:</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// est&aacute; comprimido</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+else</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+v=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,cont</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov di,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,v</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ch,ch</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep stosb</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,s</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add cont,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Si se han obtenido un n&uacute;mero impar de bytes, entonces falta</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// otro byte que es de relleno</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (vc&amp;1) getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cambiar un n&uacute;mero determinado de colores</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case FLI_COLOR:</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// N&uacute;mero de paquetes comprimidos</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pakets=getw(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov vc,2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov c,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while (pakets--)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cu&aacute;ntos colores se saltan</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+skip=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cada 3 bytes representa 1 color: rojo, verde y azul, por lo</I></B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// que se saltar n 3*n&uacute;mero de colores bytes</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,skip</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ah,ah</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cl,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mul cl</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add c,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc vc</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Cu&aacute;ntos colores se cambian</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cnt=getc(fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Si es 0, se interpreta como 256, de 0 a 255 colores a cambiar</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (cnt==0)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cnt,256</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+while (cnt--)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Se asignan los valores RGB de cada color a la paleta</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+paleta[c]=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc c</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+paleta[c]=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc c</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+paleta[c]=getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+inc c</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+add vc,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Se hace efectivo el cambio de paleta</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for (lines=0,change=0;lines&lt;256;change+=3,lines++)</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rojo=paleta[change];</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+verde=paleta[change+1];</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+azul=paleta[change+2];</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,lines</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,rojo</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,0x3c9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,verde</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov al,azul</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+out dx,al</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Si ha habido un
+n&uacute;mero impar de bytes, se lee el de relleno</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (vc&amp;1) getc(fli);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;</B>
+
+<P align="justify"><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 64000 bytes sin
+comprimir</I></B>&nbsp;
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case FLI_COPY:</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aux=pant;</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Se leen los 64000
+p&iacute;xeles de la pantalla</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (pixel=0;pixel&lt;64000;pixel++)
+*aux++=getc(fli);</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Se vuelcan de una
+vez</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; segmento=FP_SEG(pant);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; desplazamiento=FP_OFF(pant);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+push ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ds,segmento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov si,desplazamiento</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep movsw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pop ds</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Aqu&iacute; no
+hay comprobaci&oacute;n del n&uacute;mero de vc, 64000 es par</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;</B>
+
+<P align="justify"><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Cls a negro</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case FLI_BLACK:</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0xA000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor di,di</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+xor ax,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,32000</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rep stosw</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Si no se
+reconoce, se sale</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default:</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ModoTexto();</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\nVersi&oacute;n
+incorrecta de archivo FLI");</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit (0);</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Espera hasta el n&uacute;mero especificado
+de ticks del reloj</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; while (clock()-tiks&lt;retardo);</B>
+<BR><B>&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp; fclose(fli);</B>
+<BR><B>}</B>
+
+<P align="justify">Este procedimiento nos permite indicar la velocidad de su ejecuci&oacute;n,
+siendo la m&aacute;s adecuada el valor 1 para los ordenadores r&aacute;pidos
+(486-Pentium), y 0 para los m&aacute;s lentos. Si por las caracter&iacute;sticas
+globales de un ordenador determinado, con el valor 1 la animaci&oacute;n
+fluye demasiado deprisa, o se quiere que avance lentamente, los valores
+2 y 3 se pueden llegar a utilizar sin perder demasiada fluidez.
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

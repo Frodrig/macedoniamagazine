@@ -1,0 +1,19 @@
+/* Cuerpo */
+
+/* Enlaces */
+
+/* Enlace normal, activo y visitado */
+A:link, A:active, A:visited { 
+ font-family:Arial;
+ font-weight:bold; 
+ text-decoration:none; 
+ color:#0015d9 
+}
+
+/* Enlace con foco */
+A:hover { 
+ font-family:Arial; 
+ text-decoration:underline; 
+ color:#0015d9 
+}
+

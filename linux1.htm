@@ -1,0 +1,469 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Introducción y Uso del Linux</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:pecapon@alumni.uv.es">Pedro A. Carrasco.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 2.<br> Configuración de X-Window.
+</H3>
+<H4><A NAME="ss2.1">2.1 Introducci&oacute;n.</A></h4>
+
+<P ALIGN=justify>
+
+
+En este segundo cap&iacute;tulo del curso de introducci&oacute;n a <B>Linux</B> trataremos
+el entorno gr&aacute;fico m&aacute;s popular dentro del mundo <B>Linux</B>: las <B>X-Window</B>
+(o X pero nunca X-Windows), de momento a&uacute;n est&aacute; sujeto a la licencia
+GPL, aunque sus creadores anuncian que la pr&oacute;xima versi&oacute;n no ser&aacute;
+as&iacute;, pero no hay que preocuparnos, parece que el proyecto Berl&iacute;n anda
+ya cerca y parece ser que podr&aacute; sustituir de manera m&aacute;s eficiente
+a X, ahora volviendo al tema de este segundo cap&iacute;tulo veamos los apartados
+de que constar&aacute;:
+<P>
+<OL>
+<LI>Instalaci&oacute;n y configuraci&oacute;n de X-Window.</LI>
+<LI>Fichero XF86Config.</LI>
+<LI>Uso de xvidtune.</LI>
+<LI>Nuevos proyectos (KDE, GNOME).</LI>
+</OL>
+<P>
+<H4><A NAME="ss2.2">2.2 Instalaci&oacute;n y configuraci&oacute;n de X-Window.</A>
+</H4><P ALIGN=JUSTIFY>
+La configuraci&oacute;n del servidor X ha sido considerada algo complicada
+siempre por los usuarios noveles en este sistema operativo, en este
+cap&iacute;tulo veremos que no es as&iacute; , lo primero que tenemos que tener
+a mano es las especificaciones de nuestro monitor, la frecuencia de
+muestreo horizontal y la frecuencia de muestreo vertical, debemos
+saber el modelo de nuestra tarjeta gr&aacute;fica o por lo menos con cu&aacute;l
+es compatible y la cantidad de memoria gr&aacute;fica que tenemos, el tipo
+de teclado que tenemos (101 &oacute; 102 teclas) y el rat&oacute;n, sobre todo si
+no es est&aacute;ndar. Bien, con todos esto datos en la mano pasamos a hablar
+de la configuraci&oacute;n:
+<P>
+<P ALIGN=JUSTIFY>En primer lugar debemos saber d&oacute;nde se encuentra el fichero de configuraci&oacute;n
+de X, en todas las distribuciones que conozco, este se halla en <B>/etc/X11/</B>
+con el nombre <B>XF86Config</B>.
+Una vez localizado dicho fichero tenemos dos opciones, o editarlo a
+mano, o dejar que alg&uacute;n programa m&aacute;s amigable lo haga por nosotros,
+yo siempre opto por la segunda opci&oacute;n que "rellena" bastante bien
+el fichero <B>XF86Config</B> y posteriormente realizar los cambios necesarios
+a mano. Para ello podemos utilizar varios programas, estos son:
+<P ALIGN=JUSTIFY>
+<DL>
+<DT><B>Xconfigurator.</B><DD><P ALIGN=JUSTIFY>Este programa es el que utiliza por defecto la distribuci&oacute;n
+Red Hat, es en modo texto pero con men&uacute;s, por lo que es muy f&aacute;cil
+de utilizar. Por una serie de cuadros de di&aacute;logo te va guiando por
+la configuraci&oacute;n.
+<DT><br><B>Xf86config.</B><DD><P ALIGN=JUSTIFY>Es el b&aacute;sico en cualquier distribuci&oacute;n, funciona en modo texto
+tambi&eacute;n pero sin men&uacute;s, toda la configuraci&oacute;n se realiza por una
+serie de preguntas. Para usuarios noveles puede ser bastante complicado
+de utilizar, pero pregunta de todo, sin intentar autodetectar nada,
+puede ser &uacute;til para tarjetas gr&aacute;ficas no est&aacute;ndar.
+<DT><br><B>XF86Setup.</B><DD><P ALIGN=JUSTIFY>Es en modo gr&aacute;fico, por lo que si lo ejecutas ya tendr&aacute;s
+las X aunque en VGA. Es muy sencillo de utilizar e intuitivo, viene
+en algunas distribuciones, aunque no en todas.
+</DL>
+<P ALIGN=JUSTIFY>En general todos piden lo mismo, esto es: 
+<OL>
+<LI>El tipo de rat&oacute;n, es conveniente si tienes un rat&oacute;n normal activar
+la emulaci&oacute;n de tres botones, as&iacute; al pulsar los dos botones a la
+vez ser&aacute; como si hubieses pulsado el central.
+</LI>
+<LI>El tipo de teclado, 101 &oacute; 102 teclas, el idioma (espa&ntilde;ol en nuestro
+caso) y si quieres o no activar las teclas muertas (Dead Keys),
+en general es conveniente activar esta opci&oacute;n.
+</LI>
+<LI>El tipo de tarjeta gr&aacute;fica, si sabes el modelo mejor, ya que muestra
+una lista con los modelos que conoce. Si no necesitar&aacute;s saber el
+chipset y dotclock si lo tiene. 
+</LI>
+<LI>El tipo de monitor o en su defecto la frecuencia de muestreo horizontal
+y vertical. 
+</LI>
+<LI>Los modos de v&iacute;deo que quieres ejecutar y la densidad del color (bits
+por pixel).</LI>
+</OL>
+<P ALIGN=JUSTIFY>
+<P ALIGN=JUSTIFY>Una vez configurado con el programa en cuesti&oacute;n quiz&aacute;s queramos modificar
+algo de nuestra configuraci&oacute;n, como el modo en el que arrancar&aacute;, la
+profundidad de color etc. Para poder hacerlo necesitamos saber la
+estructura del fichero XF86Config que a continuaci&oacute;n se detalla:
+<P ALIGN=JUSTIFY>
+<H4>Fichero XF86Config.</H4>
+
+<P ALIGN=JUSTIFY>El fichero <B>XF86Config</B> cuenta con varios campos configurables, estos
+se definen por las etiquetas Section - EndSection, dentro de estas
+etiquetas puede haber subsecciones (Subsection - EndSubsection). Empezaremos
+por el principio:
+<P ALIGN=JUSTIFY>Lo primero que nos encontramos es la secci&oacute;n de ficheros, en ella se
+indica d&oacute;nde se encuentran los ficheros de fuentes y la base de datos
+de colores RGB. La opci&oacute;n por defecto estar&aacute; bien. Esta secci&oacute;n es
+del tipo:
+<BLOCKQUOTE><CODE>
+<PRE>
+Section Files
+RgbPath /usr/X11R6/lib/X11/rgb
+FontPath /usr/X11R6/lib/X11/fonts/misc/
+FontPath /usr/X11R6/lib/X11/fonts/Type1/
+FontPath /usr/X11R6/lib/X11/fonts/Speedo/
+FontPath /usr/X11R6/lib/X11/fonts/75dpi/
+FontPath /usr/X11R6/lib/X11/fonts/100dpi/
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>
+<P ALIGN=JUSTIFY>Otra secci&oacute;n muy importante y que quiz&aacute;s tengas que modificar es la
+del teclado, como ejemplo veamos la de mi <B>XF86Config</B>:
+<BLOCKQUOTE><CODE>
+<PRE>
+Section Keyboard
+Protocol Standard
+AutoRepeat 500 5
+XkbKeycodes xfree86
+XkbTypes default
+XkbCompat default
+XkbSymbols us(pc101)
+XkbGeometry pc
+XkbRules xfree86
+XkbModel pc101
+XkbLayout es
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Como vemos, el protocolo que utilizamos es el est&aacute;ndar, el par&aacute;metro
+autorepeat define la espera y tasa de repetici&oacute;n al mantener pulsada
+una tecla, los c&oacute;digos, tipo, compatibilidad, s&iacute;mbolos, geometr&iacute;a
+y normas (rules) son los que tengo por defecto para mi teclado, el
+modelo de 101 teclas es el que tiene la tecla de borrar grande (el
+que la tiene peque&ntilde;a es el modelo de 102 teclas), y el Layout lo ponemos
+es (espa&ntilde;ol) si nuestro teclado es espa&ntilde;ol.
+<P ALIGN=JUSTIFY>La secci&oacute;n del rat&oacute;n indica al servidor el tipo de rat&oacute;n y otros par&aacute;metros
+importantes, como ejemplo:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+Section Pointer
+Protocol Microsoft
+Device /dev/mouse
+Emulate3Buttons
+Emulate3Timeout 50
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>El par&aacute;metro Emulate3Timeout es el tiempo de espera entre la pulsaci&oacute;n
+de un bot&oacute;n y sin soltarlo la pulsaci&oacute;n del otro bot&oacute;n del rat&oacute;n para
+tomar esta pulsaci&oacute;n como tercer bot&oacute;n, la emulaci&oacute;n de tres botones
+se hace definiendo la pulsaci&oacute;n de los dos botones (izquierdo y derecho)
+a la vez como la pulsaci&oacute;n del tercer bot&oacute;n del rat&oacute;n.
+<P ALIGN=JUSTIFY>La secci&oacute;n que m&aacute;s quebraderos de cabeza suele dar es la del monitor,
+aqu&iacute; se definir&aacute;n los distintos par&aacute;metros que puede tomar, pero el
+ajuste se explica m&aacute;s abajo con el uso de xvidtune:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+ 
+Section Monitor
+Identifier Generic Multisync
+VendorName Unknown
+ModelName Unknown
+HorizSync 30-50
+VertRefresh 50-100
+<FONT FACE ="ARIAL" SIZE=1>Modeline 800x600 50 800 856 976 1040 600 637 643 666 +hsync +vsync</FONT>
+Modeline 1024x768 85 1024 1032 1152 1360 768 784 787 823
+<FONT FACE ="ARIAL" SIZE=1>Modeline 1280x1024 135 1280 1312 1416 1664 1024 1027 1030 1064</FONT>
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Como vemos tenemos las frecuencias de refresco horizontal y vertical
+de nuestro monitor y tras estas los ``Modelines'', estos &uacute;ltimos son
+los que tomaremos de momento por defecto y en el siguiente apartado
+los retocaremos con xvidtune.
+<P ALIGN=JUSTIFY>Ahora viene la secci&oacute;n que se encarga de la tarjeta gr&aacute;fica, en ella
+le damos las especificaciones de la tarjeta que tenemos, si es una
+tarjeta que detecta el servidor (la mia es S3 Trio 64) se nos puede
+quedar algo tan sencillo como esto:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+Section Device 
+Identifier "Graficox"
+VendorName S3
+BoardName Trio 64V+
+VideoRam 2048
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Por supuesto lo que viene entre comillas es cosa m&iacute;a, puede ser que
+necesites darle el tipo de Ramdac y el Chipset, siempre que el servidor
+X no te lo reconozca en el arranque, pero en la mayor&iacute;a de los casos
+se resume a lo anterior.
+<P ALIGN=JUSTIFY>Ahora viene la &uacute;ltima secci&oacute;n donde le especificamos al servidor que
+monitor y qu&eacute; tarjeta debe arrancar, por supuesto secciones de monitor
+y tarjeta gr&aacute;fica puede haber m&aacute;s de una, el servidor no tiene porque
+arrancarse siempre con el mismo monitor y tarjeta gr&aacute;fica y eso <B>Linux</B>
+lo tiene en cuenta. La &uacute;ltima secci&oacute;n quedar&iacute;a:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+Section Screen
+Driver accel 
+Device Graficox
+Monitor Generic Multisync
+DefaultColorDepth 16
+Subsection Display Depth 16
+Modes 800x600 1024x768
+ViewPort 0 0
+Virtual 1024 768 
+EndSubsection
+EndSection
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Como vemos en la secci&oacute;n de la pantalla decimos cu&aacute;l es el driver de
+la tarjeta gr&aacute;fica, si nuestra tarjeta es una VGA usaremos el VGA2
+o VGA16, si es SVGA normal usaremos SVGA, si es un port&aacute;til o la tarjeta
+es monocromo usaremos el driver Mono, si nuestra tarjeta est&aacute; contemplada
+en el fichero AccelCards contenido en el directorio de documentaci&oacute;n
+de X (/usr/X11R6/lib/X11/doc), usaremos el driver accel. El identificador
+Device tendr&aacute; el nombre de la tarjeta que le hemos puesto en la secci&oacute;n
+Device, y el identificador Monitor tendr&aacute; el nombre del monitor. DefaultColorDepth
+define la profundidad de color por defecto (siempre que tu tarjeta
+gr&aacute;fica la soporte, lo que depende de la memoria que tengas instalada
+en ella). Luego aparecen subsecciones con el identificador de una
+profundidad de color (yo por ejemplo s&oacute;lo utilizo la de profundidad
+16bits, Depth 16), dentro de estas secciones aparecen los modos de
+resoluci&oacute;n para cada secci&oacute;n. Tras los modos podemos poner el ViewPort
+que es la coordenada donde empieza la pantalla(coordenada superior
+izquierda) inicial, la etiqueta Virtual define el tama&ntilde;o virtual de
+la pantalla, por ejemplo si estamos en 800x600 y tenemos Virtual como
+800x600, al mover el rat&oacute;n a los l&iacute;mites de la pantalla esta no se
+``mover&aacute;''.
+<P ALIGN=JUSTIFY>Por supuesto existen otros par&aacute;metros, aqu&iacute; se ha visto como archivo
+de ejemplo el que yo utilizo, ya simplificado. Para saber m&aacute;s pod&eacute;is
+mirar la p&aacute;gina del manual con <EM>man XF86Config</EM> o leer la documentaci&oacute;n
+en <EM>/usr/X11R6/lib/X11/doc</EM>.
+<P ALIGN=JUSTIFY>
+<H4>Ajuste con xvidtune.</H4>
+
+<P ALIGN=JUSTIFY>Una vez que conocemos la forma de editar el <B>XF86Config</B> veamos como
+podemos adaptar los par&aacute;metros del monitor, para ello utilizaremos
+el programa xvidtune, para ejecutarlo:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+localhost % xvidtune
+</PRE>
+</CODE></BLOCKQUOTE>
+<P ALIGN=JUSTIFY>Al ejecutar xvidtune nos saldr&aacute; una pantalla con los siguientes par&aacute;metros:
+<UL>
+<LI><B>HDisplay VDisplay:</B> Son la resoluci&oacute;n actual de la pantalla(la real,
+no la virtual). </LI>
+<LI><B>HSyncStart HSyncEnd HTotal:</B> Son los par&aacute;metros de la frecuencia
+horizontal. </LI>
+<LI><B>VSyncStart VSyncEnd VTotal:</B> Son los par&aacute;metros de la frecuencia
+vertical.</LI>
+</UL>
+<P ALIGN=JUSTIFY>Estos par&aacute;metros no pueden ser cambiados, as&iacute; como los valores de Pixel
+Clock (MHz), Horizontal Sync (KHz) y Vertical Sync (Hz). Para poderlos
+cambiar tenemos que 'jugar' con el tama&ntilde;o visible que queramos, para
+ello tenemos los siguientes botones:
+<P ALIGN=JUSTIFY>
+<UL>
+<LI><B>Left Right Wider Narrower:</B> Para mover la pantalla a la izquierda
+y derecha, as&iacute; como para hacerla m&aacute;s ancha o m&aacute;s estrecha. 
+</LI>
+<LI><B>Up Down Shorter Taller:</B> Para moverla hacia arriba hacia abajo y
+para hacerla m&aacute;s corta o m&aacute;s larga.</LI>
+</UL>
+<P ALIGN=JUSTIFY>M&aacute;s abajo tenemos <B>Quit</B> para quitar, <B>Apply</B> para aplicar los cambios
+que hallamos hecho si no hemos pulsado antes <B>Auto</B> que los aplica autom&aacute;ticamente,
+<B>Test</B> se encarga de hacer un test del modo actual y <B>Restore</B> restaura
+a los valores que tengas por defecto en <B>XF86Config</B>.
+<P ALIGN=JUSTIFY>Y bajo estos tenemos otra barra de botones con: <B>Fetch</B> que recoge los
+valores actuales del servidor (por ejemplo si has cambiado algo, est&aacute;s
+probando con otros par&aacute;metros y quieres volver a cargar los anteriores).
+<B>Show</B> visualiza los valores corrientes en la salida est&aacute;ndar, normalmente
+la terminal, de manera que los puedas copiar tal cual a las l&iacute;neas
+Modeline correspondientes. <B>Next</B> y <B>Prev</B> cambian al siguiente y anterior
+modo de v&iacute;deo respectivamente.
+<P ALIGN=JUSTIFY>Con algunas tarjetas gr&aacute;ficas pueden aparecer m&aacute;s opciones que est&aacute;n
+documentadas en la p&aacute;gina del manual de xvidtune.
+<P ALIGN=JUSTIFY>Una vez que tenemos los par&aacute;metros copiados para los modos que tenemos
+en el fichero XF86Config, tenemos que copiarlos en dicho fichero en
+la secci&oacute;n <EM>Monitor</EM> cambiando los valores de cada <EM>Modeline</EM> por los
+que hemos obtenido con xvidtune. Por ejemplo:
+<P ALIGN=JUSTIFY>
+<BLOCKQUOTE><CODE>
+<PRE>
+Supongamos que para 800x600 tenemos...
+Modeline 800x600 45 800 856 976 1000 400 637 643 666
+...y con xvidtune hemos obtenido:
+800x600 50 800 856 976 1040 600 637 643 666 +hsync +vsync
+...simplemente cambiamos el valor que ten&iacute;amos por el que 
+hemos obtenido,quedando:
+<FONT FACE ="ARIAL" SIZE=1>Modeline 800x600 50 800 856 976 1040 600 637 643 666 +hsync +vsync</FONT>
+</PRE>
+</CODE></BLOCKQUOTE>
+ 
+<P ALIGN=JUSTIFY>Con esto ya deber&iacute;amos tener el servidor X configurado correctamente,
+pero como los PC's pueden tener varias configuraciones distintas de
+hardware quiz&aacute;s no te funcionen correctamente, si es tu caso tendr&aacute;s
+que consultar la documentaci&oacute;n existente, tambi&eacute;n como siempre puedes
+consultar tu duda conmigo e intentar&eacute; resolverla, para ello escribe
+a 
+<A HREF="mailto:pecapon@alumni.uv.es">pecapon@alumni.uv.es</A>,
+indicando tu problema y tu configuraci&oacute;n de
+hardware (por lo menos monitor y tarjeta gr&aacute;fica). Tambi&eacute;n existen
+grupos de noticias que quiz&aacute;s te puedan ayudar, el m&aacute;s famoso en Espa&ntilde;ol
+es 
+<A HREF="news://es.comp.os.linux">es.comp.os.linux</A>.
+<P ALIGN=JUSTIFY>
+<H4><A NAME="ss2.3">2.3 Gestores de ventanas.</A>
+</H4>
+
+<P ALIGN=JUSTIFY>Como dec&iacute;a al principio el servidor X s&oacute;lo proporciona un entorno gr&aacute;fico,
+no dibuja las ventanas ni las decoraciones, eso es cosa del gestor
+de ventanas, este es un cliente que mediante el servidor se encarga
+de hacerlo m&aacute;s asequible al usuario, d&aacute;ndole los bordes y botones
+a las ventanas y produciendo los mecanismos necesarios para poder
+actuar con el entorno X.
+<P ALIGN=JUSTIFY>Existen varios gestores de ventanas, entre ellos:
+<P ALIGN=JUSTIFY>
+<DL>
+<DT><B>AfterStep:</B><DD><P ALIGN=JUSTIFY>Es un cl&oacute;nico de <EM>NextStep</EM>, tiene una barra de iconos llamada
+Wharf en la que podemos poner los programas que m&aacute;s utilicemos
+para acceder r&aacute;pidamente a ellos, as&iacute; como el asload para saber
+en todo momento la carga del sistema u otros m&oacute;dulos, en las &uacute;ltimas
+versiones ofrece gran cantidad de opciones de configuraci&oacute;n.
+<P ALIGN=JUSTIFY>
+<DT><B>Fvwm (y fvwm-95):</B><DD><P ALIGN=JUSTIFY>Es un gestor muy com&uacute;n ya que viene con todas las
+distribuciones, el fvwm-95 tiene un look similar al del W95, con
+una barra de tareas y el men&uacute; de inicio.
+<P ALIGN=JUSTIFY>
+<DT><B>Enlightenment:</B><DD><P ALIGN=JUSTIFY>Es espectacular en cuanto a las decoraciones de las
+ventanas, aunque su configuraci&oacute;n puede resultar algo compleja.
+</DL>
+<P ALIGN=JUSTIFY>En cuanto a los nuevos escritorios tenemos:
+<P ALIGN=JUSTIFY>
+<DL>
+<DT><B>KDE:</B><DD><P ALIGN=JUSTIFY>K-desktop enviroment es el m&aacute;s famoso, tiene total integraci&oacute;n
+con Internet, pudiendo navegar por nuestro disco duro como si de
+Internet se tratase (¿a qu&eacute; me suena eso?). Tiene multitud de aplicaciones
+propias que tienen como nota predominante su look com&uacute;n.
+<P ALIGN=JUSTIFY>
+<DT><B>GNOME:</B><DD><P ALIGN=JUSTIFY>Est&aacute; en una fase de desarrollo, promete lo mismo que KDE pero
+utiliza las librer&iacute;as GTK al contrario que KDE que utiliza QT que
+no son exactamente de libre distribuci&oacute;n.
+</DL>
+<P ALIGN=JUSTIFY>Con esto se pretende familiarizar al lector con lo que viene, no ense&ntilde;arle
+a configurarlos, ya que necesitar&iacute;a un cap&iacute;tulo para cada uno, existe
+mucha y muy variada configuraci&oacute;n y por supuesto las listas de correo
+y los grupos de noticias, como por ejemplo es.comp.os.linux.
+<P ALIGN=JUSTIFY>
+<H4><A NAME="ss2.4">2.4 Conclusi&oacute;n.</A>
+</H4>
+
+<P ALIGN=JUSTIFY>Espero que con este cap&iacute;tulo hallas podido configurar el entorno X,
+pero como no todas las m&aacute;quinas son iguales puede ser que te encuentres
+con problemas, como siempre, mira la documentaci&oacute;n, las p&aacute;ginas del
+manual, pregunta, etc. 
+<P ALIGN=JUSTIFY>El pr&oacute;ximo art&iacute;culo tratar&aacute; sobre la configuraci&oacute;n e instalaci&oacute;n de
+un kernel a tu medida, la famosa compilaci&oacute;n del kernel, si hay alguna
+duda sobre el curso o sugerencia pod&eacute;is mandarla a
+<A HREF="mailto:pecapon@alumni.uv.es">pecapon@alumni.uv.es</A>,
+intentar&eacute; contestarlas todas. Un saludo y hasta la pr&oacute;xima entrega.
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulaf.htm"><font FACE="ARIAL"><B>[Curso de Introuducción y Uso del Linux]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

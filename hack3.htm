@@ -1,0 +1,444 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>B</B></font><FONT color="#000000" size=2 face="arial"><B>reve Introducción al Mundo del Hacking</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:perota082@mx3.redestb.es">Pedro Ferrera "BaDBoY"</A>
+</b></FONT>
+<br><br>
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>
+Cap&iacute;tulo 4<br> Entrar en un sistema y "enrootarse"
+</H3>
+<P ALIGN=justify>
+
+En esta unidad aprender&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+<br><br><br>
+<UL>
+
+<UL>
+<LI><P >C&oacute;mo recoger informaci&oacute;n del sistema al que queremos entrar</LI>
+<LI><P >T&eacute;cnicas para entrar sin tener una cuenta en el sistema</LI>
+<LI><P >C&oacute;mo conseguir root dentro del sistema</LI>
+<LI><P >Qu&eacute; hacer una vez se es root en el sistema</LI>
+<LI><P >C&oacute;mo asegurar el futuro acceso al sistema una vez se es root</LI></UL>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P >Si est&aacute;is aqu&iacute; se supone que sab&eacute;is:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>Lo que es en realidad el hacking</LI>
+<LI><P ALIGN=JUSTIFY>Para qu&eacute; sirve el hacking</LI>
+<LI><P ALIGN=JUSTIFY>C&oacute;mo se comporta un hacker</LI>
+<LI><P ALIGN=JUSTIFY>Qu&eacute; es LINUX </LI>
+<LI><P ALIGN=JUSTIFY>Iniciarse en el entorno LINUX/UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Entender el entorno multiusuario UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Otros ejercicios pr&aacute;cticos para LINUX</LI>
+<LI><P ALIGN=JUSTIFY>Mucho sobre sistemas UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Clasificaci&oacute;n de sistemas UNIX</LI>
+<LI><P ALIGN=JUSTIFY>Caracter&iacute;sticas de los diferentes sistemas UNIX</LI></UL>
+</UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, estamos ante la lecci&oacute;n clave de este curso. Para entenderla, es esencial que hayas leido las lecciones anteriores, especialmente la 1 y la 2. </P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Entrar en un sistema.</h4><P ALIGN="JUSTIFY">Esta es la acci&oacute;n principal y primordial para hackear. </P>
+<P ALIGN="JUSTIFY">La acci&oacute;n de entrar en un sistema se puede dividir en dos fases :</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>Recogida de informaci&oacute;n </LI>
+<LI><P ALIGN=JUSTIFY>Incursi&oacute;n en el sistema: </LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">o bien </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>A trav&eacute;s de una cuenta shell</LI>
+<LI><P ALIGN=JUSTIFY>A trav&eacute;s de otros m&eacute;todos </LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pero tambi&eacute;n tenemos que saber que la entrada en un sistema puede ser, seg&uacute;n el nivel de privilegio:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL TYPE="a">
+
+<LI><P ALIGN=JUSTIFY>Directamente como root</LI>
+<LI><P ALIGN=JUSTIFY>Como usuario normal</LI>
+<LI><P ALIGN=JUSTIFY>como usuario an&oacute;nimo (<B>pero esta &uacute;ltima queda descartada ya que como usuario an&oacute;nimo no podemos hacer pr&aacute;cticamente nada</B>.)</LI></OL>
+
+<P ALIGN="JUSTIFY">           </P>
+<P ALIGN="JUSTIFY">As&iacute; pues, antes de entrar en un sistema (aunque ya tengamos una cuenta shell), tenemos que pasar por la etapa de recogida de informaci&oacute;n.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>1 - Recogida de informaci&oacute;n</h4>
+<P ALIGN="JUSTIFY">La informaci&oacute;n que debemos saber de cualquier sistema la vamos a dividir en:</P>
+<P ALIGN="JUSTIFY"></P>
+<OL>
+
+<LI><P ALIGN=JUSTIFY>Informaci&oacute;n primordial</LI>
+<LI><P ALIGN=JUSTIFY>Informaci&oacute;n extendida</LI>
+<LI><P ALIGN=JUSTIFY>Informaci&oacute;n complementaria</LI></OL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">La informaci&oacute;n primordial la tenemos que saber sea como sea, si no, ya nos podemos olvidar del sistema y buscarnos otro. La informaci&oacute;n extendida nos ser&aacute; de utilidad m&aacute;s adelante, y la complementaria... bueno, siempre va bien tenerla.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>Informaci&oacute;n primordial: cu&aacute;l es y c&oacute;mo se consigue</h4>
+<P ALIGN="JUSTIFY">La informaci&oacute;n primordial de cualquier sistema es qu&eacute; Host/IP tiene, as&iacute; como la versi&oacute;n de UNIX que usa. Si tenemos el host y queremos saber la IP, basta con teclear:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># nslookup &lt;host&gt;</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez sabemos el Host/IP de un sistema, tenemos que hacer un telnet a &eacute;ste y observar qu&eacute; versi&oacute;n de UNIX usa. El nombre del sistema nos basta para la informaci&oacute;n primordial (si es SunOS, si es Solaris, si es Linux, etc...).</P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># telnet &lt;host&gt;
+<br>
+SunOS v3.25
+<br>
+login:</P>
+</I><P ALIGN="JUSTIFY"></P>
+<h4>Informaci&oacute;n extendida: cu&aacute;l es, para qu&eacute; usarla y c&oacute;mo se consigue</h4>
+<P ALIGN="JUSTIFY">Al hacer el telnet, no estar&iacute;a mal que apareciese qu&eacute; versi&oacute;n (sea el UNIX que sea) est&aacute; usando. Es un dato que puede ayudarnos a elegir exploits para usarlos m&aacute;s adelante.</P>
+<P ALIGN="JUSTIFY">Otro dato que nos puede ayudar (y mucho) es la versi&oacute;n de Sendmail que usa. Esto lo conseguimos haciendo un telnet al puerto 25 del host. </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Nota: si el sistema que queremos hackear no permite hacer un telnet al puerto 25, deberemos descartar cualquier ataque v&iacute;a Sendmail.</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Para hacer un telnet al puerto 25 del host, escribimos simplemente esto:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># telnet &lt;host&gt; 25</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y nos aparecer&aacute; una l&iacute;nea con la versi&oacute;n del Sendmail.</P>
+<P ALIGN="JUSTIFY">Otra informaci&oacute;n extendida importante es saber detectar si el host tiene alguna actividad NFS. NFS (Network File System) es un sistema por el cual un ordenador puede compartir directorios con otros ordenadores, de manera que estos pueden manejar dichos directorios como si fuesen suyos. En muchos sistemas UNIX, el NFS est&aacute; mal configurado, lo que supone un fallo de seguridad. Para saber si este sistema recibe directorios NFS, y si es que s&iacute;, cu&aacute;les son, escribiremos:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># showmount -e &lt;host&gt;</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Podr&iacute;amos considerar importante m&aacute;s informaci&oacute;n, pero con esta ya tenemos de momento suficiente.</P>
+<U><P ALIGN="JUSTIFY"></P>
+</U><h4>Informaci&oacute;n complementaria</h4>
+<P ALIGN="JUSTIFY"> Siempre va bien saber, por ejemplo, qu&eacute; tipo de sistema es (si es gubernamental, si es una universidad...), en qu&eacute; sitio geogr&aacute;fico est&aacute; situado, cu&aacute;nto tiempo lleva on-line, qu&eacute; servicios ofrece, y un largo etc&eacute;tera.</P>
+<P ALIGN="JUSTIFY"></P>
+<h4>2 - Incursi&oacute;n en el sistema</h4>
+<P ALIGN="JUSTIFY">Bien, ahora que ya tenemos suficiente informaci&oacute;n vamos a tratar algunos de los m&eacute;todos que se suelen usar para entrar en un sistema (los m&aacute;s f&aacute;ciles, por supuesto).</P>
+<P ALIGN="JUSTIFY">Si ya tenemos una cuenta shell, nos basta con entrar v&iacute;a telnet, poner el login y el password y ya estamos dentro. Si este es el caso, deberemos pasar a ver c&oacute;mo podemos obtener root.</P>
+<P ALIGN="JUSTIFY">Pero si estamos en nuestro ordenador y no tenemos ni siquiera un login, vamos, que no sabemos qu&eacute; hacer para poder entrar, antes que nada probaremos los m&eacute;todos que s&oacute;lo funcionan de vez en cuando, m&eacute;todos que pueden parecer anti-elitistas, pero que muchas veces nos ahorran esfuerzo mental si, de casualidad, funcionan, claro est&aacute;.</P>
+<P ALIGN="JUSTIFY">Un ejemplo puede ser un rlogin por el morro. Por incre&iacute;ble que parezca, mi primera incursi&oacute;n en un sistema fue gracias a esta t&aacute;ctica. Simplemente escribimos:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># rlogin &lt;host&gt;</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y hay una probabilidad entre 100 de que entremos. Pero lo bueno es que entramos directamente como root, que fue lo que a mi me sucedi&oacute;. Lo que ocurre es que, al no especificar con qu&eacute; nombre (login) queremos entrar en el sistema, el comando entiende que queremos entrar como root, y como no hemos puesto password, entiende que el password es simplemente, ENTER (o sea, nada). En otras palabras, que hemos entrado con la cuenta de root sin asignar password, el root no tiene aun un password asignado, cosa que es pr&aacute;cticamente imposible (para qu&eacute; negarlo) ¡ Pero nunca est&aacute; de m&aacute;s probarlo !</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y otra t&aacute;ctica de este tipo consiste en hacer lo mismo, pero usando las "default counts", que son las cuentas que vienen por defecto en cualquier sistema UNIX, y, a no ser que el root les cambie el password o las desactive, se pueden usar. Esto es bueno probarlo porque algunas veces el root solo actualiza las cuentas que usa y las otras las deja activadas. Las default counts, en sistemas UNIX son:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Login / Password</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">admin - admin <br>
+sysadmin - sysadmin o admin <BR>
+unix - unix  <BR>
+uucp - uucp <BR>
+rje - rje <BR>
+guest - guest <BR>
+demo - demo <BR>
+daemon - daemon <BR>
+sysbin - sysbin <BR>
+bin - bin <BR>
+</I><P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> Las cuentas bin son muy interesantes ya que permiten la manipulaci&oacute;n de muchos ficheros importantes como el fichero passwd.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">adm - adm <BR>
+nuucp - nuucp <BR>
+lp - lp </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si con &eacute;stas no funciona, entonces tenemos que pensar un poco m&aacute;s. Vamos a ver, si el sitio al que nos conectamos se llama por ejemplo "Daddy's INC", no estar&iacute;a de m&aacute;s probar a entrar como daddys, o daddy. </P>
+<P ALIGN="JUSTIFY">Algunos sistemas UNIX tienen una cuenta llamada test abierta, sin password, o con el mismo login y password (test/test).</P>
+<P ALIGN="JUSTIFY">En unos pocos sistemas UNIX, podemos ejecutar algunos comandos en el prompt de login. Estos pueden ser b&aacute;sicamente tres:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">who<BR>
+rwho<BR>
+finger</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Con lo que podemos saber si hay alguien dentro del sistema. Y, si hay alguien, ya tenemos el login de un usuario. Imaginemos que hay un tal "pepe" conectado. Probablemente, ser&aacute; de esos que prefiere conectar r&aacute;pido al sistema y no le ha pasado nunca por la cabeza que alg&uacute;n hacker pueda usar su cuenta. As&iacute; que no estar&iacute;a de m&aacute;s intentar entrar como pepe y poner como password pepe, pepe1, pp, o lo que se nos pase por la cabeza...</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bueno, como seguramente no hemos entrado en el sistema, ya nos podemos quitar las lega&ntilde;as y pasar a hacer algo m&aacute;s serio. Si seguimos fuera del sistema, tenemos varias opciones:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>Explotar el Sendmail</LI>
+<LI><P ALIGN=JUSTIFY>Explotar el NFS mediante un IP Spoofing</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Lo primero, consiste en usar el sistema de Mail del ordenador para obtener privilegios de root. Esto se hace aprovechando los fallos que presenta seg&uacute;n la versi&oacute;n que use (ver informaci&oacute;n extendida). As&iacute; que a partir de ahora ya podemos empezar a usar exploits para hacer nuestras tareas m&aacute;s f&aacute;ciles. Muchos no sabr&eacute;is de lo que estoy hablando. As&iacute; que vamos a explicar lo que es un exploit.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Un exploit no es m&aacute;s que un programa que aprovecha los bugs de un sistema UNIX determinado. Hay, por supuesto, muchos exploits, para cada tipo de sistema, y diariamente van saliendo nuevos seg&uacute;n los sistemas se actualizan y se van encontrando nuevos fallos. Los buenos hackers saben programar sus propios exploits, pero de momento vamos a coger los que ya est&aacute;n hechos. Una direcci&oacute;n donde podemos encontrar muchos es: www.rootshell.com. Los exploits est&aacute;n programados en C o en shell. Y, dentro de la programaci&oacute;n en shell podemos encontrar diferentes tipos, seg&uacute;n el tipo de shell en que se base (BASH, PERL...). Una vez tenemos el exploit que queremos usar, debemos editarlo, leer las instrucciones que contenga (muchos contienen lineas de texto haciendo referencia a las maneras que hay de usarlo, c&oacute;mo hay que usarlo para que funcione de una manera u otra, etc) y salvar s&oacute;lo la parte ejecutable (ya sea en shell o en C). Si est&aacute; en C tendremos que compilar el exploit. Si est&aacute; en shell, basta con darle permiso de ejecuci&oacute;n y ya est&aacute; listo para usar. Poco a poco os ir&eacute; hablando de las diferentes maneras de usar los exploits.</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora que ya sabemos lo que es un exploit, podemos ir a cualquier site y bajarnos todos los que haya referentes a la versi&oacute;n de <B>Sendmail</B> que usa este sistema, compilarlos (si necesitan ser compilados), y usarlos. </P>
+<P ALIGN="JUSTIFY">Realmente, el sistema de Mail de UNIX es muy &uacute;til para hacer fake mails, una vez dentro del sistema. Podemos hacernos pasar por cualquier direcci&oacute;n de correo existente. </P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Es importante la organizaci&oacute;n de los exploits en el disco duro, la mejor manera es clasificarlos seg&uacute;n: qu&eacute; tipo de exploit son y a qu&eacute; sistema hacen referencia. </P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">Bueno, los exploits locales son una buena manera de entrar directamente, pero no siempre funcionan, sobretodo porque los mismos exploits suelen tener bugs y tenemos que saber modificarlos, pero por esto de momento no os preocupeis. Hay, por supuesto, t&eacute;cnicas m&aacute;s avanzadas para entrar en sistemas. Una de ellas es el IP Spoofing.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El <B>IP Spoofing</B> nos permite cambiar nuestra IP. Vale, pero ¿ Qu&eacute; ganamos con eso ? Bien, supongamos que el sistema al que queremos entrar est&aacute; en una subred, y, por lo tanto, se comunica con sistemas trusteds, sistemas que son "colegas". ¿ Qu&eacute; quiere decir que son colegas ? Pues que est&aacute;n comunicados entre s&iacute; y que por lo tanto tienen ciertos privilegios (tienen acceso a directorios compartidos v&iacute;a NFS). Los programas de IP Spoofing lo que hacen es (de manera simplificada), intentar comunicar con un sistema trusted (colega del sistema al que queremos entrar), hacer que no responda y en ese intervalo de tiempo alterar nuestra IP para hacernos pasar por ese sistema, de manera que ya tenemos ciertos privilegios en el sistema en el que queremos entrar. </P>
+<P ALIGN="JUSTIFY">Lo primero que tienes que hacer para poner en pr&aacute;ctica esta t&aacute;ctica es bajarte un buen programa de IP Spoofing. Mejor b&aacute;jate varios por si alguno no funciona. Ahora tienes que saber cu&aacute;les son los sistemas trusteds del sistema al que quieres entrar. En otras palabras, qu&eacute; estructura NFS tiene. Para esto escribe lo siguiente:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># showmount -e &lt;host&gt;</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Por otra parte, esto ya lo tendr&iacute;as que haber hecho al recopilar la informaci&oacute;n del sistema. </P>
+<P ALIGN="JUSTIFY">Y, con estos datos, ya puedes ejecutar el programa de IP Spoofing, que seguramente lo har&aacute; todo &eacute;l solito. No olvides compilarlo (si est&aacute; en C) y quitar las instrucciones.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En teor&iacute;a con todas estas t&eacute;cnicas puedes pasarte un buen rato intentando entrar en un sistema. He dejado muchas t&eacute;cnicas por explicar y las que he descrito las he descrito muy por encima, porque considero que un hacker novicio ha de empezar siempre teniendo shells. Es decir, que ya conozcas de antemano alguna cuenta en ese sistema, eso facilita much&iacute;simo las cosas. La &uacute;nica manera de conseguir una sino puedes ni siquiera entrar de forma an&oacute;nima en un sistema es utilizar la <B>ingenier&iacute;a social</B>. Si conoces el lugar f&iacute;sico en el que est&aacute; ubicado el sistema, tienes que relacionarte con la gente que accede a &eacute;l, robar papelillos o cogerlos de la papelera, espiar, hacer lo que sea hasta conseguir una cuenta en el sistema. El IRC puede ser un buen medio, pero tambi&eacute;n tienes que saber pedir las cosas. Internet, en definitiva, es un buen medio. Alguna que otra p&aacute;gina encontrar&aacute;s con shells. El fake mail puede ser tambi&eacute;n &uacute;til, hacerte pasar por alguna direcci&oacute;n importante de un proveedor de internet y enviar un mail a un usuario de ese proveedor para de alguna manera averiguar su login y password, aunque para eso tienes que estar antes en un sistema UNIX, y no todos los sistemas UNIX permiten hacer fake mails, o sea que esta t&eacute;cnica queda descartada. Pero si buscas informaci&oacute;n al respecto no te estar&aacute; de m&aacute;s.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Conseguir ROOT una vez dentro del sistema</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bien, si hemos conseguido finalmente entrar en el sistema con shell de usuario ordinario, tenemos muchas cosas que hacer. Lo primero que querremos hacer es, por supuesto, ver qu&eacute; posibilidades nos ofrece nuestra cuenta. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1 - Hacemos un listado de nuestro directorio de inicio</P>
+<P ALIGN="JUSTIFY">2 - Miramos qu&eacute; programas colectivos podemos ejecutar</P>
+<P ALIGN="JUSTIFY">3 - Echamos un vistazo al archivo .profile</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nuestro directorio de inicio, dependiendo de en qu&eacute; tipo de ordenador estemos estar&aacute; generalmente ocupado por programas en C o documentos relacionados con carreras universitarias (si estamos en una universidad). Conviene no modificar ninguno de estos elementos, porque el usuario real de esta shell se dar&iacute;a cuenta de que la fecha ha cambiado. Y a&uacute;n peor si se nos ocurre borrarlos. Simplemente les echamos un vistazo (si nos interesa, claro).</P>
+<P ALIGN="JUSTIFY">Ahora ejecutamos el comando help para ver qu&eacute; programas colectivos podemos ejecutar (editores de texto, programas de mail, etc...). Y por &uacute;ltimo, no nos ir&aacute; mal saber qu&eacute; hay en nuestro .profile, y, si tenemos que modificarlo, no tenemos que olvidar volver a poner la fecha original (con el comando touch). </P>
+<P ALIGN="JUSTIFY">Despu&eacute;s tenemos que intentar movernos del directorio en el que estamos, a ver si podemos explorar otras &aacute;reas del sistema. Si no podemos, no hay que desesperarse. Quiz&aacute;s s&iacute; podemos leer ficheros del sistema aunque no podamos movernos del directorio, por eso tenemos que probar a hacer esto:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">$ cat /etc/passwd </P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si estamos de suerte y sale algo, pues grabamos la informaci&oacute;n en un fichero nuestro.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">$ cat /etc/passwd &gt;&gt; passwd</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y ya tenemos el archivo passwd.</P>
+<P ALIGN="JUSTIFY">Ahora vamos a mirar m&aacute;s archivos importantes</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">$ cat /etc/hosts</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Este archivo te mostrar&aacute; todos los sistemas que est&aacute;n en la subred del sistema en el que est&aacute;s. Esto te puede ser &uacute;til porque, si te cierran la cuenta aqu&iacute;, probablemente puedas intentar entrar en alg&uacute;n sistema de la misma subred con la misma cuenta. Si te interesa, salva esta informaci&oacute;n en otro archivo.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora vamos a ver qu&eacute; podemos hacer con el archivo passwd.</P>
+<P ALIGN="JUSTIFY">Como ya sabeis, este fichero contiene las cuentas del sistema. Tambi&eacute;n sabeis qu&eacute; elementos contiene. Cuando dije que conten&iacute;a el password del usuario dije que nunca aparec&iacute;a tal y como era. El password puede aparecer de varias formas:</P>
+<P ALIGN="JUSTIFY"></P>
+<H5>Shadow</H5><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cuando el password est&aacute; shadow, en realidad se encuentra en otro archivo que se llama shadow, que no es visible m&aacute;s que por el root. En este caso no podemos hacer nada. Aparece shadow si aparece como un asterisco o una x:</P>
+<P ALIGN="JUSTIFY"></P>
+<I>Anastasio:*:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh<BR>
+Anastasio:x:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh
+</I><P ALIGN="JUSTIFY"></P>
+<H5>Encriptado</H5>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">El password est&aacute; encriptado si est&aacute; formado por una combinaci&oacute;n muy extra&ntilde;a de car&aacute;cteres. Esta combinaci&oacute;n no es el password en s&iacute;, sino el password encriptado. En este caso s&iacute; podemos hacer algo, es m&aacute;s, tenemos muchas posibilidades de descubrir de qu&eacute; password se trata. Lo que tenemos que hacer es bajarnos un buen desencriptador de passwords. Yo suelo usar el John The Ripper, es un desencriptador muy bueno. Los desencriptadores suelen funcionar intentando asociar una serie de palabras agrupadas por temas a los passwords encriptados. Estas agrupaciones se llaman diccionarios y tambi&eacute;n se pueden bajar. Aunque, si queremos desencriptar bien las contrase&ntilde;as hay algunos desencriptadores que hacen una desencriptaci&oacute;n completa, sin usar ning&uacute;n diccionario, prueban todas las combinaciones posibles. Lo malo que tiene este sistema es que el proceso de desencriptaci&oacute;n puede tardar muchas horas, pero vale la pena sobretodo si tienes un archivo de passwords con una cuenta root encriptada. </P>
+<P ALIGN="JUSTIFY">Los desencriptadores, por supuesto, funcionan off-line. As&iacute; que lo que tienes que hacer si has conseguido el archivo de contrase&ntilde;as encriptado es desconectar y probar a desencriptarlo.</P>
+<P ALIGN="JUSTIFY">Una cuenta encriptada tiene este aspecto:</P>
+<I>
+<P>Anastasio:Mo54Wasl6H:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh</P>
+</I><P ALIGN="JUSTIFY"></P>
+<H5>Normal</H5>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si encuentras alguna cuenta as&iacute;, te mereces un premio, porque pr&aacute;cticamente es imposible de encontrar. Simplemente la contrase&ntilde;a se muestra tal cual es.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P>Anastasio:juana:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh</P>
+</I><P ALIGN="JUSTIFY"></P>
+<H5>Sin password</H5>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">En este caso no hay password, para acceder con esta cuenta simplemente hacemos telnet, ponemos el login y ya estamos dentro.</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P>Anastasio::1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Nota: Hay que tener en cuenta que si nos encontramos un espacio en blanco, un asterisco o un signo de admiraci&oacute;n delante del password, la cuenta est&aacute; inhabilitada temporalmente, eso significa que el acceso del usuario al sistema ha sido restringuido por el admin (¡ o por un hacker !).</P>
+<P ALIGN="JUSTIFY"></P>
+</I><P ALIGN="JUSTIFY">Bueno, crackear el archivo password es una posibilidad a tener en cuenta para conseguir acceso root, averiguando cu&aacute;l es la contrase&ntilde;a que usa el root. En el hipot&eacute;tico caso de que lleguemos a saber cu&aacute;l es la contrase&ntilde;a del root, lo que tenemos que hacer es, ante todo, no cambiarla (una vez estemos dentro como root). Despu&eacute;s, pasar a mirar la parte de esta unidad referente a qu&eacute; hacer cuando se es root.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si lo del archivo passwd no ha resultado, vamos a pasar a intentar buscar defectos en el sistema en el que estamos. Ya podemos ir preparando los exploits que necesitemos. Ahora bien, ¿ Con qu&eacute; criterio hay que elegirlos ? Los exploits que ejecutes en el sistema tienen que cumplir siempre estas condiciones:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1 - La m&aacute;s trivial, que hagan referencia al sistema UNIX en el que est&aacute;s. No ejecutes un exploit para HP-UX si est&aacute;s en un Solaris. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">2 - Que hagan referencia a la versi&oacute;n exacta del sistema UNIX en el que est&aacute;s. De una versi&oacute;n a otra se corrigen los errores, por lo tanto un exploit para AIX 3.25 no funcionar&aacute; en un AIX 4.x</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3 - Que sean lo m&aacute;s nuevos posibles. Los exploits aparecen a medida que se van encontrando los errores en los sistemas. Por lo tanto, hay m&aacute;s posibilidades que el admin del sistema no haya tenido tiempo a parchear el bug al que haga referencia el exploit. En ciertos sites como rootshell.com aparecen exploits nuevos cada mes. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">4 - Que hagan lo que necesitas que hagan. Leete qu&eacute; es lo que hacen, inicialmente te interesa ganar acceso root, pues coge solo los que hagan esto. No te interesar&aacute;, por ejemplo, hacer petar el sistema, ni colocar un sniffer. Tambi&eacute;n habr&aacute;n exploits que para ejecutarlos necesitar&aacute;s ser root en el sistema ¡ Tampoco te interesan !</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">Nota: En el cap&iacute;tulo 3 hay algunos de los bugs m&aacute;s conocidos de cada sistema UNIX. Para poder aprovecharlos, busca los exploits que hagan referencia a esos bugs.</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">No todos los exploits son iguales, eso es algo que ya hemos comentado antes. Antes he mencionado la palabra exploit local. Llegados a este punto, tienes que entender la diferencia entre exploit local y exploit remoto:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- Exploit local: tanto si est&aacute; en C como en Shell, tiene que ejecutarse sin estar conectado a ning&uacute;n sistema (¡ pero s&iacute; a Internet !).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">- Exploit remoto: Si est&aacute; en C, hay que subir el c&oacute;digo fuente al sistema y compilarlo DENTRO del sistema. Una vez compilado se ejecuta. Si est&aacute; en Shell simplemente hay que subirlo al sistema y ejecutarlo dentro del sistema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora vamos a ver c&oacute;mo podemos poner a punto nuestro exploit. Debes seguir este proceso:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">1 - Descomprime el exploit si est&aacute; en formato .tgz. Esto lo puedes hacer con:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># tar xfvz &lt;nombre del archivo&gt;.tgz</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">2 - Edita el exploit.</P>
+<P ALIGN="JUSTIFY">Te encontrar&aacute;s con que algunos exploits no son m&aacute;s que un archivo de texto explicando c&oacute;mo aprovechar un bug. Si este es el caso, l&eacute;ete cuidadosamente el archivo y apunta en un papel lo que te diga que tienes que hacer (normalmente te dir&aacute; que usando un comando de tal manera puedes conseguir root o leer ciertos archivos...). Otros exploits ser&aacute;n shellscripts, y al principio habr&aacute;n las instrucciones. Tienes que le&eacute;rtelas bien, y guardar en otro archivo solo el shellscript (quitando las l&iacute;neas de texto que sobren). Para poder ejecutarlo tienes que darle permiso de ejecuci&oacute;n. Otros ser&aacute;n programas en C, en este caso si hay instrucciones, estas son ignoradas al compilar, as&iacute; que no hay problema. Ya sabes que si es un exploit remoto tienes que subir el c&oacute;digo al sistema (esto puedes hacerlo a trav&eacute;s de una sesi&oacute;n FTP, usando el mismo login y el mismo password que para la sesi&oacute;n telnet), y una vez dentro, compilarlo (haciendo una sesi&oacute;n telnet) usando esta l&iacute;nea:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY">$ gcc &lt;archivo&gt;.c</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y el resultado de esta operaci&oacute;n ser&aacute; un archivo llamado a.out, que tienes que renombrar a tu gusto ( o ejecutar directamente con ese nombre ).</P>
+<P ALIGN="JUSTIFY">Hay exploits que son una mezcla entre C y shellscript, es decir, que una parte est&aacute; en C y otra en shell. En este caso tienes que separar las dos partes en dos archivos distintos y hacer lo que ya sabes.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">3 - La &uacute;ltima parte es ejecutarlos, esperando que funcionen. Suelen funcionar si el sistema no est&aacute; parcheado al m&aacute;ximo.  </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Experimenta por ti mismo todo lo referente a exploits, ahora que ya sabes c&oacute;mo utilizarlos. </P>
+<P ALIGN="JUSTIFY">Pero recuerda, si los exploits que has seleccionado no funcionan, no hagas el tonto subiendo otros que sabes que no van a funcionar. Debes saber que todo lo que haces en un sistema UNIX queda registrado en varios logs (algo que veremos en la pr&oacute;xima lecci&oacute;n), as&iacute; que si en una sesi&oacute;n no has conseguido hacerte root, al cabo de un d&iacute;a tu cuenta estar&aacute; cerrada porque, probablemente, el admin se habr&aacute; dado cuenta de que has estado haciendo cosas "sospechosas". Por si acaso, si te tienes que ir, no olvides dejar el directorio de inicio del usuario tal y como estaba. Si te dejas tus exploits ah&iacute;, te puedo asegurar que te van a cerrar la cuenta pase lo que pase (porque el usuario se dar&aacute; cuenta y lo comunicar&aacute; al admin). Tambi&eacute;n he comentado que, si has modificado alg&uacute;n archivo ya existente, tienes que volver a ponerle la fecha que ya ten&iacute;a con el comando touch. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Pero si te han cerrado la cuenta, lo que tienes que hacer es buscarte m&aacute;s shells y seguir practicando.</P>
+<P ALIGN="JUSTIFY">Si has conseguido nivel root, vamos a pasar a explicar qu&eacute; es lo que tienes que hacer.</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>¿ Qu&eacute; hacer una vez se es ROOT ?</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Una vez eres root, el sistema es tuyo. No hay ning&uacute;n tipo de restricci&oacute;n, puedes pasearte por el sistema como si fuese tuyo. Es muy importante, cuando se es root, asegurarse de que nos vamos a ir sin dejar ninguna huella. Pero esto lo voy a explicar en la pr&oacute;xima lecci&oacute;n. As&iacute; mismo, si queremos asegurarnos nuestra continuidad como hacker en ese sistema, tenemos que ingeniarnos alg&uacute;n m&eacute;todo para que podamos entrar y salir siendo siempre root. Una manera ser&iacute;a hacer el mismo proceso que hemos hecho para conseguir root. Pero, ¿ Y si es un proceso demasiado largo ? ¿ Y si tenemos root y no sabemos ni c&oacute;mo lo hemos conseguido ? </P>
+<P ALIGN="JUSTIFY">Podr&iacute;amos crear una cuenta con acceso root, pero el admin del sistema lo acabar&iacute;a viendo. Lo que podemos hacer es usar el .profile del root para asegurarnos el futuro acceso mediante un caballo de troya. </P>
+<P ALIGN="JUSTIFY">Muchos os preguntareis ¿ Qu&eacute; es un caballo de troya ? Bueno, un caballo de troya no es m&aacute;s que un proceso oculto. Vamos a verlo mediante un ejemplo muy sencillo:</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Caballo de troya 1</H4>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Vamos a meter un caballo de troya en el archivo .profile de un usuario normal. Nos movemos a su directorio de inicio. </P>
+<P ALIGN="JUSTIFY">Lo primero que hacemos es una copia del archivo original a un archivo temporal oculto:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"># cp .profile .temp</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora, editamos el archivo .profile y a&ntilde;adimos estas l&iacute;neas al final:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> echo " Bienvenido, Anastasio Fern&aacute;ndez "<BR>
+ echo " Que tengas un buen d&iacute;a. "<BR>
+ echo " ¿ A que no sabes c&oacute;mo te est&aacute;n llegando estas l&iacute;neas ? "
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y la l&iacute;nea m&aacute;s importante que tenemos que a&ntilde;adir es:</P>
+<P ALIGN="JUSTIFY"></P>
+<I><P ALIGN="JUSTIFY"> mv .temp .profile</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">¿Qu&eacute; hemos hecho con esto?. Acabamos de ocultar un proceso, en este caso un mensage de bienvenida. El archivo original .profile estaba guardado en en uno temporal (.temp). De manera que cuando Anastasio entra en el sistema, su .profile (que es el que hemos modificado) se encarga de ocultarse moviendo el contenido del archivo temporal otra vez al archivo profile, de manera que cuando Anastasio mire en su .profile no ver&aacute; nada anormal. Excepto la fecha de modificaci&oacute;n, pero eso lo podemos arreglar a&ntilde;adiendo un comando touch al final del caballo de troya. </P>
+<P ALIGN="JUSTIFY">Naturalmente no es muy recomendable hacer esto, ya que a un usuario normal no le har&iacute;a mucha gracia y comunicar&iacute;a al admin que ha entrado un hacker en el sistema.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Ahora que ya sabemos qu&eacute; es un caballo de troya, vamos a hacer el caso que nos ocupa:</P>
+<P ALIGN="JUSTIFY"></P>
+<H4>Caballo de troya 2
+</H4><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Vamos a hacer que un usuario normal consiga root instant&aacute;neamente al entrar en el sistema. Para aquellos que pilleis las cosas r&aacute;pido, se trata de:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<LI><P ALIGN=JUSTIFY>Hacer una copia del .profile del root en el directorio de inicio de un usuario normal</LI>
+<LI><P ALIGN=JUSTIFY>Convertir esta copia a ejecutable</LI>
+<LI><P ALIGN=JUSTIFY>Hacer una copia del .profile del usuario normal a un archivo temporal oculto</LI>
+<LI><P ALIGN=JUSTIFY>Modificar el .profile para que el usuario, cuando entre:</LI>
+<LI><P ALIGN=JUSTIFY>Ejecute el .profile de root</LI>
+<LI><P ALIGN=JUSTIFY>Borre el .profile de root</LI>
+<LI><P ALIGN=JUSTIFY>Mueva el contenido de la copia de su .profile (temp) a su .profile real</LI></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Si hab&eacute;is seguido las lecciones hasta aqu&iacute; no tendr&eacute;is problema en hacer este caballo de troya.</P>
+<P ALIGN="JUSTIFY">Pero para los m&aacute;s despistados, aqu&iacute; est&aacute; el proceso:</P>
+<I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"># cd /root<BR>
+# cp .profile /usr/anastasio/.runme<BR>
+# cd /usr/anastasio<BR>
+# chmod a+x .runme<BR>
+# cp .profile .temp<BR>
+# ed .profile<BR>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Y a&ntilde;adimos:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">.<I>runme<BR>
+rm .runme<BR>
+mv .temp .profile</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">As&iacute;, cada vez que entremos con la cuenta de Anastasio, seremos root. Naturalmente tambi&eacute;n puede ser que Anastasio Fern&aacute;ndez, el usuario real de la cuenta, entre y vea que es root. Por eso recomiendo hacer esto: salir del sistema a hacer lo que tengamos que hacer, y al cabo de un rato volver a entrar (seremos root) y no volver a hacer este caballo de troya. Si en este intervalo de tiempo ha entrado Anastasio Fern&aacute;ndez, ya no hay nada que hacer. Pero siempre podemos pensar que hemos hecho feliz a alguien.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bueno, siendo root se pueden hacer infinidad de cosas. Si quieres, disfruta de tu limitado acceso root (ahora que no sabes c&oacute;mo borrar tus huellas) curioseando por el sistema. No te recomiendo que borres nada. Simplemente mira a ver qu&eacute; hay. Y, ahora que sabes hacer caballos de troya, puedes divertirte haci&eacute;ndolos en los .profile's de los usuarios normales. Por ejemplo, puedes poner un mensage personal si conoces a alguien del sistema. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">¡ S&eacute; paciente y dentro de poco descubrir&aacute;s c&oacute;mo borrar tus huellas en los sistemas en los que te enrootes ! Adem&aacute;s, aprender&aacute;s a poner Sniffers. ¡ Todo esto y mucho m&aacute;s en la pr&oacute;xima lecci&oacute;n ! ¡ Nos vemos !</P>
+
+
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulag.htm"><font FACE="ARIAL"><B>[Breve Introducción al Mundo del Hacking]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

@@ -1,0 +1,548 @@
+<HTML>
+<BASE TARGET="TEXTO">
+<BODY BGCOLOR="#FFFFFF">
+
+
+<!-- INICIO DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+<CENTER>
+<TABLE BORDER=0 ALIGN="CENTER" WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*" ALIGN="CENTER" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT COLOR="#009933" SIZE=7 FACE="ARIAL"><B>D</B></font>
+<FONT COLOR="#000000" SIZE=7 FACE="ARIAL"><B>esarrollo de juegos</B></FONT>
+<!-- LO QUE ESTA DESPUES DE ESTE COMENTARIO ES OPCIONAL Y LO PUEDES BORRAR -->
+<HR>
+<p align="right"><FONT COLOR="#CC0000" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=3 face="arial"><B>ula Macedo<font color="#cc0000">n</font>ia</B></FONT></p>
+
+
+<!-- LO QUE ESTA ANTES DE ESTE COMENTARIO ES OPCIONAL Y LO PUEDES BORRAR -->
+</CENTER>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+</CENTER>
+
+<BR>
+<HR>		  
+<!-- FINAL DE LAS SECCIONES 1 Y 2 DEL DOCUMENTO -->
+
+<!-- INICIO DE LAS SECCION 3 DEL DOCUMENTO -->
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE ALIGN="LEFT" BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<FONT COLOR="#009933" size=3 face="arial"><B>S</B></font><FONT color="#000000" size=2 face="arial"><B>istemas de control e interacción</B></FONT></a>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+<!-- FINAL DE LAS SECCION 3 DEL DOCUMENTO -->
+
+<BR><BR>
+
+<!-- SECCION PARA PONER EL CORREO ELECTRONICO -->
+<IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
+<P ALIGN=RIGHT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<A HREF="mailto:JA_Medina@timy.fi">Juan Antonio Medina "mICRO"</A>
+</b></FONT>
+<!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
+
+<BR><BR>
+
+<FONT size=2 color="#000000" face="Arial"><br><br><br>
+<H3>
+Como programar multiples controles y respuestas para varios jugadores simultaneos</p>
+</H3>
+
+<B><FONT FACE="Arial">
+</B>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Muchas veces en nuestros juegos deberemos de controlar simult&aacute;neamente el control de varios jugadores que pueden a la vez usar varios medios, por ejemplo un jugador podr&iacute;a usar teclas + joystick y otro solo teclas, en algunos casos esto se puede volver demasiado complicado, para clarificar este tema este articulo usara el m&eacute;todo del CONTROL y la RESPUESTA que nos permitir&aacute; f&aacute;cilmente tener el control de varios jugadores y los medios que usen adem&aacute;s tambi&eacute;n nos permitir&aacute; un f&aacute;cil control de lo que quiere hacer en jugador sin importar que lo haga con teclado o con Joystick. Este articulo es a nivel b&aacute;sico y solo quiere ser una aclaraci&oacute;n en el tema, se recomienda al lector del mismo que implemente su propio sistema de control y respuesta mas adecuado para su juego ya que este puede que sea un poco b&aacute;sico.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">CONTROL</P>
+</B>
+</FONT><FONT FACE="Arial" SIZE=2><P>En control es donde definiremos como va el jugador a controlar la acci&oacute;n en el juego, indicaremos si va a usar joystick o teclado o las teclas que usara entre otras cosas, esta informaci&oacute;n ser&aacute; necesaria para luego generar una respuesta acorde con el control dado.</P>
+<P>Para ello introduciremos la informaci&oacute;n en un struct de c:</P>
+
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+
+// PRINCIPIO DE CODIGO EN C<br>
+// Estructura para alojar la definicion del control de un Jugador<br>
+typedef struct {<br><DIR>
+
+unsigned short int joystick;&#9;// El Numero del Joystick, 0 si no usa<br>
+unsigned short int teclado;&#9;// Distinto de 0 si usa Teclado<br>
+unsigned short int ar,ab,iz,de;&#9;// Codigos de las teclas para la direccion<br>
+unsigned short int f1,f2;&#9;// Codigos de las teclas para el boton 1 y 2<br>
+</DIR>
+
+<P>} ___control;<br>
+</FONT><FONT FACE="Courier New"><P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>//FIN DE CODIGO EN C</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Un ejemplo podr&iacute;a ser este en el que se asignan los valores para dos controles:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+
+//PRINCIPIO DE CODIGO EN C<p>
+
+___control control1;<br>
+___control control2;<p>
+
+control1.joystick = 1;&#9;&#9;// Primer Joystick que este conectado en el sistema<br>
+control1.teclado = 1;  &#9;&#9;// Tambien usaremos el teclado<br>
+control1.ar = VK_UP;&#9;&#9;// Tecla de arriba (WIN 32 VK_KEYCODES)<br>
+control1.ab = VK_DOWN;&#9;&#9;// Tecla de abajo (WIN 32 VK_KEYCODES)<br>
+control1.iz = VK_LEFT;&#9;// Tecla de izquierda (WIN 32 VK_KEYCODES)<br>
+control1.de = VK_RIGHT;&#9;// Tecla de derecha (WIN 32 VK_KEYCODES)<br>
+control1.f1 = VK_ALT;&#9;// Tecla para el Boton 1 (WIN 32 VK_KEYCODES)<br>
+control1.f2 = VK_RSHIFT;&#9;// Tecla para el Boton 2 (WIN 32 VK_KEYCODES)<p>
+
+control2.joystick = 0;&#9;&#9;// No usaremos Joystick<br>
+control2.teclado = 1;  &#9;&#9;// Usaremos el teclado<br>
+control2.ar = VK_W;&#9;&#9;// Tecla de arriba (WIN 32 VK_KEYCODES)<br>
+control2.ab = VK_S;&#9;&#9;// Tecla de abajo (WIN 32 VK_KEYCODES)<br>
+control2.iz = VK_A;&#9;// Tecla de izquierda (WIN 32 VK_KEYCODES)<br>
+control2.de = VK_D;&#9;// Tecla de derecha (WIN 32 VK_KEYCODES)<br>
+control2.f1 = VK_F;&#9;// Tecla para el Boton 1 (WIN 32 VK_KEYCODES)<br>
+control2.f2 = VK_G;&#9;// Tecla para el Boton 2 (WIN 32 VK_KEYCODES)<p>
+
+//FIN DE CODIGO EN C<br>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">RESPUESTA</P>
+</B>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">La respuesta es el resultado de procesar el control del jugador, en ella reflejaremos que es lo que el jugador quiere hacer independientemente de con que lo haga, es lo que tendremos que mirar para reflejar en el juego, de esta manera conseguiremos que el control del juego sea igual con teclado o joystick por ejemplo, para esto tambi&eacute;n usaremos un struct de c:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+
+//PRINCIPIO DE CODIGO EN C<br>
+//Estructura para reflejar la respuesta segun el control<br>
+typedef struct {<br><DIR>
+
+unsigned short int iz,de,ar,ab;&#9;// Indica lo que quiere el jugador<br>
+
+// Botones de Fuego, sera distinto de 0 mientras el jugador tenga pulsado el boton de fuego o sea, es como un autofire<br>
+unsigned short int f1,f2;&#9; <br>
+
+long xmax,xmin,ymax,ymin;&#9; // Valores  max en  los 4 ejes del Joystick<br>
+long xvalue,yvalue;&#9; // Valores actules del joystick<br>
+
+unsigned short int act1,act2;&#9;// Estos botones de disparo se activa solo cuando el<br>
+// jugador pulsa el boton de disparo y no se vuelve<br>
+// a activar hasta que lo pulse de nuevo, lo que<br>
+// quiere decir que no usara autofire<br>
+
+unsigned short int aux1,aux2;&#9;// Variables temporales de uso interno<br>
+
+</DIR>
+} ___respuesta;<br>
+//FIN DE CODIGO EN C<br>
+
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Diferencias entre f1,f2 y act1,act2:</P>
+<P ALIGN="JUSTIFY">f1 y f2 reflejan simplemente cuando esta el bot&oacute;n pulsado o sea, cuando el jugador lo pulsa, seguir&aacute; valiendo distinto de 0 hasta que lo suelte, en cambio act1 y act2 valdr&aacute;n distinto de 0 solo una vez cuando se pulse el bot&oacute;n y luego valdr&aacute; 0 hasta que el jugador lo suelte y lo vuelva a pulsar, para que esto, pues sencillo en algunos juegos, como pueden ser de naves, queremos que el jugador tenga autofire o no, pues en cada caso usaremos una o las otras variables, para que el jugador tenga que dejar pulsado la tecla de fuego o l tenga que ir pulsado y soltando cada vez.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Antes de seguir deberemos saber leer esos controles (teclado y joystick), para ello vamos a usar funciones est&aacute;ndar de WIN 32 y no direct-x para hacerlo a si mas f&aacute;cil y a la vez para que se puedan usar en cualquier proyecto incluso los que no usan direct-x.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">COMO LEER TODO EL TECLADO EN WIN 32</P>
+</B>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Win 32 provee una f&aacute;cil manera de leer en cualquier momento todo el estado del teclado, con la funci&oacute;n del api:</P>
+</FONT><FONT SIZE=2>
+</FONT><B><FONT FACE="Arial" SIZE=2><P>BOOL GetKeyboardState(PBYTE</B><I> lpKeyState</I><B>);</P>
+</B></FONT><FONT SIZE=2>
+</FONT><I><FONT FACE="Arial" SIZE=2><P>lpKeyState</I> </P><DIR>
+<DIR>
+
+<P>Puntero a un vector de bytes de 256 de tama&ntilde;o que recibir&aacute; el estado de las teclas para cada una de las &quot;virtual keys&quot;.</P>
+</DIR>
+</DIR>
+
+<P>Devuelve no cero si funciona o cero si no.</P>
+</FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P>Para leer el teclado solamente tendremos que crear un array para contener el resultado de esa funci&oacute;n y un par de funciones para usarlo.</P>
+</FONT><FONT FACE="Courier New" SIZE=2>
+</FONT><FONT SIZE=2><P>
+</FONT><FONT FACE="Courier New" SIZE=2>
+//FUNCIONES DE TECLADO WIN-32<br>
+//Aqui declaramos el Vector donde alojaremos la pulsacion de las teclas<br>
+unsigned char teclapulsada[256];<p>
+//Simplemente inicialza el vector, debe de ser llamada al principio del juego<br>
+void InitKey()<br>
+{<br><dir>
+unsigned int z;    <br>
+&#9;for(z=0;z&lt;=255;z++) teclapulsada[z]=0;<br>
+</dir>}<p>
+
+//Actualiza el vector, debe ser llamada una vez por ciclo de juego<br>
+void leeteclas()<br>
+{<br><dir>
+unsigned int z;<br>
+GetKeyboardState(teclapulsada);<br>
+for(z=0;z&lt;=255;z++)<br>
+     &#9;{<br>
+<DIR>
+
+teclapulsada[z]=teclapulsada[z]&amp;0x80; // &amp;0x80 pulsado<br>
+</DIR>
+
+     &#9;}<br>
+</dir>}</P>
+
+//Devuelve el codigo de la primrera tecla pulsada, 0 si ninguna esta pulsada<br>
+unsigned short int unatecla()<br>
+{<dir><br>
+unsigned short int z;<br>
+ &#9;for(z=1;z&lt;127;z++)<br>
+ &#9;{<br>
+  &#9;&#9;if(teclapulsada[z])<br>
+   &#9;&#9;return z;<br>
+ &#9;}<br>
+return 0;<br>
+</dir>}<br>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=3><P ALIGN="JUSTIFY">COMO USAR EL JOYSTICK EN WIN-32</P>
+</B></FONT><FONT FACE="Arial">
+</FONT><FONT FACE="Arial" SIZE=2><P>Usar el JOYSTICK en win-32 es casi tan f&aacute;cil como usar el teclado para ello en el api hay las siguientes estructuras de datos y funciones:</P>
+
+</FONT><FONT FACE="Courier New" SIZE=2><P ALIGN="JUSTIFY">
+//Estructura definida en el WIN 32 API para sacar info de un joystick</P>
+typedef struct joycaps_tag {<BR><DIR>
+&#9;UINT  wMid;&#9;&#9;&#9;// ID del fabricante<BR>
+&#9;UINT  wPid;&#9;&#9;&#9;// ID del producto<BR>
+&#9;char  szPname[MAXPNAMELEN];&#9;// Nombre del Joystick<BR>
+&#9;UINT  wXmin;&#9;&#9;&#9;// Valor minimo del eje X<BR>
+&#9;UINT  wXmax;&#9;&#9;&#9;// Valor maximo del eje X<BR>
+&#9;UINT  wYmin;&#9;&#9;&#9;// Valor minimo del eje Y<BR>
+&#9;UINT  wYmax;&#9;&#9;&#9;// Valor maximo del ejeY<BR>
+&#9;UINT  wZmin;&#9;&#9;&#9;// Valor minimo del eje Z<BR>
+&#9;UINT  wZmax;&#9;&#9;&#9;// Valor maximo del eje Z<BR>
+&#9;UINT  wNumButtons;&#9;&#9;// Numero de Botones<BR>
+
+</FONT><FONT SIZE=2><P ALIGN="JUSTIFY">&#9;</FONT><FONT FACE="Courier New" SIZE=2>UINT  wPeriodMin;&#9;&#9;// Intervalos para el Joystick Capturado</P>
+UINT  wPeriodMax;&#9;&#9;// Intervalos para el Joystick Capturado</P></DIR>
+
+</DIR>}</FONT><FONT FACE="Courier New" SIZE=2> JOYCAPS;</P>
+
+//Estructura definida en el WIN 32 API para sacar la posicion de un Joystick</P>
+typedef struct joyinfo_tag {<BR><DIR>
+&#9;UINT  wXpos;&#9;&#9;&#9;// Posicion en el eje X<BR>
+&#9;UINT  wYpos;&#9;&#9;&#9;// Posicion en el eje Y<BR>
+&#9;UINT  wZpos;&#9;&#9;&#9;// Posicion en el eje Z<BR>
+&#9;UINT  wButtons;&#9;&#9;&#9;// Estado actual de los botones<BR>
+// JOY_BUTTON1 para el boton 1<BR>
+// JOY_BUTTON2 para el boton 2<BR>
+// JOY_BUTTON3 para el boton 3<BR>
+// JOY_BUTTON4  para el boton 4<BR>
+</DIR>} JOYINFO;<BR>
+</FONT><FONT FACE="Arial" SIZE=2>
+<P>&nbsp;</P>
+<B><P>UINT joyGetNumDevs(VOID);</P>
+</B><P>Esta funci&oacute;n devuelve el numero de Joystick conectados al sistema 0 si no hay ninguno</P>
+
+<B>MMRESULT joyGetDevCaps(<BR>
+  UINT</B><I> uJoyID</I><B>,    <BR>
+  LPJOYCAPS</B><I> pjc</I><B>,  <BR>
+  UINT</B><I> cbjc       <BR>
+</I><B>);<BR>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">uJoyID</P>
+<P ALIGN="JUSTIFY">&#9;El ID del joystick que queremos obtener sus capacidades.</P>
+<P ALIGN="JUSTIFY">pjc&#9;</P>
+<P ALIGN="JUSTIFY">Un puntero a una estructura JOYCAPS que ser&aacute; rellenada por esta funci&oacute;n</P>
+<P ALIGN="JUSTIFY">cbjc&#9;</P>
+<P ALIGN="JUSTIFY">&#9;El tama&ntilde;o del pjc</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Esta funci&oacute;n devuelve distinto de 0 si funciona y rellena la informaci&oacute;n pedida en la estructura JOYCAPS dada.</P>
+<P ALIGN="JUSTIFY"></P>
+<B>MMRESULT joyGetPos(<BR>
+  UINT</B><I> uJoyID</I><B>,  <BR>
+  LPJOYINFO</B><I> pji <BR>
+</I><B>);<BR>
+
+</B><P>uJoyID</P>
+<P>&#9;El ID del Joystic que queremos conocer su posici&oacute;n actual</P>
+<P>pji&#9;</P>
+<P>&#9;puntero a una estructura JOYINFO que ser&aacute; rellenada por esta funci&oacute;n.</P>
+
+<P>Esta funci&oacute;n devuelve la posici&oacute;n de un joystick y valor distinto de 0 si todo va bien.</P>
+</FONT><FONT SIZE=2>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">Para manejar todo esto utilizaremos las siguientes funcione y estructuras:</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P ALIGN="JUSTIFY">
+//COMIENZO DE CODIGO EN C<BR>
+UINT NJOYSTICKS;&#9;&#9;//Nº de joysticks conectados o no<BR>
+UINT NJOYSTICKSPLUG;&#9;//Nº de joysticks conectados<BR>
+JOYCAPS    joycaps;&#9;//Capacidades del joystick<P>
+//Valores para determinar los movimientos del joystick<BR>
+//Este structura la usaremos para crear un array con los joystick que hay en <BR>
+//en el sistema independientemente de cuales sea sus ID<BR>
+typedef struct {<BR><DIR>
+
+signed int JDER;&#9;//Cordenada a partir de la cual es movimiento a la derecha<BR>
+signed int JIZQ; &#9;//Cordenada a partir de la cual es movimiento a la izquierda<BR>
+signed int JARR; &#9;//Cordenada a partir de la cual es movimiento a arriba<BR>
+signed int JABA; &#9;//Cordenada a partir de la cual es movimiento a abajo<BR>
+
+UINT JOY_ID;              &#9;//ID del Joystick para el sistema<BR>
+unsigned short int Ajustado;//Si esta Ajustado<BR>
+long xmax,xmin,ymax,ymin;&#9;//Maximo del Joystick<BR>
+</DIR>} ___joyvalue;<P>
+//Array con todos los joystick conectados<BR>
+//o sea cuando en el control decimos que el joystick es igual a 1<BR>
+//nos referimos a que es el primero conectado independientemente de su ID<BR>
+//si decimos que es el 2 es el segundo etc, si desconectamos algun,<BR>
+//de esta manera es mas facil cuando en juego se quiere usar joystick (el primero)<BR>
+//sin importar cual sea <BR>
+#define maxjoys 10    </P>
+___joyvalue joyvalue[maxjoys];</P>
+
+//Informacion para recoger la posicion de un joystick<BR>
+JOYINFO joy;</P>
+//Busca Joysticks en el sistema incializa datos<BR>
+//calcula a partir de donde hay movimiento<BR>
+//y devuelve cuantos hay conectados<BR>
+unsigned short int InitJoy()<BR>
+{<BR><DIR>
+
+NJOYSTICKS=joyGetNumDevs(); &#9;//Esta funcion devuelve el nº de joyticks<BR>
+//que el sistema soporta, no los conectados<BR>
+
+NJOYSTICKSPLUG=0;                        <BR>
+<BR>
+
+JOYINFO pji;<BR>
+UINT c;<BR>
+</P>
+//Para saber cuales estan conectados miramos si la funcion joyGetPos</P>
+//Devuelve JOYERR_NOERROR<BR>
+for (c=0;c&lt;NJOYSTICKS;c++) if (joyGetPos(c,&amp;pji)==JOYERR_NOERROR){<BR>
+<BR>
+&#9;//Guardamos su ID y cogemos sus caps<BR>
+     &#9;joyvalue[NJOYSTICKSPLUG+1].JOY_ID=c;<BR>
+joyvalue[NJOYSTICKSPLUG+1].Ajustado=1;<BR>
+
+joyGetDevCaps (joyvalue[NJOYSTICKSPLUG+1].JOY_ID,&amp;joycaps,sizeof(joycaps));<P>
+
+
+//Aqui miramos la estructura joycaps para calcular los maximos y los<BR>
+//minimos de los potenciometros, y dividiendo averiguamos a partir<BR>
+//de que cordenada consideramos que es un movimiento<BR>
+//que sera cuando la palanca pase la mitad de la distancia de uno de los<BR>
+//ejes y su maximo o sea, cuando movamos el joystick a la derecha<BR>
+//se considerarar derecha cuando la palanca pase la mitada entre el <BR>
+//centro y el maximo a la derecha.<BR>
+signed int mx=(joycaps.wXmax+joycaps.wXmin)/2;<BR>
+signed int my=(joycaps.wYmax+joycaps.wYmin)/2;<BR>
+joyvalue[NJOYSTICKSPLUG+1].JDER=(mx+joycaps.wXmax)/2;<BR>
+joyvalue[NJOYSTICKSPLUG+1].JIZQ=(mx+joycaps.wXmin)/2;<BR>
+joyvalue[NJOYSTICKSPLUG+1].JARR=(my+joycaps.wYmin)/2;<BR>
+joyvalue[NJOYSTICKSPLUG+1].JABA=(my+joycaps.wYmax)/2;<BR>
+        </P>
+&#9;//guardamos los valores maximos<BR>
+joyvalue[NJOYSTICKSPLUG+1].xmax=joycaps.wXmax;<BR>
+joyvalue[NJOYSTICKSPLUG+1].xmin=joycaps.wXmin;<BR>
+joyvalue[NJOYSTICKSPLUG+1].ymax=joycaps.wYmax;<BR>
+joyvalue[NJOYSTICKSPLUG+1].ymin=joycaps.wYmin;<BR>
+</P>
+//hay un joystick mas conectado<BR>
+NJOYSTICKSPLUG++;<BR>
+}<BR>
+       else joyvalue[NJOYSTICKSPLUG+1].Ajustado=0; <BR>
+        return (unsigned short int) (NJOYSTICKSPLUG)<BR>
+</DIR>}<BR>
+<BR>
+//FIN DE CODIGO EN C</P>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial"><P ALIGN="JUSTIFY">COMO TRANSFORMAR UN CONTROL EN UNA RESPUESTA</P>
+</B>
+</FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">La idea es f&aacute;cil, crearemos una funci&oacute;n que se encarga de esa tarea, que procese el teclado y el joystick dado, el joystick que nosotros tengamos asignados en control y que al final rellene la estructura respuesta. La tendremos que llamar para cada control y respuesta que deseemos usar, adem&aacute;s antes de usarla tendremos que llamar a las funciones de inicializaci&oacute;n de joystick y teclado, tambi&eacute;n una vez por ciclo a la funci&oacute;n de actualizaci&oacute;n del teclado.</P>
+<P ALIGN="JUSTIFY"></P>
+</FONT><FONT FACE="Courier New" SIZE=2><P>
+//COMIENZO DE CODIGO EN C</P>
+
+//Esta funcion transforma un control en respuesta y devuelve distinto de 0<BR>
+//si ha habado alguna respuesta, 0 si no<BR>
+unsigned short int control(___control &amp;control,___respuesta &amp;respuesta)<BR>
+{<BR><DIR>
+//variables para el uso enla funcion<BR>
+
+unsigned short int pulsa=0,izqu=0,dere=0,arri=0,abaj=0,fue1=0,fue2=0;<BR>
+
+//Si usamos teclado<BR>
+if (control.teclado){<BR><DIR>
+
+arri=teclapulsada[control.ar];<BR>
+abaj=teclapulsada[control.ab];<BR>
+izqu=teclapulsada[control.iz];<BR>
+dere=teclapulsada[control.de];<BR>
+fue1=teclapulsada[control.f1];<BR>
+fue2=teclapulsada[control.f2];<BR>
+
+</DIR> } <P>
+
+//Si usamos joystick y es valido<BR>
+if( ((control.joystick)!=0)&amp;&amp;(joyvalue[control.joystick].Ajustado==1) ){<P><DIR>
+//cogemos los valores del joystick<BR>
+joyGetPos (joyvalue[control.joystick].JOY_ID,&amp;joy);<BR>
+<BR>
+//actualizamos los valores, usamos OR &quot;|&quot;<BR>
+//en los joyvalue teniamos guardados en que puntos de los ejes<BR>
+//se considera el movimiento para ese lado para ello en el <BR>
+//control teniamos especificado el joystick en el sistema<BR>
+//tenemos el array joyvalue con los valores que queremos<BR>
+
+izqu=((signed int)joy.wXpos&lt;=joyvalue[control.joystick].JIZQ)|izqu;<BR>
+dere=((signed int)joy.wXpos&gt;=joyvalue[control.joystick].JDER)|dere;<BR>
+arri=((signed int)joy.wYpos&lt;=joyvalue[control.joystick].JARR)|arri;<BR>
+abaj=((signed int)joy.wYpos&gt;=joyvalue[control.joystick].JABA)|abaj;<BR>
+fue1=((signed int)(joy.wButtons&amp;JOY_BUTTON1))|fue1;<BR>
+fue2=((signed int)(joy.wButtons&amp;JOY_BUTTON2))|fue2;<BR>
+
+<P>//analogico<BR>
+(respuesta.xmax)=joyvalue[control.joystick].xmax;<BR>
+(respuesta.xmin)=joyvalue[control.joystick].xmin;<BR>
+(respuesta.ymax)=joyvalue[control.joystick].ymax;<BR>
+(respuesta.ymin)=joyvalue[control.joystick].ymin;<BR>
+(respuesta.xvalue)=joy.wXpos;<BR>
+(respuesta.yvalue)=joy.wYpos;<BR>
+
+</DIR>}<P>
+
+//Para retornar Si habia alguna respuesta<BR>
+if(izqu||dere||arri||abaj||fue1||fue2)<BR>
+  <DIR>pulsa=1;<BR></DIR>
+ else<BR>
+  <DIR>pulsa=0;<P></DIR>
+
+//parte especial que controla las acciones que se hacen con conbinaciones<BR>
+//de los botones de juego<BR>
+(respuesta.iz)=izqu;<BR>
+(respuesta.de)=dere;<BR>
+(respuesta.ar)=arri;<BR>
+(respuesta.ab)=abaj;<BR>
+(respuesta.f1)=fue1;<BR>
+(respuesta.f2)=fue2;<P>
+
+// "act1": se activa al pulsar el boton 1 despues de no haberlo pulsado<BR>
+// aux1 se usa para saber si antes estaba pulsado o no<BR>
+(respuesta.act1)=0;<BR>
+ if(fue1==0)<BR>
+  <DIR>(respuesta.aux1)=1;<BR></DIR>
+ else<BR>{
+  <DIR>if(respuesta.aux1)<BR>
+  {<BR>
+   <DIR>(respuesta.aux1)=0;<BR>
+   (respuesta.act1)=1;<BR></DIR>
+  }</DIR>}<P>
+
+ // "act2": se activa al pulsar el boton 2 despues de no haberlo pulsado<BR>
+// aux2 se usa para saber si antes estaba pulsado o no<BR>
+ (respuesta.act2)=0;<BR>
+ if(fue2==0)<BR>
+  <DIR>(respuesta.aux2)=1;<BR></DIR>
+ else<BR>{
+  <DIR>if(respuesta.aux2)<BR>
+  {<BR>
+   <DIR>(respuesta.aux2)=0;<BR>
+   (respuesta.act2)=1;<BR></DIR>
+  }</DIR>}<P>
+
+//retornamos si hay respuesta o no  <BR>
+return pulsa;<BR></DIR>
+}<BR></FONT>
+
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
+<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>JULIO</B></FONT>
+<FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
+<FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>
+<!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
+
+<BR><HR>
+
+
+<!-- INICIO DEL RECUADRO DE ENLACES -->
+<CENTER>
+<TABLE CELLPADDING=2 WIDTH="100%">
+<TD  WIDTH="50%" VALIGN="TOP" align="LEFT">
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" CELLSPACING=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" CELLSPACING=0 CELLPADDING=2>
+<TR>
+<TD>
+<CENTER>
+<FONT SIZE=2>
+
+<A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
+
+<A HREF="hpj.htm"><font FACE="ARIAL"><B>[Sistemas de control e interacción]</B></font></a> <br>
+
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+</CENTER>
+<!-- FIN DEL RECUADRO DE ENLACES -->
+
+<BR>
+<HR>
+
+<!-- COMIENZO DEL CIERRE DEL ARTICULO -->
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>
+DESARROLLO DE VIDEOJUEGOS</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">X</FONT></TD>
+</TR>
+</TABLE></CENTER>
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER>
+<FONT FACE="Arial,Helvetica" COLOR="#000000">
+<B>MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</B>
+</FONT>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+<!-- FINAL DEL CIERRE DEL ARTICULO -->
+
+</BODY>
+</HTML>
+
+
+

@@ -1,0 +1,1072 @@
+<HTML>
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtículos Varios</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<b><FONT color="#cc0000" size=2 face="arial">
+A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez "Kapit".</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<P ALIGN=JUSTIFY>
+Si no has leido el artículo sobre <A HREF="interrup.htm">interrupciones</a> que, publicábamos, en nuestra
+primera actualización, te recomiendo que lo leas para que no estés muy perdido.
+<br><br>
+Para la programación del ratón utilizaremos las interrupciones ya que nos ofrecen un acceso directo a las rutinas implementadas en la tabla de vectores de interrupción al igual que una mayor facilidad a la hora de trabajar.
+<br><br>La programación, en un principio, se va a realizar mediante el BorlandC/C++, para ello, deberemos de conocer las estructuras y funciones que dicho compilador nos ofrece para trabajar con las ya citadas interrupciones.
+<br><br>Antes de pasar a describirlas, recordaremos que los registros utilizados en los microprocesadores Intel ix86 son AX, BX, CX, DX como registros de propósito general y después tendremos otros como ES, DS, CS, SS, etc que servirán para apuntar a determinadas zonas del código del programa (de datos, pila, código, etc). A su vez, cada registro, se divide (en los procesadores de 16 bits) en dos partes: la zona H (parte alta de palabra) y la zona L (parte baja de palabra), esto es, como cada registro lo vamos a tratar como una palabra de 16 bits (ya que no nos interesa hacer programas sólo para procesadores de 32 bits), cada uno de ellos podrá dividirse en una zona alta, en la que estarían los 8 primeros bits (1 byte) y en una zona baja, donde estarían los 8 bits de menor peso (también 1 byte). De esta forma, podremos hablar en el caso de los registros de propósito general, de AH, AL, BH, BL, CH, CL, DH y DL.
+<br><br>
+<h4>Cómo invocar a las interrupciones</h4>
+<P align="justify">
+Para poder acceder a los distintos registros en el Borland C, deberemos de utilizar dos funciones, estas son: 
+<br>
+<OL>
+<LI><P align=justify><b>int86   (número de interrupción, registros de entrada, registros de salida);</b></LI>
+<LI><P align=justify><b>int86x (número de interrupción, registros de entrada, registros de salida, sregistros);</b></LI>
+</OL>
+<br>
+<P align=justify>
+La  única diferencia, entre las dos funciones, radica en que la función int86, no permite acceder a todos los registros, esto es, los registros extra sólo pueden ser accedidos desde la función int86x que, son precisamente los indicados en el parámetro sregistros. Salvo ese parámetro, todo lo demás es igual para ambas ya que, en el primer parámetro se les pasa el número de interrupción que queremos producir, en el segundo parámetro la estructura en donde metemos los valores de los registros que son necesarios para la interrupción, y que actúan de argumentos o parámetros de la misma. Por último, en el tercer parámetro, lo que hacemos es pasar la estructura en la que deseamos que la función nos guarde los resultados de la llamada a la interrupción.
+<br><br>
+Para poder ver más claro las estructuras que vamos a utilizar, es decir, las estructuras de tipo registro de los parámetros 2 y 3, se van a poner a continuación, la definición que hace el BorlandC/C++ en el archivo de cabecera dos.h, el cual, lógicamente, será necesario incluir en nuestros programas para poder utilizar las estructuras y funciones de acceso a interrupciones int86 e int86x.
+<br>
+<center>
+<table >
+<td>
+<pre>
+<b>
+<FONT color="#000000" size=1 face="Arial">        
+/* Estructuras incluidas en el archivo dos.h<br> y que definen el tipo de los <br>parámetros 2 y 3 de las funciones int86 e int86x */
+
+/* en total 16 bytes por variable */
+struct WORDREGS
+	{
+	unsigned int ax, bx, cx, dx, si, di, cflag, flags;
+	};
+
+/* en total 1 byte por variable */
+struct BYTEREGS
+{
+unsigned char al, ah, bl, bh, cl, ch, dl, dh;
+};
+
+/* Mediante esta union, sólo utilizaremos un espacio de 16 bits (2  bytes) */
+union REGS
+{
+struct WORDREGS x;  /* accederemos con registro.x.ax por ejemplo */
+struct BYTEREGS h;  /* accederemos con registro.h.ah por ejemplo */
+                } ;
+</b>
+</pre>
+</td>
+</table>
+</center>
+<P align=justify>
+
+Cabe señalar que algunos registros no existen en estas estructuras, para poder utilizarlos siempre podremos acudir a la creación de variables de la siguiente estructura (también incluida en el archivo de cabecera dos.h).
+
+<br>
+<center>
+<table >
+<td>
+<pre>
+<b>
+<FONT color="#000000" size=1 face="Arial">        
+struct REGS
+	{
+	unsigned int es, cs, ss, ds;
+	};
+
+</b>
+</pre>
+</td>
+</table>
+</center>
+<P align=justify>
+<h4>Generalidades de la programación con ratón</h4>
+<P align=justify>
+Antes de pasar a explicar la programación del ratón, hay que tener en cuenta una serie de generalidades sobre lo que se debe de saber a la hora de programar el ratón:
+<br><br>
+<ol>
+<li>
+<P align=justify>
+El ratón mide sus coordenadas siempre en píxels internamente, de tal forma que siempre que llamemos al servicio que nos ofrece la información sobre las coordenadas del ratón, este nos devolverá la información en pixeles, independientemente de si estamos en modo gráfico o en modo texto. La conclusión más clara es que deberemos de utilizar una fórmula que nos permita pasar, por un lado de coordenadas reales a coordenadas que utiliza el ratón y por otro lado de coordenadas devueltas por el ratón a coordenadas reales que podamos utilizar en la pantalla aunque estemos en modo texto. De esta forma, los datos que queramos pasarlos a coordenadas de pantalla, deberemos de obtenerlos mediante la división de las coordenadas devueltas por el ratón entre las dimensiones reales de un pixel de pantalla y en caso contrario, de pantalla a sistema de ratón, deberemos de multiplicar. Así, para pasar (64,32) del ratón a una pantalla con dimensiones de carácter de 8x8 (modo texto) deberíamos de dividir, quedándonos (8,4).
+</li>
+<li>
+<P align=justify>
+Un aspecto importantísimo es el referente a la comprobación de la existencia del controlador de ratón del fabricante ya que, en caso contrario, no dispondremos de las rutinas que se encarguen de tratar las interrupciones que invoquemos.
+</li>
+<li>
+<P align=justify>
+El acceso directo al vídeo junto al uso del ratón, puede producir resultados no deseados, sobre todo si nos encontramos dibujando con el ratón o actualizando la pantalla. Para que tal no ocurra, siempre habrá que ocultar el ratón, restaurar o dibujar pantalla y volver a enseñar el ratón. Esto es así porque el ratón se redibuja y de no ocultarlo impediría que la porción en la que el se encuentra, se dibujase correctamente (el cursor del ratón la taparía).
+</li>
+<li>
+<P align=justify>
+En el caso de hacer programas residentes que hagan uso del ratón en medio de la utilización de nuestra aplicación, que también utiliza ratón, habrá que ser cautelosos y guardar las coordenadas del ratón y  pantalla de la aplicación en la que estabamos trabajando para que, de esta manera, al acabar el uso de la aplicación residente, volvamos a tener todo como estaba antes de invocar al programa residente.
+</li>
+</ol>
+
+<h4>¡A por los servicios!</h4>
+<p align=justify>
+Para la programación del ratón utilizaremos los servicios que nos ofrece la interrupción 0X33 (33h). Realizando una breve explicación, podremos decir que lo que hacemos es invocar a la interrupción 33h e indicar, mediante el registro AX, que función o servicio queremos utilizar, de esta forma, el procesador sabrá acudir a la tabla de interrupciones y una vez allí acceder a la función que le hemos indicado. El resto de registros los utilizaremos, distintos a AX, para pasar parámetros a la función elegida y/o para recoger la posible información que se nos envíe una vez hecha la llamada a la interrupción.
+<br><br>
+No veremos todos los servicios que posee el ratón, pero os aseguro, que vamos a ver muchos, los
+que realmente nos van a hacer falta e incluso, algunos, que nunca usaremos.
+<br><br>
+A continuación, la descripción de los servicios.
+<br><br>
+<h4>Servicio 0.</h4> 
+<p align=justify>
+Sirve para saber si está instalado o no el controlador de ratón y además resetear todas las variables de estado del ratón. Para poder indicar que queremos utilizar el servicio / función 0 de la interrupción 33h, hemos de colocar en AX el valor 0x00.
+Los valores devueltos serán:
+<br>
+<OL>
+<LI><P align=justify>Si AX = 0000 el controlador no está instalado</LI>
+<LI><P align=justify>Si AX = FFFF el controlador está instalado.</LI>
+<LI><P align=justify>BX = número de botones del ratón.</LI>
+</OL>
+<br>
+<P align=justify>
+
+Este servicio también realiza otra serie de cosas cuando es invocado:
+<br>
+<uL>
+<LI><P align=justify>Mueve el cursor del ratón al centro de la pantalla.</LI>
+<LI><P align=justify>Lo oculta.</LI>
+<LI><P align=justify>Establece la página 0 de vídeo como página activa. Esto es así, porque existen 4 páginas distintas (desde la 0 a la 3), y en cada momento, sólo es visible una de esas páginas. Como cada página se trata de forma independiente, se ha de indicar, sobre cual de ellas se va a trabajar.</LI>
+<LI><P align=justify>Se establece el área de exclusión a toda la pantalla. Podemos entender el área de exclusión como una zona de pantalla en la que el puntero del ratón se puede mover, pero no se puede ver (no es visible). </LI>
+<LI><P align=justify>El rango del puntero va a ser la totalidad de la pantalla, de esta forma, podremos mover el puntero del ratón por la totalidad de la pantalla.</LI>
+<LI><P align=justify>La velocidad horizontal será de 8 a 8 y la vertical de 8 a 16. Esto viene a indicar la distancia a la que tengo que mover el ratón para que el puntero se desplace una unidad. El desplazamiento se mide en mickeys y por cada 8 mickeys, el ratón se desplaza 1 pixel. La relación es de 1/200 pulgadas // 0,005 pulgadas.</LI>
+<LI><P align=justify>La doble velocidad será establecido a 64 mickeys / seg. Esto es así, porque existe un límite en el desplazamiento del ratón que viene determinado por la velocidad, de tal forma que si la velocidad en la que movemos el ratón supera el límite, pasaremos a doble velocidad y el desplazamiento será al doble en pantalla.</LI>
+<LI><P align=justify></LI>
+</uL>
+<br>
+<P align=justify>
+Antes de proseguir y, para asentar conceptos, un breve ejemplo de lo que sería una codificación para la invocación de una interrupción, del servicio 0 por ejemplo:
+<br>
+<center>
+<table >
+<td>
+<pre>
+<b>
+<FONT color="#000000" size=1 face="Arial">        
+/* Caso del servicio 0 */
+
+int PresenteRaton (int *botones)
+{
+union REGS regs;
+
+	reg.x.ax = 0;
+	int86 (0x33, &amp;regs, &amp;regs);
+	*botones = regs.x.bx;
+	return (regs.x.ax);
+}
+
+</b>
+</pre>
+</td>
+</table>
+</center>
+<P align=justify>
+
+<h4>Servicio 1.</h4>
+<p align=justify>
+Sirve para mostrar el puntero del ratón. <br>También señalar que realiza un reseteo del área de exclusión. 
+<br>Debemos de poner AX = 0x01.
+<br><br>
+<h4>Servicio 2.</h4>
+<p align=justify>
+
+Mediante este servicio ocultaremos el ratón. AX = 0x02.
+<br><br>
+<h4>Servicio 3.</h4>
+<p align=justify>
+Sirve para preguntar por la posición y los botones del ratón, pero en un momento determinado (si se ha pulsado o cambiado la posición del ratón, justo al hacer esta llamada). El único valor a pasar es el de la identificación de la función, AX =  0x03. Los valores devueltos serán:
+<br>
+<OL>
+<LI><P align=justify>El registro BX se nos indicará los botones pulsados, de esta manera si el registro BX está:
+<br>
+<ol type="A">
+<LI><P align=justify>Con el bit 0 encendido, si el botón Izq. ha sido pulsado. <br><b>if (BX & 1) == 1</b>.</LI>
+<LI><P align=justify>Con el bit 1 encendido, si el botón Dcho. ha sido pulsado.<br><b> if (BX & 2) == 2</b>.</LI>
+<LI><P align=justify>Con el bit 2 encendido, si el botón del Centro ha sido pulsado.<br><b> if (BX & 4) == 4</b>.</LI>
+</ol>
+
+</LI>
+<LI><P align=justify>El registro CX indicará la coordenada X.</LI>
+<LI><P align=justify>El registro DX indicará la coordenada Y.</LI>
+</OL>
+<br>
+<P align=justify>
+
+Como apunte final, indicar que este método para conocer el estado del botón se basa en el "polling" o pregunta constante, ya que deberemos de estar chequeando contínuamente con llamadas a esta función, perdiendo un tiempo considerable en algunas ocasiones.
+<br><br>
+<h4>Servicio 4.</h4>
+<p align=justify>
+Pone el puntero del ratón en una posición de la pantalla. Además de indicar la función, deberemos de pasar lo siguiente:
+<br>
+<OL>
+<LI><P align=justify>AX = 0x04. Indicamos la función o servicio.</LI>
+<LI><P align=justify>CX = Posición X.</LI>
+<LI><P align=justify>DX = Posición Y.</LI>
+</OL>
+Recordar que los valores de las coordenadas del ratón hay que pasarlas en mickeys, de tal manera que si queremos situar el cursor en la posición (8,4), deberemos de pasar los valores (63,32) (en el supuesto de que utilicemos el modo texto de 8x8 la dimensión de un carácter).
+
+<br><br>
+<h4>Servicio 5.</h4>
+<p align=justify>
+
+Sirve para preguntar al contador de pulsaciones de botones. Los valores a  pasar son los siguientes:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x05.</LI>
+<LI><P align=justify>BX = Botón a consultar, esto es:
+<br>
+<ol type="A">
+<LI><P align=justify>Para el botón Izquierdo pasamos un 0.</LI>
+<LI><P align=justify>Para el botón Derecho pasamos un 1.</LI>
+<LI><P align=justify>Para el botón Central pasamos un 2.</LI>
+</ol>
+</LI>
+</OL>
+<br>
+<P align=justify>
+
+Se nos devolverá la siguiente información:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = Estado del botón, que identificaremos por:</LI>
+<LI><P align=justify>Bit 0 es el botón Izquierdo.</LI>
+<LI><P align=justify>Bit 1 es el botón Derecho.</LI>
+<LI><P align=justify>Bit 2 es el botón Central.</LI>
+<LI><P align=justify>BX = Contador de pulsaciones del botón por el que vamos a preguntar.</LI>
+<LI><P align=justify>CX = Posición x.</LI>
+<LI><P align=justify>DX = Posición y.</LI>
+</OL>
+<br>
+<P align=justify>
+<h4>Servicio 5.</h4>
+<p align=justify>
+Este servicio ofrece un contador de liberaciones.<br><br>
+El funcionamiento es exactamente igual que en el del anterior servicio, salvo que este es para liberaciones y el otro era para pulsaciones. Señalar que en la programación se suele utilizar la combinación del servicio 6 y 5 para conocer el estado del ratón, ya que mediante la correspondencia de botones pulsados = botones liberados, se puede obtener una información mucho más precisa sobre lo que ha ocurrido en el ratón, descartando de este modo, el uso del servicio 3. Otra de las utilidades de utilizar estos dos servicios en común, es para la detección de dobles clicks, mediante la toma de tiempos entre una pulsación y otra.
+
+<br><br>
+<h4>Servicio 7.</h4>
+<p align=justify>
+Establece el rango horizontal en el que el ratón puede moverse.Los valores necesarios son:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x07.</LI>
+<LI><P align=justify>CX = Mínima coordenada de X.</LI>
+<LI><P align=justify>DX = Máxima coordenada de X.</LI>
+</OL>
+<br>
+<P align=justify>
+
+<h4>Servicio 8.</h4>
+<p align=justify>
+Establece el rango vertical de movimiento del ratón. 
+<br>Deberemos de pasar lo siguiente:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x08.</LI>
+<LI><P align=justify>CX = Mínima coordenada de Y.</LI>
+<LI><P align=justify>DX = Máxima coordenada de Y.</LI>
+</OL>
+<br>
+
+<h4>Servicio 9.</h4>
+<p align=justify>
+	Mediante este servicio establecemos la forma del puntero del ratón en modo gráfico. Para ello deberemos de pasar lo siguiente:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0X09.</LI>
+<LI><P align=justify>BX = Hot Spot horizontal.</LI>
+<LI><P align=justify>CX = Hot Spot vertical.</LI>
+<LI><P align=justify>ES:DX = Dirección (segmento::desplazamiento) del buffer de 64 bytes que almacena las máscaras AND y XOR.</LI>
+</OL>
+<br>
+<P align=justify>
+Esta función se encarga, como ya se ha indicado, de establecer la forma del puntero del ratón en modo gráfico, para ello necesitamos un Hot Spot horizontal y vertical, que será aquella parte, del dibujo del puntero del ratón, sobre el que se realicen los chequeos de pulsación y demás. De esta forma, si tuviésemos un puntero en forma de cruz, lo más lógico sería otorgar un Hot Spot en las coordenadas centrales del puntero.
+<br><br>
+Por otro lado, tenemos el buffer de 64 bytes. En dicho buffer deberemos de colocar los 32 bytes superiores con una máscara AND y los 32 bytes inferiores con una máscara XOR, de esta manera, estableceríamos distintas formas del puntero del ratón, con distintas combinaciones de dichas máscaras. Lo que haremos será aplicar sobre los pixels en los que pasamos el puntero del ratón, la máscara AND y del resultado obtenido la máscara XOR teniendo como solución, el aspecto del cursor del ratón al pasar por esa zona de la pantalla. Precisar que el cursor del ratón en modo gráfico es de 16x16, es decir, de 32 bytes, es por ello que necesitemos esos 32 bytes para máscaras AND y XOR.
+<br><br>
+A modo de recordatorio, se indicarán las tablas AND y XOR.
+<br>
+<BR>
+<CENTER>
+<table border=1>
+<td>
+<font size=2>
+<B>AND<B>
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+<B>XOR</B>
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+
+<tr>
+
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+
+<tr>
+
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+0
+</td>
+</table>
+</CENTER>
+<BR>
+También indicaremos las distintas combinaciones que se pueden efectuar con dicha tabla y sus repercusiones en pantalla.
+<br>
+<BR>
+<CENTER>
+<table border=1>
+<td>
+<font size=2>
+<B>Pixel de pantalla.<br> (1 activado y 0 apagado)</B>
+</td>
+<td>
+<font size=2>
+<b>AND</b>
+</td>
+<td>
+<font size=2>
+<b>XOR</b>
+</td>
+<td>
+<font size=2>
+<B>Resultado</B>
+</td>
+<tr>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0. Queda igual el pixel de pantalla.
+</td>
+<tr>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1. Queda igual el pixel de pantalla.
+</td>
+<tr>
+<td>
+<font size=2>
+X. Cualquier valor.
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+0. Se pasa a 0.
+</td>
+
+<tr>
+<td>
+<font size=2>
+X. Cualquier valor.
+</td>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1. Se pasa a 1.
+</td>
+<tr>
+<td>
+<font size=2>
+0
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1. Se invierte el valor que existiera.
+</td>
+<tr>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+1
+</td>
+<td>
+<font size=2>
+0. Se invierte el valor que existiera.
+</td>
+
+</table>
+</CENTER>
+
+<br>
+
+<h4>Servicio 10.</h4>
+<p align=justify>
+Este servicio nos permite, en modo texto, establecer la forma del cursor de texto (o caret) y los atributos del puntero del ratón usando, nuevamente, máscaras de bits. Pasa invocar a dicho servicio deberemos de suministrar los siguientes datos a la interrupción:
+<br>
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x0A</LI>
+<LI><P align=justify>BX = Tipo de cursor del ratón:
+<br>
+<ol type="A">
+<LI><P align=justify>Si pasamos un 0, indicaremos que queremos establecer la forma del cursor por Hardware, o lo que es lo mismo, que queremos establecer la forma del caret.</LI>
+<LI><P align=justify>Si pasamos un 1, indicaremos que queremos establecer los atributos del cursor del ratón en modo texto y de esta forma realizar el tratamiento por Software.</LI>
+</ol>
+</LI>
+<LI><P align=justify>CX = Dependerá de lo que pusiéramos en BX:
+<br>
+<ol type="A">
+<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar la línea de comienzo para el caret.</LI>
+<LI><P align=justify>Si pusimos BX a 1 deberemos de indicar el valor de la máscara AND, teniendo en cuenta que los 8 primero bytes indican el atributo que queremos y los 8 último bytes (o parte baja) el carácter que queremos.</LI>
+</ol>
+
+</LI>
+<LI><P align=justify>DX = De nuevo, depende de lo puesto en BX:
+<br>
+<ol type="A">
+<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar el final de la línea para el carte.</LI>
+<LI><P align=justify>Si, por el contrario, habíamos puesto BX a 1, lo que tendremos que hacer es indicar la máscara XOR, con los 8 primeros bytes para máscara de atributo y los 8 último para máscara de carácter.</LI>
+</ol>
+</LI>
+</OL>
+<br>
+<P align=justify>
+Señalar que, si se selecciona el cursor de Software, el código de carácter bajo el cursor del ratón y el byte de atributos asociados se operan con la máscara que se encuentra en el registro CX, es decir, la máscara AND, a continuación el resultado se operará con la máscara que se encuentra en el registro DX y que será aplicada mediante un XOR. El byte de atributos se opera respectivamente con el byte alto (CH y DH), y el código de carácter con el byte bajo (CL y DL). Decir también, que los 8 bits destinados al atributo del carácter se dividen de tres en tres y de mayor importancia a menor por color de fondo, por intensidad y por color de letra.
+<BR><BR>
+Por otro lado, si lo que escogimos es una definición del cursor, esto es, poner BX a 1, los rangos para la línea inicial y final en el modo monocromo están entre 0 y 13 y para el modo color entre 0 y 7.
+
+<br><BR>
+<h4>Servicio 11.</h4>
+<p align=justify>
+	Con este servicio podremos averiguar la distancia entre la posición actual del ratón y la posición del ratón durante la última llamada de esta función. Lo único que deberemos de pasar a la función es el número del servició, es decir, AX = 0x0B. Una vez hecha la llamada a la función se nos devolverá la siguiente información:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>CX = Distancia horizontal.</LI>
+<LI><P align=justify>DX = Distancia Vertical.</LI>
+</OL>
+<br>
+<P align=justify>
+Es muy importante señalar que los valores se han de interpretar como números con signo ya que los valores negativos indicarán, para el caso del movimiento horizontal, un desplazamiento derecho si es positivo o izquierdo si es negativo. Para el caso de la distancia vertical, un valor positivo indicará un movimiento hacia abajo, mientras que el caso contrario, un valor negativo, indicará un movimiento hacia arriba.
+<BR><BR>
+Indicar también, que los valores serán devueltos en Mickeys y que habrá que hacer las divisiones oportunas en caso de trabajar en modo texto (1 Mickey = 1/200 pulgadas).
+
+<br><BR>
+<h4>Servicio 12.</h4>
+<p align=justify>
+
+El servicio 12 o 0x0C, es uno de los más importantes, ya que se encarga de establecer el manejador de eventos, es decir, establecemos las rutinas en memoria que son invocadas cuando ocurre alguna alteración en alguno de los estados del ratón, ya sea de movimiento o pulsación de boton, etc. De esta forma es, el propio driver del ratón, quien nos avisa a nosotros de que a sucedido algo y no somos nosotros los que tenemos que estar contínuamente preguntando por el estado del ratón. Con esto queda claro que el manejador de eventos cumple con una labor muy importante a la hora de tomar el camino más óptimo en la creación de una librería de control del ratón.
+<BR><BR>
+Pasando a citar los valores que debemos de pasar a la hora de invocar al servicio nos encontramos:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX=0x0C. Esto es, el número de servicio a utilizar que es el 12.</LI>
+<LI><P align=justify>CX = Máscara de eventos por la que queremos que seamos avisados. Si hemos activado alguno de los bits que se indican a continuación, la rutina que alojemos en memoria entrará a funcionar y se nos avisará del suceso. Para indicar que sucesos queremos que sean "vigilados" tenemos a CX en el que activaremos los eventos a tratar como indicamos a continuación:
+<br>
+<ol type="A">
+<LI><P align=justify>Bit 0 a 1 para movimiento del ratón.</LI>
+<LI><P align=justify>Bit 1 a 1 para pulsación del botón izquierdo.</LI>
+<LI><P align=justify>Bit 2 a 1 para liberación del botón izquierdo.</LI>
+<LI><P align=justify>Bit 3 a 1 para pulsación del botón derecho.</LI>
+<LI><P align=justify>Bit 4 a 1 para liberación del botón derecho.</LI>
+<LI><P align=justify>Bit 5 a 1 para pulsación del botón central.</LI>
+<LI><P align=justify>Bit 6 a 1 para liberación del botón central.
+<br>Como apunte, señalar que, de poner CX = 007F, todos los posibles eventos tendrán un tratamiento.</LI>
+</ol>
+</LI>
+<LI><P align=justify>ES:DX = Como es fácil adivinar en ES:DX irá la dirección del manejador a instalar en la memoria, para que cuando ocurra alguno de los sucesos indicados en el registro CX se active dicha rutina. En ES irá, como es habitual, el segmento y en DX el desplazamiento.</LI>
+</OL>
+<br>
+<P align=justify>
+Una vez invocada la interrupción 0x0C, deberemos de saber que en la rutina que coloquemos en la memoria, cada vez que se active alguno de los sucesos indicados en el registro CX, se nos pasará, precisamente a dicha rutina, una serie de valores que nos darán información acerca del estado del ratón y que podríamos considerar como los valores devueltos por la interrupción, con la particularidad de que son valores que se nos mandan continuamente, siempre que ocurre algún suceso de los indicados. Los valores que se nos mandarán a la rutina serán:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = Máscara del evento que se produjo. Esto quiere decir, que si en CX antes de invocar a la interrupción, nosotros pasábamos una máscara en la cual indicábamos por cuales de los sucesos queríamos estar informados, al producirse alguno/s de ellos se nos mandará dicha máscara de sucesos y podremos saber que suceso o sucesos han producido la activación de nuestra rutina.</LI>
+<LI><P align=justify>BX = Estado de los botones, esto es:
+<br>
+<ol type="A">
+<LI><P align=justify>Bit 0 indica botón izquierdo. <br><b>if (bx & 1) == 1</b>.</LI>
+<LI><P align=justify>Bit 1 indica botón derecho. <br><b>if (bx & 2) == 2</b>.</LI>
+<LI><P align=justify>Bit 2 indica botón central. <br><b>if (bc & 4) == 4</b>.</LI>
+</ol>
+</LI>
+<LI><P align=justify>CX = Posición horizontal del puntero del ratón.</LI>
+<LI><P align=justify>DX = Posición vertical del puntero del ratón.</LI>
+<LI><P align=justify>SI = Distancia recorrida en horizontal.</LI>
+<LI><P align=justify>DI = Distancia recorrida en vertical. Reseñar que, tanto en SI como en DI, se utilizarán Mickeys y que los valores podrán ser negativos o positivos. En el caso de ser positivos y trabajar con SI significarán movimientos a derecha e izquierda si son negativos. Si trabajamos con DI, valores positivos indican movimiento hacia arriba y negativos hacia abajo.</LI>
+<LI><P align=justify>DS = Segmento de datos del controlador del ratón.</LI>
+</OL>
+<br>
+<P align=justify>
+A continuación, se ofrece un ejemplo de una posible implementación de este servicio (no voy
+a ser tan malo ;) ):
+<br>
+<center>
+<table >
+<td>
+<pre>
+<b>
+<FONT color="#000000" size=1 face="Arial">        
+bool activo; /* podría ser un typedef char bool; */
+int evento=0;
+unsigned int boton;
+bool suceso;
+
+void establece_manejador (int eventos, void far *manejador)
+{
+	union REGS regs;
+	struct SREGS sregs;
+	regs.x.ax = 0x0C;
+	regs.x.cx = estados;
+	regs.x.dx = FP_OFF (manejador);
+	sregs.es = FP_SEG (manejador);
+	int86x (0x33, &amp;regs, &amp;regs, &amp;sregs);
+}
+
+void maneja (void) /* Función manejador , cada cual que la adapte a sus necesidades */
+{
+	evento = _AX;
+	boton  = _BX;
+	suceso = VERDADERO;
+	activo = FALSO;
+
+	if (boton &amp;0x02) activo = VERDADERO;
+}
+
+void main (void)
+{
+...............................
+...............................
+if (raton.existe () )
+            {
+	unsigned int botones;
+	if (raton.inicializar(&amp;botones))
+    {
+     raton.mostrarcursor();
+     establece_manejador (movimiento_raton | pulsa_izquierdo | pulsa_derecho, maneja);
+     activo = FALSO;
+     evento = 0;
+	while (¡activo) { if (suceso){.................................} }              
+             }
+           }
+
+}
+
+/* Para quitar el manejador, cosa imprescindible al salir de 
+   nuestro programa, deberíamos de ejecutar:
+   establece_manejador (0x0, maneja); */
+
+</b>
+</pre>
+</td>
+</table>
+</center>
+
+<h4>Servicio 15. </h4>
+<p align=justify>
+Este servicio se encarga de establecer la velocidad del puntero del ratón en pantalla respecto de nuestros movimientos con el periférico.
+<br><br>
+Deberemos de pasar los siguientes valores:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x0F.</LI>
+<LI><P align=justify>CX = Velocidad horizontal.</LI>
+<LI><P align=justify>DX = Velocidad vertical.</LI>
+</OL>
+<br>
+<P align=justify>
+Los valores que pasemos a CX y a DX indican la distancia que deberemos de mover para que el puntero se mueva x pixels (los que nosotros indiquemos). Por defecto, los valores de velocidad horizontal están a 8 pixels y los de velocidad vertical a 16 pixels.
+<br><br>
+Esta función puede ser muy útil cuando se busca precisión en los movimientos, de esta forma si queremos mover pocos pixels en cada desplazamiento del ratón sólo tendremos que cambiar estos valores.
+<br><BR>
+<h4>Servicio 16.</h4>
+<p align=justify>
+Aquí estableceremos el área de exclusión, es decir, en qué rectángulo de la pantalla se puede mover nuestro ratón y ser visto, o dicho de otro modo, fuera de qué límites nuestro puntero es capaz de moverse pero no de verse. 
+<br><br>
+Para utilizar esta función deberemos de dar los siguientes parámetros a la interrupción:
+<br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x10.</LI>
+<LI><P align=justify>CX = X1.</LI>
+<LI><P align=justify>DX = Y1.</LI>
+<LI><P align=justify>SI  = X2.</LI>
+<LI><P align=justify>DI  = Y2.</LI>
+</OL>
+<br>
+<P align=justify>
+Para entender la disposición de estas coordenadas lo mejor es echar un vistazo a la figura siguiente.
+<br>
+<center>
+<img src="gif/fraton.gif">
+</center>
+<h4>Servicio 19. </h4>
+<p align=justify>
+Este servicio nos permite establecer la doble velocidad del ratón. Para ello tan sólo deberemos de pasar, dejando de un lado la función en AX, el límite de doble velocidad, como indicamos a continuación:
+<br><br>
+
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x13.</LI>
+<LI><P align=justify>DX = Límite de doble velocidad (Mickeys por segundo).</LI>
+</OL>
+<br>
+<P align=justify>
+
+Cuando nos referimos al término de doble velocidad, lo que queremos indicar es la capacidad de movimiento del cursor del ratón cuando movemos velozmente el ratón sobre la mesa, de esta forma, al superar el límite establecido, lo que logramos es que el puntero del ratón se desplace mucho más rápido por pantalla al ir de más en más pixels.
+<br><br>
+El valor por defecto de la doble velocidad está situado en 64, con lo que si superamos dicho límite tendremos 64/200 pulgadas de desplazamiento.
+
+<br><BR>
+<h4>Servicio 20.</h4>
+<p align=justify>
+Sirve para intercambiar los manejadores de eventos. Su constitución es similar a la de la función 12, salvo que nos deja intercambiar el manejador. Este servicio es muy útil, sobre todo desde el punto de vista de que nos permite encadenar diversos manejadores de eventos que nos pueden ser útiles en distintas ocasiones.
+<br><br>
+Deberemos de pasar lo siguientes parámetros:
+
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x14.</LI>
+<LI><P align=justify>CX = Máscara de eventos, que es la misma que la que hay en el servicio 12.</LI>
+<LI><P align=justify>ES:DS = La dirección del manejador, siguiendo el concepto de segmento y desplazamiento.</LI>
+</OL>
+<br>
+<P align=justify>
+Una vez invocada a la interrupción con los parámetros adecuados, se nos devolverán los siguientes datos:
+<br><br>
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>CX = Máscara de eventos anterior, es decir, del manejador anterior.</LI>
+<LI><P align=justify>ES:DX = Dirección, segmento y desplazamiento, del manejador que había antes de cambiarlo.</LI>
+</OL>
+<br>
+<P align=justify>
+
+<h4>Los 3 Servicios de Estado del Ratón: 21, 22 y 23.</h4>
+Estos tres servicios nos permiten cambiar toda la información que tengamos sobre el ratón en un determinado momento para luego poder volver a restaurarla. Para ello contaremos, como veremos a continuación, con una función que nos devolverá el tamaño de los bytes necesarios para guardar la información, con otra para pasar la dirección del buffer a utilizar y por último con una para restaurar la información original.
+<br><br>
+<h4>Servicio 21.</h4>
+<p align=justify>
+Esta es el primero de los servicios de estado del ratón y nos permite recoger el tamaño del buffer que deberemos de utilizar. Señalar que al no estar documentada, sólo recibiremos el tamaño en bytes y no la disposición de la información.
+<br><br>
+Pasando ya a los datos que hay que pasar tan sólo deberemos de indicar el número de la función con AX = 0x15. Por otro lado, se nos devolverá el tamaño del buffer en BX.	
+<br><br>
+<h4>Servicio 22.</h4>
+<p align=justify>
+En la segunda función de estado lo que tendremos que hacer es pasar la dirección (segmento y desplazamiento) en dónde se encuentra nuestro buffer para almacenar los datos actuales del ratón. No se nos devolverá nada.
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x16.</LI>
+<LI><P align=justify>ES:DX = Dirección del buffer a guardar los datos.</LI>
+</OL>
+<br>
+<h4>Servicio 23.</h4>
+<p align=justify>
+Ya, por último, con esta función podremos restaurar los valores originales que guardamos en el buffer. Para ello deberemos de volver a indicar la dirección del mismo. Por tanto, pasaremos:
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x17.</LI>
+<LI><P align=justify>ES:DX = Dirección del buffer en donde se encuentran los datos a restaurar.</LI>
+</OL>
+<br>
+<P align=justify>
+
+<h4>Servicio 24.</h4>
+<p align=justify>
+Nos encontramos ante el tercer servicio para utilizar los manejadores del ratón. Es el conocido manejador de eventos alternativo, es decir, funciona igual que el servicio 12 salvo que la máscara de sucesos a chequear es distinta. De esta forma, indico los parámetros que necesitamos:
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>1. AX = 0x18. </LI>
+<LI><P align=justify>CX = Máscara de eventos en la cual, al activar el bit correspondiente poniendo un 1, elegimos que sucesos queremos que active nuestra rutina particular. Hasta aquí, igual que el servicio 12, sin embargo, vamos a ver como la máscara de eventos a controlar es bastante distinta:
+<br>
+<ol type="A">
+<LI><P align=justify>Bit 0 a 1 para movimiento.</LI>
+<LI><P align=justify>Bit 1 a 1 para pulsación del botón izquierdo.</LI>
+<LI><P align=justify>Bit 2 a 1 para liberación del botón izquierdo.</LI>
+<LI><P align=justify>Bit 3 a 1 para pulsación del botón derecho.</LI>
+<LI><P align=justify>Bit 4 a 1 para liberación del botón derecho.</LI>
+<LI><P align=justify>Bit 5 a 1 para Shift + pulsación botón.</LI>
+<LI><P align=justify>Bit 6 a 1 para Ctrl + pulsación botón.</LI>
+<LI><P align=justify>Bit 7 a 1 para Alt + pulsación botón.</LI>
+</ol>
+</LI>
+<LI><P align=justify>ES:DX = La dirección de la rutina nuestra.</LI>
+</OL>
+<br>
+<P align=justify>
+Una vez invocada a la interrupción, AX nos podrá devolver dos valores. Si AX nos devuelve 0018h significará que se instaló y si nos devuelve un FFFF significará que el manejador no se instaló.
+
+<br><BR>
+<h4>Servicio 25.</h4>
+<p align=justify>
+
+Con este servicio, podremos elegir un determinado manejador de eventos cuando nos interese. Señalar que este servicio sólo funcionará con los manejadores instalados con el servicio anterior, el servicio 18. 
+<br><br>
+Pasando ya a la ejecución de la interrupción, deberemos de pasar los siguientes parámetros:
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x19. Que indica, como siempre, el número de servicio.</LI>
+<LI><P align=justify>CX = Máscara.</LI>
+</OL>
+<br>
+<P align=justify>
+Una vez invocada la interrupción, se nos devolverá:
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>CX = Máscara del manejador.</LI>
+<LI><P align=justify>ES:DX = Dirección del manejador.</LI>
+</OL>
+<BR>
+<h4>Servicio 26.</h4>
+<p align=justify>
+Mediante este servicio podemos establecer la sensibilidad del ratón, esto es, podemos establecer todos los aspectos que influyen en la precisión del ratón. En este servicio tan sólo pasamos parámetros:
+
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>AX = 0x1A.</LI>
+<LI><P align=justify>BX = Valor de velocidad horizontal. (Mickeys por pixel).</LI>
+<LI><P align=justify>CX = Valor de velocidad vertical. (Mickeys por pixel).</LI>
+<LI><P align=justify>DX = Establecemos el límite de la doble velocidad. (Mickeys por segundo).</LI>
+</OL>
+<br>
+<P align=justify>
+Como se puede observar, lo que nos ofrece esta función, ya lo habíamos visto por separado con los servicios 15 y 19.
+<br><BR>
+<h4>Servicio 27.</h4>
+<p align=justify>
+Obtiene los valores de sensibilidad del ratón, o lo que es lo mismo, nos permite conocer todos aquellos parámetros que en la función 28 (la de arriba) poníamos. Tan sólo pasaremos el número de servicio con AX = 0x1B y a cambio nos serán devueltos los siguientes datos:
+<P align=justify>
+<br>
+<OL>
+<LI><P align=justify>BX = Valor horizontal actual.</LI>
+<LI><P align=justify>CX = Valor vertical actual.</LI>
+<LI><P align=justify>DX = Límite de doble velocidad actual.</LI>
+</OL>
+<br>
+<P align=justify>
+En resumidas cuentas, es la complementaria a  la función 27.
+<br><BR>
+<h4>Servicio 28.</h4>
+<p align=justify>
+Establecemos el ratio de interrupción, o dicho de otro modo, la frecuencia en la que deseamos que se chequee el puerto de entrada en el que está conectado el ratón. Para la utilización de esta función o servicio deberemos de pasar lo siguiente:
+<br>
+<OL>
+<LI><P align=justify>AX = 0x1C.</LI>
+<LI><P align=justify>BX = La frecuencia a la que queremos que se chequee, y que podrá ser:
+<br>
+<ol type="A">
+<LI><P align=justify>1 si no deseamos que se chequee.</LI>
+<LI><P align=justify>2 si queremos que se chequee a una frecuencia de 30 veces por segundo.</LI>
+<LI><P align=justify>4 si queremos que se chequee a una frecuencia de 50 veces por segundo.</LI>
+<LI><P align=justify>8 si queremos que se chequee a una frecuencia de 100 veces por segundo.</LI>
+<LI><P align=justify>16 si queremos que se chequee a una frecuencia de 200 veces por segundo.</LI>
+</ol>
+</LI>
+</OL>
+<br>
+<P align=justify>
+Esta función también resulta, al igual que la 15, muy útil para buscar precisión ya que a mayor frecuencia de chequee más lento irá nuestro programa y vicerversa.
+<br><BR>
+<h4>Servicio 29.</h4>
+<p align=justify>
+Establece la página de visualización del puntero del ratón. Existen 4 páginas de visualización en modo gráfico y 8 en modo texto, con lo que, si nuestro puntero de ratón se encuentra en la página que no estamos visualizando en pantalla, no veremos nada. Con esta función solventamos el problema ya que podremos establecer la página en donde se encuentra nuestro puntero como página activa. 
+<br><br>
+Para poder utilizar este servicio deberemos de pasar los siguientes valores:
+<br>
+<OL>
+<LI><P align=justify>AX = 0x1D.</LI>
+<LI><P align=justify>BX = Número de la página que queremos activar.</LI>
+</OL>
+<br>
+<P align=justify>
+<h4>Servicio 30.</h4>
+<p align=justify>
+Este servicio nos sirve para saber en qué página de vídeo se encuentra el puntero del ratón. Tan sólo deberemos de pasar el valor de esta función en AX con AX = 0x1F y se nos será devuelto en BX la página en la que se encuentra. Como se puede deducir esta función es la complementaria a la 29.
+<br><br>
+<h4>Servicio 31.</h4>
+<p align=justify>
+Sirve para desactivar el controlador de ratón y dejar acabar el programa correctamente. Deberemos de pasar sólo la función en AX con AX = 0x1F. Los valores que obtendremos serán los siguientes:
+<br>
+<OL>
+<LI><P align=justify>AX = Resultado de la invocación:</LI>
+<LI><P align=justify>ES:DX = Nos suministrará la dirección, en memoria, del controlador anterior al que hemos desinstalado.
+<br>
+<ol type="A">
+<LI><P align=justify>Si AX = 001F, el controlador se ha desactivado.</LI>
+<LI><P align=justify>Si AX = FFFF, el controlador no se ha desactivado.</LI>
+</ol>
+</LI>
+</OL>
+<br>
+<P align=justify>
+
+<h4>Servicio 32.</h4>
+<p align=justify>
+Este servicio, simplemente, activa el controlador en su llamada, mediante el parámetro de AX, el cual contiene el número de servicio, esto es, AX = 0x20. No se nos devolverá nada después de haber invocado la llamada a la interrupción.
+<br><br>
+<h4>Servicio 33.</h4>
+<p align=justify>
+
+Realiza un reset del Software del ratón y establece las variables del controlador a sus valores por defecto. Tan sólo hay que pasar en AX el servicio que es, AX = 0x21. Por otro lado se nos devolverán los siguientes valores:
+
+<br>
+<OL>
+<LI><P align=justify>AX = Resultado de la operación:
+<br>
+<ol type="A">
+<LI><P align=justify>Si AX = 0021, todo ha salido bien y no existe error.</LI>
+<LI><P align=justify>Si AX = FFFF, ha existido error.</LI>
+</ol>
+</LI>
+<LI><P align=justify>BX = Número de botones del ratón.</LI>
+</OL>
+<br>
+
+<h4>Servicio 36.</h4>
+<p align=justify>
+Este servicio nos permite averiguar el tipo de conexión que hay entre el ratón y el ordenador (tipo de ratón y versión del driver). Una vez hecha la llamada con el valor AX = 0x24, se nos devolverán los siguientes datos:
+
+<br>
+<OL>
+<LI><P align=justify>BH = Número de versión del controlador.</LI>
+<LI><P align=justify>BL = Extensión de la versión del controlador (parte decimal).</LI>
+<LI><P align=justify>CH = Tipo de conexión:
+<br>
+<ol type="A">
+<LI><P align=justify>CH = 1 indicará que es de BUS.</LI>
+<LI><P align=justify>CH = 2 indicará que es de SERIE.</LI>
+<LI><P align=justify>CH = 3 indicará que es en el puerto de entrada.</LI>
+<LI><P align=justify>CH = 4 indicará que es de un modelo PS/2 de IBM.</LI>
+<LI><P align=justify>CH = 5 indicará que es de un HP.</LI>
+</ol>
+</LI>
+<LI><P align=justify>CL = IRQ a la que está ligado.</LI>
+</OL>
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Artículos Varios]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+

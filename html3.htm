@@ -1,0 +1,283 @@
+<HTML>
+
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso Acelerado de HTML</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+</b></FONT>
+<br><br>
+
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<H3>Cap&iacute;tulo 3.<br>Trabajando con texto</h3>
+<p align=JUSTIFY>
+
+Bueno, después de aprender las cuatro bobadas para poder "sacar algo" en el navegador,
+vamos a aprender unos cuantos conceptos básicos de manejo del texto, que nos va a
+posibilitar el poder presentarlo de una forma elegante en pantalla.
+<br>
+<br>
+Antes de pasar a la materia en si, señalar que existen una serie de caracteres que
+no son representados en pantalla tal cual, es decir, que en algunas versiones antiguas
+de los navegadores, son presentados en pantalla de forma distínta a como nosotros esperábamos y
+sí, resulta que entre esos caracteres se encuentra nuestra querida e&ntilde;e y los
+acentos. Para poder representarlos os pongo una tabla de correspondencia en la que
+podeis ver lo que tendreís que poner para representar este o aquel caracter que
+no se encuentre entre los estándar.
+<br>
+<br>
+<center><table border=1>
+<td><b><FONT size=2>Caracter Original</b></td><td><FONT size=2><b>Sustitución</b></td><tr>
+<td><FONT size=2>&aacute;</td><td><FONT size=2>&amp;aacute;</td><tr>
+<td><FONT size=2>&eacute;</td><td><FONT size=2>&amp;eacute;</td><tr>
+<td><FONT size=2>&iacute;</td><td><FONT size=2>&amp;iacute;</td><tr>
+<td><FONT size=2>&oacute;</td><td><FONT size=2>&amp;oacute;</td><tr>
+<td><FONT size=2>&uacute;</td><td><FONT size=2>&amp;uacute;</td><tr>
+<td><FONT size=2>&ntilde;</td><td><FONT size=2>&amp;ntilde;</td><tr>
+<td><FONT size=2>&uuml;</td><td><FONT size=2>&amp;uuml;;</td><tr>
+<td><FONT size=2>&ccedil;</td><td><FONT size=2>&amp;ccedil;</td><tr>
+<td><FONT size=2>&lt;</td><td><FONT size=2>&amp;lt;</td><tr>
+<td><FONT size=2>&gt;</td><td><FONT size=2>&amp;gt;</td><tr>
+<td><FONT size=2>&amp;</td><td><FONT size=2>&amp;amp;</td><tr>
+<td><FONT size=2>&quot;</td><td><FONT size=2>&amp;quot;</td><tr>
+</table></center>
+<BR>
+<br>
+</p>
+<h4>
+Directivas BASEFONT y FONT.
+</h4>
+<p align=justify>
+Ahora vamos a ver como poder cambiar el tamaño del texto que saquemos por pantalla así
+como el color del mismo.
+<br>
+<br>
+En lo referente al tamaño del texto contamos por un lado con la directiva &lt;BASEFONT&gt; que
+nos permite establecer un tamaño por defecto para nuestro texto, así, si ponemos por ejemplo:
+&lt;BASEFONT size = 3&gt; conseguiremos que todo el texto que vayamos a sacar tenga
+un tamaño de 3, ahorrándonos de esta manera un tratamiento particular de cada párrafo.
+<br>
+<br>
+La otra posibilidad con la que contamos a la hora de cambiar el tamaño del texto es
+la directiva &lt;FONT&gt; &lt;/FONT&gt;. De esta forma, queremos que la frase "Tengo tamaño 3" salga
+por pantalla y con tamaño 3, tan sólo deberíamos de poner:
+<br>
+<br>
+<I>
+&lt;FONT size = 3&gt;<BR>
+Tengo tamaño 3<br>
+&lt;/FONT&gt;<br>
+</I>
+<br>
+Sin embargo, la directiva &lt;FONT&gt; tiene la particularidad de poder aumentar o disminuir en x
+unidades el tamaño que se tenga establecido como base para el texto a sacar, es decir, si suponemos
+un tamaño base de fuente de valor 2 y queremos aumentarlo hasta 5, podríamos poner:
+<br>
+<br>
+<I>
+&lt;FONT size = +3&gt;<BR>
+Tengo tamaño 3<br>
+&lt;/FONT&gt;<br>
+</I>
+<br>
+Y si quisiesemos disminuir hasta una unidad de 1:<br>
+<br>
+<I>
+&lt;FONT size = -1&gt;<BR>
+Tengo tamaño 3<br>
+&lt;/FONT&gt;<br>
+</I>
+<br>
+Lógicamente, al acabar con &lt;/FONT&gt; el tamaño del texto volvería a ser el establecido
+como defecto, bien por &lt;BASEFONT&gt; o bien por el que tenga el navegador.
+<br>
+<br>
+Otras de las posibilidades que nos ofrece la directiva FONT es la de poder cambiar el
+color del texto a elegir, para ello utilizaremos el clásico concepto del RGB, es decir,
+el color que vemos es una mezcla en determinadas unidades de R(rojo), G(verde) y B(Azul),
+para ello, tendremos hasta 256 colores distintos a elegir para el rojo, verde y azul.
+Para llevar esto a cabo pondremos:<br>
+<br>
+<I>
+&lt;FONT color"#000000"&gt;
+Texto a imprimir con color
+&lt;FONT&gt;
+</I>
+<br><br>
+A modo de ejemplo, te pongo estas combinaciones:
+<br>
+<br>
+</P>
+<center><table border=1>
+<td><b><FONT size=2>Color</b></td><td><b><FONT size=2>Directiva FONT</b></td><tr>
+<td><FONT color="#FF0000" size=2>Rojo</FONT></td><td><FONT size=2>&lt;FONT color="#FF0000"&gt;</td><tr>
+<td><FONT color="#00FF00" size=2>Verde</FONT></td><td><FONT size=2>&lt;FONT color="#00FF00"&gt;</td><tr>
+<td><FONT color="#0000FF" size=2>Azul</FONT></td><td><FONT size=2>&lt;FONT color="#0000FF"&gt;</td><tr>
+<td><FONT color="#000000" size=2>Negro</FONT></td><td><FONT size=2>&lt;FONT color="#000000"&gt;</td><tr>
+<td><FONT color="#FFFFFF" size=2>Blanco</FONT></td><td><FONT size=2>&lt;FONT color="#FFFFFF"&gt;</td><tr>
+</table></center>
+<BR>
+<br>
+</p>
+<h4>
+Directiva P, CENTER, BR y HR para el tratamiento de los párrafos.
+</h4>
+<p align=justify>
+Con la directiva &lt;P&gt; &lt;/P&gt;, podremos trabajar con párrafos por separado,
+esto es, todo lo que esté entre la directiva citada, consituirá un párrafo independiente
+y además podremos alinearlo según nos convenga. La justificación del texto que vaya
+entre &lt;P&gt; y &lt;/P&gt;, podrá hacerse a izquierda, al centro o a la derecha, par
+ello basta con añadir a la directiva el campo align=alineación_escogida. Para que lo
+veas más claro una tabla:
+<br>
+<br>
+<center><table border=1>
+<td><b><FONT size=2>Alineación<b></td><td><FONT size=2><b>Construcción<b></td><tr>
+<td><FONT size=2>Izquierda</td><td><FONT size=2>&lt;P align=left&gt;</td><tr>
+<td><FONT size=2>Centro</td><td><FONT size=2>&lt;P align=center&gt;</td><tr>
+<td><FONT size=2>Derecha</td><td><FONT size=2>&lt;P align=right&gt;</td><tr>
+</table></center>
+<br>
+
+Como podeis ver es bien sencillo formatear el texto mediante esta directiva.<br>
+Antes de pasar a comentaros otras dos directivas útiles, decir que la directiva
+&lt;P&gt; formatea el texto por defecto a la Izquierda y que para el caso de querer
+formatear el texto al centro, también existe otra directiva que es &lt;CENTER&gt con
+su correspondiente &lt;/CENTER&gt;. Reseñar que en el caso de esta directiva, abarcaremos
+muchas más estructuras para centrar que con la ya explicada &lt;P&gt;
+<br>
+<br>
+Otras dos directivas que también os serán interesantes y de valiosa utilizad son por
+una lado &lt;BR&gt;, que se encarga de producir un salto de línea. Esta instrucción,
+no lleva su correspondiente pareja con la barra, es decir, es única.
+<br><br>
+Por otro lado, se encuentra la directiva &lt;HR&gt; que producirá una línea en pantalla.
+Tampoco necesita de la directiva pareja con la barra invertida.
+<br><br>
+<h4>
+Resaltando el texto.
+</h4>
+<p align=justify>
+Ahora vamos a ver como poder incluir texto en negrita, cursiva, subrayado o incluso,
+como poder hacer títulos de distintos tamaños.<br>
+<br>
+Para empezar, en el caso de querer sacar el texto en negrita tan sólo deberemos de
+utilizar la directiva &lt;B&gt; con su correspondiente &lt;/B&gt;, de esta manera,
+todo el texto que esté entre la directiva saldrá en negrita en la pantalla de
+tú navegador.<br><br>
+Si lo que queremos hacer es que salga subrayado, pues podremos utilizar la directiva
+&lt;U&gt; y &lt;/U&gt; de forma idéntica a lo que hacíamos con negrita. Ya por último,
+si queremos que salga en cursiva, deberemos de aplicar lo anterior con la directiva
+&lt;I&gt;.
+<br>
+<br>
+En el caso de querer resaltar de una forma aún más notoria el texto, es decir, si lo
+que queremos es hacer títulos o cabeceras deberemos de utilizar la directiva &lt;Hx&gt; con
+su correspondiente &lt;Hx&gt;, en donde x es igual a un valor entre 1 y 6. Con x=1 mostraríamos
+el texto al tamaño más grande y con x=6 al más pequeño.
+<br><br>
+<h4>
+Reutilizando nuestros archivos ASCII.
+</h4>
+<p align=justify>
+Si tienes un archivo en formato ASCII en el cual ya te has currado los tabulados,
+tablas, y demás historias y deseas pasarlo a tu página WEB sin necesidad de tener
+que teclearlo otra vez, la directiva &lt;PRE&gt; y su cierre &lt;/PRE&gt;, te permiten
+poder poner el archivo ASCII que tengas conservando todas las características del mismo.
+La única pega de todo esto es que no podremos aplicar, lógicamente, los atributos que
+nos brinda el HTML.
+<br>
+<br>
+Ya para terminar, os recomiendo que hagaís un pequeño ejemplo por vuestra cuenta con
+lo visto en el capítulo este y así conocer mejor las directivas de las que hablamos aquí. 
+
+<br>
+
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulap.htm"><font FACE="ARIAL"><B>[Curso Acelerado de HTML]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>

@@ -1,0 +1,406 @@
+<HTML>
+<BODY BGCOLOR="#FFFFFF">
+<br>
+<center><TABLE BORDER=0 align = center WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="*"  align = center HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="center">
+<FONT COLOR="#009933" size=7 face="arial"><B>A</B></font><FONT color="#000000" size=7 face="arial"><B>ula Macedo<FONT COLOR="#CC0000">n</FONT>ia</B></FONT><BR>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE></center>
+<br>
+<HR>
+<TABLE align = left BORDER=0 WIDTH="*" HEIGHT="*" BGCOLOR="#009933" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE align = left BORDER=0 WIDTH="*"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="left">
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Multimedia Bajo DOS</B></FONT></a>
+</DIV>
+</TD>
+</TR>
+</TABLE></TD>
+</TABLE>
+<br><br>
+
+<img src="g_misc/69.gif" align=right>
+<P align=right>
+<FONT color="#cc0000" size=2 face="arial">
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</b></A>
+</b></FONT>
+<br><br>
+
+<FONT color="#000000" size=2 face="arial"><br><br><br>
+<h3>
+Capítulo 2. <br> Programación del ratón (I).
+</h3>
+<H4>1.- El Manejador del Rat&oacute;n</H4>
+<br>
+<FONT color="#000000" size=2 face="arial">
+<P ALIGN=justify>
+
+Para comunicarse con el rat&oacute;n, tenemos que emplear la interrupci&oacute;n
+33h. El n&uacute;mero de la funci&oacute;n deseada se pasa con el registro
+AX y el resto de los registros se usan para pasar o recibir datos.
+
+<P align="justify"><B>mov ax,0</B>
+<BR><B>int 0x33</B>
+
+<P align="justify">Esta ser&iacute;a la forma de llamar a la funci&oacute;n 0 del rat&oacute;n.
+
+<P align="justify">Algunas funciones del interfaz del rat&oacute;n son las que se encuentran
+en el siguiente cuadro:
+<BR>&nbsp;
+<BR>&nbsp;<center>
+<TABLE BORDER CELLSPACING=2 CELLPADDING=4 WIDTH="535" BORDERCOLOR="#000000" >
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>Funci&oacute;n</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%"><B>Uso</B></TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>00h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Resetea el driver del rat&oacute;n.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>01h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Dibuja el cursor del rat&oacute;n en la pantalla.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>02h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Oculta el cursor del rat&oacute;n.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>03h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Devuelve la posici&oacute;n del cursor y el
+estado de sus botones.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>07h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Define la zona horizontal de movimiento para
+el cursor.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>08h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Define la zona vertical de movimiento para el
+cursor.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>09h</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Define el cursor del rat&oacute;n para los modos
+gr&aacute;ficos.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>0Ah</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Define el cursor del rat&oacute;n para los modos
+de texto.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="17%"><B>0Fh</B></TD>
+
+<TD VALIGN=TOP WIDTH="83%">Fija la velocidad de desplazamiento del cursor.</TD>
+</TR>
+</TABLE></center>
+&nbsp;
+
+<P align="justify">Tras esta breve exposici&oacute;n del rat&oacute;n a nivel hardware,
+comenzamos con el an&aacute;lisis de las rutinas que lo manejan.
+
+<P align="justify">La librer&iacute;a que se encarga del rat&oacute;n se llama <I>"RATON.C"</I>,
+y sus cabeceras est&aacute;n en <I>"RATON.H",</I> ambos ficheros incluidos
+&iacute;ntegramente al final de esta secci&oacute;n.
+
+<P align="justify">Empecemos por cambiar el cursor del rat&oacute;n, tarea sencilla para
+empezar. S&oacute;lo hay que dibujar un mapa de bits con la forma que queramos,
+dibujar tambi&eacute;n su negativo (m&aacute;scara) y luego traducir esas
+l&iacute;neas de binario a hexadecimal. En el fichero de cabeceras (RATON.H)
+podemos encontrar la siguiente declaraci&oacute;n:
+
+<P align="justify"><B>int cursor1 [32+32] = { <I>// Flecha</I></B>
+
+<P align="justify"><B>0x3FFF, 0x1FFF, 0x0FFF, 0x07FF, 0x03FF, 0x01FF, 0x00FF, 0x007F, 0x003F,
+0x001F, 0x000F, 0x0007,</B>
+
+<P align="justify"><B>0x0007, 0xF81F, 0xFC0F, 0xFE0F,</B>
+
+<P align="justify"><B><I>// M&aacute;scara</I></B>
+
+<P align="justify"><B>0x0000, 0x4000, 0x6000, 0x7000, 0x7800, 0x7C00, 0x7E00, 0x7F00, 0x7F80,
+0x7FC0, 0x7FE0, 0x7FF0,</B>
+
+<P align="justify"><B>0x0780, 0x03C0, 0x01E0, 0x0000 };</B>
+
+<P align="justify">Y usando el siguiente procedimiento hacemos efectivo el cambio:
+
+<P align="justify"><B><FONT COLOR="#990000">void CambiaPunteroRaton(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; long dir;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int dir2,dir3;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; dir=(long)cursor1; dir2=(int)dir; dir3=(int)(dir>>16);</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0x9</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,dir2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov es,dir3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify"><I>N&oacute;tese el uso del Ensamblador dentro del c&oacute;digo C,
+es decir, "Ensamblador Inmerso".</I>
+
+<P align="justify">Como se ve, se ha llamado a la interrupci&oacute;n 33h, al servicio
+9h.
+
+<P align="justify">Otra funci&oacute;n y la primera que debemos ejecutar cuando queremos
+utilizar el rat&oacute;n es la detecci&oacute;n del propio rat&oacute;n,
+ya que si &eacute;ste no est&aacute;, no podremos usarlo por mucho que
+programemos los eventos.
+
+<P align="justify">El procedimiento que lo hace es el siguiente:
+
+<P align="justify">&nbsp;
+
+<P align="justify"><B><FONT COLOR="#990000">int DetectarRaton(void)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int w;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,0</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov bx,0x2</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov w,ax</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; return(w);</B>
+<BR><B>}</B>
+
+<P align="justify">Si <I>DetectarRaton </I>devuelve -1, es que el rat&oacute;n est&aacute;
+presente.
+
+<P align="justify">Una vez detectado la presencia del driver del rat&oacute;n, hay que
+definir los l&iacute;mites (en p&iacute;xels) por los que se podr&aacute;
+mover.
+
+<P align="justify"><B><FONT COLOR="#990000">void EstablecerLimRaton(int xi,int yi,int xf,int
+yf)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,7</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,xi</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,xf</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,8</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov cx,yi</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov dx,yf</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>}</B>
+
+<P align="justify">De esta forma, independientemente de la resoluci&oacute;n de la pantalla,
+podemos hacer que el rat&oacute;n s&oacute;lo se pueda mover por una zona
+determinada, por un rect&aacute;ngulo que especifican las coordenadas del
+procedimiento. Esto es &uacute;til cuando queremos centrar la atenci&oacute;n
+del usuario sobre una zona determinada, no permiti&eacute;ndole hacer otra
+cosa hasta que haya seleccionado algo indispensable para continuar.
+
+<P align="justify">Una vez detectado el rat&oacute;n y establecido su &aacute;mbito de
+movimiento, hay que mostrar la flecha.
+
+<P align="justify"><B>void MostrarRaton(void);</B>
+
+<P align="justify">Algo que hay que tener en cuenta es que cuando se vaya a hacer un cambio
+en la pantalla tales como escribir un texto o una l&iacute;nea, hay que
+ocultar el rat&oacute;n y volverlo a mostrar cuando acabemos, ya que si
+n&oacute;, aparecer&aacute;n incongruencias entre la m&aacute;scara del
+rat&oacute;n y la memoria de v&iacute;deo, provocando la aparici&oacute;n
+de rect&aacute;ngulos extra&ntilde;os que estropear&aacute;n lo que veamos.
+Esto es debido a que el driver del rat&oacute;n continuamente usa una peque&ntilde;a
+zona de memoria para almacenar lo que hab&iacute;a "debajo" del cursor
+antes de que alcanzase la posici&oacute;n en que ahora se encuentra, de
+forma que al volverse a desplazar a otra posici&oacute;n se "restaura"
+lo que el cursor estaba "pisando". Por esto, si hacemos un cambio en una
+zona en la que se encuentra el cursor, al moverlo restaurar&aacute; la
+"antigua" zona que antes estaba, y no la que ahora deber&iacute;a estar
+debido al cambio.
+
+<P align="justify">Para ocultar el rat&oacute;n usaremos:
+
+<P align="justify"><B>void OcultarRaton(void);</B>
+
+<P align="justify">Y jugando con estos dos &uacute;ltimos procedimientos, escondemos y
+mostramos el rat&oacute;n cuando se vayan a producir los cambios en la
+pantalla.
+
+<P align="justify">Aparte de esto, dos de los &uacute;ltimos procedimientos que vamos a
+presentar aqu&iacute; (aunque hay m&aacute;s pero son secundarios), son
+los que se encargan de hacer esperar a la CPU hasta que se haya pulsado
+un bot&oacute;n (en este caso s&oacute;lo se reconocen las pulsaciones
+de los botones izquierdo y derecho. Si se quisiera observar tambi&eacute;n
+el del bot&oacute;n central cuando el rat&oacute;n disponga de tres, tendr&iacute;a
+que a&ntilde;adirse una tercera condici&oacute;n al "while": (*bot!=4)):
+
+<P align="justify"><B><FONT COLOR="#990000">void EsperarPulsadoBoton(int *bot)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; do { PulsadoBoton(bot); }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; while ((*bot!=1)&amp;&amp;(*bot!=2));</B>
+<BR><B>}</B>
+
+<P align="justify">y de hacerla esperar tambi&eacute;n hasta que se haya soltado ese bot&oacute;n.
+Los procedimientos son:
+
+<P align="justify"><B><FONT COLOR="#990000">void EsperarSoltadoBoton(int bot)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int *boton;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; do { PulsadoBoton(boton); }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; while (*boton==bot);</B>
+<BR><B>}</B>
+
+<P align="justify">Ambos procedimientos llaman al procedimiento que interact&uacute;a directamente
+con el rat&oacute;n:
+
+<P align="justify"><B><FONT COLOR="#990000">void PulsadoBoton(int *bot)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int boton;</B>
+<BR><B>&nbsp;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<B>mov boton,bx</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B><I>&nbsp;&nbsp;&nbsp; // Si vale 1 es el izquierdo, si vale 2 es
+el derecho,si vale 4 el central</I></B>
+<BR><B>&nbsp;&nbsp;&nbsp; *bot=(int)boton;</B>
+<BR><B>}</B>
+
+<P align="justify">Y por &uacute;ltimo, el procedimiento que se encarga de leer las coordenadas:
+
+<P align="justify"><B><FONT COLOR="#990000">void LeerPosRaton(int *x,int *y)</FONT></B>
+<BR><B>{</B>
+<BR><B>&nbsp;&nbsp;&nbsp; int xx,yy;</B>
+
+<P align="justify"><B>&nbsp;&nbsp;&nbsp; asm{</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov ax,3</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int 0x33</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov xx,cx</B>
+<BR><B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+mov yy,dx</B>
+<BR><B>&nbsp;&nbsp;&nbsp; }</B>
+<BR><B>&nbsp;&nbsp;&nbsp; *x=xx;</B>
+<BR><B>&nbsp;&nbsp;&nbsp; *y=yy;</B>
+<BR><B>}</B>
+
+<P align="justify">Con esto, la exposici&oacute;n de los procedimientos que se encargan
+del rat&oacute;n termina. Por &uacute;ltimo, usando estos procedimientos
+podremos saber cu&aacute;ndo el cursor se pulsa sobre una zona que nosotros
+hemos decidido que sea "sensible", esto es, un bot&oacute;n, un men&uacute;,
+un submen&uacute;, etc.
+<br>
+<hr>
+<center><TABLE CELLPADDING=2 WIDTH="100%">
+
+<TD  WIDTH="50%" VALIGN="TOP" align="left">
+
+<TABLE BORDER=1 WIDTH="100%" HEIGHT="*" BGCOLOR="#CC0000" cellspacing=0 CELLPADDING=2>
+<TD>
+<TABLE BORDER=0 WIDTH="100%"  HEIGHT="*" BGCOLOR="#FDEDBD" cellspacing=0 CELLPADDING=2>
+<TR>
+<TD>
+<DIV align="CENTER">
+<FONT SIZE=2>
+<A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
+<HR>
+<A HREF="aulak.htm"><font FACE="ARIAL"><B>[Curso de Programación Multimedia Bajo DOS]</B></font></a><br>
+</DIV>
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TABLE>
+</TD>
+</TABLE>
+
+
+<br>
+<HR>
+
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" >
+<TR>
+<TD>
+<TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica"><FONT COLOR="#000000">AULA MACEDONIA</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><TABLE BORDER=0 COLS=1 WIDTH="100%" BGCOLOR="#0080C0" >
+<TR>
+<TD BGCOLOR="#0080C0"><FONT COLOR="#0080C0">a</FONT></TD>
+</TR>
+</TABLE></CENTER>
+
+<DIV ALIGN=right><TABLE BORDER=0 COLS=1 WIDTH="50%" BGCOLOR="#F1E08D" >
+<TR>
+<TD>
+<CENTER><B><FONT FACE="Arial,Helvetica">MACEDO<FONT COLOR="#CC0000">N</FONT>IA Magazine</FONT></B></CENTER>
+</TD>
+</TR>
+</TABLE></DIV>
+</TD>
+</TR>
+</TABLE></CENTER>
+</HTML>
+
