@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n GrÃ¡fica en OpenGL</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <b><FONT color="#cc0000" size=2 face="arial">
-A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
-<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+A</font><FONT color="#000000" size=2 face="arial">rtÃ­culo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar GarcÃ­a "Kokopus".</A>
 </b></FONT>
 <br><br>
 
@@ -44,10 +44,10 @@ Capitulo 4<br>
 Interacci&oacute;n. Dispositivos de entrada..
 </H3>
 <P ALIGN=JUSTIFY>
-Ya lo s&eacute;...¡¡¡¡ya lo s&eacute;!!!!...ex&aacute;menes y m&aacute;s
+Ya lo s&eacute;...Â¡Â¡Â¡Â¡ya lo s&eacute;!!!!...ex&aacute;menes y m&aacute;s
 ex&aacute;menes...pero ahora ha llegado el momento de relajarnos totalmente
-y qu&eacute; mejor que.....¡¡¡¡el curso de gr&aacute;ficos!!!!...claro si es
-que lo teni&aacute;is en la punta de la lengua ¿¿¿verdad???...pu&eacute;s
+y qu&eacute; mejor que.....Â¡Â¡Â¡Â¡el curso de gr&aacute;ficos!!!!...claro si es
+que lo teni&aacute;is en la punta de la lengua Â¿Â¿Â¿verdad???...pu&eacute;s
 vamos a ello.
 <P ALIGN=JUSTIFY>En la pasada edici&oacute;n de la revista coment&eacute; ampliamente
 un programa de ejemplo. Esto nos sirvi&oacute; para familiarizarnos con
@@ -55,7 +55,7 @@ la forma de la funci&oacute;n MAIN en OpenGL, as&iacute; como con diversas
 funciones de GLUT. Hablaremos a&uacute;n m&aacute;s de &eacute;ste &uacute;ltimo
 en relaci&oacute;n con lo que se llama "<B>programaci&oacute;n orientada
 al evento</B>" ( &iquest;os suena a los usuarios de Power Builder, Visual
-Basic o Delphi?...¡¡¡si si es que va por ah&iacute;!!! ).
+Basic o Delphi?...Â¡Â¡Â¡si si es que va por ah&iacute;!!! ).
 
 <P ALIGN=JUSTIFY>Si quer&eacute;is ir haciendo "boca" pasaros por el manual de la API
 de GLUT <A HREF="http://reality.sgi.com/opengl/spec3/spec3.html">aqu&iacute;</A>.
@@ -258,8 +258,8 @@ seg&uacute;n nos movamos, cuando detecte que XPOS y ZPOS han cambiado.
 <P ALIGN=JUSTIFY>Una primera aproximaci&oacute;n medio codificada podr&iacute;a ser algo
 as&iacute;:
 <BR>&nbsp;
-<pre><font face="arial" size=1>/* Definición e inicialización de variables globales */  
-/* Partimos de la posición X=0 y Z=0 en el mundo */  
+<pre><font face="arial" size=1>/* DefiniciÃ³n e inicializaciÃ³n de variables globales */  
+/* Partimos de la posiciÃ³n X=0 y Z=0 en el mundo */  
 
 <b>GLfloat</b> xpos=0, zpos=0;  
 
@@ -269,7 +269,7 @@ as&iacute;:
 /*  
 ........  
 ........  
-esta rutina dibujaría todos los polígonos que componen  
+esta rutina dibujarÃ­a todos los polÃ­gonos que componen  
 nuestro mundo virtual !  
 ........  
 ........  
@@ -280,27 +280,27 @@ nuestro mundo virtual !
     /* Dibujo el mundo que me rodea */  
     DibujarMundo( );  
 
-    /* Representaré a mi personaje con una esfera amarilla */  
+    /* RepresentarÃ© a mi personaje con una esfera amarilla */  
     /* Activo el color amarillo */  
     glColor3f(1.0, 1.0, 0.0);  
 
-    /* Las funciones referidas a matrices que se observan las comentaré   
-    ampliamente en el siguiente capítulo, no os preocupéis por ellas */  
+    /* Las funciones referidas a matrices que se observan las comentarÃ©   
+    ampliamente en el siguiente capÃ­tulo, no os preocupÃ©is por ellas */  
     glPushMatrix();  
 
-        /* Me trasladó a la posición concreta en el mundo */  
+        /* Me trasladÃ³ a la posiciÃ³n concreta en el mundo */  
         glTranslatef(xpos, 0.0, zpos);  
 
         /* Dibujo una esfera de radio 2 unidades, y dividida en 16 trozos */  
         glutSolidSphere(2.0, 16, 16);  
     glPopMatrix();  
 
-    /* Esta función la explico más adelante en este capítulo */  
+    /* Esta funciÃ³n la explico mÃ¡s adelante en este capÃ­tulo */  
     glutSwapBuffers( );  
 }  
 /* Rutina de control del teclado */   
 <b>void</b> ControlTeclado(<b>unsigned char</b> key,<b>int</b> x,<b>int</b> y ){  
-    /* Según la tecla pulsada incremento una u otra variable de movimiento */  
+    /* SegÃºn la tecla pulsada incremento una u otra variable de movimiento */  
     <b>switch</b>(key){  
         <b>case</b> "o":  
             xpos++;  
@@ -318,22 +318,22 @@ nuestro mundo virtual !
     /* Le digo a OpenGL que dibuje de nuevo cuando pueda */  
     glutPostRedisplay( );  
 }  
-/* Función MAIN del programa */   
+/* FunciÃ³n MAIN del programa */   
 <B>int</B> main(<B>int</b> argc, <B>char</b>** argv){  
     int id;  
-    /* Definición típica de la ventana de visualización */   
+    /* DefiniciÃ³n tÃ­pica de la ventana de visualizaciÃ³n */   
   
     glutInit(&argc, argv);  
     glutInitDisplayMode(<B>GLUT_DOUBLE</B> | <B>GLUT_RGB</B> | <B>GLUT_DEPTH</B>);  
     glutInitWindowSize(500, 500);  
     glutInitWindowPosition(0, 0);  
     id=glutCreateWindow("Ejemplo de control de movimiento");  
-    /* Definición de los Callbacks que controlaremos */  
-    /* Cuando haya que dibujar llamaré a ... */  
+    /* DefiniciÃ³n de los Callbacks que controlaremos */  
+    /* Cuando haya que dibujar llamarÃ© a ... */  
     glutDisplayFunc(Dibujar);  
-    /* Cuando el usuario pulse una tecla llamaré a ... */  
+    /* Cuando el usuario pulse una tecla llamarÃ© a ... */  
     glutKeyboardFunc(ControlTeclado);  
-    /* Cuando no esté haciendo nada también dibujaré ... */  
+    /* Cuando no estÃ© haciendo nada tambiÃ©n dibujarÃ© ... */  
     glutIdleFunc(Dibujar);  
     glutMainLoop( );  
   
@@ -424,7 +424,7 @@ bot&oacute;n derecho de nuestro rat&oacute;n. Todo lo haremos desde el
 MAIN del programa:
 
 <P ALIGN=JUSTIFY>Queremos crear este men&uacute;:<br><br>
-<CENTER><IMG src="gif/art4fig4.gif" ALT="Menús en OpenGL" BORDER=1 HEIGHT=164 WIDTH=306></CENTER>
+<CENTER><IMG src="gif/art4fig4.gif" ALT="MenÃºs en OpenGL" BORDER=1 HEIGHT=164 WIDTH=306></CENTER>
 
 
 <P ALIGN=JUSTIFY>Como v&eacute;is tenemos dos niveles de men&uacute; en la primera opci&oacute;n
@@ -432,12 +432,12 @@ mientras que el resto son opciones de un s&oacute;lo nivel. Esto lo codificar&ia
 as&iacute;:
 <BR>&nbsp;
 <BR>&nbsp;
-<pre><font size=1 face="arial">/* Funciones de Control del menú seleccionado */  
-/* Se ejecutan cuando el usuario utilize los menús */  
+<pre><font size=1 face="arial">/* Funciones de Control del menÃº seleccionado */  
+/* Se ejecutan cuando el usuario utilize los menÃºs */  
 
 <b>void</b> menu_nivel_2(<b>int</b> identificador){  
 
-    /* Según la opción de 2o nivel activada, ejecutaré una rutina u otra */  
+    /* SegÃºn la opciÃ³n de 2o nivel activada, ejecutarÃ© una rutina u otra */  
 
     <b>switch</b>( identificador){  
         <b>case</b> 0:  
@@ -454,7 +454,7 @@ as&iacute;:
 
 <b>void</b> menu_nivel_1(<b>int</b> identificador){  
 
-    /* Según la opción de 1er nivel activada, ejecutaré una rutina u otra */  
+    /* SegÃºn la opciÃ³n de 1er nivel activada, ejecutarÃ© una rutina u otra */  
 
     switch( identificador){  
        <b>case</b> 0:  
@@ -475,18 +475,18 @@ as&iacute;:
 
     <b>int</b> submenu, id;  
 
-    /* Definición de la ventana */  
+    /* DefiniciÃ³n de la ventana */  
 
     glutInit(&argc, argv);  
     glutInitDisplayMode(<b>GLUT_DOUBLE</b>|<b>GLUT_RGB</b>|<b>GLUT_DEPTH</b>);  
     glutInitWindowSize(500, 500);  
     glutInitWindowPosition(0, 0);  
-    id=glutCreateWindow("Ventana con menú contextual");  
+    id=glutCreateWindow("Ventana con menÃº contextual");  
 
-    /* Creación del menú */  
+    /* CreaciÃ³n del menÃº */  
     submenu = glutCreateMenu(menu_nivel_2);  
 
-    glutAddMenuEntry("Vértices", 0);  
+    glutAddMenuEntry("VÃ©rtices", 0);  
     glutAddMenuEntry("Normales", 1);  
     glutAddMenuEntry("Aristas", 2);  
     glutCreateMenu(menu_nivel_1);  
@@ -498,7 +498,7 @@ as&iacute;:
     glutAttachMenu(<b>GLUT_RIGHT_BUTTON</b>);  
     ........  
     ........  
-    aquí vendrían los callbacks, el Loop, el retorno del entero....lo de siempre!!!  
+    aquÃ­ vendrÃ­an los callbacks, el Loop, el retorno del entero....lo de siempre!!!  
     ........  
     ........  
 }

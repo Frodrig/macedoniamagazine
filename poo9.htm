@@ -24,7 +24,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n Orientada a Objetos en C++</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -35,13 +35,13 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÃ­guez.</A>
 </b></FONT>
 <br><br>
 <FONT size=2 color="#000000" face="Arial"><br><br><br>
 <H3>
-Cap&iacute;tulo 9.<br>Gestión de memoria; los operadores new y delete.
+Cap&iacute;tulo 9.<br>GestiÃ³n de memoria; los operadores new y delete.
 </H3>
 
 <p align=justify>
@@ -52,7 +52,7 @@ En este pen&uacute;ltimo cap&iacute;tulo del curso vamos a hablar de los operado
 <P ALIGN="JUSTIFY"></P>
 <h4>Un poco de teor&iacute;a sobre memoria</h4>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Durante los ejemplos de los &uacute;ltimos cap&iacute;tulos del curso hemos estado utilizando, de vez en cuando, estos operadores para crear punteros a objetos (aunque tambi&eacute;n podr&iacute;amos haberlos utilizado para crear cualquier otro tipo de variables). Las variables de tipo din&aacute;mico creadas por el operador <I>new</I> y eliminadas con el operador <I>delete</I>, se almacenan en una porci&oacute;n de memoria llamada <B>heap </B>(o mont&oacute;n). Las variables locales a una funci&oacute;n, es decir, las que se definen en tiempo de compilaci&oacute;n, junto a los argumentos que ésta recibe se almacenan en una porci&oacute;n de memoria llamada <B>pila </B>(o <I>stack</I>). </P>
+<P ALIGN="JUSTIFY">Durante los ejemplos de los &uacute;ltimos cap&iacute;tulos del curso hemos estado utilizando, de vez en cuando, estos operadores para crear punteros a objetos (aunque tambi&eacute;n podr&iacute;amos haberlos utilizado para crear cualquier otro tipo de variables). Las variables de tipo din&aacute;mico creadas por el operador <I>new</I> y eliminadas con el operador <I>delete</I>, se almacenan en una porci&oacute;n de memoria llamada <B>heap </B>(o mont&oacute;n). Las variables locales a una funci&oacute;n, es decir, las que se definen en tiempo de compilaci&oacute;n, junto a los argumentos que Ã©sta recibe se almacenan en una porci&oacute;n de memoria llamada <B>pila </B>(o <I>stack</I>). </P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">La memoria <I>heap</I> es capaz de dar "cobijo" a estructuras de datos muy grandes ya que su espacio depende de la cantidad de memoria virtual que tengamos en el sistema propio. Es por esto que se utilicen siempre para alojar grandes estructuras como arrays u instancias a clases de gran tama&ntilde;o. El principal problema en este tipo de memoria es que nosotros, como programadores, debemos de hacernos cargo de "limpiar" la memoria al abandonar el programa ya que de lo contrario, nuestras variables din&aacute;micas seguir&aacute;n estando ah&iacute; y podr&aacute;n producir serios fallos en el sistema al intentar arrancar otros programas.</P>
 <P ALIGN="JUSTIFY"></P>
@@ -87,9 +87,9 @@ m_buffEnteros = <B>new</B> <B>int</B>[1000];
 <B>int</B>* m_buffEnteros = <B>new int</B>[1000] ;
 
 <B>if</B> (m_buffEnteros)
-<B>     cout</B> <B>&lt;&lt;</B> "\n¡Se ha reservado memoria!";
+<B>     cout</B> <B>&lt;&lt;</B> "\nÂ¡Se ha reservado memoria!";
 <B>else 
-</B>     <B>cout</B> <B>&lt;&lt;</B> "\n¡Error: No se ha reservado memoria!";
+</B>     <B>cout</B> <B>&lt;&lt;</B> "\nÂ¡Error: No se ha reservado memoria!";
 </PRE></FONT>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">&nbsp;</P>
@@ -117,9 +117,9 @@ m_buffEnteros = <B>new</B> <B>int</B>[1000];
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY"><FONT SIZE=2 FACE=ARIAL>Utilizad <I>new</I> y <I>delete</I> pues facilitan un mont&oacute;n el trabajo con memoria y realmente todo son ventajas. Ni que decir tiene que el trabajo de los punteros que se han reservado con estos operadores es el de siempre, es decir, si est&aacute;is trabajando con variables hay que utilizar el operador uniario "<B>*</B>" para acceder al valor. Si trabaj&aacute;is con estructuras o instancias, esto es, objetos, deber&eacute;is de utilizar el operador "<B>-&gt;</B>" para acceder a los miembros. Si revis&aacute;is ejemplos de cap&iacute;tulos anteriores ver&eacute;is casos de estos. De todas formas, cuidado con la memoria ;).</P>
 <P ALIGN="JUSTIFY"></P>
-<H4>¿Y ahora qu&eacute;?</H4>
+<H4>Â¿Y ahora qu&eacute;?</H4>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Realmente ya se han redactado todos los cap&iacute;tulos del curso de programaci&oacute;n orientada a objetos con C++ que si record&aacute;is fue establecido en el cap&iacute;tulo 1. De todas formas, se har&aacute; un cap&iacute;tulo m&aacute;s en el que se abordar&aacute; un caso muy pr&aacute;ctico y de vigente actualidad: "Las MFC y el Visual C++". Por tanto, ¡hasta el pr&oacute;ximo y &uacute;ltimo!.</P>
+<P ALIGN="JUSTIFY">Realmente ya se han redactado todos los cap&iacute;tulos del curso de programaci&oacute;n orientada a objetos con C++ que si record&aacute;is fue establecido en el cap&iacute;tulo 1. De todas formas, se har&aacute; un cap&iacute;tulo m&aacute;s en el que se abordar&aacute; un caso muy pr&aacute;ctico y de vigente actualidad: "Las MFC y el Visual C++". Por tanto, Â¡hasta el pr&oacute;ximo y &uacute;ltimo!.</P>
 <br>
 <hr>
 <center><TABLE CELLPADDING=2 WIDTH="100%">

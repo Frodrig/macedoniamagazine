@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n Orientada a Objetos en C++</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,14 +33,14 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÃ­guez.</A>
 </b></FONT>
 <br><br><FONT color="#000000" size=2 face="arial">
 <br><br>
 <FONT color="#000000" size=2 face="arial"><br><br><br>
 <H3>
-Cap&iacute;tulo 5.<br> Jerarquía de clases y herencia en la práctica.
+Cap&iacute;tulo 5.<br> JerarquÃ­a de clases y herencia en la prÃ¡ctica.
 </H3>
 
 <p align=justify>
@@ -50,31 +50,31 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 <P ALIGN="JUSTIFY">En este cap&iacute;tulo vamos a aprender a derivar clases y a utilizar la herencia en nuestros programas. Pronto veremos las grandes posibilidades que esto nos reporta para hacer dise&ntilde;os mucho m&aacute;s robustos y flexibles y, sobre todo, aprenderemos a ir pensado en C++ cosa fundamental para saber trabajar con la POO. Recordad que la metodolog&iacute;a orientada a objetos no es s&oacute;lo una nueva forma de programar es, sobre todo, una nueva forma de pensar.</P>
 <P ALIGN="JUSTIFY"></P>
 <h4>Introducci&oacute;n a la jerarqu&iacute;a y herencia de clases</h4>
-<P ALIGN="JUSTIFY">La derivaci&oacute;n de clases viene a significar crear una clase a la que denominamos <B>clase base</B>. En ella, definimos un conjunto de propiedades (atributos y m&eacute;todos) que consideramos que son los m&aacute;s generales y que no deber&iacute;an de faltar. Una vez que tengamos la seguridad de haber dado con la clase general que and&aacute;bamos buscando, podemos crear otra clase que, en cierto modo, supone una especializaci&oacute;n de la anterior. Como es una especializaci&oacute;n de la anterior, adem&aacute;s de las propiedades definidas para la clase base tendr&aacute; las suyas propias que servir&aacute;n para diferenciarla de la anterior y para hacer que consiga esa especializaci&oacute;n que buscamos. ¿Para hacer que tenga los atributos de la clase base tenemos que volver a escribir todo?. ¡NO!, s&oacute;lo hace falta heredar de la clase base los atributos que nos interesen. Lo &uacute;nico que tendremos que escribir nuevo ser&aacute;n los atributos que especializan a esta clase. A la clase que hereda de otra clase se le llama <B>clase derivada</B>.</P>
+<P ALIGN="JUSTIFY">La derivaci&oacute;n de clases viene a significar crear una clase a la que denominamos <B>clase base</B>. En ella, definimos un conjunto de propiedades (atributos y m&eacute;todos) que consideramos que son los m&aacute;s generales y que no deber&iacute;an de faltar. Una vez que tengamos la seguridad de haber dado con la clase general que and&aacute;bamos buscando, podemos crear otra clase que, en cierto modo, supone una especializaci&oacute;n de la anterior. Como es una especializaci&oacute;n de la anterior, adem&aacute;s de las propiedades definidas para la clase base tendr&aacute; las suyas propias que servir&aacute;n para diferenciarla de la anterior y para hacer que consiga esa especializaci&oacute;n que buscamos. Â¿Para hacer que tenga los atributos de la clase base tenemos que volver a escribir todo?. Â¡NO!, s&oacute;lo hace falta heredar de la clase base los atributos que nos interesen. Lo &uacute;nico que tendremos que escribir nuevo ser&aacute;n los atributos que especializan a esta clase. A la clase que hereda de otra clase se le llama <B>clase derivada</B>.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¡¡¡Arggg!!!, vaya l&iacute;o que te estar&aacute;s formando en la cabeza, ¿no?. Te recomiendo que eches un vistazo al gr&aacute;fico que voy a poner a continuaci&oacute;n y que luego vuelvas a leer la parrafada anterior.</P>
+<P ALIGN="JUSTIFY">Â¡Â¡Â¡Arggg!!!, vaya l&iacute;o que te estar&aacute;s formando en la cabeza, Â¿no?. Te recomiendo que eches un vistazo al gr&aacute;fico que voy a poner a continuaci&oacute;n y que luego vuelvas a leer la parrafada anterior.</P>
 <P ALIGN="JUSTIFY"></P>
 <center><img src="gif/poo51.gif"></center>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¿Deacuerdo?. Bueno, me supongo que no del todo as&iacute; que voy a intentar ir aclarando todo esto poco a poco explicando qu&eacute; son las <B>jerarqu&iacute;as</B>. </P>
+<P ALIGN="JUSTIFY">Â¿Deacuerdo?. Bueno, me supongo que no del todo as&iacute; que voy a intentar ir aclarando todo esto poco a poco explicando qu&eacute; son las <B>jerarqu&iacute;as</B>. </P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Cuando una clase se deriva de otra clase, llamada clase base, lo que hace es heredar un conjunto de funciones o m&eacute;todos y variables de la clase base. No se heredan todos. S&oacute;lo se heredan los elementos que est&eacute;n preparados para ser heredados. As&iacute;, si una funci&oacute;n o variable en la clase base est&aacute; declarada como privada no se podr&aacute; heredar desde la clase derivada, es decir, no podremos acceder a ella y si lo intentamos, obtendremos un error en tiempo de compilaci&oacute;n. </P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Hasta ahora s&oacute;lo hemos puesto el ejemplo de dos clases. Una la llamamos clase base y otra clase derivada. La segunda hereda los m&eacute;todos y variables que no son declarados como privados en la clase base sin embargo, ¿puede la clase base ser heredada por m&aacute;s de una clase derivada?, ¿puede una clase derivada convertirse en clase base y que otras clases hereden de ella?. Ambas respuestas obtienen un gran S&Iacute;. Podemos tener una clase base y montones de clases derivadas. As&iacute; mismo, puede darse el caso de una clase derivada de una clase base y una tercera clase que toma a la clase derivada como su clase base, deriv&aacute;ndose de ella. Si esto lo llevamos a la pr&aacute;ctica iremos obteniendo una jerarqu&iacute;a de clases.</P>
+<P ALIGN="JUSTIFY">Hasta ahora s&oacute;lo hemos puesto el ejemplo de dos clases. Una la llamamos clase base y otra clase derivada. La segunda hereda los m&eacute;todos y variables que no son declarados como privados en la clase base sin embargo, Â¿puede la clase base ser heredada por m&aacute;s de una clase derivada?, Â¿puede una clase derivada convertirse en clase base y que otras clases hereden de ella?. Ambas respuestas obtienen un gran S&Iacute;. Podemos tener una clase base y montones de clases derivadas. As&iacute; mismo, puede darse el caso de una clase derivada de una clase base y una tercera clase que toma a la clase derivada como su clase base, deriv&aacute;ndose de ella. Si esto lo llevamos a la pr&aacute;ctica iremos obteniendo una jerarqu&iacute;a de clases.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¿Un ejemplo?. Voy a poner un caso que bien podr&iacute;a darse para un sistema de generaci&oacute;n de personajes de un juego de rol (ahora bien, super primitivo...). Imaginaros que queremos hacer un sistema para la creaci&oacute;n de multitud de personajes. Estos personajes podr&aacute;n ser s&oacute;lo humanos. Al ser humanos s&oacute;lo existir&aacute;n dos sexos, hombre y mujer. Por otro lado, existen dos tipos de personajes: los Guerreros y los Magos. ¿C&oacute;mo podr&iacute;amos montarnos un sistema jer&aacute;rquico con todo estos datos?. </P>
+<P ALIGN="JUSTIFY">Â¿Un ejemplo?. Voy a poner un caso que bien podr&iacute;a darse para un sistema de generaci&oacute;n de personajes de un juego de rol (ahora bien, super primitivo...). Imaginaros que queremos hacer un sistema para la creaci&oacute;n de multitud de personajes. Estos personajes podr&aacute;n ser s&oacute;lo humanos. Al ser humanos s&oacute;lo existir&aacute;n dos sexos, hombre y mujer. Por otro lado, existen dos tipos de personajes: los Guerreros y los Magos. Â¿C&oacute;mo podr&iacute;amos montarnos un sistema jer&aacute;rquico con todo estos datos?. </P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Est&aacute; claro que todos los personajes son humanos por lo tanto ser&iacute;a una buena idea partir de una clase llamada HUMANO que contuviera todos los atributos que tiene cualquier ser humano. Luego vemos que, al estar creando un sistema de generaci&oacute;n de personajes humanos, tenemos dos sexos independientes el del hombre y el de la mujer. Las diferencias son obvias pero no por ello hace falta crear dos clases distintas llamadas HOMBRE y MUJER pues no nos hacen falta tomar atributos exclusivos de los sexos para trabajar en la generaci&oacute;n de personajes. Basta con poner una variable en la clase HUMANO llamada sexo y dar el valor oportuno (por ejemplo si sexo se inicia con V significa que es un hombre y si se inicia con M significa que es una mujer. Internamente trabajaremos con 0 y 1). </P>
 <P ALIGN="JUSTIFY">Lo que seguro necesita de clases nuevas es el tema de las dos especialidades de los personajes que podamos crear. Est&aacute; claro que tanto los guerreros como los magos son humanos. Vamos a preguntarnos a nosotros mismos para ver si  nos aclaramos las diferencias que pueden existir en cada uno de los personajes.</P>
 <P ALIGN="JUSTIFY"></P>
-<I><P ALIGN="JUSTIFY">¿Un guerrero tiene fuerza, inteligencia, destreza, energ&iacute;a, peso, sexo, edad y nombre?.</I></P> 
+<I><P ALIGN="JUSTIFY">Â¿Un guerrero tiene fuerza, inteligencia, destreza, energ&iacute;a, peso, sexo, edad y nombre?.</I></P> 
 <P ALIGN="JUSTIFY">S&iacute;, y adem&aacute;s esto tambi&eacute;n lo tiene cualquier mago por lo tanto estas caracter&iacute;sticas ya han debido de ser incluidas en la clase HUMANO.</P>
 <P ALIGN="JUSTIFY"></P>
-<I><P ALIGN="JUSTIFY">¿Un guerrero utiliza un libro de hechizos para luchar?</I>. </P>
+<I><P ALIGN="JUSTIFY">Â¿Un guerrero utiliza un libro de hechizos para luchar?</I>. </P>
 <P ALIGN="JUSTIFY">No, un guerrero s&oacute;lo puede utilizar armas. Pero un mago s&iacute; que puede utilizar libros de hechizos para luchar. Del mismo modo, un mago no puede utilizar armas para pelear.</P>
 <P ALIGN="JUSTIFY"></P>
-<I><P ALIGN="JUSTIFY">¿Un mago puede vestir armaduras?</I>. </P>
-<P ALIGN="JUSTIFY">No, los magos s&oacute;lo pueden llevar t&uacute;nicas de tres colores: negro, rojo o blanco (te suena ¿no?). Adem&aacute;s, en el caso de los guerreros, esto s&iacute; pueden vestir armaduras pero no t&uacute;nicas y las armaduras pueden ser de cuero o simplemente nada (el típico Conan...).</P>
+<I><P ALIGN="JUSTIFY">Â¿Un mago puede vestir armaduras?</I>. </P>
+<P ALIGN="JUSTIFY">No, los magos s&oacute;lo pueden llevar t&uacute;nicas de tres colores: negro, rojo o blanco (te suena Â¿no?). Adem&aacute;s, en el caso de los guerreros, esto s&iacute; pueden vestir armaduras pero no t&uacute;nicas y las armaduras pueden ser de cuero o simplemente nada (el tÃ­pico Conan...).</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Podr&iacute;amos seguir hasta desmenuzar totalmente a cada tipo de personaje pero, con estos datos, ya podemos saber que necesitamos dos clases que heredan de la clase base HUMANO. Estas clases ser&aacute;n la de GUERRERO y la de MAGO. La clase GUERRERO poseer&aacute; una variable llamada armas cuyo rango de valores podr&aacute; ir desde espadas a &quot;simples&quot; pu&ntilde;os mientras que el MAGO poseer&aacute; una variable llamada libro de hechizos que trabajar&aacute; con todos los distintos libros de hechizos que nosotros dise&ntilde;emos. As&iacute; mismo, la clase GUERRERO dispondr&aacute; de una variable llamada armadura que tomara los valores de cuero o nada, indicando que no tiene armadura,  y la clase MAGO dispondr&aacute; tambi&eacute;n de una variable similar llamada t&uacute;nica y su rango ser&aacute; el de t&uacute;nica roja, negra o blanca. </P>
 <P ALIGN="JUSTIFY"></P>
@@ -90,10 +90,10 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Si queremos implementar un programa, debemos de ponernos antes delante de un papel y dise&ntilde;ar a mano los posibles m&oacute;dulos que vamos a necesitar y, una vez establecidos, desmenuzar esos m&oacute;dulos en jerarqu&iacute;as de clases. Esto nos va a permitir que, en un futuro, nuestro dise&ntilde;o sea totalmente ampliable y mejorable y que otras personas puedan aprovecharlo para trabajar. </P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Intenta ir m&aacute;s all&aacute; del ejemplo anteriormente establecido. Imagina que hay ahora una clase de guerreros distinta que adem&aacute;s tambi&eacute;n son magos. ¿Qu&eacute; har&iacute;as?. Crea una clase llamada GUERRERO_MAGO que herede de la clase GUERRERO y de la clase MAGO y ya est&aacute;. Tu personaje ahora podr&aacute; tener todos los atributos exclusivos de un ser humano, de un guerrero y de un mago. Esto es lo que nos ofrece la herencia y la jerarqu&iacute;a de clases, poder reutilizar c&oacute;digo de una forma inteligente. </P>
+<P ALIGN="JUSTIFY">Intenta ir m&aacute;s all&aacute; del ejemplo anteriormente establecido. Imagina que hay ahora una clase de guerreros distinta que adem&aacute;s tambi&eacute;n son magos. Â¿Qu&eacute; har&iacute;as?. Crea una clase llamada GUERRERO_MAGO que herede de la clase GUERRERO y de la clase MAGO y ya est&aacute;. Tu personaje ahora podr&aacute; tener todos los atributos exclusivos de un ser humano, de un guerrero y de un mago. Esto es lo que nos ofrece la herencia y la jerarqu&iacute;a de clases, poder reutilizar c&oacute;digo de una forma inteligente. </P>
 <P ALIGN="JUSTIFY"></P>
 <h4>Un ejemplo </h4>
-<P ALIGN="JUSTIFY">A continuaci&oacute;n vamos a ver, mediante un sencillo ejemplo, c&oacute;mo implementar la derivaci&oacute;n de una clase utilizando el concepto de herencia. Utilizaremos, para ello, el modelo ideado m&aacute;s atr&aacute;s, es decir, tendremos una clase base llamada HUMANO y de ella se derivar&aacute;n dos, la clase GUERRERO y la clase MAGO. En la clase HUMANO estar&aacute;n todos los datos b&aacute;sicos y que son comunes a los dos tipos de personajes (Guerreros y Magos) mientras que, en la clases ya respectivas, pondremos caracter&iacute;sticas &uacute;nicas y que les diferencian, como el caso de armas, hechizos, armaduras o t&uacute;nicas. ¡All&aacute; vamos!</P>
+<P ALIGN="JUSTIFY">A continuaci&oacute;n vamos a ver, mediante un sencillo ejemplo, c&oacute;mo implementar la derivaci&oacute;n de una clase utilizando el concepto de herencia. Utilizaremos, para ello, el modelo ideado m&aacute;s atr&aacute;s, es decir, tendremos una clase base llamada HUMANO y de ella se derivar&aacute;n dos, la clase GUERRERO y la clase MAGO. En la clase HUMANO estar&aacute;n todos los datos b&aacute;sicos y que son comunes a los dos tipos de personajes (Guerreros y Magos) mientras que, en la clases ya respectivas, pondremos caracter&iacute;sticas &uacute;nicas y que les diferencian, como el caso de armas, hechizos, armaduras o t&uacute;nicas. Â¡All&aacute; vamos!</P>
 <P ALIGN="JUSTIFY"></P>
 <pre>
 <FONT FACE="ARIAL" SIZE=1>#<B>include</B> &lt;iostream.h&gt;
@@ -223,7 +223,7 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 
 <B>int</B> main()
 {
-&#9;// Nota: Pese a que los nombres os sonar&aacute;n (o, al menos, ¡deber&iacute;an!)
+&#9;// Nota: Pese a que los nombres os sonar&aacute;n (o, al menos, Â¡deber&iacute;an!)
 &#9;// sus datos los he puesto casi sin mirar... as&iacute; que los puritanos
 &#9;// de las novelas, disculpen ;-)
 
@@ -267,7 +267,7 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 }</FONT></pre>
 
 <h4>Analizando el ejemplo</h4>
-<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>¿Qu&eacute; tal lo veis?. Espero que se os hayan aclarado bastantes m&aacute;s cosas ahora que ten&eacute;is toda la teor&iacute;a codificada. Como pod&eacute;is observar, utilizamos la clase base HUMANO y, a partir de ella, derivamos las clases GUERRERO y MAGO. Esto da mucha potencia ya que tenemos todo lo b&aacute;sico en la clase base y creamos clases espec&iacute;ficas que se especializan, caso de las citadas GUERRERO y MAGO, ofreciendo esos datos u acciones concretas. Ser&iacute;a muy f&aacute;cil crear una clase arquero, ladr&oacute;n, bardo.... tan s&oacute;lo hay que derivar de la clase base y a&ntilde;adir esas caracter&iacute;sticas &uacute;nicas.</P>
+<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Â¿Qu&eacute; tal lo veis?. Espero que se os hayan aclarado bastantes m&aacute;s cosas ahora que ten&eacute;is toda la teor&iacute;a codificada. Como pod&eacute;is observar, utilizamos la clase base HUMANO y, a partir de ella, derivamos las clases GUERRERO y MAGO. Esto da mucha potencia ya que tenemos todo lo b&aacute;sico en la clase base y creamos clases espec&iacute;ficas que se especializan, caso de las citadas GUERRERO y MAGO, ofreciendo esos datos u acciones concretas. Ser&iacute;a muy f&aacute;cil crear una clase arquero, ladr&oacute;n, bardo.... tan s&oacute;lo hay que derivar de la clase base y a&ntilde;adir esas caracter&iacute;sticas &uacute;nicas.</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">A modo de recordatorio, os pongo la clase base HUMANO que establece todas las caracter&iacute;sticas b&aacute;sicas as&iacute; como los m&eacute;todos para trabajar con ellas. Ah&iacute; va:</P>
 <P ALIGN="JUSTIFY"></P>
@@ -345,7 +345,7 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 &#9;<B>void</B> PonInformacion(<b>void</b>);
 };</pre></FONT>
 <P ALIGN="JUSTIFY"></P>
-<h4>¿C&oacute;mo declaramos, exactamente, una clase derivada?</h4>
+<h4>Â¿C&oacute;mo declaramos, exactamente, una clase derivada?</h4>
 <P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Vamos a mirar la cabecera de la clase GUERRERO que nos vale para ilustrar el proceso. Recordemos c&oacute;mo era:</P>
 <P ALIGN="JUSTIFY"></P>
 <pre><FONT FACE="ARIAL" SIZE=1>// Primera clase derivada
@@ -375,7 +375,7 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 &#9;<B>cout</B> &lt;&lt; "\n Energ&iacute;a: " &lt;&lt; m_energia;
 }</pre></FONT>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Se puede observar perfectamente que lo que hace este m&eacute;todo es volcar la informaci&oacute;n concerniente a las variables que contienen (o contendr&aacute;n) los valores acerca del nombre, edad, sexo, inteligencia, fuerza, destreza y energ&iacute;a del personaje. La pregunta viene ahora. Si un Guerrero o Mago, tiene estos datos, que los hereda y, adem&aacute;s, tiene otros que tambi&eacute;n deber&aacute; listar, ¿Tendremos que volver a escribir todo otra vez?. La respuesta es NO. Tan s&oacute;lo hace falta mirar a la funci&oacute;n PonInformacion() de la clase Guerrero o Mago. Echemos un vistazo a la clase Mago y, en concreto, a dicha funci&oacute;n:</P>
+<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Se puede observar perfectamente que lo que hace este m&eacute;todo es volcar la informaci&oacute;n concerniente a las variables que contienen (o contendr&aacute;n) los valores acerca del nombre, edad, sexo, inteligencia, fuerza, destreza y energ&iacute;a del personaje. La pregunta viene ahora. Si un Guerrero o Mago, tiene estos datos, que los hereda y, adem&aacute;s, tiene otros que tambi&eacute;n deber&aacute; listar, Â¿Tendremos que volver a escribir todo otra vez?. La respuesta es NO. Tan s&oacute;lo hace falta mirar a la funci&oacute;n PonInformacion() de la clase Guerrero o Mago. Echemos un vistazo a la clase Mago y, en concreto, a dicha funci&oacute;n:</P>
 <P ALIGN="JUSTIFY"></P>
 <pre><FONT FACE="ARIAL" SIZE=1><B>void</B> Mago<B>::</B>PonInformacion(<b>void</b>)
 {
@@ -393,13 +393,13 @@ Hasta ahora hemos tocado bastantes aspectos de forma puramente te&oacute;rica, t
 &#9;};
 }</pre></FONT>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Est&aacute; m&aacute;s o menos claro, ¿no?.  Lo que hacemos es llamar la funci&oacute;n definida en la clase base y que se encarga de listar los valores b&aacute;sicos anteriormente citados. Para ello, ponemos el nombre de la clase base, seguida de los dos puntos de resoluci&oacute;n de &aacute;mbito y, despu&eacute;s, el nombre de la funci&oacute;n, es decir, <B>Humano::PonInformacion(); </B>. Una vez hecho esto, definimos la parte de la funci&oacute;n que nos hace falta y que no es otra que la concerniente al listado de los valores &uacute;nicos de un Mago, esto es, tipo de libro de hechizos y tipo de t&uacute;nica, es decir, completamos funci&oacute;n <B>PonInformacion()</B> para que, adem&aacute;s de listar los datos b&aacute;sicos sin necesidad de reescribir las instrucciones (llamamos a la funci&oacute;n definida en la clase base), liste tambi&eacute;n los datos espec&iacute;ficos.</P>
+<P ALIGN="JUSTIFY"><FONT FACE="ARIAL" SIZE=2>Est&aacute; m&aacute;s o menos claro, Â¿no?.  Lo que hacemos es llamar la funci&oacute;n definida en la clase base y que se encarga de listar los valores b&aacute;sicos anteriormente citados. Para ello, ponemos el nombre de la clase base, seguida de los dos puntos de resoluci&oacute;n de &aacute;mbito y, despu&eacute;s, el nombre de la funci&oacute;n, es decir, <B>Humano::PonInformacion(); </B>. Una vez hecho esto, definimos la parte de la funci&oacute;n que nos hace falta y que no es otra que la concerniente al listado de los valores &uacute;nicos de un Mago, esto es, tipo de libro de hechizos y tipo de t&uacute;nica, es decir, completamos funci&oacute;n <B>PonInformacion()</B> para que, adem&aacute;s de listar los datos b&aacute;sicos sin necesidad de reescribir las instrucciones (llamamos a la funci&oacute;n definida en la clase base), liste tambi&eacute;n los datos espec&iacute;ficos.</P>
 <P ALIGN="JUSTIFY">Esto mismo es aplicable a la clase Guerrero.</P>
 <P ALIGN="JUSTIFY"></P>
 <h4>Y esto es todo por ahora</h4>
 <P ALIGN="JUSTIFY">Creo que con este cap&iacute;tulo deber&iacute;a de haber quedado claro qu&eacute; es la herencia y c&oacute;mo implementarla en nuestros programas en C++. As&iacute; mismo, deber&iacute;a de comenzar a tomar fuerza el concepto que entra&ntilde;a programar con una metodolog&iacute;a orientada a objetos y es que, hasta que el programador no consigue pensar de esta nueva forma, es muy importante armarse de papel y l&aacute;piz y hacer un boceto de lo que deber&iacute;a de ser el dise&ntilde;o. Siempre lo agradecer&eacute;is cuando os met&aacute;is, en serio, a codificar.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">El pr&oacute;ximo n&uacute;mero hablaremos del Polimorfismo y se desvelará esa palabreja de nombre <b>virtual</b>. Hasta que os suene esa palabreja, ya est&aacute;is en condiciones de ir haciendo cosas algo m&aacute;s serias. ¿Por qu&eacute; no intent&aacute;is hacer un generador de personajes en plan serio?. Basta con dise&ntilde;arlo en papel, escribir sus clases, variables y m&eacute;todos. Si hac&eacute;is eso, y lo hac&eacute;is bien, aprovechar&eacute;is mucho m&aacute;s que si os lanz&aacute;is a codificar como locos. Rercordad que primero hay que saber dise&ntilde;ar. Luego ya vendr&aacute; lo de &quot;machacar&quot; el teclado.</P>
+<P ALIGN="JUSTIFY">El pr&oacute;ximo n&uacute;mero hablaremos del Polimorfismo y se desvelarÃ¡ esa palabreja de nombre <b>virtual</b>. Hasta que os suene esa palabreja, ya est&aacute;is en condiciones de ir haciendo cosas algo m&aacute;s serias. Â¿Por qu&eacute; no intent&aacute;is hacer un generador de personajes en plan serio?. Basta con dise&ntilde;arlo en papel, escribir sus clases, variables y m&eacute;todos. Si hac&eacute;is eso, y lo hac&eacute;is bien, aprovechar&eacute;is mucho m&aacute;s que si os lanz&aacute;is a codificar como locos. Rercordad que primero hay que saber dise&ntilde;ar. Luego ya vendr&aacute; lo de &quot;machacar&quot; el teclado.</P>
 <P ALIGN="JUSTIFY"></P>
 <br>
 <hr>

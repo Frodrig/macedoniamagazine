@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programación.</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n Visual en Delphi.<hr> <font color="#009933"><b>C</b></font>urso de programaciÃ³n.</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,14 +33,14 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <b><FONT color="#cc0000" size=2 face="arial">
-A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
-<A HREF="mailto:aradriel@geocities.com">José Antonio Suárez.</A>
+A</font><FONT color="#000000" size=2 face="arial">rtÃ­culo realizado por<br>
+<A HREF="mailto:aradriel@geocities.com">JosÃ© Antonio SuÃ¡rez.</A>
 </b></FONT>
 <br><br>
 
 <FONT color="#000000" size=2 face="arial"><br><br><br>
 <H3>
-Capítulo 5.<br> Desarrollo de un componente
+CapÃ­tulo 5.<br> Desarrollo de un componente
 </H3>
 
 <br>
@@ -54,7 +54,7 @@ En este cap&iacute;tulo vamos a centrarnos en un aspecto muy importante, comerci
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">En el c&oacute;digo que se incluye al final de este cap&iacute;tulo, se encuentra la implementaci&oacute;n de un componente, el cual, y a trav&eacute;s de los comentarios pertinentes, vamos a ir conociendo poco a poco. Veremos de qu&eacute; se trata eso de hacernos nuestros propio Objeto (componente) para poder usarlo posteriormente en nuestros programas.</P>
 <P ALIGN="JUSTIFY"></P>
-<h4>¿Qu&eacute; hay que hacer?</h4>
+<h4>Â¿Qu&eacute; hay que hacer?</h4>
 <P ALIGN="JUSTIFY">El componente que he creado a continuaci&oacute;n es muy simple.</P>
 <P ALIGN="JUSTIFY">Supongo que ya conocer&eacute;is el TShape que viene con Delphi (paleta Additional), y si no es el caso, es el momento de ejecutar Delphi y probarlo.</P>
 <P ALIGN="JUSTIFY">Lo que se pretende conseguir es que cuando el cursor entre en una zona determinada del formulario, nuestro programa sea capaz de darse cuenta de que ha entrado y podamos hacer algo en ese momento (y lo mismo cuando salga).</P>
@@ -72,18 +72,18 @@ En este cap&iacute;tulo vamos a centrarnos en un aspecto muy importante, comerci
 <Pre>shape.Brush.Style:=bsClear;
 shape.Pen.Style:=psClear;</Pre>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">y de esta forma aunque el control est&eacute; sobre el formulario, no tendr&aacute; ni bordes ni nada, aunque no deje de estar ah&iacute;… y si encima hacemos que nos permita saber cu&aacute;ndo entra el rat&oacute;n en &eacute;l, y cu&aacute;ndo sale… pues es lo que buscamos.</P>
+<P ALIGN="JUSTIFY">y de esta forma aunque el control est&eacute; sobre el formulario, no tendr&aacute; ni bordes ni nada, aunque no deje de estar ah&iacute;â€¦ y si encima hacemos que nos permita saber cu&aacute;ndo entra el rat&oacute;n en &eacute;l, y cu&aacute;ndo saleâ€¦ pues es lo que buscamos.</P>
 <P ALIGN="JUSTIFY">Una aplicaci&oacute;n para nuestro TShape &quot;Plus&quot; es por ejemplo, cambiar un gr&aacute;fico de la pantalla cuando el cursor est&eacute; en un sitio determinado. Este sitio (rectangular) va a ser el que ocupa el control TShape que no se ve pero que s&iacute; est&aacute;. </P>
 <P ALIGN="JUSTIFY">Imaginemos que tenemos un gr&aacute;fico en pantalla que queremos que se &quot;encienda&quot; cuando el cursor entre en &eacute;l, y que se &quot;apague&quot; cuando el cursor salga. </P>
-<P ALIGN="JUSTIFY">¡Pues usamos nuestro componente y pan comido (o bit devorado)!</P>
+<P ALIGN="JUSTIFY">Â¡Pues usamos nuestro componente y pan comido (o bit devorado)!</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Sigamos. </P>
 <P ALIGN="JUSTIFY">Va a ser necesario conocer al menos lo que es la programaci&oacute;n orientada a objetos, ya que lo que vamos a hacer en realidad es hacer una herencia del objeto TShape, a&ntilde;adirle dos procedimientos m&aacute;s y redefinir los m&eacute;todos de creaci&oacute;n y destrucci&oacute;n. Pero no es nada dif&iacute;cil, ya que gracias a Borland, la sintaxis no se parece para nada a la de C.</P>
 <P ALIGN="JUSTIFY"></P>
-<h4>¡Y por f&iacute;n, el C&oacute;digo!</h4>
+<h4>Â¡Y por f&iacute;n, el C&oacute;digo!</h4>
 <P ALIGN="JUSTIFY">Pasemos ya al c&oacute;digo y a los comentarios &quot;en l&iacute;nea&quot;</P>
 <P ALIGN="JUSTIFY"></P>
-<pre><font size=1 face="arial">// EL nombre del fichero .pas en el que se guardará el componente será ShapeAvanzado.pas
+<pre><font size=1 face="arial">// EL nombre del fichero .pas en el que se guardarÃ¡ el componente serÃ¡ ShapeAvanzado.pas
 <b>unit</b> ShapeAvanzado;
 
 <b>interface</b>
@@ -99,34 +99,34 @@ shape.Pen.Style:=psClear;</Pre>
 
  <B> private</b>
 // "private" quiere indicar que lo que se defina en esta parte no va a ser visto desde fuera, es 
-// decir, no vamos a poder poner ShapeAvanzado.FOnEnter. Tan solo será "visible" desde
-// dentro del propio componente y por los hijos que declaremos sobre él igual que hemos 
-// hecho con TShape. Un ejemplo sería:  TShapeMasAvanzado = class (TShapeAvanzado);
+// decir, no vamos a poder poner ShapeAvanzado.FOnEnter. Tan solo serÃ¡ "visible" desde
+// dentro del propio componente y por los hijos que declaremos sobre Ã©l igual que hemos 
+// hecho con TShape. Un ejemplo serÃ­a:  TShapeMasAvanzado = class (TShapeAvanzado);
 
 // Con lo siguiente decimos que en estas variables vamos a "almacenar" los mensajes 
-// que Windows nos envíe cuando el cursor entre y salga.
+// que Windows nos envÃ­e cuando el cursor entre y salga.
 FOnEnter, FOnExit: <b>TNotifyEvent</b>;
 
   <b>protected</b>
-// "protected" es prácticamente igual que "private", con la excepción de que lo que en esta 
-// parte se ponga no será visible para los hijos de nuestro componente. Además, es el lugar
-// donde se tienen que declar los manejadores de eventos de los controles (los On…)
+// "protected" es prÃ¡cticamente igual que "private", con la excepciÃ³n de que lo que en esta 
+// parte se ponga no serÃ¡ visible para los hijos de nuestro componente. AdemÃ¡s, es el lugar
+// donde se tienen que declar los manejadores de eventos de los controles (los Onâ€¦)
     	<b>procedure</b> CMMouseEnter(<b>var</b> msg:<b>TMessage</b>); <b>message CM_MOUSEENTER</b>;
     	<b>procedure</b> CMMouseLeave(<b>var</b> msg:<b>TMessage</b>); <b>message CM_MOUSELEAVE</b>;
 
   <b>public</b>
-// "public" es para la redefinición de los métodos del padre de nuestro componente, o sea que,
+// "public" es para la redefiniciÃ³n de los mÃ©todos del padre de nuestro componente, o sea que,
 // como lo que hacen "Create" y "Destroy" de TShape se nos queda corto, los vamos a 
-// modificar. Más concretamente le vamos a añadir al código que tengan, lo que nos hace falta.
-// Esto se dice con "override", es decir, que mantenga lo que tenía y que añada (sobrecarge) 
+// modificar. MÃ¡s concretamente le vamos a aÃ±adir al cÃ³digo que tengan, lo que nos hace falta.
+// Esto se dice con "override", es decir, que mantenga lo que tenÃ­a y que aÃ±ada (sobrecarge) 
 // lo nuevo que le vamos a definir.
     	<b>constructor</b> Create(AOwner:<b>TComponent</b>);<b>override</b>;
     	<b>destructor</b> Destroy;<b>override</b>;
 
   <b>published</b>
 // "published" es lo que vamos a ver desde fuera del componente, o sea, cuando ya lo estemos 
-// usando como uno más. Así, cuando ya lo tengamos, en el Inspector de Objetos de Delphi, en
-// la pestaña de "Events" aparecerán nuestros 2 nuevos eventos: OnEnter y OnExit.
+// usando como uno mÃ¡s. AsÃ­, cuando ya lo tengamos, en el Inspector de Objetos de Delphi, en
+// la pestaÃ±a de "Events" aparecerÃ¡n nuestros 2 nuevos eventos: OnEnter y OnExit.
 	<b>property</b> OnEnter: TNotifyEvent read FOnEnter write FOnEnter;
 	<b>property</b> OnExit: TNotifyEvent read FOnExit write FOnExit;
 
@@ -138,7 +138,7 @@ FOnEnter, FOnExit: <b>TNotifyEvent</b>;
 
 <b>procedure</b> Register;
 <b>begin</b>
-// El componente, cuando se añada a la paleta de Delphi, se hará en una nueva pestaña 
+// El componente, cuando se aÃ±ada a la paleta de Delphi, se harÃ¡ en una nueva pestaÃ±a 
 // llamada "Macedonia"
 	<b>RegisterComponents</b>('Macedonia', [TShapeAvanzado]);
 <b>end</b>;
@@ -161,17 +161,17 @@ FOnEnter, FOnExit: <b>TNotifyEvent</b>;
 
 <b>constructor</b> TShapeAvanzado.Create(AOwner:<b>TComponent</b>);
 <b>begin</b>
-	// Heredamos el código del padre…
+	// Heredamos el cÃ³digo del padreâ€¦
      	<b>inherited</b> Create(AOwner);
-	// … y le añadimos el nuestro
+	// â€¦ y le aÃ±adimos el nuestro
 	Brush.Style:=bsClear;
 	Pen.Style:=psClear;
 <b>end</b>;
 
 <b>destructor</b> TShapeAvanzado.Destroy;
 <b>begin</b>
-	// La redeclaración del método Destroy podríamos habernosla ahorrado, pero por convención
-	// la redeclaramos y la dejamos tal cual… en vistas a en un futuro añadir más funcionalidad a
+	// La redeclaraciÃ³n del mÃ©todo Destroy podrÃ­amos habernosla ahorrado, pero por convenciÃ³n
+	// la redeclaramos y la dejamos tal cualâ€¦ en vistas a en un futuro aÃ±adir mÃ¡s funcionalidad a
 	// nuestro componente.
 	<b>inherited</b> Destroy;
 <b>end</b>;
@@ -184,19 +184,19 @@ FOnEnter, FOnExit: <b>TNotifyEvent</b>;
 <h4>El Final</h4>
 <P ALIGN="JUSTIFY">Y por fin nuestro nuevo y flamante componente TShapeAvanzado est&aacute; listo para ser codificado, guardado, compilado, e instalado en Delphi.</P>
 <P ALIGN="JUSTIFY">Pero antes, una cosa:</P>
-<P ALIGN="JUSTIFY">&#9;¿Donde se escribe todo esto?</P>
+<P ALIGN="JUSTIFY">&#9;Â¿Donde se escribe todo esto?</P>
 <P ALIGN="JUSTIFY">Pues hacemos los siguiente en Delphi 3:</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">&#9;<B>&quot;Men&uacute; Component&quot;</P>
 </B><P ALIGN="JUSTIFY">&#9;<B>&quot;New Component&quot;</P>
-</B><P ALIGN="JUSTIFY">&#9;&#9;Elegimos el &quot;Ancestor Type&quot; (o sea, el TShape)…</P>
-<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;… y rellenamos el resto.</P>
+</B><P ALIGN="JUSTIFY">&#9;&#9;Elegimos el &quot;Ancestor Type&quot; (o sea, el TShape)â€¦</P>
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;â€¦ y rellenamos el resto.</P>
 <P ALIGN="JUSTIFY">&#9;&#9;Bot&oacute;n <B>&quot;Create Unit&quot;</P>
 <P ALIGN="JUSTIFY"></P>
 </B><P ALIGN="JUSTIFY">Y y&aacute; estamos en la ventana de edici&oacute;n, as&iacute; que a rellenar lo que le falta.&#9;</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">&nbsp;</P>
-¡Feliz Programaci&oacute;n!… o como dicen lo anglosajones: Happy Codding!</P>
+Â¡Feliz Programaci&oacute;n!â€¦ o como dicen lo anglosajones: Happy Codding!</P>
 
 
 <br>

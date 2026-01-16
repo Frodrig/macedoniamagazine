@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación de Scripts para mIRC</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n de Scripts para mIRC</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto: garcifer@iies.es">David García "Gato".</A></b></FONT><br><br>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David GarcÃ­a "Gato".</A></b></FONT><br><br>
 
 
 <FONT color="#000000" size=2 face="arial"><br><br><br>
@@ -43,63 +43,63 @@ Identificadores del mIRC 5.02</H3>
 
 <p align=justify>
 Los identificadores son una serie de 
-comandos que devuelven un valor específico, y
-ya definido,  al mIRC. Por ejemplo, $time debería devolver la hora actual. Cuando
+comandos que devuelven un valor especÃ­fico, y
+ya definido,  al mIRC. Por ejemplo, $time deberÃ­a devolver la hora actual. Cuando
 el mIRC encuentra un identificador en su comando lo sustituye por su valor actual
-deforma automática. Muchos identificadores también pueden desempeñar funciones
-sobre los datos que usted proporcione y devolver un resultado. También hay
+deforma automÃ¡tica. Muchos identificadores tambiÃ©n pueden desempeÃ±ar funciones
+sobre los datos que usted proporcione y devolver un resultado. TambiÃ©n hay
 identificadores remote para usuarios con script remote (como son los clones/bots).
 <br><br>
 
-Los identificadores no pueden ser evaluados o evaluar a ningún valor devuelto por
-el valor $null. Éste valor puede ser usado en comparaciones con declaraciones
+Los identificadores no pueden ser evaluados o evaluar a ningÃºn valor devuelto por
+el valor $null. Ã‰ste valor puede ser usado en comparaciones con declaraciones
 if-then-else para controlar las bifurcaciones.
 <br><br>
 Todos los identificadores siguientes pueden ser sustituidos por identificadores o
-variables dentro del paréntesis.
+variables dentro del parÃ©ntesis.
 <br>
 
 <h4>Identificadores de Tiempo y Fecha</h4><p align=justify>
-<b>$ctime</b>. <br>Devuelve el número total de segundos transcurridos desde las 00:00:00 GMT
-del 1 de enero de 1970 (Ni idea de para qué demonios vale esto).
+<b>$ctime</b>. <br>Devuelve el nÃºmero total de segundos transcurridos desde las 00:00:00 GMT
+del 1 de enero de 1970 (Ni idea de para quÃ© demonios vale esto).
 <br><br>
 <b>$asctime(N)</b>.<br> Convierte los valores de tiempo devueltos por $ctime en una fecha
 completa en formato texto.
 <br><br>
 
-<b>$date</b>.<br> Devuelve la fecha actual según el formato día/mes/año.
+<b>$date</b>.<br> Devuelve la fecha actual segÃºn el formato dÃ­a/mes/aÃ±o.
 <br><br>
 <b>$adate</b>.<br> Los mismo que $date pero en formato americano (US).
 <br><br>
-<b>$day</b>.<br> Devuelve el nombre del día actual (en ingles).
+<b>$day</b>.<br> Devuelve el nombre del dÃ­a actual (en ingles).
 <br><br>
-<b>$duration(N)</b>. Devuelve el número especificado de segundos en el formato
-semana/día/hora/minuto/segundo.
+<b>$duration(N)</b>. Devuelve el nÃºmero especificado de segundos en el formato
+semana/dÃ­a/hora/minuto/segundo.
 <br><br>
-<b>$fulldate</b>. Devuelve la fecha actual en el formato: Día de semana Mes Día Hora Año.
+<b>$fulldate</b>. Devuelve la fecha actual en el formato: DÃ­a de semana Mes DÃ­a Hora AÃ±o.
 Ejemplo: Wed Jun 26 19:34:03 1997
 <br><br>
 <b>$idle</b>. Devuelve su tiempo actual de idle (idle = tiempo de inactividad).
 <br><br>
-<b>$online</b>. Devuelve el número de segundos transcurridos en el apartado del cronómetro
-del mIRC. (el cronómetro está en la barra de herramientas del mIRC)
+<b>$online</b>. Devuelve el nÃºmero de segundos transcurridos en el apartado del cronÃ³metro
+del mIRC. (el cronÃ³metro estÃ¡ en la barra de herramientas del mIRC)
 <br><br>
-<b>$ticks</b>. Devuelve el número de tic/tas que se han producido desde que su sistema
+<b>$ticks</b>. Devuelve el nÃºmero de tic/tas que se han producido desde que su sistema
 operativo fue iniciado por primera vez.
 <br><br>
 <b>$time</b>. Devuelve la hora actual en el formato hora:minutos:segundos.
 <br><br>
-<b>$timer(N)</b>.<br> Devuelve la ID (identificación) del cronómetro número N de la lista de
-cronómetros activa.
+<b>$timer(N)</b>.<br> Devuelve la ID (identificaciÃ³n) del cronÃ³metro nÃºmero N de la lista de
+cronÃ³metros activa.
 <br>
 <b>Propiedades del $timer (N):</b> com, time, reps, delay, tipe
 <br>
-<b>$timer(0)</b>. Devuelve el número de cronómetros activos.<br>
-<b>$timer(1)</b>. Devuelve la ID del primer cronómetro.<br>
-<b>$timer(1) .com </b>. Devuelve el comando para el primer cronómetro de la lista.<br>
-<b>$timer(3) .type</b>. Devuelve el estado del tercer cronómetro de la lista.<br>
+<b>$timer(0)</b>. Devuelve el nÃºmero de cronÃ³metros activos.<br>
+<b>$timer(1)</b>. Devuelve la ID del primer cronÃ³metro.<br>
+<b>$timer(1) .com </b>. Devuelve el comando para el primer cronÃ³metro de la lista.<br>
+<b>$timer(3) .type</b>. Devuelve el estado del tercer cronÃ³metro de la lista.<br>
 <br>
-Un ejemplo de cronómetro activo es:
+Un ejemplo de cronÃ³metro activo es:
 <br><br>
 <font size=1>
 /timer1 120 /say Estoy navegando ahora.<br>
@@ -110,27 +110,27 @@ Un ejemplo de cronómetro activo es:
 <br>
 <b>$timestamp</b>. Devuelve la hora actual en el formato [xx:xx]
 <br>
-<h4>Identificadores de Texto y Números</h4><p align=justify>
-<b>$abs(N)</b>.<br> Devuelve el valor absoluto del número N.<br>
+<h4>Identificadores de Texto y NÃºmeros</h4><p align=justify>
+<b>$abs(N)</b>.<br> Devuelve el valor absoluto del nÃºmero N.<br>
 <font size=1>
 Por ejemplo:
 <br>
 $abs(5).<br>Devuelve 5 $abs(-1) devuelve 1<br>
-$asc(C).<br>Devuelve el número ASCII del carácter C<br>
+$asc(C).<br>Devuelve el nÃºmero ASCII del carÃ¡cter C<br>
 $asc(A).<br>Devuelve 65 $asc(*) devuelve 42
 </font>
 <br><br>
-<b>$chr(N)</b>.<br>  Devuelve el carácter con el número ASCII N.<br>
+<b>$chr(N)</b>.<br>  Devuelve el carÃ¡cter con el nÃºmero ASCII N.<br>
 <font size=1>
 Por ejemplo:<br>
 $chr(65).<BR> Devuelve A $chr(42) devuelve *
 </font>
 <br><br>
-<b>$count(ristra, subristra)</b>.<br> Devuelve el número de veces que la subristra está
+<b>$count(ristra, subristra)</b>.<br> Devuelve el nÃºmero de veces que la subristra estÃ¡
 incluida en la ristra.<br>
 <font size=1>
 Por ejemplo:<br>
-  $count(hola, ol). <br>Devuelve 2 ya que tanto la O como la L están incluidas.
+  $count(hola, ol). <br>Devuelve 2 ya que tanto la O como la L estÃ¡n incluidas.
 </font>
 <br><br>
 <B>$left(texto, N)</b>.<br>Devuelve los N caracteres a la izquierda del texto.<br>
@@ -145,41 +145,41 @@ Por ejemplo:<br>
 $len(hola).<br>Devuelve 4 $len(mi casa) devuelve 7
 </font>
 <br><br>
-<b>$lower(texto)</b>.<br> Devuelve el texto en minúsculas.<br>
+<b>$lower(texto)</b>.<br> Devuelve el texto en minÃºsculas.<br>
 <font size=1>
 Por ejemplo:<br>
 $lower(HOLA)<br>. Devuelve hola
 </font>
 <br><br>
-<b>$mid(texto, S, N)</b>.<br> Devuelve los N caracteres que empiezan en la posición S del
+<b>$mid(texto, S, N)</b>.<br> Devuelve los N caracteres que empiezan en la posiciÃ³n S del
 texto.<br>
 <font size=1>
 Por ejemplo:<br>
 $mid(otholapf, 3, 4)<br>. Devuelve hola
 </font>
 <br><br>
-<b>$pos(ristra, subristra)</b>.<br> Devuelve un número que indica la posición de la subristra
+<b>$pos(ristra, subristra)</b>.<br> Devuelve un nÃºmero que indica la posiciÃ³n de la subristra
 en la ristra.<br>
 <font size=1>
 Por ejemplo:<br>
   $pos(hola, la). <br>Devuelve 3 $pos(hola, le) devuelve $null
   </font>
 <br><br>
-<b>$longip(IP)</b>.<br>Convierte una dirección IP en un valor grande y viceversa.<br>
+<b>$longip(IP)</b>.<br>Convierte una direcciÃ³n IP en un valor grande y viceversa.<br>
 <font size=1>
 Por ejemplo:<br>
   $longip(158.152.50.239) devuelve 2660774639<br>
   $longip(2660774639) devuelve 158.152.50.239<br>
   </font>
 <br><br>
-<b>$rand(v1, v2)</b>.<br> Esto funciona de dos formas:<BR>A.- Si usted proporciona dos números a v1 y
-v2, le devolverá un número aleatorio situado entre v1 y v2.<Br>B.- Si le proporciona una
-letra a v1 y v2, devolverá una letra aleatoria entre v1 y v2.<BR>
+<b>$rand(v1, v2)</b>.<br> Esto funciona de dos formas:<BR>A.- Si usted proporciona dos nÃºmeros a v1 y
+v2, le devolverÃ¡ un nÃºmero aleatorio situado entre v1 y v2.<Br>B.- Si le proporciona una
+letra a v1 y v2, devolverÃ¡ una letra aleatoria entre v1 y v2.<BR>
 <font size=1>
 Por ejemplo:<br>
  $rand(a, z).<br>Devuelve una letra cualquiera entre la a y la z<br>
  $rand(A, Z).<br>Devuelve una letra cualquiera entre la A y la Z<br>
- $rand(0, N).<br>Devuelve un número situado entre 0 y N
+ $rand(0, N).<br>Devuelve un nÃºmero situado entre 0 y N
  </font>
 <br><br>
 <b>$remove(ristra, subristra)</b>.<br>Quita la subristra de la ristra.<br>
@@ -206,14 +206,14 @@ Por ejemplo:<br>
  $str(ja, 3).<br>Devuelve jajaja
  </font>
 <br><br>
-<b>$strip(texto)</b>.<br> Devuelve el texto sin negrita, subrayado, invertido o códigos de
+<b>$strip(texto)</b>.<br> Devuelve el texto sin negrita, subrayado, invertido o cÃ³digos de
 control.<br>
  <font size=1>
  Por ejemplo:<br>
  $strip( 12 ]GaTo[ Script  4v1.4)<br> Devuelve ]GaTo[ Script v1.4
  </font>
 <br><br>
-<b>$upper(texto)</b>.<br> Devuelve el texto en mayúsculas.<br>
+<b>$upper(texto)</b>.<br> Devuelve el texto en mayÃºsculas.<br>
 <font size=1>
 Por ejemplo:<br>
  $upper(hola) <BR>Devuelve HOLA
@@ -221,30 +221,30 @@ Por ejemplo:<br>
 
 <h4>Identificadores de Archivos y Directorios</h4>
 <P ALIGN=JUSTIFY>
-<b>$dir, $file, $hfile</b>.<BR> Le permite seleccionar un nombre de archivo que será insertado
-dentro de un alias. El identificador $dir hace aparecer un completo menú con
-archivos y directorios. $file hace aparecer un menú igual que el anterior pero más
-pequeño. $hfile es igual que $file con la única diferencia que el menú aparece
+<b>$dir, $file, $hfile</b>.<BR> Le permite seleccionar un nombre de archivo que serÃ¡ insertado
+dentro de un alias. El identificador $dir hace aparecer un completo menÃº con
+archivos y directorios. $file hace aparecer un menÃº igual que el anterior pero mÃ¡s
+pequeÃ±o. $hfile es igual que $file con la Ãºnica diferencia que el menÃº aparece
 horizontal.<BR>
-De esta forma tendríamos lo siguiente:<br><br>
-<b>$dir="Mensaje" &lt;ubicación y tipo de archivo></b><br>
+De esta forma tendrÃ­amos lo siguiente:<br><br>
+<b>$dir="Mensaje" &lt;ubicaciÃ³n y tipo de archivo></b><br>
 <font size=1>
 $dir="Selecciona un dibujo" c:/mirc/ascii/*.txt<br>
 $dir="Selecciona un archivo" $mircdirdocumentos/*.*
 </font>
 <br><br>
-<b>$file="Mensaje" &lt;ubicación y tipo de archivo></b><br>
+<b>$file="Mensaje" &lt;ubicaciÃ³n y tipo de archivo></b><br>
 <font size=1>
-$file="Seleccona una canción" c:/sonidos/*.mid<br>
+$file="Seleccona una canciÃ³n" c:/sonidos/*.mid<br>
 $file="Seleccona un sonido" $mircdirsonido/*.wav</font>
 <br><br>
-<b>$hfile="Mensaje" &lt;ubicación y tipo de archivo></b><br>
+<b>$hfile="Mensaje" &lt;ubicaciÃ³n y tipo de archivo></b><br>
 <font size=1>
 $hfile="Seleccona un archivo" c:/fotos/*.*<br>
 $hfile="Escoge un archivo" $mircdirrecog/*.*<br>
 </font>
 <br>
-NOTA: no se debe utilizar $file o $dir con el comando /dcc send ya que ya está
+NOTA: no se debe utilizar $file o $dir con el comando /dcc send ya que ya estÃ¡
 incluidos en un DCC  SEND
 
 <b>$exists(nombre_archivo)</b>.<BR>Devuelve $true si el archivo exixte y $false si no
@@ -254,9 +254,9 @@ Por ejemplo:<br>
 $exists(c:/mirc/mirc32.exe)<br>Devuelve $true si existe y $false si no existe.
 </font>
 <br><br>
-<b>$findfile(dir, extensión, N)</b>.<br> Busca en el directorio especificado (dir) y en todos
+<b>$findfile(dir, extensiÃ³n, N)</b>.<br> Busca en el directorio especificado (dir) y en todos
 sus subdirectorios el N archivo deacuerdo con el tipo de archivo especificado y
-devuelve su ubicación completa si lo encuentra.<br>
+devuelve su ubicaciÃ³n completa si lo encuentra.<br>
 <font size=1>
 Por ejemplo:<br> 
 $findfile(c:/mirc, *.exe, 1)<Br>Devuelve c:/mirc/mirc32.exe
@@ -265,7 +265,7 @@ $findfile(c:/mirc, *.exe, 1)<Br>Devuelve c:/mirc/mirc32.exe
 
 <b>$getdir</b>.<br> Devuelve el directorio DCC GET especificado en las opciones DCC.
 <br><br>
-<b>$lines(nombre_archivo)</b>.<br> Devuelve el número total de lineas que hay en el archivo de
+<b>$lines(nombre_archivo)</b>.<br> Devuelve el nÃºmero total de lineas que hay en el archivo de
 texto especificado.
 <b>$lof(nombre_archivo)</b>.<br> Devuelve la longitud del archivo especificado en bytes.
 <br>
@@ -276,17 +276,17 @@ $lof(c:/mirc/mirc32.exe) devuelve 757000
 <b>$logdir</b>. Devuelve el directorio de almacenamiento de las conversaciones indicado en
 el apartado "logging" del apartado opciones del mIRC.
 <br><br>
-<b>$mididir</b>.<br> Devuelve el directorio MIDI especificado en la sección "sound" del
+<b>$mididir</b>.<br> Devuelve el directorio MIDI especificado en la secciÃ³n "sound" del
 apartado opciones del mIRC.
 <br><br>
-<b>$nofile(nombre_archivo)</b>.<br> Devuelve la ubicación del archivo sin decir al final el
+<b>$nofile(nombre_archivo)</b>.<br> Devuelve la ubicaciÃ³n del archivo sin decir al final el
 nombre del archivo.
 <br><font size=1>
 Por ejemplo:<br>
 $nofile(c:/mirc/mirc32.exe)<br>Devuelve c:/mirc
 </font>
 </br><br>
-<b>$nopath(nombre_archivo)</b>.<br> Devuelve el nombre del archivo sin la ubicación.
+<b>$nopath(nombre_archivo)</b>.<br> Devuelve el nombre del archivo sin la ubicaciÃ³n.
 <br>
 <font size=1>
 Por ejemplo:<br>
@@ -296,43 +296,43 @@ $nopath(c:/mirc/mirc32.exe)<br>Devuelve mirc32.exe
 <b>$mircdir</b>. Devuelve el directorio actual del programa mIRC.<br><br>
 <b>$mircini</b>. Devuelve el archivo INI principal del mIRC. Normalmente es mirc.ini
 <br><br>
-<b>$read</b>. Lee una línea al azar de un archivo y la inserta en la posición actual en un
+<b>$read</b>. Lee una lÃ­nea al azar de un archivo y la inserta en la posiciÃ³n actual en un
 comando alias. El formato es <b>$read[-nl# -stexto] &lt;nombre_archivo></b>
 <br>
-$read insertará cualquier texto, incluso comandos e identificadores, y ellos
-funcionarán como un comando normal.
+$read insertarÃ¡ cualquier texto, incluso comandos e identificadores, y ellos
+funcionarÃ¡n como un comando normal.
 <br><br>
 <font size=1>
 Ejemplos:<br><br>
-/say $read c:/chistes.txt<br> Lee una línea aleatoria del archivo "chistes.txt"<br>
-/say $read -l24 c:/chistes.txt<br>Lee la línea 24 del archivo "chistes.txt"<br>
-/kick # $1 $read kick.txt<br>  Expulsa a un nick del canal actual y le manda una línea
-al azar del archivo "kick.txt" como motivo de la expulsión.<br>
-/say $read -smirc info.txt<br> Examina el archivo info.txt en busca de alguna línea
-que empiece por "mirc" y usa el resto de la línea en el alias.<br>
-Si se especifica la opción -n entonces la linea será leida pero no será evaluada y
-será tratada como si fuese texto normal.
+/say $read c:/chistes.txt<br> Lee una lÃ­nea aleatoria del archivo "chistes.txt"<br>
+/say $read -l24 c:/chistes.txt<br>Lee la lÃ­nea 24 del archivo "chistes.txt"<br>
+/kick # $1 $read kick.txt<br>  Expulsa a un nick del canal actual y le manda una lÃ­nea
+al azar del archivo "kick.txt" como motivo de la expulsiÃ³n.<br>
+/say $read -smirc info.txt<br> Examina el archivo info.txt en busca de alguna lÃ­nea
+que empiece por "mirc" y usa el resto de la lÃ­nea en el alias.<br>
+Si se especifica la opciÃ³n -n entonces la linea serÃ¡ leida pero no serÃ¡ evaluada y
+serÃ¡ tratada como si fuese texto normal.
 </font>
 <br><br>
-NOTA: Si la primera línea del archivo es un número, este debe representar el
-número total de líneas que hay en el archivo. Esto acelerará la búsqueda
-considerablemente. Si no se especifica el número de líneas que hay en el archivo,
-entonces el mIRC necesitará contar todas las líneas lo cual podría ralentizar el
-proceso. En los archivos pequeños, no habrá mucha diferencia.
+NOTA: Si la primera lÃ­nea del archivo es un nÃºmero, este debe representar el
+nÃºmero total de lÃ­neas que hay en el archivo. Esto acelerarÃ¡ la bÃºsqueda
+considerablemente. Si no se especifica el nÃºmero de lÃ­neas que hay en el archivo,
+entonces el mIRC necesitarÃ¡ contar todas las lÃ­neas lo cual podrÃ­a ralentizar el
+proceso. En los archivos pequeÃ±os, no habrÃ¡ mucha diferencia.
 </br><br>
-<b>$readini</b>.<br>Lee información de un archivo INI y la inserta entro de la posición
+<b>$readini</b>.<br>Lee informaciÃ³n de un archivo INI y la inserta entro de la posiciÃ³n
 actual en el comando alias. Esto funciona junto con el comando /writeini para leer
-información de archivos INI. El formato es <b>$readini <-n> &lt;nombre_archivo> &lt;sección> &lt;artículo></b>
+informaciÃ³n de archivos INI. El formato es <b>$readini <-n> &lt;nombre_archivo> &lt;secciÃ³n> &lt;artÃ­culo></b>
 <br><br>
 <b>/echo $readini mirc.ini mIRC nick</b>.<BR> Lee su nick del archivo mirc.ini
- Con la opción -n la línea será leída pero no será evaluada y será tratada como si
+ Con la opciÃ³n -n la lÃ­nea serÃ¡ leÃ­da pero no serÃ¡ evaluada y serÃ¡ tratada como si
 fuese texto normal.
 <br><br>
-<b>$wavedir</b>.<br> Devuelve el directorio WAV especificado en la sección "opciones" en el
+<b>$wavedir</b>.<br> Devuelve el directorio WAV especificado en la secciÃ³n "opciones" en el
 apartado "sound"<br><br>
 
-Hasta aquí todos los identificadores que tiene el mIRC 5.02 para tiempo, fechas,
-archivos, directorios, texto y números. Espero que te sean útiles ;).
+Hasta aquÃ­ todos los identificadores que tiene el mIRC 5.02 para tiempo, fechas,
+archivos, directorios, texto y nÃºmeros. Espero que te sean Ãºtiles ;).
 <br>
 
 <br>
@@ -341,7 +341,7 @@ archivos, directorios, texto y números. Espero que te sean útiles ;).
 <font size=1>
 <center>
 <b>Nota del autor</b><br>
-Todos los comandos han sidos sacados del manual de Ramírez sobre el mIRC.
+Todos los comandos han sidos sacados del manual de RamÃ­rez sobre el mIRC.
 </center>
 </font>
 
@@ -361,7 +361,7 @@ Todos los comandos han sidos sacados del manual de Ramírez sobre el mIRC.
 <FONT SIZE=2>
 <A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
 <HR>
-<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programación de Scripts para mIRC]</B></font></a><br>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de ProgramaciÃ³n de Scripts para mIRC]</B></font></a><br>
 </DIV>
 </TD>
 </TR>

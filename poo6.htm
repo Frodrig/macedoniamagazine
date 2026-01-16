@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Orientada a Objetos en C++</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n Orientada a Objetos en C++</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÃ­guez.</A>
 </b></FONT>
 <br><br><FONT color="#000000" size=2 face="arial">
 <br><br>
@@ -45,9 +45,9 @@ Cap&iacute;tulo 6.<br> Funciones virtuales: polimorfismo.
 
 <p align=justify>
 
-En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci&oacute;n orientada a objetos: el <B>polimorfismo</B>. Esta caracter&iacute;stica de la POO, permite que podamos construirnos m&eacute;todos para nuestras clase derivadas que parten de una misma clase base, para que adopten comportamientos totalmente distintos. Es un concepto realmente potente y que se lleva a cabo mediante la utilizaci&oacute;n de <B>funciones virtuales</B>. Nosotros ya las hemos utilizado. Si te acuerdas, en el cap&iacute;tulo anterior declar&aacute;bamos la clase que redefin&iacute;amos como virtual. ¡Hemos utilizado el polimorfismo y sin enterarnos!.</P>
+En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci&oacute;n orientada a objetos: el <B>polimorfismo</B>. Esta caracter&iacute;stica de la POO, permite que podamos construirnos m&eacute;todos para nuestras clase derivadas que parten de una misma clase base, para que adopten comportamientos totalmente distintos. Es un concepto realmente potente y que se lleva a cabo mediante la utilizaci&oacute;n de <B>funciones virtuales</B>. Nosotros ya las hemos utilizado. Si te acuerdas, en el cap&iacute;tulo anterior declar&aacute;bamos la clase que redefin&iacute;amos como virtual. Â¡Hemos utilizado el polimorfismo y sin enterarnos!.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Una funci&oacute;n virtual es un mecanismo que permite a clases derivadas redefinir a las funciones de las clases base. Por tanto, hasta ahora, nos debemos de quedar con que el polimorfismo es una acci&oacute;n que se puede implementar en clases distintas pero que tienen en com&uacute;n el hecho de heredar de una clase base com&uacute;n. Dicho m&eacute;todo, pese a ser com&uacute;n para los objetos derivados, es tratado de forma distinta y, por tanto, dando resultados tambi&eacute;n diferentes dependiendo de con qu&eacute; clase lo invoquemos. ¿C&oacute;mo conseguirlo?. Para poder implementar el polimorfismo tenemos las funciones virtuales. Las funciones virtuales se definen en la clase base y son las que ser&aacute;n redefinidas, luego, en las clases derivadas.</P>
+<P ALIGN="JUSTIFY">Una funci&oacute;n virtual es un mecanismo que permite a clases derivadas redefinir a las funciones de las clases base. Por tanto, hasta ahora, nos debemos de quedar con que el polimorfismo es una acci&oacute;n que se puede implementar en clases distintas pero que tienen en com&uacute;n el hecho de heredar de una clase base com&uacute;n. Dicho m&eacute;todo, pese a ser com&uacute;n para los objetos derivados, es tratado de forma distinta y, por tanto, dando resultados tambi&eacute;n diferentes dependiendo de con qu&eacute; clase lo invoquemos. Â¿C&oacute;mo conseguirlo?. Para poder implementar el polimorfismo tenemos las funciones virtuales. Las funciones virtuales se definen en la clase base y son las que ser&aacute;n redefinidas, luego, en las clases derivadas.</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">La declaraci&oacute;n de una funci&oacute;n virtual se consigue mediante la palabra clave virtual precediendo a la declaraci&oacute;n de la funci&oacute;n. Por ejemplo:</P>
 <P ALIGN="JUSTIFY"></P>
@@ -67,7 +67,7 @@ En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci
 // que adem&aacute;s es virtual e &quot;inline&quot;
 
 <B>public</B>:
-<B>vitual void</B> PonInformacion(<B>void</B>) <B>{</B> <B>cout</B> &lt;&lt; &quot;\n¡Hola!&quot;; <B>}
+<B>vitual void</B> PonInformacion(<B>void</B>) <B>{</B> <B>cout</B> &lt;&lt; &quot;\nÂ¡Hola!&quot;; <B>}
 </B>
 <B>};
 </B>
@@ -80,7 +80,7 @@ En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci
 // que hereda de la clase ClaseBase. Tambi&eacute;n es &quot;inline&quot;.
 
 <B>public</B>:
-<B>void</B> PonInformacion(<B>void</B>) <B>{</B> <B>cout</B> &lt;&lt; &quot;\n¡Adios!&quot;; <B>}
+<B>void</B> PonInformacion(<B>void</B>) <B>{</B> <B>cout</B> &lt;&lt; &quot;\nÂ¡Adios!&quot;; <B>}
 </B>
 <B>};
 </B>
@@ -102,7 +102,7 @@ En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci
   <B>return</B> 0;
 <B>}
 </B></Pre>
-<P ALIGN="JUSTIFY">Bueno, el resultado est&aacute; claro, ¿no?. Mientras que la clase declarada como <I>ClaseBase</I> e instanciada con <I>base</I>, pone en pantalla &quot;¡Hola!&quot;, la clase derivada, que ha redefinido la funci&oacute;n virtual <I>PonInformacion</I>, pone &quot;¡Adi&oacute;s!&quot;. Es un ejemplo, en definitiva, muy sencillo en el que se puede ver c&oacute;mo hacer que una funci&oacute;n ya definida en una clase base cambie totalmente seg&uacute;n nuestras necesidades: es el polimorfismo.</P>
+<P ALIGN="JUSTIFY">Bueno, el resultado est&aacute; claro, Â¿no?. Mientras que la clase declarada como <I>ClaseBase</I> e instanciada con <I>base</I>, pone en pantalla &quot;Â¡Hola!&quot;, la clase derivada, que ha redefinido la funci&oacute;n virtual <I>PonInformacion</I>, pone &quot;Â¡Adi&oacute;s!&quot;. Es un ejemplo, en definitiva, muy sencillo en el que se puede ver c&oacute;mo hacer que una funci&oacute;n ya definida en una clase base cambie totalmente seg&uacute;n nuestras necesidades: es el polimorfismo.</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Otra de las cosas que vimos en el cap&iacute;tulo anterior era el hecho de utilizar dentro de la funci&oacute;n de la clase derivada, a la funci&oacute;n virtual de la clase base. Si nosotros hubi&eacute;ramos implementado as&iacute; a la funci&oacute;n virtual de la clase derivada:</P>
 <P ALIGN="JUSTIFY"></P>
@@ -114,7 +114,7 @@ En esta ocasi&oacute;n vamos abordar un concepto muy importante de la programaci
 // void ClaseDerivada::PonInformacion(void)
 
 ClaseBase<B>::</B>PonInformacion(); 
-cout &lt;&lt; &quot;\n¡Adios!&quot;; 
+cout &lt;&lt; &quot;\nÂ¡Adios!&quot;; 
 <B>}
 </B></PRE>
 
@@ -124,10 +124,10 @@ cout &lt;&lt; &quot;\n¡Adios!&quot;;
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Lo que nos saldr&iacute;a por pantalla ser&iacute;a:</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY"><I>¡Hola!<BR>
-¡Adios!</I></P>
+<P ALIGN="JUSTIFY"><I>Â¡Hola!<BR>
+Â¡Adios!</I></P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">En contraposici&oacute;n a lo que nos sale en el programa original en el que no llamamos a la funci&oacute;n de la clase base, es decir, en el ejemplo original saldr&iacute;a nada m&aacute;s ¡Adi&oacute;s!. Esto es as&iacute; porque dentro del cuerpo <I>PonInformacion</I>() que est&aacute; implementado en la clase <I>ClaseDerivada</I>, llamamos antes de nada a la funci&oacute;n de la clase base <I>ClaseBase</I> que se trata como una funci&oacute;n heredada m&aacute;s.</P>
+<P ALIGN="JUSTIFY">En contraposici&oacute;n a lo que nos sale en el programa original en el que no llamamos a la funci&oacute;n de la clase base, es decir, en el ejemplo original saldr&iacute;a nada m&aacute;s Â¡Adi&oacute;s!. Esto es as&iacute; porque dentro del cuerpo <I>PonInformacion</I>() que est&aacute; implementado en la clase <I>ClaseDerivada</I>, llamamos antes de nada a la funci&oacute;n de la clase base <I>ClaseBase</I> que se trata como una funci&oacute;n heredada m&aacute;s.</P>
 <P ALIGN="JUSTIFY"></P>
 <H4>Aclarando todo un poco</H4>
 <P ALIGN="JUSTIFY">Si recuerdas el cap&iacute;tulo anterior del curso, habr&aacute;s observado que, en cierta forma, ya hemos utilizado el polimorfismo, es decir, en el anterior cap&iacute;tulo redefin&iacute;amos funciones miembro de una clase base utilizando sus caracter&iacute;sticas comunes a la clase derivada en la que trabaj&aacute;bamos pero a&ntilde;adiendo una serie de especificaciones extra para que &quot;adem&aacute;s se hiciera otra cosa&quot;.</P>
@@ -139,13 +139,13 @@ cout &lt;&lt; &quot;\n¡Adios!&quot;;
 <TABLE><TD><IMG SRC="gif/poovir.gif"></TD></TABLE>
 </CENTER>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Cabe decir tambi&eacute;n, y esto es importante pues puede dar lugar a confusiones, que si tenemos una funci&oacute;n en una clase base que no est&eacute; marcada como virtual y despu&eacute;s creamos en una clase derivada otra funci&oacute;n con el mismo nombre los resultados no van a ser los esperados... Lo que har&aacute; el compilador ser&aacute; llamar directamente a la funci&oacute;n implementada en la clase base y pasar &quot;ol&iacute;mpicamente&quot; de la implementaci&oacute;n de la clase derivada. ¿y si, habiendo declarado una funci&oacute;n en la clase base como virtual, luego se nos olvida redefinirla en la clase derivada?. Bueno, en este caso, se llamar&aacute; a la funci&oacute;n de la clase base y no pasar&aacute; nada.</P>
+<P ALIGN="JUSTIFY">Cabe decir tambi&eacute;n, y esto es importante pues puede dar lugar a confusiones, que si tenemos una funci&oacute;n en una clase base que no est&eacute; marcada como virtual y despu&eacute;s creamos en una clase derivada otra funci&oacute;n con el mismo nombre los resultados no van a ser los esperados... Lo que har&aacute; el compilador ser&aacute; llamar directamente a la funci&oacute;n implementada en la clase base y pasar &quot;ol&iacute;mpicamente&quot; de la implementaci&oacute;n de la clase derivada. Â¿y si, habiendo declarado una funci&oacute;n en la clase base como virtual, luego se nos olvida redefinirla en la clase derivada?. Bueno, en este caso, se llamar&aacute; a la funci&oacute;n de la clase base y no pasar&aacute; nada.</P>
 <P ALIGN="JUSTIFY"></P>
 <H4>Funciones virtuales puras implican clases abstractas.</H4>
 <P ALIGN="JUSTIFY">Se puede decir que las funciones <B>virtuales puras</B> son aquellas que, para implementarse, han de ser redefinidas, es decir, que no s&oacute;lo tienen sino que <B><I>deben </B></I>ser redefinidas. Aquellas clases que tengan una funci&oacute;n virtual pura se denominan <B>clases abstractas</B><I> </I>y tienen la gran particularidad de que de ellas no se puede crear instancias u objetos.</P>
 <P ALIGN="JUSTIFY">Quedamos, pues, en <B>que para crear una clase abstracta s&oacute;lo hace falta definir una funci&oacute;n virtual pura</B>. </P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¿Y c&oacute;mo definimos una funci&oacute;n virtual pura?. Para definir una funci&oacute;n virtual pura, tenemos que asignar a la funci&oacute;n un puntero NULL o, lo que es lo mismo, un valor 0. Suponiendo que queremos implementar una funci&oacute;n llamada <I>Forma</I> como virtual pura, deber&iacute;amos de poner as&iacute;:</P>
+<P ALIGN="JUSTIFY">Â¿Y c&oacute;mo definimos una funci&oacute;n virtual pura?. Para definir una funci&oacute;n virtual pura, tenemos que asignar a la funci&oacute;n un puntero NULL o, lo que es lo mismo, un valor 0. Suponiendo que queremos implementar una funci&oacute;n llamada <I>Forma</I> como virtual pura, deber&iacute;amos de poner as&iacute;:</P>
 <P ALIGN="JUSTIFY"></P>
 <PRE><B>virtual</B> <B>void</B> Forma() = 0;</PRE>
 <P ALIGN="JUSTIFY"></P>

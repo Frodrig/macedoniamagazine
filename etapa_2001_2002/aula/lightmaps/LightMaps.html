@@ -2,7 +2,8 @@
 
 <head>
 
-<title> CreaciÛn de LightMaps </title>
+<meta charset="utf-8">
+<title> Creaci√≥n de LightMaps </title>
 
 <!-- Tutorial by Alex Guevara---------------------------------------------- -->
 <!-- is06764@salleurl.edu-------------------------------------------------- -->
@@ -17,23 +18,23 @@
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 <center>
-<strong> <font face="Verdana" size="3"> CreaciÛn de Lightmaps</font><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> 
+<strong> <font face="Verdana" size="3"> Creaci√≥n de Lightmaps</font><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> 
 </center>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> 
-<font face="Verdana" size="1"> IntroducciÛn</font>
+<font face="Verdana" size="1"> Introducci√≥n</font>
 </strong>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Esta tÈcnica se empezÛ a usar en el 1996, y la crearon la gente de <a href="http://www.idsoftware.com">Id Software</a>, aplic·ndola en el videojuego que en ese momento estaban creando, el conocido <a href="http://www.idsoftware.com/quake">Quake</a>. Desde entonces, es difÌcil encontrar un juego 3D que no use esta tÈcnica o alguna variante. Las ventajas de su uso son muchas, desde su espectacularidad y bajo coste computacional, hasta su relativa sencillez de
-implementaciÛn. Tiene algunas desventajas, como su bajo nivel de detalle de las sombras, o que no son recomendables en escenarios exteriores, como veremos mas tarde.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Esta t√©cnica se empez√≥ a usar en el 1996, y la crearon la gente de <a href="http://www.idsoftware.com">Id Software</a>, aplic√°ndola en el videojuego que en ese momento estaban creando, el conocido <a href="http://www.idsoftware.com/quake">Quake</a>. Desde entonces, es dif√≠cil encontrar un juego 3D que no use esta t√©cnica o alguna variante. Las ventajas de su uso son muchas, desde su espectacularidad y bajo coste computacional, hasta su relativa sencillez de
+implementaci√≥n. Tiene algunas desventajas, como su bajo nivel de detalle de las sombras, o que no son recomendables en escenarios exteriores, como veremos mas tarde.</font></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong> <font face="Verdana" size="1"> øEn que consiste la tÈcnica de los LightMaps?</font> </strong></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong> <font face="Verdana" size="1"> ¬øEn que consiste la t√©cnica de los LightMaps?</font> </strong></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Los lightmaps (mapas de luz) simplemente consisten en aÒadir una segunda textura a todas y cada una de las caras existentes en una escena 3D. Esta textura
-contendrÌa la luz que recibe cada cara. Los lightmaps son precalculados, ya que si por un lado una vez creados son muy
-r·pidos de mostrar, el coste de su creaciÛn es elevado.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Los lightmaps (mapas de luz) simplemente consisten en a√±adir una segunda textura a todas y cada una de las caras existentes en una escena 3D. Esta textura
+contendr√≠a la luz que recibe cada cara. Los lightmaps son precalculados, ya que si por un lado una vez creados son muy
+r√°pidos de mostrar, el coste de su creaci√≥n es elevado.</font></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">AquÌ tenemos un ejemplo de un
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Aqu√≠ tenemos un ejemplo de un
 lightmap:</font></p>
 <center>
 <table border = 0>
@@ -108,9 +109,9 @@ lightmap:</font></p>
 </table>
 </center>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Es decir, si tenemos modelada una habitaciÛn, con sus respectivas 4 paredes, suelo y techo, aunque todas las caras tengan la misma textura, necesitaremos <strong>6</strong> texturas diferentes para la iluminaciÛn. Como podrÈis imaginar, esto
-supondr· una gran cantidad de texturas en una escena compleja, y por tanto, un gran consumo de memoria RAM. La
-˙nica soluciÛn posible es crear LightMaps de baja resoluciÛn, es decir, de 32x32 pÌxels, por ejemplo.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Es decir, si tenemos modelada una habitaci√≥n, con sus respectivas 4 paredes, suelo y techo, aunque todas las caras tengan la misma textura, necesitaremos <strong>6</strong> texturas diferentes para la iluminaci√≥n. Como podr√©is imaginar, esto
+supondr√° una gran cantidad de texturas en una escena compleja, y por tanto, un gran consumo de memoria RAM. La
+√∫nica soluci√≥n posible es crear LightMaps de baja resoluci√≥n, es decir, de 32x32 p√≠xels, por ejemplo.</font></p>
 
 <center>
 <table border = 0>
@@ -133,16 +134,16 @@ supondr· una gran cantidad de texturas en una escena compleja, y por tanto, un g
 		</td>
 		<td width = 148>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
-			Lightmap de baja resoluciÛn</font></p>
+			Lightmap de baja resoluci√≥n</font></p>
 		</td>
 	</tr>
 </table>
 </center>
 <P align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">Pasos previos</font></strong></P>
 <P align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Antes de comenzar a calcular los Lightmaps, hay que tener en cuenta unas cuantas cosas. No
-serÌa Ûptimo calcular una textura para cada uno de los tri·ngulos de la escena, hay que agrupar por
-superficies, de manera que aprovecharemos lo m·ximo posible la textura cuadrada. Si a cada
-tri·ngulo le aplicamos una textura cuadrada, malgastaremos el 50% de la memoria en texturas que nunca se ver·n.</font></p>
+ser√≠a √≥ptimo calcular una textura para cada uno de los tri√°ngulos de la escena, hay que agrupar por
+superficies, de manera que aprovecharemos lo m√°ximo posible la textura cuadrada. Si a cada
+tri√°ngulo le aplicamos una textura cuadrada, malgastaremos el 50% de la memoria en texturas que nunca se ver√°n.</font></p>
 
 <center>
 <table border = 0>
@@ -161,14 +162,14 @@ tri·ngulo le aplicamos una textura cuadrada, malgastaremos el 50% de la memoria 
 	<tr>
 		<td width = 296 colspan = 2>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
-			AquÌ veis a lo que me refiero, sobra la mitad de la textura de luz.</font></p>
+			Aqu√≠ veis a lo que me refiero, sobra la mitad de la textura de luz.</font></p>
 		</td>
 	</tr>
 </table>
 </center>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"></p>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Por lo tanto, habr· que agrupar por superfÌcies. Yo recomiendo comenzar agrupando primero todos los tri·ngulos que
-estÈn en el mismo plano, para luego separarlos seg˙n la superficie en que se encuentren.</font> </p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Por lo tanto, habr√° que agrupar por superf√≠cies. Yo recomiendo comenzar agrupando primero todos los tri√°ngulos que
+est√©n en el mismo plano, para luego separarlos seg√∫n la superficie en que se encuentren.</font> </p>
 
 
 <center>
@@ -190,14 +191,14 @@ estÈn en el mismo plano, para luego separarlos seg˙n la superficie en que se enc
 		<td width = 296>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
 			Las dos caras rojas forman parte del mismo plano, no obstante no forman parte de la misma
-            superficie, habr· que separarlas en distintos grupos.</font></p>
+            superficie, habr√° que separarlas en distintos grupos.</font></p>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
 		</td>
 		<td width = 296>
-            <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Habr· que tener en cuenta casos como
-            Èste al hacer el algoritmo, con un hueco en medio de la superficie.
-            …sta concretamente corresponde a una pared con una ventana, con la disposiciÛn de tri·ngulos que tÌpicamente crea el 3D Studio MAX al extruir una cara para hacerle un agujero.</font></p>
+            <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Habr√° que tener en cuenta casos como
+            √©ste al hacer el algoritmo, con un hueco en medio de la superficie.
+            √âsta concretamente corresponde a una pared con una ventana, con la disposici√≥n de tri√°ngulos que t√≠picamente crea el 3D Studio MAX al extruir una cara para hacerle un agujero.</font></p>
 		</td>
 
 	</tr>
@@ -206,15 +207,15 @@ estÈn en el mismo plano, para luego separarlos seg˙n la superficie en que se enc
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Adem·s,
-habrÌa que aÒadir alguna informaciÛn extra a las superficies: posteriormente necesitaremos la normal del plano de la superficie,
-asÌ como su ecuaciÛn que lo define:</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Adem√°s,
+habr√≠a que a√±adir alguna informaci√≥n extra a las superficies: posteriormente necesitaremos la normal del plano de la superficie,
+as√≠ como su ecuaci√≥n que lo define:</font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
 Ax + By + Cz + D = 0</font>
 <p align= "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 <font face="Verdana" size="1">
-Recordad que A, B, C son las componentes de la normal del plano (necesitaremos que estÈ normalizada), y D es la distancia
-mÌnima del plano al centro de coordenadas, con el signo cambiado. Para encontrar D tendrÈis que hacer:</font><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
+Recordad que A, B, C son las componentes de la normal del plano (necesitaremos que est√© normalizada), y D es la distancia
+m√≠nima del plano al centro de coordenadas, con el signo cambiado. Para encontrar D tendr√©is que hacer:</font><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 </center>
 <ul>
 <li> 
@@ -228,19 +229,19 @@ mÌnima del plano al centro de coordenadas, con el signo cambiado. Para encontrar
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Unos pasos para implementar el algoritmo:</font></p>
 <ul>
 <li> 
-  <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"> Agrupar todos los tri·ngulos en planos,
-  seg˙n la ecuaciÛn del plano Ax + By + Cz + D = 0</font></li>
-<li> <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Una vez agrupados, coger uno de los tri·ngulos del plano y, recursivamente, recorremos todos los tri·ngulos que son colindantes con
-  Èl, y 'marcamos' todos por los que pasamos. Una vez finalizado el recorrido, los no marcados forman parte de otro plano, creamos un plano nuevo y asignamos los tri·ngulos a Èste.</font></p></li>
+  <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"> Agrupar todos los tri√°ngulos en planos,
+  seg√∫n la ecuaci√≥n del plano Ax + By + Cz + D = 0</font></li>
+<li> <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Una vez agrupados, coger uno de los tri√°ngulos del plano y, recursivamente, recorremos todos los tri√°ngulos que son colindantes con
+  √©l, y 'marcamos' todos por los que pasamos. Una vez finalizado el recorrido, los no marcados forman parte de otro plano, creamos un plano nuevo y asignamos los tri√°ngulos a √©ste.</font></p></li>
 </ul>
 
 <!-- Creando las texturas de Lightmap ------------------------------------------------- -->
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong> <font face="Verdana" size="1"> Creando las texturas de Lightmap</font></strong></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Antes de empezar con c·lculos matem·ticos, tendremos que crear las texturas en las cuales dibujaremos los resultados de los c·lculos de iluminaciÛn. Supongamos que queremos que todas las texturas tengan una resoluciÛn de 32x32 pÌxels. Supongamos tambiÈn, que usaremos luces de colores, no nos limitaremos al blanco y negro. Por lo tanto usaremos texturas de 24 bits (3 bytes). Por lo tanto una textura ocupar·</font></p> 
-<center><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">32 ∑ 32 ∑ 3 = 3072 bytes</font></p></center>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Ahora hemos asignado un espacio de 3072 bytes, donde cada 3 bytes es un pÌxel. Usamos el formato de color RGB, por lo que cada byte es un color. Hemos de inicializar toda la textura en negro, por lo tanto el valor de R, G y B ser· 0. Simplemente hemos de rellenar los 3072 bytes con ceros. Una vez rellenados, habr· que asignar una textura a cada una de las superfÌcies que tengamos.</font> </p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Antes de empezar con c√°lculos matem√°ticos, tendremos que crear las texturas en las cuales dibujaremos los resultados de los c√°lculos de iluminaci√≥n. Supongamos que queremos que todas las texturas tengan una resoluci√≥n de 32x32 p√≠xels. Supongamos tambi√©n, que usaremos luces de colores, no nos limitaremos al blanco y negro. Por lo tanto usaremos texturas de 24 bits (3 bytes). Por lo tanto una textura ocupar√°</font></p> 
+<center><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">32 ¬∑ 32 ¬∑ 3 = 3072 bytes</font></p></center>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Ahora hemos asignado un espacio de 3072 bytes, donde cada 3 bytes es un p√≠xel. Usamos el formato de color RGB, por lo que cada byte es un color. Hemos de inicializar toda la textura en negro, por lo tanto el valor de R, G y B ser√° 0. Simplemente hemos de rellenar los 3072 bytes con ceros. Una vez rellenados, habr√° que asignar una textura a cada una de las superf√≠cies que tengamos.</font> </p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp; </p>
 
@@ -249,7 +250,7 @@ mÌnima del plano al centro de coordenadas, con el signo cambiado. Para encontrar
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong> <font face="Verdana" size="1"> Calculando las coordenadas U y V</font></strong></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Bien, ahora ya tenemos toda la
-geometrÌa de la escena agrupada y preparada para empezar a calcular los mapas de luz. Tenemos una serie de grupos de tri·ngulos que forman superficies planas. A cada grupo le asignaremos un lightmap, que agrupe a todos los tri·ngulos que la formen.</font>
+geometr√≠a de la escena agrupada y preparada para empezar a calcular los mapas de luz. Tenemos una serie de grupos de tri√°ngulos que forman superficies planas. A cada grupo le asignaremos un lightmap, que agrupe a todos los tri√°ngulos que la formen.</font>
 
 <center>
 <table border = 0>
@@ -279,19 +280,19 @@ geometrÌa de la escena agrupada y preparada para empezar a calcular los mapas de
 		</td>
 		<td width = 250>
 			<p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En rojo
-            estarÌan los pixels del lightmap aprovechados. En este ejemplo vemos que en algunos casos agrupar no es lo m·s
-            Ûptimo, pero en general si lo es. La mayor parte de las superficies, si hablamos de escenarios 3D, son suelos y paredes, en general rect·ngulos, con lo que
-            aprovecharÌamos el 100 por 100 del
+            estar√≠an los pixels del lightmap aprovechados. En este ejemplo vemos que en algunos casos agrupar no es lo m√°s
+            √≥ptimo, pero en general si lo es. La mayor parte de las superficies, si hablamos de escenarios 3D, son suelos y paredes, en general rect√°ngulos, con lo que
+            aprovechar√≠amos el 100 por 100 del
             lightmap.</font></p>
 		</td>
 	</tr>
 </table>
 </center>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> A continuaciÛn tendremos que asignar una coordenada U y V a cada uno de los vÈrtices de cada
-tri·ngulo del grupo. Las coordenadas U y V se refieren a la posiciÛn X y Y de la imagen de la textura de luz. Es el equivalente de las coordenadas S y T de las texturas normales. Las coordenadas van del (0,0) (coordenada inferior izquierda de la textura) a la (1, 1) (coordenada superior derecha).</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> A continuaci√≥n tendremos que asignar una coordenada U y V a cada uno de los v√©rtices de cada
+tri√°ngulo del grupo. Las coordenadas U y V se refieren a la posici√≥n X y Y de la imagen de la textura de luz. Es el equivalente de las coordenadas S y T de las texturas normales. Las coordenadas van del (0,0) (coordenada inferior izquierda de la textura) a la (1, 1) (coordenada superior derecha).</font></p>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Esto
-serÌa muy f·cil si la superficie fuera perpendicular a cualquiera de los ejes de coordenadas, pero normalmente no se dar· este caso. Ante este caso usaremos la tÈcnica m·s sencilla a tal efecto, llamada <strong>plannar mapping</strong>. Simplemente consiste en  mirar cu·l de las componentes de la normal de la superficie es mayor, la componente X, Y o Z. A continuaciÛn obtendremos las coordenadas U y V a partir de el plano perpendicular a la componente seleccionada. Explicado gr·ficamente:</font></p>
+ser√≠a muy f√°cil si la superficie fuera perpendicular a cualquiera de los ejes de coordenadas, pero normalmente no se dar√° este caso. Ante este caso usaremos la t√©cnica m√°s sencilla a tal efecto, llamada <strong>plannar mapping</strong>. Simplemente consiste en  mirar cu√°l de las componentes de la normal de la superficie es mayor, la componente X, Y o Z. A continuaci√≥n obtendremos las coordenadas U y V a partir de el plano perpendicular a la componente seleccionada. Explicado gr√°ficamente:</font></p>
 
 <center>
 <table border = 0>
@@ -303,7 +304,7 @@ serÌa muy f·cil si la superficie fuera perpendicular a cualquiera de los ejes de
 		</td>
 		<td width = 250>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
-			Coordenada X Predominante. El Plano perpendicular al eje X es el YZ. Obtendremos la informaciÛn de U y V a traves de la Y y la Z.<strong><br>U = Y<br>V = Z</strong>
+			Coordenada X Predominante. El Plano perpendicular al eje X es el YZ. Obtendremos la informaci√≥n de U y V a traves de la Y y la Z.<strong><br>U = Y<br>V = Z</strong>
             </font></p>
 		</td>
 
@@ -337,18 +338,18 @@ serÌa muy f·cil si la superficie fuera perpendicular a cualquiera de los ejes de
 
 </table>
 </center>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En el peor de los casos, la normal ofrecer· un ·ngulo de 45∫ en algunas de sus componentes, y por lo tanto puede que no haya normal predominante. Entonces cogeremos cualquiera de ellas y
-a˙n y asÌ, el resultado ser· bueno visualmente, no nos tendremos que preocupar por eso.</font></p>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Pero a˙n no hemos acabado. Ahora cada coordenada U y V de cada vÈrtice tiene la informaciÛn de las coordenadas al plano perpendicular al
-cual lo hemos aproximado, y nosotros queremos coordenadas del (0,0) al (1,1). Esto se puede calcular r·pidamente:</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En el peor de los casos, la normal ofrecer√° un √°ngulo de 45¬∫ en algunas de sus componentes, y por lo tanto puede que no haya normal predominante. Entonces cogeremos cualquiera de ellas y
+a√∫n y as√≠, el resultado ser√° bueno visualmente, no nos tendremos que preocupar por eso.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Pero a√∫n no hemos acabado. Ahora cada coordenada U y V de cada v√©rtice tiene la informaci√≥n de las coordenadas al plano perpendicular al
+cual lo hemos aproximado, y nosotros queremos coordenadas del (0,0) al (1,1). Esto se puede calcular r√°pidamente:</font></p>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Definiremos Umin, Umax, Vmin y Vmax.
-…stos vendr·n determinados por el plano en el que estemos trabajando, habr· que tener las correspondencias de U y V con los ejes adecuados, tal como acabamos de explicar.</font> </p>
+√âstos vendr√°n determinados por el plano en el que estemos trabajando, habr√° que tener las correspondencias de U y V con los ejes adecuados, tal como acabamos de explicar.</font> </p>
 <center>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img src = "images/g_calcuv05.gif" border = 0 width="267" height="178"></font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img src = "images/g_calcuv04.gif" border = 1 width="146" height="107"></font></p>
 </center>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En este ejemplo podemos ver
-cÛmo Umin y Umax se refieren a las X, mientras que Vmin y Vmax se refieren a las Y (Domina el eje Z). Si dominara el eje X, Umax y Umin se referirian al eje Z, Vmax y Vmin al Y, etc, tal como hemos visto en la tabla anterior.</font></p>
+c√≥mo Umin y Umax se refieren a las X, mientras que Vmin y Vmax se refieren a las Y (Domina el eje Z). Si dominara el eje X, Umax y Umin se referirian al eje Z, Vmax y Vmin al Y, etc, tal como hemos visto en la tabla anterior.</font></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
 
@@ -356,8 +357,8 @@ cÛmo Umin y Umax se refieren a las X, mientras que Vmin y Vmax se refieren a las
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">Calculando Lumels</font></strong></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Un lumel es el nombre que se le da a cada uno de los pÌxels de la textura del LightMap. El siguiente paso a seguir es calcular la posiciÛn exacta en el mundo 3D de cada uno de esos pÌxels. Ahora
-sÛlo tenemos el plano donde est· situada esa textura. Necesitaremos crear una bounding box de toda la superficie. Una bounding box simplemente es una caja que engloba a toda la superficie, en este caso una caja 3D, como vemos en el ejemplo a continuaciÛn.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Un lumel es el nombre que se le da a cada uno de los p√≠xels de la textura del LightMap. El siguiente paso a seguir es calcular la posici√≥n exacta en el mundo 3D de cada uno de esos p√≠xels. Ahora
+s√≥lo tenemos el plano donde est√° situada esa textura. Necesitaremos crear una bounding box de toda la superficie. Una bounding box simplemente es una caja que engloba a toda la superficie, en este caso una caja 3D, como vemos en el ejemplo a continuaci√≥n.</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 
@@ -368,7 +369,7 @@ sÛlo tenemos el plano donde est· situada esa textura. Necesitaremos crear una bo
 </center>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Para ello
-sÛlo hemos de buscar los m·ximos y mÌnimos de la X, Y y Z. Una vez calculada ya estamos en condiciones de calcular la posiciÛn de cada lumel de la futura textura. Primeramente creemos un vector 3D, donde cada una de sus componentes sea la longitud de cada eje de la Bounding Box que hemos creado:</font></p>
+s√≥lo hemos de buscar los m√°ximos y m√≠nimos de la X, Y y Z. Una vez calculada ya estamos en condiciones de calcular la posici√≥n de cada lumel de la futura textura. Primeramente creemos un vector 3D, donde cada una de sus componentes sea la longitud de cada eje de la Bounding Box que hemos creado:</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 
@@ -378,19 +379,19 @@ sÛlo hemos de buscar los m·ximos y mÌnimos de la X, Y y Z. Una vez calculada ya 
 </font>
 </center>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Tendremos entonces el vector (OX, OY, OZ). Ahora tenemos un problema: la posiciÛn del lumel tiene dos componentes, U y V, mientras nosotros tenemos un vector en 3D. La soluciÛn ser· calcular las dos componentes que podamos, y luego usar la
-ecuaciÛn del plano para encontrar la restante. Si nuestro plano tiene la Z dominante, aproximaremos la U y la V con la X y la Y, del siguiente modo:</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Tendremos entonces el vector (OX, OY, OZ). Ahora tenemos un problema: la posici√≥n del lumel tiene dos componentes, U y V, mientras nosotros tenemos un vector en 3D. La soluci√≥n ser√° calcular las dos componentes que podamos, y luego usar la
+ecuaci√≥n del plano para encontrar la restante. Si nuestro plano tiene la Z dominante, aproximaremos la U y la V con la X y la Y, del siguiente modo:</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">X = Xmin + (OX * U)</font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Y = Ymin + (OY * V)</font></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Luego, si la
-ecuaciÛn del plano es</font></p> 
+ecuaci√≥n del plano es</font></p> 
 <center><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Ax + By + Cz + D = 0</font></p><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p></center>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">nos falta la Z, por lo que la
 ecuacion para encontrarla seria</font></p>
 <center><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">z = - (Ax + By + D) / C</font> </p></center>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Y ya tendremos la posiciÛn X, Y, Z de nuestro
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Y ya tendremos la posici√≥n X, Y, Z de nuestro
 lumel.</font></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
@@ -399,8 +400,8 @@ lumel.</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">Iluminando el Lumel</font></strong></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Esta es la parte mas simple del c·lculo de Lightmaps.  En este paso tendremos que ir calculando la luz que recibe cada lumel, y escribir esta informaciÛn en la textura que previamente
-habÌamos creado. Hay muchos sistemas de calcular la iluminaciÛn, la m·s simple es la fÛrmula de
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Esta es la parte mas simple del c√°lculo de Lightmaps.  En este paso tendremos que ir calculando la luz que recibe cada lumel, y escribir esta informaci√≥n en la textura que previamente
+hab√≠amos creado. Hay muchos sistemas de calcular la iluminaci√≥n, la m√°s simple es la f√≥rmula de
 Lambert:</font></p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">&nbsp;</p>
@@ -409,19 +410,19 @@ Lambert:</font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img src = "images/g_ilu01.gif" border = 0 width="213" height="211"></font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img src = "images/g_ilu00.gif" border = 1 width="85" height="38"></font></p>
 </center>
-<p align= "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Donde I es el brillo de la luz, (de 0 a 1), y L es la distancia entre el lumel y la luz. Hay que tener en cuenta que trabajamos en RGB, por tanto habr· que realizar un c·lculo por separado para cada color. Con esta formula tendremos una atenuaciÛn lineal, si queremos una atenuaciÛn cuadr·tica simplemente elevaremos L al cuadrado.</font>
+<p align= "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Donde I es el brillo de la luz, (de 0 a 1), y L es la distancia entre el lumel y la luz. Hay que tener en cuenta que trabajamos en RGB, por tanto habr√° que realizar un c√°lculo por separado para cada color. Con esta formula tendremos una atenuaci√≥n lineal, si queremos una atenuaci√≥n cuadr√°tica simplemente elevaremos L al cuadrado.</font>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> M·s adelante veremos otros sistemas para iluminar, pero de momento usemos
-Èste que es el m·s simple. En el apartado anterior habÌamos calculado la posiciÛn 3D que ocupa nuestro lumel 2D. Usaremos la posiciÛn 3D para las ecuaciones de c·lculo de luz, y la posiciÛn 2D para modificar la textura del Lightmap. Inicialmente esa textura era negra, por lo que tendremos que ir sumando en cada pixel el efecto de todas y cada una de las luces de la escena.</font> </p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> M√°s adelante veremos otros sistemas para iluminar, pero de momento usemos
+√©ste que es el m√°s simple. En el apartado anterior hab√≠amos calculado la posici√≥n 3D que ocupa nuestro lumel 2D. Usaremos la posici√≥n 3D para las ecuaciones de c√°lculo de luz, y la posici√≥n 2D para modificar la textura del Lightmap. Inicialmente esa textura era negra, por lo que tendremos que ir sumando en cada pixel el efecto de todas y cada una de las luces de la escena.</font> </p>
 
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> &nbsp; </p>
 
-<! AÒadiendo sombras ------------------------------------------------------------------ -->
+<! A√±adiendo sombras ------------------------------------------------------------------ -->
 
-<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">AÒadiendo sombras</font></strong></p>
+<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">A√±adiendo sombras</font></strong></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Para aÒadir
-sombras, tendremos que hacer unos cuantos c·lculos extra antes de iluminar el lumel. Seguiremos los siguientes pasos:</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Para a√±adir
+sombras, tendremos que hacer unos cuantos c√°lculos extra antes de iluminar el lumel. Seguiremos los siguientes pasos:</font></p>
 <ul>
 <li> 
   <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"> Trazaremos un rayo (vector) desde la luz al lumel correspondiente.</font>
@@ -435,20 +436,20 @@ sombras, tendremos que hacer unos cuantos c·lculos extra antes de iluminar el lu
 	<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"></p>
 </li>
 <li> <p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Comprobaremos si el vector colisiona con el plano de otra superficie.
-  Colisionar· seguro, a no ser que Èste sea paralelo al plano. Habremos de
-  comprobar tambiÈn si colisiona en la direcciÛn del vector o en el sentido contrario. Si es el
-  ˙ltimo caso ignoraremos la colisiÛn. AquÌ tenÈis las matem·ticas necesarias para encontrar el punto:</font></p>
+  Colisionar√° seguro, a no ser que √©ste sea paralelo al plano. Habremos de
+  comprobar tambi√©n si colisiona en la direcci√≥n del vector o en el sentido contrario. Si es el
+  √∫ltimo caso ignoraremos la colisi√≥n. Aqu√≠ ten√©is las matem√°ticas necesarias para encontrar el punto:</font></p>
 <center>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><img src = "images/g_csomb02.gif" border = 1 width="244" height="109"></font></p>
 </center>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> Donde:</font></p>
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> A, B, C y D Son las componentes de la
-ecuaciÛn del plano Ax + By + Cz + D = 0</font></p>
-<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> P1 es la posiciÛn del Lumel (x, y, z)</font></p>
-<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> P2 es la posiciÛn de la Luz (u, v, w)</font></p>
+ecuaci√≥n del plano Ax + By + Cz + D = 0</font></p>
+<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> P1 es la posici√≥n del Lumel (x, y, z)</font></p>
+<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"> <font face="Verdana" size="1"> P2 es la posici√≥n de la Luz (u, v, w)</font></p>
 </li>
 <li> <p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Una vez obtenido el punto del plano donde
-  intersecta, comprobaremos si este punto est· dentro de alguno de los tri·ngulos que forman la superficie asociada al plano. Para saber si un punto est· dentro de un tri·ngulo habr· que seguir el siguiente proceso:</font></p>
+  intersecta, comprobaremos si este punto est√° dentro de alguno de los tri√°ngulos que forman la superficie asociada al plano. Para saber si un punto est√° dentro de un tri√°ngulo habr√° que seguir el siguiente proceso:</font></p>
 <table border = 0>
 	<tr>
 		<td width = 250>
@@ -460,8 +461,8 @@ ecuaciÛn del plano Ax + By + Cz + D = 0</font></p>
             </center>
 		</td>
 		<td width = 250>
-			<p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">  <font face="Verdana" size="1">  trazaremos 3 vectores, desde el cada uno de los vÈrtices del
-            tri·ngulo hasta el punto P en cuestiÛn. Si la suma de los ·ngulos entre estos vectores es 360 grados, quiere decir que el punto est· dentro del triangulo.</font></p>
+			<p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">  <font face="Verdana" size="1">  trazaremos 3 vectores, desde el cada uno de los v√©rtices del
+            tri√°ngulo hasta el punto P en cuesti√≥n. Si la suma de los √°ngulos entre estos vectores es 360 grados, quiere decir que el punto est√° dentro del triangulo.</font></p>
 		</td>
 
 	</tr>
@@ -476,7 +477,7 @@ ecuaciÛn del plano Ax + By + Cz + D = 0</font></p>
 		</td> 
 		<td width = 250>
             <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">
-			Si la suma de ·ngulos es inferior, quiere decir que est· fuera del triangulo.</font></p>
+			Si la suma de √°ngulos es inferior, quiere decir que est√° fuera del triangulo.</font></p>
 		</td>
 
 	</tr>
@@ -485,7 +486,7 @@ ecuaciÛn del plano Ax + By + Cz + D = 0</font></p>
 
 </li>
 <li> <p align = "justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Si es
-  asÌ, ese rayo colisiona y no tendrÌa que llegar al lumel, por tanto ignoramos este lumel y pasamos al siguiente. Si no colisiona, seguimos
+  as√≠, ese rayo colisiona y no tendr√≠a que llegar al lumel, por tanto ignoramos este lumel y pasamos al siguiente. Si no colisiona, seguimos
   comprobando con otra superficie, hasta colisionar o comprobar toda las superficies.</font></p>
 	<p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"></p>
   <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
@@ -503,10 +504,10 @@ ecuaciÛn del plano Ax + By + Cz + D = 0</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">Antialiasing</font></strong></p>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Y llegamos al
-˙ltimo paso. Ya tenemos todos los lightmaps calculados y listos para mostrar. No obstante, si los visualiz·is ahora, pueden verse un poco bruscos, recordad que su resoluciÛn es baja,
+√∫ltimo paso. Ya tenemos todos los lightmaps calculados y listos para mostrar. No obstante, si los visualiz√°is ahora, pueden verse un poco bruscos, recordad que su resoluci√≥n es baja,
 y generalmente se aplican en superficies grandes. Es recomendable suavizarlos,
-aplic·ndole un antialias. Simplemente consiste en coger cada uno de los pÌxels de la textura del lightmap, y hacer la media con los que le rodean, de tal modo que en lugar de cambios bruscos se
-ver·n gradados, dependiendo del n˙mero de pasadas que hagamos.</font></p>
+aplic√°ndole un antialias. Simplemente consiste en coger cada uno de los p√≠xels de la textura del lightmap, y hacer la media con los que le rodean, de tal modo que en lugar de cambios bruscos se
+ver√°n gradados, dependiendo del n√∫mero de pasadas que hagamos.</font></p>
 <center>
 <table border = 0>
 	<tr>
@@ -517,8 +518,8 @@ ver·n gradados, dependiendo del n˙mero de pasadas que hagamos.</font></p>
 		</td>
 		<td width = 250>
 			<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Este lightmap
-            podrÌa pertenecer, por ejemplo, a la sombra proyectada por una columna en una pared. Como vemos, es un cambio muy brusco, y
-            podrÌa no quedar muy real una vez aplicado.</font></p>
+            podr√≠a pertenecer, por ejemplo, a la sombra proyectada por una columna en una pared. Como vemos, es un cambio muy brusco, y
+            podr√≠a no quedar muy real una vez aplicado.</font></p>
 		</td>
 
 	</tr>
@@ -529,8 +530,8 @@ ver·n gradados, dependiendo del n˙mero de pasadas que hagamos.</font></p>
             </font></p>
 		</td>
 		<td width = 250>
-			<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">AsÌ es como
-            quedarÌa tras una pasada de antialiasing. El resultado es mucho m·s suave.</font></p>
+			<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">As√≠ es como
+            quedar√≠a tras una pasada de antialiasing. El resultado es mucho m√°s suave.</font></p>
 		</td>
 
 	</tr>
@@ -541,8 +542,8 @@ ver·n gradados, dependiendo del n˙mero de pasadas que hagamos.</font></p>
             </font></p>
 		</td>
 		<td width = 250>
-			<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En una segunda pasada quiz· la sombra quede ya demasiado difuminada. Si trabaj·is con una resoluciÛn baja de lightmaps con una pasada ser· suficiente, pero si
-            us·is lightmaps de mayor resoluciÛn, m·s de 64x64, entonces probad con dos pasadas.</font></p>
+			<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">En una segunda pasada quiz√° la sombra quede ya demasiado difuminada. Si trabaj√°is con una resoluci√≥n baja de lightmaps con una pasada ser√° suficiente, pero si
+            us√°is lightmaps de mayor resoluci√≥n, m√°s de 64x64, entonces probad con dos pasadas.</font></p>
 		</td>
 
 	</tr>
@@ -558,21 +559,21 @@ ver·n gradados, dependiendo del n˙mero de pasadas que hagamos.</font></p>
 
 <p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><strong><font face="Verdana" size="1">Optimizaciones</font></strong><p style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0">
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1">Bien, si has llegado hasta
-aquÌ ya sabes todo lo que hay que saber sobre la base de los lightmaps :) No obstante, este mÈtodo es muy b·sico y es extremadamente lento. Para hacerlo viable,
-habrÌa que tener en cuenta una serie de optimizaciones.</font></p>
+aqu√≠ ya sabes todo lo que hay que saber sobre la base de los lightmaps :) No obstante, este m√©todo es muy b√°sico y es extremadamente lento. Para hacerlo viable,
+habr√≠a que tener en cuenta una serie de optimizaciones.</font></p>
 
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>TamaÒo de los lightmaps:</em> Al principio suponÌamos un tamaÒo de los lightmaps de 32x32 pÌxels. No obstante no es necesario que todos tengan el mismo tamaÒo, un objeto muy pequeÒo no tiene por
-quÈ tener tanta resoluciÛn, con un lightmap de 4x4 le sobrarÌa. AsÌ pues, antes de empezar a calcular nada, no est· de mas decidir el tamaÒo de los lightmaps de cada superficie en funciÛn de su tamaÒo. Se puede hacer en funciÛn de un tamaÒo predefinido, o en relaciÛn con los dem·s objetos.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Tama√±o de los lightmaps:</em> Al principio supon√≠amos un tama√±o de los lightmaps de 32x32 p√≠xels. No obstante no es necesario que todos tengan el mismo tama√±o, un objeto muy peque√±o no tiene por
+qu√© tener tanta resoluci√≥n, con un lightmap de 4x4 le sobrar√≠a. As√≠ pues, antes de empezar a calcular nada, no est√° de mas decidir el tama√±o de los lightmaps de cada superficie en funci√≥n de su tama√±o. Se puede hacer en funci√≥n de un tama√±o predefinido, o en relaci√≥n con los dem√°s objetos.</font></p>
 <p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Alcance de las luces:</em> Al calcular las sombras, no es necesario
-comprobar las superficies que, debido a la atenuaciÛn de la luz, no le afectan. Esto es MUY necesario implementarlo. Una opciÛn r·pida de implementar
-serÌa crear una bounding box de cada luz y, aprovechando las bounding boxes de las
-superficies ya creadas, mirar si Èstas colisionan o est·n una dentro de otra. AsÌ crear una lista de caras con las que trabajar, una lista por cada luz.</font></p>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Uso de estructuras avanzadas:</em> Al calcular las sombras, para calcular la intersecciÛn de los rayos con planos, o incluso directamente con las superficies, es recomendable usar algo m·s avanzado que una simple lista. Por ejemplo, un ·rbol BSP. Pero eso ya es otra historia...</font></p>
-<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Exteriores:</em> Normalmente los exteriores est·n formados por
-superficies 'suaves', es decir, con una gran cantidad de tri·ngulos, todos dispuestos en ·ngulos diferentes, pero prÛximos, para crear sensaciÛn suavidad. Por lo tanto, cada una de esas
-superficies estar· formada por un solo tri·ngulo, por lo que si un exterior tiene un numero X de
-superficies, tendr· un numero X de tri·ngulos, y por tanto un numero X de lightmaps. Como ya hemos dicho anteriormente, aplicar un lightmap a un solo tri·ngulo es malgastar mucha RAM, y como normalmente en los exteriores no habr· sombras, por lo que es recomendable aplicar iluminaciÛn por vÈrtice en los exteriores. Un ejemplo de ello
-serÌan los exteriores del Quake III: Team Arena.</font></p>
+comprobar las superficies que, debido a la atenuaci√≥n de la luz, no le afectan. Esto es MUY necesario implementarlo. Una opci√≥n r√°pida de implementar
+ser√≠a crear una bounding box de cada luz y, aprovechando las bounding boxes de las
+superficies ya creadas, mirar si √©stas colisionan o est√°n una dentro de otra. As√≠ crear una lista de caras con las que trabajar, una lista por cada luz.</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Uso de estructuras avanzadas:</em> Al calcular las sombras, para calcular la intersecci√≥n de los rayos con planos, o incluso directamente con las superficies, es recomendable usar algo m√°s avanzado que una simple lista. Por ejemplo, un √°rbol BSP. Pero eso ya es otra historia...</font></p>
+<p align="justify" style="word-spacing: 0; line-height: 100%; margin-top: 0; margin-bottom: 0"><font face="Verdana" size="1"><em>Exteriores:</em> Normalmente los exteriores est√°n formados por
+superficies 'suaves', es decir, con una gran cantidad de tri√°ngulos, todos dispuestos en √°ngulos diferentes, pero pr√≥ximos, para crear sensaci√≥n suavidad. Por lo tanto, cada una de esas
+superficies estar√° formada por un solo tri√°ngulo, por lo que si un exterior tiene un numero X de
+superficies, tendr√° un numero X de tri√°ngulos, y por tanto un numero X de lightmaps. Como ya hemos dicho anteriormente, aplicar un lightmap a un solo tri√°ngulo es malgastar mucha RAM, y como normalmente en los exteriores no habr√° sombras, por lo que es recomendable aplicar iluminaci√≥n por v√©rtice en los exteriores. Un ejemplo de ello
+ser√≠an los exteriores del Quake III: Team Arena.</font></p>
 
 </td>
 </tr>

@@ -24,7 +24,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÛn Orientada a Objetos en C++</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programaci√≥n Orientada a Objetos en C++</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -35,12 +35,12 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÌculo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÌguez.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rt√≠culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodr√≠guez.</A>
 </b></FONT>
 <br><br>
 <H3>
-Cap&iacute;tulo 8.<br>Variables y funciones de miembro est·ticas. 
+Cap&iacute;tulo 8.<br>Variables y funciones de miembro est√°ticas. 
 </H3>
 
 <p align=justify>
@@ -57,7 +57,7 @@ En este cap&iacute;tulo abordaremos el estudio de las variables y funciones de m
 <P ALIGN="JUSTIFY">En la programaci&oacute;n en C tradicional, seguro que alguna vez hab&eacute;is tenido que utilizar variables globales para poder saber en cualquier momento o en cualquier funci&oacute;n, la situaci&oacute;n del programa. Pues bien, en el C++ las variables de miembro est&aacute;ticas suponen una alternativa seria y eficaz al uso de las variables globales. Cuando declaramos una variable de miembro est&aacute;tica en una clase, todos los objetos que sean instancia de esa clase, usar&aacute;n la misma variable de  miembro est&aacute;tica. </P>
 <P ALIGN="JUSTIFY">Por tanto, una variable de miembro est&aacute;tica declarada en una clase, utilizar&aacute; siempre una misma posici&oacute;n de memoria independientemente del n&uacute;mero de instancias que creemos a esa clase, es decir, si la clase que contiene la variable de miembro est&aacute;tica tiene cien instancias, los cambios que efectuemos en la variable de miembro est&aacute;tica desde la instancia n&uacute;mero 45, har&aacute; que el resto de instancias tambi&eacute;n contengan ese valor.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Uno de los usos m&aacute;s comunes de las variables de miembro est&aacute;ticas son los derivados de contabilizar el n&uacute;mero de instancias que tiene una clase. Si declaramos una variable de miembro est&aacute;tica en una clase con el nombre <I>m_numInstancias </I>y desde el constructor hacemos <I>m_numinstancias++;</I> y desde el destructor hacemos <I>m_numInstnacias--;</I> nos ser&aacute; posible conocer el n&uacute;mero de instancias existentes desde cualquier objeto creado. Este es un buen ejemplo de comprender todo lo que se ha dicho anteriormente y lo mostrarÈ al final de la secciÛn correspondiente a variables est·ticas.</P>
+<P ALIGN="JUSTIFY">Uno de los usos m&aacute;s comunes de las variables de miembro est&aacute;ticas son los derivados de contabilizar el n&uacute;mero de instancias que tiene una clase. Si declaramos una variable de miembro est&aacute;tica en una clase con el nombre <I>m_numInstancias </I>y desde el constructor hacemos <I>m_numinstancias++;</I> y desde el destructor hacemos <I>m_numInstnacias--;</I> nos ser&aacute; posible conocer el n&uacute;mero de instancias existentes desde cualquier objeto creado. Este es un buen ejemplo de comprender todo lo que se ha dicho anteriormente y lo mostrar√© al final de la secci√≥n correspondiente a variables est√°ticas.</P>
 <P ALIGN="JUSTIFY"></P>
 <H4>C&oacute;mo crear una variable de miembro est&aacute;tica</H4>
 
@@ -72,7 +72,7 @@ En este cap&iacute;tulo abordaremos el estudio de las variables y funciones de m
 <FONT FACE="Arial" SIZE=2 COLOR="#000000">
 <P ALIGN="JUSTIFY">Con esta simple declaraci&oacute;n hemos creado una variable de miembro est&aacute;tica. A partir de este momento, <I>m_staticValor</I> s&oacute;lo ocupar&aacute; una posici&oacute;n de memoria. Independientemente del n&uacute;mero de instancias que se creen de la clase que la define. S&oacute;lo existir&aacute; una posici&oacute;n de memoria de tal forma que realizar un cambio en el valor de m_staticValor se ver&aacute; reflejado en todas las instancias de la clase que defina a m_staticValor. En este sentido, podemos observar que una variable de tipo est&aacute;tico tiene las mismas prestaciones que una variable de tipo global.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">A la hora de acceder a una variable de miembro est&aacute;tica, primero debemos de tener en cuenta c&oacute;mo se ha declarado la variable, es decir, si es p&uacute;blica, protegida o privada. Una variable de miembro est&aacute;tica pues, se puede acceder perfectamente desde dentro de las funciones de la clase que la definen. Tambi&eacute;n se puede acceder utilizando el operador <B>"."</B> o <B>"-&gt;"</B> en caso de que la instancia que se haya creado sea un puntero. AsÌe, si la clase con el nombre CEjemplo contiene una definici&oacute;n de la variable est&aacute;tica m_staticValor, podr&iacute;amos hacer (siempre y cuando, la variable m_staticValor fuera p&uacute;blica, claro), lo siguiente:</P>
+<P ALIGN="JUSTIFY">A la hora de acceder a una variable de miembro est&aacute;tica, primero debemos de tener en cuenta c&oacute;mo se ha declarado la variable, es decir, si es p&uacute;blica, protegida o privada. Una variable de miembro est&aacute;tica pues, se puede acceder perfectamente desde dentro de las funciones de la clase que la definen. Tambi&eacute;n se puede acceder utilizando el operador <B>"."</B> o <B>"-&gt;"</B> en caso de que la instancia que se haya creado sea un puntero. As√≠e, si la clase con el nombre CEjemplo contiene una definici&oacute;n de la variable est&aacute;tica m_staticValor, podr&iacute;amos hacer (siempre y cuando, la variable m_staticValor fuera p&uacute;blica, claro), lo siguiente:</P>
 <P ALIGN="JUSTIFY"></P>
 </FONT>
 <PRE><FONT FACE="Arial" SIZE=1 COLOR="#000000">

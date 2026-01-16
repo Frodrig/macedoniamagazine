@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rtÌculos Varios</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>rt√≠culos Varios</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,34 +33,34 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <b><FONT color="#cc0000" size=2 face="arial">
-A</font><FONT color="#000000" size=2 face="arial">rtÌculo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÌguez "Kapit".</A>
+A</font><FONT color="#000000" size=2 face="arial">rt√≠culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodr√≠guez "Kapit".</A>
 </b></FONT>
 <br><br>
 
 
 <FONT color="#000000" size=2 face="arial"><br><br><br>
 <P ALIGN=JUSTIFY>
-Si no has leido el artÌculo sobre <A HREF="interrup.htm">interrupciones</a> que, public·bamos, en nuestra
-primera actualizaciÛn, te recomiendo que lo leas para que no estÈs muy perdido.
+Si no has leido el art√≠culo sobre <A HREF="interrup.htm">interrupciones</a> que, public√°bamos, en nuestra
+primera actualizaci√≥n, te recomiendo que lo leas para que no est√©s muy perdido.
 <br><br>
-Para la programaciÛn del ratÛn utilizaremos las interrupciones ya que nos ofrecen un acceso directo a las rutinas implementadas en la tabla de vectores de interrupciÛn al igual que una mayor facilidad a la hora de trabajar.
-<br><br>La programaciÛn, en un principio, se va a realizar mediante el BorlandC/C++, para ello, deberemos de conocer las estructuras y funciones que dicho compilador nos ofrece para trabajar con las ya citadas interrupciones.
-<br><br>Antes de pasar a describirlas, recordaremos que los registros utilizados en los microprocesadores Intel ix86 son AX, BX, CX, DX como registros de propÛsito general y despuÈs tendremos otros como ES, DS, CS, SS, etc que servir·n para apuntar a determinadas zonas del cÛdigo del programa (de datos, pila, cÛdigo, etc). A su vez, cada registro, se divide (en los procesadores de 16 bits) en dos partes: la zona H (parte alta de palabra) y la zona L (parte baja de palabra), esto es, como cada registro lo vamos a tratar como una palabra de 16 bits (ya que no nos interesa hacer programas sÛlo para procesadores de 32 bits), cada uno de ellos podr· dividirse en una zona alta, en la que estarÌan los 8 primeros bits (1 byte) y en una zona baja, donde estarÌan los 8 bits de menor peso (tambiÈn 1 byte). De esta forma, podremos hablar en el caso de los registros de propÛsito general, de AH, AL, BH, BL, CH, CL, DH y DL.
+Para la programaci√≥n del rat√≥n utilizaremos las interrupciones ya que nos ofrecen un acceso directo a las rutinas implementadas en la tabla de vectores de interrupci√≥n al igual que una mayor facilidad a la hora de trabajar.
+<br><br>La programaci√≥n, en un principio, se va a realizar mediante el BorlandC/C++, para ello, deberemos de conocer las estructuras y funciones que dicho compilador nos ofrece para trabajar con las ya citadas interrupciones.
+<br><br>Antes de pasar a describirlas, recordaremos que los registros utilizados en los microprocesadores Intel ix86 son AX, BX, CX, DX como registros de prop√≥sito general y despu√©s tendremos otros como ES, DS, CS, SS, etc que servir√°n para apuntar a determinadas zonas del c√≥digo del programa (de datos, pila, c√≥digo, etc). A su vez, cada registro, se divide (en los procesadores de 16 bits) en dos partes: la zona H (parte alta de palabra) y la zona L (parte baja de palabra), esto es, como cada registro lo vamos a tratar como una palabra de 16 bits (ya que no nos interesa hacer programas s√≥lo para procesadores de 32 bits), cada uno de ellos podr√° dividirse en una zona alta, en la que estar√≠an los 8 primeros bits (1 byte) y en una zona baja, donde estar√≠an los 8 bits de menor peso (tambi√©n 1 byte). De esta forma, podremos hablar en el caso de los registros de prop√≥sito general, de AH, AL, BH, BL, CH, CL, DH y DL.
 <br><br>
-<h4>CÛmo invocar a las interrupciones</h4>
+<h4>C√≥mo invocar a las interrupciones</h4>
 <P align="justify">
 Para poder acceder a los distintos registros en el Borland C, deberemos de utilizar dos funciones, estas son: 
 <br>
 <OL>
-<LI><P align=justify><b>int86   (n˙mero de interrupciÛn, registros de entrada, registros de salida);</b></LI>
-<LI><P align=justify><b>int86x (n˙mero de interrupciÛn, registros de entrada, registros de salida, sregistros);</b></LI>
+<LI><P align=justify><b>int86   (n√∫mero de interrupci√≥n, registros de entrada, registros de salida);</b></LI>
+<LI><P align=justify><b>int86x (n√∫mero de interrupci√≥n, registros de entrada, registros de salida, sregistros);</b></LI>
 </OL>
 <br>
 <P align=justify>
-La  ˙nica diferencia, entre las dos funciones, radica en que la funciÛn int86, no permite acceder a todos los registros, esto es, los registros extra sÛlo pueden ser accedidos desde la funciÛn int86x que, son precisamente los indicados en el par·metro sregistros. Salvo ese par·metro, todo lo dem·s es igual para ambas ya que, en el primer par·metro se les pasa el n˙mero de interrupciÛn que queremos producir, en el segundo par·metro la estructura en donde metemos los valores de los registros que son necesarios para la interrupciÛn, y que act˙an de argumentos o par·metros de la misma. Por ˙ltimo, en el tercer par·metro, lo que hacemos es pasar la estructura en la que deseamos que la funciÛn nos guarde los resultados de la llamada a la interrupciÛn.
+La  √∫nica diferencia, entre las dos funciones, radica en que la funci√≥n int86, no permite acceder a todos los registros, esto es, los registros extra s√≥lo pueden ser accedidos desde la funci√≥n int86x que, son precisamente los indicados en el par√°metro sregistros. Salvo ese par√°metro, todo lo dem√°s es igual para ambas ya que, en el primer par√°metro se les pasa el n√∫mero de interrupci√≥n que queremos producir, en el segundo par√°metro la estructura en donde metemos los valores de los registros que son necesarios para la interrupci√≥n, y que act√∫an de argumentos o par√°metros de la misma. Por √∫ltimo, en el tercer par√°metro, lo que hacemos es pasar la estructura en la que deseamos que la funci√≥n nos guarde los resultados de la llamada a la interrupci√≥n.
 <br><br>
-Para poder ver m·s claro las estructuras que vamos a utilizar, es decir, las estructuras de tipo registro de los par·metros 2 y 3, se van a poner a continuaciÛn, la definiciÛn que hace el BorlandC/C++ en el archivo de cabecera dos.h, el cual, lÛgicamente, ser· necesario incluir en nuestros programas para poder utilizar las estructuras y funciones de acceso a interrupciones int86 e int86x.
+Para poder ver m√°s claro las estructuras que vamos a utilizar, es decir, las estructuras de tipo registro de los par√°metros 2 y 3, se van a poner a continuaci√≥n, la definici√≥n que hace el BorlandC/C++ en el archivo de cabecera dos.h, el cual, l√≥gicamente, ser√° necesario incluir en nuestros programas para poder utilizar las estructuras y funciones de acceso a interrupciones int86 e int86x.
 <br>
 <center>
 <table >
@@ -68,7 +68,7 @@ Para poder ver m·s claro las estructuras que vamos a utilizar, es decir, las est
 <pre>
 <b>
 <FONT color="#000000" size=1 face="Arial">        
-/* Estructuras incluidas en el archivo dos.h<br> y que definen el tipo de los <br>par·metros 2 y 3 de las funciones int86 e int86x */
+/* Estructuras incluidas en el archivo dos.h<br> y que definen el tipo de los <br>par√°metros 2 y 3 de las funciones int86 e int86x */
 
 /* en total 16 bytes por variable */
 struct WORDREGS
@@ -82,7 +82,7 @@ struct BYTEREGS
 unsigned char al, ah, bl, bh, cl, ch, dl, dh;
 };
 
-/* Mediante esta union, sÛlo utilizaremos un espacio de 16 bits (2  bytes) */
+/* Mediante esta union, s√≥lo utilizaremos un espacio de 16 bits (2  bytes) */
 union REGS
 {
 struct WORDREGS x;  /* accederemos con registro.x.ax por ejemplo */
@@ -95,7 +95,7 @@ struct BYTEREGS h;  /* accederemos con registro.h.ah por ejemplo */
 </center>
 <P align=justify>
 
-Cabe seÒalar que algunos registros no existen en estas estructuras, para poder utilizarlos siempre podremos acudir a la creaciÛn de variables de la siguiente estructura (tambiÈn incluida en el archivo de cabecera dos.h).
+Cabe se√±alar que algunos registros no existen en estas estructuras, para poder utilizarlos siempre podremos acudir a la creaci√≥n de variables de la siguiente estructura (tambi√©n incluida en el archivo de cabecera dos.h).
 
 <br>
 <center>
@@ -115,66 +115,66 @@ struct REGS
 </table>
 </center>
 <P align=justify>
-<h4>Generalidades de la programaciÛn con ratÛn</h4>
+<h4>Generalidades de la programaci√≥n con rat√≥n</h4>
 <P align=justify>
-Antes de pasar a explicar la programaciÛn del ratÛn, hay que tener en cuenta una serie de generalidades sobre lo que se debe de saber a la hora de programar el ratÛn:
+Antes de pasar a explicar la programaci√≥n del rat√≥n, hay que tener en cuenta una serie de generalidades sobre lo que se debe de saber a la hora de programar el rat√≥n:
 <br><br>
 <ol>
 <li>
 <P align=justify>
-El ratÛn mide sus coordenadas siempre en pÌxels internamente, de tal forma que siempre que llamemos al servicio que nos ofrece la informaciÛn sobre las coordenadas del ratÛn, este nos devolver· la informaciÛn en pixeles, independientemente de si estamos en modo gr·fico o en modo texto. La conclusiÛn m·s clara es que deberemos de utilizar una fÛrmula que nos permita pasar, por un lado de coordenadas reales a coordenadas que utiliza el ratÛn y por otro lado de coordenadas devueltas por el ratÛn a coordenadas reales que podamos utilizar en la pantalla aunque estemos en modo texto. De esta forma, los datos que queramos pasarlos a coordenadas de pantalla, deberemos de obtenerlos mediante la divisiÛn de las coordenadas devueltas por el ratÛn entre las dimensiones reales de un pixel de pantalla y en caso contrario, de pantalla a sistema de ratÛn, deberemos de multiplicar. AsÌ, para pasar (64,32) del ratÛn a una pantalla con dimensiones de car·cter de 8x8 (modo texto) deberÌamos de dividir, qued·ndonos (8,4).
+El rat√≥n mide sus coordenadas siempre en p√≠xels internamente, de tal forma que siempre que llamemos al servicio que nos ofrece la informaci√≥n sobre las coordenadas del rat√≥n, este nos devolver√° la informaci√≥n en pixeles, independientemente de si estamos en modo gr√°fico o en modo texto. La conclusi√≥n m√°s clara es que deberemos de utilizar una f√≥rmula que nos permita pasar, por un lado de coordenadas reales a coordenadas que utiliza el rat√≥n y por otro lado de coordenadas devueltas por el rat√≥n a coordenadas reales que podamos utilizar en la pantalla aunque estemos en modo texto. De esta forma, los datos que queramos pasarlos a coordenadas de pantalla, deberemos de obtenerlos mediante la divisi√≥n de las coordenadas devueltas por el rat√≥n entre las dimensiones reales de un pixel de pantalla y en caso contrario, de pantalla a sistema de rat√≥n, deberemos de multiplicar. As√≠, para pasar (64,32) del rat√≥n a una pantalla con dimensiones de car√°cter de 8x8 (modo texto) deber√≠amos de dividir, qued√°ndonos (8,4).
 </li>
 <li>
 <P align=justify>
-Un aspecto importantÌsimo es el referente a la comprobaciÛn de la existencia del controlador de ratÛn del fabricante ya que, en caso contrario, no dispondremos de las rutinas que se encarguen de tratar las interrupciones que invoquemos.
+Un aspecto important√≠simo es el referente a la comprobaci√≥n de la existencia del controlador de rat√≥n del fabricante ya que, en caso contrario, no dispondremos de las rutinas que se encarguen de tratar las interrupciones que invoquemos.
 </li>
 <li>
 <P align=justify>
-El acceso directo al vÌdeo junto al uso del ratÛn, puede producir resultados no deseados, sobre todo si nos encontramos dibujando con el ratÛn o actualizando la pantalla. Para que tal no ocurra, siempre habr· que ocultar el ratÛn, restaurar o dibujar pantalla y volver a enseÒar el ratÛn. Esto es asÌ porque el ratÛn se redibuja y de no ocultarlo impedirÌa que la porciÛn en la que el se encuentra, se dibujase correctamente (el cursor del ratÛn la taparÌa).
+El acceso directo al v√≠deo junto al uso del rat√≥n, puede producir resultados no deseados, sobre todo si nos encontramos dibujando con el rat√≥n o actualizando la pantalla. Para que tal no ocurra, siempre habr√° que ocultar el rat√≥n, restaurar o dibujar pantalla y volver a ense√±ar el rat√≥n. Esto es as√≠ porque el rat√≥n se redibuja y de no ocultarlo impedir√≠a que la porci√≥n en la que el se encuentra, se dibujase correctamente (el cursor del rat√≥n la tapar√≠a).
 </li>
 <li>
 <P align=justify>
-En el caso de hacer programas residentes que hagan uso del ratÛn en medio de la utilizaciÛn de nuestra aplicaciÛn, que tambiÈn utiliza ratÛn, habr· que ser cautelosos y guardar las coordenadas del ratÛn y  pantalla de la aplicaciÛn en la que estabamos trabajando para que, de esta manera, al acabar el uso de la aplicaciÛn residente, volvamos a tener todo como estaba antes de invocar al programa residente.
+En el caso de hacer programas residentes que hagan uso del rat√≥n en medio de la utilizaci√≥n de nuestra aplicaci√≥n, que tambi√©n utiliza rat√≥n, habr√° que ser cautelosos y guardar las coordenadas del rat√≥n y  pantalla de la aplicaci√≥n en la que estabamos trabajando para que, de esta manera, al acabar el uso de la aplicaci√≥n residente, volvamos a tener todo como estaba antes de invocar al programa residente.
 </li>
 </ol>
 
-<h4>°A por los servicios!</h4>
+<h4>¬°A por los servicios!</h4>
 <p align=justify>
-Para la programaciÛn del ratÛn utilizaremos los servicios que nos ofrece la interrupciÛn 0X33 (33h). Realizando una breve explicaciÛn, podremos decir que lo que hacemos es invocar a la interrupciÛn 33h e indicar, mediante el registro AX, que funciÛn o servicio queremos utilizar, de esta forma, el procesador sabr· acudir a la tabla de interrupciones y una vez allÌ acceder a la funciÛn que le hemos indicado. El resto de registros los utilizaremos, distintos a AX, para pasar par·metros a la funciÛn elegida y/o para recoger la posible informaciÛn que se nos envÌe una vez hecha la llamada a la interrupciÛn.
+Para la programaci√≥n del rat√≥n utilizaremos los servicios que nos ofrece la interrupci√≥n 0X33 (33h). Realizando una breve explicaci√≥n, podremos decir que lo que hacemos es invocar a la interrupci√≥n 33h e indicar, mediante el registro AX, que funci√≥n o servicio queremos utilizar, de esta forma, el procesador sabr√° acudir a la tabla de interrupciones y una vez all√≠ acceder a la funci√≥n que le hemos indicado. El resto de registros los utilizaremos, distintos a AX, para pasar par√°metros a la funci√≥n elegida y/o para recoger la posible informaci√≥n que se nos env√≠e una vez hecha la llamada a la interrupci√≥n.
 <br><br>
-No veremos todos los servicios que posee el ratÛn, pero os aseguro, que vamos a ver muchos, los
+No veremos todos los servicios que posee el rat√≥n, pero os aseguro, que vamos a ver muchos, los
 que realmente nos van a hacer falta e incluso, algunos, que nunca usaremos.
 <br><br>
-A continuaciÛn, la descripciÛn de los servicios.
+A continuaci√≥n, la descripci√≥n de los servicios.
 <br><br>
 <h4>Servicio 0.</h4> 
 <p align=justify>
-Sirve para saber si est· instalado o no el controlador de ratÛn y adem·s resetear todas las variables de estado del ratÛn. Para poder indicar que queremos utilizar el servicio / funciÛn 0 de la interrupciÛn 33h, hemos de colocar en AX el valor 0x00.
-Los valores devueltos ser·n:
+Sirve para saber si est√° instalado o no el controlador de rat√≥n y adem√°s resetear todas las variables de estado del rat√≥n. Para poder indicar que queremos utilizar el servicio / funci√≥n 0 de la interrupci√≥n 33h, hemos de colocar en AX el valor 0x00.
+Los valores devueltos ser√°n:
 <br>
 <OL>
-<LI><P align=justify>Si AX = 0000 el controlador no est· instalado</LI>
-<LI><P align=justify>Si AX = FFFF el controlador est· instalado.</LI>
-<LI><P align=justify>BX = n˙mero de botones del ratÛn.</LI>
+<LI><P align=justify>Si AX = 0000 el controlador no est√° instalado</LI>
+<LI><P align=justify>Si AX = FFFF el controlador est√° instalado.</LI>
+<LI><P align=justify>BX = n√∫mero de botones del rat√≥n.</LI>
 </OL>
 <br>
 <P align=justify>
 
-Este servicio tambiÈn realiza otra serie de cosas cuando es invocado:
+Este servicio tambi√©n realiza otra serie de cosas cuando es invocado:
 <br>
 <uL>
-<LI><P align=justify>Mueve el cursor del ratÛn al centro de la pantalla.</LI>
+<LI><P align=justify>Mueve el cursor del rat√≥n al centro de la pantalla.</LI>
 <LI><P align=justify>Lo oculta.</LI>
-<LI><P align=justify>Establece la p·gina 0 de vÌdeo como p·gina activa. Esto es asÌ, porque existen 4 p·ginas distintas (desde la 0 a la 3), y en cada momento, sÛlo es visible una de esas p·ginas. Como cada p·gina se trata de forma independiente, se ha de indicar, sobre cual de ellas se va a trabajar.</LI>
-<LI><P align=justify>Se establece el ·rea de exclusiÛn a toda la pantalla. Podemos entender el ·rea de exclusiÛn como una zona de pantalla en la que el puntero del ratÛn se puede mover, pero no se puede ver (no es visible). </LI>
-<LI><P align=justify>El rango del puntero va a ser la totalidad de la pantalla, de esta forma, podremos mover el puntero del ratÛn por la totalidad de la pantalla.</LI>
-<LI><P align=justify>La velocidad horizontal ser· de 8 a 8 y la vertical de 8 a 16. Esto viene a indicar la distancia a la que tengo que mover el ratÛn para que el puntero se desplace una unidad. El desplazamiento se mide en mickeys y por cada 8 mickeys, el ratÛn se desplaza 1 pixel. La relaciÛn es de 1/200 pulgadas // 0,005 pulgadas.</LI>
-<LI><P align=justify>La doble velocidad ser· establecido a 64 mickeys / seg. Esto es asÌ, porque existe un lÌmite en el desplazamiento del ratÛn que viene determinado por la velocidad, de tal forma que si la velocidad en la que movemos el ratÛn supera el lÌmite, pasaremos a doble velocidad y el desplazamiento ser· al doble en pantalla.</LI>
+<LI><P align=justify>Establece la p√°gina 0 de v√≠deo como p√°gina activa. Esto es as√≠, porque existen 4 p√°ginas distintas (desde la 0 a la 3), y en cada momento, s√≥lo es visible una de esas p√°ginas. Como cada p√°gina se trata de forma independiente, se ha de indicar, sobre cual de ellas se va a trabajar.</LI>
+<LI><P align=justify>Se establece el √°rea de exclusi√≥n a toda la pantalla. Podemos entender el √°rea de exclusi√≥n como una zona de pantalla en la que el puntero del rat√≥n se puede mover, pero no se puede ver (no es visible). </LI>
+<LI><P align=justify>El rango del puntero va a ser la totalidad de la pantalla, de esta forma, podremos mover el puntero del rat√≥n por la totalidad de la pantalla.</LI>
+<LI><P align=justify>La velocidad horizontal ser√° de 8 a 8 y la vertical de 8 a 16. Esto viene a indicar la distancia a la que tengo que mover el rat√≥n para que el puntero se desplace una unidad. El desplazamiento se mide en mickeys y por cada 8 mickeys, el rat√≥n se desplaza 1 pixel. La relaci√≥n es de 1/200 pulgadas // 0,005 pulgadas.</LI>
+<LI><P align=justify>La doble velocidad ser√° establecido a 64 mickeys / seg. Esto es as√≠, porque existe un l√≠mite en el desplazamiento del rat√≥n que viene determinado por la velocidad, de tal forma que si la velocidad en la que movemos el rat√≥n supera el l√≠mite, pasaremos a doble velocidad y el desplazamiento ser√° al doble en pantalla.</LI>
 <LI><P align=justify></LI>
 </uL>
 <br>
 <P align=justify>
-Antes de proseguir y, para asentar conceptos, un breve ejemplo de lo que serÌa una codificaciÛn para la invocaciÛn de una interrupciÛn, del servicio 0 por ejemplo:
+Antes de proseguir y, para asentar conceptos, un breve ejemplo de lo que ser√≠a una codificaci√≥n para la invocaci√≥n de una interrupci√≥n, del servicio 0 por ejemplo:
 <br>
 <center>
 <table >
@@ -203,46 +203,46 @@ union REGS regs;
 
 <h4>Servicio 1.</h4>
 <p align=justify>
-Sirve para mostrar el puntero del ratÛn. <br>TambiÈn seÒalar que realiza un reseteo del ·rea de exclusiÛn. 
+Sirve para mostrar el puntero del rat√≥n. <br>Tambi√©n se√±alar que realiza un reseteo del √°rea de exclusi√≥n. 
 <br>Debemos de poner AX = 0x01.
 <br><br>
 <h4>Servicio 2.</h4>
 <p align=justify>
 
-Mediante este servicio ocultaremos el ratÛn. AX = 0x02.
+Mediante este servicio ocultaremos el rat√≥n. AX = 0x02.
 <br><br>
 <h4>Servicio 3.</h4>
 <p align=justify>
-Sirve para preguntar por la posiciÛn y los botones del ratÛn, pero en un momento determinado (si se ha pulsado o cambiado la posiciÛn del ratÛn, justo al hacer esta llamada). El ˙nico valor a pasar es el de la identificaciÛn de la funciÛn, AX =  0x03. Los valores devueltos ser·n:
+Sirve para preguntar por la posici√≥n y los botones del rat√≥n, pero en un momento determinado (si se ha pulsado o cambiado la posici√≥n del rat√≥n, justo al hacer esta llamada). El √∫nico valor a pasar es el de la identificaci√≥n de la funci√≥n, AX =  0x03. Los valores devueltos ser√°n:
 <br>
 <OL>
-<LI><P align=justify>El registro BX se nos indicar· los botones pulsados, de esta manera si el registro BX est·:
+<LI><P align=justify>El registro BX se nos indicar√° los botones pulsados, de esta manera si el registro BX est√°:
 <br>
 <ol type="A">
-<LI><P align=justify>Con el bit 0 encendido, si el botÛn Izq. ha sido pulsado. <br><b>if (BX & 1) == 1</b>.</LI>
-<LI><P align=justify>Con el bit 1 encendido, si el botÛn Dcho. ha sido pulsado.<br><b> if (BX & 2) == 2</b>.</LI>
-<LI><P align=justify>Con el bit 2 encendido, si el botÛn del Centro ha sido pulsado.<br><b> if (BX & 4) == 4</b>.</LI>
+<LI><P align=justify>Con el bit 0 encendido, si el bot√≥n Izq. ha sido pulsado. <br><b>if (BX & 1) == 1</b>.</LI>
+<LI><P align=justify>Con el bit 1 encendido, si el bot√≥n Dcho. ha sido pulsado.<br><b> if (BX & 2) == 2</b>.</LI>
+<LI><P align=justify>Con el bit 2 encendido, si el bot√≥n del Centro ha sido pulsado.<br><b> if (BX & 4) == 4</b>.</LI>
 </ol>
 
 </LI>
-<LI><P align=justify>El registro CX indicar· la coordenada X.</LI>
-<LI><P align=justify>El registro DX indicar· la coordenada Y.</LI>
+<LI><P align=justify>El registro CX indicar√° la coordenada X.</LI>
+<LI><P align=justify>El registro DX indicar√° la coordenada Y.</LI>
 </OL>
 <br>
 <P align=justify>
 
-Como apunte final, indicar que este mÈtodo para conocer el estado del botÛn se basa en el "polling" o pregunta constante, ya que deberemos de estar chequeando contÌnuamente con llamadas a esta funciÛn, perdiendo un tiempo considerable en algunas ocasiones.
+Como apunte final, indicar que este m√©todo para conocer el estado del bot√≥n se basa en el "polling" o pregunta constante, ya que deberemos de estar chequeando cont√≠nuamente con llamadas a esta funci√≥n, perdiendo un tiempo considerable en algunas ocasiones.
 <br><br>
 <h4>Servicio 4.</h4>
 <p align=justify>
-Pone el puntero del ratÛn en una posiciÛn de la pantalla. Adem·s de indicar la funciÛn, deberemos de pasar lo siguiente:
+Pone el puntero del rat√≥n en una posici√≥n de la pantalla. Adem√°s de indicar la funci√≥n, deberemos de pasar lo siguiente:
 <br>
 <OL>
-<LI><P align=justify>AX = 0x04. Indicamos la funciÛn o servicio.</LI>
-<LI><P align=justify>CX = PosiciÛn X.</LI>
-<LI><P align=justify>DX = PosiciÛn Y.</LI>
+<LI><P align=justify>AX = 0x04. Indicamos la funci√≥n o servicio.</LI>
+<LI><P align=justify>CX = Posici√≥n X.</LI>
+<LI><P align=justify>DX = Posici√≥n Y.</LI>
 </OL>
-Recordar que los valores de las coordenadas del ratÛn hay que pasarlas en mickeys, de tal manera que si queremos situar el cursor en la posiciÛn (8,4), deberemos de pasar los valores (63,32) (en el supuesto de que utilicemos el modo texto de 8x8 la dimensiÛn de un car·cter).
+Recordar que los valores de las coordenadas del rat√≥n hay que pasarlas en mickeys, de tal manera que si queremos situar el cursor en la posici√≥n (8,4), deberemos de pasar los valores (63,32) (en el supuesto de que utilicemos el modo texto de 8x8 la dimensi√≥n de un car√°cter).
 
 <br><br>
 <h4>Servicio 5.</h4>
@@ -254,70 +254,70 @@ Sirve para preguntar al contador de pulsaciones de botones. Los valores a  pasar
 <br>
 <OL>
 <LI><P align=justify>AX = 0x05.</LI>
-<LI><P align=justify>BX = BotÛn a consultar, esto es:
+<LI><P align=justify>BX = Bot√≥n a consultar, esto es:
 <br>
 <ol type="A">
-<LI><P align=justify>Para el botÛn Izquierdo pasamos un 0.</LI>
-<LI><P align=justify>Para el botÛn Derecho pasamos un 1.</LI>
-<LI><P align=justify>Para el botÛn Central pasamos un 2.</LI>
+<LI><P align=justify>Para el bot√≥n Izquierdo pasamos un 0.</LI>
+<LI><P align=justify>Para el bot√≥n Derecho pasamos un 1.</LI>
+<LI><P align=justify>Para el bot√≥n Central pasamos un 2.</LI>
 </ol>
 </LI>
 </OL>
 <br>
 <P align=justify>
 
-Se nos devolver· la siguiente informaciÛn:
+Se nos devolver√° la siguiente informaci√≥n:
 <br>
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>AX = Estado del botÛn, que identificaremos por:</LI>
-<LI><P align=justify>Bit 0 es el botÛn Izquierdo.</LI>
-<LI><P align=justify>Bit 1 es el botÛn Derecho.</LI>
-<LI><P align=justify>Bit 2 es el botÛn Central.</LI>
-<LI><P align=justify>BX = Contador de pulsaciones del botÛn por el que vamos a preguntar.</LI>
-<LI><P align=justify>CX = PosiciÛn x.</LI>
-<LI><P align=justify>DX = PosiciÛn y.</LI>
+<LI><P align=justify>AX = Estado del bot√≥n, que identificaremos por:</LI>
+<LI><P align=justify>Bit 0 es el bot√≥n Izquierdo.</LI>
+<LI><P align=justify>Bit 1 es el bot√≥n Derecho.</LI>
+<LI><P align=justify>Bit 2 es el bot√≥n Central.</LI>
+<LI><P align=justify>BX = Contador de pulsaciones del bot√≥n por el que vamos a preguntar.</LI>
+<LI><P align=justify>CX = Posici√≥n x.</LI>
+<LI><P align=justify>DX = Posici√≥n y.</LI>
 </OL>
 <br>
 <P align=justify>
 <h4>Servicio 5.</h4>
 <p align=justify>
 Este servicio ofrece un contador de liberaciones.<br><br>
-El funcionamiento es exactamente igual que en el del anterior servicio, salvo que este es para liberaciones y el otro era para pulsaciones. SeÒalar que en la programaciÛn se suele utilizar la combinaciÛn del servicio 6 y 5 para conocer el estado del ratÛn, ya que mediante la correspondencia de botones pulsados = botones liberados, se puede obtener una informaciÛn mucho m·s precisa sobre lo que ha ocurrido en el ratÛn, descartando de este modo, el uso del servicio 3. Otra de las utilidades de utilizar estos dos servicios en com˙n, es para la detecciÛn de dobles clicks, mediante la toma de tiempos entre una pulsaciÛn y otra.
+El funcionamiento es exactamente igual que en el del anterior servicio, salvo que este es para liberaciones y el otro era para pulsaciones. Se√±alar que en la programaci√≥n se suele utilizar la combinaci√≥n del servicio 6 y 5 para conocer el estado del rat√≥n, ya que mediante la correspondencia de botones pulsados = botones liberados, se puede obtener una informaci√≥n mucho m√°s precisa sobre lo que ha ocurrido en el rat√≥n, descartando de este modo, el uso del servicio 3. Otra de las utilidades de utilizar estos dos servicios en com√∫n, es para la detecci√≥n de dobles clicks, mediante la toma de tiempos entre una pulsaci√≥n y otra.
 
 <br><br>
 <h4>Servicio 7.</h4>
 <p align=justify>
-Establece el rango horizontal en el que el ratÛn puede moverse.Los valores necesarios son:
+Establece el rango horizontal en el que el rat√≥n puede moverse.Los valores necesarios son:
 <br>
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x07.</LI>
-<LI><P align=justify>CX = MÌnima coordenada de X.</LI>
-<LI><P align=justify>DX = M·xima coordenada de X.</LI>
+<LI><P align=justify>CX = M√≠nima coordenada de X.</LI>
+<LI><P align=justify>DX = M√°xima coordenada de X.</LI>
 </OL>
 <br>
 <P align=justify>
 
 <h4>Servicio 8.</h4>
 <p align=justify>
-Establece el rango vertical de movimiento del ratÛn. 
+Establece el rango vertical de movimiento del rat√≥n. 
 <br>Deberemos de pasar lo siguiente:
 <br>
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x08.</LI>
-<LI><P align=justify>CX = MÌnima coordenada de Y.</LI>
-<LI><P align=justify>DX = M·xima coordenada de Y.</LI>
+<LI><P align=justify>CX = M√≠nima coordenada de Y.</LI>
+<LI><P align=justify>DX = M√°xima coordenada de Y.</LI>
 </OL>
 <br>
 
 <h4>Servicio 9.</h4>
 <p align=justify>
-	Mediante este servicio establecemos la forma del puntero del ratÛn en modo gr·fico. Para ello deberemos de pasar lo siguiente:
+	Mediante este servicio establecemos la forma del puntero del rat√≥n en modo gr√°fico. Para ello deberemos de pasar lo siguiente:
 <br>
 <P align=justify>
 <br>
@@ -325,15 +325,15 @@ Establece el rango vertical de movimiento del ratÛn.
 <LI><P align=justify>AX = 0X09.</LI>
 <LI><P align=justify>BX = Hot Spot horizontal.</LI>
 <LI><P align=justify>CX = Hot Spot vertical.</LI>
-<LI><P align=justify>ES:DX = DirecciÛn (segmento::desplazamiento) del buffer de 64 bytes que almacena las m·scaras AND y XOR.</LI>
+<LI><P align=justify>ES:DX = Direcci√≥n (segmento::desplazamiento) del buffer de 64 bytes que almacena las m√°scaras AND y XOR.</LI>
 </OL>
 <br>
 <P align=justify>
-Esta funciÛn se encarga, como ya se ha indicado, de establecer la forma del puntero del ratÛn en modo gr·fico, para ello necesitamos un Hot Spot horizontal y vertical, que ser· aquella parte, del dibujo del puntero del ratÛn, sobre el que se realicen los chequeos de pulsaciÛn y dem·s. De esta forma, si tuviÈsemos un puntero en forma de cruz, lo m·s lÛgico serÌa otorgar un Hot Spot en las coordenadas centrales del puntero.
+Esta funci√≥n se encarga, como ya se ha indicado, de establecer la forma del puntero del rat√≥n en modo gr√°fico, para ello necesitamos un Hot Spot horizontal y vertical, que ser√° aquella parte, del dibujo del puntero del rat√≥n, sobre el que se realicen los chequeos de pulsaci√≥n y dem√°s. De esta forma, si tuvi√©semos un puntero en forma de cruz, lo m√°s l√≥gico ser√≠a otorgar un Hot Spot en las coordenadas centrales del puntero.
 <br><br>
-Por otro lado, tenemos el buffer de 64 bytes. En dicho buffer deberemos de colocar los 32 bytes superiores con una m·scara AND y los 32 bytes inferiores con una m·scara XOR, de esta manera, establecerÌamos distintas formas del puntero del ratÛn, con distintas combinaciones de dichas m·scaras. Lo que haremos ser· aplicar sobre los pixels en los que pasamos el puntero del ratÛn, la m·scara AND y del resultado obtenido la m·scara XOR teniendo como soluciÛn, el aspecto del cursor del ratÛn al pasar por esa zona de la pantalla. Precisar que el cursor del ratÛn en modo gr·fico es de 16x16, es decir, de 32 bytes, es por ello que necesitemos esos 32 bytes para m·scaras AND y XOR.
+Por otro lado, tenemos el buffer de 64 bytes. En dicho buffer deberemos de colocar los 32 bytes superiores con una m√°scara AND y los 32 bytes inferiores con una m√°scara XOR, de esta manera, establecer√≠amos distintas formas del puntero del rat√≥n, con distintas combinaciones de dichas m√°scaras. Lo que haremos ser√° aplicar sobre los pixels en los que pasamos el puntero del rat√≥n, la m√°scara AND y del resultado obtenido la m√°scara XOR teniendo como soluci√≥n, el aspecto del cursor del rat√≥n al pasar por esa zona de la pantalla. Precisar que el cursor del rat√≥n en modo gr√°fico es de 16x16, es decir, de 32 bytes, es por ello que necesitemos esos 32 bytes para m√°scaras AND y XOR.
 <br><br>
-A modo de recordatorio, se indicar·n las tablas AND y XOR.
+A modo de recordatorio, se indicar√°n las tablas AND y XOR.
 <br>
 <BR>
 <CENTER>
@@ -419,7 +419,7 @@ A modo de recordatorio, se indicar·n las tablas AND y XOR.
 </table>
 </CENTER>
 <BR>
-TambiÈn indicaremos las distintas combinaciones que se pueden efectuar con dicha tabla y sus repercusiones en pantalla.
+Tambi√©n indicaremos las distintas combinaciones que se pueden efectuar con dicha tabla y sus repercusiones en pantalla.
 <br>
 <BR>
 <CENTER>
@@ -551,46 +551,46 @@ X. Cualquier valor.
 
 <h4>Servicio 10.</h4>
 <p align=justify>
-Este servicio nos permite, en modo texto, establecer la forma del cursor de texto (o caret) y los atributos del puntero del ratÛn usando, nuevamente, m·scaras de bits. Pasa invocar a dicho servicio deberemos de suministrar los siguientes datos a la interrupciÛn:
+Este servicio nos permite, en modo texto, establecer la forma del cursor de texto (o caret) y los atributos del puntero del rat√≥n usando, nuevamente, m√°scaras de bits. Pasa invocar a dicho servicio deberemos de suministrar los siguientes datos a la interrupci√≥n:
 <br>
 <br>
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x0A</LI>
-<LI><P align=justify>BX = Tipo de cursor del ratÛn:
+<LI><P align=justify>BX = Tipo de cursor del rat√≥n:
 <br>
 <ol type="A">
 <LI><P align=justify>Si pasamos un 0, indicaremos que queremos establecer la forma del cursor por Hardware, o lo que es lo mismo, que queremos establecer la forma del caret.</LI>
-<LI><P align=justify>Si pasamos un 1, indicaremos que queremos establecer los atributos del cursor del ratÛn en modo texto y de esta forma realizar el tratamiento por Software.</LI>
+<LI><P align=justify>Si pasamos un 1, indicaremos que queremos establecer los atributos del cursor del rat√≥n en modo texto y de esta forma realizar el tratamiento por Software.</LI>
 </ol>
 </LI>
-<LI><P align=justify>CX = Depender· de lo que pusiÈramos en BX:
+<LI><P align=justify>CX = Depender√° de lo que pusi√©ramos en BX:
 <br>
 <ol type="A">
-<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar la lÌnea de comienzo para el caret.</LI>
-<LI><P align=justify>Si pusimos BX a 1 deberemos de indicar el valor de la m·scara AND, teniendo en cuenta que los 8 primero bytes indican el atributo que queremos y los 8 ˙ltimo bytes (o parte baja) el car·cter que queremos.</LI>
+<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar la l√≠nea de comienzo para el caret.</LI>
+<LI><P align=justify>Si pusimos BX a 1 deberemos de indicar el valor de la m√°scara AND, teniendo en cuenta que los 8 primero bytes indican el atributo que queremos y los 8 √∫ltimo bytes (o parte baja) el car√°cter que queremos.</LI>
 </ol>
 
 </LI>
 <LI><P align=justify>DX = De nuevo, depende de lo puesto en BX:
 <br>
 <ol type="A">
-<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar el final de la lÌnea para el carte.</LI>
-<LI><P align=justify>Si, por el contrario, habÌamos puesto BX a 1, lo que tendremos que hacer es indicar la m·scara XOR, con los 8 primeros bytes para m·scara de atributo y los 8 ˙ltimo para m·scara de car·cter.</LI>
+<LI><P align=justify>Si pusimos BX a 0 deberemos de indicar el final de la l√≠nea para el carte.</LI>
+<LI><P align=justify>Si, por el contrario, hab√≠amos puesto BX a 1, lo que tendremos que hacer es indicar la m√°scara XOR, con los 8 primeros bytes para m√°scara de atributo y los 8 √∫ltimo para m√°scara de car√°cter.</LI>
 </ol>
 </LI>
 </OL>
 <br>
 <P align=justify>
-SeÒalar que, si se selecciona el cursor de Software, el cÛdigo de car·cter bajo el cursor del ratÛn y el byte de atributos asociados se operan con la m·scara que se encuentra en el registro CX, es decir, la m·scara AND, a continuaciÛn el resultado se operar· con la m·scara que se encuentra en el registro DX y que ser· aplicada mediante un XOR. El byte de atributos se opera respectivamente con el byte alto (CH y DH), y el cÛdigo de car·cter con el byte bajo (CL y DL). Decir tambiÈn, que los 8 bits destinados al atributo del car·cter se dividen de tres en tres y de mayor importancia a menor por color de fondo, por intensidad y por color de letra.
+Se√±alar que, si se selecciona el cursor de Software, el c√≥digo de car√°cter bajo el cursor del rat√≥n y el byte de atributos asociados se operan con la m√°scara que se encuentra en el registro CX, es decir, la m√°scara AND, a continuaci√≥n el resultado se operar√° con la m√°scara que se encuentra en el registro DX y que ser√° aplicada mediante un XOR. El byte de atributos se opera respectivamente con el byte alto (CH y DH), y el c√≥digo de car√°cter con el byte bajo (CL y DL). Decir tambi√©n, que los 8 bits destinados al atributo del car√°cter se dividen de tres en tres y de mayor importancia a menor por color de fondo, por intensidad y por color de letra.
 <BR><BR>
-Por otro lado, si lo que escogimos es una definiciÛn del cursor, esto es, poner BX a 1, los rangos para la lÌnea inicial y final en el modo monocromo est·n entre 0 y 13 y para el modo color entre 0 y 7.
+Por otro lado, si lo que escogimos es una definici√≥n del cursor, esto es, poner BX a 1, los rangos para la l√≠nea inicial y final en el modo monocromo est√°n entre 0 y 13 y para el modo color entre 0 y 7.
 
 <br><BR>
 <h4>Servicio 11.</h4>
 <p align=justify>
-	Con este servicio podremos averiguar la distancia entre la posiciÛn actual del ratÛn y la posiciÛn del ratÛn durante la ˙ltima llamada de esta funciÛn. Lo ˙nico que deberemos de pasar a la funciÛn es el n˙mero del serviciÛ, es decir, AX = 0x0B. Una vez hecha la llamada a la funciÛn se nos devolver· la siguiente informaciÛn:
+	Con este servicio podremos averiguar la distancia entre la posici√≥n actual del rat√≥n y la posici√≥n del rat√≥n durante la √∫ltima llamada de esta funci√≥n. Lo √∫nico que deberemos de pasar a la funci√≥n es el n√∫mero del servici√≥, es decir, AX = 0x0B. Una vez hecha la llamada a la funci√≥n se nos devolver√° la siguiente informaci√≥n:
 <br>
 <P align=justify>
 <br>
@@ -600,62 +600,62 @@ Por otro lado, si lo que escogimos es una definiciÛn del cursor, esto es, poner 
 </OL>
 <br>
 <P align=justify>
-Es muy importante seÒalar que los valores se han de interpretar como n˙meros con signo ya que los valores negativos indicar·n, para el caso del movimiento horizontal, un desplazamiento derecho si es positivo o izquierdo si es negativo. Para el caso de la distancia vertical, un valor positivo indicar· un movimiento hacia abajo, mientras que el caso contrario, un valor negativo, indicar· un movimiento hacia arriba.
+Es muy importante se√±alar que los valores se han de interpretar como n√∫meros con signo ya que los valores negativos indicar√°n, para el caso del movimiento horizontal, un desplazamiento derecho si es positivo o izquierdo si es negativo. Para el caso de la distancia vertical, un valor positivo indicar√° un movimiento hacia abajo, mientras que el caso contrario, un valor negativo, indicar√° un movimiento hacia arriba.
 <BR><BR>
-Indicar tambiÈn, que los valores ser·n devueltos en Mickeys y que habr· que hacer las divisiones oportunas en caso de trabajar en modo texto (1 Mickey = 1/200 pulgadas).
+Indicar tambi√©n, que los valores ser√°n devueltos en Mickeys y que habr√° que hacer las divisiones oportunas en caso de trabajar en modo texto (1 Mickey = 1/200 pulgadas).
 
 <br><BR>
 <h4>Servicio 12.</h4>
 <p align=justify>
 
-El servicio 12 o 0x0C, es uno de los m·s importantes, ya que se encarga de establecer el manejador de eventos, es decir, establecemos las rutinas en memoria que son invocadas cuando ocurre alguna alteraciÛn en alguno de los estados del ratÛn, ya sea de movimiento o pulsaciÛn de boton, etc. De esta forma es, el propio driver del ratÛn, quien nos avisa a nosotros de que a sucedido algo y no somos nosotros los que tenemos que estar contÌnuamente preguntando por el estado del ratÛn. Con esto queda claro que el manejador de eventos cumple con una labor muy importante a la hora de tomar el camino m·s Ûptimo en la creaciÛn de una librerÌa de control del ratÛn.
+El servicio 12 o 0x0C, es uno de los m√°s importantes, ya que se encarga de establecer el manejador de eventos, es decir, establecemos las rutinas en memoria que son invocadas cuando ocurre alguna alteraci√≥n en alguno de los estados del rat√≥n, ya sea de movimiento o pulsaci√≥n de boton, etc. De esta forma es, el propio driver del rat√≥n, quien nos avisa a nosotros de que a sucedido algo y no somos nosotros los que tenemos que estar cont√≠nuamente preguntando por el estado del rat√≥n. Con esto queda claro que el manejador de eventos cumple con una labor muy importante a la hora de tomar el camino m√°s √≥ptimo en la creaci√≥n de una librer√≠a de control del rat√≥n.
 <BR><BR>
 Pasando a citar los valores que debemos de pasar a la hora de invocar al servicio nos encontramos:
 <br>
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>AX=0x0C. Esto es, el n˙mero de servicio a utilizar que es el 12.</LI>
-<LI><P align=justify>CX = M·scara de eventos por la que queremos que seamos avisados. Si hemos activado alguno de los bits que se indican a continuaciÛn, la rutina que alojemos en memoria entrar· a funcionar y se nos avisar· del suceso. Para indicar que sucesos queremos que sean "vigilados" tenemos a CX en el que activaremos los eventos a tratar como indicamos a continuaciÛn:
+<LI><P align=justify>AX=0x0C. Esto es, el n√∫mero de servicio a utilizar que es el 12.</LI>
+<LI><P align=justify>CX = M√°scara de eventos por la que queremos que seamos avisados. Si hemos activado alguno de los bits que se indican a continuaci√≥n, la rutina que alojemos en memoria entrar√° a funcionar y se nos avisar√° del suceso. Para indicar que sucesos queremos que sean "vigilados" tenemos a CX en el que activaremos los eventos a tratar como indicamos a continuaci√≥n:
 <br>
 <ol type="A">
-<LI><P align=justify>Bit 0 a 1 para movimiento del ratÛn.</LI>
-<LI><P align=justify>Bit 1 a 1 para pulsaciÛn del botÛn izquierdo.</LI>
-<LI><P align=justify>Bit 2 a 1 para liberaciÛn del botÛn izquierdo.</LI>
-<LI><P align=justify>Bit 3 a 1 para pulsaciÛn del botÛn derecho.</LI>
-<LI><P align=justify>Bit 4 a 1 para liberaciÛn del botÛn derecho.</LI>
-<LI><P align=justify>Bit 5 a 1 para pulsaciÛn del botÛn central.</LI>
-<LI><P align=justify>Bit 6 a 1 para liberaciÛn del botÛn central.
-<br>Como apunte, seÒalar que, de poner CX = 007F, todos los posibles eventos tendr·n un tratamiento.</LI>
+<LI><P align=justify>Bit 0 a 1 para movimiento del rat√≥n.</LI>
+<LI><P align=justify>Bit 1 a 1 para pulsaci√≥n del bot√≥n izquierdo.</LI>
+<LI><P align=justify>Bit 2 a 1 para liberaci√≥n del bot√≥n izquierdo.</LI>
+<LI><P align=justify>Bit 3 a 1 para pulsaci√≥n del bot√≥n derecho.</LI>
+<LI><P align=justify>Bit 4 a 1 para liberaci√≥n del bot√≥n derecho.</LI>
+<LI><P align=justify>Bit 5 a 1 para pulsaci√≥n del bot√≥n central.</LI>
+<LI><P align=justify>Bit 6 a 1 para liberaci√≥n del bot√≥n central.
+<br>Como apunte, se√±alar que, de poner CX = 007F, todos los posibles eventos tendr√°n un tratamiento.</LI>
 </ol>
 </LI>
-<LI><P align=justify>ES:DX = Como es f·cil adivinar en ES:DX ir· la direcciÛn del manejador a instalar en la memoria, para que cuando ocurra alguno de los sucesos indicados en el registro CX se active dicha rutina. En ES ir·, como es habitual, el segmento y en DX el desplazamiento.</LI>
+<LI><P align=justify>ES:DX = Como es f√°cil adivinar en ES:DX ir√° la direcci√≥n del manejador a instalar en la memoria, para que cuando ocurra alguno de los sucesos indicados en el registro CX se active dicha rutina. En ES ir√°, como es habitual, el segmento y en DX el desplazamiento.</LI>
 </OL>
 <br>
 <P align=justify>
-Una vez invocada la interrupciÛn 0x0C, deberemos de saber que en la rutina que coloquemos en la memoria, cada vez que se active alguno de los sucesos indicados en el registro CX, se nos pasar·, precisamente a dicha rutina, una serie de valores que nos dar·n informaciÛn acerca del estado del ratÛn y que podrÌamos considerar como los valores devueltos por la interrupciÛn, con la particularidad de que son valores que se nos mandan continuamente, siempre que ocurre alg˙n suceso de los indicados. Los valores que se nos mandar·n a la rutina ser·n:
+Una vez invocada la interrupci√≥n 0x0C, deberemos de saber que en la rutina que coloquemos en la memoria, cada vez que se active alguno de los sucesos indicados en el registro CX, se nos pasar√°, precisamente a dicha rutina, una serie de valores que nos dar√°n informaci√≥n acerca del estado del rat√≥n y que podr√≠amos considerar como los valores devueltos por la interrupci√≥n, con la particularidad de que son valores que se nos mandan continuamente, siempre que ocurre alg√∫n suceso de los indicados. Los valores que se nos mandar√°n a la rutina ser√°n:
 <br>
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>AX = M·scara del evento que se produjo. Esto quiere decir, que si en CX antes de invocar a la interrupciÛn, nosotros pas·bamos una m·scara en la cual indic·bamos por cuales de los sucesos querÌamos estar informados, al producirse alguno/s de ellos se nos mandar· dicha m·scara de sucesos y podremos saber que suceso o sucesos han producido la activaciÛn de nuestra rutina.</LI>
+<LI><P align=justify>AX = M√°scara del evento que se produjo. Esto quiere decir, que si en CX antes de invocar a la interrupci√≥n, nosotros pas√°bamos una m√°scara en la cual indic√°bamos por cuales de los sucesos quer√≠amos estar informados, al producirse alguno/s de ellos se nos mandar√° dicha m√°scara de sucesos y podremos saber que suceso o sucesos han producido la activaci√≥n de nuestra rutina.</LI>
 <LI><P align=justify>BX = Estado de los botones, esto es:
 <br>
 <ol type="A">
-<LI><P align=justify>Bit 0 indica botÛn izquierdo. <br><b>if (bx & 1) == 1</b>.</LI>
-<LI><P align=justify>Bit 1 indica botÛn derecho. <br><b>if (bx & 2) == 2</b>.</LI>
-<LI><P align=justify>Bit 2 indica botÛn central. <br><b>if (bc & 4) == 4</b>.</LI>
+<LI><P align=justify>Bit 0 indica bot√≥n izquierdo. <br><b>if (bx & 1) == 1</b>.</LI>
+<LI><P align=justify>Bit 1 indica bot√≥n derecho. <br><b>if (bx & 2) == 2</b>.</LI>
+<LI><P align=justify>Bit 2 indica bot√≥n central. <br><b>if (bc & 4) == 4</b>.</LI>
 </ol>
 </LI>
-<LI><P align=justify>CX = PosiciÛn horizontal del puntero del ratÛn.</LI>
-<LI><P align=justify>DX = PosiciÛn vertical del puntero del ratÛn.</LI>
+<LI><P align=justify>CX = Posici√≥n horizontal del puntero del rat√≥n.</LI>
+<LI><P align=justify>DX = Posici√≥n vertical del puntero del rat√≥n.</LI>
 <LI><P align=justify>SI = Distancia recorrida en horizontal.</LI>
-<LI><P align=justify>DI = Distancia recorrida en vertical. ReseÒar que, tanto en SI como en DI, se utilizar·n Mickeys y que los valores podr·n ser negativos o positivos. En el caso de ser positivos y trabajar con SI significar·n movimientos a derecha e izquierda si son negativos. Si trabajamos con DI, valores positivos indican movimiento hacia arriba y negativos hacia abajo.</LI>
-<LI><P align=justify>DS = Segmento de datos del controlador del ratÛn.</LI>
+<LI><P align=justify>DI = Distancia recorrida en vertical. Rese√±ar que, tanto en SI como en DI, se utilizar√°n Mickeys y que los valores podr√°n ser negativos o positivos. En el caso de ser positivos y trabajar con SI significar√°n movimientos a derecha e izquierda si son negativos. Si trabajamos con DI, valores positivos indican movimiento hacia arriba y negativos hacia abajo.</LI>
+<LI><P align=justify>DS = Segmento de datos del controlador del rat√≥n.</LI>
 </OL>
 <br>
 <P align=justify>
-A continuaciÛn, se ofrece un ejemplo de una posible implementaciÛn de este servicio (no voy
+A continuaci√≥n, se ofrece un ejemplo de una posible implementaci√≥n de este servicio (no voy
 a ser tan malo ;) ):
 <br>
 <center>
@@ -664,7 +664,7 @@ a ser tan malo ;) ):
 <pre>
 <b>
 <FONT color="#000000" size=1 face="Arial">        
-bool activo; /* podrÌa ser un typedef char bool; */
+bool activo; /* podr√≠a ser un typedef char bool; */
 int evento=0;
 unsigned int boton;
 bool suceso;
@@ -680,7 +680,7 @@ void establece_manejador (int eventos, void far *manejador)
 	int86x (0x33, &amp;regs, &amp;regs, &amp;sregs);
 }
 
-void maneja (void) /* FunciÛn manejador , cada cual que la adapte a sus necesidades */
+void maneja (void) /* Funci√≥n manejador , cada cual que la adapte a sus necesidades */
 {
 	evento = _AX;
 	boton  = _BX;
@@ -703,14 +703,14 @@ if (raton.existe () )
      establece_manejador (movimiento_raton | pulsa_izquierdo | pulsa_derecho, maneja);
      activo = FALSO;
      evento = 0;
-	while (°activo) { if (suceso){.................................} }              
+	while (¬°activo) { if (suceso){.................................} }              
              }
            }
 
 }
 
 /* Para quitar el manejador, cosa imprescindible al salir de 
-   nuestro programa, deberÌamos de ejecutar:
+   nuestro programa, deber√≠amos de ejecutar:
    establece_manejador (0x0, maneja); */
 
 </b>
@@ -721,7 +721,7 @@ if (raton.existe () )
 
 <h4>Servicio 15. </h4>
 <p align=justify>
-Este servicio se encarga de establecer la velocidad del puntero del ratÛn en pantalla respecto de nuestros movimientos con el perifÈrico.
+Este servicio se encarga de establecer la velocidad del puntero del rat√≥n en pantalla respecto de nuestros movimientos con el perif√©rico.
 <br><br>
 Deberemos de pasar los siguientes valores:
 <br>
@@ -734,15 +734,15 @@ Deberemos de pasar los siguientes valores:
 </OL>
 <br>
 <P align=justify>
-Los valores que pasemos a CX y a DX indican la distancia que deberemos de mover para que el puntero se mueva x pixels (los que nosotros indiquemos). Por defecto, los valores de velocidad horizontal est·n a 8 pixels y los de velocidad vertical a 16 pixels.
+Los valores que pasemos a CX y a DX indican la distancia que deberemos de mover para que el puntero se mueva x pixels (los que nosotros indiquemos). Por defecto, los valores de velocidad horizontal est√°n a 8 pixels y los de velocidad vertical a 16 pixels.
 <br><br>
-Esta funciÛn puede ser muy ˙til cuando se busca precisiÛn en los movimientos, de esta forma si queremos mover pocos pixels en cada desplazamiento del ratÛn sÛlo tendremos que cambiar estos valores.
+Esta funci√≥n puede ser muy √∫til cuando se busca precisi√≥n en los movimientos, de esta forma si queremos mover pocos pixels en cada desplazamiento del rat√≥n s√≥lo tendremos que cambiar estos valores.
 <br><BR>
 <h4>Servicio 16.</h4>
 <p align=justify>
-AquÌ estableceremos el ·rea de exclusiÛn, es decir, en quÈ rect·ngulo de la pantalla se puede mover nuestro ratÛn y ser visto, o dicho de otro modo, fuera de quÈ lÌmites nuestro puntero es capaz de moverse pero no de verse. 
+Aqu√≠ estableceremos el √°rea de exclusi√≥n, es decir, en qu√© rect√°ngulo de la pantalla se puede mover nuestro rat√≥n y ser visto, o dicho de otro modo, fuera de qu√© l√≠mites nuestro puntero es capaz de moverse pero no de verse. 
 <br><br>
-Para utilizar esta funciÛn deberemos de dar los siguientes par·metros a la interrupciÛn:
+Para utilizar esta funci√≥n deberemos de dar los siguientes par√°metros a la interrupci√≥n:
 <br>
 <P align=justify>
 <br>
@@ -755,139 +755,139 @@ Para utilizar esta funciÛn deberemos de dar los siguientes par·metros a la inter
 </OL>
 <br>
 <P align=justify>
-Para entender la disposiciÛn de estas coordenadas lo mejor es echar un vistazo a la figura siguiente.
+Para entender la disposici√≥n de estas coordenadas lo mejor es echar un vistazo a la figura siguiente.
 <br>
 <center>
 <img src="gif/fraton.gif">
 </center>
 <h4>Servicio 19. </h4>
 <p align=justify>
-Este servicio nos permite establecer la doble velocidad del ratÛn. Para ello tan sÛlo deberemos de pasar, dejando de un lado la funciÛn en AX, el lÌmite de doble velocidad, como indicamos a continuaciÛn:
+Este servicio nos permite establecer la doble velocidad del rat√≥n. Para ello tan s√≥lo deberemos de pasar, dejando de un lado la funci√≥n en AX, el l√≠mite de doble velocidad, como indicamos a continuaci√≥n:
 <br><br>
 
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x13.</LI>
-<LI><P align=justify>DX = LÌmite de doble velocidad (Mickeys por segundo).</LI>
+<LI><P align=justify>DX = L√≠mite de doble velocidad (Mickeys por segundo).</LI>
 </OL>
 <br>
 <P align=justify>
 
-Cuando nos referimos al tÈrmino de doble velocidad, lo que queremos indicar es la capacidad de movimiento del cursor del ratÛn cuando movemos velozmente el ratÛn sobre la mesa, de esta forma, al superar el lÌmite establecido, lo que logramos es que el puntero del ratÛn se desplace mucho m·s r·pido por pantalla al ir de m·s en m·s pixels.
+Cuando nos referimos al t√©rmino de doble velocidad, lo que queremos indicar es la capacidad de movimiento del cursor del rat√≥n cuando movemos velozmente el rat√≥n sobre la mesa, de esta forma, al superar el l√≠mite establecido, lo que logramos es que el puntero del rat√≥n se desplace mucho m√°s r√°pido por pantalla al ir de m√°s en m√°s pixels.
 <br><br>
-El valor por defecto de la doble velocidad est· situado en 64, con lo que si superamos dicho lÌmite tendremos 64/200 pulgadas de desplazamiento.
+El valor por defecto de la doble velocidad est√° situado en 64, con lo que si superamos dicho l√≠mite tendremos 64/200 pulgadas de desplazamiento.
 
 <br><BR>
 <h4>Servicio 20.</h4>
 <p align=justify>
-Sirve para intercambiar los manejadores de eventos. Su constituciÛn es similar a la de la funciÛn 12, salvo que nos deja intercambiar el manejador. Este servicio es muy ˙til, sobre todo desde el punto de vista de que nos permite encadenar diversos manejadores de eventos que nos pueden ser ˙tiles en distintas ocasiones.
+Sirve para intercambiar los manejadores de eventos. Su constituci√≥n es similar a la de la funci√≥n 12, salvo que nos deja intercambiar el manejador. Este servicio es muy √∫til, sobre todo desde el punto de vista de que nos permite encadenar diversos manejadores de eventos que nos pueden ser √∫tiles en distintas ocasiones.
 <br><br>
-Deberemos de pasar lo siguientes par·metros:
+Deberemos de pasar lo siguientes par√°metros:
 
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x14.</LI>
-<LI><P align=justify>CX = M·scara de eventos, que es la misma que la que hay en el servicio 12.</LI>
-<LI><P align=justify>ES:DS = La direcciÛn del manejador, siguiendo el concepto de segmento y desplazamiento.</LI>
+<LI><P align=justify>CX = M√°scara de eventos, que es la misma que la que hay en el servicio 12.</LI>
+<LI><P align=justify>ES:DS = La direcci√≥n del manejador, siguiendo el concepto de segmento y desplazamiento.</LI>
 </OL>
 <br>
 <P align=justify>
-Una vez invocada a la interrupciÛn con los par·metros adecuados, se nos devolver·n los siguientes datos:
+Una vez invocada a la interrupci√≥n con los par√°metros adecuados, se nos devolver√°n los siguientes datos:
 <br><br>
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>CX = M·scara de eventos anterior, es decir, del manejador anterior.</LI>
-<LI><P align=justify>ES:DX = DirecciÛn, segmento y desplazamiento, del manejador que habÌa antes de cambiarlo.</LI>
+<LI><P align=justify>CX = M√°scara de eventos anterior, es decir, del manejador anterior.</LI>
+<LI><P align=justify>ES:DX = Direcci√≥n, segmento y desplazamiento, del manejador que hab√≠a antes de cambiarlo.</LI>
 </OL>
 <br>
 <P align=justify>
 
-<h4>Los 3 Servicios de Estado del RatÛn: 21, 22 y 23.</h4>
-Estos tres servicios nos permiten cambiar toda la informaciÛn que tengamos sobre el ratÛn en un determinado momento para luego poder volver a restaurarla. Para ello contaremos, como veremos a continuaciÛn, con una funciÛn que nos devolver· el tamaÒo de los bytes necesarios para guardar la informaciÛn, con otra para pasar la direcciÛn del buffer a utilizar y por ˙ltimo con una para restaurar la informaciÛn original.
+<h4>Los 3 Servicios de Estado del Rat√≥n: 21, 22 y 23.</h4>
+Estos tres servicios nos permiten cambiar toda la informaci√≥n que tengamos sobre el rat√≥n en un determinado momento para luego poder volver a restaurarla. Para ello contaremos, como veremos a continuaci√≥n, con una funci√≥n que nos devolver√° el tama√±o de los bytes necesarios para guardar la informaci√≥n, con otra para pasar la direcci√≥n del buffer a utilizar y por √∫ltimo con una para restaurar la informaci√≥n original.
 <br><br>
 <h4>Servicio 21.</h4>
 <p align=justify>
-Esta es el primero de los servicios de estado del ratÛn y nos permite recoger el tamaÒo del buffer que deberemos de utilizar. SeÒalar que al no estar documentada, sÛlo recibiremos el tamaÒo en bytes y no la disposiciÛn de la informaciÛn.
+Esta es el primero de los servicios de estado del rat√≥n y nos permite recoger el tama√±o del buffer que deberemos de utilizar. Se√±alar que al no estar documentada, s√≥lo recibiremos el tama√±o en bytes y no la disposici√≥n de la informaci√≥n.
 <br><br>
-Pasando ya a los datos que hay que pasar tan sÛlo deberemos de indicar el n˙mero de la funciÛn con AX = 0x15. Por otro lado, se nos devolver· el tamaÒo del buffer en BX.	
+Pasando ya a los datos que hay que pasar tan s√≥lo deberemos de indicar el n√∫mero de la funci√≥n con AX = 0x15. Por otro lado, se nos devolver√° el tama√±o del buffer en BX.	
 <br><br>
 <h4>Servicio 22.</h4>
 <p align=justify>
-En la segunda funciÛn de estado lo que tendremos que hacer es pasar la direcciÛn (segmento y desplazamiento) en dÛnde se encuentra nuestro buffer para almacenar los datos actuales del ratÛn. No se nos devolver· nada.
+En la segunda funci√≥n de estado lo que tendremos que hacer es pasar la direcci√≥n (segmento y desplazamiento) en d√≥nde se encuentra nuestro buffer para almacenar los datos actuales del rat√≥n. No se nos devolver√° nada.
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x16.</LI>
-<LI><P align=justify>ES:DX = DirecciÛn del buffer a guardar los datos.</LI>
+<LI><P align=justify>ES:DX = Direcci√≥n del buffer a guardar los datos.</LI>
 </OL>
 <br>
 <h4>Servicio 23.</h4>
 <p align=justify>
-Ya, por ˙ltimo, con esta funciÛn podremos restaurar los valores originales que guardamos en el buffer. Para ello deberemos de volver a indicar la direcciÛn del mismo. Por tanto, pasaremos:
+Ya, por √∫ltimo, con esta funci√≥n podremos restaurar los valores originales que guardamos en el buffer. Para ello deberemos de volver a indicar la direcci√≥n del mismo. Por tanto, pasaremos:
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>AX = 0x17.</LI>
-<LI><P align=justify>ES:DX = DirecciÛn del buffer en donde se encuentran los datos a restaurar.</LI>
+<LI><P align=justify>ES:DX = Direcci√≥n del buffer en donde se encuentran los datos a restaurar.</LI>
 </OL>
 <br>
 <P align=justify>
 
 <h4>Servicio 24.</h4>
 <p align=justify>
-Nos encontramos ante el tercer servicio para utilizar los manejadores del ratÛn. Es el conocido manejador de eventos alternativo, es decir, funciona igual que el servicio 12 salvo que la m·scara de sucesos a chequear es distinta. De esta forma, indico los par·metros que necesitamos:
+Nos encontramos ante el tercer servicio para utilizar los manejadores del rat√≥n. Es el conocido manejador de eventos alternativo, es decir, funciona igual que el servicio 12 salvo que la m√°scara de sucesos a chequear es distinta. De esta forma, indico los par√°metros que necesitamos:
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>1. AX = 0x18. </LI>
-<LI><P align=justify>CX = M·scara de eventos en la cual, al activar el bit correspondiente poniendo un 1, elegimos que sucesos queremos que active nuestra rutina particular. Hasta aquÌ, igual que el servicio 12, sin embargo, vamos a ver como la m·scara de eventos a controlar es bastante distinta:
+<LI><P align=justify>CX = M√°scara de eventos en la cual, al activar el bit correspondiente poniendo un 1, elegimos que sucesos queremos que active nuestra rutina particular. Hasta aqu√≠, igual que el servicio 12, sin embargo, vamos a ver como la m√°scara de eventos a controlar es bastante distinta:
 <br>
 <ol type="A">
 <LI><P align=justify>Bit 0 a 1 para movimiento.</LI>
-<LI><P align=justify>Bit 1 a 1 para pulsaciÛn del botÛn izquierdo.</LI>
-<LI><P align=justify>Bit 2 a 1 para liberaciÛn del botÛn izquierdo.</LI>
-<LI><P align=justify>Bit 3 a 1 para pulsaciÛn del botÛn derecho.</LI>
-<LI><P align=justify>Bit 4 a 1 para liberaciÛn del botÛn derecho.</LI>
-<LI><P align=justify>Bit 5 a 1 para Shift + pulsaciÛn botÛn.</LI>
-<LI><P align=justify>Bit 6 a 1 para Ctrl + pulsaciÛn botÛn.</LI>
-<LI><P align=justify>Bit 7 a 1 para Alt + pulsaciÛn botÛn.</LI>
+<LI><P align=justify>Bit 1 a 1 para pulsaci√≥n del bot√≥n izquierdo.</LI>
+<LI><P align=justify>Bit 2 a 1 para liberaci√≥n del bot√≥n izquierdo.</LI>
+<LI><P align=justify>Bit 3 a 1 para pulsaci√≥n del bot√≥n derecho.</LI>
+<LI><P align=justify>Bit 4 a 1 para liberaci√≥n del bot√≥n derecho.</LI>
+<LI><P align=justify>Bit 5 a 1 para Shift + pulsaci√≥n bot√≥n.</LI>
+<LI><P align=justify>Bit 6 a 1 para Ctrl + pulsaci√≥n bot√≥n.</LI>
+<LI><P align=justify>Bit 7 a 1 para Alt + pulsaci√≥n bot√≥n.</LI>
 </ol>
 </LI>
-<LI><P align=justify>ES:DX = La direcciÛn de la rutina nuestra.</LI>
+<LI><P align=justify>ES:DX = La direcci√≥n de la rutina nuestra.</LI>
 </OL>
 <br>
 <P align=justify>
-Una vez invocada a la interrupciÛn, AX nos podr· devolver dos valores. Si AX nos devuelve 0018h significar· que se instalÛ y si nos devuelve un FFFF significar· que el manejador no se instalÛ.
+Una vez invocada a la interrupci√≥n, AX nos podr√° devolver dos valores. Si AX nos devuelve 0018h significar√° que se instal√≥ y si nos devuelve un FFFF significar√° que el manejador no se instal√≥.
 
 <br><BR>
 <h4>Servicio 25.</h4>
 <p align=justify>
 
-Con este servicio, podremos elegir un determinado manejador de eventos cuando nos interese. SeÒalar que este servicio sÛlo funcionar· con los manejadores instalados con el servicio anterior, el servicio 18. 
+Con este servicio, podremos elegir un determinado manejador de eventos cuando nos interese. Se√±alar que este servicio s√≥lo funcionar√° con los manejadores instalados con el servicio anterior, el servicio 18. 
 <br><br>
-Pasando ya a la ejecuciÛn de la interrupciÛn, deberemos de pasar los siguientes par·metros:
+Pasando ya a la ejecuci√≥n de la interrupci√≥n, deberemos de pasar los siguientes par√°metros:
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>AX = 0x19. Que indica, como siempre, el n˙mero de servicio.</LI>
-<LI><P align=justify>CX = M·scara.</LI>
+<LI><P align=justify>AX = 0x19. Que indica, como siempre, el n√∫mero de servicio.</LI>
+<LI><P align=justify>CX = M√°scara.</LI>
 </OL>
 <br>
 <P align=justify>
-Una vez invocada la interrupciÛn, se nos devolver·:
+Una vez invocada la interrupci√≥n, se nos devolver√°:
 <P align=justify>
 <br>
 <OL>
-<LI><P align=justify>CX = M·scara del manejador.</LI>
-<LI><P align=justify>ES:DX = DirecciÛn del manejador.</LI>
+<LI><P align=justify>CX = M√°scara del manejador.</LI>
+<LI><P align=justify>ES:DX = Direcci√≥n del manejador.</LI>
 </OL>
 <BR>
 <h4>Servicio 26.</h4>
 <p align=justify>
-Mediante este servicio podemos establecer la sensibilidad del ratÛn, esto es, podemos establecer todos los aspectos que influyen en la precisiÛn del ratÛn. En este servicio tan sÛlo pasamos par·metros:
+Mediante este servicio podemos establecer la sensibilidad del rat√≥n, esto es, podemos establecer todos los aspectos que influyen en la precisi√≥n del rat√≥n. En este servicio tan s√≥lo pasamos par√°metros:
 
 <P align=justify>
 <br>
@@ -895,33 +895,33 @@ Mediante este servicio podemos establecer la sensibilidad del ratÛn, esto es, po
 <LI><P align=justify>AX = 0x1A.</LI>
 <LI><P align=justify>BX = Valor de velocidad horizontal. (Mickeys por pixel).</LI>
 <LI><P align=justify>CX = Valor de velocidad vertical. (Mickeys por pixel).</LI>
-<LI><P align=justify>DX = Establecemos el lÌmite de la doble velocidad. (Mickeys por segundo).</LI>
+<LI><P align=justify>DX = Establecemos el l√≠mite de la doble velocidad. (Mickeys por segundo).</LI>
 </OL>
 <br>
 <P align=justify>
-Como se puede observar, lo que nos ofrece esta funciÛn, ya lo habÌamos visto por separado con los servicios 15 y 19.
+Como se puede observar, lo que nos ofrece esta funci√≥n, ya lo hab√≠amos visto por separado con los servicios 15 y 19.
 <br><BR>
 <h4>Servicio 27.</h4>
 <p align=justify>
-Obtiene los valores de sensibilidad del ratÛn, o lo que es lo mismo, nos permite conocer todos aquellos par·metros que en la funciÛn 28 (la de arriba) ponÌamos. Tan sÛlo pasaremos el n˙mero de servicio con AX = 0x1B y a cambio nos ser·n devueltos los siguientes datos:
+Obtiene los valores de sensibilidad del rat√≥n, o lo que es lo mismo, nos permite conocer todos aquellos par√°metros que en la funci√≥n 28 (la de arriba) pon√≠amos. Tan s√≥lo pasaremos el n√∫mero de servicio con AX = 0x1B y a cambio nos ser√°n devueltos los siguientes datos:
 <P align=justify>
 <br>
 <OL>
 <LI><P align=justify>BX = Valor horizontal actual.</LI>
 <LI><P align=justify>CX = Valor vertical actual.</LI>
-<LI><P align=justify>DX = LÌmite de doble velocidad actual.</LI>
+<LI><P align=justify>DX = L√≠mite de doble velocidad actual.</LI>
 </OL>
 <br>
 <P align=justify>
-En resumidas cuentas, es la complementaria a  la funciÛn 27.
+En resumidas cuentas, es la complementaria a  la funci√≥n 27.
 <br><BR>
 <h4>Servicio 28.</h4>
 <p align=justify>
-Establecemos el ratio de interrupciÛn, o dicho de otro modo, la frecuencia en la que deseamos que se chequee el puerto de entrada en el que est· conectado el ratÛn. Para la utilizaciÛn de esta funciÛn o servicio deberemos de pasar lo siguiente:
+Establecemos el ratio de interrupci√≥n, o dicho de otro modo, la frecuencia en la que deseamos que se chequee el puerto de entrada en el que est√° conectado el rat√≥n. Para la utilizaci√≥n de esta funci√≥n o servicio deberemos de pasar lo siguiente:
 <br>
 <OL>
 <LI><P align=justify>AX = 0x1C.</LI>
-<LI><P align=justify>BX = La frecuencia a la que queremos que se chequee, y que podr· ser:
+<LI><P align=justify>BX = La frecuencia a la que queremos que se chequee, y que podr√° ser:
 <br>
 <ol type="A">
 <LI><P align=justify>1 si no deseamos que se chequee.</LI>
@@ -934,31 +934,31 @@ Establecemos el ratio de interrupciÛn, o dicho de otro modo, la frecuencia en la
 </OL>
 <br>
 <P align=justify>
-Esta funciÛn tambiÈn resulta, al igual que la 15, muy ˙til para buscar precisiÛn ya que a mayor frecuencia de chequee m·s lento ir· nuestro programa y vicerversa.
+Esta funci√≥n tambi√©n resulta, al igual que la 15, muy √∫til para buscar precisi√≥n ya que a mayor frecuencia de chequee m√°s lento ir√° nuestro programa y vicerversa.
 <br><BR>
 <h4>Servicio 29.</h4>
 <p align=justify>
-Establece la p·gina de visualizaciÛn del puntero del ratÛn. Existen 4 p·ginas de visualizaciÛn en modo gr·fico y 8 en modo texto, con lo que, si nuestro puntero de ratÛn se encuentra en la p·gina que no estamos visualizando en pantalla, no veremos nada. Con esta funciÛn solventamos el problema ya que podremos establecer la p·gina en donde se encuentra nuestro puntero como p·gina activa. 
+Establece la p√°gina de visualizaci√≥n del puntero del rat√≥n. Existen 4 p√°ginas de visualizaci√≥n en modo gr√°fico y 8 en modo texto, con lo que, si nuestro puntero de rat√≥n se encuentra en la p√°gina que no estamos visualizando en pantalla, no veremos nada. Con esta funci√≥n solventamos el problema ya que podremos establecer la p√°gina en donde se encuentra nuestro puntero como p√°gina activa. 
 <br><br>
 Para poder utilizar este servicio deberemos de pasar los siguientes valores:
 <br>
 <OL>
 <LI><P align=justify>AX = 0x1D.</LI>
-<LI><P align=justify>BX = N˙mero de la p·gina que queremos activar.</LI>
+<LI><P align=justify>BX = N√∫mero de la p√°gina que queremos activar.</LI>
 </OL>
 <br>
 <P align=justify>
 <h4>Servicio 30.</h4>
 <p align=justify>
-Este servicio nos sirve para saber en quÈ p·gina de vÌdeo se encuentra el puntero del ratÛn. Tan sÛlo deberemos de pasar el valor de esta funciÛn en AX con AX = 0x1F y se nos ser· devuelto en BX la p·gina en la que se encuentra. Como se puede deducir esta funciÛn es la complementaria a la 29.
+Este servicio nos sirve para saber en qu√© p√°gina de v√≠deo se encuentra el puntero del rat√≥n. Tan s√≥lo deberemos de pasar el valor de esta funci√≥n en AX con AX = 0x1F y se nos ser√° devuelto en BX la p√°gina en la que se encuentra. Como se puede deducir esta funci√≥n es la complementaria a la 29.
 <br><br>
 <h4>Servicio 31.</h4>
 <p align=justify>
-Sirve para desactivar el controlador de ratÛn y dejar acabar el programa correctamente. Deberemos de pasar sÛlo la funciÛn en AX con AX = 0x1F. Los valores que obtendremos ser·n los siguientes:
+Sirve para desactivar el controlador de rat√≥n y dejar acabar el programa correctamente. Deberemos de pasar s√≥lo la funci√≥n en AX con AX = 0x1F. Los valores que obtendremos ser√°n los siguientes:
 <br>
 <OL>
-<LI><P align=justify>AX = Resultado de la invocaciÛn:</LI>
-<LI><P align=justify>ES:DX = Nos suministrar· la direcciÛn, en memoria, del controlador anterior al que hemos desinstalado.
+<LI><P align=justify>AX = Resultado de la invocaci√≥n:</LI>
+<LI><P align=justify>ES:DX = Nos suministrar√° la direcci√≥n, en memoria, del controlador anterior al que hemos desinstalado.
 <br>
 <ol type="A">
 <LI><P align=justify>Si AX = 001F, el controlador se ha desactivado.</LI>
@@ -971,45 +971,45 @@ Sirve para desactivar el controlador de ratÛn y dejar acabar el programa correct
 
 <h4>Servicio 32.</h4>
 <p align=justify>
-Este servicio, simplemente, activa el controlador en su llamada, mediante el par·metro de AX, el cual contiene el n˙mero de servicio, esto es, AX = 0x20. No se nos devolver· nada despuÈs de haber invocado la llamada a la interrupciÛn.
+Este servicio, simplemente, activa el controlador en su llamada, mediante el par√°metro de AX, el cual contiene el n√∫mero de servicio, esto es, AX = 0x20. No se nos devolver√° nada despu√©s de haber invocado la llamada a la interrupci√≥n.
 <br><br>
 <h4>Servicio 33.</h4>
 <p align=justify>
 
-Realiza un reset del Software del ratÛn y establece las variables del controlador a sus valores por defecto. Tan sÛlo hay que pasar en AX el servicio que es, AX = 0x21. Por otro lado se nos devolver·n los siguientes valores:
+Realiza un reset del Software del rat√≥n y establece las variables del controlador a sus valores por defecto. Tan s√≥lo hay que pasar en AX el servicio que es, AX = 0x21. Por otro lado se nos devolver√°n los siguientes valores:
 
 <br>
 <OL>
-<LI><P align=justify>AX = Resultado de la operaciÛn:
+<LI><P align=justify>AX = Resultado de la operaci√≥n:
 <br>
 <ol type="A">
 <LI><P align=justify>Si AX = 0021, todo ha salido bien y no existe error.</LI>
 <LI><P align=justify>Si AX = FFFF, ha existido error.</LI>
 </ol>
 </LI>
-<LI><P align=justify>BX = N˙mero de botones del ratÛn.</LI>
+<LI><P align=justify>BX = N√∫mero de botones del rat√≥n.</LI>
 </OL>
 <br>
 
 <h4>Servicio 36.</h4>
 <p align=justify>
-Este servicio nos permite averiguar el tipo de conexiÛn que hay entre el ratÛn y el ordenador (tipo de ratÛn y versiÛn del driver). Una vez hecha la llamada con el valor AX = 0x24, se nos devolver·n los siguientes datos:
+Este servicio nos permite averiguar el tipo de conexi√≥n que hay entre el rat√≥n y el ordenador (tipo de rat√≥n y versi√≥n del driver). Una vez hecha la llamada con el valor AX = 0x24, se nos devolver√°n los siguientes datos:
 
 <br>
 <OL>
-<LI><P align=justify>BH = N˙mero de versiÛn del controlador.</LI>
-<LI><P align=justify>BL = ExtensiÛn de la versiÛn del controlador (parte decimal).</LI>
-<LI><P align=justify>CH = Tipo de conexiÛn:
+<LI><P align=justify>BH = N√∫mero de versi√≥n del controlador.</LI>
+<LI><P align=justify>BL = Extensi√≥n de la versi√≥n del controlador (parte decimal).</LI>
+<LI><P align=justify>CH = Tipo de conexi√≥n:
 <br>
 <ol type="A">
-<LI><P align=justify>CH = 1 indicar· que es de BUS.</LI>
-<LI><P align=justify>CH = 2 indicar· que es de SERIE.</LI>
-<LI><P align=justify>CH = 3 indicar· que es en el puerto de entrada.</LI>
-<LI><P align=justify>CH = 4 indicar· que es de un modelo PS/2 de IBM.</LI>
-<LI><P align=justify>CH = 5 indicar· que es de un HP.</LI>
+<LI><P align=justify>CH = 1 indicar√° que es de BUS.</LI>
+<LI><P align=justify>CH = 2 indicar√° que es de SERIE.</LI>
+<LI><P align=justify>CH = 3 indicar√° que es en el puerto de entrada.</LI>
+<LI><P align=justify>CH = 4 indicar√° que es de un modelo PS/2 de IBM.</LI>
+<LI><P align=justify>CH = 5 indicar√° que es de un HP.</LI>
 </ol>
 </LI>
-<LI><P align=justify>CL = IRQ a la que est· ligado.</LI>
+<LI><P align=justify>CL = IRQ a la que est√° ligado.</LI>
 </OL>
 <br>
 <hr>
@@ -1026,7 +1026,7 @@ Este servicio nos permite averiguar el tipo de conexiÛn que hay entre el ratÛn y
 <FONT SIZE=2>
 <A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
 <HR>
-<A HREF="aulam.htm"><font FACE="ARIAL"><B>[ArtÌculos Varios]</B></font></a><br>
+<A HREF="aulam.htm"><font FACE="ARIAL"><B>[Art√≠culos Varios]</B></font></a><br>
 </DIV>
 </TD>
 </TR>

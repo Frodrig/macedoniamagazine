@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÃ­guez.</A>
 </b></FONT>
 <br><br>
 
@@ -45,30 +45,30 @@ Cap&iacute;tulo 4.<br>Presentemos todo m&aacute;s elegantemente: Las Listas.
 <p align=JUSTIFY>
 Hasta ahora, hemos visto lo suficiente como para poder sacar texto de diferente
 color por pantalla, sin embargo, se echaba en falta, una forma de poder hacer 
-listas ordenadas con las que estructurar nuestra información.<br>
-¿Un ejemplo?. Pues muy fácil, imaginar que quereis poner un menú, lógicamente,
-deberá de tener diferentes opciones, pues bien, gracias a las facilidades que
+listas ordenadas con las que estructurar nuestra informaciÃ³n.<br>
+Â¿Un ejemplo?. Pues muy fÃ¡cil, imaginar que quereis poner un menÃº, lÃ³gicamente,
+deberÃ¡ de tener diferentes opciones, pues bien, gracias a las facilidades que
 nos ofrecen las listas, podremos mostrar dichas opciones, en pantalla, numeradas,
-marcadas, etc. ¿Qué no?, pues echar un vistazo al ejemplo que viene a continuación para
-que os aclareis un poco más acerca de que van las listas que vamos a explicar:
+marcadas, etc. Â¿QuÃ© no?, pues echar un vistazo al ejemplo que viene a continuaciÃ³n para
+que os aclareis un poco mÃ¡s acerca de que van las listas que vamos a explicar:
 <br>
 <br>
 <center><table border=1>
 <td>
 <FONT size=2>
-Menú 1.
+MenÃº 1.
 <br>
 <OL >
-<LI><FONT size=2>Opción Primera.</LI>
-<LI><FONT size=2>Opción Segunda.</LI>
+<LI><FONT size=2>OpciÃ³n Primera.</LI>
+<LI><FONT size=2>OpciÃ³n Segunda.</LI>
 </OL>
 </Td>
 <TD>
-<FONT size=2>Menú 2.
+<FONT size=2>MenÃº 2.
 <br>
 <UL>
-<LI><FONT size=2>Opción Primera.</LI>
-<LI><FONT size=2>Opción Segunda.</LI>
+<LI><FONT size=2>OpciÃ³n Primera.</LI>
+<LI><FONT size=2>OpciÃ³n Segunda.</LI>
 </UL>
 </TD>
 </TD>
@@ -76,8 +76,8 @@ Menú 1.
 </table></center>
 <br><br>
 <FONT size=2>
-Cómo podeis ver, las listas nos permiten presentar texto de forma extructurada, siendo
-muy útiles cuando queremos hacer menús, listar índices, etc. Bien, una vez visto lo
+CÃ³mo podeis ver, las listas nos permiten presentar texto de forma extructurada, siendo
+muy Ãºtiles cuando queremos hacer menÃºs, listar Ã­ndices, etc. Bien, una vez visto lo
 que es el concepto de lista, pasamos a materia.
 <br><br>
 </p>
@@ -85,56 +85,56 @@ que es el concepto de lista, pasamos a materia.
 Listas Numeradas.
 </h4>
 <p align=justify>
-Este tipo de lista es aquella que tiene sus componentes ordendados por un número
-indicativo. El ejemplo lo tenemos más arriba, en el Menú1. Con este tipo de lista,
-podemos hacer que el navegador vaya generando los números de los elementos que
+Este tipo de lista es aquella que tiene sus componentes ordendados por un nÃºmero
+indicativo. El ejemplo lo tenemos mÃ¡s arriba, en el MenÃº1. Con este tipo de lista,
+podemos hacer que el navegador vaya generando los nÃºmeros de los elementos que
 componen dicha lista, por nosotros. Esto nos puede ahorrar, en muchos casos, bastante
 tiempo.
 <br>
-Para poder llevar a cabo la implementación de dicha lista, deberemos de utilizar la
+Para poder llevar a cabo la implementaciÃ³n de dicha lista, deberemos de utilizar la
 directiva &lt;OL&gt; con su correspondiente &lt;/OL&gt;, ahora bien, dentro de dicha directiva,
 deberemos de poner el texto a listar, pero este, ha de ir encerrado en otra directiva,
-que es &lt;LI&gt;, esto es, &lt;LI&gt; elemento de la lista &lt;/LI&gt;. Cómo lo mejor es ver esto
-con un ejemplo, os voy a poner el código necesario para generar una lista igual a la
-generada para el Menú 1 (ejemplo de arriba).
+que es &lt;LI&gt;, esto es, &lt;LI&gt; elemento de la lista &lt;/LI&gt;. CÃ³mo lo mejor es ver esto
+con un ejemplo, os voy a poner el cÃ³digo necesario para generar una lista igual a la
+generada para el MenÃº 1 (ejemplo de arriba).
 <br>
 <br>
 <i>
-Menú 1.<BR>
+MenÃº 1.<BR>
 &lt;OL&gt;<br>
-&lt;LI&gt; Opción Primera &lt;/LI&gt;<BR>
-&lt;LI&gt; Opción Segunda &lt;/LI&gt;<BR>
+&lt;LI&gt; OpciÃ³n Primera &lt;/LI&gt;<BR>
+&lt;LI&gt; OpciÃ³n Segunda &lt;/LI&gt;<BR>
 &lt;/OL&gt;</i><BR><BR>
-Como podeis ver, este tipo de listas no tienen ningún misterio. Bueno, para ser 
-sinceros, sí tienen un secretito, y es que si despues de la instrucción &lt;OL&gt;
+Como podeis ver, este tipo de listas no tienen ningÃºn misterio. Bueno, para ser 
+sinceros, sÃ­ tienen un secretito, y es que si despues de la instrucciÃ³n &lt;OL&gt;
 poneis type igualado a un tipo de caracter de comienzo, la lista, en lugar de
-mostrar números, mostrará los componentes ordenados en función del caracter 
-insertado. Así, si queremos que salga ordenada, nuestra lista, por las letras
-del abecedario pondríamos &lt;OL type=a&gt;, el resto sería igual. <br>
-Como nota curiosa, si quereis sacar los listados en números romanos, no teneis
-más que poner &lt;OL type=I&gt;.
+mostrar nÃºmeros, mostrarÃ¡ los componentes ordenados en funciÃ³n del caracter 
+insertado. AsÃ­, si queremos que salga ordenada, nuestra lista, por las letras
+del abecedario pondrÃ­amos &lt;OL type=a&gt;, el resto serÃ­a igual. <br>
+Como nota curiosa, si quereis sacar los listados en nÃºmeros romanos, no teneis
+mÃ¡s que poner &lt;OL type=I&gt;.
 <br><br>
 </p>
 <h4>
 Listas Marcadas.
 </h4>
 <p align=justify>
-Bien, este tipo de lista es idéntico al anterior, salvo que en lugar de ir poniendo
-los componentes de la lista con un identificador de ordenación, simplemente ponemos
-una marca, un punto. Como podeis observar más arriba, el Menu 2, es una lista de este
-tipo. El código necesario para generar este tipo de lista, sería igual que el del
+Bien, este tipo de lista es idÃ©ntico al anterior, salvo que en lugar de ir poniendo
+los componentes de la lista con un identificador de ordenaciÃ³n, simplemente ponemos
+una marca, un punto. Como podeis observar mÃ¡s arriba, el Menu 2, es una lista de este
+tipo. El cÃ³digo necesario para generar este tipo de lista, serÃ­a igual que el del
 anterior, salvo que la directiva &lt;OL&gt; cambia a &lt;UL&gt;. <br>
-Lo mejor será que ponga el código necesario para generar la lista del ejemplo del
-Menú 2, ahí va:<br>
+Lo mejor serÃ¡ que ponga el cÃ³digo necesario para generar la lista del ejemplo del
+MenÃº 2, ahÃ­ va:<br>
 <br>
 <i>
-Menú 1.<BR>
+MenÃº 1.<BR>
 &lt;UL&gt;<br>
-&lt;LI&gt; Opción Primera &lt;/LI&gt;<BR>
-&lt;LI&gt; Opción Segunda &lt;/LI&gt;<BR>
+&lt;LI&gt; OpciÃ³n Primera &lt;/LI&gt;<BR>
+&lt;LI&gt; OpciÃ³n Segunda &lt;/LI&gt;<BR>
 &lt;/UL&gt;<BR><BR>
 </i>
-Creo que sobran más explicaciones. ¡A por el siguiente tipo de lista!
+Creo que sobran mÃ¡s explicaciones. Â¡A por el siguiente tipo de lista!
 <br><br>
 </p>
 <h4>
@@ -142,45 +142,45 @@ Listas de Definiciones.
 </h4>
 <p align=justify>
 Este tipo de lista nos va a permitir, generar estupendos formatos de texto en donde
-poner una explicación, una definción o similares. Sin ir más lejos son las que utilizamos
-para poner las explicaciones en la sección de "Bájate algo interesante". Para que
-no te confundas, lo mejor será que veas un ejemplo de una lista de este tipo y
-después te explico cómo hacer ese mismo ejemplo, ¿ok?, pues vamos:
+poner una explicaciÃ³n, una definciÃ³n o similares. Sin ir mÃ¡s lejos son las que utilizamos
+para poner las explicaciones en la secciÃ³n de "BÃ¡jate algo interesante". Para que
+no te confundas, lo mejor serÃ¡ que veas un ejemplo de una lista de este tipo y
+despuÃ©s te explico cÃ³mo hacer ese mismo ejemplo, Â¿ok?, pues vamos:
 <br><BR>
 <center><table>
 <td>
 <dl>
 <dt><FONT SIZE=2>Encabezamiento1</dt>
 <dd><FONT SIZE=2>Toooodo el texto que nos habla acerca del encabezamiento.
-	Como puedes observar, ¡es genial para hacer comentarios breves,
+	Como puedes observar, Â¡es genial para hacer comentarios breves,
 	definiciones y similares!</dd>
 <dt><FONT SIZE=2>Encabezamiento2</dt>
-<dd><FONT SIZE=2>Bueno, pues aquí tenemos otro título más.</dd>
+<dd><FONT SIZE=2>Bueno, pues aquÃ­ tenemos otro tÃ­tulo mÃ¡s.</dd>
 </dl>
 </td>
 </table></center>
 <p align=justify>
-Bueno, ¿Convencido de que puede sernos de utilidad en el futuro?, bien, pues
+Bueno, Â¿Convencido de que puede sernos de utilidad en el futuro?, bien, pues
 vamos a ver como narices se hace eso. <br>
-La implementación de este tipo de listas es prácticamente igual que las dos
-anteriores. Aquí también necesitamos una directiva general al estilo de 
+La implementaciÃ³n de este tipo de listas es prÃ¡cticamente igual que las dos
+anteriores. AquÃ­ tambiÃ©n necesitamos una directiva general al estilo de 
 &lt;OL&gt; y &lt;UL&gt;, esta directiva va a ser &lt;DL&gt; y su correspondiente
-&lt;/DL&gt;. Como ya habrás adivinado, dentro deberá de ir el cuerpo, al igual que
-en las dos listas ya vistas, sin embargo, aquí deberemos de definir, para un 
+&lt;/DL&gt;. Como ya habrÃ¡s adivinado, dentro deberÃ¡ de ir el cuerpo, al igual que
+en las dos listas ya vistas, sin embargo, aquÃ­ deberemos de definir, para un 
 elemento, dos cuerpo distintos, uno para poner el texto que va en la
-zona del encabezamiento y otro para poner texto que acompañara a dicho encabezamiento.
+zona del encabezamiento y otro para poner texto que acompaÃ±ara a dicho encabezamiento.
 <bR>El encabezamiento se codifica con &lt;DT&gt; Encabezamiento &lt;/DT&gt; y el
-texto que lo define con &lt;DD&gt; texto &lt;/DD&gt;. Lógicamente primero irá
-&lt;DT&gt; y despues &lt;DD&gt;.<br> Bueno, mejor vamos a ver el código del
+texto que lo define con &lt;DD&gt; texto &lt;/DD&gt;. LÃ³gicamente primero irÃ¡
+&lt;DT&gt; y despues &lt;DD&gt;.<br> Bueno, mejor vamos a ver el cÃ³digo del
 ejemplo.
 <BR><br><I>
 &lt;DL&gt;<br>
 &lt;DT&gt;Encabezamiento1&lt;/DT&gt;<br>
 &lt;DD&gt;Toooodo el texto que nos habla acerca del encabezamiento.<br>
-	Como puedes observar, ¡es genial para hacer comentarios breves,<br>
+	Como puedes observar, Â¡es genial para hacer comentarios breves,<br>
 	definiciones y similares!&lt;/DD&gt;<br>
 &lt;DT&gt;Encabezamiento2&lt;/DT&gt;<br>
-&lt;DD&gt;Bueno, pues aquí tenemos otro título más.&lt;/DD&gt;<br>
+&lt;DD&gt;Bueno, pues aquÃ­ tenemos otro tÃ­tulo mÃ¡s.&lt;/DD&gt;<br>
 &lt;/DL&gt;
 </I>
 

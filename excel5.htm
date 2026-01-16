@@ -21,7 +21,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n en VBA para Excel</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -32,8 +32,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">IÃ±aki Ecenarro.</A>
 </b></FONT>
 
 <BR><BR>
@@ -43,7 +43,7 @@
 Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
 </H3>
 
-<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la lÃ­nea que viene a continuaciÃ³n) -->
 
 <FONT FACE="Arial" SIZE=2>
 <P ALIGN=JUSTIFY>En esta entrega vamos a tratar sobre la creaci&oacute;n de men&uacute;s y barras de herramientas personalizadas para nuestras hojas. En Visual Basic for Applications, las barras de men&uacute; y las barras de herramientas est&aacute;n representadas por el mismo objeto (<B>CommandBar</B>), y su funcionamiento es exactamente igual. </P>
@@ -62,7 +62,7 @@ Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
 
 <P ALIGN=JUSTIFY>Antes de nada, vamos a intentar aclarar la nomenclatura que se utiliza en VBA para hacer referencia a cada una de las partes de un menu.
 </P>
-<IMG SRC="gif/xlmenu.gif" HEIGHT="355" WIDTH="412" ALT="Menús y submenús" BORDER="1" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>El nombre del menu en s&iacute; mismo es <B>CommandBar</B>. Un <B>CommandBar</B> (barra de men&uacute;) representa a todo el men&uacute;, como por ejemplo el que aparece cuando est&aacute;s en una hoja de c&aacute;lculo. Si cambias a una hoja de gr&aacute;fico ver&aacute;s que el men&uacute; cambia: se ha cambiado de barra de men&uacute; (<B>CommandBar</B>).</P>
+<IMG SRC="gif/xlmenu.gif" HEIGHT="355" WIDTH="412" ALT="MenÃºs y submenÃºs" BORDER="1" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>El nombre del menu en s&iacute; mismo es <B>CommandBar</B>. Un <B>CommandBar</B> (barra de men&uacute;) representa a todo el men&uacute;, como por ejemplo el que aparece cuando est&aacute;s en una hoja de c&aacute;lculo. Si cambias a una hoja de gr&aacute;fico ver&aacute;s que el men&uacute; cambia: se ha cambiado de barra de men&uacute; (<B>CommandBar</B>).</P>
 
 <P ALIGN=JUSTIFY>Cada una de las opciones de la barra de men&uacute; se llama <B>CommandBarPopUp</B> (men&uacute; desplegable seg&uacute;n la traducci&oacute;n de Microsoft). Por ejemplo, en el men&uacute; de una hoja de c&aacute;lculo la opci&oacute;n &quot;Archivo&quot; es un men&uacute; desplegable o <B>CommandBarPopUp</B>. </P>
 
@@ -114,7 +114,7 @@ Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
 </PRE>
 <P ALIGN=JUSTIFY>Hemos utilizado la propiedad &quot;Controls&quot; del objeto CommandBar. Esta propiedad nos permite acceder a todos los submen&uacute;s de una barra de comandos. El objeto devuelto es del tipo &quot;CommandBarPopup&quot;. Reconozco que la terminolog&iacute;a es un poco confusa, pero as&iacute; lo ha hecho Microsoft.</P>
 
-<IMG SRC="gif/xlearl.gif" HEIGHT="116" WIDTH="131" ALT="Menús y submenús" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>Ahora ya tenemos el men&uacute; de &quot;<I>Edici&oacute;n</I>&quot; en nuestra variable. Y lo que queremos hacer es a&ntilde;adir una opci&oacute;n dentro de ese men&uacute;. Para hacerlo utilizaremos deberemos acceder a la propiedad &quot;<B>Controls</B>&quot; de nuestro men&uacute; de <I>Edici&oacute;n</I>. F&iacute;jate que antes hemos accedido a la propiedad Controls del objeto cBar, y ahora vamos a acceder a la propiedad <B>Controls</B> del objeto <I>cBarPopUp</I>. Pues bien, una vez que accedemos a la propiedad &quot;Controls&quot; del men&uacute; <I>Edici&oacute;n</I> (<I>cBarPopUp</I>), utilizamos el m&eacute;todo <B>Add</B> para a&ntilde;adir una nueva opci&oacute;n del men&uacute;:</P>
+<IMG SRC="gif/xlearl.gif" HEIGHT="116" WIDTH="131" ALT="MenÃºs y submenÃºs" ALIGN="Right" HSPACE="4"><P ALIGN=JUSTIFY>Ahora ya tenemos el men&uacute; de &quot;<I>Edici&oacute;n</I>&quot; en nuestra variable. Y lo que queremos hacer es a&ntilde;adir una opci&oacute;n dentro de ese men&uacute;. Para hacerlo utilizaremos deberemos acceder a la propiedad &quot;<B>Controls</B>&quot; de nuestro men&uacute; de <I>Edici&oacute;n</I>. F&iacute;jate que antes hemos accedido a la propiedad Controls del objeto cBar, y ahora vamos a acceder a la propiedad <B>Controls</B> del objeto <I>cBarPopUp</I>. Pues bien, una vez que accedemos a la propiedad &quot;Controls&quot; del men&uacute; <I>Edici&oacute;n</I> (<I>cBarPopUp</I>), utilizamos el m&eacute;todo <B>Add</B> para a&ntilde;adir una nueva opci&oacute;n del men&uacute;:</P>
 
 <PRE>    <FONT COLOR="#0000FF">Set</FONT> cButton = cBarPopUp.Controls.Add(msoControlButton)
 </PRE>
@@ -255,7 +255,7 @@ Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
 
 <PRE>    <FONT COLOR="#0000FF">Set</FONT> cBar = CommandBars.Add(&quot;Barra Macedonia&quot;, msoBarTop, True)
 </PRE>
-<IMG SRC="gif/xlbaud.gif" HEIGHT="116" WIDTH="131" ALT="Menús y submenús" ALIGN="Left" HSPACE="4"><P ALIGN=JUSTIFY>El primer argumento es el nombre de la barra de comandos que vamos a crear. El segundo argumento es la posici&oacute;n de la nueva barra de comandos, y puede ser uno de los siguientes valores:</P>
+<IMG SRC="gif/xlbaud.gif" HEIGHT="116" WIDTH="131" ALT="MenÃºs y submenÃºs" ALIGN="Left" HSPACE="4"><P ALIGN=JUSTIFY>El primer argumento es el nombre de la barra de comandos que vamos a crear. El segundo argumento es la posici&oacute;n de la nueva barra de comandos, y puede ser uno de los siguientes valores:</P>
 <UL TYPE="CIRCLE">
 <LI><B>msoBarLeft, msoBarRight, msoBarTop, msoBarBottom</B>: izquierda, derecha, arriba o abajo.
 <LI><B>msoBarFloating</B>: queremos que la nueva barra de men&uacute; sea flotante.
@@ -379,7 +379,7 @@ Cap&iacute;tulo 5. Men&uacute;s y barras de herramientas.
 </A>
 <HR>
 <A HREF="aulae.htm">
-<FONT FACE="ARIAL"><B>Curso de programación en VBA para Excel</B></FONT>
+<FONT FACE="ARIAL"><B>Curso de programaciÃ³n en VBA para Excel</B></FONT>
 </A> 
 </CENTER>
 </TD>

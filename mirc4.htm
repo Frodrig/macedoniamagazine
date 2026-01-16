@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÛn de Scripts para mIRC</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programaci√≥n de Scripts para mIRC</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÌculo realizado por<br>
-<A HREF="mailto: garcifer@iies.es">David GarcÌa "Gato".</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rt√≠culo realizado por<br>
+<A HREF="mailto: garcifer@iies.es">David Garc√≠a "Gato".</A>
 </b></FONT>
 <br><br>
 
@@ -44,20 +44,20 @@
 <p align=justify>
 Las variables son areas de almacenamiento 
 temporal a las cuales se les puede
-asignar un valor, el cual puede ser usado m·s tarde en los scripts. Por ejemplo,
-puede que el nombre de un Bot (como Scytale) varÌe cada semana. Para no tener que
-variar todo un script, podemos asignarle una variable tal y como se enseÒa m·s
-adelante, y el script se configurar· solo.
+asignar un valor, el cual puede ser usado m√°s tarde en los scripts. Por ejemplo,
+puede que el nombre de un Bot (como Scytale) var√≠e cada semana. Para no tener que
+variar todo un script, podemos asignarle una variable tal y como se ense√±a m√°s
+adelante, y el script se configurar√° solo.
 <br><br>
 Si usted hace uso de una variable que no existe, esta devuelve el valor $null. El
 valor $null ser puede ser usado en comparaciones del tipo if-then-else para
 controlar las bifurcaciones, etc.
 <br><br>
-Para entender bien este documento hay que saber antes quÈ es un alias, los
+Para entender bien este documento hay que saber antes qu√© es un alias, los
 comandos de los alias, y todo lo relacionado en general con los alias
 <br><br>
 <H4>
-DefiniciÛn de Variables.
+Definici√≥n de Variables.
 </H4>
 <p align=justify>
 
@@ -69,14 +69,14 @@ Los siguientes comandos le permiten crear y situar los valores de las variables.
 <br><br>
 <font size=1>
 <i>Ejemplo:</i><br>
-<b>/set %nombrebot Scytale</b>  Û  <b>/set %nombrebot $$?="øNombre del bot?"</b>
+<b>/set %nombrebot Scytale</b>  √≥  <b>/set %nombrebot $$?="¬øNombre del bot?"</b>
 </font>
 <br><br>
 <p align=justify>
-En el primer ejemplo de definiciÛn de variables el nombre del bot es fijo, y solo
+En el primer ejemplo de definici√≥n de variables el nombre del bot es fijo, y solo
 hay que modificarlo en las variables del mIRC para que todo el script sepa que el
 bot se llama Scytale.<br> En el segundo ejemplo solo hay que ejecutar la orden para
-variar el nombre del bot autom·ticamente.
+variar el nombre del bot autom√°ticamente.
 </li>
 
 <br>
@@ -89,7 +89,7 @@ variar el nombre del bot autom·ticamente.
 </font>
 <p align=justify>
 Si usted especifica una variable con caracteres comodines (*) entonces todas las
-variables que coincidan ser·n eliminadas.
+variables que coincidan ser√°n eliminadas.
 </li>
 
 <br>
@@ -98,7 +98,7 @@ variables que coincidan ser·n eliminadas.
 <p align=justify>
 <b>/unset %test*</b>. Esto quita todas las variables que comiencen con la palabra %test.
 <br>
-<b>/unsetall</b>. Esto es igual que el /unset pero Èste elimina TODAS las variables
+<b>/unsetall</b>. Esto es igual que el /unset pero √©ste elimina TODAS las variables
 definidas.
 <br>
 <b>/inc &lt;%var&gt;[valor]</b>. Esto aumenta el valor de %var por el "valor".
@@ -107,7 +107,7 @@ definidas.
 </li>
 </ol>
 <br>
-TambiÈn se puede usar el signo igual (=) para asignar valores a una variable.
+Tambi√©n se puede usar el signo igual (=) para asignar valores a una variable.
 <br>
 
 %nombrebot = Scytale %i = 5 %count = $1
@@ -116,10 +116,10 @@ TambiÈn se puede usar el signo igual (=) para asignar valores a una variable.
 Y usted puede ejecutar las siguientes operaciones en las variables usando el signo
 igual (=):
 <br><br>
-%x=5+1.<br> Valor de x igual a 5 m·s 1<br><br>
+%x=5+1.<br> Valor de x igual a 5 m√°s 1<br><br>
 %x=5-%y.<br> Valor de x es igual a 5 menos valor de y.<br><br>
 %x=%x*2.<br> Valor de x igual a valor de x por 2.<br><br>
-%x=%z/$2.<br> Valor de x igual a valor de z entre la definiciÛn 2 (ver popups del mIRC).<br><br>
+%x=%z/$2.<br> Valor de x igual a valor de z entre la definici√≥n 2 (ver popups del mIRC).<br><br>
 %x=$1%3.<br>
 %x=2^%w.<br>
 etc.<br><br>
@@ -129,10 +129,10 @@ entramos en operaciones complejas.
 <h4>If-then-else Statements (Declaraciones if-then-else)</h4>
 <p align=justify>
 Las declaraciones if-then-else le permiten comparar valores y ejecutar diferentes
-partes de un script bas·ndose en la comparaciÛn. Ahora explicamos esto un poco
+partes de un script bas√°ndose en la comparaci√≥n. Ahora explicamos esto un poco
 mejor.
 <br><br>
-El formato b·sico con que nos podemos encontrar es el siguiente:
+El formato b√°sico con que nos podemos encontrar es el siguiente:
 <br><bR>
 <font size=1>
 If  (v1 operador v2) { comandos }<br>
@@ -140,15 +140,15 @@ Elseif (v1 operador v2) { comandos}<br>
 Else (v1 operador v2) {comandos }<br>
 </font>
 <br>
-El parÈntesis () encierra las comparaciones, y las llaves {} encierran los
-comandos que usted desea que se ejecuten en el caso de que la comparaciÛn sea
-cierta. Debe tener mucho cuidado con el n˙mero de parÈntesis y llaves que pone
+El par√©ntesis () encierra las comparaciones, y las llaves {} encierran los
+comandos que usted desea que se ejecuten en el caso de que la comparaci√≥n sea
+cierta. Debe tener mucho cuidado con el n√∫mero de par√©ntesis y llaves que pone
 para, de este modo, asegurarse de que las comparaciones sean hechas correctamente
 y que los comandos ejecutados son los correctos.
 <br><br>
-Usando llaves {} aumentar· la velocidad de proceso. Si un alias usa unas pocas
-llaves {} la declaraciÛn podria ser ambigua y el alias podr°a tardar mucho en
-realizar la comparaciÛn, hacerla mal o incluso no hacerla completa.
+Usando llaves {} aumentar√° la velocidad de proceso. Si un alias usa unas pocas
+llaves {} la declaraci√≥n podria ser ambigua y el alias podr¬°a tardar mucho en
+realizar la comparaci√≥n, hacerla mal o incluso no hacerla completa.
 <br><br>
 Se pueden realizar tantas declaraciones if-then-else como se quiera.
 <br>
@@ -161,22 +161,22 @@ Se pueden realizar tantas declaraciones if-then-else como se quiera.
 <li><b>></b>. Mayor que</li>
 <li><b>>=</b>. Mayor o igual que</li>
 <li><b><=</b>. Menor o igual que</li>
-<li><b>//</b>. Es un m˙ltiplo de</li>
-<li><b>//</b>. No es un m˙ltiplo de</li>
-<li><b>isin</b>. El valor v1 est· incluido en el valor v2</li>
+<li><b>//</b>. Es un m√∫ltiplo de</li>
+<li><b>//</b>. No es un m√∫ltiplo de</li>
+<li><b>isin</b>. El valor v1 est√° incluido en el valor v2</li>
 <li><b>iswm</b>. Los comodines del valor v1 coinciden con los de v2</li>
-<li><b>isnum</b>. El n˙mero v1 es un n˙mero situado en el rango v2 que est· el la forma n1-n2 (v2 optativo)</li>
-<li><b>ison</b>. El nick v1 est· en el canal v2</li>
+<li><b>isnum</b>. El n√∫mero v1 es un n√∫mero situado en el rango v2 que est√° el la forma n1-n2 (v2 optativo)</li>
+<li><b>ison</b>. El nick v1 est√° en el canal v2</li>
 <li><b>isop</b>. El nick v1 es un op del canal v2</li>
 <li><b>isvo</b>. El nick v1 tiene voz en el canal v2</li>
-<li><b>ischan</b>. Si v1 es un canal en el que est· usted</li>
-<li><b>isauto</b>. Si v1 es un usuario que est· en su lista de auto-op del canal v2 (v2 optativo)</li>
-<li><b>isignore</b>. Si v1 es un usuario que est· en su lista de ignorados con la opciÛn de</li>
+<li><b>ischan</b>. Si v1 es un canal en el que est√° usted</li>
+<li><b>isauto</b>. Si v1 es un usuario que est√° en su lista de auto-op del canal v2 (v2 optativo)</li>
+<li><b>isignore</b>. Si v1 es un usuario que est√° en su lista de ignorados con la opci√≥n de</li>
 <li><b>ignorar</b>. v2 (v2 optativo)</li>
-<li><b>isprotect</b>. Si v1 es un usuario que est· en su lista de protecciÛn del canal v2 (v2 optativo)</li>
-<li><b>isnotify</b>. Si v1 es un usuario que est· en su lista de notificaciÛn.</li>
+<li><b>isprotect</b>. Si v1 es un usuario que est√° en su lista de protecci√≥n del canal v2 (v2 optativo)</li>
+<li><b>isnotify</b>. Si v1 es un usuario que est√° en su lista de notificaci√≥n.</li>
 </ol>
-Para negar un operador usted puede anteponerle un signo de exclamaciÛn (!).
+Para negar un operador usted puede anteponerle un signo de exclamaci√≥n (!).
 <br>
 </p>
 <h4>Combinar comparaciones.</h4><p align=justify>
@@ -188,22 +188,22 @@ Ejemplos de comparaciones:
 <pre>
 number {
  if (($1 > 0) && ($1< 10)) {
-   if ($1 < 5) echo El n˙mero es menor de cinco
-   else echo El n˙mero es m·s grande que cinco
+   if ($1 < 5) echo El n√∫mero es menor de cinco
+   else echo El n√∫mero es m√°s grande que cinco
  }
- else echo El n˙mero est· fuera de los l°mites
+ else echo El n√∫mero est√° fuera de los l¬°mites
 }</pre>
 
 <br>
-Este alias comprueba si un n˙mero especificado ($1), cuando se escribe " /number
-<$1> ", se encuentra entre 0 y 10. Este alias se leerÌa asÌ lÌnea a lÌnea:<br>
+Este alias comprueba si un n√∫mero especificado ($1), cuando se escribe " /number
+<$1> ", se encuentra entre 0 y 10. Este alias se leer√≠a as√≠ l√≠nea a l√≠nea:<br>
 <br><font size=1>
-Si el n˙mero que yo digo ($1) est· entre 0 y 10 entonces<br>
-  Si es menor de 5 escribe en la pantalla " El n˙mero es menor de cinco "<br>
-  Para el resto de valores, que entran en el rango 0-10,<br> escribe " El n˙mero es
-m·s grande de cinco "<br>
- Para todos los valores que no estÈn entre 0-10<br> escribe " El n˙mero est· fuera de
-los lÌmites "
+Si el n√∫mero que yo digo ($1) est√° entre 0 y 10 entonces<br>
+  Si es menor de 5 escribe en la pantalla " El n√∫mero es menor de cinco "<br>
+  Para el resto de valores, que entran en el rango 0-10,<br> escribe " El n√∫mero es
+m√°s grande de cinco "<br>
+ Para todos los valores que no est√©n entre 0-10<br> escribe " El n√∫mero est√° fuera de
+los l√≠mites "
 </font>
 <br><br>
 Otros ejemplos:
@@ -227,7 +227,7 @@ Listops {
 
 <p align=justify>
 Este alias lista los ops del canal en el que te encuentras actualmente. Este es un
-mÈtodo "bruto" ya que podrÌamos haber usado el identificador  $opnick(), pero para
+m√©todo "bruto" ya que podr√≠amos haber usado el identificador  $opnick(), pero para
 ver la estructura general de un alias con variables nos vale.
 </li>
 <br>
@@ -249,12 +249,12 @@ GiveOps {
   goto nextnick
 }</pre>
 <p align = justify>
-Esto es una definiciÛn para popups que da op a los nicks que hemos seleccionado en
+Esto es una definici√≥n para popups que da op a los nicks que hemos seleccionado en
 la lista de nicks del canal actual.
 </li>
 <br>
 <li>
-<b>En los Remotes, ctcp¥s.</b>
+<b>En los Remotes, ctcp¬¥s.</b>
 
 <pre>
 on 1:ctcpreplay:PING* {
@@ -264,23 +264,23 @@ on 1:ctcpreplay:PING* {
     if (%pt < 0) set %pt 0
     if (%pt > 5) { 
 	echo 4 [PING Replay] 
-	$nick est· muy cerca. Buf! DeberÌa usar desodorante
+	$nick est√° muy cerca. Buf! Deber√≠a usar desodorante
 	             }
     elseif (%pt < 20) { 
 	echo 4 [PING Replay] 
-	$nick est· a unos cuantos pasos de distancia 
+	$nick est√° a unos cuantos pasos de distancia 
 	                  }
     else 
 	echo 4 [PING Replay] 
 	Tierra llamando a $nick, tierra llamando a $nick.
-	"DÛnde se ha metido este?
+	"D√≥nde se ha metido este?
   }
  hatl
 }
 </pre>
 
 <p align=justify>
-Esto interpreta una respuesta PING e imprime un mensaje tonto seg˙n lo que tarde
+Esto interpreta una respuesta PING e imprime un mensaje tonto seg√∫n lo que tarde
 en llegarte la respuesta de la otra persona a tu PING.
 </li>
 <br>
@@ -290,13 +290,13 @@ en llegarte la respuesta de la otra persona a tu PING.
 <pre>
 on 1:START: {
   if ( $group(#comb) == $null ) 
-  { echo 4 -s No se cargÛ CTCPs.ini }
+  { echo 4 -s No se carg√≥ CTCPs.ini }
   
   if ( $group(#voicelist) == $null ) 
-  { echo 4 -s No se cargÛ EVENTS.ini }
+  { echo 4 -s No se carg√≥ EVENTS.ini }
   
   if ( $group(#canal) == $null ) 
-  { echo 4 -s No se cargÛ RAW.ini }
+  { echo 4 -s No se carg√≥ RAW.ini }
   
   if ( $exists($mircdirutil/neko95.exe) ==$true ) 
   { run $mircdirutil/neko95.exe }
@@ -305,7 +305,7 @@ on 1:START: {
   echo 1 Parece ser que no tienes a mi mascota Neko..Pobre Neko}
   
   if ( $exists($mircdirutil/nknab.exe) == $false) 
-  { echo  ≠No tienes instaladas las utilidades! }
+  { echo  ¬≠No tienes instaladas las utilidades! }
 }
 </pre>
 <p align=justify>
@@ -315,40 +315,40 @@ archivos del script correctamente.
 </ul>
 <br>
 <p align=justify>
-Otro ejemplo en los alias de la utilizaciÛn de las variables es:
+Otro ejemplo en los alias de la utilizaci√≥n de las variables es:
 <br>
 <pre>
 /ascii {
   set %i 1
   :otro
   if (%i == 260) goto hecho
-  echo 3 El car·cter n˙mero %i del mIRC es $chr(%i)
+  echo 3 El car√°cter n√∫mero %i del mIRC es $chr(%i)
   inc %i
   goto otro
   :hecho
-  echo Fin del cÛdigo ASCII del mIRC
+  echo Fin del c√≥digo ASCII del mIRC
 }</pre>
 <br>
 <p align=justify>
-AquÌ definimos la variable %i como 1. Creamos un apartado llamado "otro".  La
-primera lÌnea del apartado "otro" nos dice que si %i es igual a 260, entonces debe
+Aqu√≠ definimos la variable %i como 1. Creamos un apartado llamado "otro".  La
+primera l√≠nea del apartado "otro" nos dice que si %i es igual a 260, entonces debe
 ir al apartado "hecho". Esta orden hace que el alias que hemos definido tenga un
 fin. Se debe tener siempre mucho cuidado de no hacer ordenes "sin fin". En la
-siguiente lÌnea decimos que nos escriba en  la pantalla este mensaje "El car·cter
-n˙mero (lo que sea %i) del mIRC es (mostrar el car·cter que coincide con el valor
-de %i). DespuÈs sumamos 1 a %i. Seguido a esto le ordenamos que vuelva al
+siguiente l√≠nea decimos que nos escriba en  la pantalla este mensaje "El car√°cter
+n√∫mero (lo que sea %i) del mIRC es (mostrar el car√°cter que coincide con el valor
+de %i). Despu√©s sumamos 1 a %i. Seguido a esto le ordenamos que vuelva al
 principio del apartado "otro". Se repite entonces todas las ordenes. Cuando %i sea
-igual a 260 se inicia el apartado "hecho" y se muestra el mensaje "Fin del cÛdigo
-ASCII del mIRC". AquÌ termina el alias.
+igual a 260 se inicia el apartado "hecho" y se muestra el mensaje "Fin del c√≥digo
+ASCII del mIRC". Aqu√≠ termina el alias.
 <br><br>
 Eso es todo lo que hay sobre variables en el mIRC 5.02, ahora todo depende de la
-imaginaciÛn de cada uno para usarlos. Espero haberle ayudado a entender un poco
+imaginaci√≥n de cada uno para usarlos. Espero haberle ayudado a entender un poco
 mejor el mIRC.
 <br><br>
 <font size=1>
 <center>
 <b>Nota del autor</b><br>
-Todos los comandos han sidos sacados del manual de RamÌrez sobre el mIRC.
+Todos los comandos han sidos sacados del manual de Ram√≠rez sobre el mIRC.
 </center>
 </font>
 
@@ -368,7 +368,7 @@ Todos los comandos han sidos sacados del manual de RamÌrez sobre el mIRC.
 <FONT SIZE=2>
 <A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
 <HR>
-<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de ProgramaciÛn de Scripts para mIRC]</B></font></a><br>
+<A HREF="aulai.htm"><font FACE="ARIAL"><B>[Curso de Programaci√≥n de Scripts para mIRC]</B></font></a><br>
 </DIV>
 </TD>
 </TR>

@@ -21,7 +21,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación en VBA para Excel</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n en VBA para Excel</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -32,8 +32,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
-<A HREF="mailto:ecenaitu@arrakis.es">Iñaki Ecenarro.</A>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
+<A HREF="mailto:ecenaitu@arrakis.es">IÃ±aki Ecenarro.</A>
 </b></FONT>
 <br><br>
 
@@ -140,9 +140,9 @@ ActiveCell.Formula = ActiveCell.Formula + i<BR>
 ActiveCell.Formula = ActiveCell.Formula &amp; &quot;+&quot; &amp; i<BR>
 <BR>
 <P ALIGN="justify">El operador &amp; ya lo vimos en la primera entrega, se utiliza para concatenar cadenas de caracteres. Partimos de la f&oacute;rmula que actualmente tiene la celda activa (por ejemplo, &quot;=A1*2&quot;) y luego le a&ntilde;adimos un signo &quot;+&quot; y luego nuestro valor (i), con lo que la f&oacute;rmula pasar&aacute; a ser &quot;=A1*2+3&quot; (si i tiene el valor 3).</P>
-<P ALIGN="justify">El problema que se nos presenta ahora es que si en la celda activa no hay una celda, sino un valor (por ejemplo, 2), nosotros asignaremos a ActiveCell.Formula la cadena &quot;2+3&quot; (si i tiene el valor 3). ¿Veis el error? Evidentemente el error es que falta el signo &quot;=&quot; al principio de la f&oacute;rmula para decirle a Excel que es una f&oacute;rmula. O sea que deber&iacute;amos a&ntilde;adir delante de la f&oacute;rmula un &quot;=&quot;, lo que podemos hacer de la siguiente forma:</P>
+<P ALIGN="justify">El problema que se nos presenta ahora es que si en la celda activa no hay una celda, sino un valor (por ejemplo, 2), nosotros asignaremos a ActiveCell.Formula la cadena &quot;2+3&quot; (si i tiene el valor 3). Â¿Veis el error? Evidentemente el error es que falta el signo &quot;=&quot; al principio de la f&oacute;rmula para decirle a Excel que es una f&oacute;rmula. O sea que deber&iacute;amos a&ntilde;adir delante de la f&oacute;rmula un &quot;=&quot;, lo que podemos hacer de la siguiente forma:</P>
 ActiveCell.Formula = &quot;=&quot; &amp; ActiveCell.Formula &amp; &quot;+&quot; &amp; i<BR><BR>
-<P ALIGN="justify">¿Cu&aacute;l es el problema ahora? Pues que si la celda activa tiene una f&oacute;rmula nos encontramos con que nuestra f&oacute;rmula definitiva tiene dos signos &quot;=&quot; al principio, uno el que ya ten&iacute;a y otro el que le hemos puesto nosotros. El resultado es que introducimos una f&oacute;rmula incorrecta y Excel nos vuelve a dar un error.</P>
+<P ALIGN="justify">Â¿Cu&aacute;l es el problema ahora? Pues que si la celda activa tiene una f&oacute;rmula nos encontramos con que nuestra f&oacute;rmula definitiva tiene dos signos &quot;=&quot; al principio, uno el que ya ten&iacute;a y otro el que le hemos puesto nosotros. El resultado es que introducimos una f&oacute;rmula incorrecta y Excel nos vuelve a dar un error.</P>
 <P ALIGN="justify">Bueno, creo que he montado un peque&ntilde;o l&iacute;o, pero en realidad no tiene ninguna dificultad. Lo que hay que hacer es comprobar si en la celda activa hay una f&oacute;rmula (esto se puede hacer mirando si el primer car&aacute;cter es el signo &quot;=&quot;, utilizando por ejemplo la funci&oacute;n <I>Left</I>). Si hay una f&oacute;rmula, s&oacute;lo a&ntilde;adimos la parte del final, y si no hay una f&oacute;rmula a&ntilde;adimos primero un signo &quot;=&quot; y luego la parte del final. Esto queda como ejercicio, y si no te sale me escribes y lo comentamos.</P>
 <P ALIGN="justify">Pues aparte de todo este l&iacute;o ya lo hemos visto todo. Si ejecutas la rutina <B>Sumar_A_Celda()</B> comprobar&aacute;s que primero te pide un valor y luego suma ese valor a la celda activa. Por cierto, que nadie piense que esta macro es ninguna maravilla, porque lo mismo que hace se puede hacer m&aacute;s r&aacute;pido utilizando &quot;Pegado especial..&quot;, que adem&aacute;s es capaz de restar, multiplicar y dividir. Ya llegaremos a eso tambi&eacute;n, pero para ir aprendiendo un poco no nos viene mal.</P>
 <P ALIGN="justify">Ahora vamos a avanzar otro paso: la rutina anterior sumaba un valor a la celda activa, y ahora vamos a sumar ese valor a todo el rango que seleccione el usuario. Como siempre, aqu&iacute; va la rutina completa, luego la explicamos:</P>
@@ -165,7 +165,7 @@ ActiveCell.Formula = &quot;=&quot; &amp; ActiveCell.Formula &amp; &quot;+&quot; 
 <P ALIGN="justify">Las dos siguientes l&iacute;neas son iguales que antes: primero presentamos un peque&ntilde;o mensaje al usuario, y luego obtenemos el valor y convertimos la cadena a un valor num&eacute;rico.</P>
 <P ALIGN="justify">En las tres siguientes l&iacute;neas est&aacute; todo lo nuevo. Vamos por pasos: <B>Selection</B> es una propiedad del objeto <B>Application</B>, o sea que al escribir <B>Selection</B> Excel supone que estamos escribiendo <B>Application.Selection</B>. Pues bien, la propiedad <B>Selection</B> nos devuelve el rango que est&aacute; seleccionado en la hoja activa, es decir, un objeto de tipo Range.</P>
 <P ALIGN="justify">Con <B>Selection</B> obtenemos un objeto de tipo Range que apunta al rango seleccionado de la hoja activa. Si accedemos a la propiedad <B>Cells</B> de ese objeto Range, obtendremos un &quot;conjunto&quot; de todas las celdas de ese rango.</P>
-<P ALIGN="justify">¿Que es un <U><B>conjunto</B></U>? Un conjunto es un objeto que contiene otros objetos, generalmente del mismo tipo (la definici&oacute;n la he copiado de la ayuda de Windows). La propiedad Cells de un objeto Range nos devuelve un conjunto que contiene todas las celdas de ese rango.</P>
+<P ALIGN="justify">Â¿Que es un <U><B>conjunto</B></U>? Un conjunto es un objeto que contiene otros objetos, generalmente del mismo tipo (la definici&oacute;n la he copiado de la ayuda de Windows). La propiedad Cells de un objeto Range nos devuelve un conjunto que contiene todas las celdas de ese rango.</P>
 <P ALIGN="justify">Luego viene una instrucci&oacute;n &quot;<B>For</B>&quot;. En la entrega anterior vimos una instrucci&oacute;n For, pero un poco distinta a esta. En ese caso lo que hac&iacute;amos era dar a una variable distintos valores, desde el 1 hasta el 10, y para cada valor de la variable ejecut&aacute;bamos unas instrucciones. An&aacute;logamente, en esta ocasi&oacute;n vamos a dar a la variable &quot;h&quot; (de tipo Object) unos valores, y para cada valor de &quot;h&quot; vamos a ejecutar una instrucci&oacute;n.</P>
 <P ALIGN="justify">Para dar los distintos valores a &quot;h&quot; vamos a utilizar la instrucci&oacute;n &quot;<B>For Each</B>&quot;, que &quot;<I>repite un grupo de enunciados para cada elemento de una matriz o de un conjunto</I>&quot;. El conjunto que vamos a utilizar es <B>Selection.Cells</B>, que como sabemos son todas las celdas del rango seleccionado. Es decir, que con </P>
 <PRE><FONT SIZE="+0"><FONT COLOR="#0000FF">For Each</FONT> h <FONT COLOR="#0000FF">In</FONT> Selection.Cells

@@ -21,7 +21,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÛn Gr·fica en OpenGL</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programaci√≥n Gr√°fica en OpenGL</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -32,8 +32,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <b><FONT color="#cc0000" size=2 face="arial">
-A</font><FONT color="#000000" size=2 face="arial">rtÌculo realizado por<br>
-<A HREF="mailto:oscarg@salleurl.edu">Oscar GarcÌa "Kokopus".</A>
+A</font><FONT color="#000000" size=2 face="arial">rt√≠culo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar Garc√≠a "Kokopus".</A>
 </b></FONT>
 <br><br>
 
@@ -47,37 +47,37 @@ Conceptos previos.
 
 <FONT color="#000000" size=2 face="arial">
 <P ALIGN=JUSTIFY>
-Si estais aquÌ es porque os interesa el curso y eso me parece
-perfecto...°vamos alla pues!
-<h4>Sistemas gr·ficos. Dispositivos y elementos.</h4>
+Si estais aqu√≠ es porque os interesa el curso y eso me parece
+perfecto...¬°vamos alla pues!
+<h4>Sistemas gr√°ficos. Dispositivos y elementos.</h4>
 <p align =justify>
-Tal como comentÈ en el artÌculo de presentaciÌn, es inevitable
-hablar de cÛmo programar con OpenGL sin, a la par, mencionar determinados
-conceptos. Por tanto primero debemos entender quÈ es un "pipeline" gr·fico,
-quÈ elementos lo configuran y cu·les son sus entradas y salidas.
+Tal como coment√© en el art√≠culo de presentaci√≠n, es inevitable
+hablar de c√≥mo programar con OpenGL sin, a la par, mencionar determinados
+conceptos. Por tanto primero debemos entender qu√© es un "pipeline" gr√°fico,
+qu√© elementos lo configuran y cu√°les son sus entradas y salidas.
 <br><br>
-Un sistema gr·fico tÌpico se compone de los siguientes
-elementos fÌsicos:<br><br>
+Un sistema gr√°fico t√≠pico se compone de los siguientes
+elementos f√≠sicos:<br><br>
 <CENTER><table border=1><td><IMG SRC="jpg/open_f1.jpg"></td></table></CENTER>
 <br><br>
 <p align=justify>
-Estas son las caracterÌsticas generales de cada uno de los
+Estas son las caracter√≠sticas generales de cada uno de los
 elementos:
 <br><br>
 <UL>
 <LI>
 <B><p align = justify>Entradas </B>: todo aquello que nuestro programa ha calculado
 y desea dibujar... En definitiva es el "nuevo estado" de nuestro mundo
-tras alg˙n evento que lo ha hecho cambiar como por ejemplo que la c·mara
+tras alg√∫n evento que lo ha hecho cambiar como por ejemplo que la c√°mara
 se haya movido o alejado de la escena.<br><br></LI>
 
 <LI>
-<B><p align = justify>Procesador ("CPU")</B> : m·ximo administrador del sistema,
-este maestro de ceremonias se encargara de gestionar la comunicaciÛn entre
-todos los mÛdulos. Realizara operaciones seg˙n se le pida con ayuda de
-una/s <B>ALU</B>/s ( Unidades aritmÈticas ) y consultara la memoria cuando
+<B><p align = justify>Procesador ("CPU")</B> : m√°ximo administrador del sistema,
+este maestro de ceremonias se encargara de gestionar la comunicaci√≥n entre
+todos los m√≥dulos. Realizara operaciones seg√∫n se le pida con ayuda de
+una/s <B>ALU</B>/s ( Unidades aritm√©ticas ) y consultara la memoria cuando
 le sea necesario. En sistemas dedicados, y por tanto especializados en
-gr·ficos, podemos tener diversas CPU's "trabajando" en paralelo para asegurar
+gr√°ficos, podemos tener diversas CPU's "trabajando" en paralelo para asegurar
 un buen rendimiento en <B>tiempo real </B>(Calcular y dibujar a la vez).<br><br></LI>
 
 <LI>
@@ -87,53 +87,53 @@ el "frame buffer".<br><br></LI>
 
 <LI>
 <B><p align = justify>"Frame Buffer"</B> : zona de memoria destinada a almacenar
-todo aquello que debe ser dibujado. Antes de presentar la informaciÛn por
+todo aquello que debe ser dibujado. Antes de presentar la informaci√≥n por
 pantalla, esta se recibe en el frame buffer. Por tanto nuestro programa
-OpenGL escribe en esta area de memoria y autom·ticamente envÌa su contenido
-a la pantalla despuÈs.<br><br></LI>
+OpenGL escribe en esta area de memoria y autom√°ticamente env√≠a su contenido
+a la pantalla despu√©s.<br><br></LI>
 
 <LI>
 <B><p align = justify>Look Up Table ("LUT")</B> : esta "tabla" contiene todos
-los colores que tenemos disponibles en nuestro sistema. A algunos os parecer·
-quiz·s mas familiar el termino "paleta" para referiros a la LUT. En sistemas
+los colores que tenemos disponibles en nuestro sistema. A algunos os parecer√°
+quiz√°s mas familiar el termino "paleta" para referiros a la LUT. En sistemas
 "<B>indexados</B>" cada color tiene un identificador en la tabla y puedes
-referirte a el us·ndolo en tu programa. AsÌ si deseamos dibujar un polÌgono
-de color rojo, modificaremos su atributo de color d·ndole a este el valor
+referirte a el us√°ndolo en tu programa. As√≠ si deseamos dibujar un pol√≠gono
+de color rojo, modificaremos su atributo de color d√°ndole a este el valor
 del identificador que tiene el color rojo en la LUT...leer despacio esta
-lÌnea y seguro que lo entendÈis...<br><br></LI>
+l√≠nea y seguro que lo entend√©is...<br><br></LI>
 
 <LI>
-<B><p align = justify>Conversor D/A</B> : la informaciÛn contenida en el frame
-buffer a nivel de bit es digital y por tanto debe convertirse a su homÛnimo
-analÛgico para poder ser procesada por un <B>CRT</B> (Tubo de rayos catÛdicos)
+<B><p align = justify>Conversor D/A</B> : la informaci√≥n contenida en el frame
+buffer a nivel de bit es digital y por tanto debe convertirse a su hom√≥nimo
+anal√≥gico para poder ser procesada por un <B>CRT</B> (Tubo de rayos cat√≥dicos)
 y proyectada en la pantalla. No profundizo mas en este tema pues no es
 el objetivo analizar el funcionamiento de un monitor.<br><br></LI>
 
 <LI>
-<B><p align = justify>Salidas</B> : tras el conversar ya disponemos de informaciÛn
-analÛgica para ser visualizada en nuestra pantalla.<br><br></LI>
+<B><p align = justify>Salidas</B> : tras el conversar ya disponemos de informaci√≥n
+anal√≥gica para ser visualizada en nuestra pantalla.<br><br></LI>
 </UL>
 <br><br>
 <p align = justify>
 Antes de continuar aclarar el termino "<B>pixel</B>" (picture
-element). Un pixel es la unidad mÌnima de pantalla y los encontramos dispuestos
+element). Un pixel es la unidad m√≠nima de pantalla y los encontramos dispuestos
 en filas en cualquier monitor o televisor de manera que el conglomerado
 de pixels con sus colores asociados da lugar a la imagen.
 <br><br>
 El frame buffer se caracteriza por su <B>resolucion</B>
 y por su <B>profundidad</B>.
 <br><br>
-La resoluciÛn viene dada por el producto ancho x alto,
-es decir, el numero de filas multiplicado por el numero de columnas an·logamente
+La resoluci√≥n viene dada por el producto ancho x alto,
+es decir, el numero de filas multiplicado por el numero de columnas an√°logamente
 a las resoluciones que nuestro monitor puede tener (640 x 480, 800 x 600
 ...).
 <br><br>
 La profundidad es el numero de bits que utilizamos para
-guardar la informaciÛn de cada pixel. Este numero depender· de la cantidad
-de colores que deseemos mostrar en nuestra aplicaciÛn. TÌpicamente si queremos
+guardar la informaci√≥n de cada pixel. Este numero depender√° de la cantidad
+de colores que deseemos mostrar en nuestra aplicaci√≥n. T√≠picamente si queremos
 "<B>color real</B>" necesitaremos ser capaces de mostrar 16,7 millones
-de colores simult·neamente que es la capacidad aproximada de nuestro sistema
-visual. En este caso y suponiendo una resoluciÛn de 800 x 600 pixels en
+de colores simult√°neamente que es la capacidad aproximada de nuestro sistema
+visual. En este caso y suponiendo una resoluci√≥n de 800 x 600 pixels en
 pantalla necesitaremos...:
 <br><br>
 <TABLE BORDER=1>
@@ -147,115 +147,115 @@ pantalla necesitaremos...:
 dado que color real implica 256 posibles valores de rojo,
 256 de verde y 256 de azul por pixel y esto implica un byte/pixel para
 cada una de estas componentes. De todas formas mas adelante abordaremos
-este tema en profundidad cuando hablemos de color....°no os preocupÈis si
+este tema en profundidad cuando hablemos de color....¬°no os preocup√©is si
 ahora mismo no lo veis del todo claro!.
 <br><br>
-Por ahora debÈis quedaros con la idea de que necesitamos
-una ·rea especial de memoria para poder dibujar a cada momento nuestra
-imagen 3D. Seg˙n la resoluciÛn que deseemos para nuestra ventana de visionado
-y segun la calidad de color esperada, necesitaremos mas o menos memoria...asÌ
+Por ahora deb√©is quedaros con la idea de que necesitamos
+una √°rea especial de memoria para poder dibujar a cada momento nuestra
+imagen 3D. Seg√∫n la resoluci√≥n que deseemos para nuestra ventana de visionado
+y segun la calidad de color esperada, necesitaremos mas o menos memoria...as√≠
 es.
 <br><br>
-Entonces pensareis...<B>y øcÛmo lo hago para "reservar"
-esta memoria?</B>...<B>øtengo que tratar "yo" directamente con ella?</B>.....NO,
-precisamente esto ser· lo que OpenGL har· por si sola sin que nosotros
-nos demos ni cuenta aunque mas adelante veremos que tambiÈn podrÌamos llegar
+Entonces pensareis...<B>y ¬øc√≥mo lo hago para "reservar"
+esta memoria?</B>...<B>¬øtengo que tratar "yo" directamente con ella?</B>.....NO,
+precisamente esto ser√° lo que OpenGL har√° por si sola sin que nosotros
+nos demos ni cuenta aunque mas adelante veremos que tambi√©n podr√≠amos llegar
 a este nivel de detalle.
 <br><br>
-Nuestra librerÌa o <B>API </B>(Application Programming
+Nuestra librer√≠a o <B>API </B>(Application Programming
 Interface) , en este caso OpenGL, contactara directamente con los elementos
 de la figura anterior a medida que lo crea necesario. Por tanto esto nos
-ser· totalmente transparente y no deber· preocuparnos.
+ser√° totalmente transparente y no deber√° preocuparnos.
 <br>
-<h4>El modelo "c·mara sintÈtica"</h4><p align=justify>
-OpenGL utiliza este modelo sem·ntico para interpretar
-una escena que debe ser dibujada. B·sicamente se trata de imaginar un objeto
-situado en un determinado lugar y filmado por una c·mara...es tan sencillo
-como esto. Si conseguÌs tener claro este punto de vista tendrÈis mucho
-ganado os lo aseguro. Uno de los problemas al programar gr·ficos es no
-tener una visiÛn mental clara del mundo 3D y no saber interpretar QUE es
+<h4>El modelo "c√°mara sint√©tica"</h4><p align=justify>
+OpenGL utiliza este modelo sem√°ntico para interpretar
+una escena que debe ser dibujada. B√°sicamente se trata de imaginar un objeto
+situado en un determinado lugar y filmado por una c√°mara...es tan sencillo
+como esto. Si consegu√≠s tener claro este punto de vista tendr√©is mucho
+ganado os lo aseguro. Uno de los problemas al programar gr√°ficos es no
+tener una visi√≥n mental clara del mundo 3D y no saber interpretar QUE es
 lo que esta pasando. Vamos a echarle un vistazo al siguiente diagrama:
 <br><br>
 <CENTER><table border=1><td><IMG SRC="jpg/open_f2.jpg"></td></table></CENTER>
 <br><br>
 <p align=justify>
 <BR>Contamos con un "mundo 3D" que estamos observando desde
-una determinada posiciÛn. PodÈis pensar en el observador como vosotros
-mismos mirando hacia vuestro mundo virtual o bien como una c·mara que lo
-esta filmando. Lo llamÈis como lo llamÈis, ese punto es el <B>centro de
-proyecciÛn</B> tal y como se observa en la figura. Evidentemente el mundo
-es tridimensional pero su proyecciÛn en un plano (<B>plano de proyecciÛn</B>)
+una determinada posici√≥n. Pod√©is pensar en el observador como vosotros
+mismos mirando hacia vuestro mundo virtual o bien como una c√°mara que lo
+esta filmando. Lo llam√©is como lo llam√©is, ese punto es el <B>centro de
+proyecci√≥n</B> tal y como se observa en la figura. Evidentemente el mundo
+es tridimensional pero su proyecci√≥n en un plano (<B>plano de proyecci√≥n</B>)
 es bidimensional. Este plano es nuestro frame buffer antes de dibujar o
-bien la pantalla del monitor despuÈs de haberlo hecho.
+bien la pantalla del monitor despu√©s de haberlo hecho.
 <br><br>
 Por tanto queda claro que pasamos de coordenadas del mundo
 en 3D a coordenadas de pantalla en 2D y por lo tanto necesitamos <B>proyectar</B>.
 <br><br>
-El modelo "<B>camara sintÈtica</B>" se compone pues de
+El modelo "<B>camara sint√©tica</B>" se compone pues de
 los siguientes elementos:
 <br><br>
 <UL>
 <LI>
 <p align=justify>
 Necesitamos <B>luces</B> que iluminen nuestro mundo 3D. Para
-ello ser· necesario que especifiquemos sus <B>localizaciones</B>, sus <B>intensidades</B>
+ello ser√° necesario que especifiquemos sus <B>localizaciones</B>, sus <B>intensidades</B>
 y sus <B>colores</B>.<br><br></LI>
 
 <LI><p align=justify>
 Necesitamos una <B>camara</B> que "filme" nuestro mundo virtual
-y lo muestre por pantalla. Esta c·mara es nuestro "punto de vista" del
+y lo muestre por pantalla. Esta c√°mara es nuestro "punto de vista" del
 mundo a cada momento. Se caracteriza por su <B>posicion</B> en el mundo,
 su <B>orientacion</B> y su <B>apertura</B> o "<B>campo</B> <B>visual</B>".
-El campo visual es la "cantidad" de mundo que la c·mara alcanza a ver.
-Mirad la figura anterior e imaginad que acercamos el plano de proyecciÛn
+El campo visual es la "cantidad" de mundo que la c√°mara alcanza a ver.
+Mirad la figura anterior e imaginad que acercamos el plano de proyecci√≥n
 a nuestro mundo 3D. En este caso estaremos disminuyendo el campo visual
-dado que ser· menos "porciÛn" del mundo la que se proyectara ...°imaginad
-un poco y lo verÈis!. De hecho cualquiera que haya usado una c·mara
-para hacer fotografÌas entender· con un poquito de esfuerzo lo que estoy
+dado que ser√° menos "porci√≥n" del mundo la que se proyectara ...¬°imaginad
+un poco y lo ver√©is!. De hecho cualquiera que haya usado una c√°mara
+para hacer fotograf√≠as entender√° con un poquito de esfuerzo lo que estoy
 comentando.<br><br></LI>
 
 <LI><p align=justify>
 Por ultimo necesitamos <B>objetos</B> que formen parte de
-nuestro mundo y que precisamente ser·n los "filmados" por nuestra c·mara.
+nuestro mundo y que precisamente ser√°n los "filmados" por nuestra c√°mara.
 Se caracterizaran por sus atributos de color, material, grado de transparencia,
 etc....ya lo analizaremos mas adelante.</LI>
 </UL>
 <br><P ALIGN=JUSTIFY>
-Es muy importante que notÈis la independencia que todos estos
-elementos tienen entre si. La c·mara es independiente de los objetos puesto
-que estos est·n en una posiciÛn y ella en otra. Manejaremos los objetos
-(<B>Geometria</B>) por un lado y la c·mara por otro de manera que los primeros
+Es muy importante que not√©is la independencia que todos estos
+elementos tienen entre si. La c√°mara es independiente de los objetos puesto
+que estos est√°n en una posici√≥n y ella en otra. Manejaremos los objetos
+(<B>Geometria</B>) por un lado y la c√°mara por otro de manera que los primeros
 "actuaran" en nuestro mundo y la segunda "filmara" desde una determinada
-posiciÛn con un determinado ·ngulo, øok?
+posici√≥n con un determinado √°ngulo, ¬øok?
 <br>
 <h4>Arquitecturas graficas</h4>
 <p align=justify>
-Hablemos ahora del "<B>pipeline gr·fico</B>", elemento
-que marcara la pauta de actuaciÛn para OpenGL e incluso para vuestras manos
+Hablemos ahora del "<B>pipeline gr√°fico</B>", elemento
+que marcara la pauta de actuaci√≥n para OpenGL e incluso para vuestras manos
 en el momento de programar.
 <br><br>
-La geometrÌa que dese·is dibujar ser· la entrada de vuestro
-pipeline gr·fico y como salida tendrÈis una imagen en pantalla. Pero que
-ocurre con todos esos puntos, vectores y polÌgonos desde que entran hasta
-que salen?....ve·moslo en la figura:
+La geometr√≠a que dese√°is dibujar ser√° la entrada de vuestro
+pipeline gr√°fico y como salida tendr√©is una imagen en pantalla. Pero que
+ocurre con todos esos puntos, vectores y pol√≠gonos desde que entran hasta
+que salen?....ve√°moslo en la figura:
 <BR><br>
 <CENTER><table border=1><td><IMG SRC="jpg/open_f3.jpg"></td></table></CENTER>
 <br><br>
 <p align=justify>
-El punto de entrada de nuestra geometrÌa es el superior
-izquierdo y a partir de ahÌ solo tenÈis que seguir las lÌneas que conectan
-los diferentes mÛdulos. Quiz·s ahora pensÈis que esto no es ser· ˙til y
-que es simplemente teorÌa. No, de ninguna manera podÈis pretender programar
-OpenGL si no sabÈis QUE y en QUE ORDEN hace las cosas...lo verÈis cuando
+El punto de entrada de nuestra geometr√≠a es el superior
+izquierdo y a partir de ah√≠ solo ten√©is que seguir las l√≠neas que conectan
+los diferentes m√≥dulos. Quiz√°s ahora pens√©is que esto no es ser√° √∫til y
+que es simplemente teor√≠a. No, de ninguna manera pod√©is pretender programar
+OpenGL si no sab√©is QUE y en QUE ORDEN hace las cosas...lo ver√©is cuando
 empecemos a programar...
 <br>
 <h4>Analicemos cada uno de los modulos</h4>
 <UL>
 <LI><p align=justify>
-<B>Objeto geomÈtrico</B> : nuestro mundo se compone de puntos,
-lÌneas, polÌgonos .... en definitiva "<B>primitivas</B>". Inicialmente
+<B>Objeto geom√©trico</B> : nuestro mundo se compone de puntos,
+l√≠neas, pol√≠gonos .... en definitiva "<B>primitivas</B>". Inicialmente
 estos objetos tienen unos atributos que nosotros fijamos pero pueden ser
-movibles o fijos, deformables o rÌgidos...y por tanto debemos ser capaces
+movibles o fijos, deformables o r√≠gidos...y por tanto debemos ser capaces
 de trasladarlos, rotarlos, escalarlos ... antes de dibujarlos en pantalla.
 <br><br>
 </LI>
@@ -264,100 +264,100 @@ de trasladarlos, rotarlos, escalarlos ... antes de dibujarlos en pantalla.
 <B>Transformacion del modelo</B> : este modulo es el encargado
 de trasladar, rotar, escalar e incluso torcer cualquier objeto para que
 sea dibujado en pantalla tal y como debe estar dispuesto en el mundo. OpenGL
-realiza estas funciones multiplicando a nuestra geometrÌa (<B>vertices</B>)
+realiza estas funciones multiplicando a nuestra geometr√≠a (<B>vertices</B>)
 por varias matrices, cada una de las cuales implementa un proceso (rotar,
 trasladar ...). Nosotros usaremos las funciones de OpenGL para "crear"
-estas matrices y "operarlas" con nuestra geometrÌa.
+estas matrices y "operarlas" con nuestra geometr√≠a.
 <br><br>
 </LI>
 
 <LI><p align=justify>
 <B>Coordenadas del mundo</B> : tras haber transformado nuestros
-vÈrtices, ya sabemos las posiciones de todos los objetos en nuestro mundo.
-No son relativas a la c·mara, recordad que precisamente he incidido en
-la independencia c·mara/mundo. Son posiciones referidas a un sistema de
-coordenadas que definiremos ˙nica y exclusivamente para el mundo que estamos
+v√©rtices, ya sabemos las posiciones de todos los objetos en nuestro mundo.
+No son relativas a la c√°mara, recordad que precisamente he incidido en
+la independencia c√°mara/mundo. Son posiciones referidas a un sistema de
+coordenadas que definiremos √∫nica y exclusivamente para el mundo que estamos
 creando.<br><br></LI>
 
 <LI><p align=justify>
 <B>Transformacion del visionado</B> : ahora es cuando necesitamos
 saber "como" se ven esos objetos, ya posicionados correctamente en el mundo,
-desde nuestra c·mara. Por tanto los "iluminamos" para que sean visibles
-y tomamos sus posiciones tal y como se ven desde la c·mara.<br><br></LI>
+desde nuestra c√°mara. Por tanto los "iluminamos" para que sean visibles
+y tomamos sus posiciones tal y como se ven desde la c√°mara.<br><br></LI>
 
 <LI><p align=justify>
-<B>Coordenadas de c·mara</B> : tras aplicar luces ya sabemos
-cuales son las coordenadas de todos los objetos respecto de nuestra c·mara,
-es decir, como los vemos nosotros desde nuestra posiciÛn en el mundo.<br><br></LI>
+<B>Coordenadas de c√°mara</B> : tras aplicar luces ya sabemos
+cuales son las coordenadas de todos los objetos respecto de nuestra c√°mara,
+es decir, como los vemos nosotros desde nuestra posici√≥n en el mundo.<br><br></LI>
 
 <LI><p align=justify>
 <B>"Clipping"</B> : el clipping consiste en recortar (ocultar)
-todo aquello que "esta" pero "no se ve" desde la c·mara. Por ejemplo, imaginad
-una habitaciÛn 3D como las de Duke Nukem' o Doom. Cuando el personaje mira
-en una direcciÛn, solo ve esa pared y su contenido o incluso solo una fracciÛn
-de la pared, pero el resto de la habitaciÛn "esta allÌ" aunque no se ve.
-A "ese" resto de la habitaciÛn se le ha aplicado un "clipping" o recorte,
-se ha eliminado por tanto de la informaciÛn que debe dibujarse en pantalla.<br><br></LI>
+todo aquello que "esta" pero "no se ve" desde la c√°mara. Por ejemplo, imaginad
+una habitaci√≥n 3D como las de Duke Nukem' o Doom. Cuando el personaje mira
+en una direcci√≥n, solo ve esa pared y su contenido o incluso solo una fracci√≥n
+de la pared, pero el resto de la habitaci√≥n "esta all√≠" aunque no se ve.
+A "ese" resto de la habitaci√≥n se le ha aplicado un "clipping" o recorte,
+se ha eliminado por tanto de la informaci√≥n que debe dibujarse en pantalla.<br><br></LI>
 
 <LI><p align=justify>
 <B>Proyeccion</B> : ya la hemos comentado anteriormente.
 Pasamos de coordenadas 3D del mundo a coordenadas 2D de nuestro plano de
-proyecciÛn.<br><br></LI>
+proyecci√≥n.<br><br></LI>
 
 <LI><p align=justify>
 <B>"D.I.S.C." (Device Independent Screen Coordinates)</B>
 : tras proyectar tenemos lo que se llaman "coordenadas de pantalla independientes
 de dispositivo". Esto es sencillo aunque suena muy raro. Las coordenadas
-que tenemos calculadas en este momento todavÌa no se han asociado a ning˙n
+que tenemos calculadas en este momento todav√≠a no se han asociado a ning√∫n
 tipo de pantalla o monitor. En este punto del pipeline no sabemos si nuestro
-monitor es de 15 pulgadas y de resoluciÛn 800 x 600 o si es de 19 pulgadas
-y de resoluciÛn 1024 x 1480. De hecho esto no tenemos porque controlarlo
-nosotros, nos ser· transparente. Se trata de asociar la imagen recortada
-2D que se encuentra en el frame buffer con los pixels de la pantalla. Seg˙n
-la resoluciÛn de pantalla sea mayor o menor, un punto de nuestro mundo
+monitor es de 15 pulgadas y de resoluci√≥n 800 x 600 o si es de 19 pulgadas
+y de resoluci√≥n 1024 x 1480. De hecho esto no tenemos porque controlarlo
+nosotros, nos ser√° transparente. Se trata de asociar la imagen recortada
+2D que se encuentra en el frame buffer con los pixels de la pantalla. Seg√∫n
+la resoluci√≥n de pantalla sea mayor o menor, un punto de nuestro mundo
 ocupara mas o menos pixels.<br><br></LI>
 
 <LI><p align=justify>
-<B>"Rasterization"</B> : este proceso se conoce tambiÈn como
-"<B>scan conversiÛn</B>". Finalmente asociamos todos nuestros puntos a
-pixels en pantalla. Tras esto solo falta iluminar los fÛsforos de nuestra
-pantalla con energÌa suficiente para que veamos lo que esperamos. Evidentemente
-esto es un proceso totalmente fÌsico llevado a cabo en el tubo de rayos
-catÛdicos del monitor. No actuaremos pues sobre el.<br><br></LI>
+<B>"Rasterization"</B> : este proceso se conoce tambi√©n como
+"<B>scan conversi√≥n</B>". Finalmente asociamos todos nuestros puntos a
+pixels en pantalla. Tras esto solo falta iluminar los f√≥sforos de nuestra
+pantalla con energ√≠a suficiente para que veamos lo que esperamos. Evidentemente
+esto es un proceso totalmente f√≠sico llevado a cabo en el tubo de rayos
+cat√≥dicos del monitor. No actuaremos pues sobre el.<br><br></LI>
 
 <LI><p align=justify>
 <B>Imagen de pantalla</B> : proceso cerrado. Ya tenemos la
-imagen de lo que nuestra c·mara "ve" °en frente de nuestros ojos!.<br><br></LI>
+imagen de lo que nuestra c√°mara "ve" ¬°en frente de nuestros ojos!.<br><br></LI>
 </UL>
 <br><br><p align=justify>
-El pipeline gr·fico puede implementarse vÌa software o hardware.
-En m·quinas dedicadas, por ejemplo Silicon Graphics, todos los mÛdulos
-est·n construidos en la placa madre de manera que el sistema es muy r·pido.
-En sistemas mas convencionales como PC o Mac, todo se realiza vÌa software
-y por tanto es mas lento. Evidentemente esta es la razÛn de que una estaciÛn
-gr·fica potente no sea precisamente barata.
+El pipeline gr√°fico puede implementarse v√≠a software o hardware.
+En m√°quinas dedicadas, por ejemplo Silicon Graphics, todos los m√≥dulos
+est√°n construidos en la placa madre de manera que el sistema es muy r√°pido.
+En sistemas mas convencionales como PC o Mac, todo se realiza v√≠a software
+y por tanto es mas lento. Evidentemente esta es la raz√≥n de que una estaci√≥n
+gr√°fica potente no sea precisamente barata.
 <br><br>
 De todas formas lo interesante de OpenGL es que funciona
-independientemente de la implementaciÛn del pipeline. No tendrÈis que cambiar
-el cÛdigo si cambi·is de plataforma, °funcionara igual!...lo ˙nico es
-que seg˙n el sistema conseguirÈis mas o menos velocidad.
+independientemente de la implementaci√≥n del pipeline. No tendr√©is que cambiar
+el c√≥digo si cambi√°is de plataforma, ¬°funcionara igual!...lo √∫nico es
+que seg√∫n el sistema conseguir√©is mas o menos velocidad.
 <br>
 <h4>Primeros Comandos</h4>
 <P ALIGN=JUSTIFY>
-Empecemos pues con algunos comandos b·sicos de OpenGL.
-Como ya dije, supongo que tenÈis nociones de C y por tanto no debe de seros
+Empecemos pues con algunos comandos b√°sicos de OpenGL.
+Como ya dije, supongo que ten√©is nociones de C y por tanto no debe de seros
 complicado de asimilar.
 <br><br>
 OpenGL tiene sus propios tipos en cuanto a <B>variables</B>
-se refiere. AsÌ aunque podemos usar los tÌpicos (int, float, double), nos
-acostumbraremos a los definidos por esta librerÌa (GLint, GLfloat, GLdouble).
+se refiere. As√≠ aunque podemos usar los t√≠picos (int, float, double), nos
+acostumbraremos a los definidos por esta librer√≠a (GLint, GLfloat, GLdouble).
 Como veis son los mismos pero con el prefijo "<B>GL</B>" delante. Se declaran
 exactamente igual que cualquier variable en C y tienen casi las mismas
-propiedades. UsÈmoslos porque el funcionamiento general del sistema sera
+propiedades. Us√©moslos porque el funcionamiento general del sistema sera
 mas optimo.
 <br><br>
 Las <B>funciones</B> OpenGL empiezan con el prefijo "<B>gl</B>",
-en min˙sculas. Veamos un ejemplo. supongamos que queremos crear un vÈrtice,
+en min√∫sculas. Veamos un ejemplo. supongamos que queremos crear un v√©rtice,
 es decir un punto:
 <br>
 Usaremos...
@@ -368,26 +368,26 @@ o...
 <BR>
 <font color="000000"><B>GLfloat vertice[3] = { 0.0, 0.0, 0.0 };</B></font>
 <BR>
-y despuÈs...
+y despu√©s...
 <BR>
 <font color="000000"><B>glVertexfv( vertice );</B></font>
 <br><br><p align=justify>
-Ambas funciones crean un vÈrtice situado en el origen
+Ambas funciones crean un v√©rtice situado en el origen
 de coordenadas del mundo, es decir, x = y = z = 0.0. En el primer caso
-el nombre de la funciÛn termina en "3f" (3 floats). Esto significa que
-vas a especificar el vÈrtice con 3 valores o variables de tipo real, o
+el nombre de la funci√≥n termina en "3f" (3 floats). Esto significa que
+vas a especificar el v√©rtice con 3 valores o variables de tipo real, o
 sea float. En cambio en el segundo caso tenemos "fv" (float vector). Estamos
-indicando a OpenGL que el vÈrtice lo daremos mediante un array/vector de
+indicando a OpenGL que el v√©rtice lo daremos mediante un array/vector de
 floats. Precisamente este es el array que defino justo antes de llamar
-a la funciÛn.
+a la funci√≥n.
 <br><br>
-Trabajamos en 3D y especificamos las coordenadas del vÈrtice
+Trabajamos en 3D y especificamos las coordenadas del v√©rtice
 en este orden: X, Y, Z. Si deseamos trabajar en 2D solo tenemos que hacer
 una coordenada igual a 0.0, normalmente la Z.
 <br><br>
 Ya que estamos puestos vamos a definir nuestro primer
-polÌgono, un tri·ngulo. OpenGL tiene varios tipos definidos de manera que
-nos facilita la creaciÛn de polÌgonos simples. Vamos all·:
+pol√≠gono, un tri√°ngulo. OpenGL tiene varios tipos definidos de manera que
+nos facilita la creaci√≥n de pol√≠gonos simples. Vamos all√°:
 <br><br>
 <font color="000000"><i>
 <B>glBegin( GL_TRIANGLES );</B><br>
@@ -395,42 +395,42 @@ nos facilita la creaciÛn de polÌgonos simples. Vamos all·:
 <B>&nbsp;&nbsp;&nbsp; glVertex3f (1.0, 0.0, 0.0);</B><br>
 <B>&nbsp;&nbsp;&nbsp; glVertex3f (0.0, 1.0, 0.0);</B><br>
 <B>glEnd( );</B></i></font><br><br>
-Este cÛdigo crea un tri·ngulo situado en el plano XY ya
-que observareis que los valores de Z son todos 0.0 para los tres vÈrtices
-que lo forman. Sus tres vÈrtices se encuentran en las posiciones ( -1.0,
-0.0 ), ( 1.0, 0.0 ) y (0.0, 1.0 ) seg˙n la forma ( X, Y ).
+Este c√≥digo crea un tri√°ngulo situado en el plano XY ya
+que observareis que los valores de Z son todos 0.0 para los tres v√©rtices
+que lo forman. Sus tres v√©rtices se encuentran en las posiciones ( -1.0,
+0.0 ), ( 1.0, 0.0 ) y (0.0, 1.0 ) seg√∫n la forma ( X, Y ).
 <br><br>
-Un polÌgono se encapsula entre las funciones glBegin y
-glEnd. El par·metro que recibe la primera sirve para decirle a OpenGL que
-tipo de polÌgono deseamos crear, en nuestro caso un tri·ngulo. GL_TRIANGLES
-es una constante ya definida en la librerÌa. Ya verÈis como usaremos muchisimas
+Un pol√≠gono se encapsula entre las funciones glBegin y
+glEnd. El par√°metro que recibe la primera sirve para decirle a OpenGL que
+tipo de pol√≠gono deseamos crear, en nuestro caso un tri√°ngulo. GL_TRIANGLES
+es una constante ya definida en la librer√≠a. Ya ver√©is como usaremos muchisimas
 constantes de este tipo para programar.
 <br><br>
-Por claridad es conveniente tabular (indentar) el cÛdigo
+Por claridad es conveniente tabular (indentar) el c√≥digo
 entre glBegin y glEnd tal y como veis en el ejemplo. Cualquier programa
-OpenGL que examinÈis seguir· esta convenciÛn si esta bien estructurado.
+OpenGL que examin√©is seguir√° esta convenci√≥n si esta bien estructurado.
 <br><br>
-Vamos a definir alguno de los atributos de nuestro tri·ngulo,
+Vamos a definir alguno de los atributos de nuestro tri√°ngulo,
 por ejemplo su color. Usamos:
 <br><br><font color="000000">
 <B><i>glColor3f (0.5, 0.5, 0.5);</i></B></font>
 <br><br>
-donde los tres valores (floats) que se le pasan a la funciÛn
+donde los tres valores (floats) que se le pasan a la funci√≥n
 glColor son por orden, la cantidad de rojo (Red) que deseamos, la cantidad
 de verde (Green) y la cantidad de azul (Blue). Es el llamado sistema <B>RGB</B>
-que muchos conocerÈis sobradamente. Aplicando una cantidad de cada color
-conseguimos el tono deseado (TeorÌa <B>aditiva </B>del color). Los valores
+que muchos conocer√©is sobradamente. Aplicando una cantidad de cada color
+conseguimos el tono deseado (Teor√≠a <B>aditiva </B>del color). Los valores
 de cada color deben estar entre 0.0 (No aplicar ese color) y 1.0 (Aplicar
-ese color en su m·xima intensidad). Por tanto:
+ese color en su m√°xima intensidad). Por tanto:
 <br><br><font color="000000"><i>
 <B>glColor3f (0.0, 0.0, 0.0);</b></i></font> se corresponde con el color
 NEGRO
 <br><br>
 mientras que...
 <br><br><font color="000000"><i>
-<B>glColor3f (1.0, 1.0, 1.0);</i></font></b>  °se corresponde con el BLANCO!
+<B>glColor3f (1.0, 1.0, 1.0);</i></font></b>  ¬°se corresponde con el BLANCO!
 <br><br>
-y de esta manera si queremos definir un tri·ngulo blanco
+y de esta manera si queremos definir un tri√°ngulo blanco
 obraremos asi:<br><br>
 <font color="000000"><i>
 <B>glColor3f (1.0, 1.0, 1.0);</B>
@@ -441,58 +441,58 @@ obraremos asi:<br><br>
 <BR><B>glEnd( );</i></font></B>
 <br><br>
 de manera que primero especificamos el color y TODO lo
-que dibujemos a partir de este momento ser· de ese color, en este caso
-el tri·ngulo.
+que dibujemos a partir de este momento ser√° de ese color, en este caso
+el tri√°ngulo.
 <br><br>
-Al ejecutar cada funciÛn glVertex, el vÈrtice en cuestiÛn
-"entra" en el pipeline y se traslada a la posiciÛn que hemos especificado
-para el. Entonces se "<B>mapea</B>" en el frame buffer (representaciÛn
-en memoria del plano de proyecciÛn 2D) pasando posteriormente a la pantalla
-de nuestro monitor. AsÌ en este caso tenemos 3 vÈrtices que sucesivamente
-entran en el pipeline uno detr·s de otro.
+Al ejecutar cada funci√≥n glVertex, el v√©rtice en cuesti√≥n
+"entra" en el pipeline y se traslada a la posici√≥n que hemos especificado
+para el. Entonces se "<B>mapea</B>" en el frame buffer (representaci√≥n
+en memoria del plano de proyecci√≥n 2D) pasando posteriormente a la pantalla
+de nuestro monitor. As√≠ en este caso tenemos 3 v√©rtices que sucesivamente
+entran en el pipeline uno detr√°s de otro.
 <br><br>
-Algo muy importante que debÈis tener en cuenta. Cuando
-defin·is un polÌgono a base de sus vÈrtices deberÈis seguir un orden concreto.
-Si no lo hacÈis, OpenGL no asegura que la representaciÛn en pantalla sea
-la correcta. La convenciÛn es crear los vÈrtices siguiendo el polÌgono
-seg˙n el s<B>entido antihorario</B> de las manecillas del reloj. Comprobad
-mi ejemplo sobre papel y verÈis como esta definido siguiendo este criterio.
-OpenGL supone la cara "a dibujar" del polÌgono como la que se define de
+Algo muy importante que deb√©is tener en cuenta. Cuando
+defin√°is un pol√≠gono a base de sus v√©rtices deber√©is seguir un orden concreto.
+Si no lo hac√©is, OpenGL no asegura que la representaci√≥n en pantalla sea
+la correcta. La convenci√≥n es crear los v√©rtices siguiendo el pol√≠gono
+seg√∫n el s<B>entido antihorario</B> de las manecillas del reloj. Comprobad
+mi ejemplo sobre papel y ver√©is como esta definido siguiendo este criterio.
+OpenGL supone la cara "a dibujar" del pol√≠gono como la que se define de
 esta manera.
 <br><br>
-Respecto a las constantes que podemos usar en la funciÛn
+Respecto a las constantes que podemos usar en la funci√≥n
 glBegin tenemos entre otras:<br><br>
 <UL>
 <LI><p align=justify>
-<B>GL_POINTS </B>: para que todos los vÈrtices indicados
+<B>GL_POINTS </B>: para que todos los v√©rtices indicados
 entre ambas funciones se dibujen por separado a modo de puntos "libres".<br><br></LI>
 
 <LI><p align=justify>
-<B>GL_LINES</B> : cada dos vÈrtices definidos, se traza autom·ticamente
-una lÌnea que los une.<br><br></LI>
+<B>GL_LINES</B> : cada dos v√©rtices definidos, se traza autom√°ticamente
+una l√≠nea que los une.<br><br></LI>
 
 <LI><p align=justify>
-<B>GL_POLYGON</B> : se unen todos los vÈrtices formando un
-polÌgono.<br><br></LI>
+<B>GL_POLYGON</B> : se unen todos los v√©rtices formando un
+pol√≠gono.<br><br></LI>
 
 <LI><p align=justify>
-<B>GL_QUADS</B> : cada 4 vÈrtices se unen para formar un
-cuadril·tero.<br><br></LI>
+<B>GL_QUADS</B> : cada 4 v√©rtices se unen para formar un
+cuadril√°tero.<br><br></LI>
 
 <LI><p align=justify>
 
-<B>GL_TRIANGLES</B> : cada 3 vÈrtices se unen para formar
-un tri·ngulo.<br><br></LI>
+<B>GL_TRIANGLES</B> : cada 3 v√©rtices se unen para formar
+un tri√°ngulo.<br><br></LI>
 
 <LI><p align=justify>
-<B>GL_TRIANGLE_STRIP</B> : crea un tri·ngulo con los 3 primeros
-vÈrtices. entonces sucesivamente crea un nuevo tri·ngulo unido al anterior
-usando los dos ˙ltimos vÈrtices que se han definido y el actual.....ya
-se que es complicado pero esto vale mas la pena verlo en pantalla...°no
-os impacientÈis!<br><br>.</LI>
+<B>GL_TRIANGLE_STRIP</B> : crea un tri√°ngulo con los 3 primeros
+v√©rtices. entonces sucesivamente crea un nuevo tri√°ngulo unido al anterior
+usando los dos √∫ltimos v√©rtices que se han definido y el actual.....ya
+se que es complicado pero esto vale mas la pena verlo en pantalla...¬°no
+os impacient√©is!<br><br>.</LI>
 
 <LI><p align=justify>
-<B>GL_QUAD_STRIP</B> : igual que el anterior pero con cuadril·teros.<br><br></LI>
+<B>GL_QUAD_STRIP</B> : igual que el anterior pero con cuadril√°teros.<br><br></LI>
 <LI><p align=justify>
 Etc, etc, etc ...<br><br></LI>
 </UL><br><br><p align=justify>
@@ -501,18 +501,18 @@ que el resto pueden sernos de ayuda en casos determinados. Ya lo iremos
 viendo...
 <br><br>
 Bueno creo que con este material concluyo este primer
-capitulo del curso. Espero que os sea de interÈs y sig·is leyendo en la
-prÛxima ediciÛn.
+capitulo del curso. Espero que os sea de inter√©s y sig√°is leyendo en la
+pr√≥xima edici√≥n.
 <br>
-En el prÛximo capitulo ya seremos capaces de teclear un
-programa de iniciaciÛn y prueba. Por ahora es importante que todo os quede
-muy claro a nivel teÛrico pues sino mas adelante °os darÈis con una pared!
+En el pr√≥ximo capitulo ya seremos capaces de teclear un
+programa de iniciaci√≥n y prueba. Por ahora es importante que todo os quede
+muy claro a nivel te√≥rico pues sino mas adelante ¬°os dar√©is con una pared!
 <br>
-TambiÈn intentare mencionar aquellos web's que os pueden
-ser de mas interÈs en cuanto a este tema asÌ como posible bibliografÌa
+Tambi√©n intentare mencionar aquellos web's que os pueden
+ser de mas inter√©s en cuanto a este tema as√≠ como posible bibliograf√≠a
 a consultar.
 <br><br>
-°Hasta ahora! ;)
+¬°Hasta ahora! ;)
 
 <br>
 <hr>

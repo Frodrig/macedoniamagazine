@@ -35,7 +35,7 @@
 
 <DIV align="left">
 
-<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>sí funciona</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>A</B></font><FONT color="#000000" size=2 face="arial"><B>sÃ­ funciona</B></FONT></a>
 
 </DIV>
 
@@ -57,9 +57,9 @@
 
 <FONT color="#cc0000" size=2 face="arial">
 
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
 
-<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando Rodríguez.</A>
+<A HREF="mailto:i9808685@petra.euitio.uniovi.es">Fernando RodrÃ­guez.</A>
 
 </b></FONT>
 
@@ -69,7 +69,7 @@
 
 <H3>
 
-Así funciona un Tetris
+AsÃ­ funciona un Tetris
 
 </H3>
 
@@ -83,7 +83,7 @@ En este art&iacute;culo vamos a investigar, mediante planteamientos, algunas for
 <hr width=60%>
 <CENTER>
 <FONT size=2 color="#cc0000" face="Arial">
-<b>Puedes conseguir el Petris pulsando </b><A HREF="zip/petrise.zip"><B>aquí</B></a>
+<b>Puedes conseguir el Petris pulsando </b><A HREF="zip/petrise.zip"><B>aquÃ­</B></a>
 </CENTER>
 <hr width=70%>
 
@@ -110,7 +110,7 @@ En este art&iacute;culo vamos a investigar, mediante planteamientos, algunas for
 
 <CENTER><IMG SRC="gif/figtet1.gif"></CENTER>
 
-<P ALIGN="JUSTIFY">As&iacute; pues, un &aacute;rea como el que sale en la figura perfectamente puede implementarse con una matriz (array bidimensional o una lista de listas) de m filas y n columnas. Ahora la siguiente pregunta es ¿qu&eacute; guardo en cada posici&oacute;n de la matriz?. Para responder a esta pregunta, convendr&iacute;a estudiar tambi&eacute;n la forma en la que vamos a implementar las piezas, pues el &aacute;rea del juego, esto es, la matriz, no hace otra cosa que guardar las piezas que el jugador ha ido utilizando, y utiliza, durante la partida. La aproximaci&oacute;n m&aacute;s b&aacute;sica nos dice que hay zonas del &aacute;rea de juego que est&aacute;n ocupadas y otras que no lo est&aacute;n. Para poder representar esto, bastar&iacute;a con tener un valor 0 en las posiciones de la matriz libres y un 1 en las ocupadas. Sin embargo, como vamos a utilizar piezas de distintos colores (o, incluso, de distintas propiedades), convendr&iacute;a generalizar el valor 1 a valores distintos de 0, de tal forma que valores como el 2, el 3, el 4 o 14, tambi&eacute;n indicaran que esa zona est&aacute; ocupada. As&iacute;, si a cada c&oacute;digo distinto de 0 le asignamos un color, podr&iacute;amos identificar cada zona de la matriz ocupada por una porci&oacute;n de pieza de un determinado color. Por ejemplo, veamos la figura siguiente:</P>
+<P ALIGN="JUSTIFY">As&iacute; pues, un &aacute;rea como el que sale en la figura perfectamente puede implementarse con una matriz (array bidimensional o una lista de listas) de m filas y n columnas. Ahora la siguiente pregunta es Â¿qu&eacute; guardo en cada posici&oacute;n de la matriz?. Para responder a esta pregunta, convendr&iacute;a estudiar tambi&eacute;n la forma en la que vamos a implementar las piezas, pues el &aacute;rea del juego, esto es, la matriz, no hace otra cosa que guardar las piezas que el jugador ha ido utilizando, y utiliza, durante la partida. La aproximaci&oacute;n m&aacute;s b&aacute;sica nos dice que hay zonas del &aacute;rea de juego que est&aacute;n ocupadas y otras que no lo est&aacute;n. Para poder representar esto, bastar&iacute;a con tener un valor 0 en las posiciones de la matriz libres y un 1 en las ocupadas. Sin embargo, como vamos a utilizar piezas de distintos colores (o, incluso, de distintas propiedades), convendr&iacute;a generalizar el valor 1 a valores distintos de 0, de tal forma que valores como el 2, el 3, el 4 o 14, tambi&eacute;n indicaran que esa zona est&aacute; ocupada. As&iacute;, si a cada c&oacute;digo distinto de 0 le asignamos un color, podr&iacute;amos identificar cada zona de la matriz ocupada por una porci&oacute;n de pieza de un determinado color. Por ejemplo, veamos la figura siguiente:</P>
 
 <CENTER><IMG SRC="gif/figtet2.gif"></CENTER>
 
@@ -141,9 +141,9 @@ En este art&iacute;culo vamos a investigar, mediante planteamientos, algunas for
 <P ALIGN="JUSTIFY"><LI>Todas las piezas tienen el mismo n&uacute;mero de cuadrados. </LI></P></OL>
 
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">El que todas las piezas est&eacute;n formadas por cuadrados, nos permite ajustar de forma muy elegante los sprites que vamos a utilizar. Si todas las piezas est&aacute;n formadas por cuadrados, bastar&aacute; con tener un cuadrado, es decir, una porci&oacute;n de pieza, por cada color posible de pieza. En otras palabras, si en nuestro Tetris las piezas pueden tener color rojo, azul, verde y amarillo, bastar&aacute; con tener un cuadrado de color rojo, azul, verde y amarillo ya que la uni&oacute;n de varios de ellos (de cuatro), nos formar&aacute; una pieza del juego. As&iacute; de simple y claro. ¿Esto que nos evita?, pues nos evita tener que almacenar un gr&aacute;fico por cada pieza en cada una de sus posiciones posibles o estados. Pensemos que cada pieza tiene 4 estados de giro, si tenemos un total de 5 piezas distintas tendr&iacute;amos que dibujar 4*5=20 estados diferentes (20 sprites diferentes). Mediante este m&eacute;todo construimos las piezas durante el transcurso de juego, ahorrando espacio en disco y memoria para gr&aacute;ficos (adem&aacute;s los c&aacute;lculos ser&aacute;n m&iacute;nimos). Y, sobre todo, dando una mayor flexibilidad al programa de cara a modificaciones o inserci&oacute;n de nuevas piezas.</P>
+<P ALIGN="JUSTIFY">El que todas las piezas est&eacute;n formadas por cuadrados, nos permite ajustar de forma muy elegante los sprites que vamos a utilizar. Si todas las piezas est&aacute;n formadas por cuadrados, bastar&aacute; con tener un cuadrado, es decir, una porci&oacute;n de pieza, por cada color posible de pieza. En otras palabras, si en nuestro Tetris las piezas pueden tener color rojo, azul, verde y amarillo, bastar&aacute; con tener un cuadrado de color rojo, azul, verde y amarillo ya que la uni&oacute;n de varios de ellos (de cuatro), nos formar&aacute; una pieza del juego. As&iacute; de simple y claro. Â¿Esto que nos evita?, pues nos evita tener que almacenar un gr&aacute;fico por cada pieza en cada una de sus posiciones posibles o estados. Pensemos que cada pieza tiene 4 estados de giro, si tenemos un total de 5 piezas distintas tendr&iacute;amos que dibujar 4*5=20 estados diferentes (20 sprites diferentes). Mediante este m&eacute;todo construimos las piezas durante el transcurso de juego, ahorrando espacio en disco y memoria para gr&aacute;ficos (adem&aacute;s los c&aacute;lculos ser&aacute;n m&iacute;nimos). Y, sobre todo, dando una mayor flexibilidad al programa de cara a modificaciones o inserci&oacute;n de nuevas piezas.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Sin embargo, y tal como pod&iacute;amos ver cuando se mostraron todas las figuras que intervienen en un Tetris b&aacute;sico (primera figura del art&iacute;culo), es necesario implementar una serie de posiciones diferentes para cada pieza. A&uacute;n m&aacute;s, es necesario, para este sistema de almacenamiento, implementar alg&uacute;n modo de saber c&oacute;mo se han de disponer los cuadrados para formas las piezas. En otras palabras, ¿c&oacute;mo sabemos cu&aacute;l es la pieza que hay que poner en pantalla cuando se realiza un giro?. Para resolver este problema, deberemos de almacenar tantas plantillas como posiciones de giro haya por pieza. As&iacute;, si cualquier pieza tiene 4 posibles posiciones de giro, deberemos de almacenar 4 plantillas. ¿C&oacute;mo podemos construir esas plantillas?. Bien, bastar&aacute; con disponer de un array de pxq, donde p = anchura de la pieza y q = altura de la pieza, que contenga un "1" en donde haya que poner cuadrado de la figura y un "0" donde no haga falta. Obviamente, habr&aacute; que disponer un array de estas dimensiones por plantilla. </P>
+<P ALIGN="JUSTIFY">Sin embargo, y tal como pod&iacute;amos ver cuando se mostraron todas las figuras que intervienen en un Tetris b&aacute;sico (primera figura del art&iacute;culo), es necesario implementar una serie de posiciones diferentes para cada pieza. A&uacute;n m&aacute;s, es necesario, para este sistema de almacenamiento, implementar alg&uacute;n modo de saber c&oacute;mo se han de disponer los cuadrados para formas las piezas. En otras palabras, Â¿c&oacute;mo sabemos cu&aacute;l es la pieza que hay que poner en pantalla cuando se realiza un giro?. Para resolver este problema, deberemos de almacenar tantas plantillas como posiciones de giro haya por pieza. As&iacute;, si cualquier pieza tiene 4 posibles posiciones de giro, deberemos de almacenar 4 plantillas. Â¿C&oacute;mo podemos construir esas plantillas?. Bien, bastar&aacute; con disponer de un array de pxq, donde p = anchura de la pieza y q = altura de la pieza, que contenga un "1" en donde haya que poner cuadrado de la figura y un "0" donde no haga falta. Obviamente, habr&aacute; que disponer un array de estas dimensiones por plantilla. </P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Una buena forma de implementar esta idea, es construir una lista din&aacute;mica circular (despu&eacute;s del &uacute;ltimo nodo va el primero), en la que cada nodo contenga la plantilla del frame actual. Cada vez que la pieza pega un giro, pasamos al siguiente nodo de la lista y construimos la pieza en base a la plantilla que nos encontremos. He aqu&iacute; un ejemplo de c&oacute;mo podr&iacute;a verse esto gr&aacute;ficamente:</P>
 <P ALIGN="JUSTIFY"></P>
@@ -177,7 +177,7 @@ En este art&iacute;culo vamos a investigar, mediante planteamientos, algunas for
 </FONT><FONT SIZE=2>
 </FONT><FONT FACE="Arial" SIZE=2><P><B>Colisiones entre los l&iacute;mites del &aacute;rea de juego</B></P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Las piezas pueden colisionar contra los l&iacute;mites del &aacute;rea de juego, siempre que intentemos moverlas m&aacute;s all&aacute; de los l&iacute;mites izquierdo, derecho y base de nuestra "matriz" de juego. Es decir, si el jugador comienza a pulsar de forma continuada a la tecla derecha, llegar&aacute; un momento en el que la pieza chocar&aacute; contra la parte lateral derecha. Esto mismo suceder&aacute; en la parte lateral izquierda si el jugador comienza a pulsar continuamente la tecla de movimiento a la izquierda. ¿Y en la base?. Pues esta colisi&oacute;n ocurrir&aacute; cuando el usuario haga que su pieza colisione con el fondo de la matriz. Esto producir&aacute; que el tiempo de vida de la pieza que estamos manejando termine y que salga otra por la parte superior. He aqu&iacute; un dibujo explicativo de cada tipo de colisi&oacute;n.</P>
+<P ALIGN="JUSTIFY">Las piezas pueden colisionar contra los l&iacute;mites del &aacute;rea de juego, siempre que intentemos moverlas m&aacute;s all&aacute; de los l&iacute;mites izquierdo, derecho y base de nuestra "matriz" de juego. Es decir, si el jugador comienza a pulsar de forma continuada a la tecla derecha, llegar&aacute; un momento en el que la pieza chocar&aacute; contra la parte lateral derecha. Esto mismo suceder&aacute; en la parte lateral izquierda si el jugador comienza a pulsar continuamente la tecla de movimiento a la izquierda. Â¿Y en la base?. Pues esta colisi&oacute;n ocurrir&aacute; cuando el usuario haga que su pieza colisione con el fondo de la matriz. Esto producir&aacute; que el tiempo de vida de la pieza que estamos manejando termine y que salga otra por la parte superior. He aqu&iacute; un dibujo explicativo de cada tipo de colisi&oacute;n.</P>
 <CENTER><IMG SRC="gif/figtet5.gif"></CENTER>
 <P ALIGN="JUSTIFY">Pero no s&oacute;lo debemos de pensar que una colisi&oacute;n se produce cuando se intenta mover en sentido horizontal (izquierda - derecha) o vertical (hacia abajo); tambi&eacute;n puede darse el caso de que la colisi&oacute;n se produzca cuando vayamos a realizar un giro de una pieza. S&iacute;, puede ocurrir que estemos en un lateral de la pantalla y que por la naturaleza de la pieza que estamos utilizando (por ejemplo, suponed que estamos usando una barra en horizontal), el realizar un giro supone que nuestra pieza va a ocupar hacia el lateral por el que no podemos movernos m&aacute;s, una colisi&oacute;n. En este caso, deberemos de detectar tambi&eacute;n la colisi&oacute;n y no permitir que nuestra pieza realice el giro. En la figura siguiente, se ve c&oacute;mo la barra en horizontal no puede realizar un giro estando en el tope del lateral derecho. M&aacute;s a&uacute;n, puesto que tiene una longitud de 4 casillas, no podr&aacute; realizar un giro estando en posici&oacute;n vertical, a menos que est&eacute; a 3 casillas de distancia del lateral. En caso contrario, la barra en horizontal se saldr&iacute;a del &aacute;rea de juego.</P>
 
@@ -214,7 +214,7 @@ Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" S
 </DIR>
 </DIR>
 
-<P ALIGN="JUSTIFY">Como se puede observar, el proceso es bastante simple en lo b&aacute;sico. ¿C&oacute;mo har&iacute;amos para detectar una colisi&oacute;n al realizar un giro?. Bien sencillo. No habr&aacute; que escribir un c&oacute;digo especial, bastar&aacute; con obtener la </FONT><FONT FACE="Courier New" SIZE=2>anchura</FONT><FONT FACE="Arial" SIZE=2> y la </FONT><FONT FACE="Courier New" SIZE=2>altura</FONT><FONT FACE="Arial" SIZE=2> del "frame" o plantilla que viene a continuaci&oacute;n de la pieza actual, y aplicarle exactamente las mismas comprobaciones que antes. Lo &uacute;nico que hacemos, es sustituir "virtualmente" la pieza actual por la siguiente y comprobar si un movimiento de &eacute;sta &uacute;ltima producir&iacute;a alg&uacute;n tipo de colisi&oacute;n.</P>
+<P ALIGN="JUSTIFY">Como se puede observar, el proceso es bastante simple en lo b&aacute;sico. Â¿C&oacute;mo har&iacute;amos para detectar una colisi&oacute;n al realizar un giro?. Bien sencillo. No habr&aacute; que escribir un c&oacute;digo especial, bastar&aacute; con obtener la </FONT><FONT FACE="Courier New" SIZE=2>anchura</FONT><FONT FACE="Arial" SIZE=2> y la </FONT><FONT FACE="Courier New" SIZE=2>altura</FONT><FONT FACE="Arial" SIZE=2> del "frame" o plantilla que viene a continuaci&oacute;n de la pieza actual, y aplicarle exactamente las mismas comprobaciones que antes. Lo &uacute;nico que hacemos, es sustituir "virtualmente" la pieza actual por la siguiente y comprobar si un movimiento de &eacute;sta &uacute;ltima producir&iacute;a alg&uacute;n tipo de colisi&oacute;n.</P>
 
 
 <b>Colisiones entre piezas</b>
@@ -224,7 +224,7 @@ Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" S
 <CENTER><IMG SRC="gif/figtet7.gif"></CENTER>
 <P ALIGN="JUSTIFY">En este ejemplo, vemos c&oacute;mo una pieza que intenta moverse hacia la derecha no puede por el sencillo motivo de que hay fragmentos de otras piezas que le impiden el movimiento. Poder controlar esto es muy f&aacute;cil, pues tan s&oacute;lo deberemos de comprobar, internamente, si al mover una posici&oacute;n nuestra figura (a la izquierda, derecha o hacia abajo), ocupa alguna zona que ya estaba previamente ocupada. En este caso, no podremos permitir el movimiento. Si este tipo de colisi&oacute;n se da, por ejemplo, cuando el temporizador asignado a la figura que estamos manejando vence y hace que &eacute;sta tenga que bajar una posici&oacute;n, significar&aacute; que no podr&aacute; bajar y que, por lo tanto, se ha acabado su tiempo de vida en el juego y tiene que salir otra por la parte superior.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">El otro problema que pod&iacute;a darse al manejar una pieza, era el referido al de girarla. Si nuestra figura va a ser girada en un determinado sentido y encuentra fragmentos de otras figuras, &eacute;sta no podr&aacute; girar. ¿C&oacute;mo podemos solucionar este problema?. Bien, lo primero que deberemos de hacer es tomar las propiedades del frame siguiente al actual, m&aacute;s concretamente la anchura y la altura. Una vez hecho esto, deberemos de discutir dichos valores: </P>
+<P ALIGN="JUSTIFY">El otro problema que pod&iacute;a darse al manejar una pieza, era el referido al de girarla. Si nuestra figura va a ser girada en un determinado sentido y encuentra fragmentos de otras figuras, &eacute;sta no podr&aacute; girar. Â¿C&oacute;mo podemos solucionar este problema?. Bien, lo primero que deberemos de hacer es tomar las propiedades del frame siguiente al actual, m&aacute;s concretamente la anchura y la altura. Una vez hecho esto, deberemos de discutir dichos valores: </P>
 <P ALIGN="JUSTIFY">&#9;</P><DIR>
 <DIR>
 
@@ -236,14 +236,14 @@ Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" S
 <B><P ALIGN="JUSTIFY"></P></DIR>
 </DIR>
 
-</B><P ALIGN="JUSTIFY">Una vez estudiadas las colisiones, convendr&iacute;a hacerse la pregunta ¿y cu&aacute;l de las dos compruebo antes?. Es obvio que, en cada movimiento de pieza, hay que realizar una comparaci&oacute;n de colisi&oacute;n en el escenario. Lo ideal ser&iacute;a tratar ambas colisiones por separado. Si al encontrarnos una colisi&oacute;n en los l&iacute;mites del &aacute;rea de juego, ya no realizar&iacute;amos comprobaci&oacute;n de colisi&oacute;n con los fragmentos de piezas y viceversa.</P>
+</B><P ALIGN="JUSTIFY">Una vez estudiadas las colisiones, convendr&iacute;a hacerse la pregunta Â¿y cu&aacute;l de las dos compruebo antes?. Es obvio que, en cada movimiento de pieza, hay que realizar una comparaci&oacute;n de colisi&oacute;n en el escenario. Lo ideal ser&iacute;a tratar ambas colisiones por separado. Si al encontrarnos una colisi&oacute;n en los l&iacute;mites del &aacute;rea de juego, ya no realizar&iacute;amos comprobaci&oacute;n de colisi&oacute;n con los fragmentos de piezas y viceversa.</P>
 <P ALIGN="JUSTIFY"></P>
 </FONT><h4><FONT FACE="Arial">C&oacute;mo averiguar si hemos hecho l&iacute;nea</h4>
 <P ALIGN="JUSTIFY"></P>
 </FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY">Siempre que la vida de una pieza ha terminado, esto es, en el mismo instante que vence la ranura de tiempo y no puede bajar una posici&oacute;n porque hay colisi&oacute;n (contra la base del &aacute;rea de juego o contra otros fragmentos de piezas), hay que comprobar si ha hecho l&iacute;nea. Una pieza har&aacute; l&iacute;nea cuando alguno de sus fragmentos logren hacer que la fila en la que se han colocado todas las casillas est&eacute;n ocupadas. Para verlo m&aacute;s claro, esta figura:</P>
 <CENTER><IMG SRC="gif/figtet8.gif"></CENTER>
 
-<P ALIGN="JUSTIFY">Aqu&iacute; podemos ver c&oacute;mo la barra que acabamos de colocar hace que dos de sus casillas hagan l&iacute;nea (la casilla 1 y 3, comenzando a contar de arriba a abajo). ¿C&oacute;mo detectar esto?. Bien, antes de explicar c&oacute;mo detectar l&iacute;nea, convendr&iacute;a que pens&aacute;ramos mejor lo que pasa cuando una pieza hace l&iacute;nea. Puntos a tener en cuenta:</P>
+<P ALIGN="JUSTIFY">Aqu&iacute; podemos ver c&oacute;mo la barra que acabamos de colocar hace que dos de sus casillas hagan l&iacute;nea (la casilla 1 y 3, comenzando a contar de arriba a abajo). Â¿C&oacute;mo detectar esto?. Bien, antes de explicar c&oacute;mo detectar l&iacute;nea, convendr&iacute;a que pens&aacute;ramos mejor lo que pasa cuando una pieza hace l&iacute;nea. Puntos a tener en cuenta:</P>
 <P ALIGN="JUSTIFY"></P>
 
 <UL>
@@ -267,7 +267,7 @@ Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" S
 </FONT><h4><FONT FACE="Arial">En resumen</h4>
 </FONT><FONT FACE="Arial" SIZE=2><P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Lo expuesto aqu&iacute; no es m&aacute;s que un an&aacute;lisis bastante acelerado de todo lo que ser&iacute;a el mecanismo interno de cara a la realizaci&oacute;n de un Tetris b&aacute;sico. Algunos temas no se han enfocado m&aacute;s a fondo por el simple hecho de que no se pretend&iacute;a hacer de este art&iacute;culo un listado en donde copiar la soluci&oacute;n para hacer un Tetris. Creo que la mayor parte de las bases de este juego est&aacute;n expuestas. Ahora bien, todo aquel que quiera hacer un Tetris, que se olvide de agarrarse a este documento &uacute;nicamente pues un juego tan trivial como el Tetris, esconde unos cuantos secretos m&aacute;s que s&oacute;lo se desvelan cuando se toma en serio el proyecto. As&iacute; que, si quieres hacer un Tetris l&eacute;ete este documento una vez, obt&eacute;n una idea general y luego ponte a escribir tu propia documentaci&oacute;n.</P></FONT>
-<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ú</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÓN EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>JULIO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
+<P ALIGN="RIGHT"><FONT COLOR="#0080C0" size=2 face="arial"><B>Ãš</B></font><FONT color="#000000" size=1 face="arial">LTIMA REVISIÃ“N EN</FONT> <FONT color="#CC0000" size=2 face="arial"><B>JULIO</B></FONT><FONT color="#000000" size=1 face="arial"> DE </FONT><FONT color="#CC0000" size=2 face="arial"><B>1999</B></FONT>
 <br><hr>
 <center><TABLE CELLPADDING=2 WIDTH="100%">
 
@@ -293,7 +293,7 @@ Sea </FONT><FONT FACE="Courier New" SIZE=1>limiteBase</FONT><FONT FACE="Arial" S
 
 <A HREF="pjuegos.htm"><font FACE="ARIAL"><B>[Desarrollo de Videojuegos]</B></font></a> <hR>
 
-<A HREF="fpj.htm"><font FACE="ARIAL"><B>[Así Funciona]</B></font></a> 
+<A HREF="fpj.htm"><font FACE="ARIAL"><B>[AsÃ­ Funciona]</B></font></a> 
 
 </DIV>
 

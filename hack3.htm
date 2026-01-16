@@ -21,7 +21,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>B</B></font><FONT color="#000000" size=2 face="arial"><B>reve Introducción al Mundo del Hacking</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>B</B></font><FONT color="#000000" size=2 face="arial"><B>reve IntroducciÃ³n al Mundo del Hacking</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -32,7 +32,7 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <FONT color="#cc0000" size=2 face="arial">
-<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtículo realizado por<br>
+<b>A</b></font><FONT color="#000000" size=2 face="arial"><b>rtÃ­culo realizado por<br>
 <A HREF="mailto:perota082@mx3.redestb.es">Pedro Ferrera "BaDBoY"</A>
 </b></FONT>
 <br><br>
@@ -158,7 +158,7 @@ login:</P>
 <P ALIGN="JUSTIFY"></P>
 <I><P ALIGN="JUSTIFY"># rlogin &lt;host&gt;</P>
 </I><P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Y hay una probabilidad entre 100 de que entremos. Pero lo bueno es que entramos directamente como root, que fue lo que a mi me sucedi&oacute;. Lo que ocurre es que, al no especificar con qu&eacute; nombre (login) queremos entrar en el sistema, el comando entiende que queremos entrar como root, y como no hemos puesto password, entiende que el password es simplemente, ENTER (o sea, nada). En otras palabras, que hemos entrado con la cuenta de root sin asignar password, el root no tiene aun un password asignado, cosa que es pr&aacute;cticamente imposible (para qu&eacute; negarlo) ¡ Pero nunca est&aacute; de m&aacute;s probarlo !</P>
+<P ALIGN="JUSTIFY">Y hay una probabilidad entre 100 de que entremos. Pero lo bueno es que entramos directamente como root, que fue lo que a mi me sucedi&oacute;. Lo que ocurre es que, al no especificar con qu&eacute; nombre (login) queremos entrar en el sistema, el comando entiende que queremos entrar como root, y como no hemos puesto password, entiende que el password es simplemente, ENTER (o sea, nada). En otras palabras, que hemos entrado con la cuenta de root sin asignar password, el root no tiene aun un password asignado, cosa que es pr&aacute;cticamente imposible (para qu&eacute; negarlo) Â¡ Pero nunca est&aacute; de m&aacute;s probarlo !</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Y otra t&aacute;ctica de este tipo consiste en hacer lo mismo, pero usando las "default counts", que son las cuentas que vienen por defecto en cualquier sistema UNIX, y, a no ser que el root les cambie el password o las desactive, se pueden usar. Esto es bueno probarlo porque algunas veces el root solo actualiza las cuentas que usa y las otras las deja activadas. Las default counts, en sistemas UNIX son:</P>
 <P ALIGN="JUSTIFY"></P>
@@ -210,7 +210,7 @@ finger</P>
 <P ALIGN="JUSTIFY"></P>
 </I><P ALIGN="JUSTIFY">Bueno, los exploits locales son una buena manera de entrar directamente, pero no siempre funcionan, sobretodo porque los mismos exploits suelen tener bugs y tenemos que saber modificarlos, pero por esto de momento no os preocupeis. Hay, por supuesto, t&eacute;cnicas m&aacute;s avanzadas para entrar en sistemas. Una de ellas es el IP Spoofing.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">El <B>IP Spoofing</B> nos permite cambiar nuestra IP. Vale, pero ¿ Qu&eacute; ganamos con eso ? Bien, supongamos que el sistema al que queremos entrar est&aacute; en una subred, y, por lo tanto, se comunica con sistemas trusteds, sistemas que son "colegas". ¿ Qu&eacute; quiere decir que son colegas ? Pues que est&aacute;n comunicados entre s&iacute; y que por lo tanto tienen ciertos privilegios (tienen acceso a directorios compartidos v&iacute;a NFS). Los programas de IP Spoofing lo que hacen es (de manera simplificada), intentar comunicar con un sistema trusted (colega del sistema al que queremos entrar), hacer que no responda y en ese intervalo de tiempo alterar nuestra IP para hacernos pasar por ese sistema, de manera que ya tenemos ciertos privilegios en el sistema en el que queremos entrar. </P>
+<P ALIGN="JUSTIFY">El <B>IP Spoofing</B> nos permite cambiar nuestra IP. Vale, pero Â¿ Qu&eacute; ganamos con eso ? Bien, supongamos que el sistema al que queremos entrar est&aacute; en una subred, y, por lo tanto, se comunica con sistemas trusteds, sistemas que son "colegas". Â¿ Qu&eacute; quiere decir que son colegas ? Pues que est&aacute;n comunicados entre s&iacute; y que por lo tanto tienen ciertos privilegios (tienen acceso a directorios compartidos v&iacute;a NFS). Los programas de IP Spoofing lo que hacen es (de manera simplificada), intentar comunicar con un sistema trusted (colega del sistema al que queremos entrar), hacer que no responda y en ese intervalo de tiempo alterar nuestra IP para hacernos pasar por ese sistema, de manera que ya tenemos ciertos privilegios en el sistema en el que queremos entrar. </P>
 <P ALIGN="JUSTIFY">Lo primero que tienes que hacer para poner en pr&aacute;ctica esta t&aacute;ctica es bajarte un buen programa de IP Spoofing. Mejor b&aacute;jate varios por si alguno no funciona. Ahora tienes que saber cu&aacute;les son los sistemas trusteds del sistema al que quieres entrar. En otras palabras, qu&eacute; estructura NFS tiene. Para esto escribe lo siguiente:</P>
 <P ALIGN="JUSTIFY"></P>
 <I><P ALIGN="JUSTIFY"># showmount -e &lt;host&gt;</P>
@@ -274,11 +274,11 @@ Anastasio:x:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh
 <P ALIGN="JUSTIFY"></P>
 <I><P>Anastasio::1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Nota: Hay que tener en cuenta que si nos encontramos un espacio en blanco, un asterisco o un signo de admiraci&oacute;n delante del password, la cuenta est&aacute; inhabilitada temporalmente, eso significa que el acceso del usuario al sistema ha sido restringuido por el admin (¡ o por un hacker !).</P>
+<P ALIGN="JUSTIFY">Nota: Hay que tener en cuenta que si nos encontramos un espacio en blanco, un asterisco o un signo de admiraci&oacute;n delante del password, la cuenta est&aacute; inhabilitada temporalmente, eso significa que el acceso del usuario al sistema ha sido restringuido por el admin (Â¡ o por un hacker !).</P>
 <P ALIGN="JUSTIFY"></P>
 </I><P ALIGN="JUSTIFY">Bueno, crackear el archivo password es una posibilidad a tener en cuenta para conseguir acceso root, averiguando cu&aacute;l es la contrase&ntilde;a que usa el root. En el hipot&eacute;tico caso de que lleguemos a saber cu&aacute;l es la contrase&ntilde;a del root, lo que tenemos que hacer es, ante todo, no cambiarla (una vez estemos dentro como root). Despu&eacute;s, pasar a mirar la parte de esta unidad referente a qu&eacute; hacer cuando se es root.</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Si lo del archivo passwd no ha resultado, vamos a pasar a intentar buscar defectos en el sistema en el que estamos. Ya podemos ir preparando los exploits que necesitemos. Ahora bien, ¿ Con qu&eacute; criterio hay que elegirlos ? Los exploits que ejecutes en el sistema tienen que cumplir siempre estas condiciones:</P>
+<P ALIGN="JUSTIFY">Si lo del archivo passwd no ha resultado, vamos a pasar a intentar buscar defectos en el sistema en el que estamos. Ya podemos ir preparando los exploits que necesitemos. Ahora bien, Â¿ Con qu&eacute; criterio hay que elegirlos ? Los exploits que ejecutes en el sistema tienen que cumplir siempre estas condiciones:</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">1 - La m&aacute;s trivial, que hagan referencia al sistema UNIX en el que est&aacute;s. No ejecutes un exploit para HP-UX si est&aacute;s en un Solaris. </P>
 <P ALIGN="JUSTIFY"></P>
@@ -286,13 +286,13 @@ Anastasio:x:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">3 - Que sean lo m&aacute;s nuevos posibles. Los exploits aparecen a medida que se van encontrando los errores en los sistemas. Por lo tanto, hay m&aacute;s posibilidades que el admin del sistema no haya tenido tiempo a parchear el bug al que haga referencia el exploit. En ciertos sites como rootshell.com aparecen exploits nuevos cada mes. </P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">4 - Que hagan lo que necesitas que hagan. Leete qu&eacute; es lo que hacen, inicialmente te interesa ganar acceso root, pues coge solo los que hagan esto. No te interesar&aacute;, por ejemplo, hacer petar el sistema, ni colocar un sniffer. Tambi&eacute;n habr&aacute;n exploits que para ejecutarlos necesitar&aacute;s ser root en el sistema ¡ Tampoco te interesan !</P>
+<P ALIGN="JUSTIFY">4 - Que hagan lo que necesitas que hagan. Leete qu&eacute; es lo que hacen, inicialmente te interesa ganar acceso root, pues coge solo los que hagan esto. No te interesar&aacute;, por ejemplo, hacer petar el sistema, ni colocar un sniffer. Tambi&eacute;n habr&aacute;n exploits que para ejecutarlos necesitar&aacute;s ser root en el sistema Â¡ Tampoco te interesan !</P>
 <P ALIGN="JUSTIFY"></P>
 <I><P ALIGN="JUSTIFY">Nota: En el cap&iacute;tulo 3 hay algunos de los bugs m&aacute;s conocidos de cada sistema UNIX. Para poder aprovecharlos, busca los exploits que hagan referencia a esos bugs.</P>
 </I><P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">No todos los exploits son iguales, eso es algo que ya hemos comentado antes. Antes he mencionado la palabra exploit local. Llegados a este punto, tienes que entender la diferencia entre exploit local y exploit remoto:</P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">- Exploit local: tanto si est&aacute; en C como en Shell, tiene que ejecutarse sin estar conectado a ning&uacute;n sistema (¡ pero s&iacute; a Internet !).</P>
+<P ALIGN="JUSTIFY">- Exploit local: tanto si est&aacute; en C como en Shell, tiene que ejecutarse sin estar conectado a ning&uacute;n sistema (Â¡ pero s&iacute; a Internet !).</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">- Exploit remoto: Si est&aacute; en C, hay que subir el c&oacute;digo fuente al sistema y compilarlo DENTRO del sistema. Una vez compilado se ejecuta. Si est&aacute; en Shell simplemente hay que subirlo al sistema y ejecutarlo dentro del sistema.</P>
 <P ALIGN="JUSTIFY"></P>
@@ -318,11 +318,11 @@ Anastasio:x:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh
 <P ALIGN="JUSTIFY">Pero si te han cerrado la cuenta, lo que tienes que hacer es buscarte m&aacute;s shells y seguir practicando.</P>
 <P ALIGN="JUSTIFY">Si has conseguido nivel root, vamos a pasar a explicar qu&eacute; es lo que tienes que hacer.</P>
 <P ALIGN="JUSTIFY"></P>
-<H4>¿ Qu&eacute; hacer una vez se es ROOT ?</H4>
+<H4>Â¿ Qu&eacute; hacer una vez se es ROOT ?</H4>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">Una vez eres root, el sistema es tuyo. No hay ning&uacute;n tipo de restricci&oacute;n, puedes pasearte por el sistema como si fuese tuyo. Es muy importante, cuando se es root, asegurarse de que nos vamos a ir sin dejar ninguna huella. Pero esto lo voy a explicar en la pr&oacute;xima lecci&oacute;n. As&iacute; mismo, si queremos asegurarnos nuestra continuidad como hacker en ese sistema, tenemos que ingeniarnos alg&uacute;n m&eacute;todo para que podamos entrar y salir siendo siempre root. Una manera ser&iacute;a hacer el mismo proceso que hemos hecho para conseguir root. Pero, ¿ Y si es un proceso demasiado largo ? ¿ Y si tenemos root y no sabemos ni c&oacute;mo lo hemos conseguido ? </P>
+<P ALIGN="JUSTIFY">Una vez eres root, el sistema es tuyo. No hay ning&uacute;n tipo de restricci&oacute;n, puedes pasearte por el sistema como si fuese tuyo. Es muy importante, cuando se es root, asegurarse de que nos vamos a ir sin dejar ninguna huella. Pero esto lo voy a explicar en la pr&oacute;xima lecci&oacute;n. As&iacute; mismo, si queremos asegurarnos nuestra continuidad como hacker en ese sistema, tenemos que ingeniarnos alg&uacute;n m&eacute;todo para que podamos entrar y salir siendo siempre root. Una manera ser&iacute;a hacer el mismo proceso que hemos hecho para conseguir root. Pero, Â¿ Y si es un proceso demasiado largo ? Â¿ Y si tenemos root y no sabemos ni c&oacute;mo lo hemos conseguido ? </P>
 <P ALIGN="JUSTIFY">Podr&iacute;amos crear una cuenta con acceso root, pero el admin del sistema lo acabar&iacute;a viendo. Lo que podemos hacer es usar el .profile del root para asegurarnos el futuro acceso mediante un caballo de troya. </P>
-<P ALIGN="JUSTIFY">Muchos os preguntareis ¿ Qu&eacute; es un caballo de troya ? Bueno, un caballo de troya no es m&aacute;s que un proceso oculto. Vamos a verlo mediante un ejemplo muy sencillo:</P>
+<P ALIGN="JUSTIFY">Muchos os preguntareis Â¿ Qu&eacute; es un caballo de troya ? Bueno, un caballo de troya no es m&aacute;s que un proceso oculto. Vamos a verlo mediante un ejemplo muy sencillo:</P>
 <P ALIGN="JUSTIFY"></P>
 <H4>Caballo de troya 1</H4>
 <P ALIGN="JUSTIFY"></P>
@@ -335,13 +335,13 @@ Anastasio:x:1500:10:Anastasio Fernandez:/usr/anastasio:/bin/sh
 <P ALIGN="JUSTIFY"></P>
 <I><P ALIGN="JUSTIFY"> echo " Bienvenido, Anastasio Fern&aacute;ndez "<BR>
  echo " Que tengas un buen d&iacute;a. "<BR>
- echo " ¿ A que no sabes c&oacute;mo te est&aacute;n llegando estas l&iacute;neas ? "
+ echo " Â¿ A que no sabes c&oacute;mo te est&aacute;n llegando estas l&iacute;neas ? "
 </I><P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Y la l&iacute;nea m&aacute;s importante que tenemos que a&ntilde;adir es:</P>
 <P ALIGN="JUSTIFY"></P>
 <I><P ALIGN="JUSTIFY"> mv .temp .profile</P>
 </I><P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¿Qu&eacute; hemos hecho con esto?. Acabamos de ocultar un proceso, en este caso un mensage de bienvenida. El archivo original .profile estaba guardado en en uno temporal (.temp). De manera que cuando Anastasio entra en el sistema, su .profile (que es el que hemos modificado) se encarga de ocultarse moviendo el contenido del archivo temporal otra vez al archivo profile, de manera que cuando Anastasio mire en su .profile no ver&aacute; nada anormal. Excepto la fecha de modificaci&oacute;n, pero eso lo podemos arreglar a&ntilde;adiendo un comando touch al final del caballo de troya. </P>
+<P ALIGN="JUSTIFY">Â¿Qu&eacute; hemos hecho con esto?. Acabamos de ocultar un proceso, en este caso un mensage de bienvenida. El archivo original .profile estaba guardado en en uno temporal (.temp). De manera que cuando Anastasio entra en el sistema, su .profile (que es el que hemos modificado) se encarga de ocultarse moviendo el contenido del archivo temporal otra vez al archivo profile, de manera que cuando Anastasio mire en su .profile no ver&aacute; nada anormal. Excepto la fecha de modificaci&oacute;n, pero eso lo podemos arreglar a&ntilde;adiendo un comando touch al final del caballo de troya. </P>
 <P ALIGN="JUSTIFY">Naturalmente no es muy recomendable hacer esto, ya que a un usuario normal no le har&iacute;a mucha gracia y comunicar&iacute;a al admin que ha entrado un hacker en el sistema.</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Ahora que ya sabemos qu&eacute; es un caballo de troya, vamos a hacer el caso que nos ocupa:</P>
@@ -381,7 +381,7 @@ mv .temp .profile</P>
 <P ALIGN="JUSTIFY"></P>
 <P ALIGN="JUSTIFY">Bueno, siendo root se pueden hacer infinidad de cosas. Si quieres, disfruta de tu limitado acceso root (ahora que no sabes c&oacute;mo borrar tus huellas) curioseando por el sistema. No te recomiendo que borres nada. Simplemente mira a ver qu&eacute; hay. Y, ahora que sabes hacer caballos de troya, puedes divertirte haci&eacute;ndolos en los .profile's de los usuarios normales. Por ejemplo, puedes poner un mensage personal si conoces a alguien del sistema. </P>
 <P ALIGN="JUSTIFY"></P>
-<P ALIGN="JUSTIFY">¡ S&eacute; paciente y dentro de poco descubrir&aacute;s c&oacute;mo borrar tus huellas en los sistemas en los que te enrootes ! Adem&aacute;s, aprender&aacute;s a poner Sniffers. ¡ Todo esto y mucho m&aacute;s en la pr&oacute;xima lecci&oacute;n ! ¡ Nos vemos !</P>
+<P ALIGN="JUSTIFY">Â¡ S&eacute; paciente y dentro de poco descubrir&aacute;s c&oacute;mo borrar tus huellas en los sistemas en los que te enrootes ! Adem&aacute;s, aprender&aacute;s a poner Sniffers. Â¡ Todo esto y mucho m&aacute;s en la pr&oacute;xima lecci&oacute;n ! Â¡ Nos vemos !</P>
 
 
 <br>
@@ -399,7 +399,7 @@ mv .temp .profile</P>
 <FONT SIZE=2>
 <A HREF="index03.htm"><font FACE="ARIAL"><B>[Aula Macedonia]</B></font></a> <BR>
 <HR>
-<A HREF="aulag.htm"><font FACE="ARIAL"><B>[Breve Introducción al Mundo del Hacking]</B></font></a><br>
+<A HREF="aulag.htm"><font FACE="ARIAL"><B>[Breve IntroducciÃ³n al Mundo del Hacking]</B></font></a><br>
 </DIV>
 </TD>
 </TR>

@@ -19,7 +19,7 @@ w\:* {behavior:url(#default#VML);}
 .shape {behavior:url(#default#VML);}
 </style>
 <![endif]-->
-<title>TÈcnicas de Flocking para entornos de Realidad Virtual</title>
+<title>T√©cnicas de Flocking para entornos de Realidad Virtual</title>
 <!--[if gte mso 9]><xml>
  <o:DocumentProperties>
   <o:Author>kokopus</o:Author>
@@ -286,39 +286,39 @@ ul
       <td>
 
 <p align=left style="word-spacing: 0; margin: 0"><font face="Verdana" size="1"><span style='mso-bidi-font-size: 12.0pt; color: black'><b>Autor:
-<a href="mailto:oscarg@salleurl.edu">Oscar GarcÌa i
+<a href="mailto:oscarg@salleurl.edu">Oscar Garc√≠a i
 Panyella - &#8220;KOKOPUS&#8221;</a></b></span></font></p>
 
 <p align=left style="word-spacing: 0; margin: 0"><font face="Verdana" size="1"><b><span style="mso-bidi-font-size: 12.0pt; color: black">Fecha:
 13-04-01</span></b></font></p>
 
-        <p align="center"><b><span style='color: black'><font face="Verdana" size="4">TÈcnicas de &#8220;Flocking&#8221; para
+        <p align="center"><b><span style='color: black'><font face="Verdana" size="4">T√©cnicas de &#8220;Flocking&#8221; para
 entornos de Realidad Virtual</font></span></b></p>
 
 <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
-color:black'>Este artÌculo pretende retomar uno de los temas que en su dÌa
-introduje en la revista. Ahora la aproximaciÛn a la problem·tica ser· mucho m·s
-pr·ctica, intentando plantear soluciones concretas.<o:p></o:p></span></p>
+color:black'>Este art√≠culo pretende retomar uno de los temas que en su d√≠a
+introduje en la revista. Ahora la aproximaci√≥n a la problem√°tica ser√° mucho m√°s
+pr√°ctica, intentando plantear soluciones concretas.<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
-windowtext;mso-pattern:gray-20 auto'>IntroducciÛn</span></b></p>
+windowtext;mso-pattern:gray-20 auto'>Introducci√≥n</span></b></p>
 
-<p><span style='font-size:10.0pt;font-family:Arial;color:black'>øCÛmo podemos
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>¬øC√≥mo podemos
 animar muchos seres virtuales (de ahora en adelante &#8220;<b>avatars</b>&#8221;) sin tener
-que modelarlos uno a uno?. Esta es la cuestiÛn que quisiera plantearos. En
-grandes factorÌas de producciÛn Multimedia como Disney, producen pelÌculas con
+que modelarlos uno a uno?. Esta es la cuesti√≥n que quisiera plantearos. En
+grandes factor√≠as de producci√≥n Multimedia como Disney, producen pel√≠culas con
 escenas en las que inundan la pantalla de avatars que se comportan
 independientemente uno de otro. Por ejemplo la escena de la plaza en EL
-JOROBADO DE NOTRE DAME o bien la estampida de animales en EL REY LEON adem·s de
-los tÌpicos escuadrones de aviones &#8220;clÛnicos&#8221; que aparecen en muchas pelÌculas
-bÈlicas.<o:p></o:p></span></p>
+JOROBADO DE NOTRE DAME o bien la estampida de animales en EL REY LEON adem√°s de
+los t√≠picos escuadrones de aviones &#8220;cl√≥nicos&#8221; que aparecen en muchas pel√≠culas
+b√©licas.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Al contrario de
-lo que pudiera parecer, los diseÒadores no modelan y colorean a cada avatar por
-separado. Existen tÈcnicas que automatizan este proceso. La idea es que el
-ordenador calcule autom·ticamente los efectos de &#8220;flocking&#8221; (bandadas, rebaÒos,
-estampidas, etc...) de forma que la responsabilidad del diseÒador sÛlo implique
-la Ûptima elecciÛn del modelo 3D (mallado) o 2D (textura) para cada avatar.<o:p></o:p></span></p>
+lo que pudiera parecer, los dise√±adores no modelan y colorean a cada avatar por
+separado. Existen t√©cnicas que automatizan este proceso. La idea es que el
+ordenador calcule autom√°ticamente los efectos de &#8220;flocking&#8221; (bandadas, reba√±os,
+estampidas, etc...) de forma que la responsabilidad del dise√±ador s√≥lo implique
+la √≥ptima elecci√≥n del modelo 3D (mallado) o 2D (textura) para cada avatar.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Veamos un
 ejemplo con el que he trabajado recientemente:<o:p></o:p></span></p>
@@ -379,7 +379,7 @@ ejemplo con el que he trabajado recientemente:<o:p></o:p></span></p>
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   padding:0cm 3.5pt 0cm 3.5pt'>
   <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-  font-family:Arial;color:black'>En rojo se observan las partÌculas de comida
+  font-family:Arial;color:black'>En rojo se observan las part√≠culas de comida
   que engullen los animales.<o:p></o:p></span></b></p>
   </td>
  </tr>
@@ -392,52 +392,52 @@ avatars &#8220;inteligentes&#8221; les tendremos que dotar de:<o:p></o:p></span>
 
 <p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
 tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>VisiÛn</span></b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>. La posibilidad de ver todo aquello que les rodea. TÈcnicamente
-se trata de definir una regiÛn de &#8220;sensibilidad&#8221; para cada uno, dentro de la
-cual tienen acceso a la base de datos de geometrÌa.<o:p></o:p></span></p>
+color:black'>Visi√≥n</span></b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>. La posibilidad de ver todo aquello que les rodea. T√©cnicamente
+se trata de definir una regi√≥n de &#8220;sensibilidad&#8221; para cada uno, dentro de la
+cual tienen acceso a la base de datos de geometr√≠a.<o:p></o:p></span></p>
 
 <p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
 tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
 color:black'>Movimiento</span></b><span style='font-size:10.0pt;font-family:
-Arial;color:black'>. Es obvio que un p·jaro vuela y un pez nada. Eso lo podemos
-solventar con un &#8220;solver numÈrico&#8221; de m·s o menos orden, seg˙n la precisiÛn
-buscada. Ejemplos tÌpicos son los algoritmos de Euler, Punto Medio o Runge-Kutta.<o:p></o:p></span></p>
+Arial;color:black'>. Es obvio que un p√°jaro vuela y un pez nada. Eso lo podemos
+solventar con un &#8220;solver num√©rico&#8221; de m√°s o menos orden, seg√∫n la precisi√≥n
+buscada. Ejemplos t√≠picos son los algoritmos de Euler, Punto Medio o Runge-Kutta.<o:p></o:p></span></p>
 
 <p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
 tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>ColisiÛn</span></b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>. El avatar tendr· conciencia del resto de elementos de la escena
-y chocar· con ellos, ya sean objetos est·ticos u otros avatars. Este punto es
-inseparable del primero, los sensores de visiÛn artificial.<o:p></o:p></span></p>
+color:black'>Colisi√≥n</span></b><span style='font-size:10.0pt;font-family:Arial;
+color:black'>. El avatar tendr√° conciencia del resto de elementos de la escena
+y chocar√° con ellos, ya sean objetos est√°ticos u otros avatars. Este punto es
+inseparable del primero, los sensores de visi√≥n artificial.<o:p></o:p></span></p>
 
 <p style='margin-left:52.4pt;text-indent:-17.0pt;mso-list:l3 level1 lfo2;
 tab-stops:list 53.4pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
 color:black'>Intencionalidad</span></b><span style='font-size:10.0pt;
 font-family:Arial;color:black'>. Un avatar tiene asociado un generador de
-intenciones que b·sicamente se encarga de las decisiones en cada momento: øvoy
-a chocar?, øme estoy alejando de mi destino?, øestoy cerca del resto del
+intenciones que b√°sicamente se encarga de las decisiones en cada momento: ¬øvoy
+a chocar?, ¬øme estoy alejando de mi destino?, ¬øestoy cerca del resto del
 grupo?, etc...<o:p></o:p></span></p>
 
-<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Existen a˙n m·s
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Existen a√∫n m√°s
 posibilidades al respecto pero de momento trabajaremos con lo dicho. Para
-centrar el tema hablarÈ de un ejemplo concreto: <b>la simulaciÛn de bandadas de
-p·jaros</b>.<o:p></o:p></span></p>
+centrar el tema hablar√© de un ejemplo concreto: <b>la simulaci√≥n de bandadas de
+p√°jaros</b>.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Pensad que son
-muchos los juegos que se sustentan en tÈcnicas de este estilo. Algunos ejemplos
+muchos los juegos que se sustentan en t√©cnicas de este estilo. Algunos ejemplos
 son </span><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
 font-family:Arial'>Unreal</span></b><span style='font-size:10.0pt;mso-bidi-font-size:
 12.0pt;font-family:Arial'> o <b>Half-life</b>.</span><span style='font-size:
@@ -447,7 +447,7 @@ font-family:Arial'>Unreal</span></b><span style='font-size:10.0pt;mso-bidi-font-
 windowtext;mso-pattern:gray-20 auto'>Diagrama General</span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno que mejor
-que un diagrama para tener una visiÛn global del sistema. Vamos a echarle una
+que un diagrama para tener una visi√≥n global del sistema. Vamos a echarle una
 ojeada:<o:p></o:p></span></p>
 
 <p><!--[if gte vml 1]><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
@@ -459,130 +459,130 @@ ojeada:<o:p></o:p></span></p>
 </v:shape><![endif]--><![if !vml]><img width=566 height=456
 src="flocking_archivos/image004.jpg" align=left hspace=12 v:shapes="_x0000_s1027"><![endif]><span
 style='font-size:10.0pt;font-family:Arial;color:black'>Nuestros avatars-pajaros
-&#8220;piensan por sÌ mismos&#8221; y por tanto tienen que ser capaces de priorizar entre
-diversas acciones. En este caso observamos que sus &#8220;<b>heurÌsticas</b>&#8221; de
+&#8220;piensan por s√≠ mismos&#8221; y por tanto tienen que ser capaces de priorizar entre
+diversas acciones. En este caso observamos que sus &#8220;<b>heur√≠sticas</b>&#8221; de
 pensamiento son:<o:p></o:p></span></p>
 
 <p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
 tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
 color:black'>Tengo que volar hacia un destino predefinido</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'>, como por ejemplo un
-nido, un ·rbol o un montÛn de comida.<o:p></o:p></span></p>
+nido, un √°rbol o un mont√≥n de comida.<o:p></o:p></span></p>
 
 <p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
 tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
 color:black'>Tengo que permanecer cerca de la bandada</span></b><span
-style='font-size:10.0pt;font-family:Arial;color:black'>. Los p·jaros tienden a
+style='font-size:10.0pt;font-family:Arial;color:black'>. Los p√°jaros tienden a
 volar juntos en grupo y nunca se alejan demasiado a no ser que la necesidad sea
 imperiosa!.<o:p></o:p></span></p>
 
 <p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
 tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
 color:black'>Tengo que evitar colisiones</span></b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>. Esta claro que un p·jaro no desea chocar
-contra un ·rbol, contra otro p·jaro o bien contra un posible predador.<o:p></o:p></span></p>
+font-family:Arial;color:black'>. Esta claro que un p√°jaro no desea chocar
+contra un √°rbol, contra otro p√°jaro o bien contra un posible predador.<o:p></o:p></span></p>
 
 <p style='margin-left:17.0pt;text-indent:-17.0pt;mso-list:l4 level1 lfo10;
 tab-stops:list 18.0pt'><![if !supportLists]><span style='font-size:10.0pt;
-font-family:Symbol;mso-bidi-font-family:Arial;color:black'>∑<span
+font-family:Symbol;mso-bidi-font-family:Arial;color:black'>¬∑<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>Tengo que seguir a mi lÌder</span></b><span style='font-size:10.0pt;
+color:black'>Tengo que seguir a mi l√≠der</span></b><span style='font-size:10.0pt;
 font-family:Arial;color:black'>. En el caso de existir puede optarse porque
-nuestros p·jaros sigan m·s o menos fielmente a uno que ejerce de &#8220;jefe de
+nuestros p√°jaros sigan m√°s o menos fielmente a uno que ejerce de &#8220;jefe de
 grupo&#8221;.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>El hecho de
-decidir quÈ hacer y quÈ no hacer o incluso priorizar entre varias opciones
-existentes se relega al llamado &#8220;<b>Generador de Intenciones</b>&#8221;. Este mÛdulo
-es el que realmente modela el cerebro de cada p·jaro. Un ·guila no act˙a igual
-que una paloma o que un gorriÛn, a eso me refiero.<o:p></o:p></span></p>
+decidir qu√© hacer y qu√© no hacer o incluso priorizar entre varias opciones
+existentes se relega al llamado &#8220;<b>Generador de Intenciones</b>&#8221;. Este m√≥dulo
+es el que realmente modela el cerebro de cada p√°jaro. Un √°guila no act√∫a igual
+que una paloma o que un gorri√≥n, a eso me refiero.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>En la
-simulaciÛn intervienen diversos mÛdulos que paso a describir uno por uno a
-continuaciÛn:<o:p></o:p></span></p>
+simulaci√≥n intervienen diversos m√≥dulos que paso a describir uno por uno a
+continuaci√≥n:<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
-windowtext;mso-pattern:gray-20 auto'>Solver NumÈrico</span><span
+windowtext;mso-pattern:gray-20 auto'>Solver Num√©rico</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Parece
-contradictorio que empiece por el ˙ltimo mÛdulo pero lo necesito para
+contradictorio que empiece por el √∫ltimo m√≥dulo pero lo necesito para
 justificar el proceso que viene antes.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Un solver
-numÈrico se encarga de calcular la evoluciÛn din·mica del sistema, es decir, la
-posiciÛn y velocidad de cada avatar a cada instante de simulaciÛn. La idea
+num√©rico se encarga de calcular la evoluci√≥n din√°mica del sistema, es decir, la
+posici√≥n y velocidad de cada avatar a cada instante de simulaci√≥n. La idea
 fundamental radica en definir lo que se llama un &#8220;<b>problema de valor inicial</b>&#8221;.
-Se parte de unas condiciones iniciales conocidas, tÌpicamente las posiciones y
-velocidades iniciales de todos los avatars. A partir de Èstas y conocido el </span><b><span style='mso-char-type:symbol;
+Se parte de unas condiciones iniciales conocidas, t√≠picamente las posiciones y
+velocidades iniciales de todos los avatars. A partir de √©stas y conocido el </span><b><span style='mso-char-type:symbol;
 mso-symbol-font-family:Symbol'>D</span><span style='font-size:
 10.0pt;font-family:Arial;color:black'>t</span></b><span style='font-size:10.0pt;
 font-family:Arial;color:black'> (incremento de tiempo) que supondremos que se
-produce a cada iteraciÛn, pasamos a &#8220;mover&#8221; toda la geometrÌa. O sea que:<o:p></o:p></span></p>
+produce a cada iteraci√≥n, pasamos a &#8220;mover&#8221; toda la geometr√≠a. O sea que:<o:p></o:p></span></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>para t = t<sub>0</sub>, conocemos la posiciÛn(t<sub>0</sub>)
+font-family:Arial;color:black'>para t = t<sub>0</sub>, conocemos la posici√≥n(t<sub>0</sub>)
 = (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) y la velocidad(t<sub>0</sub>) =
 (vx<sub>0</sub>,vy<sub>0</sub>,vz<sub>0</sub>) de cada avatar<o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>No es nada
-raro. De hecho b·sicamente a todos os tendrÌa que sonar la famosa segunda ley
+raro. De hecho b√°sicamente a todos os tendr√≠a que sonar la famosa segunda ley
 de Newton:<o:p></o:p></span></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>Fuerza = Masa * AceleraciÛn<o:p></o:p></span></b></p>
+font-family:Arial;color:black'>Fuerza = Masa * Aceleraci√≥n<o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Definidas
-cu·les son las fuerzas que act˙an sobre un determinado avatar y conocida su masa,
-deducimos su aceleraciÛn. A partir de la aceleraciÛn y del tiempo deducimos su
-incremento de velocidad instant·nea y de Èsta su incremento de
-posiciÛn...osease:<o:p></o:p></span></p>
+cu√°les son las fuerzas que act√∫an sobre un determinado avatar y conocida su masa,
+deducimos su aceleraci√≥n. A partir de la aceleraci√≥n y del tiempo deducimos su
+incremento de velocidad instant√°nea y de √©sta su incremento de
+posici√≥n...osease:<o:p></o:p></span></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>1) AceleraciÛn = Fuerza / Masa<o:p></o:p></span></b></p>
+font-family:Arial;color:black'>1) Aceleraci√≥n = Fuerza / Masa<o:p></o:p></span></b></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
 font-family:Arial;color:black'>2) Nueva velocidad = Velocidad anterior +
-AceleraciÛn * </span><span
+Aceleraci√≥n * </span><span
 style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'>t<o:p></o:p></span></b></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>3) Nueva posiciÛn = PosiciÛn anterior +
+font-family:Arial;color:black'>3) Nueva posici√≥n = Posici√≥n anterior +
 Velocidad anterior * </span><span
 style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'>t<o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>y ya lo
-tenemos! si hacemos esto repetidamente iteraciÛn tras iteraciÛn renderizando al
-final de cada una, tenemos un sistema de simulaciÛn din·mica. A este
-procedimiento tan simple se le conoce como &#8220;<b>mÈtodo explÌcito de Euler</b>&#8221;.
+tenemos! si hacemos esto repetidamente iteraci√≥n tras iteraci√≥n renderizando al
+final de cada una, tenemos un sistema de simulaci√≥n din√°mica. A este
+procedimiento tan simple se le conoce como &#8220;<b>m√©todo expl√≠cito de Euler</b>&#8221;.
 Es muy inestable para </span><b><span
 style='mso-char-type:symbol;mso-symbol-font-family:Symbol'>D</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'>t</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'>&#8217;s demasiado grandes
-pero si se controla este par·metro no hay problema. Existen mÈtodos m·s
-completos para integrar pero suelen emplearse en simulaciÛn fÌsica, cuando la
-precisiÛn es un factor decisivo. En nuestro caso podemos sacrificarla un poco
+pero si se controla este par√°metro no hay problema. Existen m√©todos m√°s
+completos para integrar pero suelen emplearse en simulaci√≥n f√≠sica, cuando la
+precisi√≥n es un factor decisivo. En nuestro caso podemos sacrificarla un poco
 en favor de la velocidad, idealmente &#8220;tiempo real&#8221;.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Por tanto
-siempre tendremos una funciÛn dedicada a la resoluciÛn del mÈtodo de Euler en
-nuestro sistema. <b>ConclusiÛn</b>: necesitamos <b>fuerzas</b> como par·metro de
+siempre tendremos una funci√≥n dedicada a la resoluci√≥n del m√©todo de Euler en
+nuestro sistema. <b>Conclusi√≥n</b>: necesitamos <b>fuerzas</b> como par√°metro de
 entrada!<o:p></o:p></span></p>
 
-<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para m·s
-informaciÛn leed mis artÌculos sobre <b>SimulaciÛn fÌsica. MÈtodos numÈricos</b>
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para m√°s
+informaci√≥n leed mis art√≠culos sobre <b>Simulaci√≥n f√≠sica. M√©todos num√©ricos</b>
 y <b>Paso adaptativo</b>.<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
@@ -591,52 +591,52 @@ style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Podemos
 &#8220;inventar&#8221; tantas fuerzas como consideremos conveniente. De hecho existen
-procedimientos matem·ticos complejos para deducir fuerzas a partir de
-condiciones aunque no entrarÈ en ese punto. Se trata de introducir gravedad,
-fricciÛn con el aire, tornados, elÈctricas, magnÈticas, muelles ... De momento
-pueden sernos de interÈs las dos primeras:<o:p></o:p></span></p>
+procedimientos matem√°ticos complejos para deducir fuerzas a partir de
+condiciones aunque no entrar√© en ese punto. Se trata de introducir gravedad,
+fricci√≥n con el aire, tornados, el√©ctricas, magn√©ticas, muelles ... De momento
+pueden sernos de inter√©s las dos primeras:<o:p></o:p></span></p>
 
 <p><b><span style='font-size:10.0pt;font-family:Arial;color:black'>Gravedad </span><span style='mso-char-type:symbol;
-mso-symbol-font-family:Symbol'>ﬁ</span><span style='font-size:
+mso-symbol-font-family:Symbol'>√û</span><span style='font-size:
 10.0pt;font-family:Arial;color:black'> Fuerza (Newton&#8217;s) = masa (Kg&#8217;s) * G</span></b><span
-style='font-size:10.0pt;font-family:Arial;color:black'> (tÌpicamente constante
-de gravitaciÛn universal de valor -9.81 m/s<sup>2</sup>)<o:p></o:p></span></p>
+style='font-size:10.0pt;font-family:Arial;color:black'> (t√≠picamente constante
+de gravitaci√≥n universal de valor -9.81 m/s<sup>2</sup>)<o:p></o:p></span></p>
 
-<p><b><span style='font-size:10.0pt;font-family:Arial;color:black'>FricciÛn </span><span style='mso-char-type:symbol;
-mso-symbol-font-family:Symbol'>ﬁ</span><span style='font-size:
+<p><b><span style='font-size:10.0pt;font-family:Arial;color:black'>Fricci√≥n </span><span style='mso-char-type:symbol;
+mso-symbol-font-family:Symbol'>√û</span><span style='font-size:
 10.0pt;font-family:Arial;color:black'> Fuerza (Newton&#8217;s) = -Kv * velocidad</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'> (Kv es una constante de
-restituciÛn a escoger por parte del programador. Se observa que esta fuerza
-siempre va en contra de la direcciÛn del movimiento y dota al sistema global de
-m·s estabilidad).<o:p></o:p></span></p>
+restituci√≥n a escoger por parte del programador. Se observa que esta fuerza
+siempre va en contra de la direcci√≥n del movimiento y dota al sistema global de
+m√°s estabilidad).<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Obviamente para
 la primera se nos hace imperiosa la necesidad de definir una masa para cada
 avatar.<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
-windowtext;mso-pattern:gray-20 auto'>MÛdulo de c·lculo de aceleraciones</span><span
+windowtext;mso-pattern:gray-20 auto'>M√≥dulo de c√°lculo de aceleraciones</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno acabamos
 de ver que necesitamos trabajar con fuerzas para poder calcular aceleraciones.
-De hecho tambiÈn es totalmente lÌcito aÒadir aceleraciones precalculadas a las
+De hecho tambi√©n es totalmente l√≠cito a√±adir aceleraciones precalculadas a las
 obtenidas a partir de las fuerzas. Esto es lo que haremos con el generador de
 intenciones.<o:p></o:p></span></p>
 
-<p><span style='font-size:10.0pt;font-family:Arial;color:black'>La idea b·sica
-es que en funciÛn de las decisiones del avatar se calcule un vector de
-aceleraciÛn que sumado a las aceleraciones provenientes de las fuerzas, se
-utilizar· para desplazarlo en la prÛxima iteraciÛn. Una posible aproximaciÛn al
-c·lculo es el promediado de varios vectores ponderados que es lo que se muestra
-en el diagrama. El avatar-p·jaro calcula los siguientes vectores (siempre en
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>La idea b√°sica
+es que en funci√≥n de las decisiones del avatar se calcule un vector de
+aceleraci√≥n que sumado a las aceleraciones provenientes de las fuerzas, se
+utilizar√° para desplazarlo en la pr√≥xima iteraci√≥n. Una posible aproximaci√≥n al
+c√°lculo es el promediado de varios vectores ponderados que es lo que se muestra
+en el diagrama. El avatar-p√°jaro calcula los siguientes vectores (siempre en
 coordenadas de mundo 3D):<o:p></o:p></span></p>
 
 <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
 tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
 font-family:Arial;color:black'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>Vector desde su posiciÛn hasta el destino final prefijado</span></b><span
+color:black'>Vector desde su posici√≥n hasta el destino final prefijado</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'>. Este vector lo pondera
 la constante KD.<o:p></o:p></span></p>
 
@@ -644,54 +644,54 @@ la constante KD.<o:p></o:p></span></p>
 tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
 font-family:Arial;color:black'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>Vector desde su posiciÛn hasta el centroide de la bandada</span></b><span
+color:black'>Vector desde su posici√≥n hasta el centroide de la bandada</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'> (se entiende por
-centroide el promedio de las posiciones de todo el resto de p·jaros). Este
+centroide el promedio de las posiciones de todo el resto de p√°jaros). Este
 vector lo pondera la constante KB.<o:p></o:p></span></p>
 
 <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
 tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
 font-family:Arial;color:black'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><span style='font-size:10.0pt;font-family:Arial;
-color:black'>En el caso de detecciÛn inminente de <b>colisiÛn</b>, vector de
-respuesta a Èsta. Me refiero al vector que evita la colisiÛn. Este vector lo
+color:black'>En el caso de detecci√≥n inminente de <b>colisi√≥n</b>, vector de
+respuesta a √©sta. Me refiero al vector que evita la colisi√≥n. Este vector lo
 pondera la constante KC.<o:p></o:p></span></p>
 
 <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l5 level1 lfo11;
 tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
 font-family:Arial;color:black'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><![endif]><b><span style='font-size:10.0pt;font-family:Arial;
-color:black'>Vector desde su posiciÛn hasta la del lÌder de la bandada</span></b><span
+color:black'>Vector desde su posici√≥n hasta la del l√≠der de la bandada</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'> (en caso de haberlo).
 Este vector lo pondera la constante KL.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Calculados
-estos vectores con un procedimiento puramente geomÈtrico (hablo de Èsto en mi
-curso de Gr·ficos publicado en esta misma revista) los ponderamos
-(multiplicamos) con las constantes para despuÈs promediarlos. Lo fundamental es
-escoger adecuadamente los valores de las constantes de forma que demos m·s peso
-a las decisiones de m·s prioridad y menos a las menos importantes (para el
-avatar-p·jaro que estemos modelando est· claro puesto que <b>cada uno tiene sus
-propias constantes</b>). Esto quedarÌa asÌ:<o:p></o:p></span></p>
+estos vectores con un procedimiento puramente geom√©trico (hablo de √©sto en mi
+curso de Gr√°ficos publicado en esta misma revista) los ponderamos
+(multiplicamos) con las constantes para despu√©s promediarlos. Lo fundamental es
+escoger adecuadamente los valores de las constantes de forma que demos m√°s peso
+a las decisiones de m√°s prioridad y menos a las menos importantes (para el
+avatar-p√°jaro que estemos modelando est√° claro puesto que <b>cada uno tiene sus
+propias constantes</b>). Esto quedar√≠a as√≠:<o:p></o:p></span></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>AceleraciÛn intenciones = [ KD(xd,yd,zd) +
+font-family:Arial;color:black'>Aceleraci√≥n intenciones = [ KD(xd,yd,zd) +
 KB(xb,yb,zb) + KC(xc,yc,zc) + KL(xl,yl,zl) ] / 4.0<o:p></o:p></span></b></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>AceleraciÛn fuerzas = </span><span style='mso-char-type:symbol;
+font-family:Arial;color:black'>Aceleraci√≥n fuerzas = </span><span style='mso-char-type:symbol;
 mso-symbol-font-family:Symbol'>S</span><span style='font-size:
 10.0pt;font-family:Arial;color:black'> (Fuerzas) / masa<o:p></o:p></span></b></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
-font-family:Arial;color:black'>AceleraciÛn Total = AceleraciÛn intenciones +
-AceleraciÛn fuerzas</span></b><span style='font-size:10.0pt;font-family:Arial;
+font-family:Arial;color:black'>Aceleraci√≥n Total = Aceleraci√≥n intenciones +
+Aceleraci√≥n fuerzas</span></b><span style='font-size:10.0pt;font-family:Arial;
 color:black'><o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>De esta forma
-tenemos en cuenta tanto lo que decide el p·jaro como lo que no puede controlar,
-es decir la influencia del resto del entorno sobre Èl. A partir de esta <b>AceleraciÛn
-Total</b> y empleando el solver numÈrico deduciremos las nuevas posiciones /
+tenemos en cuenta tanto lo que decide el p√°jaro como lo que no puede controlar,
+es decir la influencia del resto del entorno sobre √©l. A partir de esta <b>Aceleraci√≥n
+Total</b> y empleando el solver num√©rico deduciremos las nuevas posiciones /
 velocidades.<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
@@ -699,47 +699,47 @@ windowtext;mso-pattern:gray-20 auto'>Correspondencia de velocidades</span><span
 style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>En el caso de
-que sea importante seguir el ritmo del resto de la bandada ser· de importancia
+que sea importante seguir el ritmo del resto de la bandada ser√° de importancia
 este criterio. Si bien ya lo hemos tenido algo en cuenta en el apartado
-anterior con el vector avatar-centroide bandada, no est· de m·s aÒadir un
+anterior con el vector avatar-centroide bandada, no est√° de m√°s a√±adir un
 segundo punto de ajuste fino.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Simplemente se
-trata de escalar el mÛdulo de la velocidad reciÈn calculada (nada de tocar su
-direcciÛn y sentido !!!) con la constante KV en el caso de detectar que somos
+trata de escalar el m√≥dulo de la velocidad reci√©n calculada (nada de tocar su
+direcci√≥n y sentido !!!) con la constante KV en el caso de detectar que somos
 demasiado lentos para el resto de la bandada aunque nos estemos dirigiendo
-hacia ella. La correcciÛn pues:<o:p></o:p></span></p>
+hacia ella. La correcci√≥n pues:<o:p></o:p></span></p>
 
 <p align=center style='text-align:center'><b><span style='font-size:10.0pt;
 font-family:Arial;color:black'>Nueva velocidad final = Nueva velocidad * KV<o:p></o:p></span></b></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>De esta forma
 podremos acelerar a nuestros avatars si se quedan cortos! Quede claro que la
-metodologÌa que estoy comentando conduce a un efecto realista a nivel de
-visualizaciÛn y no de precisiÛn. Si dese·ramos lo segundo probablemente
-tendrÌamos que recurrir a algoritmos mucho m·s complejos. Esto nos ir· muy bien
-para una bandada de p·jaros o para el acuario virtual que os presentaba antes
-pero no para un sistema de cirugÌa virtual en tiempo real, por ejemplo.<o:p></o:p></span></p>
+metodolog√≠a que estoy comentando conduce a un efecto realista a nivel de
+visualizaci√≥n y no de precisi√≥n. Si dese√°ramos lo segundo probablemente
+tendr√≠amos que recurrir a algoritmos mucho m√°s complejos. Esto nos ir√° muy bien
+para una bandada de p√°jaros o para el acuario virtual que os presentaba antes
+pero no para un sistema de cirug√≠a virtual en tiempo real, por ejemplo.<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
 windowtext;mso-pattern:gray-20 auto'>Colisiones</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para
-documentaros sobre este tema podÈis dirigiros a los artÌculos que escribÌ en su
-dÌa sobre <b>DetecciÛn de Colisiones entre objetos&nbsp; deformables</b> y <b>Respuesta
+documentaros sobre este tema pod√©is dirigiros a los art√≠culos que escrib√≠ en su
+d√≠a sobre <b>Detecci√≥n de Colisiones entre objetos&nbsp; deformables</b> y <b>Respuesta
 a las colisiones</b>.<o:p></o:p></span></p>
 
-<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Adem·s de lo
-mencionado en esos artÌculos quisiera comentar otra tÈcnica que os puede ser muy
-˙til para evitar obst·culos de forma autom·tica en sistemas como Èste, basados
-en c·lculos din·micos. Se trata de la utilizaciÛn de <b>voxels inicializados
+<p><span style='font-size:10.0pt;font-family:Arial;color:black'>Adem√°s de lo
+mencionado en esos art√≠culos quisiera comentar otra t√©cnica que os puede ser muy
+√∫til para evitar obst√°culos de forma autom√°tica en sistemas como √©ste, basados
+en c√°lculos din√°micos. Se trata de la utilizaci√≥n de <b>voxels inicializados
 con campos vectoriales</b>. Vamos a ello.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Un voxel es
-b·sicamente un &#8220;cubito&#8221; 3D en el espacio . Cada voxel almacena un valor de
-propiedad. Por claridad vamos a imaginarnos lo que se verÌa desde arriba, algo
-asÌ como una proyecciÛn ortogr·fica superior de un trocito de nuestro mundo 3D:<o:p></o:p></span></p>
+b√°sicamente un &#8220;cubito&#8221; 3D en el espacio . Cada voxel almacena un valor de
+propiedad. Por claridad vamos a imaginarnos lo que se ver√≠a desde arriba, algo
+as√≠ como una proyecci√≥n ortogr√°fica superior de un trocito de nuestro mundo 3D:<o:p></o:p></span></p>
 
 <p><!--[if gte vml 1]><v:shape id="_x0000_s1028" type="#_x0000_t75" style='position:absolute;
  margin-left:0;margin-top:0;width:378.75pt;height:319.5pt;z-index:2;
@@ -750,69 +750,69 @@ asÌ como una proyecciÛn ortogr·fica superior de un trocito de nuestro mundo 3D:<
 </v:shape><![endif]--><![if !vml]><img
 src="flocking_archivos/image005.gif" align=left hspace=12 v:shapes="_x0000_s1028" width="505" height="426"><![endif]><span
 style='font-size:10.0pt;font-family:Arial;color:black'>En este caso supongamos
-el caso en que uno de nuestros p·jaros tiene que bordear una columna. PodrÌamos
-optar por un procedimiento puramente geomÈtrico a partir de vectores proyect·ndola sobre el plano de visiÛn del p·jaro y tratando de encontrar cual
-es la direcciÛn que Èste debe tomar para no chocar. Esto es complicado y
-tedioso puesto que empiezan a aparecer casos y m·s casos de esos que hay que
+el caso en que uno de nuestros p√°jaros tiene que bordear una columna. Podr√≠amos
+optar por un procedimiento puramente geom√©trico a partir de vectores proyect√°ndola sobre el plano de visi√≥n del p√°jaro y tratando de encontrar cual
+es la direcci√≥n que √©ste debe tomar para no chocar. Esto es complicado y
+tedioso puesto que empiezan a aparecer casos y m√°s casos de esos que hay que
 contemplar aparte (singularidades...buuufff).<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Ya que tenemos
 un sistema basado en fuerzas vamos a utilizarlas para evitar la columna con lo
-cual no tendremos que aÒadir procesos &#8220;extraÒos&#8221; al sistema. SÛlo
+cual no tendremos que a√±adir procesos &#8220;extra√±os&#8221; al sistema. S√≥lo
 aprovecharemos lo que ya hay hecho!<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Bueno se trata
-de aÒadir una nueva fuerza: un campo vectorial gradiente que apunte en
-direcciÛn normal y opuesta al centro de la columna. Es un campo radial, normal
-a la superficie de Èsta. Vamos mirad la figura y decidme que entendÈis lo que digo!!!<o:p></o:p></span></p>
+de a√±adir una nueva fuerza: un campo vectorial gradiente que apunte en
+direcci√≥n normal y opuesta al centro de la columna. Es un campo radial, normal
+a la superficie de √©sta. Vamos mirad la figura y decidme que entend√©is lo que digo!!!<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Cada cajita es
-un voxel, una discretizaciÛn 3D del espacio. Tiene unas dimensiones fijas
-conocidas y por lo tanto es muy f·cil saber si nuestro p·jaro esta dentro de
-uno. Montamos una &#8220;grid&#8221; como la de la figura (la resoluciÛn de Èsta la
-decidimos a priori seg˙n nos parezca), asociamos un vector orientado de forma
+un voxel, una discretizaci√≥n 3D del espacio. Tiene unas dimensiones fijas
+conocidas y por lo tanto es muy f√°cil saber si nuestro p√°jaro esta dentro de
+uno. Montamos una &#8220;grid&#8221; como la de la figura (la resoluci√≥n de √©sta la
+decidimos a priori seg√∫n nos parezca), asociamos un vector orientado de forma
 radial y hacia afuera en cada voxel y a simular.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>El vector de
-cada voxel puede calcularse f·cilmente a partir del centro de Èste y el centro
-de la secciÛn circular de la columna.<o:p></o:p></span></p>
+cada voxel puede calcularse f√°cilmente a partir del centro de √©ste y el centro
+de la secci√≥n circular de la columna.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Si detectamos
-que nuestro p·jaro se ha metido dentro de un voxel, o sea que se est· acercando
-peligrosamente a la columna, le aplicaremos ,adem·s de todo lo anterior, la
-fuerza que contiene. Podemos incluso escalarla para darle m·s o menos peso en
-relaciÛn al resto. Dejamos al solver numÈrico que haga su trabajo y tach·n!!!
-(mirad la lÌnea naranja de la figura) ... el pajarito no choca!!!<o:p></o:p></span></p>
+que nuestro p√°jaro se ha metido dentro de un voxel, o sea que se est√° acercando
+peligrosamente a la columna, le aplicaremos ,adem√°s de todo lo anterior, la
+fuerza que contiene. Podemos incluso escalarla para darle m√°s o menos peso en
+relaci√≥n al resto. Dejamos al solver num√©rico que haga su trabajo y tach√°n!!!
+(mirad la l√≠nea naranja de la figura) ... el pajarito no choca!!!<o:p></o:p></span></p>
 
 <p><b><span style='font-family:Arial;color:black;background:#CCCCCC;mso-shading:
 windowtext;mso-pattern:gray-20 auto'>Consideraciones finales</span></b><span
 style='font-size:10.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Para acabar
-deciros que tÌpicamente se normalizan todos los vectores (ya sabÈis, se les
-divide por su mÛdulo para hacerlos unitarios) de forma que inicialmente todos
-los mÛdulos sean iguales. En esta situaciÛn digamos que todos &#8220;pesan&#8221; igual y
+deciros que t√≠picamente se normalizan todos los vectores (ya sab√©is, se les
+divide por su m√≥dulo para hacerlos unitarios) de forma que inicialmente todos
+los m√≥dulos sean iguales. En esta situaci√≥n digamos que todos &#8220;pesan&#8221; igual y
 es entonces cuando se escalan por sus constantes respectivas. Con estas
-constantes estamos dando m·s peso a unos y menos a otros, en definitiva,
+constantes estamos dando m√°s peso a unos y menos a otros, en definitiva,
 estamos modelando el &#8220;cerebro&#8221; del avatar.<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Quede claro que
-&#8220;No es oro todo lo que brilla&#8221; y que la implementaciÛn de sistemas de este tipo
-siempre pasa por la resoluciÛn de distintos problemas. Para empezar no es f·cil
+&#8220;No es oro todo lo que brilla&#8221; y que la implementaci√≥n de sistemas de este tipo
+siempre pasa por la resoluci√≥n de distintos problemas. Para empezar no es f√°cil
 escoger el valor de cada constante que nos da el comportamiento exacto que
 buscamos. Tampoco lo es encontrar el valor adecuado del </span><b><span style='mso-char-type:symbol;
 mso-symbol-font-family:Symbol'>D</span><span style='font-size:
 10.0pt;font-family:Arial;color:black'>t</span></b><span style='font-size:10.0pt;
 font-family:Arial;color:black'> (queremos velocidad pero si lo subimos mucho
-tendremos inestabilidad...). Hay que probar y probar pero bueno, øalgo de
-&#8220;salsa&#8221; tiene que haber no? øsi no dÛnde est· la aventura?<o:p></o:p></span></p>
+tendremos inestabilidad...). Hay que probar y probar pero bueno, ¬øalgo de
+&#8220;salsa&#8221; tiene que haber no? ¬øsi no d√≥nde est√° la aventura?<o:p></o:p></span></p>
 
 <p><span style='font-size:10.0pt;font-family:Arial;color:black'>Si os interesa
-m·s el tema podÈis leer mis artÌculos sobre</span><span style='mso-bidi-font-size:
+m√°s el tema pod√©is leer mis art√≠culos sobre</span><span style='mso-bidi-font-size:
 10.0pt;font-family:Arial;color:black'> </span><b><span style='font-size:10.0pt;
 mso-bidi-font-size:12.0pt;font-family:Arial;color:black'>Aprendizaje Artificial
 aplicado a Modelos deformables</span></b><span style='font-size:10.0pt;
-mso-bidi-font-size:12.0pt;font-family:Arial;color:black'>, tambiÈn aquÌ en
+mso-bidi-font-size:12.0pt;font-family:Arial;color:black'>, tambi√©n aqu√≠ en
 Macedonia.<o:p></o:p></span></p>
 
       </td>

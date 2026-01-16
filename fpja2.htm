@@ -50,7 +50,7 @@
 <IMG SRC="g_misc/69.gif" ALIGN=RIGHT>
 <P ALIGN=RIGHT>
 <FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL">
-<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtículo realizado por<BR>
+<B>A</B></FONT><FONT COLOR="#000000" SIZE=2 FACE="ARIAL"><B>rtÃ­culo realizado por<BR>
 <A HREF="mailto:cidcampeador@usa.net">David Isla "CID"</A>
 </b></FONT>
 <!-- FIN DE SECCION PARA PONER EL CORREO ELECTRONICO -->
@@ -59,10 +59,10 @@
 
 <FONT size=2 color="#000000" face="Arial"><br><br><br>
 <H3>
-PROGRAMACIÓN DE SPRITES
+PROGRAMACIÃ“N DE SPRITES
 </H3>
 
-<!-- PEGAR AQUI EL ARTICULO (se puede borrar la línea que viene a continuación) -->
+<!-- PEGAR AQUI EL ARTICULO (se puede borrar la lÃ­nea que viene a continuaciÃ³n) -->
 
 <b>
 INTRODUCCION 
@@ -74,13 +74,13 @@ INTRODUCCION
 	Este articulo esta pensado para todos los lectores que deseen aprender sobre el mundo de la programacion de videojuegos, en el intento explicar de una forma llana la forma de empezar a programar tus primeros juegos.
 	<p>
 	
-	En el mundo de programación existen técnicas usadas por todos los programadores sea cual sea el videojuego que estemos desarrollando independientemente de las herramientas que uses para ello, lenguaje de programación o engine, estas técnicas que mencionamos serán las que yo intentaré explicaros para daros la base que necesitáis.
+	En el mundo de programaciÃ³n existen tÃ©cnicas usadas por todos los programadores sea cual sea el videojuego que estemos desarrollando independientemente de las herramientas que uses para ello, lenguaje de programaciÃ³n o engine, estas tÃ©cnicas que mencionamos serÃ¡n las que yo intentarÃ© explicaros para daros la base que necesitÃ¡is.
 	<p>
 
-	Además de esta base, también os invito a leer el articulo QUE GENERO ELEGIR en este mismo numero, una guía fantástica para evitar que vuestras intenciones de convertiros en programadores de videojuegos caiga en multitud de pruebas y juegos no terminados.
+	AdemÃ¡s de esta base, tambiÃ©n os invito a leer el articulo QUE GENERO ELEGIR en este mismo numero, una guÃ­a fantÃ¡stica para evitar que vuestras intenciones de convertiros en programadores de videojuegos caiga en multitud de pruebas y juegos no terminados.
 	<p>
 
-	Ya sin mas, entramos en el tema y deseo que disfrutéis del documento tanto como yo me he divertido escribiéndolo.
+	Ya sin mas, entramos en el tema y deseo que disfrutÃ©is del documento tanto como yo me he divertido escribiÃ©ndolo.
 	<p>
 
 <b>
@@ -88,7 +88,7 @@ RESOLUCION CONTRA PROFUNDIDAD
 </b>
 	<p>
 
-	Esta es una cuestión que esta empezando a tomar un carácter secundario con las nuevas tecnologías que existen hoy día, cuando un Byte era un Byte, esta era una cuestión fundamental. La resolución como ya sabéis es el tamaño en pixel de la pantalla, los formatos comunes pueden ser 320x200, 640x480 o 800x600 y la profundidad el numero de colores que la paleta puede soportar. Cuando se realice un juego, se debe tomar en cuenta que tipo de pantalla vamos a utilizar pues, cuanta más resolución tenga y contra mas colores tenga, nuestros gráficos serán mayores y ocuparan mas en memoria, para elegir es conveniente saber que se suele sacrificar la resolución de una pantalla ante su profundidad, una pantalla 640x480 y 32000 colores alcanzara una definición mejor que una pantalla 800x600 y 256 colores, y por lo tanto nuestros juegos ganaran en calidad, rapidez y ocuparan menos recursos.
+	Esta es una cuestiÃ³n que esta empezando a tomar un carÃ¡cter secundario con las nuevas tecnologÃ­as que existen hoy dÃ­a, cuando un Byte era un Byte, esta era una cuestiÃ³n fundamental. La resoluciÃ³n como ya sabÃ©is es el tamaÃ±o en pixel de la pantalla, los formatos comunes pueden ser 320x200, 640x480 o 800x600 y la profundidad el numero de colores que la paleta puede soportar. Cuando se realice un juego, se debe tomar en cuenta que tipo de pantalla vamos a utilizar pues, cuanta mÃ¡s resoluciÃ³n tenga y contra mas colores tenga, nuestros grÃ¡ficos serÃ¡n mayores y ocuparan mas en memoria, para elegir es conveniente saber que se suele sacrificar la resoluciÃ³n de una pantalla ante su profundidad, una pantalla 640x480 y 32000 colores alcanzara una definiciÃ³n mejor que una pantalla 800x600 y 256 colores, y por lo tanto nuestros juegos ganaran en calidad, rapidez y ocuparan menos recursos.
 	<p>
 
 <b>
@@ -96,30 +96,30 @@ BACKBUFFER
 </b>
 	<p>
 
-	Esta técnica es seguramente la más utilizada en cualquier juego, se basa en que el programador no dibuja directamente en pantalla, en vez de eso crea una pantalla virtual en la que dibujará los gráficos necesarios y cuando finalice moverá dicha pantalla virtual hacia la pantalla real. Esto que pudiera ser confuso se realiza de la siguiente forma:
+	Esta tÃ©cnica es seguramente la mÃ¡s utilizada en cualquier juego, se basa en que el programador no dibuja directamente en pantalla, en vez de eso crea una pantalla virtual en la que dibujarÃ¡ los grÃ¡ficos necesarios y cuando finalice moverÃ¡ dicha pantalla virtual hacia la pantalla real. Esto que pudiera ser confuso se realiza de la siguiente forma:
 	<p>
 
 <dir>
-1º   El programador cambia la pantalla a modo video 320x200x256 colores. Esta pantalla se maneja como un array de bytes de 64000 posiciones que comienza en la dirección 0xA000.
+1Âº   El programador cambia la pantalla a modo video 320x200x256 colores. Esta pantalla se maneja como un array de bytes de 64000 posiciones que comienza en la direcciÃ³n 0xA000.
 	<p>
 
-2º   Se crea un array de bytes que será el BACKBUFFER, de igual tamaño a la pantalla, o sea, 64000 posiciones de bytes para que pueda guardar una pantalla completa.
+2Âº   Se crea un array de bytes que serÃ¡ el BACKBUFFER, de igual tamaÃ±o a la pantalla, o sea, 64000 posiciones de bytes para que pueda guardar una pantalla completa.
 	<p>
 
-3º   Se escribe en el array BACKBUFFER el gráfico o gráficos que se deseen como si fuera la pantalla real.
+3Âº   Se escribe en el array BACKBUFFER el grÃ¡fico o grÃ¡ficos que se deseen como si fuera la pantalla real.
 	<p>
 
-4º   Se copia el array BACKBUFFER en la pantalla para mostrar lo que habíamos dibujado. Esta copia es recomendable utilizando alguna función de alta velocidad (al estilo memcpy() de C) o usar una sencilla función en ensamblador (muy recomendable).
+4Âº   Se copia el array BACKBUFFER en la pantalla para mostrar lo que habÃ­amos dibujado. Esta copia es recomendable utilizando alguna funciÃ³n de alta velocidad (al estilo memcpy() de C) o usar una sencilla funciÃ³n en ensamblador (muy recomendable).
 	<p>
 
-5º   Se repiten los pasos 3º y 4º hasta que el programa finalice o no se desee dibujar mas en pantalla.
+5Âº   Se repiten los pasos 3Âº y 4Âº hasta que el programa finalice o no se desee dibujar mas en pantalla.
 	<p>
 </dir>
 
-	Usar esta técnica de programación evita que los gráficos parezcan estar 'a medias' en algunos momentos y si estamos realizando animaciones que la pantalla parpadee demasiado. Además de usar esta técnica creando una pantalla virtual y actualizar la pantalla con continuos volcados del BackBuffer, podemos utilizar el mismo sistema pero tan solo para partes de la pantalla como veremos mas profundamente en los apartados siguientes dedicados a SPRITES. 
+	Usar esta tÃ©cnica de programaciÃ³n evita que los grÃ¡ficos parezcan estar 'a medias' en algunos momentos y si estamos realizando animaciones que la pantalla parpadee demasiado. AdemÃ¡s de usar esta tÃ©cnica creando una pantalla virtual y actualizar la pantalla con continuos volcados del BackBuffer, podemos utilizar el mismo sistema pero tan solo para partes de la pantalla como veremos mas profundamente en los apartados siguientes dedicados a SPRITES. 
 	<p>
 
-También decir que habrá operaciones tan simples y rápidas que no necesitaran estas técnicas y que se accederá directamente a la memoria de video, por ejemplo un borrado de pantalla.
+TambiÃ©n decir que habrÃ¡ operaciones tan simples y rÃ¡pidas que no necesitaran estas tÃ©cnicas y que se accederÃ¡ directamente a la memoria de video, por ejemplo un borrado de pantalla.
 	<p>
  
 <b>
@@ -127,7 +127,7 @@ COLOR TRANSPARENTE
 </b>
 	<p>
 
-	Esta es otro de las ideas importantes, si has practicado Backbuffer con diferentes imágenes habrás observado que si la superpones una encima de la otra, la que queda abajo queda oculta, ¿normal no?, pues ¿qué ocurre si deseamos poner un fondo en la pantalla y una imagen encima de esta, del modo de algún dibujo o menú gráfico?, pues que al dibujar el menú gráfico o el dibujo, este se muestra tal y como es, pudiéndose diferenciar el marco de la imagen sobre el fondo. Para que esto no ocurra se elige un color transparente, es decir, un color que cuando el dibujo tenga que ser pintado en pantalla o en el Backbuffer se pase por alto este color y no borre lo que estuviera debajo de ese dibujo. Para que lo veáis mas claro pongo un ejemplo:
+	Esta es otro de las ideas importantes, si has practicado Backbuffer con diferentes imÃ¡genes habrÃ¡s observado que si la superpones una encima de la otra, la que queda abajo queda oculta, Â¿normal no?, pues Â¿quÃ© ocurre si deseamos poner un fondo en la pantalla y una imagen encima de esta, del modo de algÃºn dibujo o menÃº grÃ¡fico?, pues que al dibujar el menÃº grÃ¡fico o el dibujo, este se muestra tal y como es, pudiÃ©ndose diferenciar el marco de la imagen sobre el fondo. Para que esto no ocurra se elige un color transparente, es decir, un color que cuando el dibujo tenga que ser pintado en pantalla o en el Backbuffer se pase por alto este color y no borre lo que estuviera debajo de ese dibujo. Para que lo veÃ¡is mas claro pongo un ejemplo:
 <p>
 <center>
 <table>
@@ -147,7 +147,7 @@ COLOR TRANSPARENTE
 </center>
 <p>
 <p>
-Como podéis observar en la primera imagen, los cuadros negros aparecen porque todos los bytes del gráfico se trasladan a la pantalla, si en vez de eso NO dibujáramos los bytes de valor 0 (el color 0 s sera elegido como color transparente como se hace comúnmente) el resultado seria la pantalla de la derecha, con un mejor acabado y más profesional.
+Como podÃ©is observar en la primera imagen, los cuadros negros aparecen porque todos los bytes del grÃ¡fico se trasladan a la pantalla, si en vez de eso NO dibujÃ¡ramos los bytes de valor 0 (el color 0 s sera elegido como color transparente como se hace comÃºnmente) el resultado seria la pantalla de la derecha, con un mejor acabado y mÃ¡s profesional.
 	<p>
 
 
@@ -156,21 +156,21 @@ ANIMACION
 </b>
 	<p>
 
-Llegamos a lo más interesante del documento, la animación!!, esta es la parte que nos va a permitir ver a nuestros grafitos, correr y rebotar por pantalla, saltar, disparar, explotar e infinidad de efectos que deseemos realizar, todo basado en la técnica mas básica y sencilla en la programación de videojuegos, los SPRITES. A continuación paso a explicar dos formas de animar imágenes en pantallas.
+Llegamos a lo mÃ¡s interesante del documento, la animaciÃ³n!!, esta es la parte que nos va a permitir ver a nuestros grafitos, correr y rebotar por pantalla, saltar, disparar, explotar e infinidad de efectos que deseemos realizar, todo basado en la tÃ©cnica mas bÃ¡sica y sencilla en la programaciÃ³n de videojuegos, los SPRITES. A continuaciÃ³n paso a explicar dos formas de animar imÃ¡genes en pantallas.
 	<p>
 
 <b>
 ROTACION DE LA PALETA DE COLORES
 </b>
 	<p>
-Esta es una forma curiosa de animar imágenes estáticas en nuestros gráficos. Se basa en modificaciones que se realizan en la paleta de colores. Tomando como ejemplo el modo 320x200 y 256 colores (13h), la paleta de colores de este modo gráfico trabaja con un formato RGB de 3 bytes, es decir, cada color (256) se especifica con 3 bytes, cada byte corresponde a la intensidad de un color siendo el byte 1 para el color ROJO (RED), el byte 2 para el color VERDE (GREEN) y el tercero para el color AZUL (BLUE), estas tonalidades están entre 0 y 63, o sea, que el byte solo  alcanzara valores entre ese rango. Veamos de nuevo un ejemplo sobre una posible configuración de la paleta de colores:
+Esta es una forma curiosa de animar imÃ¡genes estÃ¡ticas en nuestros grÃ¡ficos. Se basa en modificaciones que se realizan en la paleta de colores. Tomando como ejemplo el modo 320x200 y 256 colores (13h), la paleta de colores de este modo grÃ¡fico trabaja con un formato RGB de 3 bytes, es decir, cada color (256) se especifica con 3 bytes, cada byte corresponde a la intensidad de un color siendo el byte 1 para el color ROJO (RED), el byte 2 para el color VERDE (GREEN) y el tercero para el color AZUL (BLUE), estas tonalidades estÃ¡n entre 0 y 63, o sea, que el byte solo  alcanzara valores entre ese rango. Veamos de nuevo un ejemplo sobre una posible configuraciÃ³n de la paleta de colores:
 	<p>
 
 <CENTER>
 <IMG SRC="jpg/spr01.jpg" ALIGN=CENTER><P>
 </CENTER>
 	
-Como veis en esta tabla, el color 1 correspondería al negro, el 2 al rojo más intenso y el color 3 seria el blanco más brillante. Pues bien, llegados a este punto, podemos jugar con estas configuraciones de tonalidades para que imágenes en pantalla cambien de color, y así conseguir un cierto dinamismo, por ejemplo, colores que pasan de un color intenso a blanco simulando efectos de reflejos, radiactividad, sombras, etc...
+Como veis en esta tabla, el color 1 corresponderÃ­a al negro, el 2 al rojo mÃ¡s intenso y el color 3 seria el blanco mÃ¡s brillante. Pues bien, llegados a este punto, podemos jugar con estas configuraciones de tonalidades para que imÃ¡genes en pantalla cambien de color, y asÃ­ conseguir un cierto dinamismo, por ejemplo, colores que pasan de un color intenso a blanco simulando efectos de reflejos, radiactividad, sombras, etc...
 	<p>
 
 <b>
@@ -178,7 +178,7 @@ SPRITES
 </b>
 	<p>
 
-	Esta es la base de la programación de videojuegos, se basa en las técnicas anteriormente descritas para conseguir animaciones con movimientos parecido al que se podría diseñar en una película, dibujando los diferentes estados en los que debe pasar la imagen mientras se mueve por la pantalla. En este apartado final, explicaremos primero como trabaja cualquier sprite, seguiremos con algunos sistemas optimizados para mostrar el sprite y concluiremos explicando las formas en las que podremos mantener estos sprites en memoria y disco.
+	Esta es la base de la programaciÃ³n de videojuegos, se basa en las tÃ©cnicas anteriormente descritas para conseguir animaciones con movimientos parecido al que se podrÃ­a diseÃ±ar en una pelÃ­cula, dibujando los diferentes estados en los que debe pasar la imagen mientras se mueve por la pantalla. En este apartado final, explicaremos primero como trabaja cualquier sprite, seguiremos con algunos sistemas optimizados para mostrar el sprite y concluiremos explicando las formas en las que podremos mantener estos sprites en memoria y disco.
 	<p>
  
 <b>
@@ -190,7 +190,7 @@ MOVER EL SPRITE Y GUARDAR EL FONDO
 	<tr>
 	<td>
 	<FONT size=2 color="#000000" face="Arial">
-	Bien, partamos de la idea de que tenemos una imagen de 32x32 pixel que debemos mover por la pantalla, para mover esta imagen bastaría con dibujar este sprite en las diferentes posiciones que le corresponda, por ejemplo si la imagen fuera un personaje que se mueve de izquierda a derecha en la pantalla, dibujaríamos el gráfico del personaje en posiciones x crecientes, es decir, primero en x=0, seguido de x=2, x=4, x=6, etc... hasta que el personaje cruzara por la pantalla entera, momento en que x volvería a ser 0 y comenzara de nuevo la operación, pero si hacemos esta operación sin borrar las imágenes anteriores tendríamos multitud de gráficos por pantalla, es decir, un gráfico en x=0, otro en x=2, etc., uno en cada posición en el que hemos dibujado el personaje, como la idea era que pareciera como se movía nuestro personaje (uno solo) y no llenar la pantalla completamente de dibujos, adoptaremos la idea de antes de dibujar un gráfico en pantalla, borraremos el anterior, así siempre tendremos una sola imagen en pantalla, esta operación la podríamos realizar de la siguiente forma:
+	Bien, partamos de la idea de que tenemos una imagen de 32x32 pixel que debemos mover por la pantalla, para mover esta imagen bastarÃ­a con dibujar este sprite en las diferentes posiciones que le corresponda, por ejemplo si la imagen fuera un personaje que se mueve de izquierda a derecha en la pantalla, dibujarÃ­amos el grÃ¡fico del personaje en posiciones x crecientes, es decir, primero en x=0, seguido de x=2, x=4, x=6, etc... hasta que el personaje cruzara por la pantalla entera, momento en que x volverÃ­a a ser 0 y comenzara de nuevo la operaciÃ³n, pero si hacemos esta operaciÃ³n sin borrar las imÃ¡genes anteriores tendrÃ­amos multitud de grÃ¡ficos por pantalla, es decir, un grÃ¡fico en x=0, otro en x=2, etc., uno en cada posiciÃ³n en el que hemos dibujado el personaje, como la idea era que pareciera como se movÃ­a nuestro personaje (uno solo) y no llenar la pantalla completamente de dibujos, adoptaremos la idea de antes de dibujar un grÃ¡fico en pantalla, borraremos el anterior, asÃ­ siempre tendremos una sola imagen en pantalla, esta operaciÃ³n la podrÃ­amos realizar de la siguiente forma:
 	</td>
 	<td>
 	<center>
@@ -203,47 +203,47 @@ MOVER EL SPRITE Y GUARDAR EL FONDO
 	<p>
 
 <dir>
-1º	Posición = 0
+1Âº	PosiciÃ³n = 0
 	<p>
-2º	Borramos la imagen en Posición dibujando encima de esta, un cuadro del color del fondo de la pantalla, seguramente en negro, para que el cuadro oculte la imagen.
+2Âº	Borramos la imagen en PosiciÃ³n dibujando encima de esta, un cuadro del color del fondo de la pantalla, seguramente en negro, para que el cuadro oculte la imagen.
 	<p>
-3º	Aumentamos Posición por ejemplo en dos unidades para así calcular la próxima posición del personaje.
+3Âº	Aumentamos PosiciÃ³n por ejemplo en dos unidades para asÃ­ calcular la prÃ³xima posiciÃ³n del personaje.
 	<p>
-4º	Dibujamos el personaje en Posición
+4Âº	Dibujamos el personaje en PosiciÃ³n
 	<p>
-5º	Se repiten las operaciones desde 2 a 5 hasta que se pulse una tecla
+5Âº	Se repiten las operaciones desde 2 a 5 hasta que se pulse una tecla
 	<p>
-6º	Fin
+6Âº	Fin
 	<p>
 </dir>
 
-	Este pseudocodigo muestras las operaciones a realizar, la primera vez que se ejecuta la orden 2º no tiene mucho sentido pues aun no se ha dibujado el personaje en pantalla pero en conjunto funciona (¿Qué pseudocodigo no funciona?). 
+	Este pseudocodigo muestras las operaciones a realizar, la primera vez que se ejecuta la orden 2Âº no tiene mucho sentido pues aun no se ha dibujado el personaje en pantalla pero en conjunto funciona (Â¿QuÃ© pseudocodigo no funciona?). 
 	<p>
 
-	Bien, pues llegados a este punto tenemos a nuestro personajes moviéndose por pantalla, de izquierda a derecha en un fondo negro, pero muy pocos juegos usarían un fondo de un solo color, en realidad ninguno, en vez de eso nuestro personaje debería estar caminando sobre una carretera, un edificio, sobre un cielo azul de nubes blancas o sobre el mar y tal como esta por ahora nuestro personaje al borrar la imagen en el paso 2º también borraría el dibujo de fondo con lo que nos encontraríamos con un problema ¿Qué hacer?, pues sencillo, en vez de machacar el fondo de la pantalla con un cuadrado en negro, lo que hacemos es guardar el fondo en memoria antes de dibujar nuestro personaje y cuando este vaya a cambiar de posición, dibujar de nuevo el fondo guardado donde estaba, aquí tenemos la modificación al pseudocodigo para que realice esta ultima función de guardar el fondo:
+	Bien, pues llegados a este punto tenemos a nuestro personajes moviÃ©ndose por pantalla, de izquierda a derecha en un fondo negro, pero muy pocos juegos usarÃ­an un fondo de un solo color, en realidad ninguno, en vez de eso nuestro personaje deberÃ­a estar caminando sobre una carretera, un edificio, sobre un cielo azul de nubes blancas o sobre el mar y tal como esta por ahora nuestro personaje al borrar la imagen en el paso 2Âº tambiÃ©n borrarÃ­a el dibujo de fondo con lo que nos encontrarÃ­amos con un problema Â¿QuÃ© hacer?, pues sencillo, en vez de machacar el fondo de la pantalla con un cuadrado en negro, lo que hacemos es guardar el fondo en memoria antes de dibujar nuestro personaje y cuando este vaya a cambiar de posiciÃ³n, dibujar de nuevo el fondo guardado donde estaba, aquÃ­ tenemos la modificaciÃ³n al pseudocodigo para que realice esta ultima funciÃ³n de guardar el fondo:
 	<p>
 
 <dir>
-1º	Posición = 0
+1Âº	PosiciÃ³n = 0
 	<p>
-2º	Si hay fondo guardado en memoria lo pinto en la posición Posición.
+2Âº	Si hay fondo guardado en memoria lo pinto en la posiciÃ³n PosiciÃ³n.
 	<p>
-3º	Aumentamos Posición en dos unidades
+3Âº	Aumentamos PosiciÃ³n en dos unidades
 	<p>
-4º	Antes de imprimir guardo la zona del fondo donde voy a imprimir en memoria para mas tarde poder restaurarla
+4Âº	Antes de imprimir guardo la zona del fondo donde voy a imprimir en memoria para mas tarde poder restaurarla
 	<p>
-5º	Dibujo a nuestro personaje
+5Âº	Dibujo a nuestro personaje
 	<p>
-6º	Se repiten las operaciones desde 2 a 6 hasta que se pulse una tecla
+6Âº	Se repiten las operaciones desde 2 a 6 hasta que se pulse una tecla
 	<p>
-7º	Fin
+7Âº	Fin
 	<p>
 </dir>
 
-Como se puede observar solo hemos insertado una nueva función, la de guardar el fondo de la pantalla en memoria y hemos sustituido el dibujar un cuadro en negro por dibujar lo que habíamos guardado en memoria.
+Como se puede observar solo hemos insertado una nueva funciÃ³n, la de guardar el fondo de la pantalla en memoria y hemos sustituido el dibujar un cuadro en negro por dibujar lo que habÃ­amos guardado en memoria.
 	<p>
 
-	Ahora si que nuestro personaje puede moverse por cualquier tipo de pantalla, tenga un fondo en negro, multicolor o como queramos. El siguiente paso que vamos a ver es como además de este movimiento, el sprite debería tomar diferentes formas para conseguir un movimiento mas real, es decir, imaginemos a nuestro personaje visto lateralmente, si solo tuviera una imagen parecería como si flotara en pantalla, en vez de eso podríamos dibujar a nuestro personaje en distintas posiciones, por ejemplo moviendo piernas y brazos con lo que conseguiríamos un mejor movimiento.
+	Ahora si que nuestro personaje puede moverse por cualquier tipo de pantalla, tenga un fondo en negro, multicolor o como queramos. El siguiente paso que vamos a ver es como ademÃ¡s de este movimiento, el sprite deberÃ­a tomar diferentes formas para conseguir un movimiento mas real, es decir, imaginemos a nuestro personaje visto lateralmente, si solo tuviera una imagen parecerÃ­a como si flotara en pantalla, en vez de eso podrÃ­amos dibujar a nuestro personaje en distintas posiciones, por ejemplo moviendo piernas y brazos con lo que conseguirÃ­amos un mejor movimiento.
 	<p>
 
 <b>
@@ -253,11 +253,11 @@ FRAMES
 
 	<IMG SRC="jpg/spr03a.jpg" ALIGN=RIGHT><P>
 	
-	¿Qué es un Frame?, un Frame es un instante de la animación, volviendo a nuestro personaje, un frame podría ser el estado digamos de reposo, donde el dibujo queremos que este parado, otro podría ser con la piernas separadas y brazos separados, el siguiente estaría mas separado y así sucesivamente, separándose y cerrándose imitando el movimiento humano, cada imagen descrita es un Frame.
+	Â¿QuÃ© es un Frame?, un Frame es un instante de la animaciÃ³n, volviendo a nuestro personaje, un frame podrÃ­a ser el estado digamos de reposo, donde el dibujo queremos que este parado, otro podrÃ­a ser con la piernas separadas y brazos separados, el siguiente estarÃ­a mas separado y asÃ­ sucesivamente, separÃ¡ndose y cerrÃ¡ndose imitando el movimiento humano, cada imagen descrita es un Frame.
 	<p>
 
-Un sprite lo forma como mínimo un Frame,  según eso podemos decir que contra mas Frames tenga el sprite, mejor estará definido el movimiento. Cuando dibujamos el sprite, en realidad vamos dibujando las distintas posiciones de este por pantalla, se suele usar un contador de frames que indica por cual vamos, es decir, que frame del sprite toca dibujar.
-En nuestro ejemplo, tenemos un sprite con 5 frames que se ejecutan ciclicamente de izquierda a derecha, del uno al cinco y de vuelta al uno, pero no tiene por que ser todos los sprites cíclicos, por ejemplo el caso de una explosión, debería mostrar como al principio una pequeña masa blanca crece convirtiéndose en amarilla y roja hasta desaparecer, ese tipo de efecto seria un sprite en pantalla que mostraría sus frames por orden pero tan solo una vez.
+Un sprite lo forma como mÃ­nimo un Frame,  segÃºn eso podemos decir que contra mas Frames tenga el sprite, mejor estarÃ¡ definido el movimiento. Cuando dibujamos el sprite, en realidad vamos dibujando las distintas posiciones de este por pantalla, se suele usar un contador de frames que indica por cual vamos, es decir, que frame del sprite toca dibujar.
+En nuestro ejemplo, tenemos un sprite con 5 frames que se ejecutan ciclicamente de izquierda a derecha, del uno al cinco y de vuelta al uno, pero no tiene por que ser todos los sprites cÃ­clicos, por ejemplo el caso de una explosiÃ³n, deberÃ­a mostrar como al principio una pequeÃ±a masa blanca crece convirtiÃ©ndose en amarilla y roja hasta desaparecer, ese tipo de efecto seria un sprite en pantalla que mostrarÃ­a sus frames por orden pero tan solo una vez.
 	<p>
 
 <b>
@@ -265,7 +265,7 @@ MODELOS Y ESTRUCTURAS DE MEMORIA
 </b>
 	<p>
 
-	Bueno, y una vez que tenemos pensado que sprites va a necesitar nuestro juego (nuestro personaje, los malos, explosiones, etc. ), ¿cómo los dibujamos? y mas importante aun ¿cómo lo guardamos para que nuesta aplicación pueda usarlos? Pues para estas preguntas hay varias respuesta que paso a explicar.
+	Bueno, y una vez que tenemos pensado que sprites va a necesitar nuestro juego (nuestro personaje, los malos, explosiones, etc. ), Â¿cÃ³mo los dibujamos? y mas importante aun Â¿cÃ³mo lo guardamos para que nuesta aplicaciÃ³n pueda usarlos? Pues para estas preguntas hay varias respuesta que paso a explicar.
 	<p>
 
 <b>
@@ -273,10 +273,10 @@ USAR UN ARCHIVO GRAFICO
 </b>
 	<p>
 
-	Esta opción se basa en dibujar con nuestra herramienta de dibujo preferida los frames del sprite y después guardarlos todos en un archivo gráfico. La mayoría de juegos que usan este método adoptan los PCX aunque no todos y no voy a explicar ahora el por que este formato es idóneo para estas imágenes. Pero además de que el fichero contenga la imágenes, este debe tener una estructura definida por nosotros para que podamos localizar rápidamente en la imagen donde se encuentra el frame que buscamos, para ello podemos optar en dividir el gráfico en celdillas, donde en cada una de estas celdillas coloquemos un frame del sprite como por ejemplo yo he hecho con la demo de estos artículos, en esta, he divido el archivo PCX en celdas de 64x64 pixel, o sea, que cada uno de mis frames empiezan en múltiplos de 64, el primero en la 0, el siguiente en el 64, el tercero en 128, y así hasta el quinto.
+	Esta opciÃ³n se basa en dibujar con nuestra herramienta de dibujo preferida los frames del sprite y despuÃ©s guardarlos todos en un archivo grÃ¡fico. La mayorÃ­a de juegos que usan este mÃ©todo adoptan los PCX aunque no todos y no voy a explicar ahora el por que este formato es idÃ³neo para estas imÃ¡genes. Pero ademÃ¡s de que el fichero contenga la imÃ¡genes, este debe tener una estructura definida por nosotros para que podamos localizar rÃ¡pidamente en la imagen donde se encuentra el frame que buscamos, para ello podemos optar en dividir el grÃ¡fico en celdillas, donde en cada una de estas celdillas coloquemos un frame del sprite como por ejemplo yo he hecho con la demo de estos artÃ­culos, en esta, he divido el archivo PCX en celdas de 64x64 pixel, o sea, que cada uno de mis frames empiezan en mÃºltiplos de 64, el primero en la 0, el siguiente en el 64, el tercero en 128, y asÃ­ hasta el quinto.
 	<p>
 
-	Este método suele ser el mejor que podemos adoptar por varias razones, primera seria que multitud de herramientas que existen en el mercado para dibujar nuestros sprites en cualquier formato, PCX, BMP, JPG, etc. Otra gran ventaja es que estos tipos de gráficos ya tienen incorporado un sistema de compresión como puede ser el RLE del PCX con lo que ocuparan menos en disco. Como unica desventaja puedo destacar que estos ficheros no han sido diseñados para construir sprites y que pueden tener algunas pegas a la hora de aprovechar el espacio, es decir, en nuestro ejemplo decidí dividir las celdas entre 64 para que el tamaño del PCX (320x200) me diera para incluir 5 frames, sin en vez de un tamaño de 64 tuviera que haber elegido uno de 60x60, existiría espacio no usado por el sprite, y para poner un ejemplo mas claro, mirad todo el espacio que desaprovecho en el PCX de nuestro personaje, tan solo he utilizado los 64 pixel altos de los 200 que disponía la altura de la imagen.
+	Este mÃ©todo suele ser el mejor que podemos adoptar por varias razones, primera seria que multitud de herramientas que existen en el mercado para dibujar nuestros sprites en cualquier formato, PCX, BMP, JPG, etc. Otra gran ventaja es que estos tipos de grÃ¡ficos ya tienen incorporado un sistema de compresiÃ³n como puede ser el RLE del PCX con lo que ocuparan menos en disco. Como unica desventaja puedo destacar que estos ficheros no han sido diseÃ±ados para construir sprites y que pueden tener algunas pegas a la hora de aprovechar el espacio, es decir, en nuestro ejemplo decidÃ­ dividir las celdas entre 64 para que el tamaÃ±o del PCX (320x200) me diera para incluir 5 frames, sin en vez de un tamaÃ±o de 64 tuviera que haber elegido uno de 60x60, existirÃ­a espacio no usado por el sprite, y para poner un ejemplo mas claro, mirad todo el espacio que desaprovecho en el PCX de nuestro personaje, tan solo he utilizado los 64 pixel altos de los 200 que disponÃ­a la altura de la imagen.
 	<p>
 
 <b>
@@ -284,10 +284,10 @@ USAR UN FICHERO PROPIO DE ALMACENAMIENTO
 </b>
 	<p>
 
-	Esta opción también es muy usada aunque necesita de un mejor nivel para llevarla acabo, se basa en la construcción de nuestro propio tipo de gráfico sprite. Aunque no quiero hablar mucho sobre el tema pues en próximos números de macedonia hablaremos sobre este tema mas extensamente incluso en la construcción de nuestro propio editor de sprites adelantare algunas ideas. Para realizar esta 'proeza', deberíamos primero en pensar el formato del fichero, por ejemplo, debería tener una cabecera donde indicara el tamaño en pixel de cada imagen, el tamaño en x y en y, el numero de frames, paleta adicional, nombre, etc. después de esta cabecera, vendrían los frames uno por uno. Entonces este formato creado tendría que ser usado en nuestros programas, e incluso estaría bien crear herramientas de conversión entre archivos gráficos comunes como los PCX y nuestro formato, a la inversa, y para finalizar aumentar nuestro fichero de sprites al concepto de librería de sprites, donde este nuevo fichero pudiera soportar varios sprites, del mismo modo que creamos una cabecera indicando cuantos frames tiene el sprite, ahora indicariamos cuantos sprites tiene la librería, etc.
+	Esta opciÃ³n tambiÃ©n es muy usada aunque necesita de un mejor nivel para llevarla acabo, se basa en la construcciÃ³n de nuestro propio tipo de grÃ¡fico sprite. Aunque no quiero hablar mucho sobre el tema pues en prÃ³ximos nÃºmeros de macedonia hablaremos sobre este tema mas extensamente incluso en la construcciÃ³n de nuestro propio editor de sprites adelantare algunas ideas. Para realizar esta 'proeza', deberÃ­amos primero en pensar el formato del fichero, por ejemplo, deberÃ­a tener una cabecera donde indicara el tamaÃ±o en pixel de cada imagen, el tamaÃ±o en x y en y, el numero de frames, paleta adicional, nombre, etc. despuÃ©s de esta cabecera, vendrÃ­an los frames uno por uno. Entonces este formato creado tendrÃ­a que ser usado en nuestros programas, e incluso estarÃ­a bien crear herramientas de conversiÃ³n entre archivos grÃ¡ficos comunes como los PCX y nuestro formato, a la inversa, y para finalizar aumentar nuestro fichero de sprites al concepto de librerÃ­a de sprites, donde este nuevo fichero pudiera soportar varios sprites, del mismo modo que creamos una cabecera indicando cuantos frames tiene el sprite, ahora indicariamos cuantos sprites tiene la librerÃ­a, etc.
 	<p>
 
-	Todo esto que he comentado será expuesto mas extensamente con la elaboración de nuestro propio formato de sprite y nuestro propio editor de sprites, además de demostrar en un programa real (el editor) las técnicas antes comentadas sobre colores transparente, backbuffer, etc..
+	Todo esto que he comentado serÃ¡ expuesto mas extensamente con la elaboraciÃ³n de nuestro propio formato de sprite y nuestro propio editor de sprites, ademÃ¡s de demostrar en un programa real (el editor) las tÃ©cnicas antes comentadas sobre colores transparente, backbuffer, etc..
 	Todo ello llegara en nuestros proximos numeros, por ahora os dejo con la demostracion de este numero en C, que la disfruteis :).
 	<p>
 
@@ -304,7 +304,7 @@ USAR UN FICHERO PROPIO DE ALMACENAMIENTO
 </tr>
 </table>
 	
-	No te bajes del carro que aquí hay tela :)
+	No te bajes del carro que aquÃ­ hay tela :)
 	<p>
 
 <BR><BR>
@@ -312,7 +312,7 @@ USAR UN FICHERO PROPIO DE ALMACENAMIENTO
 
 <!-- SECCION PARA PONER LA FECHA DE ULTIMA REVISION -->
 <P ALIGN="RIGHT"><FONT COLOR="#0080C0" SIZE=2 FACE="ARIAL">
-<B>Ú</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÓN EN</FONT> 
+<B>Ãš</B></font><FONT COLOR="#000000" SIZE=1 FACE="ARIAL">LTIMA REVISIÃ“N EN</FONT> 
 <FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>ABRIL</B></FONT>
 <FONT COLOR="#000000" SIZE=1 FACE="ARIAL"> DE </FONT>
 <FONT COLOR="#CC0000" SIZE=2 FACE="ARIAL"><B>1999</B></FONT>

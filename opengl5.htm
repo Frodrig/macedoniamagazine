@@ -22,7 +22,7 @@
 <TR>
 <TD>
 <DIV align="left">
-<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de Programación Gráfica en OpenGL</B></FONT></a>
+<FONT COLOR="#009933" size=3 face="arial"><B>C</B></font><FONT color="#000000" size=2 face="arial"><B>urso de ProgramaciÃ³n GrÃ¡fica en OpenGL</B></FONT></a>
 </DIV>
 </TD>
 </TR>
@@ -33,8 +33,8 @@
 <img src="g_misc/69.gif" align=right>
 <P align=right>
 <b><FONT color="#cc0000" size=2 face="arial">
-A</font><FONT color="#000000" size=2 face="arial">rtículo realizado por<br>
-<A HREF="mailto:oscarg@salleurl.edu">Oscar García "Kokopus".</A>
+A</font><FONT color="#000000" size=2 face="arial">rtÃ­culo realizado por<br>
+<A HREF="mailto:oscarg@salleurl.edu">Oscar GarcÃ­a "Kokopus".</A>
 </b></FONT>
 <br><br>
 
@@ -45,7 +45,7 @@ Objetos geom&eacute;tricos y sus transformaciones.
 </H3>
 
 <P ALIGN=JUSTIFY>
-¿Qué tal ha ido el mes de Agosto?...a los ordenadores ya sab&eacute;is
+Â¿QuÃ© tal ha ido el mes de Agosto?...a los ordenadores ya sab&eacute;is
 que fatal porque eso de 40 grados a la sombra les sienta como un ladrillo
 al estomago!!!
 
@@ -525,11 +525,11 @@ del vector que forman (vector <B>Q</B> - <B>P</B>).</LI>
 
 <LI>
 <B>Normalizar</B> un vector es hacerlo de modulo igual a la unidad. Si
-<B>v</B> es un vector cualquiera, <B>v’</B> ser&aacute; <B>v</B> normalizado
+<B>v</B> es un vector cualquiera, <B>vâ€™</B> ser&aacute; <B>v</B> normalizado
 ya que:</LI>
 </UL>
 
-<CENTER><B>v’</B> = <B>v</B> / || <B>v</B> ||.</CENTER>
+<CENTER><B>vâ€™</B> = <B>v</B> / || <B>v</B> ||.</CENTER>
 
 
 <P ALIGN="JUSTIFY">Es muy interesante tambi&eacute;n asociar el tema de <B>proyecciones</B>
@@ -723,11 +723,11 @@ es <B>Q</B>(t) = <B>Q</B> + t&middot;<B>w</B>. Debemos resolver:
 
 <P ALIGN="JUSTIFY">(<B>Q</B>(t) - <B>P</B>)&middot;<B>v</B> = 0 ---> (<B>Q</B> + t&middot;<B>w</B>
 -<B>P</B>)&middot;<B>v</B> = 0 de donde t = (<B>P</B> - <B>Q</B>)&middot;<B>v</B>
-/ <B>w</B>&middot;<B>v</B>. Por tanto el punto de intersecci&oacute;n <B>P’</B>
+/ <B>w</B>&middot;<B>v</B>. Por tanto el punto de intersecci&oacute;n <B>Pâ€™</B>
 es:
 <CENTER></CENTER>
 
-<CENTER><B>P’</B> = <B>Q</B> + [(<B>P</B> - <B>Q</B>)&middot;<B>v</B> /
+<CENTER><B>Pâ€™</B> = <B>Q</B> + [(<B>P</B> - <B>Q</B>)&middot;<B>v</B> /
 <B>w</B>&middot;<B>v</B>]&middot;<B>w</B>;</CENTER>
 
 
@@ -846,14 +846,14 @@ decirle:
 
 
 <P ALIGN="JUSTIFY">y en ambos casos el coche est&aacute; en el mismo sitio pero lo "referenciamos"
-a dos SR’s diferentes...&iquest;lo pill&aacute;is?. Espero que este ejemplillo
+a dos SRâ€™s diferentes...&iquest;lo pill&aacute;is?. Espero que este ejemplillo
 os haga empezar a vislumbrar la luz!!.....8)
 
 <P ALIGN="JUSTIFY">Matem&aacute;ticamente hablando y cuando nos sea necesario implementarlo,
 usaremos la matriz de cambio de esta forma:
 
 <P ALIGN="JUSTIFY">Asumamos que la base origen es S={v1,v2,v3}, o sea 3 vectores, y que
-la base final a la que deseamos "convertirnos" es S’={u1,u2,u3}. Todos
+la base final a la que deseamos "convertirnos" es Sâ€™={u1,u2,u3}. Todos
 los vectores de una base seguro que pueden ponerse como combinaci&oacute;n
 lineal de los de la otra (ya que todos pertenecen al mismo espacio vectorial).
 Algo as&iacute;:
@@ -872,19 +872,19 @@ Algo as&iacute;:
 
 <P ALIGN="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | a31 a32 a33 |
 
-<P ALIGN="JUSTIFY">nos da el cambio de base de S a S’. An&aacute;logamente la matriz inversa
-M<SUP>-1</SUP> nos da el cambio de S’ a S.
+<P ALIGN="JUSTIFY">nos da el cambio de base de S a Sâ€™. An&aacute;logamente la matriz inversa
+M<SUP>-1</SUP> nos da el cambio de Sâ€™ a S.
 
 <P ALIGN="JUSTIFY">En este caso si tenemos un vector <B>w</B> = (c1,c2,c3) componentes
 seg&uacute;n la base S, entonces:
 
-<P ALIGN="JUSTIFY"><B>w’</B> = M&middot;<B>w</B>
+<P ALIGN="JUSTIFY"><B>wâ€™</B> = M&middot;<B>w</B>
 
 <P ALIGN="JUSTIFY">es el mismo vector pero expresado con componentes referidas a la base
-S’. Algo como:
+Sâ€™. Algo como:
 
-<P ALIGN="JUSTIFY"><B>w’</B> = (c1’,c2’,c3’), y que os quede claro que... <B>w</B> = (c1,c2,c3)
-= <B>w’</B> = (c1’,c2’,c3’)...ya que es el mismo vector.
+<P ALIGN="JUSTIFY"><B>wâ€™</B> = (c1â€™,c2â€™,c3â€™), y que os quede claro que... <B>w</B> = (c1,c2,c3)
+= <B>wâ€™</B> = (c1â€™,c2â€™,c3â€™)...ya que es el mismo vector.
 
 <P ALIGN="JUSTIFY">S&eacute; sobradamente que muchos de los conceptos que os estoy presentando
 son dif&iacute;ciles de asimilar pero es algo por lo que forzosamente tendr&eacute;is
