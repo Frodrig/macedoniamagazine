@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Draft//EN">
+<HTML>
+<!-- HTML file produced from file: cursillo1.tex --
+ -- using Hyperlatex v 2.0.6 (c) Otfried Schwarzkopf -->
+<HEAD>
+<TITLE>Cursillo de Inform -- Conectando habitaciones</TITLE>
+</HEAD><BODY BGCOLOR="#ffffe6"&gt;&lt;STYLE&gt;{ BODY font-family: Verdana; }&lt;/STYLE&gt;&lt;>
+<A HREF="cursillo1_4.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_6.html"><IMG ALT="Seguir" SRC="siguiente.jpg"></A><BR><B>Anterior: </B><A HREF="cursillo1_4.html">El paso del tiempo</A><BR><B>Subir: </B><A HREF="cursillo1.html">&Iacute;ndice</A><BR><B>Siguiente: </B><A HREF="cursillo1_6.html">Un (mini) juego completo</A><BR><HR >
+<H1>Conectando habitaciones</H1>
+<P>El ejemplo que estamos viendo solo tiene una habitación. No es difícil
+añadir más, basta crear nuevos elementos del tipo Habitacion y
+conectarlos entre sí (es decir, indicar cómo se pasa de una a otra).
+<P>Por ejemplo, hagamos que, desde la celda principal, si caminamos hacia
+el sur, lleguemos a otra celda. Esto exigirá crear la nueva celda,
+conectar entre sí las dos celdas y reescribir la descripción de la
+celda primera, para indicar la viabilidad de ir hacia el sur.
+<P>La definición de estas dos celdas sería como sigue:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Habitacion Celda "En medio de ningun sitio"
+with descripcion "No recuerdas cómo has llegado aqui, una habitación
+   de paredes metálicas y lisas. Aunque no puedes ver ninguna fuente de
+   luz, el lugar no está oscuro. Hacia el sur hay un pasadizo.",
+  al_s Celda2;
+
+Habitacion Celda2 "Cubículo"
+with descripcion "Estás en un cubículo de techo bajo. La única salida
+   está al norte, por donde has entrado",
+  al_n Celda;
+</PRE>
+</TD></TABLE>
+<P>Observa qué sencillo es. Basta añadir las propiedades llamadas
+<CODE>al_s</CODE> y <CODE>al_n</CODE>. Estas propiedades dicen a dónde se
+llega si el jugador intenta ir al sur o al norte, respectivamente.
+<P>Observa asimismo que podríamos hacer mapeados "retorcidos", en el
+sentido de que si el jugador va al sur desde la Celda principal llega
+a la Celda2, pero nada nos obliga a permitirle volver a la Celda si a
+continuación va al norte, es decir, si quisiéramos podemos hacer que
+la salida de Celda2 hacia Celda esté al este o hacia arriba (lo cual
+no sería muy justo para el jugador, pero Inform nos lo permite de
+todas formas).
+<P>Si el jugador intenta caminar en una dirección, digamos por ejemplo
+hacia el este, la librería mirará si la habitación tiene definida la
+propiedad correspondiente (<CODE>al_e</CODE>) y si es así, moverá al
+jugador a la habitación correspondiente. Si esa propiedad no está
+definida mostrará el mensaje "No puedes ir por ahí".
+<P>Este mensaje por defecto puede cambiarse por otro para lo cual Inform
+ofrece dos posibilidades:
+<OL><LI>Definir en la habitación una propiedad llamada
+  <TT>no_puedes_ir</TT>, cuyo contenido ha de ser un texto entre
+  comillas. Si el jugador intenta ir por una dirección que no está
+  definida, pero existe la propiedad <TT>no_puedes_ir</TT>, la
+  librería mostrará ese texto en vez de "No puedes ir por ahí".
+<LI>Definir un texto para algunas de las direcciones. Si la librería
+  encuentra que <CODE>al_e</CODE> en vez de contener el nombre de otra
+  habitación lo que contiene es una cadena de texto entre comillas,
+  mostrará esa cadena y no moverá al jugador.
+</OL>
+<P>Usemos estos dos métodos en nuestro ejemplo. Por ejemplo, en la Celda2
+podemos usar <TT>no_puedes_ir</TT> para recordarle al jugador que la
+única salida es el norte. En la Celda inicial podemos añadir una pared
+de cristal que inicialmente el jugador no ve, hasta que no intenta
+caminar hacia ella. El código sería entonces:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Habitacion Celda "Lugar extraño"
+with descripcion "Estás en una especie de celda de paredes metálicas y
+    lisas. Hacia el norte no hay pared y fuera puedes ver un paisaje
+    soleado. Hacia el sur hay un pasadizo.",
+   al_s Celda2,
+   al_n "Ouch! ¿Qué es esto? Lo que habías tomado por ausencia de
+    pared es en realidad un muro de cristal transparente. ¡No puedes
+    salir!";
+
+Habitacion Celda2 "Cubículo"
+with descripcion "Estás en un cubículo de techo bajo. La única salida
+    está al norte, por donde has entrado",
+    al_n Celda,
+    no_puedes_ir "Te he dicho que no hay más salidas.";
+</PRE>
+</TD></TABLE>
+<H2><A NAME="1">Código en las salidas</A></H2>
+<P>Podemos ir incluso más lejos. Las salidas de una habitación, como
+hemos visto, pueden contener el nombre de otra habitación o bien una
+cadena de texto. Pero lo bueno viene ahora: también pueden contener
+una rutina, la cual puede hacer una serie de averiguaciones antes de
+decidir a dónde va a parar el jugador si toma esa dirección.
+<P>Por ejemplo, podríamos hacer una salida que lleve a un lugar diferente
+cada vez, o bien que no deje pasar al jugador hasta que haya
+completado cierta tarea, etc.
+<P>Vamos a utilizar estas posibilidades para darle un final al juego. El
+jugador podrá salir de la Celda si usa el diamante para abrir una
+puerta en la pared norte. Además, sólo podrá salir si la alarma no
+está sonando. Si logra ambas cosas el juego habrá terminado con
+éxito.
+<P>Vamos a quitar de enmedio el papel y el bolígrafo que ya no pintan gran
+cosa en este juego, y en su lugar vamos a poner un diamante falso
+dentro de una caja en la Celda2. Si el jugador intenta usar el
+diamante falso para cortar la pared, no funcionará. En vez de eso lo
+que tiene que hacer es usarlo para dar el "cambiazo" por el diamante
+bueno que hay en la cúpula.
+<P>En resumen, el juego-rompecabezas consiste en: ir al sur para
+encontrar la caja, abrirla para encontrar el diamante falso, volver al
+norte, abrir la cúpula, sacar el diamante auténtico, meter el falso en
+la cúpula para que la alarma deje de sonar y usar el diamante
+auténtico para abrir una puerta en la pared norte.
+<P>Quizás el jugador piense en meter el falso en la cúpula antes de sacar
+el auténtico. Esto parece razonable y deberíamos hacer que la alarma
+no suene en ese caso (tendremos que cambiar el código anterior ya que
+tal como estaba la alarma saltaba al sacar cualquier cosa de la
+cúpula, independientemente de que dentro ya estuviera el diamante
+falso).
+<P>Por otro lado es probable que al jugador se le ocurra lo de usar el
+diamante para cortar la pared, pero ¿qué verbos intentará? Debemos
+prever las posibles respuestas del jugador para admitir todo lo que
+denote que está intentando la idea correcta. Por ejemplo "CORTAR
+PARED CON DIAMANTE" es lo que esperaríamos, pero también deberíamos
+admitir "CORTAR PARED" si el jugador tiene el diamante, o bien
+"CORTAR CRISTAL" o bien "ROMPER PARED" o "ROMPER CRISTAL" si
+tiene el diamante. El verbo ROMPER causa la acción Atacar (por tanto
+es Atacar lo que hay que programar en la rutina <CODE>antes</CODE>).
+<P>Para que el jugador pueda referirse a un "CRISTAL" o "PARED"
+necesitaremos definir este objeto. Ahora bien si lo definimos como
+hemos hecho con la caja o la cúpula, aparecería listado entre los
+contenidos de la habitación como: "Puedes ver una pared de
+cristal". No queremos que aparezca así, por lo que hay que decir a
+Inform que este objeto sea "oculto" (esto significa que no lo
+mencione, pero que permita al jugador actuar sobre él).
+<P>Por otro lado la cúpula se menciona en la habitación de una forma
+bastante "fea", es decir: "Puedes ver una cúpula de cristal (que
+está cerrada) (en la que hay un diamante)". Para cambiar la forma en
+que Inform la menciona tenemos dos opciones: mencionarla nosotros
+mismos en la descripción de la habitación y después decirle a inform
+que es "oculta" para que no la mencione de nuevo, o bien darle a la
+cúpula la propiedad <TT>si_abierta</TT> y <TT>si_cerrada</TT> que la
+librería usará para citar este objeto cuando esté abierto y cuando
+esté cerrado, respectivamente.
+<P>Todos estos conceptos se ponen en juego en el listado del capítulo
+siguiente, con el cual cerraremos este cursillo.
+<HR ><ADDRESS>Zak McKraken - spinf@geocities.com</ADDRESS><BR>
+<A HREF="cursillo1_4.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_6.html"><IMG ALT="Siguiente" SRC="siguiente.jpg"></A></BODY></HTML>

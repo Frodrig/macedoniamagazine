@@ -1,0 +1,231 @@
+<html>
+
+<head>
+<title>SQ Opinión: Lógica Externa</title>
+</head>
+
+<body BACKGROUND="o-logica.jpg" style="font-family: Arial" bgcolor="#FFFFFF"
+text="#000000" link="#800080" vlink="#800080" alink="#800080">
+
+<p align="center"><b><font SIZE="6">LÓGICA EXTERNA<br>
+</font></b></p>
+
+<p align="center"><font SIZE="5">por Fran Morell<br>
+</font></p>
+
+<p>Si conoces un poco el Mundo de la Aventura, es posible que alguna vez hayas oído
+hablar de esa extraña teoría que llaman de la &quot;Lógica Externa&quot;. Hoy en día,
+cuando las aventuras gráficas ya han superado definitivamente a las aventuras de texto, y
+es más, cuando las &quot;películas interactivas&quot; amenazan con ser el futuro final
+de la Aventura, es tal vez más necesario que nunca volver un poco la vista hacia los
+conceptos más básicos, y en especial este de la Lógica externa, tan íntimamente ligado
+a lo que es en general esa cosa que se llama el guión de la aventura.<br>
+</p>
+
+<p>Y tal vez lo primero sea hacer una pequeña definición de lo que es precisamente el
+guión en una aventura, ya que es un término aparentemente tan genérico que lleva a
+muchos a confundirse. El guión es la serie de órdenes concretas que son necesarias para
+terminar el juego, es decir, la solución. Pero no sólo eso, sino que además incluye
+todas las demás cosas que se pueden hacer en la aventura, como las pistas falsas, las
+muertes, y un largo etcétera de posibilidades que existen en toda aventura, o al menos,
+en casi todas. Así tenemos que podría haber una aventura con una solución de apenas
+diez pasos, pero con un guión gigantesco. El guión se distingue del argumento de la
+aventura en que este último es simplemente la respuesta a la pregunta &quot;¿de qué va
+este juego?&quot;. Si la respuesta al juego es &quot;la aventura trata de que hay que
+rescatar a una princesa secuestrada por el dragón&quot;, entonces esa respuesta es el
+argumento del juego. El guión es la serie de órdenes concretas que el programador ha
+previsto que existan en el juego. En una aventura conversacional, estas órdenes están
+integradas en el código del juego y compiladas normalmente con un parser. En una aventura
+gráfica las posibilidades pueden ser muchas más, especialmente en lo que se refiere a
+los movimientos, mientras que otras cosas quedan más reducidas, como las conversaciones
+con otros personajes. </p>
+
+<p>Bien, pues todo este rollazo era necesario para sentar la base previa de lo que es la
+Lógica Externa. Veámoslo de la siguiente manera: tenemos un guión en el que es
+necesario rescatar a la princesa de turno, pero hemos previsto que para ello el héroe
+(¡o sea, nosotros!) deba resolver antes una serie de problemas. Dichos problemas son,
+como bien sabemos, la &quot;salsa&quot; de la aventura. Si simplemente se tratara de
+llegar hasta el dragón y de luchar contra él, entonces lo nuestro no sería una
+aventura, sino &quot;Dragon Fight XXIII&quot;. Pongamos entonces que dichos problemas son
+los clásicos de estos juegos: no tenemos una espada, así que hay que conseguirla. Pero
+está atrapada en una piedra, y no somos lo bastante fuertes como para sacarla. Para tener
+esa fuerza es necesario comer un bote de espinacas, pero las espinacas están en la tienda
+y no tenemos dinero. Hay una moneda en el fondo del lago, pero hay que nadar...<br>
+</p>
+
+<p>Bueno, todos esos problemas que he descrito forman parte de la lógica
+&quot;interna&quot; de la propia aventura. Es decir, que cualquier jugador que juegue
+nuestro programa puede resolver los problemas sin necesidad de acudir a deducciones cuyas
+premisas no estén incluidas en el propio juego. Por ejemplo, para matar al dragón hace
+falta la espada: ambas cosas están el el propio juego. El problema (un dragón que no nos
+deja entrar a la cueva) se plantea dentro del juego, y la solución (matarlo con la
+espada) también está en el juego. Está claro que hay que &quot;deducir&quot; que una
+espada está afilada, y que si se clava a alguien, suele matarle, pero esta deducción es
+evidente para cualquiera, siempre que no sufra de frenopatía esquizoide, claro.<br>
+</p>
+
+<p>Este tipo de problemas, que requieren de una lógica interna, son los que abundan en
+las aventuras, y componen normalmente el 95% de dichos juegos. Son los más habituales y
+son los que casi todos los aventureros esperan encontrarse, de tal manera que incluso se
+han llegado a crear una especie de &quot;soluciones típicas&quot; o clásicas, que los
+aventureros que se consideran &quot;expertos&quot; conocen ya más o menos de antemano.
+Son los llamados &quot;trucos&quot; que se usan para resolver problemas, y para muchos
+aventureros constituyen la mismísima esencia de la Aventura, en especial en las aventuras
+de texto, aunque en las gráficas (tal vez porque los guiones suelen ser más pobres)
+dicho elenco de soluciones típicas es incluso más reducido. Seguro que vosotros tenéis
+en mente muchas de estas soluciones típicas, y como no son el tema central de este
+artículo, no continuaré aburriéndoos con ellas. Tal vez en otro artículo, ¿vale? </p>
+
+<p>Las soluciones que nos interesan son las otras, las que constituyen esa maravillosa
+sensación de encontrarnos en una aventura realmente buena, de calidad, en fin, bien
+pensada: cuando estamos ante un problema de lógica externa. </p>
+
+<p>¿Y cuáles son esas? Empezaremos con un ejemplo, y a partir de él, trataremos de
+construir una teoría general. En la aventura de la princesa y el dragón, por fin
+llegamos hasta el monstruo con la espada en la mano, se la vamos a clavar y... ¡nos la
+derrite de un soplido flamígero! De pronto, nos hemos quedado sin soluciones aparentes.
+Lo hemos probado todo, todas las salidas, hemos hablado con todos los personajes (PSIs),
+nos han soltado un rollo, y el dragón sigue allí delante, impasible, parece que hasta se
+ríe y todo, el muy sádico. ¿Qué hacer? Pues ha llegado el momento de dar una
+oportunidad a la lógica externa al juego, es decir, que no vamos a apoyarnos sólo en lo
+que sabemos como personaje jugador, sino que trataremos de apoyarnos, además, en nuestra
+propia inteligencia, en los conocimientos que debe haber en nuestra cabezota. </p>
+
+<p>Supongamos, para poder seguir adelante con la explicación, que la solución del juego
+consiste en lo siguiente: la cueva del dragón tiene otra salida, por la parte de atrás,
+pero para acceder a ella es necesario dar un paso &quot;en el aire&quot;, porque se trata
+de una pantalla en la que dice que hay un abismo insondable. En una aventura gráfica esto
+es más fácil de implementar: la pantalla se acaba en un punto, y si tratamos de llegar
+andando, o saltando, moriremos. Sin embargo, si saltamos usando un trampolín, llegaremos
+al otro lado, donde está la entrada. Pero el trampolín debemos construirlo nosotros
+mismos, y el problema será conocer el ángulo exacto que debe tener para que nuestro
+salto sea afortunado. El dato del ángulo no aparece en ninguna parte del juego, es algo
+que debemos saber por nuestra cuenta, es decir, que el programador, al idear la solución,
+parece que determinó que sólo si sabemos un poco de física podremos acabar el juego,
+tras hallar la solución. <br>
+</p>
+
+<p>Tal vez os parezca una solución algo complicada, pero eso es porque no se me ocurre
+otra en este momento, y porque además, incluye un elemento de lógica externa muy
+descriptivo. Vamos a examinarlo paso a paso para descubrir sus secretos.<br>
+</p>
+
+<p>El primer elemento de la lógica externa es la aparente ausencia de continuidad.
+Estamos ante lo que solemos llamar un &quot;atasco&quot; o &quot;bloqueo&quot;, nos
+encontramos sin nada que hacer, pero no es un atasco cualquiera, en el que no sabemos
+cómo resolver un problema, sino un atasco en el que no sabemos qué hacer, porque parece
+como si no hubiera ningún problema pendiente: tenemos todo el juego paralizado por culpa
+de una situación general que no puede continuar. No es el clásico problema de que no
+sabemos cómo abrir una puerta, sino que no sabemos cómo continuar, porque parece que no
+hay nada más que hacer. Así pues, este corte en la acción es la primera premisa.<br>
+</p>
+
+<p>Pero nosotros sabemos que la aventura DEBE continuar. Está claro que el juego
+continúa de alguna manera, que la acción sigue más allá del punto en el que nos
+encontramos. Por lo tanto, hay una disolución en la continuidad, hay un
+&quot;salto&quot;, estamos ante lo que se llama un GAP (&quot;hueco&quot;, en inglés). El
+problema, en esencia, consiste en saltar ese hueco, que parece que no se puede saltar
+mediante los procedimientos tradicionales. Es necesario lanzarse al vacío, sin saber lo
+que va a haber al otro lado. Significa correr un riesgo, que nos puede llevar a morir en
+la aventura, o a perder los objetos, o perder tiempo, o perderse alguna acción
+importante. En resumidas cuentas, que el &quot;gap&quot; se nos plantea como un abismo
+oscuro, ante el que es necesario no sólo poner inteligencia, sino además, tener un
+poquitín de suerte.<br>
+</p>
+
+<p>Pero deducir que al otro lado del abismo hay más tierra no ha sido sencillo (en
+nuestro ejemplo este abismo es real, pero en las aventuras con lógica externa suele ser
+sólo una metáfora): en primer lugar, debemos suponer que es así porque hay pistas en el
+juego. Esto no se nos debe decir nunca, o casi nunca, directamente, porque sería
+estropearnos nuestra deducción. Puede tratarse de un rumor (que un personaje te diga que
+&quot;ha oído hablar&quot; de otra entrada), o mejor aún, de una deducción que hacemos
+mediante signos visibles, como por ejemplo, vemos humo salir de la cueva, así que
+evidentemente dicho humo debe salir por algún lado.<br>
+</p>
+
+<p>Pero también hay un riesgo: el humo puede estar saliendo por una chimenea muy
+pequeña, por la que no vamos a poder entrar, o simplemente, los rumores de otra entrada
+son falsos, o peor aún, que el programador ha puesto el humo sólo para confundirnos.
+Así que corremos ese riesgo, lo aceptamos (mejor salvar la partida, je, je), y entonces
+pasamos a la acción. Pero así simplemente, la cosa no sería más que un problema de
+lógica interna: en efecto, los rumores nos los han proporcionado dentro del juego, y el
+humo también lo hemos visto allí dentro. ¿Dónde está la lógica externa? Pues en el
+siguiente y definitivo elemento del conjunto de la teoría.<br>
+</p>
+
+<p>Este último elemento es la lógica externa en sí misma: una vez que hayamos decidido
+que necesitamos ese trampolín, y que ya tenemos los elementos para construirlo, debemos
+averiguar el ángulo con el que hay que saltar. ¿Cómo? En el juego nadie nos ha dicho
+cómo se calculan los ángulos, ningún PSI nos va a dar el dato, ningún pergamino
+secreto contiene el dato revelador. Simplemente, deberemos calcularlo nosotros mismos, y
+esto lo haremos acudiendo al interior de nuestra cabeza, a ese lugar tan lleno de
+telarañas (en especial entre los jugadores del DOOM) que se llama inteligencia. Tomamos
+los datos que tenemos (por ejemplo: &quot;la pantalla siguiente, caso de existir, parece
+bastante alejada&quot;) y los unimos a nuestra propia intuición. De este modo, hallamos
+el dato de la posible distancia a la que pueda estar el otro lado del abismo, y... ¡a
+saltar!<br>
+</p>
+
+<p>¡Bingo! Acabamos de llegar al otro lado. La lógica externa ha sido completada. Hemos
+reunido las pistas, le hemos añadido nuestras propias deducciones, un poco de
+inteligencia y... la mesa está servida. La solución ha llegado. No hay mejor momento en
+una aventura que cuando te das cuenta de que tus deducciones eran correctas, que te has
+arriesgado y has ganado. Como la vida misma.<br>
+</p>
+
+<p>Demos un rápido repaso, por lo tanto, a los elementos que componen la lógica externa:<br>
+
+<ol>
+  <li>Bloqueo aparente </li>
+  <li>Presencia del salto o gap </li>
+  <li>Deducciones basadas en pistas del juego </li>
+  <li>Recurso a una deducción basada en la Lógica, pero de cuyas premisas no estamos seguros
+    (situación de riesgo) </li>
+  <li>Aceptación del riesgo.<br>
+  </li>
+</ol>
+
+<p>Cuando trato de explicar lo que es la Lógica Externa siempre acudo a una aventura que
+para mí constituye el culmen de este tipo de juegos, tal vez una de las mejores aventuras
+jamás creadas. Y se trata de una miserable aventura de texto, creada en un Spectrum de
+apenas 128K. Me refiero a THE RAVEN, un juego programado por la compañía Keebolg, en
+inglés, y en 1988. En esta aventura somos Sherlock Holmes, y la acción se va
+desarrollando por medio de &quot;gaps&quot;, de tal manera que si llegado un cierto
+momento del juego (en el que el tiempo tiene su importancia) no has logrado saltar ese
+gap, entonces la aventura se termina. Deberás ir continuamente haciendo deducciones, cada
+vez más arriesgadas, e irás comprobando que tenías razón en tus deducciones
+simplemente porque la aventura continúa, porque los personajes siguen moviéndose a tu
+alrededor, y cuando estés cerca del final, las que en un principio sólo eran sospechas
+irán convirtiéndose en convicciones, y reunidas, te darán la pista definitiva para
+saber lo que hacer. En esencia, en todo el juego, ese &quot;hacer&quot; consiste
+simplemente en &quot;saber dónde estar en cada momento&quot;, para llegar a tiempo de
+oír una conversación, para poder interrogar a un PSI que pasaba por allí, para
+presenciar un hecho revelador, o para poder coger el objeto que se le cae a alguien.<br>
+</p>
+
+<p>Entraríamos ya en la fase final de la Lógica Externa, cuando no sólo hay UN problema
+de este tipo, sino varios, concatenados de tal manera que debemos saltar varios gaps uno
+tras otro, y no sabremos si lo hemos hecho bien hasta llegar al último, porque nadie nos
+va a decir que vamos por el buen camino: esto es algo que tenemos que deducir nosotros
+mismos, cuando lleguemos a la escena final y sepamos exactamente quién es el asesino, y
+por qué lo es.<br>
+</p>
+
+<p>Está claro que THE RAVEN, como todas las que hacen uso de la lógica externa, no son
+juegos de los que se consideran &quot;buenos&quot; por parte de muchos Gurús de la
+Aventura que corren por ahí, de los que nos quieren hacer creer que la mejor aventura del
+mundo es &quot;La Aventura Original&quot; y que el problema mejor planteado jamás es el
+de cambiar la llave por una tortilla a un elfito que lloraba. Para solucionar esos
+problemas no es necesario ser inteligente, sino más bien todo lo contrario. En el caso de
+los problemas revestidos de lógica externa, no sólo es útil, sino absolutamente
+imprescindible, tener esa inteligencia, porque en una buena aventura no se nos recompensa
+con un mensaje que dice &quot;Has solucionado el problema&quot;, ni con una espectacular
+animación. No señor, nos basta a nosotros con saber que lo hemos logrado, saber que
+gracias a nuestra acción, podemos seguir adelante, que el juego, como el show, va a
+continuar. </p>
+
+<hr>
+
+<p align="center">[<a HREF="opinion.htm">Volver</a>] </p>
+</body>
+</html>

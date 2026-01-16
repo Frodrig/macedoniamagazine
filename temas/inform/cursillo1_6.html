@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Draft//EN">
+<HTML>
+<!-- HTML file produced from file: cursillo1.tex --
+ -- using Hyperlatex v 2.0.6 (c) Otfried Schwarzkopf -->
+<HEAD>
+<TITLE>Cursillo de Inform -- Un (mini) juego completo</TITLE>
+</HEAD><BODY BGCOLOR="#ffffe6"&gt;&lt;STYLE&gt;{ BODY font-family: Verdana; }&lt;/STYLE&gt;&lt;>
+<A HREF="cursillo1_5.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <IMG ALT="Seguir" SRC="siguiente.jpg"><BR><B>Anterior: </B><A HREF="cursillo1_5.html">Conectando habitaciones</A><BR><B>Subir: </B><A HREF="cursillo1.html">&Iacute;ndice</A><BR><HR >
+<H1>Un (mini) juego completo</H1>
+<P>Como colofón de este cursillo, a continuación tienes el fichero
+completo que crea el mini-juego-puzzle propuesto en la sección
+anterior. Leelo con detenimiento (todo lo que se escribe detrás de un
+signo "!" es un comentario que Inform ignorará, pero que sirve para
+explicar el programa a sus posibles lectores). Siéntete libre de
+modificarlo y experimentar con él.  Aún podrían mejorarse algunas
+cosas (por ejemplo, el mensaje cuando intenta atravesar la pared sólo
+debería aparecer la primera vez que se intenta, y las veces restantes
+mejor poner otra cosa como "No gracias, ya me he llevado un golpe".
+Los objetos tienen un atributo llamado <CODE>general</CODE> que puede
+ponerse y quitarse a modo de bandera genérica para este tipo de
+cosas), y falta por manejar asuntos como la puntuación (que siempre es
+cero en este juego) o el añadir nuevos verbos a los que ya vienen en
+la librería (por ejemplo, el verbo "HACER" no es comprendido y es
+posible que el jugador intente "HACER PUERTA EN PARED"). Además de
+esto, nuestro juego no tiene ningún personaje con el cual interactuar
+(salvo el guardia que aparece debido a la alarma, pero este ni
+siquiera existe en términos del juego). Todos estos temas serán objeto
+de un futuro cursillo.
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+!-------------------------------------------------
+Constant Historia "Cursillo";
+Constant Titular  " Un ejemplo práctico paso a paso.^";
+
+Include "EParser";
+Include "Acciones";
+Include "Facilitar";
+
+!-------EMPIEZA LA DESCRIPCION DEL MUNDO
+!
+! *** LA CELDA INICIAL Y LOS OBJETOS QUE CONTIENE ***
+Habitacion Celda "Lugar extraño"
+with descripcion "Estás en una especie de celda de paredes metálicas y
+    lisas. Hacia el norte no hay pared y fuera puedes ver un paisaje
+    soleado. Hacia el sur hay un pasadizo.",
+    al_s Celda2,
+ 
+    ! La salida norte es complicada. Debe examinar si el objeto 
+    ! cristal está cortado o no antes de decidir si el jugador
+    ! puede pasar. Además debe mirar si el objeto cúpula ha
+    ! disparado la alarma para ver si el jugador ha ganado
+    ! o todavía no puede salir
+    al_n [;
+        if (cristal.cortado) 
+        {
+            if (cupula.alarma_sonando&gt;0)
+                "No puedes salir con esa alarma sonando. Te cogerían
+                enseguida. Y te cogerán de todos modos si no la haces
+                callar pronto.";
+            else 
+            {
+                banderafin=2;  ! Fin del juego. Ha ganado!
+                "Cruzas la puerta que tú mismo has creado en el muro
+                de cristal y sales al exterior triunfante.";
+            }
+        }
+        else   ! Si el cristal no está cortado...
+            "Ouch! ¿Qué es esto? Lo que habías tomado por ausencia de
+            pared es en realidad un muro de cristal transparente. ¡No puedes
+            salir!";
+    ];
+
+Objeto Cupula "cúpula de cristal" Celda
+with nombre 'cupula' 'tapa',
+     adjetivos 'cristal',
+     alarma_sonando 0, 
+     descripcion [;
+        if (self has abierta) "Está abierta.";
+        else "Examinando con detenimiento la cúpula descubres una
+        especie de juntura. Parece una tapa que podría abrirse.";
+     ],
+     si_abierta "En el centro de la habitación hay una cúpula de
+           cristal con la tapa abierta.",
+     si_cerrada [;
+        print "En el centro de la habitación hay una cúpula de
+            cristal";
+        if (Diamante in Cupula) print " en cuyo interior refulge un
+            increíble diamante";
+        ".";
+     ],
+     antes [;
+       Atacar, Cortar: "No es necesaria una acción tan drástica. La
+                  cúpula tiene una tapa.";
+     ],
+     despues [;
+     DejarSalir:
+        if (children(Cupula)==0) !Si la cupula queda vacía
+        {
+            ArrancarDaemon(Cupula);
+            "Al sacar ", (el) uno, " de la cúpula una alarma empieza a
+                sonar en algún lugar del exterior.";
+        }
+        else "Consigues sacar ", (el) uno, " sin disparar la alarma.";
+        
+     Recibir:
+        if (self.alarma_sonando&gt;0) 
+        {
+            PararDaemon(Cupula);
+            self.alarma_sonando=0;
+            "Ufff. La alarma ha parado. Creo que nadie la ha
+            escuchado.";
+        }
+    ],
+    daemon [;  !** Se ejuta cada turno, si está activado
+        self.alarma_sonando=self.alarma_sonando+1;
+        switch(self.alarma_sonando) 
+        {
+         2:"La alarma sigue sonando fuera. Acabará por atraer a alguien.";
+         3:"Definitivamente, esa alarma te está poniendo muy
+            nervioso. Mejor devolvías el diamante a su sitio.";
+         4: banderafin=1;
+            "Súbitamente un rayo de luz vertical aparece en la 
+            estancia y se ensancha hasta convertirse en un cilindro. 
+            Cuando el resplandor se apaga ves que en su lugar ha 
+            aparecido un guardia con equipamiento anti-disturbios. 
+            ~Hmm~ dice, ~Te crees muy listo ¿eh? Me has sacado de la 
+            siesta con esa maldita alarma y eso es algo que no 
+            perdono.~";
+        }
+    ],      
+has femenino recipiente transparente abrible ~abierta estatica;
+
+Objeto Diamante "diamante luminoso" Cupula
+with nombre 'diamante',
+    adjetivos 'luminoso' 'autentico' 'refulgente' 'cegador' 'brillante',
+    descripcion  "Tiene un brillo casi cegador, que no parece 
+                 explicable por las leyes de la óptica.",
+    antes [;
+     Atacar: "No podría, es muy duro.";
+    ],
+has masculino;
+
+
+! Finalmente la pared de cristal (oculta, no se menciona 
+! en la descripción de la habitación)
+! Tiene una propiedad ``cortado'' que hemos inventado para este
+! objeto en particular. Ya que la librería no conoce esta propiedad
+! debemos programar nosotros cómo cambia con las acciones del jugador
+! El valor inicial de ``cortado'' es false. Cambiará a True cuando
+! el jugador haga la acción correcta.
+Objeto Cristal "pared de cristal" Celda
+with nombre 'pared' 'rectangulo' 'puerta',
+     adjetivos 'cristal',
+     cortado false,  ! Está cortado el cristal?
+     descripcion "La pared norte es de un cristal tan transparente que
+            en un primer momento pensaste que no había pared.",
+     antes [;
+      Cortar, Atacar: !Para permitir CORTA y ROMPE
+        if (Diamante in Jugador) ! Solo funciona si el jugador tiene
+                                 ! el diamante bueno
+        {
+            self.cortado=true;
+            "Usando el diamante cortas limpiamente un rectángulo en
+            forma de puerta.";
+        }
+        else if (DiamanteFalso in Jugador) ! El falso no corta
+        {
+            "Intentas cortar el cristal usando el diamante rayado,
+            pero sólo logras rayarlo más. No creo que este diamante
+            sea auténtico...";
+
+        } ! Y si no hay diamante, tampoco se puede cortar
+        else "El cristal de la pared es demasiado resistente y no
+        tienes herramienta para cortarlo.";
+      Meterse: &lt;&lt;Ir obj_n&gt;&gt;;  ! Esto genera la acción de ir al norte.
+                              ! Está aqui por si el jugador pone
+                              ! ENTRA EN RECTANGULO o ATRAVIESA CRISTAL...
+                              ! PASA POR PUERTA...
+
+    ],
+has femenino oculto;
+
+         
+!*** LA SEGUNDA CELDA Y LOS OBJETOS QUE CONTIENE ****
+Habitacion Celda2 "Cubículo"
+with descripcion "Estás en un cubículo de techo bajo. La única salida
+    está al norte, por donde has entrado",
+    al_n Celda,
+    no_puedes_ir "Te he dicho que no hay más salidas.";
+
+Objeto Caja "caja" Celda2
+with nombre 'caja',
+has  femenino recipiente abrible ~abierta;
+
+Objeto DiamanteFalso "diamante rayado" Caja
+with nombre 'diamante',
+    adjetivos 'rayado' 'falso' 'pacotilla',
+    descripcion "No brilla mucho porque su superficie está rayada. Hum
+    ¿Un diamante rayado?",
+    antes [;
+     Atacar: "Es falso. Seguro que podría romperlo, pero ¿qué ganaría
+        con ello?";
+    ],
+has masculino;
+
+
+!---- Ya estan todos los objetos descritos. Ahora empieza el juego
+[ Inicializar;
+    localizacion=Celda;   ! En qué habitación empieza el jugador?
+    "Bienvenido al...^";
+];
+
+Include "Gramatica";
+!-----------------------------------------------------FIN DE FICHERO
+</PRE>
+</TD></TABLE>
+<P>Observar que existen algunos objetos que podrían causar
+ambigüedad. Por ejemplo si ambos diamantes están juntos y el jugador
+pone "Coge diamante" ¿a cuál se refiere?. Y si el jugador pone
+"Rompe cristal" ¿se estará refiriendo a la cúpula o a la pared?
+<P>Juega al juego y descubre cómo resuelve inform estas
+ambigüedades. Observa que es necesario que demos diferentes adjetivos
+a cada diamante para que la ambigüedad pueda ser resuelta. 
+<HR ><ADDRESS>Zak McKraken - spinf@geocities.com</ADDRESS><BR>
+<A HREF="cursillo1_5.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <IMG ALT="Siguiente" SRC="siguiente.jpg"></BODY></HTML>

@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Draft//EN">
+<HTML>
+<!-- HTML file produced from file: cursillo1.tex --
+ -- using Hyperlatex v 2.0.6 (c) Otfried Schwarzkopf -->
+<HEAD>
+<TITLE>Cursillo de Inform -- Complicando las cosas</TITLE>
+</HEAD><BODY BGCOLOR="#ffffe6"&gt;&lt;STYLE&gt;{ BODY font-family: Verdana; }&lt;/STYLE&gt;&lt;>
+<A HREF="cursillo1_2.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_4.html"><IMG ALT="Seguir" SRC="siguiente.jpg"></A><BR><B>Anterior: </B><A HREF="cursillo1_2.html">Manos a la obra</A><BR><B>Subir: </B><A HREF="cursillo1.html">&Iacute;ndice</A><BR><B>Siguiente: </B><A HREF="cursillo1_4.html">El paso del tiempo</A><BR><HR >
+<H1>Complicando las cosas</H1>
+<H2><A NAME="1">Algo de programación</A></H2>
+<P>Hasta aqui nuestra versión del mundo del juego ha sido meramente
+descriptiva. No hemos necesitado programar nada, todavía porque las
+respuestas por defecto de la librería nos parecen adecuadas.
+Naturalmente esto impide cualquier tipo de rompecabezas ya que la
+librería no trae ninguno pre-programado (salvo quizás, ocultar un
+objeto dentro de otro y esperar a que el jugador abra el objeto para
+descubrirlo).
+<P>Ha llegado el momento de cambiar alguna de las respuestas por defecto
+de la librería. Por ejemplo, es bastante probable que el jugador
+intente el comando ROMPE EL PAPEL, recibiendo la respuesta estándar
+"La violencia no es la solución." que no parece muy adecuada en este
+caso.
+<P>La librería comprende el verbo ROMPER, pero responde siempre la misma
+frase, independientemente del objeto sobre el que se use. En Inform,
+por defecto, los objetos no pueden romperse. Bien, el papel parece una
+excepción lícita. ¿Cómo hacer que el papel sea "rompible"? Aunque
+existe el atributo <EM>abrible</EM>, no existe el atributo
+<EM>rompible</EM> y esto se debe a que, si bien podemos suponer qué
+pasará en general al abrir un objeto (simplemente cambia de estar
+cerrado a estar abierto), ya no es posible suponer qué pasará en el
+caso general al romper un objeto. ¿Qué debería hacer la librería con
+el papel si dejara romperlo? ¿desaparecería el papel del juego?
+¿Cambiaría el papel una bandera que indicara que está "roto"?
+¿deberán aparecer en su lugar unos cuantos trocitos de papel? (esto
+podría ser la solución a un rompecabezas en el que el jugador
+necesitase obtener confetti). Por supuesto la librería no puede traer
+programado qué ocurrirá en general al romper un objeto, de modo que
+por defecto impide que se rompan y si queremos un objeto rompible
+debemos programar nosotros qué pasará cuando se rompa.
+<P>Empecemos por lo fácil: si el jugador pone ROMPE PAPEL, el papel debe
+desaparecer del juego, mostrando un mensaje apropiado. Bien, esto es
+una excepción a la regla general para el verbo Romper, pero sólo
+cuando el objeto sea el Papel. En los demás casos queremos mantener la
+regla original (es decir, el boli y la caja no se pueden romper).
+<P>Las excepciones se programan "dentro" de los objetos que queremos se
+comporten de forma especial. Por tanto no hay que tocar lo que está
+escrito para el bolígrafo ni la caja, sino tan solo la parte del
+programa que define el papel.
+<P>Todo objeto puede tener una propiedad llamada <EM>antes</EM>, y esta
+propiedad es un programa que la librería ejecutará "antes" de
+intentar la acción por defecto. La librería, cuando ejecute esta
+función es como si preguntara al objeto "¿Estamos ante una excepción
+a la regla general?". La misión del objeto es averiguar qué verbo
+está intentando aplicar el jugador, y si es el verbo Romper, entonces
+debe hacer desaparecer ese objeto y responder <EM>CIERTO</EM> a la
+librería. Si no es el verbo romper, no hará nada especial y responderá
+<EM>FALSO</EM> a la librería, para que esta pueda proseguir con su
+acción por defecto.
+<P>La forma de programar esto es la siguiente:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Papel "papel" Caja
+with   nombre 'papel',
+       descripcion "El papel dice ~Tonto el que lo lea~",
+       antes [;
+         Atacar:  move Papel to Nothing;
+                 print_ret "Rompes el papel en trocitos minusculos, que
+                  desaparecen al tocar el suelo";
+                 rtrue;
+       ];
+</PRE>
+</TD></TABLE>
+<P>El progama requiere una pequeña explicación. Tras la palabra
+<EM>antes</EM> se abre un corchete (<CODE>[</CODE>) tras el cual iría la lista
+de variables locales que necesitara este programa (en este caso no hay
+ninguna) y finalmente un punto y coma. El corchete es el delimitador
+de funciones en Inform. Todo lo que aparezca desde que se abre un
+corchete hasta que se cierra, se interpretará como una serie de
+órdenes, es decir, un programa.
+<P>En este caso, el programa se compone del nombre de una acción
+(<TT>Atacar</TT>), terminado en dos puntos, a continuación del cual se
+escribe el código a ejecutar cuando la acción del jugador sea esa. Hay
+que decir que Inform traduce los verbos usados por el jugador a un
+subconjunto de acciones. Si el jugador pone ROMPE, MATA, ATACA, u
+otros similares, Inform entenderá todos ellos como un intento de la
+misma acción: agresividad, y los covierte todos en la acción Atacar.
+Por eso es esta acción la que aparece en el código de
+<EM>antes</EM>. Para saber qué verbos corresponden con qué acciones
+deberás examinar el manual de InformatE, donde viene una tabla
+completa. Observa que los verbos que escribe el jugador van en forma
+imperativa (ROMPE), pero las acciones internas de Inform van siempre
+en forma infinitiva (Atacar).
+<P>El código en nuestro caso consta de varias líneas. Una que dice
+<TT>move Papel to Nothing;</TT>, cuyo resultado es mover el papel
+desde donde estuviera en ese instante (probablemente en posesión del
+jugador) al interior de otro objeto llamado Nothing. Este objeto es
+uno que nunca aparecerá en el juego, por lo que, en lo que respecta al
+jugador, nunca más verá el papel.
+<P>Seguidamente la instrucción <CODE>print_ret</CODE> mostrará el texto que
+sigue por la pantalla, añadiendo un retorno de carro al final (si
+hubieramos usado <CODE>print</CODE> a secas no añadiría este retorno de
+carro). Por último, la instrucción <CODE>rtrue</CODE> indica que hemos
+terminado y retornamos a la librería la respuesta CIERTO. La librería
+entiende entonces que esto era una excepción a su regla general, y ya
+no sacará el mensaje "La violencia no es la solución", ni hará nada
+especial. Ha dejado a nuestro objeto que maneje por sí mismo esta
+situación. 
+<P>La secuencia de operaciones "imprimr algo y a continuación retornar
+cierto" es muy frecuente al programar este tipo de excepciones a la
+regla general. Tanto que Inform permite usar una abreviatura: en lugar
+de <CODE>print_ret "texto"</CODE> seguido de <CODE>rtrue</CODE>, podemos usar
+<CODE>"texto"</CODE> a secas. Un texto entre comillas dentro de una zona de
+código es interpretado como "imprime este texto, añade un retorno de
+carro al final y da por terminada la función, retornando CIERTO".
+<P>En la misma función llamada <CODE>antes</CODE>, podemos programar
+excepciones a otros verbos (por ejemplo podemos cambiar la respuesta
+por defecto ante el verbo ABRIR). Para ello basta repetir el esquema
+visto para el verbo ROMPER, es decir:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Papel "papel" Caja
+with   nombre 'papel',
+       descripcion "El papel dice ~Tonto el que lo lea~",
+       antes [;
+         Atacar:  move Papel to Nothing;
+                 "Rompes el papel en trocitos minusculos, que
+                  desaparecen al tocar el suelo";
+         Abrir:  "El papel no está doblado. No necesitas abrirlo.";
+       ];
+</PRE>
+</TD></TABLE>
+<P>En este ejemplo hemos usado la forma abreviada "texto entre
+comillas" como sustituto de <CODE>print_ret</CODE> y <CODE>rtrue</CODE>.
+<P>Observa cómo esta forma de programar mantiene juntos todos los
+mensajes que se refieren a un mismo objeto, lo cual hace más simple la
+programación y modificación del juego. Los verbos que no se mencionan
+en la rutina <CODE>antes</CODE> seguirán funcionando "por defecto" (por
+ejemplo, CERRAR PAPEL produciría la respuesta estándar "No es algo
+que pueda cerrarse". Para variar esta respuesta para el caso del
+papel habría que programar CERRAR como otra excepción dentro de
+<CODE>antes</CODE>.
+<P>Al programar algo dentro de <CODE>antes</CODE>, la mayoría de las veces nos
+limitaremos a poner un mensaje (que aparecerá cuando el jugador
+intente ese verbo sobre ese objeto), y no hará nada más. Normalmente
+por tanto se trata de <EM>impedir</EM> al jugador que lleve a cabo esa
+acción mostrando un mensaje que explica <EM>por qué</EM> no puede
+llevarla a cabo (mira por ejemplo la acción ABRIR del ejemplo
+anterior).
+<P>En otras ocasiones sí se puede llevar a cabo la acción, pero entonces
+debemos programar "a mano" las consecuencias de la misma. Por
+ejemplo hemos visto cómo hacer desaparecer el papel ante la acción
+ROMPER.
+<P>Pensemos ahora otro caso posible (y bastante frecuente). Queremos que
+<EM>como consecuencia</EM> de una acción del jugador, algo ocurra en el
+juego. Por ejemplo, imaginemos un diamante dentro de una cúpula
+transparente, sobre un cojín de terciopelo que tiene un sensor de
+peso, de modo que puede detectar cuándo el diamante está encima.
+<P>El jugador puede EXAMINAR DIAMANTE sin problema, ya que la cúpula es
+transparente. Sin embargo no puede COGER DIAMANTE, porque la cúpula se
+lo impide. Si el jugador consigue desembarazarse de la cúpula (la
+rompe, o la levanta o lo que sea), entonces ya podría coger el
+diamante. Pero queremos que en ese caso suene una alarma (ya que el
+cojín de terciopelo detecta la ausencia de peso).
+<P>Ante la acción COGER, la librería se ocupa por defecto de comprobar si
+el diamante está dentro de otro objeto, impidiendo cogerlo si está
+dentro de un objeto cerrado. Sin embargo, en el momento que la cúpula
+deja de ser un impedimento, la librería dejará ya libre acceso al
+diamante, es decir COGER DIAMANTE, produciría la acción por defecto
+"Cogido.", en lugar de disparar la alarma.
+<P>Queremos que salte una alarma al coger el diamante. Parece un caso de
+"excepción a la regla general", para el caso particular del
+diamante. No obstante, si lo programáramos en la rutina <CODE>antes</CODE>
+del diamante la cosa sería bastante complicada, ya que la rutina
+<CODE>antes</CODE> es llamada por la librería antes de hacer ninguna otra
+comprobación. En particular, la librería no ha comprobado aún si hay
+cúpula u otro impedimento para coger el diamante. Esto significa que
+deberíamos comprobarlo nosotros mediante la programación adecuada
+dentro de la rutina <CODE>antes</CODE> (lo cual puede ser muy complejo en el
+caso general. Imagina que en el juego aparecen otros muchos
+recipientes que puedan estar abiertos o cerrados y el diamante podría
+estar en cualquiera de ellos, ya que el jugador pudo haberlo metido
+allí).
+<P>Afortunadamente la librería tiene previsto este caso. Se puede dotar a
+los objetos de una propiedad llamada <CODE>despues</CODE> que es totalmente
+análoga a la <CODE>antes</CODE>. La diferencia es que la rutina
+<CODE>despues</CODE> es llamada <EM>después</EM> de que la librería ha
+comprobado si la acción es posible y después de haberlallevado a cabo.
+En nuestro ejemplo, la rutina <CODE>despues</CODE> se llamaría una vez que
+la acción COGER ha tenido éxito y por tanto el diamante está en poder
+del jugador. En ese momento entra nuestra rutina, donde podremos
+imprimir el mensaje adecuado, indicando que una alarma ha empezado a
+sonar (y podremos modificar otros objetos del juego, u otras variables
+o <EM>flags</EM> para indicar que la alarma está sonando).
+<P>Vamos a programar todas estas ideas en forma de dos objetos: una
+cúpula (que será un recipiente transparente dentro del cual está el
+diamante) y un diamante (tal que al ser cogido hace sonar una
+alarma). La cúpula tiene una tapita que el jugador puede abrir para
+acceder al diamante. La cúpula no puede ser cogida por el jugador.
+<P>Una primera versión del código puede ser:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Cupula "cúpula de cristal" Celda
+with
+     nombre 'cupula',
+     adjetivos 'cristal',
+     descripcion "Examinando con detenimiento la cúpula descubres una
+        especie de juntura. Parece una tapa que podría abrirse.",
+has femenino recipiente transparente abrible ~abierta estatica;
+
+Objecto Diamante "diamante" Cupula
+with
+     nombre 'diamante',
+     descripcion "El diamante reposa sobre un cojín de terciopelo.",
+     despues [;
+        Coger: "Al coger el diamante una alarma empieza a sonar.";
+     ],
+has masculino;
+</PRE>
+</TD></TABLE>
+<P>Si añades los objetos anteriores en el listado original (después del
+objeto bolígrafo, por ejemplo) y creas una nueva versión "jugable"
+podrás experimentar para ver si las cosas funcionan como queríamos:
+<P><TABLE BORDER><TD BGCOLOR=#0000FF><FONT COLOR=#FFFFFF>
+<PRE>
+Puedes ver una caja (que está cerrada) y una cúpula de cristal (que
+está cerrada) (en la que hay un diamante).
+</PRE>
+</FONT></TD></TABLE>
+<P>Esto aparece como parte de la descripción de la habitación . Menciona
+al diamante porque la cúpula es transparente. En cambio no menciona el
+papel que hay dentro de la caja porque la caja no es transparente. Así
+que podemos ver el diamante. Intentemos hacer cosas con él:
+<P><TABLE BORDER><TD BGCOLOR=#0000FF><FONT COLOR=#FFFFFF>
+<PRE>
+&gt; EXAMINA DIAMANTE
+El diamante reposa sobre un cojín de terciopelo. 
+
+&gt; COGE DIAMANTE
+La cúpula de cristal no está abierta.
+
+&gt; SACA DIAMANTE DE LA CUPULA
+Por desgracia la cúpula de cristal está cerrada.
+</PRE>
+</FONT></TD></TABLE>
+<P>¡Funciona! Podemos ver el diamante, pero no hacer cosas con
+él. Intentemos ahora manipular la cúpula:
+<P><TABLE BORDER><TD BGCOLOR=#0000FF><FONT COLOR=#FFFFFF>
+<PRE>
+&gt; COGE CUPULA
+Está fijada al sitio.
+
+&gt; ROMPE CUPULA
+La violencia no es la solución. 
+
+&gt; EMPUJA CUPULA
+Está firmemente sujeta.
+
+&gt; EXAMINA CUPULA
+Examinando con detenimiento la cúpula descubres una especie de
+juntura. Parece una tapa que podría abrirse.
+
+&gt; ABRE CUPULA
+Abres la cúpula de cristal.
+</PRE>
+</FONT></TD></TABLE>
+<P>Qué bien. Todo parece funcionar. Ahora se supone que ya tenemos acceso
+al diamante (pero esto debería hacer saltar la alarma). Probemos:
+<P><TABLE BORDER><TD BGCOLOR=#0000FF><FONT COLOR=#FFFFFF>
+<PRE>
+&gt; COGE DIAMANTE
+Al coger el diamante una alarma empieza a sonar. 
+
+&gt; INVENTARIO
+Llevas
+  un diamante
+  un bolígrafo
+</PRE>
+</FONT></TD></TABLE>
+<P>Bueno, no ha sido tan difícil ¿verdad?
+<H2><A NAME="2">Algo más de programación</A></H2>
+<P>Todo funciona bien ¿no? Eso te crees tú... la verdad es que no todo es
+tan perfecto como parece. Ahora que el jugador tiene el diamante en su
+poder su descripción debería cambiar (ya no está sobre el cojín).
+Además, si se deja el diamante (en el suelo) al recogerlo de nuevo no
+debe sonar la alarma otra vez, sin embargo tal y como lo hemos hecho
+cada vez que se recoja el diamante saldrá el mensajito de la alarma.
+Pruébalo:
+<P><TABLE BORDER><TD BGCOLOR=#0000FF><FONT COLOR=#FFFFFF>
+<PRE>
+&gt; COGE DIAMANTE
+Ya tienes el diamante.
+
+&gt; EXAMINA DIAMANTE
+El diamante reposa sobre un cojín de terciopelo. 
+
+&gt; DEJA DIAMANTE
+Dejado.
+
+&gt; COGELO
+Al coger el diamante una alarma empieza a sonar.
+</PRE>
+</FONT></TD></TABLE>
+<P>Esto no es correcto. La forma de evitarlo consiste en hacer más
+compleja la descripción del diamante (de modo que cambie, según esté o
+no esté el diamante dentro de la cúpula) y en la acción por defecto
+para COGER (que debería comprobar si el diamante está o no dentro de
+la cúpula antes de hacer sonar la alarma). La solución (aparente) será
+reescribir el objeto diamante como sigue:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Diamante "diamante" Cupula
+with nombre 'diamante',
+     descripcion [;
+       if (self in Cupula) 
+         "El diamante reposa sobre un cojín de terciopelo";
+       else "Tiene un brillo casi cegador, que no parece explicable
+             por las leyes de la óptica.";
+     ],
+     despues [;
+       Coger: if (self in cupula) 
+                "Al coger el diamante una alarma empieza a sonar.";
+     ],
+has masculino;
+</PRE>
+</TD></TABLE>
+<P>Observa que hemos convertido la descripción en un programa. Antes
+simplemente era una cadena de texto. Ahora es un mini-programa que
+comprueba dónde está el diamante para decidir el texto más
+adecuado. No olvides que los corchetes son los delimitadores de las
+rutinas en Inform.
+<P>La palabra <CODE>self</CODE> hace siempre referencia al objeto en cuestión
+(en este caso el diamante). Podríamos haber puesto igualmente
+<TT>if (Diamante in Cupula) ...</TT>. La palabra <CODE>in</CODE> comprueba
+si el primer objeto está dentro del segundo, en este ejemplo, si el
+diamante está en la cúpula. Según el resultado de la comparación
+imprimos una descripción o la otra. Esto funcionará correctamente.
+<P>En la rutina <CODE>despues</CODE> intentamos el mismo truco: comprobar si el
+diamante está en la cúpula para imprimir el mensaje de la alarma (y si
+no lo está, no hacemos nada especial con lo que la librería emitiría
+su mensaje por defecto "Cogido.") Sin embargo, esto no funcionará.
+Pruébalo si quieres...¿por qué? Recuerda que la rutina <CODE>despues</CODE>
+se ejecutará <EM>después</EM> de que el jugador haya cogido el diamante,
+por tanto, cuando esta rutina entre en ejecución el diamante ya no
+estará en la cupula. El resultado es que el mensaje acerca de la
+alarma nunca llega a mostrarse.
+<P>La solución a este problema exige un cambio de diseño. ¿Qué objeto
+debería disparar la alarma? ¿El diamante o la cúpula? Si lo pensamos
+de nuevo, realmente lo más lógico sería que lo hiciese la cúpula. Un
+diamante no tiene "intrínsecamente" la propiedad de activar alarmas
+al ser cogido. Más bien es la cúpula la que tiene esta propieadad
+cuando detecta que se extrae algo de su interior.
+<P>Precisamente para este tipo de cosas Inform tiene prevista la acción
+<EM>DejarSalir</EM>.Cada vez que el jugador intente sacar algo de un
+recipiente, la librería llamará a la rutina <CODE>antes</CODE> de dicho
+recipiente, indicándole que va a "DejarSalir" un objeto. El
+recipiente puede impedirlo (si retorna CIERTO, en cuyo caso debería
+también imprimir un texto que explique al jugador por qué no puede
+sacar el objeto) o bien dejarlo salir (retornando FALSO). Si la
+librería ha recibido la respuesta FALSO, sacará el objeto del
+recipiente, y a continuación llamará a la rutina <CODE>despues</CODE> del
+recipiente para indicarle de nuevo que ha tenido lugar la acción
+"DejarSalir". El objeto puede imprimir algún mensaje aclaratorio y
+retornar CIERTO, o bien no imprimir nada y retornar FALSO (en cuyo
+caso será la librería la que muestre el mensaje "Sacas el [objeto]
+del [recipiente]").
+<P>Por tanto la respuesta a nuestro problema es programar en la cupula
+una respuesta <CODE>despues</CODE> a la acción DejarSalir. Si el jugador
+intenta sacar cualquier cosa de la cúpula, entrará nuestra rutina (y
+mostrará el mensaje acerca de la alarma).
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Cupula "cúpula de cristal" Celda
+with
+     nombre 'cupula',
+     adjetivos 'cristal',
+     descripcion "Examinando con detenimiento la cúpula descubres una
+        especie de juntura. Parece una tapa que podría abrirse.",
+     despues [;
+        DejarSalir: "Al sacar el diamante de la cúpula empieza 
+            a sonar una alarma.";
+     ],
+has femenino recipiente transparente abrible ~abierta estatica;
+</PRE>
+</TD></TABLE>
+<P>Simétricamente a la acción "DejarSalir" existe la acción "Recibir"
+que se produce cada vez que el jugador mete algo en un recipiente.
+Esto me da una idea para un mini-rompecabezas. Si el jugador saca el
+diamante de la cúpula, una alarma empieza a sonar. Si el jugador mete
+cualquier cosa en la cúpula, la alarma se detiene. De este modo el
+jugador puede cambiar el diamante por el bolígrafo por ejemplo y así
+detener la alarma. ¿Y si además hacemos que la alarma acabe por atraer
+a alguien si no deja de sonar? Esto será el tema de la próxima
+sección.
+<HR ><ADDRESS>Zak McKraken - spinf@geocities.com</ADDRESS><BR>
+<A HREF="cursillo1_2.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_4.html"><IMG ALT="Siguiente" SRC="siguiente.jpg"></A></BODY></HTML>

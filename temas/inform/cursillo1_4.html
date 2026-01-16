@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Draft//EN">
+<HTML>
+<!-- HTML file produced from file: cursillo1.tex --
+ -- using Hyperlatex v 2.0.6 (c) Otfried Schwarzkopf -->
+<HEAD>
+<TITLE>Cursillo de Inform -- El paso del tiempo</TITLE>
+</HEAD><BODY BGCOLOR="#ffffe6"&gt;&lt;STYLE&gt;{ BODY font-family: Verdana; }&lt;/STYLE&gt;&lt;>
+<A HREF="cursillo1_3.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_5.html"><IMG ALT="Seguir" SRC="siguiente.jpg"></A><BR><B>Anterior: </B><A HREF="cursillo1_3.html">Complicando las cosas</A><BR><B>Subir: </B><A HREF="cursillo1.html">&Iacute;ndice</A><BR><B>Siguiente: </B><A HREF="cursillo1_5.html">Conectando habitaciones</A><BR><HR >
+<H1>El paso del tiempo</H1>
+<P>Para dar más emoción podemos hacer que la activación de la alarma sea
+fatal para el jugador de la forma siguiente: si la alarma está sonando
+durante más de tres turnos, llegará un guardián, cogerá al jugador y
+se acabará el juego. Sin embargo, si el jugador detiene la alarma
+antes de los tres turnos, el guardián no aparecerá.
+<P>Para manejar este tipo de cosas Inform posee lo que se llaman
+<EM>daemons</EM> y <EM>relojes</EM>. Un <EM>daemon</EM> es una rutina que es
+ejecutada automáticamente tras cada turno. Suele usarse para hacer que
+otros personajes (no jugadores) se muevan o hagan algo en cada turno.
+Cada objeto puede tener su propio daemon, que es una rutina, y se
+ejecutará al final de cada turno (si el daemon está activado).
+Mediante la rutina <CODE>ArrancarDaemon</CODE> se puede activar un daemon de
+un objeto dado y mediante <CODE>PararDaemon</CODE> se puede desactivar.
+<P>Así que podríamos hacer que, al sacar un objeto de la cúpula se
+arranque el daemon del objeto cúpula. Este daemon, cada vez que es
+ejecutado puede, por ejemplo, incrementar un contador. Cuando el
+contador llegue a 3, hará aparecer un guarda y se acabó el juego. Por
+otra parte, el poner un objeto dentro de la cúpula desactivará el
+daemon por lo que el guardia no aparecerá.
+<P>Pero Inform ya viene preparado también para este tipo de objetos (que
+cuentan un cierto número de turnos y después hacen algo). Para ello
+basta llamar a la función <TT>ArrancarReloj(objeto, tiempo)</TT>. Por
+ejemplo: <TT>ArrancarReloj(cupula, 3)</TT>. Esto hará que la librería,
+de forma automática cuente los turnos a partir de ese instante, y
+cuando hayan transcurrido 3, llamará a una rutina llamada
+<TT>tiempo_agotado</TT>, que debe formar parte del objeto "cupula"
+en nuestro ejemplo. Esta rutina puede hacer aparecer al guardia. Por
+otra parte, la rutina <TT>PararReloj(objeto)</TT> detiene la cuenta y
+evita que entre la rutina <TT>tiempo_agotado</TT> de ese objeto.
+<H2><A NAME="1">Usando relojes</A></H2>
+<P>La cúpula podría programarse así:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Cupula "cúpula de cristal" Celda
+    with
+    nombre 'cupula',
+    adjetivos 'cristal',
+    tiempo_restante 0, 
+    descripcion [;
+        if (self has abierta) "Está abierta.";
+        else "Examinando con detenimiento la cúpula descubres una
+        especie de juntura. Parece una tapa que podría abrirse.";
+    ],
+    despues [;
+     DejarSalir: ArrancarReloj(Cupula,3);
+        "Al sacar ", (el) uno, " de la cúpula una alarma empieza a
+            sonar en algún lugar del exterior.";
+     Recibir: PararReloj(Cupula);
+        "Ufff. La alarma ha parado. Creo que nadie la ha escuchado.";
+    ],
+    tiempo_agotado [;
+        banderafin=1;
+        "Súbitamente un rayo de luz vertical aparece en la estancia y
+        se ensancha hasta convertirse en un cilindro. Cuando el
+        resplandor se apaga ves que en su lugar ha aparecido un
+        guardia con equipamiento anti-disturbios. ~Hmm~ dice, ~Te
+        crees muy listo ¿eh? Me has sacado de la siesta con esa
+        maldita alarma y eso es algo que no perdono.~";
+    ],      
+has femenino recipiente transparente abrible ~abierta estatica;
+</PRE>
+</TD></TABLE>
+<P>Observar los siguientes puntos de interés:
+<UL><LI>La cúpula tiene una nueva propiedad llamada
+  <CODE>tiempo_restante</CODE>, la cual empieza con el valor 0 (en realidad
+  el valor que le demos no es importante, pero hay que darle
+  alguno). Esto es necesario porque vamos a asociar un reloj con este
+  objeto (es decir, vamos a usar la función <TT>ArrancarReloj</TT>
+  sobre este objeto). Es obligatorio definir la propiedad
+  <CODE>tiempo_restante</CODE> en cada objeto que use un reloj, o se
+  producirá un error al jugar.
+<LI>Cuando el tiempo se agota, ponemos una variable llamada
+  <EM>banderafin</EM> a 1. Esta variable es consultada por la librería
+  al final de cada turno, y si encuentra en ella el valor 1, da por
+  terminado el juego con la muerte del jugador. Si en cambio encuentra
+  el valor 2, el juego termina con su victoria. Su valor por defecto
+  es 0, que significa que el juego prosigue.
+<LI>Hemos cambiado la descripción de la cúpula, para que sea
+  diferente si está abierta o cerrada. Para ello usamos el operador
+  llamado <TT>has</TT>, que comprueba si el objeto tiene ese atributo
+  activado o no. 
+<LI>Fíjate en el mensaje cuando sacamos el diamante de la cúpula. En
+  lugar de poner "Al sacar el diamante de la cúpula" hemos puesto
+  "Al sacar ", (el) uno, " de la cúpula..." ¿Qué significa esto?
+  La variable llamada <CODE>uno</CODE> siempre contiene el objeto que el
+  jugador está intentando manipular. De modo que si el jugador había
+  escrito "coge diamante", esta variable toma el valor del objeto
+  Diamante. Podrías objetar que esto es redundante, ya que dentro de
+  la cùpula está el diamante y por tanto el jugador no puede sacar de
+  ella otra cosa. Sin embargo esto no es cierto, ya que el jugador
+  puede meter otros objetos en la cúpula. Por ejemplo, el
+  bolígrafo. Si más adelante lo intenta sacar de nuevo, el mensaje
+  sería "Al sacar el bolígrafo de la cúpula...". Esta es por tanto
+  la forma de generar mensajes genéricos que se amoldarán en cada caso
+  al objeto manipulado. ¡Incluso escribirá correctamente el género! Si
+  el jugador mete la caja en la cúpula y luego intenta sacarla el
+  mensaje sería "Al sacar la caja de la cúpula...", es decir, ha
+  puesto "la" en lugar de (el).
+</UL>
+<H2><A NAME="2">Y puede hacerse de otra forma: usando <EM>daemons</EM></A></H2>
+<P>Inform es un lenguaje muy versátil y como ya hemos visto cada problema
+de programación admite múltiples soluciones. En el ejemplo anterior
+hemos usado un <EM>reloj</EM> asociado a la cúpula para hacer aparecer
+al guardia. También podríamos haber usado un <EM>daemon</EM>. La
+diferencia es que el reloj inicia una cuenta atrás y cuando ésta llega
+a cero, la librería llamará automáticamente a la función
+<CODE>tiempo_agotado</CODE> del objeto correspondiente. En cambio el daemon
+se ejecutará <EM>siempre</EM> durante todos los turnos, mientras esté
+activado hasta que se desactive.
+<P>Por tanto si usamos un daemon asociado con la cúpula, podemos
+activar el daemon cuando el jugador saque un objeto de la cúpula y
+desactivarlo cuando meta otro objeto. Mientras el daemon esté activado
+se ejecutará al final de cada turno, donde podemos aprovechar para
+imprimir un mensaje que recuerde al jugador que hay una alarma
+sonando (y contar cuántos turnos lleva sonando). De hecho podemos
+cambiar el mensaje, según cuantos turnos lleve sonando y así crear un
+poco más de "atmósfera". Observa cómo se haría:
+<P><TABLE BORDER><TD BGCOLOR=#FFFFFF>
+<PRE>
+Objeto Cupula "cúpula de cristal" Celda
+    with
+    nombre 'cupula',
+    adjetivos 'cristal',
+    alarma_sonando 0, 
+    descripcion [;
+        if (self has abierta) "Está abierta.";
+        else "Examinando con detenimiento la cúpula descubres una
+        especie de juntura. Parece una tapa que podría abrirse.";
+    ],
+    despues [;
+     DejarSalir: ArrancarDaemon(Cupula);
+        "Al sacar ", (el) uno, " de la cúpula una alarma empieza a
+            sonar en algún lugar del exterior.";
+     Recibir: PararDaemon(Cupula);
+        self.alarma_sonando=0;
+        "Ufff. La alarma ha parado. Creo que nadie la ha escuchado.";
+    ],
+    daemon [;
+        self.alarma_sonando=self.alarma_sonando+1;
+        switch(self.alarma_sonando) 
+        {
+         2:"La alarma sigue sonando fuera. Acabará por atraer a alguien.";
+         3:"Definitivamente, esa alarma te está poniendo muy
+            nervioso. Mejor devolvías el diamante a su sitio.";
+         4: banderafin=1;
+            "Súbitamente un rayo de luz vertical aparece en la 
+            estancia y se ensancha hasta convertirse en un cilindro. 
+            Cuando el resplandor se apaga ves que en su lugar ha 
+            aparecido un guardia con equipamiento anti-disturbios. 
+            ~Hmm~ dice, ~Te crees muy listo ¿eh? Me has sacado de la 
+            siesta con esa maldita alarma y eso es algo que no 
+            perdono.~";
+        }
+    ],      
+has femenino recipiente transparente abrible ~abierta estatica;
+</PRE>
+</TD></TABLE>
+<P>Observaciones:
+<UL><LI>Hemos añadido una propiedad al objeto, llamada
+  <CODE>alarma_sonando</CODE> a la cual hemos dado un valor inicial
+  cero. Esta propiedad nos la hemos inventado para este objeto
+  particular, no forma parte de la librería. Para cualquier objeto
+  podemos inventar propiedades, que son como variables o <EM>flags</EM>,
+  pero asociados con ese objeto particularl. En nuestro caso
+  <CODE>alarma_sonando</CODE> será un contador de cuántos turnos hace que se
+  disparó la alarma (si vale 0 es que la alarma no está sonando).
+<P>  Desde cualquier otra parte del programa podríamos consultar el valor
+  de esta variable, por ejemplo así: <TT>if
+  (cupula.alarma_sonando==1) ...</TT> Las variables asociadas a los
+  objetos se referencian poniendo en primer lugar el nombre del
+  objeto, y separado por un punto el de la variable.
+<LI>Cuando el jugador saca algo de la cúpula, arrancamos su
+  daemon. En este mismo turno (y en los siguientes) ya se ejecutará la
+  función <EM>daemon</EM> de la cúpula.
+<LI>Cuando mete algo en la cúpula, paramos el daemon y volvemos a
+  poner su variable <CODE>alarma_sonando</CODE> a cero. Observar cómo se
+  accede a esta variable (es necesario poner a qué objeto pertenece
+  incluso si se usa desde funciones del propio objeto, aunque en este
+  caso podemos poner <TT>self</TT> en lugar de <TT>Cupula</TT>).
+<LI>La propia función <EM>daemon</EM> simplemente incrementa el
+  contador de la alarma y escribe un mensaje que será diferente según
+  el valor del contador. Si el contador llega a 3, el juego terminará
+  (usamos para ello el mismo método que en la función
+  <TT>tiempo_agotado</TT> del ejemplo anterior).
+</UL>
+<HR ><ADDRESS>Zak McKraken - spinf@geocities.com</ADDRESS><BR>
+<A HREF="cursillo1_3.html"><IMG ALT="Anterior" SRC="anterior.jpg"></A>
+    <A HREF="cursillo1.html"><IMG ALT="Subir" SRC="arriba.jpg"></A>
+    <A HREF="cursillo1_5.html"><IMG ALT="Siguiente" SRC="siguiente.jpg"></A></BODY></HTML>
