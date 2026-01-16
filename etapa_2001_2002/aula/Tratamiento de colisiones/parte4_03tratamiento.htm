@@ -1,0 +1,129 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>El personaje se aproxima con una esfera - Algoritmo de tratamiento de colisiones</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            4: EJEMPLO DE UN SISTEMA DE TRATAMIENTO DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Algoritmo 
+        de tratamiento de colisiones<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Juego()</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">por 
+                ( <span class="variable">t</span> = <span class="variable">t<span class="subindice">0</span></span> 
+                hasta <span class="subindice">&ordm;&ordm;</span> en incrementos 
+                de <span class="variable">t<span class="subindice">rep</span></span> 
+                ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">obtiene 
+                datos de los dispositivos de entrada</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">actualiza 
+                el comportamiento del personaje por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">velocidad</span> 
+                = velocidad del personaje por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">trata( 
+                <span class="variable">personaje</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">trata( 
+                <span class="variable">personaje</span>, <span class="variable">gravedad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">representa 
+                el mundo por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+              <li></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">trata( 
+                <span class="variable">objeto</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">haz 
+                {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">infoCol</span> 
+                = detecta( <span class="variable">objeto</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">actualiza 
+                la posici&oacute;n de <span class="variable">objeto</span> seg&uacute;n 
+                <span class="variable">infoCol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">infoCol</span> contiene colisiones )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">velocidad</span> 
+                = responde( <span class="variable">infoCol</span>, <span class="variable">objeto</span>, 
+                <span class="variable">velocidad</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">} 
+                mientras ( <span class="variable">infoCol</span> contenga colisiones 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 1</b>: Algoritmo de tratamiento 
+            de colisiones</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Vamos ya 
+        a aplicar la teor&iacute;a aprendida. En la figura 1 se muestra el algoritmo 
+        que sigue el sistema de tratamiento de colisiones del motor y como es 
+        llamado por el juego.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Actualmente 
+        el algoritmo trata colisiones entre un objeto (siempre el personaje en 
+        este caso) y los pol&iacute;gonos del mundo. Adem&aacute;s del objeto 
+        se le pasa como par&aacute;metro adicional la velocidad que tendr&aacute; 
+        durante su tratamiento, de modo que se pueda simular la gravedad con el 
+        m&eacute;todo de dos pasadas (l&iacute;neas de 6 a 8).</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Lo primero 
+        que hace el algoritmo es llamar al primer componente del tratamiento de 
+        colisiones, el algoritmos de detecci&oacute;n, guardando a <span class="variable">infoCol</span> 
+        la informaci&oacute;n &uacute;til que genere (l&iacute;nea 16). A continuaci&oacute;n 
+        actualiza la posici&oacute;n del objeto movi&eacute;ndolo la distancia 
+        libre de colisiones que indique <span class="variable">infoCol</span> 
+        (l&iacute;nea 17). Si se ha producido alguna colisi&oacute;n se llama 
+        al segundo componente del tratamiento de colisiones, el algoritmo de reacci&oacute;n, 
+        del cual se obtiene el nuevo vector de velocidad que se aplicar&aacute; 
+        a la siguiente iteraci&oacute;n del tratamiento de colisiones (l&iacute;neas 
+        18 y 19). El proceso de tratamiento de colisiones se ir&aacute; repitiendo 
+        mientras se produzca alguna colisi&oacute;n (l&iacute;nea 20).</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte4_02consideraciones.htm">Anterior: Consideraciones previas 
+            de dise&ntilde;o</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte4_04deteccion.htm">Siguiente: 
+            Algoritmo de detecci&oacute;n</a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

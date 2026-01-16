@@ -1,0 +1,95 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Ejemplo de un sistema de tratamiento de colisiones - Consideraciones previas de dise&ntilde;o</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            4: EJEMPLO DE UN SISTEMA DE TRATAMIENTO DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Consideraciones 
+        previas de dise&ntilde;o<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Antes de 
+        ponernos a escribir algoritmos debemos decidir algunos conceptos de dise&ntilde;o 
+        que se usar&aacute;n en nuestro sistema de tratamiento de colisiones. 
+        Estos ser&aacute;n los tipos de <span class="ingles">bounding</span>, 
+        tanto de objeto como de movimiento, que mejor se adapten a las necesidades 
+        de nuestra aplicaci&oacute;n y el modo en como organizaremos la geometr&iacute;a.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El sistema 
+        de visualizaci&oacute;n del motor se basa en la t&eacute;cnica del <span class="ingles">portal 
+        rendering</span>, la cual, a grandes rasgos, organiza la geometr&iacute;a 
+        del mundo en zonas o habitaciones (si se desea conocer mejor dicha t&eacute;cnica 
+        <span class="autor">Carles Iglesias Pichel</span> ha escrito un art&iacute;culo 
+        llamado sencillamente <span class="articulo">Portal rendering</span> que 
+        pod&eacute;is hallar tambi&eacute;n aqu&iacute; en <span class="autor">Macedonia 
+        Magazine</span>); por lo tanto nos serviremos de la misma estructura, 
+        con lo que s&oacute;lo ser&aacute; necesario buscar colisiones entre el 
+        personaje y los pol&iacute;gonos de las habitaciones por las que pase, 
+        que en la mayor&iacute;a de los casos ser&aacute; s&oacute;lo una.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Por lo que 
+        respecta al <span class="ingles">bounding</span> de objeto, se tuvo en 
+        cuenta que el juego para el que estaba destinado el motor ser&iacute;a 
+        de acci&oacute;n, cosa que hace que sea m&aacute;s importante una detecci&oacute;n 
+        r&aacute;pida de colisiones que no una detecci&oacute;n precisa. Esto 
+        nos descarta las cajas orientadas y, debido a su propiedad de ser rotacionalmente 
+        invariables, se decidi&oacute; por las esferas en vez de las cajas alineadas 
+        al mundo.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El <span class="ingles">bounding</span> 
+        de movimiento elegido fue la caja alineada al mundo, pues el juego se 
+        pens&oacute; para que no hubiera una gran acumulaci&oacute;n de personajes 
+        y objetos al mismo lugar, de modo que con una caja alineada al mundo normalmente 
+        se descartar&aacute; casi la misma cantidad de posibles parejas en colisi&oacute;n 
+        que con una caja orientada.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Resumiendo, 
+        en la versi&oacute;n actual del motor (y por consiguiente en este art&iacute;culo) 
+        se tiene:</font></p>
+      <p>&nbsp;</p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El personaje 
+          se aproxima con una esfera</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Se usa 
+          una caja alineada al mundo como <span class="ingles">bounding</span> 
+          de movimiento</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La geometr&iacute;a 
+          se organiza en habitaciones</font></li>
+      </ul>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte4_01introduccion.htm">Anterior: Introducci&oacute;n</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte4_03tratamiento.htm">Siguiente: 
+            Algoritmo de tratamiento de colisiones</a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

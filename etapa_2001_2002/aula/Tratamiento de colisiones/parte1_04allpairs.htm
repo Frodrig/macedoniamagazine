@@ -1,0 +1,98 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Detecci&oacute;n de colisiones - All-pairs weakness</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            1: DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" --><span class="ingles">All-pairs 
+        weakness</span><!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Las simulaciones 
+        de hoy contienen muchos objetos, por lo que realizar la operaci&oacute;n 
+        de intersecci&oacute;n entre todas las parejas de objetos representar&aacute; 
+        una cantidad enorme de estas operaciones. Ya hemos visto como la utilizaci&oacute;n 
+        de <span class="ingles">boundings</span> de movimiento sencillos aumenta 
+        el rendimiento del algoritmo de detecci&oacute;n, pues el algoritmo de 
+        intersecci&oacute;n entre los <span class="ingles">boundings</span> ser&aacute; 
+        mucho m&aacute;s r&aacute;pido que el de intersecci&oacute;n entre objetos 
+        y pronto se descartan muchas parejas de objetos, con lo que la operaci&oacute;n 
+        de intersecci&oacute;n entre objetos ya no se realiza para todas las parejas. 
+        Pero por m&aacute;s r&aacute;pido que sea el algoritmo de intersecci&oacute;n 
+        entre <span class="ingles">boundings</span>, a medida que la escena va 
+        creciendo en n&uacute;mero de objetos la gran cantidad de comprobaciones 
+        de intersecci&oacute;n que se realizar&aacute;n har&aacute; que el sistema 
+        deje de funcionar a tiempo real.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Una caracter&iacute;stica 
+        comuna entre la gran mayor&iacute;a de escenas es que los objetos que 
+        la componen suelen estar distribuidos en un espacio muy grande en relaci&oacute;n 
+        al tama&ntilde;o de estos. Esto hace que se comprueben intersecciones 
+        entre <span class="ingles">boundings</span> de movimiento de objetos que 
+        est&aacute;n muy lejanos el uno del otro, siendo muy pocas las que generar&aacute;n 
+        una intersecci&oacute;n. Aqu&iacute; lo interesante ser&iacute;a tener 
+        una estructura que nos organice los objetos de forma que se pueda descartar 
+        cualquier posibilidad de colisi&oacute;n entre muchos de los objetos sin 
+        tener que realizar la prueba de intersecci&oacute;n. Una buena soluci&oacute;n 
+        es basa en dividir el espacio en regiones m&aacute;s peque&ntilde;as, 
+        con lo que los objetos est&aacute;n en regiones diferentes ya se puede 
+        afirmar que no colisionar&aacute;n.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Normalmente 
+        esta estructura es compartida con el sistema de visualizaci&oacute;n del 
+        motor de la aplicaci&oacute;n; por lo tanto no depender&aacute; s&oacute;lo 
+        del sistema de detecci&oacute;n de colisiones el hecho de elegir la estructura 
+        m&aacute;s adecuada. Tener una estructura separada de la utilizada por 
+        el sistema de visualizaci&oacute;n puede agilizar la detecci&oacute;n 
+        de colisiones, pero antes de coger esta soluci&oacute;n es importante 
+        estudiar el coste a&ntilde;adido que supondr&aacute; para la aplicaci&oacute;n 
+        tener que mantener otra estructura, tanto por el impacto en el rendimiento 
+        como por la memoria extra que necesitar&aacute;.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Este art&iacute;culo 
+        est&aacute; orientado a un modelo general del algoritmo de detecci&oacute;n 
+        que se pueda aplicar con independencia de la aplicaci&oacute;n y una estructura 
+        de este tipo puede ser totalmente diferente entre dos aplicaciones seg&uacute;n 
+        las necesidades de cada una; por lo tanto, no se entra en detalle en ning&uacute;n 
+        tipo de estructura para organizar los objetos. Pero cabe mencionar que 
+        algunas de las m&aacute;s utilizadas son los &aacute;rboles <span class="ingles">BSP</span>, 
+        las basadas en el <span class="ingles">portal engine</span> y los <span class="ingles">octrees</span>, 
+        de las cuales se puede encontrar bastante informaci&oacute;n en la web.</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte1_03fixedtimestep.htm">Anterior: <span class="ingles">Fixed-timestep 
+            weaknes</span></a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte1_05pairprocessing.htm">Siguiente: 
+            <span class="ingles">Pair-processing weakness</span></a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

@@ -1,0 +1,203 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Boundings m&aacute;s usuales en la detecci&oacute;n de colisiones - Comparativa de los tipos de bounding de objeto</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            2: <span class="ingles">BOUNDINGS</span> M&Aacute;S USUALES EN LA 
+            DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Comparativa 
+        de los tipos de <span class="ingles">bounding</span> de objeto<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Los aspectos 
+        a considerar en la elecci&oacute;n del tipo de <span class="ingles">bounding</span> 
+        de objeto ser&aacute;n:</font></p>
+      <p>&nbsp;</p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Rapidez 
+          de actualizaci&oacute;n</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">M&aacute;xima 
+          aproximaci&oacute;n a la forma del objeto</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Eficiencia 
+          en el algoritmo de intersecci&oacute;n</font></li>
+      </ul>
+      <p>&nbsp;</p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Actualizaci&oacute;n</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Debido a 
+        la gran cantidad de objetos que puede contener una escena, el <span class="ingles">bounding</span> 
+        de un objeto normalmente se crea s&oacute;lo una vez, con el objeto que 
+        aproxima centrado en el origen de coordenadas. Luego s&oacute;lo si el 
+        objeto sufre una transformaci&oacute;n es necesario actualizar su <span class="ingles">bounding</span>.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Por lo que 
+        respecta a las transformaciones de translaci&oacute;n, los tres tipos 
+        de <span class="ingles">boundings</span> solucionan la actualizaci&oacute;n 
+        aplic&aacute;ndose la misma translaci&oacute;n. Es en el caso de las transformaciones 
+        de rotaci&oacute;n donde aparecen grandes diferencias de rendimiento. 
+        En este aspecto destacan las esferas, pues son rotacionalment invariables 
+        y, en consecuencia, su actualizaci&oacute;n a una rotaci&oacute;n es gratis. 
+        Por lo que respecta a las cajas orientadas, su operaci&oacute;n de actualizaci&oacute;n 
+        es bastante r&aacute;pida, pues s&oacute;lo hace falta que se les aplique 
+        la misma rotaci&oacute;n que sufra el objeto. Es en el caso de las cajas 
+        alineadas al mundo donde la operaci&oacute;n de actualizaci&oacute;n debida 
+        a una rotaci&oacute;n ya no es tan trivial. Cuando el objeto rota hay 
+        una gran posibilidad de que parte del objeto quede fuera de su <span class="ingles">bounding</span>, 
+        de modo que sea necesaria una nueva reconstrucci&oacute;n del <span class="ingles">bounding</span> 
+        para que contenga todo el objeto. Esto representa tener que recorrer todos 
+        los v&eacute;rtices del objeto, con el impacto en el rendimiento que supondr&aacute;. 
+        Las figuras 1a, 1b y 1c muestran un objeto con cada uno de los tres tipos 
+        de <span class="ingles">bounding</span>. Al objeto se le ha aplicado una 
+        transformaci&oacute;n de translaci&oacute;n y otra de rotaci&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="center">
+        <tr> 
+          <td width="450"><img src="images/parte2/figura1a.gif" width="150" height="150"><img src="images/parte2/figura1b.gif" width="150" height="150"><img src="images/parte2/figura1c.gif" width="150" height="150"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="450"><font size="1"><b>De izquierda a derecha, 
+            figuras 1a, 1b y 1c</b>: Esfera, caja alineada al mundo y caja orientada 
+            aproximando al objeto en su posici&oacute;n inicial y con el objeto 
+            transformado</font></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Una alternativa 
+        es utilizar caja alineadas al mundo lo suficientemente grandes como para 
+        que contengan siempre todo el objeto independientemente de su orientaci&oacute;n, 
+        de modo que sea rotacionalment invariable; pero esto tiene el inconveniente 
+        de que ahora el <span class="ingles">bounding</span> aproximar&aacute; 
+        peor a su objeto, pudiendo encarecer el coste de las otras etapas del 
+        sistema de detecci&oacute;n de colisiones, adem&aacute;s de aumentar el 
+        margen de error del mundo de las colisiones respecto al mundo visual.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Aproximaci&oacute;n 
+        a la forma del objeto</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Decir que 
+        un tipo de <span class="ingles">bounding</span> aproximar&aacute; mejor 
+        a un objeto que otro depende exclusivamente de la forma de los objetos 
+        que contiene una escena. A&uacute;n y as&iacute;, como regla general los 
+        objetos suelen tener una forma m&aacute;s bien rectangular y, por lo tanto, 
+        las cajas suelen aproximar mejor a los objetos que las esferas. Concretamente 
+        &eacute;ste es el punto fuerte de las cajas orientadas, y suele ser &eacute;sta 
+        la principal raz&oacute;n para que una aplicaci&oacute;n que necesite 
+        simular con m&aacute;s fiabilidad el mundo real las pueda elegir, incluso 
+        con el coste a&ntilde;adido que suponen en las dem&aacute;s etapas.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Puede que 
+        hasta las cajas orientadas no sean suficiente para los requisitos de ciertas 
+        aplicaciones, en las que se necesitar&iacute;a utilizar tipos de <span class="ingles">bounding</span> 
+        que aproximasen mejor a los objetos. Pero estos <span class="ingles">boundings</span> 
+        supondr&iacute;an un coste de rendimiento tan grande que no permitir&iacute;an 
+        una ejecuci&oacute;n en tiempo real. Una soluci&oacute;n es utilizar &aacute;rboles 
+        de <span class="ingles">boundings</span>, de modo que a cada nivel se 
+        aproxime de forma m&aacute;s fiable al objeto. Aqu&iacute; cabe mencionar 
+        que un &aacute;rbol construido con cajas orientadas, debido a su propiedad 
+        de orientarse libremente, convergir&aacute; hacia la forma del objeto 
+        m&aacute;s r&aacute;pidamente que un &aacute;rbol construido con alguno 
+        de los otros dos tipos de <span class="ingles">boundings</span>.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Otra variante 
+        es tener un <span class="ingles">bounding</span> m&aacute;s simple conteniendo 
+        al que realmente aproxima el objeto. Por ejemplo, se podr&iacute;a tener 
+        una caja alineada al mundo para descartar r&aacute;pidamente muchas colisiones 
+        y, dentro de esta caja, una caja orientada para simular de forma m&aacute;s 
+        fiable las colisiones.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Operaci&oacute;n 
+        de intersecci&oacute;n</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Una vez hallada 
+        una intersecci&oacute;n entre dos <span class="ingles">boundings</span> 
+        de movimiento, a&uacute;n falta averiguar si realmente los objetos colisionan 
+        y, si es el caso, en qu&eacute; punto y momento lo hacen. Igual que con 
+        el algoritmo de intersecci&oacute;n de dos <span class="ingles">boundings</span> 
+        de movimiento, el coste de esta operaci&oacute;n es muy superior con las 
+        cajas orientadas que con las esferas o las cajas alineadas al mundo.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Se tiene 
+        que tener en cuenta que este algoritmo no es el mismo que el algoritmo 
+        de intersecci&oacute;n entre dos <span class="ingles">boundings</span> 
+        de movimiento, pues tiene el problema a&ntilde;adido del dinamismo de 
+        los <span class="ingles">boundings</span>, que no exist&iacute;a en los 
+        <span class="ingles">boundings</span> de movimiento, al ser estos est&aacute;ticos. 
+        Este dinamismo a&ntilde;ade una complejidad matem&aacute;tica extra que 
+        puede llegar a ser insostenible. Una buena forma de simplificar el algoritmo 
+        es considerar uno de los dos objetos como est&aacute;tico y el otro movi&eacute;ndose 
+        en relaci&oacute;n al est&aacute;tico. De esta forma se reduce el algoritmo 
+        a una operaci&oacute;n de intersecci&oacute;n entre un objeto m&oacute;vil 
+        y un est&aacute;tico, en vez de entre dos objetos m&oacute;viles. Las 
+        figuras 4a y 4b muestran precisamente esta conversi&oacute;n. En la figura 
+        4a se tiene los objetos con sus respectivos vectores de velocidad, mientras 
+        que en la figura 4b se tiene uno de los objetos con el vector de velocidad 
+        que &#147;ve&#148; el otro objeto. Para hallarlo simplemente se ha tenido 
+        que restar del vector de velocidad del objeto &#147;m&oacute;vil&#148; 
+        el del objeto &#147;est&aacute;tico&#148;.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="300"><img src="images/parte2/figura4a.gif" width="150" height="150"><img src="images/parte2/figura4b.gif" width="150" height="150"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="300"><font size="1"><b>Izquierda, figura 4a</b>: 
+            Objetos con sus vectores de velocidad<br>
+            <b>Derecha, figura 4b</b>: Los mismos objetos, ahora con el vector 
+            de velocidad de uno respecto al otro</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">En este art&iacute;culo 
+        no se pretende entrar en detalle en las operaciones envueltas para implementar 
+        el algoritmo de intersecci&oacute;n, que adem&aacute;s llevar&iacute;a 
+        todo un art&iacute;culo completo para cada tipo de <span class="ingles">bounding</span>. 
+        Como este algoritmo es especialmente complejo en el caso de las cajas 
+        orientadas, para aquellos que dese&eacute;is implementar un sistema de 
+        detecci&oacute;n con este tipo de cajas os doy una direcci&oacute;n que 
+        os puede ayudar (probada el 29 de junio de 2001, si el link est&aacute; 
+        roto buscad por el nombre del art&iacute;culo):</font></p>
+      <p>&nbsp;</p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><span class="articulo">Dynamic 
+          Collision Detection using Oriented Bounding Boxes</span> (<span class="autor">David 
+          Eberly</span> de <span class="autor">Magic Software</span>). Trata de 
+          un sistema de detecci&oacute;n de colisiones que usa &aacute;rboles 
+          de cajas orientadas, detallando las operaciones de intersecci&oacute;n 
+          para cajas est&aacute;ticas y para cajas din&aacute;micas, hasta llegar 
+          a comparaciones con la misma geometr&iacute;a del objeto cuando el algoritmo 
+          se halla en las hojas del &aacute;rbol.<br>
+          Link: <a href="http://www.magic-software.com/Documentation/dynacoll.pdf">http://www.magic-software.com/Documentation/dynacoll.pdf</a></font></li>
+      </ul>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte2_03compmov.htm">Anterior: Comparativa de los tipos 
+            de <span class="ingles">bounding</span> de movimiento</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+          <font color="#808080"><!-- #BeginEditable "Siguiente" --><a href="parte3_01introduccion.htm">Siguiente: 
+            PARTE 3 &#151; REACCIONES SIMPLES A LAS COLISIONES</a> </font>&gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

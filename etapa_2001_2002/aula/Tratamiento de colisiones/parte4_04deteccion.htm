@@ -1,0 +1,548 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Ejemplo de un sistema de tratamiento de colisiones - Algoritmo de detecci&oacute;n</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            4: EJEMPLO DE UN SISTEMA DE TRATAMIENTO DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Algoritmo 
+        de detecci&oacute;n<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">detecta( 
+                <span class="variable">objeto</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">boundObj</span> 
+                = bounding de objeto</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">boundMov</span> 
+                = genera_bound_mov( <span class="variable">boundObj</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">polsPot</span> 
+                = obtiene_pols_potenciales( <span class="variable">boundMov</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">cols</span> 
+                = encuentra_colisiones( <span class="variable">boundObj</span>, 
+                <span class="variable">velocidad</span>, <span class="variable">polsPot</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">infoCol</span> 
+                = primera_colisi&oacute;n( <span class="variable">cols</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">infoCol</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 2</b>: Algoritmo de detecci&oacute;n</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La figura 
+        2 presenta el algoritmo de detecci&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Lo primero 
+        que el algoritmo hace es obtener la esfera con que se aproxima el objeto 
+        (l&iacute;nea 3). Con esta esfera, y no con el objeto en s&iacute;, es 
+        con la que se realizan todas las operaciones, haci&eacute;ndose evidente 
+        as&iacute; la diferencia entre los mundo del sistema de colisiones y del 
+        de visualizaci&oacute;n. El primer paso de la detecci&oacute;n de colisiones 
+        es generar el <span class="ingles">bounding</span> de movimiento a partir 
+        de la esfera y la velocidad asociada al objeto (l&iacute;nea 4). Con el 
+        <span class="ingles">bounding</span> de movimiento se obtienen los pol&iacute;gonos 
+        con que potencialmente puede colisionar la esfera (l&iacute;nea 5). De 
+        estos pol&iacute;gonos se encuentran aquellos con que la esfera realmente 
+        colisiona (l&iacute;nea 6). De estas colisiones es busca la que se tiene 
+        que producir primero (l&iacute;nea 7). Finalmente se devuelve la informaci&oacute;n 
+        de esta colisi&oacute;n (l&iacute;nea 8).<br clear="all">
+        </font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Generaci&oacute;n 
+        del bounding de movimiento</font></h2>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">genera_bound_mov( 
+                <span class="variable">esfera</span>, <span class="variable">velocidad</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">origen</span> 
+                = posici&oacute;n de <span class="variable">esfera</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">destino</span> 
+                = <span class="variable">origen</span> + <span class="variable">velocidad</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">radio</span> 
+                = radio de <span class="variable">esfera</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.x<span class="subindice">m&iacute;n</span></span> 
+                = m&iacute;nimo( <span class="variable">origen.x</span>, <span class="variable">destino.x</span> 
+                ) - <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.x<span class="subindice">m&aacute;x</span></span> 
+                = m&aacute;ximo( <span class="variable">origen.x</span>, <span class="variable">destino.x</span> 
+                ) + <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.y<span class="subindice">m&iacute;n</span></span> 
+                = m&iacute;nimo( <span class="variable">origen.y</span>, <span class="variable">destino.y</span> 
+                ) - <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.y<span class="subindice">m&aacute;x</span></span> 
+                = m&aacute;ximo( <span class="variable">origen.y</span>, <span class="variable">destino.y</span> 
+                ) + <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.z<span class="subindice">m&iacute;n</span></span> 
+                = m&iacute;nimo( <span class="variable">origen.z</span>, <span class="variable">destino.z</span> 
+                ) - <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">caja.z<span class="subindice">m&aacute;x</span></span> 
+                = m&aacute;ximo( <span class="variable">origen.z</span>, <span class="variable">destino.z</span> 
+                ) + <span class="variable">radio</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">caja</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 3</b>: Algoritmo de generaci&oacute;n 
+            del <span class="ingles">bounding</span> de movimiento</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La figura 
+        3 muestra el algoritmo que genera el bounding de movimiento.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Para construir 
+        una caja alineada al mundo es necesario conocer los seis planos que la 
+        forman. Para hallar estos planos, se necesita conocer los puntos de origen 
+        y destino y el radio de la esfera (l&iacute;neas de 3 a 5). Luego se comparan 
+        las componentes x, y e z de los dos puntos, y los planos salen de restar 
+        a las componentes de valor m&aacute;s peque&ntilde;a el radio, y de sumarlo 
+        a las de valor mayor (l&iacute;neas de 6 a 11). La figura 4 muestra de 
+        forma gr&aacute;fica la construcci&oacute;n de un <span class="ingles">bounding</span> 
+        de movimiento. Se puede ver como para hallar los planos que forman la 
+        caja alineada al mundo s&oacute;lo es necesario sumar a los puntos de 
+        origen y destino el valor del radio. Esta suma se realiza a la componente 
+        x, y e z que corresponda a cada plano, y el valor sumado ser&aacute; de 
+        signo positivo o negativo seg&uacute;n convenga.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="262"><img src="images/parte4/figura04.gif" width="262" height="262"> 
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 4</b>: Construcci&oacute;n 
+            de un bounding de movimiento</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">&nbsp;<br clear="all">
+        </font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Obtenci&oacute;n 
+        de los pol&iacute;gonos potenciales</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La figura 
+        5 presenta el algoritmo que se encarga de obtener los pol&iacute;gonos 
+        potenciales. &Eacute;stos son aquellos pol&iacute;gonos que interseccionan 
+        con el <span class="ingles">bounding</span> de movimiento; es decir, aquellos 
+        por los que ser&aacute; necesario usar un algoritmo de intersecci&oacute;n 
+        m&aacute;s preciso para poder descubrir si realmente la esfera colisiona 
+        con ellos.</font></p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><br clear="all">
+        </font></p>
+      <table border="1" cellpadding="3" cellspacing="0" align="center">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">obtiene_pols_potenciales( 
+                <span class="variable">boundMov</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">habsOcupadas</span> 
+                = habitaciones que contiene el mundo y que interseccionan con 
+                <span class="variable">boundMov</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada habitaci&oacute;n <span class="variable">H<span class="subindice">i</span></span> 
+                de <span class="variable">habsOcupadas</span> ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada pol&iacute;gono <span class="variable">P<span class="subindice">j</span></span> 
+                de los pol&iacute;gonos que contiene <span class="variable">H<span class="subindice">i</span></span> 
+                ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">boundPol</span> 
+                = bounding de <span class="variable">P<span class="subindice">j</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">boundMov</span> y <span class="variable">boundPol</span> 
+                interseccionan )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">boundMov</span> y <span class="variable">P<span class="subindice">j</span></span> 
+                interseccionan )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">a&ntilde;ade 
+                Pj a polsPot</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">polsPot</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 5</b>: Algoritmo de obtenci&oacute;n 
+            de pol&iacute;gonos potenciales</font></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura06.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>Figura 6</b>: Un portal 
+            intersecciona con el <span class="ingles">bounding</span> de movimiento</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El algoritmo 
+        aprovecha la organizaci&oacute;n en habitaciones que establece el motor 
+        en ser &eacute;ste basado en la t&eacute;cnica del <span class="ingles">portal 
+        rendering</span>. As&iacute;, lo primero que se hace es determinar qu&eacute; 
+        habitaciones interseccionan con el <span class="ingles">bounding</span> 
+        de movimiento (l&iacute;nea 3), de modo que ya se descartan todos los 
+        pol&iacute;gonos de las otras como pol&iacute;gonos con que la esfera 
+        puede colisionar. El <span class="ingles">portal rendering</span> conecta 
+        dos habitaciones con un portal, de modo que para que un objeto cambie 
+        de habitaci&oacute;n debe atravesar por fuerza un portal. Por lo tanto, 
+        para determinar las habitaciones que interseccionan con el <span class="ingles">bounding</span> 
+        de movimiento s&oacute;lo es necesario comprobar qu&eacute; portales interseccionan 
+        con &eacute;ste. Es m&aacute;s, dicha comprobaci&oacute;n s&oacute;lo 
+        se tendr&aacute; que efectuar con los portales de la habitaci&oacute;n 
+        donde se halle inicialmente la esfera, y, si es encuentra alguna intersecci&oacute;n, 
+        realizar esta operaci&oacute;n recursivamente con la habitaci&oacute;n 
+        a la que lleve ese portal. La figura 6 muestra un ejemplo de una esfera 
+        atravesando un portal, y, por lo tanto, cambiando de habitaci&oacute;n. 
+        Se puede ver como esto implica que el portal intersecciona con el <span class="ingles">bounding</span> 
+        de movimiento.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura07.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>Figura 7</b>: <span class="ingles">Bounding</span> 
+            de movimiento y pol&iacute;gonos con sus <span class="ingles">boundings</span></font></td>
+        </tr>
+      </table>
+      <p>&nbsp;<br clear="right">
+      </p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Comprobar 
+        una intersecci&oacute;n entre dos cajas alineadas al mundo es una operaci&oacute;n 
+        muy r&aacute;pida. Teniendo en cuenta esto, para acelerar todav&iacute;a 
+        m&aacute;s el proceso de obtenci&oacute;n de pol&iacute;gonos potenciales 
+        cada pol&iacute;gono tiene su propia caja alineada al mundo como a <span class="ingles">bounding</span> 
+        de pol&iacute;gono, de modo que se obtiene dicho <span class="ingles">bounding</span> 
+        (l&iacute;nea 6) y se comprueba primero la intersecci&oacute;n entre el 
+        <span class="ingles">bounding</span> de movimiento y el del pol&iacute;gono 
+        (l&iacute;nea 7). En la figura 7 se puede ver como uno de los <span class="ingles">boundings</span> 
+        de los tres pol&iacute;gonos no interseccionan con el <span class="ingles">bounding</span> 
+        de movimiento y, por lo tanto, ya se puede descartar.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">S&oacute;lo 
+        en el caso que se produzca una intersecci&oacute;n entre el <span class="ingles">bounding</span> 
+        de un pol&iacute;gono y el <span class="ingles">bounding</span> de movimiento, 
+        se comprueba una intersecci&oacute;n entre el pol&iacute;gono en si y 
+        el bounding de movimiento (l&iacute;nea 8). Para realizar esta operaci&oacute;n 
+        se usa un algoritmo de <span class="ingles">clipping</span> de pol&iacute;gonos. 
+        Si finalmente el pol&iacute;gono intersecciona con el <span class="ingles">bounding</span> 
+        de movimiento entonces se a&ntilde;ade a los pol&iacute;gonos potenciales 
+        (l&iacute;nea 9). Este proceso se realiza para todos los pol&iacute;gonos 
+        de las habitaciones ocupadas por el <span class="ingles">bounding</span> 
+        de movimiento (l&iacute;neas 4 y 5) y, al final, se devuelven todos los 
+        pol&iacute;gonos potenciales (l&iacute;nea 12).<br clear="all">
+        </font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">C&aacute;lculo 
+        de las colisiones</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El algoritmo 
+        de la figura 8 encuentra todas las colisiones que se produzcan entre la 
+        esfera de un objeto y los pol&iacute;gonos potenciales hallados en la 
+        etapa anterior.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="center">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">encuentra_colisiones( 
+                <span class="variable">esfera</span>, <span class="variable">velocidad</span>, 
+                <span class="variable">pol&iacute;gonos</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">origen</span> 
+                = posici&oacute;n de la esfera</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">vel<span class="subindice">u</span></span> 
+                = velocidad normalizada</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada pol&iacute;gono <span class="variable">P<span class="subindice">i</span></span> 
+                de <span class="variable">pol&iacute;gonos</span> ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">norm</span> 
+                = normal de <span class="variable">P<span class="subindice">i</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">norm</span> &middot; <span class="variable">vel<span class="subindice">u</span></span> 
+                &lt; 0 ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">ptCol<span class="subindice">e</span></span> 
+                = punto de intersecci&oacute;n del rayo definido por <span class="variable">origen</span> 
+                y -<span class="variable">norm</span> con <span class="variable">esfera</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">ptCol<span class="subindice">p</span></span> 
+                = punto de intersecci&oacute;n del rayo definido pot <span class="variable">ptCol<span class="subindice">e</span></span> 
+                y <span class="variable">vel<span class="subindice">u</span></span> 
+                con el plano de define <span class="variable">P<span class="subindice">i</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">ptCol<span class="subindice">p</span></span> 
+                no se encuentra dentro de <span class="variable">P<span class="subindice">i</span></span> 
+                ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">ptCol<span class="subindice">p</span></span> 
+                = punto de <span class="variable">P<span class="subindice">i</span></span> 
+                m&aacute;s cercano a <span class="variable">ptCol<span class="subindice">p</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">ptCol<span class="subindice">e</span></span> 
+                = primer punto de intersecci&oacute;n del rayo definido por <span class="variable">ptCol<span class="subindice">p</span></span> 
+                y -<span class="variable">vel<span class="subindice">u</span></span> 
+                con <span class="variable">esfera</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( no existe <span class="variable">ptCol<span class="subindice">e</span></span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">continuar 
+                con la siguiente iteraci&oacute;n</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">distCol</span> 
+                = m&oacute;dulo de <span class="variable">ptCol<span class="subindice">p</span></span> 
+                - <span class="variable">ptCol<span class="subindice">e</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">distCol</span> &lt;= m&oacute;dulo de 
+                <span class="variable">velocidad</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">a&ntilde;ade 
+                <span class="variable">distCol</span> y <span class="variable">P<span class="subindice">i</span></span> 
+                a <span class="variable">colisiones</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">colisiones</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 8</b>: Algoritmo que encuentra 
+            las colisiones entre la esfera del objeto y los pol&iacute;gonos potenciales</font></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="374"><img src="images/parte4/figura09a.gif" width="187" height="187"><img src="images/parte4/figura09b.gif" width="187" height="187"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="374"><font size="1"><b>De izquierda a derecha, 
+            figuras 9a y 9b</b>: Un pol&iacute;gono del que la esfera se aleja 
+            y otro al que se le acerca</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El algoritmo 
+        realiza la operaci&oacute;n de detecci&oacute;n de colisi&oacute;n para 
+        todos los pol&iacute;gonos potenciales (l&iacute;nea 5). Dicha operaci&oacute;n 
+        empieza comprobando si el producto escalar de la normal y el vector de 
+        velocidad da un valor positivo o negativo (l&iacute;nea 7). En caso de 
+        ser positivo querr&aacute; decir que la esfera se est&aacute; alejando 
+        del pol&iacute;gono y, por lo tanto, se puede descartar. Las figuras 9a 
+        y 9b muestran los dos posibles casos.<br clear="right">
+        </font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura10.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>Figura 10</b>: Punto 
+            de colisi&oacute;n de la esfera</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Una vez hallado 
+        un pol&iacute;gono al que la esfera se acerca, se calcula el punto de 
+        colisi&oacute;n de la esfera en su posici&oacute;n de origen (l&iacute;nea 
+        8). Moviendo el plano del pol&iacute;gono hasta tocar la esfera se puede 
+        ver como la distancia des del punto de colisi&oacute;n hasta el centro 
+        de la esfera tendr&aacute; la direcci&oacute;n de la normal del pol&iacute;gono 
+        y magnitud del valor del radio. Esto queda claro gr&aacute;ficamente en 
+        la figura 10.<br clear="right">
+        </font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura11.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>Figura 11</b>: Punto 
+            de colisi&oacute;n con el plano del pol&iacute;gono</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El siguiente 
+        paso es calcular el punto de colisi&oacute;n del pol&iacute;gono. Para 
+        hacer esto primero se encuentra el punto de colisi&oacute;n con el plano 
+        del pol&iacute;gono, el cual corresponde al punto de intersecci&oacute;n 
+        con el plano de un rayo del mismo sentido y direcci&oacute;n que el vector 
+        de velocidad y trazado desde el punto de colisi&oacute;n de la esfera 
+        (l&iacute;nea 9). Siguiendo el ejemplo de la figura 10, en la figura 11 
+        se muestra la operaci&oacute;n de intersecci&oacute;n de dicho rayo con 
+        el plano del pol&iacute;gono.<br clear="right">
+        </font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura12.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>Figura 12</b>: El nuevo 
+            punto de colisi&oacute;n es aquel del pol&iacute;gono que sea m&aacute;s 
+            cercano al antiguo punto de colisi&oacute;n</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">A continuaci&oacute;n 
+        se comprueba si el punto encontrado anteriormente ya se encuentra dentro 
+        del pol&iacute;gono (l&iacute;nea 10). Si no es as&iacute;, el punto de 
+        colisi&oacute;n ser&aacute; aquel del pol&iacute;gono que m&aacute;s cerca 
+        est&eacute; de ese punto (l&iacute;nea 11). Gr&aacute;ficamente este punto 
+        es muy evidente, tal y como muestra la figura 12.<br clear="right">
+        </font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="337"><img src="images/parte4/figura13a.gif" width="337" height="262"><br>
+            <img src="images/parte4/figura13b.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="337"><font size="1"><b>De arriba abajo, figuras 
+            13a y 13b</b>: Un caso donde se encuentra el nuevo punto de colisi&oacute;n 
+            y otro donde no se produce colisi&oacute;n</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Si ha sido 
+        necesario hallar un nuevo punto de colisi&oacute;n para el pol&iacute;gono 
+        esto habr&aacute; invalidado el punto de colisi&oacute;n de la esfera 
+        y, por lo tanto, tambi&eacute;n se tendr&aacute; que encontrar un nuevo 
+        punto de colisi&oacute;n para la esfera. Este punto corresponder&aacute; 
+        al primer punto de intersecci&oacute;n con la esfera del rayo con el mismo 
+        sentido y direcci&oacute;n que el vector de velocidad invertido y trazado 
+        desde el nuevo punto de colisi&oacute;n del pol&iacute;gono (l&iacute;nea 
+        12). Tambi&eacute;n se puede dar el caso de que este rayo no interseccione 
+        con la esfera, cosa que querr&aacute; decir que no se produce una colisi&oacute;n 
+        entre la esfera y el pol&iacute;gono y, por lo tanto, se proseguir&aacute; 
+        con el siguiente pol&iacute;gono (l&iacute;neas 13 y 14). Las figuras 
+        13a y 13b muestran los dos casos posibles.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">A&uacute;n 
+        y haber hallado el punto de colisi&oacute;n, si la esfera no se tiene 
+        que desplazar suficiente distancia como para llegar a contactar entonces 
+        tampoco se producir&aacute; una colisi&oacute;n. Por esta raz&oacute;n 
+        se calcula la distancia entre el punto de colisi&oacute;n de la esfera 
+        y el del pol&iacute;gono (l&iacute;nea 16) y, s&oacute;lo si esta distancia 
+        es inferior o igual a la distancia que desea recorrer la esfera, la cual 
+        viene definida por el m&oacute;dulo del vector de velocidad, se a&ntilde;ade 
+        el pol&iacute;gono y la distancia de colisi&oacute;n a la lista de colisiones 
+        (l&iacute;nea 17 y 18).</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Al finalizar 
+        el proceso para todos los pol&iacute;gonos s&oacute;lo queda devolver 
+        la lista de colisiones (l&iacute;nea 21).<br clear="right">
+        </font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Elecci&oacute;n 
+        de la colisi&oacute;n m&aacute;s inmediata</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">De todas 
+        la colisiones halladas en el apartado anterior, s&oacute;lo ser&aacute; 
+        v&aacute;lida la primera que se produzca, pues esta har&aacute; que para 
+        el resto del intervalo de la detecci&oacute;n de colisiones se use otro 
+        vector de velocidad. La figura 14 presenta el algoritmo que encuentra 
+        el punto de colisi&oacute;n que se producir&aacute; en primer lugar de 
+        entre todos los que contiene la lista de colisiones.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">primera_colisi&oacute;n( 
+                <span class="variable">colisiones</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">colisiones</span> no contiene ninguna 
+                colisi&oacute;n )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( &Oslash; )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">dist<span class="subindice">m&iacute;n</span></span> 
+                = <span class="subindice">&ordm;&ordm;</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada colisi&oacute;n <span class="variable">C<span class="subindice">i</span></span> 
+                de <span class="variable">colisiones</span> ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">dist</span> 
+                = distancia de colisi&oacute;n de <span class="variable">C<span class="subindice">i</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">dist</span> &lt; <span class="variable">dist<span class="subindice">m&iacute;n</span></span> 
+                ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">dist<span class="subindice">m&iacute;n</span></span> 
+                = <span class="variable">dist</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">pol</span> 
+                = pol&iacute;gono de <span class="variable">C<span class="subindice">i</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">a&ntilde;ade 
+                <span class="variable">dist<span class="subindice">m&iacute;n</span></span> 
+                y <span class="variable">pol</span> a <span class="variable">infoCol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">infoCol</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 14</b>: Algoritmo que encuentra 
+            la primera colisi&oacute;n que se produce</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Antes que 
+        nada, se comprueba que realmente la lista de colisiones contenga alguna 
+        colisi&oacute;n (l&iacute;nea 3). Si s&iacute; que contiene se recorren 
+        todas las colisiones (l&iacute;nea 6) y, para cada una, se compara si 
+        su distancia de colisi&oacute;n es inferior a la m&aacute;s peque&ntilde;a 
+        hallada hasta el momento (l&iacute;neas 7 y 8). Si as&iacute; es, se fija 
+        la nueva distancia como la m&aacute;s peque&ntilde;a y se guarda como 
+        informaci&oacute;n &uacute;til de colisi&oacute;n el pol&iacute;gono asociado 
+        (l&iacute;neas 9 y 10). Una vez finalizado todo el proceso, se a&ntilde;ade 
+        a la informaci&oacute;n de colisi&oacute;n a devolver el pol&iacute;gono 
+        que haya resultado ser el primero con que la esfera chocar&aacute; junto 
+        con la distancia de colisi&oacute;n (l&iacute;nea 13) y se devuelve dicha 
+        informaci&oacute;n (l&iacute;nea 14).</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte4_03tratamiento.htm">Anterior: Algoritmo de tratamiento 
+            de colisiones</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte4_05reaccion.htm">Siguiente: 
+            Algoritmo de reacci&oacute;n</a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

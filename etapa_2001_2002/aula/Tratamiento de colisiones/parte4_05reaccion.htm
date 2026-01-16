@@ -1,0 +1,124 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Ejemplo de un sistema de tratamiento de colisiones - Algoritmo de reacci&oacute;n</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            4: EJEMPLO DE UN SISTEMA DE TRATAMIENTO DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Algoritmo 
+        de reacci&oacute;n<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">responde( 
+                <span class="variable">infoCol</span>, <span class="variable">objeto</span>, 
+                <span class="variable">velocidad</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">esfera</span> 
+                = bounding de <span class="variable">objeto</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">pol</span> 
+                = pol&iacute;gono que contiene <span class="variable">infoCol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">velExcedente</span> 
+                = trozo del vector <span class="variable">velocidad</span> despu&eacute;s 
+                del punto de colisi&oacute;n</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">planoCol</span> 
+                = plano tangente a <span class="variable">esfera</span> en el 
+                punto de colisi&oacute;n</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">deslizamiento</span> 
+                = proyecci&oacute;n de <span class="variable">velExcedente</span> 
+                sobre <span class="variable">planoCol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">deslizamiento</span> 
+                = <span class="variable">deslizamiento</span> acortado por el 
+                factor de fricci&oacute;n de <span class="variable">pol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">deslizamiento</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 15</b>: Algoritmo de reacci&oacute;n</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Cuando se 
+        ha detectado una colisi&oacute;n para el personaje interesa que este no 
+        se detenga incondicionalmente, sino que se quiere que se deslice por el 
+        pol&iacute;gono con que ha chocado. Adem&aacute;s, tambi&eacute;n es deseable 
+        que este deslizamiento sea m&aacute;s o menos acentuado en funci&oacute;n 
+        del &aacute;ngulo de colisi&oacute;n con el pol&iacute;gono y la fricci&oacute;n 
+        que se le haya asociado para simular la textura f&iacute;sica de &eacute;ste. 
+        Al final, esta reacci&oacute;n permitir&aacute; que el personaje pueda 
+        continuar avanzando en pegarse a una pared y tambi&eacute;n que pueda 
+        subir autom&aacute;ticamente por pendientes peque&ntilde;as y obst&aacute;culos 
+        bajos, como por ejemplo escaleras.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Todo lo que 
+        hace falta para obtener esta reacci&oacute;n es calcular el vector de 
+        deslizamiento y volver a ejecutar el proceso de tratamiento de colisiones, 
+        ahora usando este vector como vector de velocidad. La figura 15 muestra 
+        el algoritmo de reacci&oacute;n, el cual actualmente lo &uacute;nico que 
+        tiene que hacer es calcular un vector de deslizamiento y devolverlo.<br clear="right">
+        </font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td> <img src="images/parte4/figura16.gif" width="337" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 16</b>: Vector de deslizamiento 
+            a partir del excedente de velocidad</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El vector 
+        de deslizamiento se calcular&aacute; a partir de la parte del vector de 
+        velocidad que quede despu&eacute;s del punto de colisi&oacute;n; es decir, 
+        aquella parte que no se ha tenido en cuenta en el momento de actualizar 
+        la posici&oacute;n del objeto en haber detectado una colisi&oacute;n (l&iacute;nea 
+        5). Este trozo de vector se proyecta sobre el plano de colisi&oacute;n, 
+        el cual corresponde al plano tangente a la esfera en el punto de colisi&oacute;n, 
+        para obtener un vector de deslizamiento sin fricci&oacute;n (l&iacute;neas 
+        6 y 7). Para aplicar la fricci&oacute;n s&oacute;lo es necesario acortar 
+        el vector de deslizamiento por un factor definido por el pol&iacute;gono 
+        con el que se tiene que colisionar (l&iacute;nea 8). Finalmente se devuelve 
+        este vector de deslizamiento (l&iacute;nea 9). La figura 16 muestra la 
+        proyecci&oacute;n sobre el plano de colisi&oacute;n del trozo excedente 
+        del vector de velocidad, y tambi&eacute;n como se acorta por el factor 
+        de fricci&oacute;n.</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte4_04deteccion.htm">Anterior: Algoritmo de detecci&oacute;n</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

@@ -1,0 +1,206 @@
+<html><!-- #BeginTemplate "/Templates/Contingut.dwt" -->
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Detecci&oacute;n de colisiones - Un algoritmo de detecci&oacute;n b&aacute;sico</title>
+<!-- #EndEditable -->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha:
+            13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            1: DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Un 
+        algoritmo de detecci&oacute;n b&aacute;sico<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">A primera 
+        vista puede parecer que dise&ntilde;ar un algoritmo de detecci&oacute;n
+      tiene que ser bastante sencillo; pero hay ciertos problemas o &#147;flaquezas&#148; 
+        que cualquier algoritmo de detecci&oacute;n que se precie debe evitar. 
+        Para entenderlos y poderlos solucionar partir&eacute; de un algoritmo 
+        de detecci&oacute;n b&aacute;sico, e ir&eacute; mostrando los errores 
+        que presenta y como corregirlos. Dicho algoritmo se muestra en la figura 
+        1, junto a una aplicaci&oacute;n que lo llama.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td> 
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Aplicaci&oacute;n()</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">mientras 
+                ( se est&eacute; en estado de simulaci&oacute;n ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">t</span> 
+                = tiempo de simulaci&oacute;n</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">obtiene 
+                datos de los dispositivos de entrada</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">actualiza 
+                el comportamiento de los objetos por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">haz 
+                {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">infoCol</span> 
+                = detecta( <span class="variable">t</span>, <span class="variable">objetos</span> 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">infoCol</span> contiene colisiones )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">respuesta 
+                a las colisiones</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">} 
+                mientras ( <span class="variable">infoCol</span> contenga colisiones 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">representa 
+                cada objeto de objetos por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+              <li></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">/* 
+                La variable <span class="variable">t<span class="subindice">ant</span></span> 
+                persiste entre llamadas. */</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">/* 
+                Inicialmente <span class="variable">t<span class="subindice">ant</span></span> 
+                = tiempo de inicio de la simulaci&oacute;n. */</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">detecta( 
+                <span class="variable">t<span class="subindice">act</span></span>, 
+                <span class="variable">objetos</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">{</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">por 
+                ( <span class="variable">t</span> = <span class="variable">t<span class="subindice">ant</span></span> 
+                hasta tact en incrementos de <span class="variable">t<span class="subindice">det</span></span> 
+                ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">mueve 
+                objetos a su posici&oacute;n por <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada objeto <span class="variable">O<span class="subindice">i</span></span> 
+                de <span class="variable">objetos</span> ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">por 
+                ( cada objeto <span class="variable">O<span class="subindice">j</span></span> 
+                de {<span class="variable">objetos</span> - <span class="variable">O<span class="subindice">i</span></span>} 
+                )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">O<span class="subindice">i</span></span> 
+                y <span class="variable">O<span class="subindice">j</span></span> 
+                interseccionan )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">a&ntilde;adir 
+                <span class="variable">O<span class="subindice">i</span></span> 
+                y <span class="variable">O<span class="subindice">j</span></span> 
+                a <span class="variable">infoCol</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">si 
+                ( <span class="variable">infoCol</span> contiene colisiones ) 
+                {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><span class="variable">t<span class="subindice">ant</span></span> 
+                = <span class="variable">t</span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( <span class="variable">infoCol</span> )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">}</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4"><span class="variable">t<span class="subindice">ant</span></span> 
+                = <span class="variable">t<span class="subindice">act</span></span></font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><img src="images/sangria.gif" width="24" height="4">devuelve 
+                ( &oslash; )</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 1</b>: Un algoritmo de detecci&oacute;n 
+            b&aacute;sico</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Para situarnos 
+        veamos el algoritmo paso por paso. La aplicaci&oacute;n est&aacute; muy 
+        simplificada y s&oacute;lo consta de un bucle de simulaci&oacute;n, el 
+        cual realizar&aacute; mientras no se indique lo contrario (l&iacute;nea 
+        3). Lo primero que hace el bucle es coger el tiempo de simulaci&oacute;n 
+        actual, que se utilizar&aacute; como par&aacute;metro de tiempo en 
+        algunas de las operaciones del bucle (l&iacute;nea 4). De esta forma se 
+        consigue un comportamiento de la aplicaci&oacute;n independiente de las 
+        caracter&iacute;sticas de la m&aacute;quina donde se est&eacute; ejecutando. 
+        Como la aplicaci&oacute;n es interactiva se obtienen los datos de los 
+        dispositivos de entrada y se actualiza el comportamiento de los objetos 
+        (l&iacute;neas 5 y 6). A continuaci&oacute;n es cuando se llama al algoritmo 
+        de detecci&oacute;n para saber si hay alg&uacute;n objeto en colisi&oacute;n 
+        (l&iacute;nea 8). Si as&iacute; es, se llama al algoritmo de reacci&oacute;n 
+        para corregir el comportamiento (l&iacute;neas 9 y 10). El cambio de comportamiento 
+        puede acarrear nuevas colisiones, por lo que se hace necesario volver 
+        a pasar por todo el proceso de tratamiento de colisiones (l&iacute;nea 
+        11). Una vez tratadas todas las colisiones la aplicaci&oacute;n ya es 
+        libre de representar todos los objetos (l&iacute;nea 12).</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El algoritmo 
+        de detecci&oacute;n busca colisiones en el intervalo entre <span class="variable">t<span class="subindice">ant</span></span> 
+        y <span class="variable">t<span class="subindice">act</span></span>; es 
+        decir, des de la &uacute;ltima vez que ha sido llamado hasta el tiempo 
+        de simulaci&oacute;n actual. Este intervalo es recorrido en incrementos 
+        de tiempo <span class="variable">t<span class="subindice">det</span></span> 
+        (l&iacute;nea 20). Se empieza moviendo los objetos a la posici&oacute;n 
+        que les corresponda seg&uacute;n el momento del intervalo en el que se 
+        est&eacute; (l&iacute;nea 21). Luego se comprueba por todas la parejas 
+        de objetos (l&iacute;neas 22 y 23) si se produce alguna intersecci&oacute;n 
+        (l&iacute;nea 24) y se a&ntilde;ade a una lista con todas las parejas 
+        de objetos en colisi&oacute;n (l&iacute;nea 25). Esta lista es devuelta 
+        en el caso de que se haya producido alguna colisi&oacute;n, guardando 
+        antes el tiempo de colisi&oacute;n para saber en que momento del intervalo 
+        se debe continuar la detecci&oacute;n de colisiones en posteriores llamadas 
+        al algoritmo (l&iacute;neas 27 a 30). En caso de no producirse ninguna 
+        colisi&oacute;n el tiempo guardado ser&aacute; el tiempo de simulaci&oacute;n 
+        actual y se devolver&aacute; una lista vac&iacute;a (l&iacute;neas 32 
+        y 33).</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Una vez presentado 
+        el algoritmo de detecci&oacute;n veamos los problemas que tiene.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Problemas 
+        del algoritmo de detecci&oacute;n b&aacute;sico</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El algoritmo 
+        de la figura 1 presenta tres problemas importantes. A continuaci&oacute;n 
+        los enumero e indico cómo se les suele referenciar en ingl&eacute;s por 
+        si se desea buscar informaci&oacute;n adicional de alguno de ellos:</font></p>
+      <p>&nbsp;</p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Problema 
+          de comprobar las colisiones cada cierto instante de tiempo con incrementos 
+          de tiempo constantes (l&iacute;nea 20): <span class="ingles">fixed-timestep 
+          weakness</span>.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"> Problema 
+          de comprobar las intersecciones entre todas las parejas de objetos de 
+          la escena (l&iacute;neas 22 y 23): <span class="ingles">all-pairs weakness</span>.</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"> Problema 
+          de determinar si las superficies de dos objetos interseccionan (l&iacute;nea 
+          24): <span class="ingles">pair-processing weakness</span>.</font></li>
+      </ul>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Un buen algoritmo 
+        de detecci&oacute;n deber&aacute; solucionar estos tres problemas. As&iacute; 
+        pues, en las siguientes secciones explicar&eacute; problema por problema 
+        en qué consisten y cómo se pueden solucionar.</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte1_01introduccion.htm">Anterior: Introducci&oacute;n</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte1_03fixedtimestep.htm">Siguiente: 
+            <span class="ingles">Fixed-timestep weakness</span></a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate --></html>

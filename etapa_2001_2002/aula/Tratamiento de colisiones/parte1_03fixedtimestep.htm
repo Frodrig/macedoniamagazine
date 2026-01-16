@@ -1,0 +1,201 @@
+<html><!-- #BeginTemplate "/Templates/Contingut.dwt" -->
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Detecci&oacute;n de colisiones - Fixed-timestep weakness</title>
+<!-- #EndEditable -->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            1: DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" --><span class="ingles">Fixed-timestep 
+        weaknes</span><!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">El hecho 
+        de comprobar si dos objetos interseccionan cada <span class="variable">t<span class="subindice">det</span></span> 
+        instante de tiempo puede hacer que algunas colisiones no se detecten. 
+        La figura 2 es un claro ejemplo de una situaci&oacute;n en que dos objetos 
+        habr&iacute;an tenido que colisionar pero no se ha detectado.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="262"><img src="images/parte1/figura2.gif" width="262" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 2</b>: El algoritmo 
+            de detecci&oacute;n b&aacute;sico se salta esta colisi&oacute;n</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">En el ejemplo 
+        los dos objetos se mueven en sentido contrario a lo largo del eje x, mostrando 
+        su posici&oacute;n a cada incremento de tiempo <span class="variable">t<span class="subindice">det</span></span>. 
+        Debido a que las comprobaciones de intersecci&oacute;n s&oacute;lo se 
+        realizan cada <span class="variable">t<span class="subindice">det</span></span> 
+        no se detecta la colisi&oacute;n que se produce durante el intervalo entre 
+        <span class="variable">t<span class="subindice">det</span></span> y 2&middot;<span class="variable">t<span class="subindice">det</span></span>. 
+        En consecuencia los dos objetos se traviesan el uno al otro durante la 
+        simulaci&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Se podr&iacute;a 
+        pensar en disminuir el valor de <span class="variable">t<span class="subindice">det</span></span> 
+        para reducir la posibilidad de que aparezca este error, pero esto conllevar&iacute;a 
+        a un empeoramiento en el rendimiento del algoritmo, pues se incrementar&iacute;a 
+        el n&uacute;mero de iteraciones realizadas por un mismo intervalo de tiempo.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Lo que interesa 
+        es un m&eacute;todo para poder buscar colisiones por todo el intervalo 
+        de tiempo y no s&oacute;lo en ciertos momentos. Aqu&iacute; es donde entra 
+        en escena lo que se llama <span class="ingles">bounding</span> de movimiento.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><span class="ingles">Bounding</span> 
+        de movimiento</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La palabra 
+        <span class="ingles">bounding</span> viene del ingl&eacute;s (como no) 
+        y hace referencia a un envoltorio. &iquest;Y qu&eacute; es este &#147;envoltorio&#148; 
+        de movimiento? Pues es un envoltorio que contiene todo el espacio ocupado 
+        por el objeto durante el intervalo de tiempo. Ahora, en cada proceso de 
+        detecci&oacute;n de colisiones se generan los <span class="ingles">boundings</span> 
+        de movimiento y la prueba de intersecci&oacute;n se hace entre estos en 
+        vez de entre los objetos. Si se produce una intersecci&oacute;n se sabe 
+        que en alg&uacute;n momento del intervalo de tiempo se ha producido una 
+        colisi&oacute;n. En la figura 3 se han generado los <span class="ingles">boundings</span> 
+        de movimiento para los objetos de la figura 2 y ahora s&iacute; se detecta 
+        la colisi&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="173"><img src="images/parte1/figura3.gif" width="173" height="49"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="173"><font size="1"><b>Figura 3</b>: Los <span class="ingles">boundings</span> 
+            de movimiento solucionan la <span class="ingles">fixed-timestep weakness</span></font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Otra ventaja 
+        de utilizar <span class="ingles">boundings</span> de movimiento es que 
+        no hace falta subdividir el intervalo de tiempo, pues con el <span class="ingles">bounding</span> 
+        de movimiento ya cubrimos todo el intervalo, reduciendo el n&uacute;mero 
+        de iteraciones necesarias a una sola.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Se tiene 
+        que tener en cuenta que constantemente se deber&aacute;n generar <span class="ingles">boundings</span> 
+        de movimiento y comprobar intersecciones entre ellos. Esto conlleva a 
+        que el tipo de envoltorio elegido tenga que ser muy simple, con el problema 
+        de que con casi toda seguridad no representar&aacute; con exactitud el 
+        espacio ocupado por el objeto. La condici&oacute;n para detectar todas 
+        las colisiones es que el <span class="ingles">bounding</span> de movimiento 
+        sea lo suficientemente grande como para contener todo el espacio ocupado 
+        por el objeto, por lo que tendr&aacute; una regi&oacute;n que no corresponder&aacute; 
+        al objeto. Si la intersecci&oacute;n entre dos <span class="ingles">boundings</span> 
+        se produce en esta regi&oacute;n, la colisi&oacute;n detectada ser&aacute; 
+        falsa. Para solucionar esto, despu&eacute;s de detectar una intersecci&oacute;n 
+        entre dos <span class="ingles">boundings</span> es imprescindible comprobar 
+        si realmente los dos objetos colisionan en alg&uacute;n momento del intervalo 
+        de tiempo. En un sistema sin <span class="ingles">boundings</span> de 
+        movimiento esta operaci&oacute;n ser&iacute;a demasiado costosa debido 
+        a la gran cantidad de objetos en la escena, pero los <span class="ingles">boundings</span> 
+        de movimiento descartan r&aacute;pidamente muchas parejas de objetos, 
+        reduciendo el n&uacute;mero necesario de este tipo de operaciones. Este 
+        problema se muestra en la figura 4, donde se ha utilizado una caja con 
+        sus caras paralelas a los planos del mundo como <span class="ingles">bounding</span> 
+        de movimiento.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="262"><img src="images/parte1/figura4.gif" width="262" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 4</b>: Se detecta 
+            una falsa colisi&oacute;n debido a la mala aproximaci&oacute;n del 
+            <span class="ingles">bounding</span> de movimiento</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La operaci&oacute;n 
+        que soluciona el problema anterior tambi&eacute;n sirve para solucionar 
+        a&uacute;n otro caso de detecci&oacute;n de colisiones falsas. Los <span class="ingles">boundings</span> 
+        de movimiento s&oacute;lo guardan informaci&oacute;n espacial del objeto, 
+        y no la temporal. Por lo tanto, incluso si el envoltorio elegido aproxima 
+        a la perfecci&oacute;n el espacio ocupado por el objeto, &eacute;ste no 
+        retiene la posici&oacute;n donde se encontraba el objeto en distintos 
+        instantes de tiempo, con lo cual se puede detectar una colisi&oacute;n 
+        en el espacio que no se deber&iacute;a producir si se tiene en cuenta 
+        el aspecto temporal. Pero gracias a la operaci&oacute;n que soluciona 
+        el caso anterior ya queda resuelto tambi&eacute;n este problema. En la 
+        figura 5 se han utilizado envoltorios exactos para mostrar que no es una 
+        condici&oacute;n suficiente para afirmar que la colisi&oacute;n detectada 
+        es verdadera.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="262"><img src="images/parte1/figura5.gif" width="262" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 5</b>: Se detecta 
+            una falsa colisi&oacute;n debido a que el <span class="ingles">bounding</span> 
+            de movimiento no guarda la informaci&oacute;n temporal</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">A&uacute;n 
+        hay otra situaci&oacute;n que nos puede llevar a detectar una colisi&oacute;n 
+        falsa. Recordemos que el sistema de tratamiento de colisiones en detectar 
+        una colisi&oacute;n llama al algoritmo de reacci&oacute;n para corregir 
+        el comportamiento de los objetos en colisi&oacute;n. Esto significa que 
+        despu&eacute;s del momento de colisi&oacute;n los objetos pueden haber 
+        variado su trayectoria, con lo que su <span class="ingles">bounding</span> 
+        de movimiento no corresponder&aacute; para el resto del intervalo. La 
+        forma de proceder aqu&iacute; es guardar con cada colisi&oacute;n encontrada 
+        el tiempo en que se producir&aacute;, e ir trat&aacute;ndolas empezando 
+        con la m&aacute;s inmediata. Despu&eacute;s de tratar una colisi&oacute;n 
+        se debe anular cualquier colisi&oacute;n en que estuviera involucrado 
+        alguno de los objetos de la colisi&oacute;n tratada, pues el algoritmo 
+        de reacci&oacute;n puede haber cambiado sus trayectorias. En consecuencia 
+        para estos objetos se debe generar de nuevo el <span class="ingles">bounding</span> 
+        de movimiento para el intervalo de despu&eacute;s del momento de colisi&oacute;n 
+        y buscar nuevas posibles colisiones. Este proceso se debe repetir hasta 
+        que no queden colisiones por tratar. En la figura 6 se puede ver como 
+        no se detectar&aacute; la colisi&oacute;n entre el cuadrado y el triangulo 
+        a menos que se regenere el <span class="ingles">bounding</span> de movimiento 
+        del cuadrado despu&eacute;s de su colisi&oacute;n con la redonda.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="262"><img src="images/parte1/figura6.gif" width="262" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 6</b>: Se recalculan 
+            las colisiones para los objetos que colisionan</font></td>
+        </tr>
+      </table>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte1_02algoritmo.htm">Anterior: Un algoritmo de detecci&oacute;n 
+            b&aacute;sico</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte1_04allpairs.htm">Siguiente: 
+            <span class="ingles">All-pairs weakness</span></a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate --></html>

@@ -1,0 +1,100 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Detecci&oacute;n de colisiones - Pair-processing weakness</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            1: DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" --><span class="ingles">Pair-processing 
+        weakness</span><!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Debido a 
+        la complejidad en la forma que un objeto puede tener, dise&ntilde;ar un 
+        algoritmo que compruebe si las superficies de dos objetos interseccionan 
+        en un momento dado de la simulaci&oacute;n implicar&aacute; que el algoritmo 
+        tenga que contemplar una gran multitud de casos en que estas superficies 
+        pueden interseccionar, con lo que el algoritmo ser&aacute; muy poco eficiente. 
+        Si los objetos tuviesen formas m&aacute;s simples entonces se reducir&iacute;a 
+        autom&aacute;ticamente el n&uacute;mero de casos en que las superficies 
+        de estos podr&iacute;an interseccionar, pudiendo as&iacute; dise&ntilde;ar 
+        un algoritmo m&aacute;s r&aacute;pido. Por lo tanto, con el objetivo de 
+        acelerar esta fase, se aproximar&aacute;n los objetos a formas m&aacute;s 
+        simples, de forma que el algoritmo compruebe las intersecciones entre 
+        estas formas y no entre los objetos. Cabe mencionar que esta aproximaci&oacute;n 
+        implica que los objetos utilizados por el sistema de visualizaci&oacute;n 
+        y el de colisiones ser&aacute;n diferentes; por lo tanto, para evitar 
+        que el usuario se siente desconcertado entre lo que ve y lo que realmente 
+        colisiona ser&aacute; necesario llegar a un compromiso entre la complejidad 
+        de la forma utilizada para aproximar los objetos y la eficiencia del algoritmo 
+        de intersecci&oacute;n. Un ejemplo de este error se muestra en la figura 
+        7, donde se ve como se detecta una colisi&oacute;n antes de que el objeto 
+        visualizado realmente haya colisionado.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="262"><img src="images/parte1/figura7.gif" width="262" height="262"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="262"><font size="1"><b>Figura 7</b>: El objeto 
+            del mundo de las colisiones choca, cosa que no sucede con el del mundo 
+            visual</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Igual que 
+        con la soluci&oacute;n dada para la <span class="ingles">fixed-timestep 
+        weakness</span> aqu&iacute; tambi&eacute;n se propone la utilizaci&oacute;n 
+        de un envoltorio para aproximar el objeto. Como ya se ha dicho con anterioridad, 
+        la ventaja de utilizar un <span class="ingles">bounding</span> sencillo 
+        es que comprobar intersecciones entre ellos es muy eficiente. Tambi&eacute;n 
+        cabe mencionar que normalmente ser&aacute; un buen criterio que el envoltorio 
+        contenga el objeto en su totalidad, pues de otra forma el usuario podr&iacute;a 
+        ver como algunas partes de los objetos penetran sin detectarse una colisi&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Cada tipo 
+        de <span class="ingles">bounding</span> tiene sus ventajas e inconvenientes; 
+        pero, por regla general, como mejor se aproxima al objeto m&aacute;s lento 
+        ser&aacute; su algoritmo de intersecci&oacute;n. Una aplicaci&oacute;n 
+        usar&aacute; el tipo de <span class="ingles">bounding</span> que m&aacute;s 
+        le convenga, pero algunos de los m&aacute;s utilizados son las esferas, 
+        las cajas alineadas con el mundo (en ingl&eacute;s <span class="ingles">axis-aligned 
+        bounding box</span> &#151; <span class="ingles">AABB</span>) y las cajas 
+        orientadas (en ingl&eacute;s <span class="ingles">oriented bounding box</span> 
+        &#151; <span class="ingles">OBB</span>).</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte1_04allpairs.htm">Anterior: <span class="ingles">All-pairs 
+            weakness</span></a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte1_06sopa.htm">Siguiente: 
+            Sopa de pol&iacute;gonos</a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

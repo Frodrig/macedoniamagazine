@@ -1,0 +1,201 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Boundings m&aacute;s usuales en la detecci&oacute;n de colisiones - Comparativa de los tipos de bounding de movimiento</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            2: <span class="ingles">BOUNDINGS</span> M&Aacute;S USUALES EN LA 
+            DETECCI&Oacute;N DE COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Comparativa 
+        de los tipos de <span class="ingles">bounding</span> de movimiento<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Un <span class="ingles">bounding</span> 
+        de movimiento interesa que sea lo m&aacute;s &oacute;ptimo posible en 
+        los siguientes aspectos:</font></p>
+      <p>&nbsp;</p>
+      <ul>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Rapidez 
+          de creaci&oacute;n</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">M&aacute;xima 
+          aproximaci&oacute;n al espacio ocupado por el objeto</font></li>
+        <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Eficiencia 
+          en el algoritmo de intersecci&oacute;n</font></li>
+      </ul>
+      <p>&nbsp;</p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Creaci&oacute;n</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La rapidez 
+        en la creaci&oacute;n del <span class="ingles">bounding</span> de movimiento 
+        no vendr&aacute; s&oacute;lo determinada por el tipo de <span class="ingles">bounding</span> 
+        elegido para &eacute;ste, sino tambi&eacute;n del tipo de <span class="ingles">bounding</span> 
+        elegido para aproximar el objeto, pues seg&uacute;n la complejidad del 
+        <span class="ingles">bounding</span> de objeto ser&aacute; mayor o menor 
+        la dificultad de determinar el espacio ocupado por el objeto y, en consecuencia, 
+        esto afectar&aacute; a la velocidad de creaci&oacute;n del <span class="ingles">bounding</span> 
+        de movimiento. T&iacute;picamente, pero, crear una esfera o una caja alineada 
+        al mundo es m&aacute;s r&aacute;pido que crear una caja orientada.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Las figuras 
+        2a, 2b y 2c muestran un ejemplo donde se utilizan esferas como <span class="ingles">bounding</span> 
+        de objeto y un tipo de <span class="ingles">bounding</span> de movimiento 
+        distinto para cada figura.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="center">
+        <tr> 
+          <td width="450"><img src="images/parte2/figura2a.gif" width="150" height="150"><img src="images/parte2/figura2b.gif" width="150" height="150"><img src="images/parte2/figura2c.gif" width="150" height="150"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="450"><font size="1"><b>De izquierda a derecha, 
+            figuras 2a, 2b y 2c</b>: Esfera, caja alineada al mundo y caja orientada 
+            como <span class="ingles">bounding</span> de movimiento</font></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Para crear 
+        una esfera es necesario hallar los dos puntos m&aacute;s alejados de todo 
+        el espacio ocupado por el objeto, de los cuales se sacar&aacute; el di&aacute;metro 
+        de la esfera. En la figura 2a se puede ver que para determinar el di&aacute;metro 
+        de la esfera s&oacute;lo ha sido necesario sumar al vector de velocidad 
+        el radio de la esfera en ambos extremos.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Crear una 
+        caja alineada al mundo representa crear primero las cajas alineadas al 
+        mundo de la posici&oacute;n inicial y final del objeto, y luego hallar 
+        la caja alineada al mundo para el <span class="ingles">bounding</span> 
+        de movimiento es una operaci&oacute;n casi gratis. La figura 2b muestra 
+        como se crea el <span class="ingles">bounding</span> de movimiento, creando 
+        primero las cajas para la posici&oacute;n inicial y final del objeto, 
+        que en este caso salen de sumar al centro del objeto el radio de la esfera 
+        en cada uno de los ejes del mundo.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">La caja orientada 
+        que se crea como <span class="ingles">bounding</span> de movimiento tiene 
+        la misma orientaci&oacute;n que el vector de velocidad y sus dimensiones 
+        vienen determinadas por los puntos m&aacute;s lejanos del objeto respecto 
+        el vector de velocidad. En la figura 2c se da un ejemplo de una caja orientada 
+        como <span class="ingles">bounding</span> de movimiento, para la cual 
+        se han hallado sus dimensiones sumando al centro de la esfera su radio, 
+        dos veces en sentido perpendicular al vector de velocidad y otra como 
+        extensi&oacute;n de ambos extremos del vector de velocidad.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Aproximaci&oacute;n 
+        al espacio ocupado por el objeto</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Echando un 
+        vistazo a las figuras 2a, 2b y 2c queda claro que el tipo de <span class="ingles">bounding</span> 
+        que mejor aproxima el espacio ocupado por el objeto es la caja orientada, 
+        la cual s&oacute;lo contiene espacio no ocupado por el objeto en los dos 
+        extremos. Este espacio, adem&aacute;s, se mantiene independientemente 
+        de la longitud del vector de velocidad, a diferencia de los otros dos 
+        tipos de <span class="ingles">boundings</span>, que como mayor sea el 
+        vector de velocidad m&aacute;s espacio no ocupado por el objeto contendr&aacute;n, 
+        aumentando la posibilidad de detectar colisiones falsas que luego har&aacute;n 
+        aumentar el coste global del sistema de detecci&oacute;n de colisiones. 
+        El hecho de que este empobrecimiento en la aproximaci&oacute;n se hace 
+        muy exagerado en el caso de la esfera conlleva a que se suela descartar 
+        como tipo de <span class="ingles">bounding</span> de movimiento, pues 
+        la ventaja que representar&iacute;a en los otros dos aspectos a considerar 
+        tienen un rendimiento parecido a los de la caja alineada al mundo, la 
+        cual suele dar una mejor aproximaci&oacute;n al espacio ocupado por el 
+        objeto. De hecho la caja alineada al mundo aproxima el espacio ocupado 
+        por el objeto de forma muy parecida a la caja orientada cuando el vector 
+        de velocidad es muy peque&ntilde;o o casi paralelo a alguno de los ejes 
+        del mundo.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Como regla 
+        general, los tipos de <span class="ingles">bounding</span> que mejor aproximan 
+        el espacio ocupado por el objeto suelen tener un mayor coste en los dos 
+        otros aspectos. Por lo tanto, en el momento de elegir un tipo de <span class="ingles">bounding</span> 
+        ser&aacute; necesario evaluar si el hecho de descartar m&aacute;s colisiones 
+        falsas en esta etapa compensa el coste a&ntilde;adido en las otras etapas.</font></p>
+      <h2><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Operaci&oacute;n 
+        de intersecci&oacute;n</font></h2>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Aqu&iacute; 
+        vuelven a ser los m&aacute;s eficientes la esfera y la caja alineada al 
+        mundo. En el caso de dos esferas, determinar si se produce intersecci&oacute;n 
+        entre ellas se reduce a comprobar si la distancia que las separa es menor 
+        o no a la suma de sus radios. Por lo que respecta a las cajas alineadas 
+        al mundo, se pueden proyectar las dos sobre cada uno de los tres planos 
+        definidos por los ejes del mundo y, aprovechando la propiedad de que todas 
+        las caras de este tipo de cajas son perpendiculares a alguno de los ejes 
+        del mundo, determinar si las dos cajas interseccionan se reduce a operaciones 
+        de comparaci&oacute;n de una sola dimensi&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="right">
+        <tr> 
+          <td width="300"><img src="images/parte2/figura3a.gif" width="150" height="150"><img src="images/parte2/figura3b.gif" width="150" height="150"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="300"><font size="1"><b>De izquierda a derecha, 
+            figuras 3a y 3b</b>: M&eacute;todos para determinar intersecciones 
+            entre esferas y entre cajas alineadas al mundo</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Comprobar 
+        si dos cajas orientadas interseccionan ya es una operaci&oacute;n m&aacute;s 
+        compleja, pues hay una gran multitud de casos en los que dos cajas puedes 
+        interseccionar. Las figuras 3a, 3b y 3c presentan un ejemplo de cada uno 
+        de los tres casos mencionados, mostrando en la figura 3c como el m&eacute;todo 
+        de proyecci&oacute;n utilizado para las cajas alineadas al mundo no es 
+        suficiente en el caso de las orientadas.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Para determinar 
+        si dos cajas orientadas interseccionan un m&eacute;todo a seguir ser&iacute;a 
+        proyectar las dos cajas sobre cada uno de los planos definidos por las 
+        caras de las dos cajas (cosa que nos da un m&aacute;ximo de 6 planos), 
+        y si en todos los planos las proyecciones interseccionan entonces las 
+        dos cajas tambi&eacute;n est&aacute;n en intersecci&oacute;n. En la figura 
+        3d se puede ver un ejemplo de este m&eacute;todo, en el que se halla un 
+        plano donde las proyecciones no interseccionan y, por consiguiente, las 
+        cajas tampoco.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td width="300"><img src="images/parte2/figura3c.gif" width="150" height="150"><img src="images/parte2/figura3d.gif" width="150" height="150"></td>
+        </tr>
+        <tr> 
+          <td class="figura" width="300"><font size="1"><b>Izquierda, figura 3c</b>: 
+            El m&eacute;todo utilizado para determinar intersecciones entre dos 
+            cajas alineadas al mundo no es suficiente para las orientadas<br>
+            <b>Derecha, figura 3d</b>: En uno de los planos de proyecci&oacute;n 
+            no se produce intersecci&oacute;n entre las proyecciones de las dos 
+            cajas</font></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte2_02boundings.htm">Anterior: Qu&eacute; <span class="ingles">boundings</span> 
+            se comparan</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Siguiente" --><a href="parte2_04compobj.htm">Siguiente: 
+            Comparativa de los tipos de <span class="ingles">bounding</span> de 
+            objeto</a> &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>

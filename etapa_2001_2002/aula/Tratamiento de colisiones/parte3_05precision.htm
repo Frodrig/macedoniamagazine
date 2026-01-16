@@ -1,0 +1,102 @@
+<html>
+<!-- #BeginTemplate "/Templates/Contingut.dwt" --> 
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>Reacciones simples a las colisiones - Error de precisi&oacute;n</title>
+<!-- #EndEditable --> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="estilos.css" type="text/css">
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td> 
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"> 
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Autor: 
+              <a href="mailto:is04732@salleurl.edu">Carles Ros Mart&iacute;nez</a></font></b></p>
+            <p><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Fecha: 
+              13-07-01</font></b></p>
+          </td>
+          <td align="right" valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "TituloParte" -->PARTE 
+            3: REACCIONES SIMPLES A LAS COLISIONES<!-- #EndEditable --></font></b></td>
+        </tr>
+      </table>
+      <h1><font face="Verdana, Arial, Helvetica, sans-serif" size="4"><!-- #BeginEditable "TituloSeccion" -->Error 
+        de precisi&oacute;n<!-- #EndEditable --></font></h1>
+      <!-- #BeginEditable "Contenido" --> 
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Los ordenadores 
+        traban con n&uacute;meros finitos, lo que quiere decir que los n&uacute;meros 
+        decimales tienen un m&aacute;ximo de precisi&oacute;n. En muchos casos 
+        la precisi&oacute;n proporcionada por &eacute;stos ser&aacute; suficiente; 
+        pero siempre habr&aacute; la posibilidad de que ciertas operaciones no 
+        den el resultado correcto debido a haber realizado la operaci&oacute;n 
+        con n&uacute;meros muy pr&oacute;ximos al l&iacute;mite de la precisi&oacute;n 
+        soportada por los ordenadores.</font></p>
+      <p>&nbsp;</p>
+      <table border="1" cellpadding="3" cellspacing="0" align="left">
+        <tr> 
+          <td>
+            <ol>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">si 
+                ( a &gt; 0 y b &gt; 0 ) {</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+              <img src="images/sangria.gif" width="24" height="4">c 
+                = a &middot; b</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">
+              <img src="images/sangria.gif" width="24" height="4">d 
+                = 1 / c</font></li>
+              <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1">}</font></li>
+            </ol>
+          </td>
+        </tr>
+        <tr> 
+          <td class="figura"><font size="1"><b>Figura 4</b>: C&oacute;digo que 
+            no funciona correctamente con valores muy peque&ntilde;os</font></td>
+        </tr>
+      </table>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">En la figura 
+        4 se muestra un c&oacute;digo aparentemente inofensivo. La comprobaci&oacute;n 
+        de que a y b sean mayores que 0 implica que c no ser&aacute; nunca 0 y, 
+        por consiguiente, nunca habr&aacute; divisi&oacute;n por 0. Pero esto 
+        no es del todo cierto en un ordenador. Supongamos que a = 0.012 y b = 
+        0.025 y que el m&aacute;ximo de precisi&oacute;n de un ordenador es 0.001. 
+        Esto nos da para a &middot; b un resultado de 0.0003; pero como el ordenador 
+        solo puede guardar hasta 0.001 el valor se trunca para dar 0.000. En consecuencia 
+        c = 0 y la siguientes operaciones trabajan con una valor err&oacute;neo, 
+        que en este caso generar&aacute; una divisi&oacute;n por cero.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Claro est&aacute; 
+        que el ejemplo anterior es muy exagerado y los ordenadores disponen de 
+        una mayor precisi&oacute;n; pero el caso siempre se puede dar por buena 
+        que sea esta precisi&oacute;n. Un modo de solucionar esto ser&iacute;a 
+        modificar las comparaciones de la l&iacute;nea 1, de forma que no se compruebe 
+        si es mayor que 0, sino si es mayor que un valor &eacute;psilon muy cercano 
+        al cero, de modo que la operaci&oacute;n de multiplicaci&oacute;n no pueda 
+        dar en ning&uacute;n caso 0 debido a una falta de precisi&oacute;n.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Existen evidentemente 
+        otros casos en que puede haber problemas por culpa de la falta de precisi&oacute;n, 
+        pero lo importante es entenderla para poder detectar estos casos y corregirlos.</font></p>
+      <!-- #EndEditable --> <br clear="all">
+      <hr noshade size="1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td valign="top"><b><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><!-- #BeginEditable "Anterior" -->&lt;&lt; 
+            <a href="parte3_04gravedad.htm">Anterior: Gravedad</a><!-- #EndEditable --></font></b></td>
+          <td align="right" valign="top"><b>
+          <font face="Verdana, Arial, Helvetica, sans-serif" size="1" color="#808080"><!-- #BeginEditable "Siguiente" --><a href="parte4_01introduccion.htm">Siguiente: 
+            PARTE 4 &#151; EJEMPLO DE UN SISTEMA DE TRATAMIENTO DE COLISIONES</a> 
+            &gt;&gt;<!-- #EndEditable --></font></b></td>
+        </tr>
+        <tr> 
+          <td valign="top" colspan="2" height="4"><img src="images/sangria.gif" width="24" height="4"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+<!-- #EndTemplate -->
+</html>
